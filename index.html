@@ -1017,36 +1017,45 @@
     .theme-toggle:hover { filter: brightness(1.2); }
 
     /* ===== Светлая тема ===== */
-    body.theme-light { --bg:#f5f2fc; --panel:#ffffff; --text:#241c38; --muted:#6f6785; background:var(--bg); color:var(--text); }
-    body.theme-light header { background:rgba(255,255,255,.86); border-bottom:1px solid #e4dcf5; }
+    body.theme-light {
+      --bg:#e6dafa; --panel:#fdfbff; --text:#2a1f45; --muted:#7a6f96;
+      color:var(--text);
+      background-color:#e6dafa;
+      background-image:
+        radial-gradient(ellipse at 88% -12%, rgba(168,85,247,.3), transparent 46%),
+        radial-gradient(ellipse at -12% 112%, rgba(139,54,211,.22), transparent 46%),
+        linear-gradient(160deg, #f2ebfd, #e2d3f6 55%, #d8c4f4);
+      background-attachment: fixed;
+    }
+    body.theme-light header { background:rgba(247,241,255,.87); border-bottom:1px solid #d9c6f2; }
     body.theme-light .logo { color:#241c38; }
     body.theme-light nav a { color:#5d5377; }
     body.theme-light nav a:hover { color:#241c38; }
-    body.theme-light .search { background:#ffffff; color:#241c38; border-color:#d9cfef; }
-    body.theme-light .search:focus { background:#ffffff; }
-    body.theme-light .search-suggestions { background:#ffffff; border-color:rgba(124,58,237,.35); box-shadow:0 24px 60px rgba(80,50,140,.2); }
+    body.theme-light .search { background:#fbf8ff; color:#2a1f45; border-color:#d6c5f0; }
+    body.theme-light .search:focus { background:#fdfbff; }
+    body.theme-light .search-suggestions { background:#fdfbff; border-color:rgba(124,58,237,.4); box-shadow:0 24px 60px rgba(96,56,168,.25); }
     body.theme-light .search-suggestion { color:#241c38; }
-    body.theme-light .search-suggestion:hover, body.theme-light .search-suggestion.active { background:rgba(124,58,237,.08); }
+    body.theme-light .search-suggestion:hover, body.theme-light .search-suggestion.active { background:rgba(124,58,237,.12); }
     body.theme-light .sug-empty { color:#6f6785; }
-    body.theme-light .filter { background:#ffffff; color:#5d5377; border-color:#d9cfef; }
-    body.theme-light .advanced-filters input, body.theme-light .advanced-filters select { background:#ffffff; color:#241c38; border-color:#d9cfef; }
-    body.theme-light .reset-filter { background:#ffffff; color:#6d28d9; border-color:#d9cfef; }
+    body.theme-light .filter { background:#f7f1fd; color:#5b4a7d; border-color:#d6c5f0; }
+    body.theme-light .advanced-filters input, body.theme-light .advanced-filters select { background:#f7f1fd; color:#2a1f45; border-color:#d6c5f0; }
+    body.theme-light .reset-filter { background:#f7f1fd; color:#6d28d9; border-color:#d6c5f0; }
     body.theme-light .secondary { background:rgba(124,58,237,.08); color:#3b2a63; border:1px solid rgba(124,58,237,.22); }
     body.theme-light .secondary:hover { background:rgba(124,58,237,.16); }
     body.theme-light .language-switch button { color:#241c38; }
     body.theme-light .language-switch button.active { color:#fff; }
     body.theme-light .theme-toggle { color:#241c38; }
-    body.theme-light .list-tab { background:#ffffff; color:#5d5377; border-color:#d9cfef; }
-    body.theme-light .stat-card { background:#ffffff; }
+    body.theme-light .list-tab { background:#f7f1fd; color:#5b4a7d; border-color:#d6c5f0; }
+    body.theme-light .stat-card { background:#fdfbff; }
     body.theme-light .stat-card strong { color:#6d28d9; }
     body.theme-light .stat-card span { color:#6f6785; }
     body.theme-light .genre-chip { color:#6d28d9; background:rgba(124,58,237,.08); }
-    body.theme-light .history-card { background:#ffffff; }
-    body.theme-light .card-season-button { background:#f3edfd; color:#6d28d9; border-color:rgba(124,58,237,.35); }
-    body.theme-light .card-more-button { background:#f3edfd; }
+    body.theme-light .history-card { background:#fdfbff; }
+    body.theme-light .card-season-button { background:#f6effe; color:#6d28d9; border-color:rgba(124,58,237,.4); }
+    body.theme-light .card-more-button { background:#f6effe; }
     body.theme-light .season-count { color:#6d28d9; }
-    body.theme-light .missed-banner { background:linear-gradient(110deg, rgba(124,58,237,.14), rgba(168,85,247,.08)); }
-    body.theme-light footer { color:#6f6785; border-top-color:#e4dcf5; }
+    body.theme-light .missed-banner { background:linear-gradient(110deg, rgba(124,58,237,.16), rgba(168,85,247,.1)); }
+    body.theme-light footer { color:#7a6f96; border-top-color:#d9c6f2; }
     body.theme-light .filter.active, body.theme-light .filter:hover { background:#8b36d3; border-color:#a855f7; color:#fff; }
     body.theme-light .list-tab.active { background:linear-gradient(110deg,#8b36d3,#a855f7); border-color:#c084fc; color:#fff; }
     body.theme-light .list-tab:hover { border-color:#a855f7; color:#241c38; }
@@ -1087,10 +1096,10 @@
     .calendar-item-name { font-size:11px; font-weight:700; line-height:1.25; display:-webkit-box; -webkit-line-clamp:2; line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
     .calendar-item-meta { font-size:10px; color:#a99fc2; }
     .calendar-empty { color:#5c5470; font-size:12px; text-align:center; padding:14px 0; }
-    body.theme-light .calendar-day { background:#ffffff; }
-    body.theme-light .calendar-day.today { background:rgba(124,58,237,.08); }
+    body.theme-light .calendar-day { background:#fdfbff; }
+    body.theme-light .calendar-day.today { background:rgba(124,58,237,.13); }
     body.theme-light .calendar-day-title { color:#6d28d9; }
-    body.theme-light .calendar-item { background:#f7f3fe; color:#241c38; }
+    body.theme-light .calendar-item { background:#f2eafc; color:#2a1f45; }
     body.theme-light .calendar-item-meta { color:#6f6785; }
     body.theme-light .calendar-empty { color:#a99fc2; }
     @media (max-width: 1000px) { .calendar-grid { grid-template-columns:repeat(4,minmax(0,1fr)); } }
@@ -1108,7 +1117,7 @@
     .achievement-icon { font-size:26px; }
     .achievement-title { font-size:13px; font-weight:800; }
     .achievement-hint { font-size:11px; color:#a99fc2; }
-    body.theme-light .achievement-card { background:#ffffff; }
+    body.theme-light .achievement-card { background:#fdfbff; }
     body.theme-light .achievement-card.unlocked { background:linear-gradient(150deg, rgba(124,58,237,.12), #ffffff); }
     body.theme-light .achievement-hint { color:#6f6785; }
 
