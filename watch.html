@@ -101,6 +101,22 @@
       border-radius: 20px;
     }
 
+    .player-message {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 24px;
+      gap: 10px;
+      background: radial-gradient(circle at center, rgba(168,85,247,.18), transparent 55%), #0b0812;
+    }
+    .player-message[hidden] { display: none; }
+    .player-message strong { font-size: clamp(18px, 3vw, 26px); }
+    .player-message p { margin: 0; color: #bbb3ca; line-height: 1.5; }
+
     .controls {
       margin-top: 20px;
       display: flex;
@@ -192,6 +208,10 @@
       <video id="animePlayer" controls preload="metadata">
         Ваш браузер не поддерживает видео.
       </video>
+      <div id="playerMessage" class="player-message" role="status" hidden>
+        <strong id="playerMessageTitle">Видео пока недоступно</strong>
+        <p id="playerMessageDetail">На данный момент видео для просмотра не подключено или недоступно.</p>
+      </div>
     </div>
 
     <div class="controls">
@@ -222,6 +242,13 @@
       episode: currentEpisode
     }));
 
+    const playerMessage = document.getElementById("playerMessage");
+    player.addEventListener("error", () => {
+      playerMessage.hidden = false;
+    });
+    player.addEventListener("loadeddata", () => {
+      playerMessage.hidden = true;
+    });
     player.src = `video/${currentEpisode}.mp4`;
     player.load();
 
@@ -320,6 +347,11 @@
     function applyLanguage() {
       const isRussian = currentLanguage === "ru";
       document.documentElement.lang = currentLanguage;
+      document.getElementById("playerMessageTitle").textContent = isRussian
+        ? "Видео пока недоступно" : "Video is currently unavailable";
+      document.getElementById("playerMessageDetail").textContent = isRussian
+        ? "На данный момент видео для просмотра не подключено или недоступно."
+        : "No video is connected for viewing, or it is currently unavailable.";
       document.getElementById("langBtn").textContent = isRussian ? "EN" : "RU";
       document.getElementById("backAnime").textContent = isRussian
         ? "← К странице аниме"
