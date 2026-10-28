@@ -10,6 +10,12 @@
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#a855f7">
   <link rel="apple-touch-icon" href="icon-192.png">
+  <meta name="description" content="ANIME VOID — страница аниме: описание, персонажи и сэйю, трейлер, сезоны, похожие тайтлы, статусы и оценки.">
+  <meta property="og:title" content="ANIME VOID — Аниме">
+  <meta property="og:description" content="Описания, персонажи, трейлеры, сезоны и похожие аниме.">
+  <meta property="og:image" content="https://anime-void-app.github.io/AV/icon-512.png">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://anime-void-app.github.io/AV/anime.html">
 
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
@@ -501,6 +507,42 @@
     .season-switcher[hidden] { display:none; }
     .season-choice { border:1px solid rgba(192,132,252,.35); background:#171020; color:#ded4ea; border-radius:10px; padding:9px 13px; cursor:pointer; font:inherit; font-size:13px; }
     .season-choice:hover, .season-choice.active { background:#7c3aed; border-color:#a855f7; color:white; }
+    /* ===== Тема ===== */
+    .theme-toggle {
+      margin-left: 4px;
+      padding: 8px 10px;
+      border: 1px solid rgba(168,85,247,.45);
+      border-radius: 9px;
+      background: transparent;
+      color: white;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .theme-toggle:hover { filter: brightness(1.2); }
+
+    body.theme-light { background:#f5f2fc; color:#241c38; }
+    body.theme-light .page-overlay { background: linear-gradient(to bottom, rgba(245,242,252,.4), #f5f2fc 80%); }
+    body.theme-light header { background:rgba(255,255,255,.86); border-bottom:1px solid #e4dcf5; }
+    body.theme-light .logo { color:#241c38; }
+    body.theme-light .back { color:#6d28d9; }
+    body.theme-light .lang-btn { color:#241c38; }
+    body.theme-light .theme-toggle { color:#241c38; }
+    body.theme-light .anime-page h1 { color:#241c38; }
+    body.theme-light .description { color:#4a4160; }
+    body.theme-light .info small { color:#6f6785; }
+    body.theme-light .info strong { color:#241c38; }
+    body.theme-light .season-choice { background:#ffffff; color:#4a3b6e; border-color:#d9cfef; }
+    body.theme-light .episode { background:#ffffff; color:#241c38; border-color:#d9cfef; }
+    body.theme-light .episode:hover, body.theme-light .episode.active { background:linear-gradient(110deg,#7c3aed,#a855f7); color:#fff; }
+    body.theme-light .episode.watched { background:#efe9fb; color:#6d28d9; }
+    body.theme-light .episodes h2, body.theme-light .characters-section h2, body.theme-light .trailer-section h2, body.theme-light .similar-section h2 { color:#241c38; }
+    body.theme-light .episodes-progress-text { color:#6d28d9; }
+    body.theme-light .favorite-page-btn { background:linear-gradient(110deg,#7c3aed,#a855f7); color:#fff; }
+    body.theme-light .status-btn { background:#ffffff; color:#6d28d9; border-color:rgba(124,58,237,.35); }
+    body.theme-light .status-btn.active { background:linear-gradient(110deg,#7c3aed,#a855f7); color:#fff; border-color:#c084fc; }
+    body.theme-light .rating-star { background:#ffffff; color:#6d28d9; border-color:rgba(124,58,237,.3); }
+    body.theme-light .rating-star.active { background:linear-gradient(110deg,#9333ea,#c026d3); color:#fff; border-color:#c084fc; }
+    body.theme-light .error, body.theme-light .loading { color:#4a4160; }
   </style>
 </head>
 
@@ -521,6 +563,7 @@
 <button id="langBtn" class="lang-btn" onclick="toggleLanguage()">
   EN
 </button>
+<button id="themeToggle" class="theme-toggle" onclick="toggleTheme()" title="Сменить тему" aria-label="Сменить тему">🌙</button>
   </header>
 
   <main id="content"></main>
@@ -1529,6 +1572,23 @@ if (genreLabel) {
     }
   });
 
+
+  function applyThemeFromStorage() {
+    let theme = "dark";
+    try { theme = localStorage.getItem("animeVoidTheme") || "dark"; } catch (error) {}
+    document.body.classList.toggle("theme-light", theme === "light");
+    const themeToggle = document.getElementById("themeToggle");
+    if (themeToggle) themeToggle.textContent = theme === "light" ? "☀️" : "🌙";
+  }
+
+  function toggleTheme() {
+    const isLight = document.body.classList.toggle("theme-light");
+    try { localStorage.setItem("animeVoidTheme", isLight ? "light" : "dark"); } catch (error) {}
+    const themeToggle = document.getElementById("themeToggle");
+    if (themeToggle) themeToggle.textContent = isLight ? "☀️" : "🌙";
+  }
+
+  applyThemeFromStorage();
 
 function toggleLanguage() {
   currentLanguage =

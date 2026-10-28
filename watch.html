@@ -9,6 +9,12 @@
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#a855f7">
   <link rel="apple-touch-icon" href="icon-192.png">
+  <meta name="description" content="ANIME VOID — просмотр аниме: плеер и список серий с отслеживанием прогресса.">
+  <meta property="og:title" content="ANIME VOID — Просмотр">
+  <meta property="og:description" content="Плеер и список серий с отслеживанием прогресса.">
+  <meta property="og:image" content="https://anime-void-app.github.io/AV/icon-512.png">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://anime-void-app.github.io/AV/watch.html">
 
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
@@ -191,6 +197,31 @@
       .controls { flex-direction: column; }
       .control-btn { width: 100%; }
     }
+    /* ===== Тема ===== */
+    .theme-toggle {
+      padding: 8px 10px;
+      border: 1px solid rgba(168,85,247,.45);
+      border-radius: 9px;
+      background: transparent;
+      color: white;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .theme-toggle:hover { filter: brightness(1.2); }
+
+    body.theme-light { background:#f5f2fc; color:#241c38; }
+    body.theme-light header { background:rgba(255,255,255,.86); border-bottom:1px solid #e4dcf5; }
+    body.theme-light .logo { color:#241c38; }
+    body.theme-light .back { color:#6d28d9; }
+    body.theme-light .back:hover { color:#241c38; }
+    body.theme-light .lang-btn { color:#241c38; }
+    body.theme-light .theme-toggle { color:#241c38; }
+    body.theme-light .watch-top h1 { color:#241c38; }
+    body.theme-light .watch-top p { color:#4a4160; }
+    body.theme-light .episode { background:#ffffff; color:#241c38; border-color:#d9cfef; }
+    body.theme-light .episode:hover, body.theme-light .episode.active { background:linear-gradient(110deg,#7c3aed,#a855f7); color:#fff; }
+    body.theme-light .episode.watched { background:#efe9fb; color:#6d28d9; }
+    body.theme-light .player-message p { color:#4a4160; }
   </style>
 </head>
 
@@ -200,6 +231,7 @@
     <div class="header-actions">
       <button id="langBtn" class="lang-btn" type="button" onclick="toggleLanguage()">EN</button>
       <a id="backAnime" class="back" href="#">← К странице аниме</a>
+      <button id="themeToggle" class="theme-toggle" type="button" onclick="toggleTheme()" title="Сменить тему" aria-label="Сменить тему">🌙</button>
     </div>
   </header>
 
@@ -378,6 +410,23 @@
       }
       renderEpisodes();
     }
+
+    function applyThemeFromStorage() {
+      let theme = "dark";
+      try { theme = localStorage.getItem("animeVoidTheme") || "dark"; } catch (error) {}
+      document.body.classList.toggle("theme-light", theme === "light");
+      const themeToggle = document.getElementById("themeToggle");
+      if (themeToggle) themeToggle.textContent = theme === "light" ? "☀️" : "🌙";
+    }
+
+    function toggleTheme() {
+      const isLight = document.body.classList.toggle("theme-light");
+      try { localStorage.setItem("animeVoidTheme", isLight ? "light" : "dark"); } catch (error) {}
+      const themeToggle = document.getElementById("themeToggle");
+      if (themeToggle) themeToggle.textContent = isLight ? "☀️" : "🌙";
+    }
+
+    applyThemeFromStorage();
 
     function toggleLanguage() {
       currentLanguage = currentLanguage === "ru" ? "en" : "ru";

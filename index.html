@@ -10,6 +10,12 @@
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#a855f7">
   <link rel="apple-touch-icon" href="icon-192.png">
+  <meta name="description" content="ANIME VOID — личный аниме-трекер: каталог AniList, «сейчас выходит» с таймерами, статусы просмотра, оценки, история и персональные рекомендации.">
+  <meta property="og:title" content="ANIME VOID — Мир аниме">
+  <meta property="og:description" content="Каталог аниме, расписание выхода серий, статусы, оценки и персональные рекомендации.">
+  <meta property="og:image" content="https://anime-void-app.github.io/AV/icon-512.png">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://anime-void-app.github.io/AV/">
 
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
@@ -998,6 +1004,119 @@
 .language-switch button.active {
   background: #7c3aed;
 }
+    /* ===== Кнопка темы ===== */
+    .theme-toggle {
+      padding: 6px 10px;
+      border: 1px solid #7c3aed;
+      border-radius: 7px;
+      background: transparent;
+      color: white;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .theme-toggle:hover { filter: brightness(1.2); }
+
+    /* ===== Светлая тема ===== */
+    body.theme-light { --bg:#f5f2fc; --panel:#ffffff; --text:#241c38; --muted:#6f6785; background:var(--bg); color:var(--text); }
+    body.theme-light header { background:rgba(255,255,255,.86); border-bottom:1px solid #e4dcf5; }
+    body.theme-light .logo { color:#241c38; }
+    body.theme-light nav a { color:#5d5377; }
+    body.theme-light nav a:hover { color:#241c38; }
+    body.theme-light .search { background:#ffffff; color:#241c38; border-color:#d9cfef; }
+    body.theme-light .search:focus { background:#ffffff; }
+    body.theme-light .search-suggestions { background:#ffffff; border-color:rgba(124,58,237,.35); box-shadow:0 24px 60px rgba(80,50,140,.2); }
+    body.theme-light .search-suggestion { color:#241c38; }
+    body.theme-light .search-suggestion:hover, body.theme-light .search-suggestion.active { background:rgba(124,58,237,.08); }
+    body.theme-light .sug-empty { color:#6f6785; }
+    body.theme-light .filter { background:#ffffff; color:#5d5377; border-color:#d9cfef; }
+    body.theme-light .advanced-filters input, body.theme-light .advanced-filters select { background:#ffffff; color:#241c38; border-color:#d9cfef; }
+    body.theme-light .reset-filter { background:#ffffff; color:#6d28d9; border-color:#d9cfef; }
+    body.theme-light .secondary { background:rgba(124,58,237,.08); color:#3b2a63; border:1px solid rgba(124,58,237,.22); }
+    body.theme-light .secondary:hover { background:rgba(124,58,237,.16); }
+    body.theme-light .language-switch button { color:#241c38; }
+    body.theme-light .language-switch button.active { color:#fff; }
+    body.theme-light .theme-toggle { color:#241c38; }
+    body.theme-light .list-tab { background:#ffffff; color:#5d5377; border-color:#d9cfef; }
+    body.theme-light .stat-card { background:#ffffff; }
+    body.theme-light .stat-card strong { color:#6d28d9; }
+    body.theme-light .stat-card span { color:#6f6785; }
+    body.theme-light .genre-chip { color:#6d28d9; background:rgba(124,58,237,.08); }
+    body.theme-light .history-card { background:#ffffff; }
+    body.theme-light .card-season-button { background:#f3edfd; color:#6d28d9; border-color:rgba(124,58,237,.35); }
+    body.theme-light .card-more-button { background:#f3edfd; }
+    body.theme-light .season-count { color:#6d28d9; }
+    body.theme-light .missed-banner { background:linear-gradient(110deg, rgba(124,58,237,.14), rgba(168,85,247,.08)); }
+    body.theme-light footer { color:#6f6785; border-top-color:#e4dcf5; }
+    body.theme-light .filter.active, body.theme-light .filter:hover { background:#8b36d3; border-color:#a855f7; color:#fff; }
+    body.theme-light .list-tab.active { background:linear-gradient(110deg,#8b36d3,#a855f7); border-color:#c084fc; color:#fff; }
+    body.theme-light .list-tab:hover { border-color:#a855f7; color:#241c38; }
+    body.theme-light .card-season-button:hover, body.theme-light .card-season-button.active { background:linear-gradient(110deg,#7c3aed,#a855f7); border-color:#c084fc; color:#fff; }
+    body.theme-light .reset-filter:hover { background:#8b36d3; border-color:#a855f7; color:#fff; }
+    body.theme-light .advanced-filters input:focus, body.theme-light .advanced-filters select:focus { border-color:#a855f7; }
+
+    /* ===== Баннер «вышло, пока тебя не было» ===== */
+    .missed-banner {
+      display:flex; align-items:center; justify-content:space-between; gap:14px;
+      margin:18px 0 0; padding:12px 16px;
+      border:1px solid rgba(192,132,252,.45); border-radius:14px;
+      background:linear-gradient(110deg, rgba(124,58,237,.25), rgba(168,85,247,.15));
+      font-size:13px; line-height:1.5;
+    }
+    .missed-banner[hidden] { display:none; }
+    .missed-banner-text { min-width:0; }
+    .missed-banner-close {
+      flex:0 0 auto; width:30px; height:30px; border:0; border-radius:9px;
+      background:rgba(124,58,237,.3); color:#fff; font-size:16px; cursor:pointer;
+    }
+
+    /* ===== Календарь недели ===== */
+    .calendar-section { margin-top:42px; }
+    .calendar-grid { display:grid; grid-template-columns:repeat(7,minmax(0,1fr)); gap:10px; }
+    .calendar-day {
+      border:1px solid rgba(168,85,247,.2); border-radius:14px;
+      background:rgba(18,16,29,.6); padding:10px; min-height:120px;
+      display:flex; flex-direction:column; gap:8px;
+    }
+    .calendar-day.today { border-color:rgba(192,132,252,.75); background:rgba(124,58,237,.16); }
+    .calendar-day-title { font-size:12px; font-weight:800; letter-spacing:.4px; color:#d8b4fe; display:flex; align-items:center; gap:6px; flex-wrap:wrap; }
+    .calendar-today-badge { padding:2px 7px; border-radius:999px; background:linear-gradient(110deg,#7c3aed,#a855f7); color:#fff; font-size:10px; }
+    .calendar-item { display:flex; gap:8px; align-items:center; padding:6px; border:1px solid rgba(168,85,247,.18); border-radius:10px; background:rgba(12,10,18,.75); cursor:pointer; font:inherit; color:#fff; text-align:left; }
+    .calendar-item:hover { border-color:rgba(192,132,252,.6); }
+    .calendar-item img { width:34px; height:48px; object-fit:cover; border-radius:6px; flex:0 0 auto; }
+    .calendar-item-body { min-width:0; display:flex; flex-direction:column; gap:2px; }
+    .calendar-item-name { font-size:11px; font-weight:700; line-height:1.25; display:-webkit-box; -webkit-line-clamp:2; line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+    .calendar-item-meta { font-size:10px; color:#a99fc2; }
+    .calendar-empty { color:#5c5470; font-size:12px; text-align:center; padding:14px 0; }
+    body.theme-light .calendar-day { background:#ffffff; }
+    body.theme-light .calendar-day.today { background:rgba(124,58,237,.08); }
+    body.theme-light .calendar-day-title { color:#6d28d9; }
+    body.theme-light .calendar-item { background:#f7f3fe; color:#241c38; }
+    body.theme-light .calendar-item-meta { color:#6f6785; }
+    body.theme-light .calendar-empty { color:#a99fc2; }
+    @media (max-width: 1000px) { .calendar-grid { grid-template-columns:repeat(4,minmax(0,1fr)); } }
+    @media (max-width: 600px) { .calendar-grid { display:flex; overflow-x:auto; padding-bottom:10px; } .calendar-day { flex:0 0 200px; } }
+
+    /* ===== Достижения ===== */
+    .achievements-section { margin-top:42px; }
+    .achievements-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(170px,1fr)); gap:12px; }
+    .achievement-card {
+      display:flex; flex-direction:column; gap:6px; padding:14px;
+      border:1px solid rgba(168,85,247,.18); border-radius:14px;
+      background:rgba(18,16,29,.6); opacity:.55; filter:grayscale(.6);
+    }
+    .achievement-card.unlocked { opacity:1; filter:none; border-color:rgba(192,132,252,.6); background:linear-gradient(150deg, rgba(124,58,237,.22), rgba(18,16,29,.6)); }
+    .achievement-icon { font-size:26px; }
+    .achievement-title { font-size:13px; font-weight:800; }
+    .achievement-hint { font-size:11px; color:#a99fc2; }
+    body.theme-light .achievement-card { background:#ffffff; }
+    body.theme-light .achievement-card.unlocked { background:linear-gradient(150deg, rgba(124,58,237,.12), #ffffff); }
+    body.theme-light .achievement-hint { color:#6f6785; }
+
+    /* ===== Бэкап и шаринг ===== */
+    .backup-section { margin-top:42px; }
+    .backup-row { display:flex; flex-wrap:wrap; gap:10px; }
+    .backup-row .primary, .backup-row .secondary { margin:0; }
+    .share-stats-btn { width:100%; margin-top:16px; }
   </style>
 </head>
 
@@ -1016,6 +1135,7 @@
   <button onclick="setLanguage('ru')" id="ruBtn">RU</button>
   <button onclick="setLanguage('en')" id="enBtn">EN</button>
 </div>
+<button id="themeToggle" class="theme-toggle" onclick="toggleTheme()" title="Сменить тему" aria-label="Сменить тему">🌙</button>
     <div class="search-wrap">
       <input id="search" class="search" type="search" placeholder="⌕  Найти аниме...">
       <div id="searchSuggestions" class="search-suggestions" hidden></div>
@@ -1061,6 +1181,8 @@
 </button>
       </div>
     </section>
+
+    <div class="missed-banner" id="missedBanner" hidden></div>
 
     <section class="airing-section" id="airingSection" hidden>
       <div class="section-heading">
@@ -1157,6 +1279,16 @@
 </div>
     </section>
 
+    <section class="calendar-section" id="calendarSection" hidden>
+      <div class="section-heading">
+        <div>
+          <h2 id="calendarTitle">Расписание на неделю</h2>
+          <div class="subtitle" id="calendarSubtitle">Когда выходят новые серии</div>
+        </div>
+      </div>
+      <div class="calendar-grid" id="calendarGrid"></div>
+    </section>
+
     <section id="favorites">
       <div class="section-heading">
         <div>
@@ -1189,6 +1321,30 @@
       </div>
       <div class="top-genres" id="topGenres"></div>
       <div class="history-grid" id="historyGrid"></div>
+      <button type="button" class="secondary share-stats-btn" id="shareStatsBtn" hidden>📤 Поделиться статистикой</button>
+    </section>
+    <section class="achievements-section" id="achievementsSection" hidden>
+      <div class="section-heading">
+        <div>
+          <h2 id="achievementsTitle">Достижения</h2>
+          <div class="subtitle" id="achievementsSubtitle">Собери их все</div>
+        </div>
+      </div>
+      <div class="achievements-grid" id="achievementsGrid"></div>
+    </section>
+
+    <section class="backup-section" id="backupSection">
+      <div class="section-heading">
+        <div>
+          <h2 id="backupTitle">Данные и бэкап</h2>
+          <div class="subtitle" id="backupSubtitle">Сохрани списки, оценки и историю — или перенеси на другое устройство</div>
+        </div>
+      </div>
+      <div class="backup-row">
+        <button type="button" class="primary" id="exportBtn">💾 Сохранить бэкап</button>
+        <button type="button" class="secondary" id="importBtn">📂 Загрузить бэкап</button>
+        <input type="file" id="importFile" accept="application/json,.json" hidden>
+      </div>
     </section>
   </main>
 
@@ -1862,6 +2018,299 @@ localStorage.setItem("animeVoidHasMore", String(apiHasMore));
       });
     }
 
+    /* ===== Тема ===== */
+    function applyThemeFromStorage() {
+      let theme = "dark";
+      try { theme = localStorage.getItem("animeVoidTheme") || "dark"; } catch (error) {}
+      document.body.classList.toggle("theme-light", theme === "light");
+      const themeToggle = document.getElementById("themeToggle");
+      if (themeToggle) themeToggle.textContent = theme === "light" ? "☀️" : "🌙";
+    }
+
+    function toggleTheme() {
+      const isLight = document.body.classList.toggle("theme-light");
+      try { localStorage.setItem("animeVoidTheme", isLight ? "light" : "dark"); } catch (error) {}
+      const themeToggle = document.getElementById("themeToggle");
+      if (themeToggle) themeToggle.textContent = isLight ? "☀️" : "🌙";
+    }
+
+    applyThemeFromStorage();
+
+    /* ===== Календарь недели ===== */
+    let currentAiringItems = [];
+
+    function calendarDayNames(isRussian) {
+      return isRussian
+        ? ["Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота", "Воскресенье"]
+        : ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+    }
+
+    function renderCalendarSection(items) {
+      const section = document.getElementById("calendarSection");
+      const grid = document.getElementById("calendarGrid");
+      if (!section || !grid) return;
+      if (!items || !items.length) { section.hidden = true; return; }
+      const isRussian = localStorage.getItem("animeVoidLanguage") !== "en";
+      const dayNames = calendarDayNames(isRussian);
+      const buckets = Array.from({ length: 7 }, () => []);
+      items.forEach(item => {
+        const airingAt = Number(item.airingAt);
+        if (!airingAt) return;
+        const date = new Date(airingAt * 1000);
+        const dayIndex = (date.getDay() + 6) % 7;
+        const time = String(date.getHours()).padStart(2, "0") + ":" + String(date.getMinutes()).padStart(2, "0");
+        buckets[dayIndex].push({ item, time, airingAt });
+      });
+      buckets.forEach(bucket => bucket.sort((a, b) => a.airingAt - b.airingAt));
+      const todayIndex = (new Date().getDay() + 6) % 7;
+      grid.innerHTML = buckets.map((bucket, index) => `
+        <div class="calendar-day${index === todayIndex ? " today" : ""}">
+          <div class="calendar-day-title">
+            ${dayNames[index]}
+            ${index === todayIndex ? `<span class="calendar-today-badge">${isRussian ? "сегодня" : "today"}</span>` : ""}
+          </div>
+          ${bucket.length
+            ? bucket.map(entry => `
+              <button type="button" class="calendar-item" onclick="openAnimePage('${encodeURIComponent(entry.item.id)}')">
+                <img src="${entry.item.image || 'image/poster1.jpg'}" alt="" loading="lazy"
+                  onerror="this.onerror=null;this.src='image/poster1.jpg';">
+                <span class="calendar-item-body">
+                  <span class="calendar-item-name" data-anime-title-id="${entry.item.id}">${isRussian ? (getRussianTitle(entry.item) || entry.item.title) : entry.item.title}</span>
+                  <span class="calendar-item-meta">${isRussian ? "серия" : "ep."} ${entry.item.nextEpisode} · ${entry.time}</span>
+                </span>
+              </button>`).join("")
+            : `<div class="calendar-empty">—</div>`}
+        </div>`).join("");
+      section.hidden = false;
+    }
+
+    /* ===== Баннер «вышло, пока тебя не было» ===== */
+    let missedBannerHandled = false;
+
+    function renderMissedBanner(items) {
+      if (missedBannerHandled) return;
+      missedBannerHandled = true;
+      const banner = document.getElementById("missedBanner");
+      if (!banner || !items || !items.length) return;
+      let lastVisit = 0;
+      try { lastVisit = Number(localStorage.getItem("animeVoidLastVisit")) || 0; } catch (error) {}
+      const now = Date.now();
+      try { localStorage.setItem("animeVoidLastVisit", String(now)); } catch (error) {}
+      if (!lastVisit) return;
+      const isRussian = localStorage.getItem("animeVoidLanguage") !== "en";
+      const missed = items.filter(item => {
+        const airedMs = Number(item.airingAt) * 1000;
+        return airedMs > lastVisit && airedMs <= now && now - airedMs < 7 * 24 * 60 * 60 * 1000;
+      }).slice(0, 4);
+      if (!missed.length) return;
+      const titlesText = missed.map(item =>
+        (isRussian ? (getRussianTitle(item) || item.title) : item.title) +
+        " — " + (isRussian ? "серия" : "ep.") + " " + item.nextEpisode
+      ).join("; ");
+      banner.innerHTML = `
+        <span class="missed-banner-text">🔔 ${isRussian ? "Пока тебя не было:" : "While you were away:"} ${titlesText}</span>
+        <button type="button" class="missed-banner-close" onclick="document.getElementById('missedBanner').hidden = true" aria-label="Закрыть">×</button>`;
+      banner.hidden = false;
+    }
+
+    /* ===== Достижения ===== */
+    function collectAchievementStats() {
+      let totalEpisodes = 0;
+      let watchedTitles = 0;
+      let hours = 0;
+      try {
+        for (let i = 0; i < localStorage.length; i++) {
+          const storageKey = localStorage.key(i);
+          if (!storageKey || !storageKey.startsWith("watched_")) continue;
+          let episodes = [];
+          try { episodes = JSON.parse(localStorage.getItem(storageKey) || "[]"); } catch (error) {}
+          if (!Array.isArray(episodes) || !episodes.length) continue;
+          totalEpisodes += episodes.length;
+          watchedTitles += 1;
+          const animeId = storageKey.slice("watched_".length);
+          episodes.forEach(episode => {
+            const duration = Number(localStorage.getItem("duration_" + animeId + "_" + episode)) || 0;
+            hours += duration > 0 ? duration / 60 : 24;
+          });
+        }
+      } catch (error) {}
+      hours = Math.round(hours / 60);
+      const statuses = readStatusMap();
+      let planned = 0, completed = 0, dropped = 0;
+      Object.keys(statuses).forEach(id => {
+        if (statuses[id] === "planned") planned += 1;
+        else if (statuses[id] === "completed") completed += 1;
+        else if (statuses[id] === "dropped") dropped += 1;
+      });
+      let ratingsCount = 0;
+      try { ratingsCount = Object.keys(JSON.parse(localStorage.getItem("animeVoidRatings") || "{}")).length; } catch (error) {}
+      return { totalEpisodes, watchedTitles, hours, planned, completed, dropped, ratingsCount, favoritesCount: favorites.length };
+    }
+
+    function achievementsList(stats, isRussian) {
+      return [
+        { icon: "🌱", unlocked: stats.totalEpisodes >= 1, title: isRussian ? "Первые шаги" : "First steps", hint: isRussian ? "Посмотреть 1 серию" : "Watch 1 episode" },
+        { icon: "📺", unlocked: stats.totalEpisodes >= 10, title: isRussian ? "Разогрев" : "Warming up", hint: isRussian ? "10 серий" : "10 episodes" },
+        { icon: "💯", unlocked: stats.totalEpisodes >= 100, title: isRussian ? "Сотня" : "Century", hint: isRussian ? "100 серий" : "100 episodes" },
+        { icon: "🏆", unlocked: stats.totalEpisodes >= 500, title: isRussian ? "Легенда" : "Legend", hint: isRussian ? "500 серий" : "500 episodes" },
+        { icon: "🎬", unlocked: stats.watchedTitles >= 5, title: isRussian ? "Киноман" : "Cinephile", hint: isRussian ? "5 тайтлов начато" : "5 titles started" },
+        { icon: "❤️", unlocked: stats.favoritesCount >= 10, title: isRussian ? "Коллекционер" : "Collector", hint: isRussian ? "10 в избранном" : "10 favorites" },
+        { icon: "⏱️", unlocked: stats.hours >= 10, title: isRussian ? "Марафонец" : "Marathoner", hint: isRussian ? "10 часов просмотра" : "10 hours watched" },
+        { icon: "⏰", unlocked: stats.hours >= 50, title: isRussian ? "Хардкор" : "Hardcore", hint: isRussian ? "50 часов просмотра" : "50 hours watched" },
+        { icon: "⭐", unlocked: stats.ratingsCount >= 5, title: isRussian ? "Критик" : "Critic", hint: isRussian ? "5 оценок поставлено" : "5 ratings given" },
+        { icon: "📅", unlocked: stats.planned >= 5, title: isRussian ? "Стратег" : "Planner", hint: isRussian ? "5 в «В планах»" : "5 planned" },
+        { icon: "✅", unlocked: stats.completed >= 1, title: isRussian ? "Финишист" : "Finisher", hint: isRussian ? "1 тайтл пройден" : "1 title completed" },
+        { icon: "🚫", unlocked: stats.dropped >= 1, title: isRussian ? "Бросатель" : "Dropper", hint: isRussian ? "1 брошенный тайтл" : "1 title dropped" }
+      ];
+    }
+
+    function renderAchievementsSection() {
+      const section = document.getElementById("achievementsSection");
+      const grid = document.getElementById("achievementsGrid");
+      if (!section || !grid) return;
+      const isRussian = localStorage.getItem("animeVoidLanguage") !== "en";
+      const list = achievementsList(collectAchievementStats(), isRussian);
+      const unlockedCount = list.filter(achievement => achievement.unlocked).length;
+      if (!unlockedCount) { section.hidden = true; return; }
+      const subtitle = document.getElementById("achievementsSubtitle");
+      if (subtitle) subtitle.textContent = isRussian ? "Открыто " + unlockedCount + " из " + list.length : unlockedCount + " of " + list.length + " unlocked";
+      grid.innerHTML = list.map(achievement => `
+        <div class="achievement-card${achievement.unlocked ? " unlocked" : ""}" title="${achievement.hint}">
+          <span class="achievement-icon">${achievement.unlocked ? achievement.icon : "🔒"}</span>
+          <span class="achievement-title">${achievement.title}</span>
+          <span class="achievement-hint">${achievement.hint}</span>
+        </div>`).join("");
+      section.hidden = false;
+    }
+
+    /* ===== Бэкап ===== */
+    function exportBackup() {
+      const data = {};
+      for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        if (key && (key.startsWith("animeVoid") || key.startsWith("watched_") || key.startsWith("duration_") || key.startsWith("progress_"))) {
+          data[key] = localStorage.getItem(key);
+        }
+      }
+      const blob = new Blob([JSON.stringify({ app: "ANIME VOID", version: 1, savedAt: new Date().toISOString(), data }, null, 2)], { type: "application/json" });
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = "anime-void-backup-" + new Date().toISOString().slice(0, 10) + ".json";
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      setTimeout(() => URL.revokeObjectURL(link.href), 5000);
+    }
+
+    function importBackup(file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        const isRussian = localStorage.getItem("animeVoidLanguage") !== "en";
+        try {
+          const parsed = JSON.parse(reader.result);
+          const data = parsed && typeof parsed === "object" && parsed.data && typeof parsed.data === "object" ? parsed.data : parsed;
+          if (!data || typeof data !== "object") throw new Error("bad file");
+          if (!confirm(isRussian ? "Заменить текущие данные данными из бэкапа?" : "Replace current data with the backup?")) return;
+          Object.keys(data).forEach(key => {
+            if (typeof data[key] === "string" && (key.startsWith("animeVoid") || key.startsWith("watched_") || key.startsWith("duration_") || key.startsWith("progress_"))) {
+              localStorage.setItem(key, data[key]);
+            }
+          });
+          location.reload();
+        } catch (error) {
+          alert(isRussian ? "Не удалось прочитать файл бэкапа." : "Could not read the backup file.");
+        }
+      };
+      reader.readAsText(file);
+    }
+
+    const exportBtn = document.getElementById("exportBtn");
+    if (exportBtn) exportBtn.addEventListener("click", exportBackup);
+    const importBtn = document.getElementById("importBtn");
+    const importFileInput = document.getElementById("importFile");
+    if (importBtn && importFileInput) {
+      importBtn.addEventListener("click", () => importFileInput.click());
+      importFileInput.addEventListener("change", () => {
+        if (importFileInput.files && importFileInput.files[0]) importBackup(importFileInput.files[0]);
+        importFileInput.value = "";
+      });
+    }
+
+    /* ===== Поделиться статистикой ===== */
+    function shareStatsRoundRect(ctx, x, y, width, height, radius) {
+      ctx.beginPath();
+      ctx.moveTo(x + radius, y);
+      ctx.arcTo(x + width, y, x + width, y + height, radius);
+      ctx.arcTo(x + width, y + height, x, y + height, radius);
+      ctx.arcTo(x, y + height, x, y, radius);
+      ctx.arcTo(x, y, x + width, y, radius);
+      ctx.closePath();
+    }
+
+    function shareStatsImage() {
+      const isRussian = localStorage.getItem("animeVoidLanguage") !== "en";
+      const stats = collectAchievementStats();
+      const canvas = document.createElement("canvas");
+      canvas.width = 1200;
+      canvas.height = 630;
+      const ctx = canvas.getContext("2d");
+      const gradient = ctx.createLinearGradient(0, 0, 1200, 630);
+      gradient.addColorStop(0, "#171029");
+      gradient.addColorStop(0.55, "#241040");
+      gradient.addColorStop(1, "#0b0714");
+      ctx.fillStyle = gradient;
+      ctx.fillRect(0, 0, 1200, 630);
+      ctx.fillStyle = "rgba(168, 85, 247, 0.22)";
+      ctx.beginPath(); ctx.arc(1050, 90, 190, 0, Math.PI * 2); ctx.fill();
+      ctx.fillStyle = "rgba(192, 132, 252, 0.12)";
+      ctx.beginPath(); ctx.arc(140, 560, 160, 0, Math.PI * 2); ctx.fill();
+      for (let i = 0; i < 70; i++) {
+        ctx.fillStyle = "rgba(245,243,255," + (0.25 + Math.random() * 0.5).toFixed(2) + ")";
+        ctx.fillRect(Math.random() * 1200, Math.random() * 630, 2, 2);
+      }
+      ctx.fillStyle = "#f5f3ff";
+      ctx.font = "900 64px Arial, sans-serif";
+      ctx.fillText("ANIME VOID", 70, 120);
+      ctx.fillStyle = "#c084fc";
+      ctx.font = "700 30px Arial, sans-serif";
+      ctx.fillText(isRussian ? "моя статистика просмотра" : "my watch stats", 72, 168);
+      const cells = [
+        { value: String(stats.totalEpisodes), label: isRussian ? "серий просмотрено" : "episodes watched" },
+        { value: "≈ " + stats.hours + " " + (isRussian ? "ч" : "h"), label: isRussian ? "время просмотра" : "watch time" },
+        { value: String(stats.watchedTitles), label: isRussian ? "тайтлов начато" : "titles started" },
+        { value: String(stats.favoritesCount), label: isRussian ? "в избранном" : "favorites" }
+      ];
+      cells.forEach((cell, index) => {
+        const x = 70 + (index % 2) * 550;
+        const y = 250 + Math.floor(index / 2) * 150;
+        ctx.fillStyle = "rgba(168, 85, 247, 0.16)";
+        shareStatsRoundRect(ctx, x, y, 500, 120, 20);
+        ctx.fill();
+        ctx.fillStyle = "#e9d5ff";
+        ctx.font = "900 52px Arial, sans-serif";
+        ctx.fillText(cell.value, x + 30, y + 68);
+        ctx.fillStyle = "#a99fc2";
+        ctx.font = "600 26px Arial, sans-serif";
+        ctx.fillText(cell.label, x + 30, y + 100);
+      });
+      ctx.fillStyle = "#8f879d";
+      ctx.font = "600 24px Arial, sans-serif";
+      ctx.fillText("anime-void-app.github.io/AV", 70, 585);
+      canvas.toBlob(blob => {
+        if (!blob) return;
+        const link = document.createElement("a");
+        link.href = URL.createObjectURL(blob);
+        link.download = "anime-void-stats.png";
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+        setTimeout(() => URL.revokeObjectURL(link.href), 5000);
+      }, "image/png");
+    }
+
+    const shareStatsButton = document.getElementById("shareStatsBtn");
+    if (shareStatsButton) shareStatsButton.addEventListener("click", shareStatsImage);
+
         function render() {
       const currentLanguage = localStorage.getItem("animeVoidLanguage") || "ru";
       const genreAliases = {
@@ -2102,7 +2551,7 @@ localStorage.setItem("animeVoidHasMore", String(apiHasMore));
       const row = document.getElementById("airingRow");
       if (!section || !row || !items.length) return;
       const isRussian = localStorage.getItem("animeVoidLanguage") !== "en";
-      row.innerHTML = items.map(item => {
+      row.innerHTML = items.slice(0, 14).map(item => {
         const displayTitle = isRussian ? (getRussianTitle(item) || item.title) : item.title;
         return `
           <button type="button" class="airing-card" onclick="openAnimePage('${encodeURIComponent(item.id)}')">
@@ -2117,11 +2566,14 @@ localStorage.setItem("animeVoidHasMore", String(apiHasMore));
           </button>`;
       }).join("");
       section.hidden = false;
+      currentAiringItems = items;
+      renderCalendarSection(items);
+      renderMissedBanner(items);
       translateCatalogTitles(items);
     }
 
     async function loadAiringSection() {
-      const cacheKey = "animeVoidAiringCache";
+      const cacheKey = "animeVoidAiringCacheV2";
       let items = null;
       try {
         const cache = JSON.parse(localStorage.getItem(cacheKey) || "null");
@@ -2135,7 +2587,7 @@ localStorage.setItem("animeVoidHasMore", String(apiHasMore));
           const { season, year } = currentAniListSeason();
           const query = `
             query ($season: MediaSeason, $year: Int) {
-              Page(page: 1, perPage: 14) {
+              Page(page: 1, perPage: 40) {
                 media(type: ANIME, season: $season, seasonYear: $year, sort: POPULARITY_DESC, isAdult: false) {
                   id
                   title { romaji english native }
@@ -2226,11 +2678,14 @@ localStorage.setItem("animeVoidHasMore", String(apiHasMore));
       if (!section) return;
       const isRussian = localStorage.getItem("animeVoidLanguage") !== "en";
       const entries = collectWatchHistory();
+      const shareStatsButton = document.getElementById("shareStatsBtn");
       if (!entries.length) {
         section.hidden = true;
+        if (shareStatsButton) shareStatsButton.hidden = true;
         return;
       }
       section.hidden = false;
+      if (shareStatsButton) shareStatsButton.hidden = false;
 
       let favorites = [];
       try {
@@ -3348,6 +3803,26 @@ if (resetFiltersBtn) {
 
   renderListsSection();
   renderRecommendedSection();
+
+  const calendarTitle = document.getElementById("calendarTitle");
+  if (calendarTitle) calendarTitle.textContent = lang === "ru" ? "Расписание на неделю" : "Weekly schedule";
+  const calendarSubtitle = document.getElementById("calendarSubtitle");
+  if (calendarSubtitle) calendarSubtitle.textContent = lang === "ru" ? "Когда выходят новые серии" : "When new episodes air";
+  const achievementsTitle = document.getElementById("achievementsTitle");
+  if (achievementsTitle) achievementsTitle.textContent = lang === "ru" ? "Достижения" : "Achievements";
+  const backupTitle = document.getElementById("backupTitle");
+  if (backupTitle) backupTitle.textContent = lang === "ru" ? "Данные и бэкап" : "Data & backup";
+  const backupSubtitle = document.getElementById("backupSubtitle");
+  if (backupSubtitle) backupSubtitle.textContent = lang === "ru" ? "Сохрани списки, оценки и историю — или перенеси на другое устройство" : "Save your lists, ratings and history — or move them to another device";
+  const exportButton = document.getElementById("exportBtn");
+  if (exportButton) exportButton.textContent = lang === "ru" ? "💾 Сохранить бэкап" : "💾 Save backup";
+  const importButton = document.getElementById("importBtn");
+  if (importButton) importButton.textContent = lang === "ru" ? "📂 Загрузить бэкап" : "📂 Load backup";
+  const shareStatsButton = document.getElementById("shareStatsBtn");
+  if (shareStatsButton) shareStatsButton.textContent = lang === "ru" ? "📤 Поделиться статистикой" : "📤 Share my stats";
+
+  renderAchievementsSection();
+  renderCalendarSection(currentAiringItems);
 
   const airingTitle = document.getElementById("airingTitle");
   if (airingTitle) airingTitle.textContent = lang === "ru" ? "Сейчас выходит" : "Currently airing";
