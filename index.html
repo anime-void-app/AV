@@ -91,6 +91,69 @@
       background: #1a1526;
     }
 
+    .search-wrap { position: relative; }
+
+    .search-suggestions {
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 0;
+      right: 0;
+      background: #120e1c;
+      border: 1px solid rgba(168, 85, 247, .4);
+      border-radius: 14px;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, .6);
+      z-index: 40;
+      padding: 6px;
+      max-height: 430px;
+      overflow-y: auto;
+    }
+
+    .search-suggestions[hidden] { display: none; }
+
+    .search-suggestion {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+      padding: 8px;
+      border: 0;
+      background: transparent;
+      color: #fff;
+      text-align: left;
+      border-radius: 10px;
+      cursor: pointer;
+      font: inherit;
+    }
+
+    .search-suggestion:hover,
+    .search-suggestion.active { background: rgba(168, 85, 247, .18); }
+
+    .search-suggestion img {
+      width: 38px;
+      height: 54px;
+      object-fit: cover;
+      border-radius: 6px;
+      flex-shrink: 0;
+    }
+
+    .search-suggestion .sug-info { min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+
+    .search-suggestion .sug-title {
+      font-size: 13px;
+      font-weight: 700;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .search-suggestion .sug-meta { font-size: 11px; color: #9994ae; }
+
+    .sug-empty { color: #9994ae; font-size: 13px; padding: 10px 12px; }
+
+    @media (min-width: 601px) {
+      .search-suggestions { left: auto; min-width: 340px; }
+    }
+
     main { max-width: 1400px; margin: auto; padding: 28px 7% 70px; }
 
     .hero {
@@ -611,7 +674,8 @@
       header { height: auto; min-height: 68px; flex-wrap: wrap; padding: 14px 5%; gap: 13px; position: static; }
       .logo { font-size: 22px; }
       nav { order: 3; width: 100%; justify-content: space-between; }
-      .search { order: 2; flex: 1 1 100%; width: 100%; min-width: 0; }
+      .search-wrap { order: 2; flex: 1 1 100%; width: 100%; }
+      .search { width: 100%; min-width: 0; }
       main { padding: 20px 5% 40px; }
       .hero { min-height: 330px; padding: 25px; }
       .hero p { font-size: 13px; }
@@ -830,7 +894,10 @@
   <button onclick="setLanguage('ru')" id="ruBtn">RU</button>
   <button onclick="setLanguage('en')" id="enBtn">EN</button>
 </div>
-    <input id="search" class="search" type="search" placeholder="⌕  Найти аниме...">
+    <div class="search-wrap">
+      <input id="search" class="search" type="search" placeholder="⌕  Найти аниме...">
+      <div id="searchSuggestions" class="search-suggestions" hidden></div>
+    </div>
   </header>
 
   <main>
@@ -1519,6 +1586,7 @@ localStorage.setItem("animeVoidHasMore", String(apiHasMore));
       const requestId = ++searchTranslationSequence;
       if (searchDebounceTimer) clearTimeout(searchDebounceTimer);
       render();
+      buildSearchSuggestions(searchText);
 
       if (!searchText || !/[\u0400-\u04FF]/.test(searchText)) return;
       searchDebounceTimer = setTimeout(async () => {
@@ -1531,6 +1599,97 @@ localStorage.setItem("animeVoidHasMore", String(apiHasMore));
           console.warn("Не удалось перевести поисковый запрос:", error);
         }
       }, 350);
+    });
+
+    // ----- Live search suggestions -----
+    const searchSuggestionsBox = document.getElementById("searchSuggestions");
+    let suggestionState = { items: [], activeIndex: -1 };
+
+    function buildSearchSuggestions(query) {
+      if (!searchSuggestionsBox) return;
+      const q = String(query || "").trim().toLowerCase();
+      if (!q) {
+        searchSuggestionsBox.hidden = true;
+        searchSuggestionsBox.innerHTML = "";
+        suggestionState = { items: [], activeIndex: -1 };
+        return;
+      }
+      const isRussian = localStorage.getItem("animeVoidLanguage") !== "en";
+      const matches = anime
+        .filter(item => String(item.id).startsWith("anilist-"))
+        .map(item => {
+          const variants = [item.title, item.titleEnglish, item.titleRomaji, item.titleNative, getRussianTitle(item)]
+            .filter(Boolean)
+            .map(value => String(value).toLowerCase());
+          if (!variants.length) return null;
+          const position = variants.reduce((best, value) => {
+            const found = value.indexOf(q);
+            return found >= 0 && (best === -1 || found < best) ? found : best;
+          }, -1);
+          return position >= 0 ? { item, position } : null;
+        })
+        .filter(Boolean)
+        .sort((a, b) => a.position - b.position)
+        .slice(0, 7)
+        .map(entry => entry.item);
+
+      if (!matches.length) {
+        searchSuggestionsBox.innerHTML = `<div class="sug-empty">${isRussian ? "Ничего не найдено" : "Nothing found"}</div>`;
+        searchSuggestionsBox.hidden = false;
+        suggestionState = { items: [], activeIndex: -1 };
+        return;
+      }
+      suggestionState = { items: matches, activeIndex: -1 };
+      searchSuggestionsBox.innerHTML = matches.map(item => {
+        const displayTitle = isRussian ? (getRussianTitle(item) || item.title) : item.title;
+        const meta = [item.year, item.genre].filter(Boolean).join(" · ");
+        return `
+          <button type="button" class="search-suggestion"
+            onclick="openAnimePage('${encodeURIComponent(item.id)}')">
+            <img src="${item.image || 'image/poster1.jpg'}" alt="" loading="lazy"
+              onerror="this.onerror=null;this.src='image/poster1.jpg';">
+            <span class="sug-info">
+              <span class="sug-title">${displayTitle}</span>
+              <span class="sug-meta">${meta}</span>
+            </span>
+          </button>`;
+      }).join("");
+      searchSuggestionsBox.hidden = false;
+    }
+
+    function setActiveSuggestion(index) {
+      suggestionState.activeIndex = index;
+      searchSuggestionsBox.querySelectorAll(".search-suggestion").forEach((button, i) => {
+        button.classList.toggle("active", i === index);
+      });
+    }
+
+    document.getElementById("search").addEventListener("keydown", event => {
+      if (!searchSuggestionsBox || searchSuggestionsBox.hidden) return;
+      const count = suggestionState.items.length;
+      if (!count) return;
+      if (event.key === "ArrowDown") {
+        event.preventDefault();
+        setActiveSuggestion((suggestionState.activeIndex + 1) % count);
+      } else if (event.key === "ArrowUp") {
+        event.preventDefault();
+        setActiveSuggestion((suggestionState.activeIndex - 1 + count) % count);
+      } else if (event.key === "Enter" && suggestionState.activeIndex >= 0) {
+        event.preventDefault();
+        const chosen = suggestionState.items[suggestionState.activeIndex];
+        if (chosen) openAnimePage(chosen.id);
+      } else if (event.key === "Escape") {
+        searchSuggestionsBox.hidden = true;
+      }
+    });
+
+    document.getElementById("search").addEventListener("focus", event => {
+      buildSearchSuggestions(event.target.value);
+    });
+
+    document.addEventListener("click", event => {
+      if (!searchSuggestionsBox) return;
+      if (!event.target.closest(".search-wrap")) searchSuggestionsBox.hidden = true;
     });
 
     document.getElementById("sortFilter").addEventListener("change", event => {
@@ -1567,6 +1726,7 @@ document.getElementById("resetFiltersBtn").addEventListener("click", () => {
   searchText = "";
 
   document.getElementById("search").value = "";
+  buildSearchSuggestions("");
   document.getElementById("yearFilter").value = "";
   document.getElementById("statusFilter").value = "";
   document.getElementById("sortFilter").value = "default";
