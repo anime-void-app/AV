@@ -29,6 +29,15 @@
     button, input { font: inherit; }
     button { cursor: pointer; }
 
+    html { scroll-behavior: smooth; }
+
+    ::selection { background: rgba(168, 85, 247, .45); color: #fff; }
+
+    ::-webkit-scrollbar { width: 10px; }
+    ::-webkit-scrollbar-track { background: #0b0913; }
+    ::-webkit-scrollbar-thumb { background: #2b2140; border-radius: 8px; }
+    ::-webkit-scrollbar-thumb:hover { background: #3d2e5c; }
+
     header {
       height: 76px;
       padding: 0 7%;
@@ -36,7 +45,9 @@
       align-items: center;
       justify-content: space-between;
       gap: 24px;
-      background: #0c0a14;
+      background: rgba(12, 10, 20, .82);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
       border-bottom: 1px solid #211a30;
       position: sticky;
       top: 0;
@@ -58,6 +69,7 @@
       color: #b7b1c9;
       text-decoration: none;
       font-size: 14px;
+      transition: color .2s ease;
     }
 
     nav a:hover { color: white; }
@@ -108,7 +120,12 @@
       pointer-events: none;
     }
 
-    .hero-content { max-width: 580px; position: relative; z-index: 1; }
+    .hero-content { max-width: 580px; position: relative; z-index: 1; animation: heroFadeIn .6s ease both; }
+
+    @keyframes heroFadeIn {
+      from { opacity: 0; transform: translateY(14px); }
+      to { opacity: 1; transform: none; }
+    }
 
     .tag {
       display: inline-block;
@@ -249,6 +266,7 @@
     padding: 18px;
     isolation: isolate;
     background: #17121f;
+    border: 1px solid rgba(168, 85, 247, .16);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -327,12 +345,16 @@
 
     .empty { color: var(--muted); grid-column: 1 / -1; padding: 30px 0; }
 
+    #loadMoreBtn { transition: transform .15s ease, filter .15s ease, box-shadow .15s ease; }
+    #loadMoreBtn:hover { transform: translateY(-2px); filter: brightness(1.12); box-shadow: 0 12px 30px rgba(121, 40, 202, .35); }
+
     footer {
       border-top: 1px solid #211a30;
       padding: 25px 7%;
       text-align: center;
       color: #817990;
       font-size: 12px;
+      letter-spacing: .4px;
     }
 
   .modal {
@@ -590,6 +612,7 @@
   border: 1px solid rgba(168, 85, 247, 0.45);
   border-radius: 20px;
 
+  background-color: #0b0812;
   background-size: cover;
   background-position: center;
 
@@ -1937,18 +1960,22 @@ function toggleFavorite(id) {
 
   section.style.display = "block";
 
+  // Use the highest-resolution cover so the card does not look blurry.
+  const posterSrc = String(anime.image || "").replace("/large/", "/extraLarge/") || anime.image;
+  const backgroundSrc = anime.background || posterSrc;
+
   card.style.backgroundImage =
-    `url("${anime.background || anime.image}")`;
+    `url("${backgroundSrc}")`;
 
   card.innerHTML = `
     <img
-      src="${anime.image}"
+      src="${posterSrc}"
       alt="${anime.title}"
     >
 
     <div class="continue-info">
 
-      <h3>${displayTitle}</h3>
+      <h3 data-anime-title-id="${anime.id}">${displayTitle}</h3>
 
       <p id="continueEpisodeText">
         ${isMovie ? (currentLang === "ru" ? "Фильм" : "Movie") : (currentLang === "ru" ? `Серия ${lastWatch.episode}` : `Episode ${lastWatch.episode}`)}
@@ -2006,6 +2033,8 @@ function toggleFavorite(id) {
 
   card.dataset.progressRounded =
     String(progressRounded);
+
+  translateCatalogTitles([anime]);
 }
 
 
@@ -2427,6 +2456,7 @@ if (resetFiltersBtn) {
 
     });
   render();
+  showContinueWatching();
 }
 
 
