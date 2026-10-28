@@ -882,7 +882,7 @@ const russianTitleOverrides = {
                 voiceActors(language: JAPANESE) { id name { full } }
               }
             }
-            recommendations(perPage: 12, sort: [RATING_DESC]) {
+            recommendations(perPage: 20, sort: [RATING_DESC]) {
               nodes {
                 mediaRecommendation {
                   id
@@ -943,10 +943,16 @@ const russianTitleOverrides = {
           role: edge.role || "SUPPORTING",
           va: (edge.voiceActors || []).filter(Boolean)[0]?.name?.full || ""
         }));
+      const seenSimilarIds = new Set([String(numericId)]);
       currentSimilar = (media.recommendations?.nodes || [])
         .map(node => node?.mediaRecommendation)
         .filter(rec => rec && rec.id && (rec.title?.romaji || rec.title?.english))
-        .filter(rec => String(rec.id) !== String(numericId))
+        .filter(rec => {
+          const key = String(rec.id);
+          if (seenSimilarIds.has(key)) return false;
+          seenSimilarIds.add(key);
+          return true;
+        })
         .slice(0, 12)
         .map(rec => ({
           id: "anilist-" + rec.id,
