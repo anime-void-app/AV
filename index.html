@@ -1,0 +1,2409 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ANIME VOID — Мир аниме</title>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+    :root {
+      --bg: #090810;
+      --panel: #12101d;
+      --purple: #a855f7;
+      --text: #f5f3ff;
+      --muted: #9994ae;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, Arial, sans-serif;
+    }
+
+    button, input { font: inherit; }
+    button { cursor: pointer; }
+
+    header {
+      height: 76px;
+      padding: 0 7%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      background: #0c0a14;
+      border-bottom: 1px solid #211a30;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .logo {
+      font-size: 25px;
+      font-weight: 900;
+      letter-spacing: -1px;
+      white-space: nowrap;
+    }
+
+    .logo span { color: var(--purple); }
+
+    nav { display: flex; gap: 24px; }
+
+    nav a {
+      color: #b7b1c9;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    nav a:hover { color: white; }
+
+    .search {
+      width: 210px;
+      padding: 11px 14px;
+      border: 1px solid #30263f;
+      border-radius: 10px;
+      background: #171321;
+      color: white;
+      outline: none;
+    }
+
+    .search:focus { border-color: var(--purple); }
+
+    main { max-width: 1400px; margin: auto; padding: 28px 7% 70px; }
+
+    .hero {
+      min-height: 370px;
+      border: 1px solid #3b2256;
+      border-radius: 22px;
+      padding: 48px;
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      align-items: center;
+      background:
+        radial-gradient(ellipse at 80% 50%, #7427ad88, transparent 40%),
+        radial-gradient(ellipse at 95% 0%, #31215f, transparent 45%),
+        linear-gradient(115deg, #171022, #0b0913 75%);
+    }
+
+    .hero::after {
+      content: "VOID";
+      position: absolute;
+      right: -15px;
+      bottom: -75px;
+      font-size: clamp(120px, 22vw, 290px);
+      font-weight: 900;
+      letter-spacing: -20px;
+      color: #c084fc12;
+      pointer-events: none;
+    }
+
+    .hero-content { max-width: 580px; position: relative; z-index: 1; }
+
+    .tag {
+      display: inline-block;
+      padding: 7px 11px;
+      border-radius: 7px;
+      background: #8b36d32b;
+      color: #d8b4fe;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 2px;
+    }
+
+    h1 { font-size: clamp(34px, 5vw, 58px); margin: 19px 0 12px; line-height: 1.08; }
+    .hero p { color: #bdb5d0; line-height: 1.8; max-width: 470px; font-size: 14px; }
+
+    .primary, .secondary {
+      border: 0;
+      border-radius: 10px;
+      padding: 13px 20px;
+      font-weight: 700;
+      margin: 15px 8px 0 0;
+    }
+
+    .primary {
+      background: linear-gradient(110deg, #9333ea, #c026d3);
+      color: white;
+    }
+
+    .secondary { background: #ffffff12; color: white; border: 1px solid #ffffff20; }
+    .primary:hover { filter: brightness(1.15); }
+    .secondary:hover { background: #ffffff20; }
+
+    .section-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin: 42px 0 20px;
+    }
+
+    h2 { font-size: 23px; margin: 0; }
+    .subtitle { color: var(--muted); font-size: 12px; margin-top: 7px; }
+
+    .filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 22px; }
+    .advanced-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: -8px 0 22px;
+}
+
+.advanced-filters input,
+.advanced-filters select {
+  min-height: 38px;
+  padding: 8px 12px;
+  border: 1px solid #30263f;
+  border-radius: 9px;
+  background: #15111f;
+  color: white;
+  font: inherit;
+  font-size: 12px;
+  outline: none;
+}
+
+
+.advanced-filters input:focus,
+.advanced-filters select:focus {
+  border-color: #a855f7;
+}
+
+.advanced-filters input {
+  width: 120px;
+}
+.reset-filter {
+  min-height: 38px;
+  padding: 8px 12px;
+  border: 1px solid #30263f;
+  border-radius: 9px;
+  background: #15111f;
+  color: #d8b4fe;
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.reset-filter:hover {
+  background: #8b36d3;
+  border-color: #a855f7;
+  color: white;
+}
+
+@media (max-width: 600px) {
+  .advanced-filters input,
+  .advanced-filters select {
+    flex: 1;
+    min-width: 140px;
+  }
+}
+
+    .filter {
+      border: 1px solid #30263f;
+      background: #15111f;
+      color: #bdb5d0;
+      padding: 9px 14px;
+      border-radius: 9px;
+      font-size: 12px;
+    }
+
+    .filter.active, .filter:hover {
+      background: #8b36d3;
+      border-color: #a855f7;
+      color: white;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 22px 16px;
+    }
+
+    .card { min-width: 0; cursor: pointer; }
+
+.card:focus-visible {
+  outline: 2px solid #a855f7;
+  outline-offset: 4px;
+  border-radius: 12px;
+}
+
+    
+.poster {
+    height: 300px;
+    border-radius: 13px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 18px;
+    isolation: isolate;
+    background: #17121f;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.poster img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    z-index: -1;
+    transition: transform 0.5s ease;
+}
+
+.poster:hover img {
+    transform: scale(1.07);
+}
+
+
+    .poster:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(145, 61, 255, 0.25);
+}
+
+    .poster::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+      background: var(--poster);
+    }
+
+    .poster::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background: linear-gradient(0deg, #090711 0%, #09071122 75%);
+    }
+
+    .poster-symbol {
+      position: absolute;
+      top: 16px;
+      right: 15px;
+      font-size: 68px;
+      opacity: .75;
+      filter: drop-shadow(0 0 20px #ffffff40);
+    }
+
+    .poster small { font-size: 10px; letter-spacing: 2px; color: #e9d5ff; }
+    .poster h3 { font-size: 19px; margin: 8px 0 0; line-height: 1.2; }
+    .poster .year { font-size: 11px; color: #d0c8dc; margin-top: 7px; }
+
+    .season-count { display:inline-flex; margin-top:5px; padding:3px 8px; border:1px solid rgba(192,132,252,.42); border-radius:999px; color:#d8b4fe; font-size:11px; }
+    .card-season-buttons { display:flex; flex-wrap:wrap; gap:6px; margin-top:9px; }
+    .card-season-button { min-height:34px; flex:1 1 auto; padding:6px 9px; border:1px solid rgba(192,132,252,.38); border-radius:9px; background:#171020; color:#e9d5ff; font:inherit; font-size:11px; font-weight:700; cursor:pointer; }
+    .card-season-button:hover, .card-season-button.active { background:linear-gradient(110deg,#7c3aed,#a855f7); border-color:#c084fc; color:#fff; }
+    .card-info {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .genre { font-size: 11px; color: var(--muted); }
+
+    .favorite {
+      border: 0;
+      background: transparent;
+      color: #a9a1b9;
+      font-size: 20px;
+    }
+
+    .favorite.saved { color: #e879f9; }
+
+    .empty { color: var(--muted); grid-column: 1 / -1; padding: 30px 0; }
+
+    footer {
+      border-top: 1px solid #211a30;
+      padding: 25px 7%;
+      text-align: center;
+      color: #817990;
+      font-size: 12px;
+    }
+
+  .modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+
+  background:
+  linear-gradient(rgba(5,4,11,.72), rgba(5,4,11,.88)),
+  var(--modal-bg);
+
+  background-size: cover;
+  background-position: center;
+
+  backdrop-filter: blur(1px);
+}
+
+    .modal.open { display: flex; }
+
+    .modal-box {
+      position: relative;
+  max-width: 920px;
+  width: 95%;
+  max-height: 90vh;
+  overflow-y: auto;
+
+  background:
+    radial-gradient(circle at top right, rgba(168,85,247,.18), transparent 35%),
+    linear-gradient(145deg, #120d1b, #09070f 70%);
+
+  border: 1px solid rgba(168,85,247,.45);
+  border-radius: 24px;
+  padding: 26px;
+
+  box-shadow:
+    0 0 30px rgba(147,51,234,.25),
+    0 30px 80px rgba(0,0,0,.65);
+
+  animation: animeModalOpen .35s ease;
+} 
+.close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+
+  width: 42px;
+  height: 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: rgba(10, 8, 16, 0.72);
+  border: 1px solid rgba(168, 85, 247, 0.5);
+
+  color: #ffffff;
+  font-size: 25px;
+  line-height: 1;
+
+  cursor: pointer;
+  z-index: 20;
+
+  box-shadow: 0 0 18px rgba(168, 85, 247, 0.18);
+
+  transition:
+    transform .2s ease,
+    background .2s ease,
+    border-color .2s ease;
+}
+
+.close:hover {
+  background: rgba(168, 85, 247, 0.28);
+  border-color: #c084fc;
+  transform: rotate(90deg) scale(1.08);
+}
+
+.modal-close-btn {
+  margin-top: 24px;
+  min-width: 150px;
+  padding: 13px 24px;
+  border-radius: 12px;
+
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: .3px;
+
+  background: linear-gradient(
+    110deg,
+    #7c3aed,
+    #a855f7,
+    #c026d3
+  );
+
+  box-shadow:
+    0 8px 25px rgba(168, 85, 247, 0.22);
+
+  transition:
+    transform .2s ease,
+    box-shadow .2s ease,
+    filter .2s ease;
+}
+
+.modal-close-btn:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.08);
+
+  box-shadow:
+    0 12px 32px rgba(168, 85, 247, 0.32);
+}
+@keyframes animeModalOpen {
+  from {
+    opacity: 0;
+    transform: translateY(25px) scale(0.96);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.anime-detail-layout {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 28px;
+  align-items: start;
+}
+
+.anime-detail-poster {
+  position: relative;
+  border-radius: 18px;
+  overflow: hidden;
+  aspect-ratio: 2 / 3;
+  border: 1px solid rgba(168, 85, 247, 0.45);
+}
+
+.anime-detail-poster img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.anime-detail-content h2 {
+  font-size: 34px;
+  margin: 12px 0;
+}
+
+.anime-details {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.detail-card {
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: rgba(168, 85, 247, 0.10);
+  border: 1px solid rgba(168, 85, 247, 0.25);
+}
+
+.detail-label {
+  display: block;
+  color: #928aa0;
+  font-size: 11px;
+  margin-bottom: 5px;
+}
+
+.detail-value {
+  color: white;
+  font-weight: 700;
+}
+
+.rating-value {
+  color: #d8b4fe;
+  font-size: 18px;
+}
+
+.anime-tag {
+  display: inline-block;
+  padding: 7px 12px;
+  border-radius: 999px;
+  background: rgba(168, 85, 247, 0.12);
+  border: 1px solid rgba(168, 85, 247, 0.35);
+  color: #d8b4fe;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+
+    @media (max-width: 900px) {
+      header { padding: 0 4%; }
+      main { padding: 24px 4% 50px; }
+      nav { gap: 12px; }
+      .search { width: 160px; }
+      .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .poster { height: 220px; }
+    }
+
+    @media (max-width: 600px) {
+      header { height: auto; min-height: 68px; flex-wrap: wrap; padding: 14px 5%; gap: 13px; }
+      .logo { font-size: 22px; }
+      nav { order: 3; width: 100%; justify-content: space-between; }
+      .search { flex: 1; min-width: 100px; width: auto; }
+      main { padding: 20px 5% 40px; }
+      .hero { min-height: 330px; padding: 25px; }
+      .hero p { font-size: 13px; }
+      .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px 12px; }
+      .poster { height: 210px; padding: 12px; }
+      .poster-symbol { font-size: 55px; }
+      .poster h3 { font-size: 16px; }
+      .card-season-buttons { gap:5px; }
+      .card-season-button { min-height:36px; padding:6px 7px; font-size:10px; }
+      h2 { font-size: 20px; }
+      .section-heading { margin-top: 32px; }
+    }
+    .continue-section {
+  width: 100%;
+  margin: 28px 0 32px;
+}
+
+.continue-title {
+  margin: 0 0 14px;
+  font-size: 22px;
+  font-weight: 800;
+  color: #fff;
+}
+
+.continue-card {
+  position: relative;
+  width: 100%;
+  min-height: 180px;
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  padding: 22px 24px;
+  box-sizing: border-box;
+
+  border: 1px solid rgba(168, 85, 247, 0.45);
+  border-radius: 18px;
+
+  background-size: cover;
+  background-position: center;
+
+  overflow: hidden;
+}
+
+.continue-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background: linear-gradient(
+    90deg,
+    rgba(7, 5, 12, 0.97) 0%,
+    rgba(7, 5, 12, 0.88) 45%,
+    rgba(7, 5, 12, 0.55) 100%
+  );
+
+  z-index: 0;
+}
+
+.continue-card > img {
+  position: relative;
+  z-index: 1;
+
+  width: 105px;
+  height: 145px;
+  flex-shrink: 0;
+
+  object-fit: cover;
+  border-radius: 12px;
+
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.65);
+}
+
+.continue-info {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  min-width: 0;
+}
+
+.continue-info h3 {
+  margin: 0 0 7px;
+  font-size: 19px;
+  font-weight: 800;
+  color: #fff;
+}
+
+.continue-info p {
+  margin: 0 0 15px;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.continue-btn {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 9px;
+
+  background: linear-gradient(135deg, #7c3aed, #a855f7);
+
+  color: #fff;
+  font-weight: 700;
+  font-size: 13px;
+
+  cursor: pointer;
+}
+
+.continue-btn:hover {
+  filter: brightness(1.12);
+}
+
+.continue-progress {
+  position: absolute;
+  left: 20px;
+  right: 20px;
+  bottom: 12px;
+
+  height: 6px;
+
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 10px;
+
+  overflow: hidden;
+  z-index: 5;
+}
+
+.continue-progress-fill {
+  height: 100%;
+  min-width: 3px;
+
+  background: linear-gradient(
+    90deg,
+    #7c3aed,
+    #d946ef
+  );
+
+  border-radius: 10px;
+}
+.continue-stats {
+  position: relative;
+  z-index: 2;
+
+  margin-left: auto;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 5px;
+
+  white-space: nowrap;
+}
+
+.continue-stats strong {
+  font-size: 14px;
+  color: #fff;
+}
+
+.continue-stats span {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.6);
+}
+.language-switch {
+  display: flex;
+  gap: 5px;
+}
+
+.language-switch button {
+  padding: 6px 10px;
+  border: 1px solid #7c3aed;
+  border-radius: 7px;
+
+  background: transparent;
+  color: white;
+
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.language-switch button.active {
+  background: #7c3aed;
+}
+  </style>
+</head>
+
+<body>
+  <header>
+    <a href="#" class="logo" style="text-decoration:none;color:white">
+      ANIME<span>VOID</span>
+    </a>
+
+    <nav>
+      <a href="#">Главная</a>
+      <a href="#catalog">Каталог</a>
+      <a href="#favorites">Избранное</a>
+    </nav>
+<div class="language-switch">
+  <button onclick="setLanguage('ru')" id="ruBtn">RU</button>
+  <button onclick="setLanguage('en')" id="enBtn">EN</button>
+</div>
+    <input id="search" class="search" type="search" placeholder="⌕  Найти аниме...">
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-content">
+        <span class="tag" id="heroTag">ТВОЙ МИР АНИМЕ</span>
+
+<h1 id="heroTitle">
+  За гранью<br>обычного мира.
+</h1>
+
+<p id="heroText">
+  Открывай новые вселенные, знакомься с героями
+  и находи истории, которые останутся с тобой надолго.
+</p>
+
+<button
+  id="openCatalogBtn"
+  class="primary"
+  onclick="scrollCatalog()"
+>
+  ✦ Открыть каталог
+</button>
+
+<button
+  id="aboutBtn"
+  class="secondary"
+  onclick="showAbout()"
+>
+  О проекте
+</button>
+      </div>
+    </section>
+
+    <section id="catalog">
+      <div class="section-heading">
+        <div>
+          <h2 id="catalogTitle">Каталог аниме</h2>
+         <div class="subtitle" id="catalogSubtitle">
+  Выбери свою следующую историю
+</div>
+        </div>
+      </div>
+
+      <div class="filters">
+  <button id="filterAll" class="filter active" data-genre="Все">Все</button>
+  <button id="filterFantasy" class="filter" data-genre="Фэнтези">Фэнтези</button>
+  <button id="filterAction" class="filter" data-genre="Экшен">Экшен</button>
+  <button id="filterAdventure" class="filter" data-genre="Приключения">Приключения</button>
+  <button id="filterDrama" class="filter" data-genre="Драма">Драма</button>
+  <button class="filter" data-genre="Романтика" data-ru="Романтика" data-en="Romance">Романтика</button>
+  <button class="filter" data-genre="Комедия" data-ru="Комедия" data-en="Comedy">Комедия</button>
+  <button class="filter" data-genre="Ужасы" data-ru="Ужасы" data-en="Horror">Ужасы</button>
+  <button class="filter" data-genre="Фантастика" data-ru="Фантастика" data-en="Sci-Fi">Фантастика</button>
+  <button class="filter" data-genre="Сверхъестественное" data-ru="Сверхъестественное" data-en="Supernatural">Сверхъестественное</button>
+  <button class="filter" data-genre="Мистика" data-ru="Мистика" data-en="Mystery">Мистика</button>
+  <button class="filter" data-genre="Психология" data-ru="Психология" data-en="Psychological">Психология</button>
+  <button class="filter" data-genre="Спорт" data-ru="Спорт" data-en="Sports">Спорт</button>
+</div>
+
+<div class="advanced-filters">
+  <input id="yearFilter" type="number" min="1900" max="2100"
+    placeholder="Год" aria-label="Фильтр по году">
+  <select id="statusFilter" aria-label="Фильтр по статусу">
+    <option value="">Любой статус</option>
+    <option value="RELEASING">Выходит</option>
+    <option value="FINISHED">Завершён</option>
+    <option value="NOT_YET_RELEASED">Ещё не вышел</option>
+    <option value="HIATUS">Приостановлен</option>
+    <option value="CANCELLED">Отменён</option>
+  </select>
+  <select id="sortFilter" aria-label="Сортировка каталога">
+    <option value="default" data-ru="Как в каталоге" data-en="Default order">Как в каталоге</option>
+    <option value="rating" data-ru="По рейтингу" data-en="By rating">По рейтингу</option>
+    <option value="newest" data-ru="Сначала новые" data-en="Newest first">Сначала новые</option>
+    <option value="oldest" data-ru="Сначала старые" data-en="Oldest first">Сначала старые</option>
+    <option value="title" data-ru="По названию" data-en="By title">По названию</option>
+  </select>
+  <button id="resetFiltersBtn" class="reset-filter" type="button">Сбросить фильтры</button>
+</div>
+
+<section class="continue-section" id="continueSection" style="display: none;">
+  <h2 class="continue-title" id="continueTitle">Продолжить просмотр</h2>
+  <div class="continue-card" id="continueCard">
+    <!-- Сюда JavaScript сам подставит аниме -->
+  </div>
+</section>
+
+<div class="grid" id="animeGrid"></div>
+      <div style="text-align:center; margin:30px 0;">
+  <button
+    id="loadMoreBtn"
+    onclick="showNextCatalogPage()"
+    style="
+      padding: 18px 20px 32px;
+      border:1px solid #8b3dff;
+      border-radius:10px;
+      background:#7928ca;
+      color:white;
+      font-size:15px;
+      font-weight:bold;
+      cursor:pointer;
+    "
+  >
+    Загрузить ещё аниме
+  </button>
+</div>
+    </section>
+
+    <section id="favorites">
+      <div class="section-heading">
+        <div>
+          <h2>Избранное ♥</h2>
+          <div class="subtitle">Тайтлы, которые ты сохранил</div>
+        </div>
+      </div>
+      <div class="grid" id="favoritesGrid"></div>
+    </section>
+  </main>
+
+  <footer>
+    ANIME VOID © 2026 · Твоя следующая история начинается здесь
+  </footer>
+
+  <div class="modal" id="modal" onclick="closeOutside(event)">
+    <div class="modal-box">
+      <button class="close" onclick="closeModal()" aria-label="Закрыть">×</button>
+      <div id="modalContent"></div>
+      <button class="primary modal-close-btn" onclick="closeModal()">Закрыть</button>
+    </div>
+  </div>
+
+  <script>
+    const anime = [
+      {
+        id: 1, title: "Тень бездны", genre: "Фэнтези",image: "image/poster1.jpg",
+        year: 2026, symbol: "☽", label: "DARK FANTASY",
+        color: "linear-gradient(145deg,#54217b,#17152e 65%,#090810)",
+        description: "Молодой странник отправляется в забытые земли, где древняя магия меняет судьбы."
+      },
+      {
+        id: 2, title: "Последний клинок", genre: "Экшен",
+        year: 2025, symbol: "⚔", label: "ACTION",
+        color: "linear-gradient(145deg,#9b303e,#401b40 60%,#090810)",
+        description: "Воин ищет ответы о своём прошлом в мире, раздираемом войной."
+      },
+      {
+        id: 3, title: "Небесный путь", genre: "Приключения",
+        year: 2026, symbol: "✧", label: "ADVENTURE",
+        color: "linear-gradient(145deg,#245a91,#34306c 60%,#090810)",
+        description: "Путешествие через парящие острова к тайне древнего небесного царства."
+      },
+      {
+        id: 4, title: "Алый рассвет", genre: "Драма",
+        year: 2024, symbol: "☀", label: "DRAMA",
+        color: "linear-gradient(145deg,#a04b31,#6a244c 60%,#090810)",
+        description: "История о дружбе, выборе и надежде в мире на пороге перемен."
+      },
+      {
+        id: 5, title: "Корона пустоты", genre: "Фэнтези",
+        year: 2025, symbol: "♛", label: "FANTASY",
+        color: "linear-gradient(145deg,#6332a5,#242044 60%,#090810)",
+        description: "Наследник потерянного трона должен раскрыть секрет древней короны."
+      },
+      {
+        id: 6, title: "Стальной дух", genre: "Экшен",
+        year: 2026, symbol: "✦", label: "ACTION",
+        color: "linear-gradient(145deg,#267c80,#26334e 60%,#090810)",
+        description: "Юный мастер боевых искусств проходит испытания на пути к силе."
+      },
+      {
+        id: 7, title: "Сад звёзд", genre: "Приключения",
+        year: 2025, symbol: "✺", label: "ADVENTURE",
+        color: "linear-gradient(145deg,#7b397c,#282454 60%,#090810)",
+        description: "Двое друзей ищут волшебный сад, исчезающий на рассвете."
+      },
+      {
+        id: 8, title: "Тихая вечность", genre: "Драма",
+        year: 2024, symbol: "❖", label: "DRAMA",
+        color: "linear-gradient(145deg,#36577b,#28213d 60%,#090810)",
+        description: "Необычная встреча заставляет героя по-новому взглянуть на свою жизнь."
+      }
+    ];
+const demoAnimeIds = new Set([
+    1, 2, 3, 4, 5, 6, 7, 8
+]);
+    let selectedGenre = "Все";
+    let searchText = "";
+    let translatedSearchText = "";
+    let searchTranslationSequence = 0;
+    let searchDebounceTimer = null;
+    let selectedYear = "";
+let selectedStatus = "";
+let selectedSort = "default";
+    let favorites = JSON.parse(localStorage.getItem("animeVoidFavorites") || "[]");
+    
+const animeVoidCatalogFeaturesVersion = "ru-search-season-groups-v2";
+if (localStorage.getItem("animeVoidCatalogFeaturesVersion") !== animeVoidCatalogFeaturesVersion) {
+  localStorage.setItem("animeVoidCatalogFeaturesVersion", animeVoidCatalogFeaturesVersion);
+  // Refresh the first popular page so older cached entries gain season relations.
+  localStorage.setItem("animeVoidApiPage", "1");
+  localStorage.setItem("animeVoidHasMore", "true");
+}
+let apiPage = Number(localStorage.getItem("animeVoidApiPage")) || 1;
+let visibleCatalogCount = 24;
+let currentFilteredCount = 0;
+let apiLoading = false;
+let apiHasMore = localStorage.getItem("animeVoidHasMore") !== "false";
+
+try {
+  const savedCatalog = JSON.parse(
+    localStorage.getItem("animeVoidCatalog") || "[]"
+  );
+
+  const savedIds = new Set(anime.map(item => String(item.id)));
+
+  savedCatalog.forEach(item => {
+    if (!savedIds.has(String(item.id))) {
+      anime.push(item);
+    }
+  });
+} catch (error) {
+  console.error("Не удалось восстановить каталог:", error);
+}
+
+function showNextCatalogPage() {
+  if (visibleCatalogCount < currentFilteredCount) {
+    visibleCatalogCount += 24;
+    render();
+  } else if (apiHasMore && !apiLoading) {
+    visibleCatalogCount += 24;
+    loadAnimeFromApi();
+  }
+}
+
+async function loadAnimeFromApi() {
+  if (apiLoading || !apiHasMore) return;
+
+  apiLoading = true;
+
+  try {
+    const query = `
+      query ($page: Int) {
+        Page(page: $page, perPage: 20) {
+          pageInfo {
+            hasNextPage
+          }
+          media(
+            type: ANIME,
+            sort: POPULARITY_DESC,
+            isAdult: false
+          ) {
+            id
+            title {
+              romaji
+              english
+              native
+            }
+            
+coverImage {
+  extraLarge
+  large
+}
+
+bannerImage
+
+averageScore
+episodes
+status
+      genres
+      seasonYear
+      description
+      format
+      relations {
+        edges {
+          relationType
+          node {
+            id
+            type
+            format
+            title { romaji english native }
+            coverImage { extraLarge large }
+            bannerImage
+            averageScore
+            episodes
+            status
+            genres
+            seasonYear
+            description
+          }
+        }
+      }
+          }
+        }
+      }
+    `;
+
+    const response = await fetch("https://graphql.anilist.co", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      body: JSON.stringify({
+        query,
+        variables: { page: apiPage }
+      })
+    });
+
+    if (!response.ok) {
+      throw new Error("Ошибка API: " + response.status);
+    }
+
+    const result = await response.json();
+    if (result.errors) {
+      throw new Error(result.errors[0].message);
+    }
+
+    const pageData = result.data.Page;
+
+    function mapAniListMedia(item, includeRelations = true) {
+      const relatedSeasons = includeRelations
+        ? (item.relations?.edges || [])
+            .filter(edge =>
+              ["PREQUEL", "SEQUEL"].includes(edge.relationType) &&
+              edge.node?.type === "ANIME" &&
+              ["TV", "TV_SHORT"].includes(edge.node?.format)
+            )
+            .map(edge => {
+              const node = edge.node;
+              return {
+                id: "anilist-" + node.id,
+                title: node.title?.english || node.title?.romaji || node.title?.native || "Anime",
+                titleEnglish: node.title?.english || "",
+                titleRomaji: node.title?.romaji || "",
+                titleNative: node.title?.native || "",
+                genre: node.genres?.[0] || "Other",
+                genres: node.genres || [],
+                year: node.seasonYear || "Unknown",
+                label: "ANIME",
+                color: "linear-gradient(145deg, #39285c, #090810)",
+                description: node.description || "Description unavailable",
+                rating: node.averageScore ? (node.averageScore / 10).toFixed(1) : null,
+                episodes: node.episodes,
+                status: node.status,
+                format: node.format,
+                relationType: edge.relationType,
+                relatedSeasons: [],
+                image: node.coverImage?.large || node.coverImage?.extraLarge || "",
+                background: node.bannerImage || node.coverImage?.extraLarge || node.coverImage?.large || ""
+              };
+            })
+        : [];
+
+      return {
+        id: "anilist-" + item.id,
+        title: item.title?.english || item.title?.romaji || item.title?.native || "Anime",
+        titleEnglish: item.title?.english || "",
+        titleRomaji: item.title?.romaji || "",
+        titleNative: item.title?.native || "",
+        genre: item.genres?.[0] || "Other",
+        genres: item.genres || [],
+        year: item.seasonYear || "Unknown",
+        symbol: "✦",
+        label: "ANIME",
+        color: "linear-gradient(145deg, #39285c, #090810)",
+        description: item.description || "Description unavailable",
+        rating: item.averageScore ? (item.averageScore / 10).toFixed(1) : null,
+        episodes: item.episodes,
+        status: item.status,
+        format: item.format || "",
+        relatedSeasons: relatedSeasons
+          .flatMap(season => [season, ...(season.relatedSeasons || [])])
+          .map(season => ({ ...season, relatedSeasons: [] })),
+        image: item.coverImage?.large || item.coverImage?.extraLarge || "",
+        background: item.bannerImage || item.coverImage?.extraLarge || item.coverImage?.large || ""
+      };
+    }
+
+    const newItems = pageData.media.map(item => mapAniListMedia(item));
+    // Add adjacent TV seasons discovered through AniList relations so a franchise
+    // can be grouped even when a season is not on the current popularity page.
+    const discoveredSeasons = newItems.flatMap(item =>
+      (item.relatedSeasons || []).flatMap(season => [season, ...(season.relatedSeasons || [])])
+    );
+    const allNewItems = [...newItems, ...discoveredSeasons];
+    const animeById = new Map(
+  anime.map(item => [String(item.id), item])
+);
+
+allNewItems.forEach(apiItem => {
+  const existingItem = animeById.get(String(apiItem.id));
+
+  if (existingItem) {
+    Object.assign(existingItem, apiItem);
+  } else {
+    anime.push(apiItem);
+    animeById.set(String(apiItem.id), apiItem);
+  }
+});
+
+    
+
+    apiHasMore = pageData.pageInfo.hasNextPage;
+    apiPage++;
+    localStorage.setItem(
+  "animeVoidCatalog",
+  JSON.stringify(anime.filter(item => String(item.id).startsWith("anilist-")))
+);
+
+localStorage.setItem("animeVoidApiPage", String(apiPage));
+localStorage.setItem("animeVoidHasMore", String(apiHasMore));
+
+    render();
+    showContinueWatching();
+  } catch (error) {
+    console.error(error);
+    alert("Не удалось загрузить аниме. Проверь интернет и попробуй ещё раз.");
+  } finally {
+    apiLoading = false;
+  }
+}
+
+    function isSeriesFormat(item) {
+      return ["TV", "TV_SHORT"].includes(String(item?.format || "").toUpperCase());
+    }
+
+    function applySeasonGrouping(items) {
+      const series = items.filter(isSeriesFormat);
+      const parent = new Map(series.map(item => [String(item.id), String(item.id)]));
+      const find = id => {
+        id = String(id);
+        if (!parent.has(id)) return id;
+        if (parent.get(id) !== id) parent.set(id, find(parent.get(id)));
+        return parent.get(id);
+      };
+      const unite = (a, b) => {
+        a = find(a); b = find(b);
+        if (a !== b && parent.has(a) && parent.has(b)) parent.set(b, a);
+      };
+
+      series.forEach(item => {
+        (item.relatedSeasons || []).forEach(season => {
+          if (season && parent.has(String(season.id))) unite(item.id, season.id);
+        });
+      });
+
+      const groups = new Map();
+      series.forEach(item => {
+        const root = find(item.id);
+        if (!groups.has(root)) groups.set(root, []);
+        groups.get(root).push(item);
+      });
+
+      const roots = new Map();
+      groups.forEach(group => {
+        group.sort((a, b) => (Number(a.year) || 9999) - (Number(b.year) || 9999) ||
+          String(a.id).localeCompare(String(b.id), undefined, { numeric: true }));
+        const rootItem = group[0];
+        const ids = group.map(item => String(item.id));
+        group.forEach(item => {
+          item.franchiseRootId = String(rootItem.id);
+          item.franchiseSeasonIds = ids;
+          item.franchiseSeasonCount = ids.length;
+        });
+        roots.set(String(rootItem.id), rootItem);
+      });
+
+      // Films and non-season anime remain independent catalog entries.
+      items.filter(item => !isSeriesFormat(item)).forEach(item => {
+        item.franchiseRootId = String(item.id);
+        item.franchiseSeasonIds = [String(item.id)];
+        item.franchiseSeasonCount = 1;
+      });
+      return roots;
+    }
+
+    function seasonCountLabel(count) {
+      const language = localStorage.getItem("animeVoidLanguage") || "ru";
+      if (language !== "ru") return `${count} seasons`;
+      const mod10 = count % 10, mod100 = count % 100;
+      const word = mod10 === 1 && mod100 !== 11 ? "сезон" :
+        (mod10 >= 2 && mod10 <= 4 && (mod100 < 12 || mod100 > 14) ? "сезона" : "сезонов");
+      return `${count} ${word}`;
+    }
+
+    function collapseSeasonCards(items, roots) {
+      const result = new Map();
+      items.forEach(item => {
+        const rootId = String(item.franchiseRootId || item.id);
+        const rootItem = roots.get(rootId) ||
+          items.find(candidate => String(candidate.id) === rootId) || item;
+        if (!result.has(rootId)) result.set(rootId, rootItem);
+      });
+      return [...result.values()];
+    }
+
+    async function translateSearchQueryToEnglish(query) {
+      const params = new URLSearchParams({ client: "gtx", sl: "ru", tl: "en", dt: "t", q: query });
+      try {
+        const response = await fetch(`https://translate.googleapis.com/translate_a/single?${params}`);
+        if (!response.ok) throw new Error(`Search translation HTTP ${response.status}`);
+        const data = await response.json();
+        const translated = (data?.[0] || []).map(part => part?.[0] || "").join("").trim();
+        if (translated) return translated;
+      } catch (googleError) {
+        console.warn("Google search translation unavailable; trying MyMemory", googleError);
+      }
+      const backupParams = new URLSearchParams({ q: query, langpair: "ru|en" });
+      const backup = await fetch(`https://api.mymemory.translated.net/get?${backupParams}`);
+      if (!backup.ok) throw new Error(`Search translation HTTP ${backup.status}`);
+      const backupData = await backup.json();
+      const translated = backupData?.responseData?.translatedText;
+      if (backupData.responseStatus !== 200 || !translated) throw new Error("Search translation unavailable");
+      return translated;
+    }
+
+    const grid = document.getElementById("animeGrid");
+    const favoritesGrid = document.getElementById("favoritesGrid");
+
+    function cardHTML(item) {
+      const savedIdsForCard = item.franchiseSeasonIds || [String(item.id)];
+      const saved = favorites.some(id => savedIdsForCard.includes(String(id)));
+      const isRussian = localStorage.getItem("animeVoidLanguage") === "ru";
+      const displayTitle = isRussian ? (getRussianTitle(item) || item.title) : item.title;
+      const cardSeasonItems = [...new Set((item.franchiseSeasonIds || []).map(String))]
+        .map(id => anime.find(season => String(season.id) === id))
+        .filter(season => season && ["TV", "TV_SHORT"].includes(String(season.format || "").toUpperCase()))
+        .sort((a, b) => (Number(a.year) || 9999) - (Number(b.year) || 9999) ||
+          String(a.id).localeCompare(String(b.id), undefined, { numeric: true }));
+      const seasonButtonsHTML = cardSeasonItems.length > 1
+        ? `<div class="card-season-buttons" aria-label="${isRussian ? "Выбрать сезон" : "Choose season"}">
+            ${cardSeasonItems.map((season, index) => {
+              const active = String(season.id) === String(item.id);
+              const label = isRussian ? `Сезон ${index + 1}` : `Season ${index + 1}`;
+              return `<button type="button" class="card-season-button ${active ? "active" : ""}" onclick="event.stopPropagation(); openAnimePage('${encodeURIComponent(season.id)}')">${label}</button>`;
+            }).join("")}
+          </div>`
+        : "";
+
+      return `
+        <article class="card" role="link" tabindex="0"
+          onclick="openAnimePage('${encodeURIComponent(item.id)}')"
+          onkeydown="if (event.target === this && (event.key === 'Enter' || event.key === ' ')) { event.preventDefault(); openAnimePage('${encodeURIComponent(item.id)}'); }">
+          <div class="poster" style="--poster:${item.color}">
+
+<img loading="lazy" decoding="async" src="${item.image || ('image/poster' + item.id + '.jpg')}" alt="${displayTitle}" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;" onerror="this.onerror=null;this.src='image/poster1.jpg';">
+
+
+
+            <small>${item.label}</small>
+            <h3 data-anime-title-id="${item.id}">${displayTitle}</h3>
+            <div class="year">${item.year} · ${item.genre}</div>
+            ${item.franchiseSeasonCount > 1 ? `<div class="season-count">${seasonCountLabel(item.franchiseSeasonCount)}</div>` : ""}
+            <div class="anime-meta">
+    ${item.rating ? `⭐ ${item.rating}` : ""}
+    ${item.episodes ? ` · ${item.episodes} серий` : ""}
+    ${item.status ? ` · ${item.status}` : ""}
+</div>
+          </div>
+          <div class="card-info">
+            <span class="genre">${item.genre}</span>
+            <button class="favorite ${saved ? "saved" : ""}"
+              onclick="event.stopPropagation(); toggleFavorite('${item.id}')"
+              aria-label="Добавить в избранное">
+              ${saved ? "♥" : "♡"}
+            </button>
+          </div>
+          ${seasonButtonsHTML}
+          <button class="secondary" style="width:100%;margin-top:10px"
+  onclick="event.stopPropagation(); openAnimePage('${encodeURIComponent(item.id)}')">
+  Подробнее ➜
+</button>
+        </article>
+      `;
+    }
+
+        function render() {
+      const currentLanguage = localStorage.getItem("animeVoidLanguage") || "ru";
+      const genreAliases = {
+        "Фэнтези": ["фэнтези", "fantasy"],
+        "Экшен": ["экшен", "action"],
+        "Приключения": ["приключения", "adventure"],
+        "Драма": ["драма", "drama"],
+        "Романтика": ["романтика", "romance"],
+        "Комедия": ["комедия", "comedy"],
+        "Ужасы": ["ужасы", "horror"],
+        "Фантастика": ["фантастика", "sci-fi", "scifi"],
+        "Сверхъестественное": ["сверхъестественное", "supernatural"],
+        "Мистика": ["мистика", "mystery"],
+        "Психология": ["психология", "psychological"],
+        "Спорт": ["спорт", "sports"]
+      };
+
+      const matchingItems = anime.filter(item => {
+        if (typeof item.id === "number" && item.id >= 1 && item.id <= 8) return false;
+
+        const itemGenres = [item.genre, ...(Array.isArray(item.genres) ? item.genres : [])]
+          .filter(Boolean)
+          .map(genre => String(genre).toLowerCase());
+        const selectedGenres = genreAliases[selectedGenre] || [String(selectedGenre).toLowerCase()];
+        const matchesGenre = selectedGenre === "Все" ||
+          selectedGenres.some(genre => itemGenres.includes(genre));
+
+        const searchableText = [
+          item.title, item.titleEnglish, item.titleRomaji, item.titleNative,
+          getRussianTitle(item), item.genre,
+          ...(Array.isArray(item.genres) ? item.genres : [])
+        ].filter(Boolean).join(" ").toLowerCase();
+        const queryVariants = [searchText, translatedSearchText]
+          .map(value => String(value || "").toLowerCase())
+          .filter(Boolean);
+        const matchesSearch = !queryVariants.length ||
+          queryVariants.some(query => searchableText.includes(query));
+        const matchesYear = !selectedYear || String(item.year) === selectedYear;
+        const matchesStatus = !selectedStatus || item.status === selectedStatus;
+
+        return matchesGenre && matchesSearch && matchesYear && matchesStatus;
+      });
+
+      const seasonRoots = applySeasonGrouping(anime);
+      const filtered = collapseSeasonCards(matchingItems, seasonRoots);
+      try {
+        localStorage.setItem("animeVoidCatalog", JSON.stringify(anime.filter(item => String(item.id).startsWith("anilist-"))));
+      } catch (error) {
+        console.warn("Не удалось сохранить сгруппированные сезоны:", error);
+      }
+
+      filtered.sort((a, b) => {
+        if (selectedSort === "rating") {
+          return (Number(b.rating) || 0) - (Number(a.rating) || 0);
+        }
+        if (selectedSort === "newest") {
+          return (Number(b.year) || 0) - (Number(a.year) || 0);
+        }
+        if (selectedSort === "oldest") {
+          return (Number(a.year) || 9999) - (Number(b.year) || 9999);
+        }
+        if (selectedSort === "title") {
+          return String(a.title || "").localeCompare(
+            String(b.title || ""), currentLanguage === "ru" ? "ru" : "en",
+            { sensitivity: "base" }
+          );
+        }
+        return 0;
+      });
+
+      currentFilteredCount = filtered.length;
+      const visibleItems = filtered.slice(0, visibleCatalogCount);
+      const loadButton = document.getElementById("loadMoreBtn");
+      loadButton.hidden = visibleCatalogCount >= filtered.length && !apiHasMore;
+      loadButton.textContent = currentLanguage === "ru" ? "Загрузить ещё аниме" : "Load more anime";
+      grid.innerHTML = filtered.length
+        ? visibleItems.map(cardHTML).join("")
+        : `<p class="empty">${currentLanguage === "ru" ? "Ничего не найдено. Попробуй другой запрос." : "Nothing found. Try another search."}</p>`;
+
+      const savedItems = anime.filter(item => favorites.some(id => String(id) === String(item.id)));
+      const savedCards = collapseSeasonCards(savedItems, seasonRoots);
+      favoritesGrid.innerHTML = savedCards.length
+        ? savedCards.map(cardHTML).join("")
+        : `<p class="empty">${currentLanguage === "ru" ? "Здесь пока пусто. Нажми ♡ у понравившегося тайтла." : "No favorites yet. Press ♡ on an anime you like."}</p>`;
+
+      translateCatalogTitles(visibleItems.concat(savedCards));
+    }
+
+    document.getElementById("search").addEventListener("input", event => {
+      searchText = event.target.value.trim();
+      translatedSearchText = "";
+      const requestId = ++searchTranslationSequence;
+      if (searchDebounceTimer) clearTimeout(searchDebounceTimer);
+      render();
+
+      if (!searchText || !/[\u0400-\u04FF]/.test(searchText)) return;
+      searchDebounceTimer = setTimeout(async () => {
+        try {
+          const translated = await translateSearchQueryToEnglish(searchText);
+          if (requestId !== searchTranslationSequence) return;
+          translatedSearchText = translated;
+          render();
+        } catch (error) {
+          console.warn("Не удалось перевести поисковый запрос:", error);
+        }
+      }, 350);
+    });
+
+    document.getElementById("sortFilter").addEventListener("change", event => {
+      selectedSort = event.target.value;
+      render();
+    });
+
+    document.querySelectorAll(".filter").forEach(button => {
+      button.addEventListener("click", () => {
+        selectedGenre = button.dataset.genre;
+
+        document.querySelectorAll(".filter").forEach(item =>
+          item.classList.remove("active")
+        );
+
+        button.classList.add("active");
+        render();
+      });
+    });
+    document.getElementById("yearFilter").addEventListener("input", event => {
+  selectedYear = event.target.value.trim();
+  render();
+});
+
+document.getElementById("statusFilter").addEventListener("change", event => {
+  selectedStatus = event.target.value;
+  render();
+});
+document.getElementById("resetFiltersBtn").addEventListener("click", () => {
+  selectedGenre = "Все";
+  selectedYear = "";
+  selectedStatus = "";
+  selectedSort = "default";
+  searchText = "";
+
+  document.getElementById("search").value = "";
+  document.getElementById("yearFilter").value = "";
+  document.getElementById("statusFilter").value = "";
+  document.getElementById("sortFilter").value = "default";
+
+  document.querySelectorAll(".filter").forEach(button => {
+    button.classList.toggle("active", button.dataset.genre === "Все");
+  });
+
+  render();
+});
+    
+
+function openAnimePage(id) {
+  window.location.href = `anime.html?id=${encodeURIComponent(id)}`;
+}
+
+function toggleFavorite(id) {
+    const exists = favorites.some(item => String(item) === String(id));
+
+    if (exists) {
+        favorites = favorites.filter(
+            item => String(item) !== String(id)
+        );
+    } else {
+        favorites.push(id);
+    }
+
+    localStorage.setItem(
+        "animeVoidFavorites",
+        JSON.stringify(favorites)
+    );
+
+    render();
+}
+    const russianTitleOverrides = {
+      "anilist-20954": "Форма голоса",
+      "anilist-16498": "Атака титанов",
+      "anilist-101922": "Клинок, рассекающий демонов",
+      "anilist-113415": "Магическая битва",
+      "anilist-1535": "Тетрадь смерти",
+      "anilist-21459": "Моя геройская академия",
+      "anilist-11061": "Охотник x Охотник",
+      "anilist-21087": "Ванпанчмен",
+      "anilist-21": "Ван-Пис"
+    };
+    const titleTranslationQueue = [];
+    const activeTitleIds = new Set();
+    let activeTitleTranslations = 0;
+    const MAX_TITLE_TRANSLATIONS = 3;
+
+    function titleCacheKey(item) {
+      return `animeVoidRuTitle_${item.id}`;
+    }
+
+    function getRussianTitle(item) {
+      const override = russianTitleOverrides[String(item.id)];
+      if (override) {
+        localStorage.setItem(titleCacheKey(item), override);
+        return override;
+      }
+      const key = titleCacheKey(item);
+      const cached = localStorage.getItem(key) || "";
+      const source = String(item.titleEnglish || item.title || "");
+      const normalize = value => String(value || "").replace(/\s+/g, " ").trim().toLocaleLowerCase();
+      if (cached && normalize(cached) === normalize(source)) {
+        // Remove an untranslated value cached by an older version.
+        localStorage.removeItem(key);
+        return "";
+      }
+      return cached;
+    }
+
+                async function translatePlainTextToRussian(text, cacheKey = "") {
+          if (!text) return "";
+          const normalize = value => String(value || "").replace(/\s+/g, " ").trim().toLocaleLowerCase();
+          const source = String(text).trim();
+
+          if (cacheKey) {
+            const cached = localStorage.getItem(cacheKey);
+            if (cached && normalize(cached) !== normalize(source)) return cached;
+            if (cached) localStorage.removeItem(cacheKey);
+          }
+
+          function splitIntoChunks(value, maxBytes = 400) {
+            const encoder = new TextEncoder();
+            const words = value.match(/\S+\s*/g) || [value];
+            const chunks = [];
+            let current = "";
+            for (const word of words) {
+              if (current && encoder.encode(current + word).length > maxBytes) {
+                chunks.push(current);
+                current = word;
+              } else {
+                current += word;
+              }
+            }
+            if (current) chunks.push(current);
+            return chunks;
+          }
+
+          function decodeEntities(value) {
+            const textarea = document.createElement("textarea");
+            textarea.innerHTML = value;
+            return textarea.value;
+          }
+
+          async function translateChunk(chunk) {
+            let googleError;
+            // Google fallback handles titles and descriptions that MyMemory leaves unchanged.
+            try {
+              const googleParams = new URLSearchParams({
+                client: "gtx", sl: "en", tl: "ru", dt: "t", q: chunk
+              });
+              const googleResponse = await fetch(
+                `https://translate.googleapis.com/translate_a/single?${googleParams.toString()}`
+              );
+              if (!googleResponse.ok) throw new Error(`Google Translate HTTP ${googleResponse.status}`);
+              const googleData = await googleResponse.json();
+              const googleResult = (googleData?.[0] || [])
+                .map(segment => segment?.[0] || "")
+                .join("")
+                .trim();
+              if (googleResult && normalize(googleResult) !== normalize(chunk)) return googleResult;
+            } catch (error) {
+              googleError = error;
+            }
+
+            let lastError = googleError;
+            for (let attempt = 0; attempt < 2; attempt++) {
+              try {
+                const params = new URLSearchParams({ q: chunk, langpair: "en|ru" });
+                const response = await fetch(`https://api.mymemory.translated.net/get?${params.toString()}`);
+                if (!response.ok) throw new Error(`MyMemory HTTP ${response.status}`);
+                const data = await response.json();
+                const result = data?.responseData?.translatedText;
+                if (data.responseStatus !== 200 || !result) {
+                  throw new Error(data.responseDetails || "MyMemory translation unavailable");
+                }
+                const decoded = decodeEntities(result);
+                if (normalize(decoded) !== normalize(chunk)) return decoded;
+                lastError = new Error("Translation service returned the source text unchanged");
+              } catch (error) {
+                lastError = error;
+              }
+              if (attempt < 1) await new Promise(resolve => setTimeout(resolve, 500));
+            }
+            // Translation APIs sometimes return the source unchanged or are unavailable.
+        // Keep the original text without raising a console error or caching it as Russian.
+        return chunk;
+          }
+
+          const parts = [];
+          for (const chunk of splitIntoChunks(source)) {
+            parts.push(await translateChunk(chunk));
+          }
+          const translated = parts.join("").trim();
+          if (translated && normalize(translated) !== normalize(source)) {
+            if (cacheKey) localStorage.setItem(cacheKey, translated);
+            return translated;
+          }
+          return source;
+        }
+    async function translateToRussian(html, cacheKey = "") {
+      if (!html) return "Описание пока отсутствует.";
+      const holder = document.createElement("div");
+      holder.innerHTML = html
+        .replace(/<br\s*\/?\s*>/gi, "\n")
+        .replace(/<\/(p|div|li)\s*>/gi, "\n\n");
+      const plainText = (holder.textContent || "").replace(/\n{3,}/g, "\n\n").trim();
+      if (!plainText) return html;
+      try {
+        const translated = await translatePlainTextToRussian(plainText, cacheKey);
+        return translated.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/\n/g, "<br>");
+      } catch (error) {
+        console.error("Не удалось перевести описание:", error);
+        return html;
+      }
+    }
+
+    function translateCatalogTitles(items) {
+      if (localStorage.getItem("animeVoidLanguage") !== "ru") return;
+      const uniqueItems = [...new Map(items.map(item => [String(item.id), item])).values()];
+
+      // Discard queued work for cards no longer displayed after filtering.
+      const visibleIds = new Set(uniqueItems.map(item => String(item.id)));
+      for (let i = titleTranslationQueue.length - 1; i >= 0; i--) {
+        if (!visibleIds.has(String(titleTranslationQueue[i].item.id))) titleTranslationQueue.splice(i, 1);
+      }
+      uniqueItems.forEach(item => {
+        if (!String(item.id).startsWith("anilist-")) return;
+        const override = russianTitleOverrides[String(item.id)];
+        if (override) {
+          localStorage.setItem(titleCacheKey(item), override);
+          updateRenderedTitle(item.id, override);
+          return;
+        }
+        if (getRussianTitle(item)) {
+          updateRenderedTitle(item.id, getRussianTitle(item));
+          return;
+        }
+        if (activeTitleIds.has(String(item.id)) || titleTranslationQueue.some(entry => String(entry.item.id) === String(item.id))) return;
+        titleTranslationQueue.push({ item, cacheKey: titleCacheKey(item) });
+      });
+      runTitleTranslationQueue();
+    }
+
+    function runTitleTranslationQueue() {
+      while (activeTitleTranslations < MAX_TITLE_TRANSLATIONS && titleTranslationQueue.length) {
+        const job = titleTranslationQueue.shift();
+        activeTitleTranslations++;
+        activeTitleIds.add(String(job.item.id));
+        translatePlainTextToRussian(job.item.titleEnglish || job.item.title, job.cacheKey)
+          .then(result => {
+            if (result) updateRenderedTitle(job.item.id, result);
+          })
+          .catch(error => console.error("Не удалось перевести название:", error))
+          .finally(() => {
+            activeTitleTranslations--;
+            activeTitleIds.delete(String(job.item.id));
+            runTitleTranslationQueue();
+          });
+      }
+    }
+
+    function updateRenderedTitle(id, title) {
+      if (localStorage.getItem("animeVoidLanguage") !== "ru") return;
+      document.querySelectorAll("[data-anime-title-id]").forEach(element => {
+        if (String(element.dataset.animeTitleId) === String(id)) {
+          element.textContent = title;
+        }
+      });
+      const modalTitle = document.getElementById("modalAnimeTitle");
+      if (modalTitle) modalTitle.textContent = title;
+    }
+
+    function translateStatus(status) {
+  const statuses = {
+    FINISHED: "Завершён",
+    RELEASING: "Выходит",
+    NOT_YET_RELEASED: "Ещё не вышел",
+    CANCELLED: "Отменён",
+    HIATUS: "Приостановлен"
+  };
+
+  return statuses[status] || status || "Неизвестно";
+}
+  function showAnime(id) {
+  const item = anime.find(
+    entry => String(entry.id) === String(id)
+  );
+
+  if (!item) return;
+
+  const poster =
+    item.image ||
+    ('image/poster' + item.id + '.jpg');
+
+  const modalBackground =
+    item.background ||
+    item.image ||
+    poster;
+
+  document.getElementById("modal").style.setProperty(
+    "--modal-bg",
+    `url("${modalBackground}")`
+  );
+
+  document.getElementById("modalContent").innerHTML = `
+    <div class="anime-detail-layout">
+
+      <div class="anime-detail-poster">
+        <img
+          src="${poster}"
+          alt="${item.title}"
+          onerror="this.onerror=null;this.src='image/poster1.jpg';"
+        >
+      </div>
+
+      <div class="anime-detail-content">
+
+        <span class="anime-tag">
+          ✦ ${item.label || "ANIME VOID"}
+        </span>
+
+        <h2 id="modalAnimeTitle">${getRussianTitle(item) || item.title}</h2>
+
+        <p
+          id="animeDescription"
+          class="anime-detail-description"
+        >
+          ${item.description || "Описание пока отсутствует."}
+        </p>
+
+        <div class="anime-details">
+
+          <div class="detail-card">
+            <span class="detail-label">Рейтинг</span>
+            <span class="detail-value rating-value">
+              ★ ${item.rating || "Нет данных"}
+            </span>
+          </div>
+
+          <div class="detail-card">
+            <span class="detail-label">Серии</span>
+            <span class="detail-value">
+              🎬 ${item.episodes || "Неизвестно"}
+            </span>
+          </div>
+
+          <div class="detail-card">
+            <span class="detail-label">Статус</span>
+            <span class="detail-value">
+              ${translateStatus(item.status)}
+            </span>
+          </div>
+
+          <div class="detail-card">
+            <span class="detail-label">Год</span>
+            <span class="detail-value">
+              ${item.year || "Неизвестно"}
+            </span>
+          </div>
+
+          <div class="detail-card">
+            <span class="detail-label">Жанр</span>
+            <span class="detail-value">
+              ${item.genre || "Неизвестно"}
+            </span>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  `;
+
+  document.getElementById("modal").classList.add("open");
+
+  const modalTitle = document.getElementById("modalAnimeTitle");
+  translateCatalogTitles([item]);
+
+  translateToRussian(item.description, `animeVoidRuDescription_${item.id}`).then(translatedText => {
+    const descriptionElement =
+      document.getElementById("animeDescription");
+
+    if (descriptionElement && translatedText) {
+      descriptionElement.innerHTML = translatedText;
+    }
+  });
+}
+
+    function showAbout() {
+      document.getElementById("modalContent").innerHTML = `
+        <h2>Добро пожаловать в ANIME VOID</h2>
+        <p>Это наш первый прототип аниме-сайта.
+        Здесь мы постепенно создадим каталог, страницы серий
+        и просмотр видео.</p>
+      `;
+      document.getElementById("modal").classList.add("open");
+    }
+
+    function closeModal() {
+      document.getElementById("modal").classList.remove("open");
+    }
+
+    function closeOutside(event) {
+      if (event.target.id === "modal") closeModal();
+    }
+
+    function scrollCatalog() {
+      document.getElementById("catalog").scrollIntoView({ behavior: "smooth" });
+    }
+
+    function showContinueWatching() {
+  const section = document.getElementById("continueSection");
+  const card = document.getElementById("continueCard");
+
+  const lastWatch = JSON.parse(
+    localStorage.getItem("animeVoidLastWatch") || "null"
+  );
+
+  const catalog = JSON.parse(
+    localStorage.getItem("animeVoidCatalog") || "[]"
+  );
+
+  if (!lastWatch || !section || !card) {
+    if (section) section.style.display = "none";
+    return;
+  }
+
+  const anime = catalog.find(
+    item => String(item.id) === String(lastWatch.animeId)
+  );
+
+  if (!anime) {
+    section.style.display = "none";
+    return;
+  }
+
+  const savedSeconds = Number(
+    localStorage.getItem(
+      `progress_${anime.id}_${lastWatch.episode}`
+    )
+  ) || 0;
+
+  const realDuration = Number(
+    localStorage.getItem(
+      `duration_${anime.id}_${lastWatch.episode}`
+    )
+  ) || 0;
+
+  const progressPercent =
+    realDuration > 0
+      ? Math.min(
+          (savedSeconds / realDuration) * 100,
+          100
+        )
+      : 0;
+
+  const isMovie = String(anime.format || "").toUpperCase() === "MOVIE";
+  const currentLang = localStorage.getItem("animeVoidLanguage") || "ru";
+  const displayTitle = currentLang === "ru"
+    ? (getRussianTitle(anime) || anime.title)
+    : anime.title;
+  const totalEpisodes = isMovie
+    ? (currentLang === "ru" ? "Фильм" : "Movie")
+    : (Number(anime.episodes) || "?");
+
+  const progressRounded =
+    Math.round(progressPercent);
+
+  const minutes =
+    Math.floor(savedSeconds / 60);
+
+  const seconds =
+    Math.floor(savedSeconds % 60);
+
+  const savedTime =
+    `${minutes}:${String(seconds).padStart(2, "0")}`;
+
+  section.style.display = "block";
+
+  card.style.backgroundImage =
+    `url("${anime.background || anime.image}")`;
+
+  card.innerHTML = `
+    <img
+      src="${anime.image}"
+      alt="${anime.title}"
+    >
+
+    <div class="continue-info">
+
+      <h3>${displayTitle}</h3>
+
+      <p id="continueEpisodeText">
+        ${isMovie ? (currentLang === "ru" ? "Фильм" : "Movie") : (currentLang === "ru" ? `Серия ${lastWatch.episode}` : `Episode ${lastWatch.episode}`)}
+        ${
+          savedSeconds > 0
+            ? ` • продолжить с ${savedTime}`
+            : ""
+        }
+      </p>
+
+      <button
+        id="continueWatchBtn"
+        class="continue-btn"
+        onclick="window.location.href='watch.html?id=${encodeURIComponent(anime.id)}&episode=${lastWatch.episode}'"
+      >
+        ${isMovie ? (currentLang === "ru" ? "▶ Продолжить фильм" : "▶ Continue movie") : (currentLang === "ru" ? "▶ Продолжить просмотр" : "▶ Continue watching")}
+      </button>
+
+    </div>
+
+    <div class="continue-stats">
+
+      <strong id="continueStatsEpisode">
+        ${isMovie ? (currentLang === "ru" ? "Фильм" : "Movie") : (currentLang === "ru" ? `Серия ${lastWatch.episode} из ${totalEpisodes}` : `Episode ${lastWatch.episode} of ${totalEpisodes}`)}
+      </strong>
+
+      <span id="continueStatsPercent">
+        ${progressRounded}% просмотрено
+      </span>
+
+    </div>
+
+    <div class="continue-progress">
+
+      <div
+        class="continue-progress-fill"
+        style="width: ${progressPercent}%"
+      ></div>
+
+    </div>
+  `;
+
+  card.dataset.episode =
+    String(lastWatch.episode);
+  card.dataset.isMovie = String(isMovie);
+
+  card.dataset.savedTime =
+    savedTime;
+
+  card.dataset.savedSeconds =
+    String(savedSeconds);
+
+  card.dataset.totalEpisodes =
+    String(totalEpisodes);
+
+  card.dataset.progressRounded =
+    String(progressRounded);
+}
+
+
+function setLanguage(lang) {
+
+  localStorage.setItem(
+    "animeVoidLanguage",
+    lang
+  );
+
+  const ruBtn =
+    document.getElementById("ruBtn");
+
+  const enBtn =
+    document.getElementById("enBtn");
+
+  const search =
+    document.getElementById("search");
+
+
+  const homeLink =
+    document.querySelector(
+      'nav a[href="#"]'
+    );
+
+  const catalogLink =
+    document.querySelector(
+      'nav a[href="#catalog"]'
+    );
+
+  const favoritesLink =
+    document.querySelector(
+      'nav a[href="#favorites"]'
+    );
+
+
+  const heroTag =
+    document.getElementById("heroTag");
+
+  const heroTitle =
+    document.getElementById("heroTitle");
+
+  const heroText =
+    document.getElementById("heroText");
+
+  const openCatalogBtn =
+    document.getElementById("openCatalogBtn");
+
+  const aboutBtn =
+    document.getElementById("aboutBtn");
+
+
+  const catalogTitle =
+    document.getElementById("catalogTitle");
+
+  const catalogSubtitle =
+    document.getElementById("catalogSubtitle");
+
+  const continueTitle =
+    document.getElementById("continueTitle");
+
+
+  const filterAll =
+    document.getElementById("filterAll");
+
+  const filterFantasy =
+    document.getElementById("filterFantasy");
+
+  const filterAction =
+    document.getElementById("filterAction");
+
+  const filterAdventure =
+    document.getElementById("filterAdventure");
+
+  const filterDrama =
+    document.getElementById("filterDrama");
+
+
+  const continueCard =
+    document.getElementById("continueCard");
+
+  const continueEpisodeText =
+    document.getElementById(
+      "continueEpisodeText"
+    );
+
+  const continueWatchBtn =
+    document.getElementById(
+      "continueWatchBtn"
+    );
+
+  const continueStatsEpisode =
+    document.getElementById(
+      "continueStatsEpisode"
+    );
+
+  const continueStatsPercent =
+    document.getElementById(
+      "continueStatsPercent"
+    );
+
+
+  const episode =
+    continueCard?.dataset.episode;
+  const isMovie = continueCard?.dataset.isMovie === "true";
+
+  const savedTime =
+    continueCard?.dataset.savedTime || "0:00";
+
+  const savedSeconds =
+    Number(
+      continueCard?.dataset.savedSeconds || 0
+    );
+
+  const totalEpisodes =
+    continueCard?.dataset.totalEpisodes || "?";
+
+  const progressRounded =
+    continueCard?.dataset.progressRounded || "0";
+
+
+  if (ruBtn) {
+    ruBtn.classList.toggle(
+      "active",
+      lang === "ru"
+    );
+  }
+
+  if (enBtn) {
+    enBtn.classList.toggle(
+      "active",
+      lang === "en"
+    );
+  }
+
+
+  if (lang === "ru") {
+
+    if (homeLink)
+      homeLink.textContent = "Главная";
+
+    if (catalogLink)
+      catalogLink.textContent = "Каталог";
+
+    if (favoritesLink)
+      favoritesLink.textContent =
+        "Избранное";
+
+    if (search)
+      search.placeholder =
+        "Найти аниме...";
+
+
+    if (heroTag)
+      heroTag.textContent =
+        "ТВОЙ МИР АНИМЕ";
+
+    if (heroTitle)
+      heroTitle.innerHTML =
+        "За гранью<br>обычного мира.";
+
+    if (heroText)
+      heroText.textContent =
+        "Открывай новые вселенные, знакомься с героями и находи истории, которые останутся с тобой надолго.";
+
+    if (openCatalogBtn)
+      openCatalogBtn.textContent =
+        "✦ Открыть каталог";
+
+    if (aboutBtn)
+      aboutBtn.textContent =
+        "О проекте";
+
+
+    if (catalogTitle)
+      catalogTitle.textContent =
+        "Каталог аниме";
+
+    if (catalogSubtitle)
+      catalogSubtitle.textContent =
+        "Выбери свою следующую историю";
+
+    if (continueTitle)
+      continueTitle.textContent =
+        "Продолжить просмотр";
+
+
+    if (filterAll)
+      filterAll.textContent = "Все";
+
+    if (filterFantasy)
+      filterFantasy.textContent =
+        "Фэнтези";
+
+    if (filterAction)
+      filterAction.textContent =
+        "Экшен";
+
+    if (filterAdventure)
+      filterAdventure.textContent =
+        "Приключения";
+
+    if (filterDrama)
+      filterDrama.textContent =
+        "Драма";
+
+
+    if (
+      continueEpisodeText &&
+      episode
+    ) {
+      continueEpisodeText.textContent =
+        (isMovie ? "Фильм" : `Серия ${episode}`) +
+        (
+          savedSeconds > 0
+            ? ` • продолжить с ${savedTime}`
+            : ""
+        );
+    }
+
+    if (continueWatchBtn) {
+      continueWatchBtn.textContent =
+        isMovie ? "▶ Продолжить фильм" : "▶ Продолжить просмотр";
+    }
+
+    if (
+      continueStatsEpisode &&
+      episode
+    ) {
+      continueStatsEpisode.textContent =
+        isMovie ? "Фильм" : `Серия ${episode} из ${totalEpisodes}`;
+    }
+
+    if (continueStatsPercent) {
+      continueStatsPercent.textContent =
+        `${progressRounded}% просмотрено`;
+    }
+
+  } else {
+
+    if (homeLink)
+      homeLink.textContent = "Home";
+
+    if (catalogLink)
+      catalogLink.textContent = "Catalog";
+
+    if (favoritesLink)
+      favoritesLink.textContent =
+        "Favorites";
+
+    if (search)
+      search.placeholder =
+        "Search anime...";
+
+
+    if (heroTag)
+      heroTag.textContent =
+        "YOUR ANIME WORLD";
+
+    if (heroTitle)
+      heroTitle.innerHTML =
+        "Beyond the<br>ordinary world.";
+
+    if (heroText)
+      heroText.textContent =
+        "Discover new worlds, meet unforgettable characters and find stories that stay with you.";
+
+    if (openCatalogBtn)
+      openCatalogBtn.textContent =
+        "✦ Open catalog";
+
+    if (aboutBtn)
+      aboutBtn.textContent =
+        "About";
+
+
+    if (catalogTitle)
+      catalogTitle.textContent =
+        "Anime catalog";
+
+    if (catalogSubtitle)
+      catalogSubtitle.textContent =
+        "Choose your next story";
+
+    if (continueTitle)
+      continueTitle.textContent =
+        "Continue watching";
+
+
+    if (filterAll)
+      filterAll.textContent = "All";
+
+    if (filterFantasy)
+      filterFantasy.textContent =
+        "Fantasy";
+
+    if (filterAction)
+      filterAction.textContent =
+        "Action";
+
+    if (filterAdventure)
+      filterAdventure.textContent =
+        "Adventure";
+
+    if (filterDrama)
+      filterDrama.textContent =
+        "Drama";
+
+
+    if (
+      continueEpisodeText &&
+      episode
+    ) {
+      continueEpisodeText.textContent =
+        (isMovie ? "Movie" : `Episode ${episode}`) +
+        (
+          savedSeconds > 0
+            ? ` • continue from ${savedTime}`
+            : ""
+        );
+    }
+
+    if (continueWatchBtn) {
+      continueWatchBtn.textContent =
+        isMovie ? "▶ Continue movie" : "▶ Continue watching";
+    }
+
+    if (
+      continueStatsEpisode &&
+      episode
+    ) {
+      continueStatsEpisode.textContent =
+        isMovie ? "Movie" : `Episode ${episode} of ${totalEpisodes}`;
+    }
+
+    if (continueStatsPercent) {
+      continueStatsPercent.textContent =
+        `${progressRounded}% watched`;
+    }
+  }
+
+const yearFilter = document.getElementById("yearFilter");
+
+if (yearFilter) {
+  yearFilter.placeholder = lang === "ru" ? "Год" : "Year";
+  yearFilter.setAttribute(
+    "aria-label",
+    lang === "ru" ? "Фильтр по году" : "Filter by year"
+  );
+}
+
+const statusFilter = document.getElementById("statusFilter");
+
+if (statusFilter) {
+  statusFilter.setAttribute(
+    "aria-label",
+    lang === "ru" ? "Фильтр по статусу" : "Filter by status"
+  );
+
+  const statusLabels = lang === "ru"
+    ? {
+        "": "Любой статус",
+        RELEASING: "Выходит",
+        FINISHED: "Завершён",
+        NOT_YET_RELEASED: "Ещё не вышел",
+        HIATUS: "Приостановлен",
+        CANCELLED: "Отменён"
+      }
+    : {
+        "": "Any status",
+        RELEASING: "Releasing",
+        FINISHED: "Finished",
+        NOT_YET_RELEASED: "Not yet released",
+        HIATUS: "On hiatus",
+        CANCELLED: "Cancelled"
+      };
+
+  Array.from(statusFilter.options).forEach(option => {
+    option.textContent = statusLabels[option.value];
+  });
+}
+const resetFiltersBtn = document.getElementById("resetFiltersBtn");
+
+if (resetFiltersBtn) {
+  resetFiltersBtn.textContent =
+    lang === "ru" ? "Сбросить фильтры" : "Reset filters";
+}
+  document.querySelectorAll(".filter[data-ru][data-en]").forEach(button => {
+    button.textContent = lang === "ru" ? button.dataset.ru : button.dataset.en;
+  });
+
+  const sortFilter = document.getElementById("sortFilter");
+  if (sortFilter) {
+    sortFilter.setAttribute("aria-label", lang === "ru" ? "Сортировка каталога" : "Sort catalog");
+    Array.from(sortFilter.options).forEach(option => {
+      if (option.dataset[lang]) option.textContent = option.dataset[lang];
+    });
+  }
+
+  const detailsText =
+    lang === "ru"
+      ? "Подробнее ➜"
+      : "Details ➜";
+
+  document
+    .querySelectorAll(
+      "#animeGrid .secondary, #favoritesGrid .secondary"
+    )
+    .forEach(button => {
+
+      if (
+        button
+          .getAttribute("onclick")
+          ?.includes("anime.html?id=")
+      ) {
+        button.textContent =
+          detailsText;
+      }
+
+    });
+  render();
+}
+
+
+render();
+
+// Reuse the saved catalog instead of downloading a new API page on every reload.
+if (!anime.some(item => String(item.id).startsWith("anilist-"))) loadAnimeFromApi();
+
+showContinueWatching();
+
+setLanguage(
+  localStorage.getItem(
+    "animeVoidLanguage"
+  ) || "ru"
+);
+  </script>
+</body>
+</html>

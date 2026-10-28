@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ANIME VOID — Просмотр</title>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: #07060c;
+      color: white;
+      font-family: Inter, Arial, sans-serif;
+    }
+
+    header {
+      min-height: 72px;
+      padding: 12px 6%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      background: #0c0a14;
+      border-bottom: 1px solid #211a30;
+    }
+
+    .logo {
+      color: white;
+      text-decoration: none;
+      font-size: 24px;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    .logo span { color: #a855f7; }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .back {
+      color: #d8b4fe;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .back:hover { color: white; }
+
+    .lang-btn {
+      padding: 9px 13px;
+      border: 1px solid rgba(168,85,247,.45);
+      border-radius: 10px;
+      background: #15111f;
+      color: #e9d5ff;
+      font-weight: 800;
+      cursor: pointer;
+      transition: .2s ease;
+    }
+
+    .lang-btn:hover {
+      background: #7c3aed;
+      border-color: #c084fc;
+    }
+
+    main {
+      max-width: 1200px;
+      margin: auto;
+      padding: 35px 5% 70px;
+    }
+
+    .watch-top { margin-bottom: 22px; }
+    .watch-top h1 { margin: 0 0 8px; font-size: 28px; }
+    .watch-top p { margin: 0; color: #9994ae; }
+
+    .player-box {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      border-radius: 20px;
+      background: radial-gradient(circle at center, rgba(168,85,247,.18), transparent 40%), #050409;
+      border: 1px solid rgba(168,85,247,.35);
+      box-shadow: 0 20px 60px rgba(0,0,0,.6), 0 0 35px rgba(168,85,247,.12);
+    }
+
+    #animePlayer {
+      display: block;
+      width: 100%;
+      height: 100%;
+      background: #000;
+      border-radius: 20px;
+    }
+
+    .controls {
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .control-btn {
+      padding: 13px 20px;
+      border: 1px solid rgba(168,85,247,.35);
+      border-radius: 12px;
+      background: #15111f;
+      color: white;
+      font-weight: 800;
+      cursor: pointer;
+      transition: .2s ease;
+    }
+
+    .control-btn:hover:not(:disabled) {
+      transform: translateY(-2px);
+      background: linear-gradient(110deg,#7c3aed,#a855f7);
+      border-color: #c084fc;
+    }
+
+    .control-btn:disabled {
+      opacity: .45;
+      cursor: not-allowed;
+    }
+
+    .episodes { margin-top: 40px; }
+    .episodes h2 { margin-bottom: 18px; }
+
+    .episode-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill,minmax(115px,1fr));
+      gap: 10px;
+    }
+
+    .episode {
+      padding: 13px;
+      border: 1px solid rgba(168,85,247,.22);
+      border-radius: 10px;
+      background: #15111f;
+      color: white;
+      cursor: pointer;
+      font-weight: 700;
+      transition: .2s ease;
+    }
+
+    .episode:hover, .episode.active {
+      background: linear-gradient(110deg,#7c3aed,#a855f7);
+      border-color: #c084fc;
+    }
+
+    .episode.watched:not(.active) {
+      color: #d8b4fe;
+      border-color: rgba(168,85,247,.5);
+    }
+
+    @media (max-width: 600px) {
+      header { padding: 12px 5%; }
+      .logo { font-size: 20px; }
+      .header-actions { gap: 10px; }
+      .back { font-size: 12px; }
+      main { padding-top: 25px; }
+      .watch-top h1 { font-size: 23px; }
+      .controls { flex-direction: column; }
+      .control-btn { width: 100%; }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <a href="index.html" class="logo">ANIME<span>VOID</span></a>
+    <div class="header-actions">
+      <button id="langBtn" class="lang-btn" type="button" onclick="toggleLanguage()">EN</button>
+      <a id="backAnime" class="back" href="#">← К странице аниме</a>
+    </div>
+  </header>
+
+  <main>
+    <div class="watch-top">
+      <h1 id="animeTitle">Загрузка...</h1>
+      <p id="episodeTitle"></p>
+    </div>
+
+    <div class="player-box">
+      <video id="animePlayer" controls preload="metadata">
+        Ваш браузер не поддерживает видео.
+      </video>
+    </div>
+
+    <div class="controls">
+      <button class="control-btn" id="prevBtn" type="button">← Предыдущая серия</button>
+      <button class="control-btn" id="nextBtn" type="button">Следующая серия →</button>
+    </div>
+
+    <section class="episodes">
+      <h2 id="episodesHeading">Все серии</h2>
+      <div class="episode-grid" id="episodeGrid"></div>
+    </section>
+  </main>
+
+  <script>
+    const LANGUAGE_KEY = "animeVoidLanguage";
+    const params = new URLSearchParams(window.location.search);
+    const animeId = params.get("id");
+    const currentEpisode = Math.max(1, Number(params.get("episode")) || 1);
+    const player = document.getElementById("animePlayer");
+    const catalog = JSON.parse(localStorage.getItem("animeVoidCatalog") || "[]");
+    const item = catalog.find(anime => String(anime.id) === String(animeId));
+    const isMovie = String(item?.format || "").toUpperCase() === "MOVIE";
+    const episodeCount = isMovie ? 1 : Math.max(1, Number(item?.episodes) || 1);
+    let currentLanguage = localStorage.getItem(LANGUAGE_KEY) === "en" ? "en" : "ru";
+
+    localStorage.setItem("animeVoidLastWatch", JSON.stringify({
+      animeId: animeId,
+      episode: currentEpisode
+    }));
+
+    player.src = `video/${currentEpisode}.mp4`;
+    player.load();
+
+    const progressKey = `progress_${animeId}_${currentEpisode}`;
+
+    player.addEventListener("loadedmetadata", () => {
+      localStorage.setItem(
+        `duration_${animeId}_${currentEpisode}`,
+        String(player.duration)
+      );
+
+      const savedTime = Number(localStorage.getItem(progressKey)) || 0;
+      if (savedTime > 0 && savedTime < player.duration) {
+        player.currentTime = savedTime;
+      }
+    });
+
+    player.addEventListener("timeupdate", () => {
+      localStorage.setItem(progressKey, String(player.currentTime));
+    });
+
+    player.addEventListener("ended", () => {
+      markEpisodeWatched(currentEpisode);
+      localStorage.removeItem(progressKey);
+      renderEpisodes();
+
+      if (currentEpisode < episodeCount) {
+        openEpisode(currentEpisode + 1);
+      }
+    });
+
+    if (item) {
+      document.getElementById("animeTitle").textContent = item.title || "ANIME VOID";
+      if (isMovie) {
+        document.querySelector(".controls").style.display = "none";
+        document.querySelector(".episodes").style.display = "none";
+      }
+      document.getElementById("backAnime").href =
+        `anime.html?id=${encodeURIComponent(item.id)}`;
+    } else {
+      document.getElementById("animeTitle").textContent =
+        currentLanguage === "ru" ? "Аниме не найдено" : "Anime not found";
+      document.getElementById("episodeGrid").innerHTML = "";
+    }
+
+    document.getElementById("prevBtn").addEventListener("click", () => {
+      if (currentEpisode > 1) openEpisode(currentEpisode - 1);
+    });
+
+    document.getElementById("nextBtn").addEventListener("click", () => {
+      if (currentEpisode < episodeCount) openEpisode(currentEpisode + 1);
+    });
+
+    document.getElementById("prevBtn").disabled = currentEpisode <= 1;
+    document.getElementById("nextBtn").disabled = currentEpisode >= episodeCount;
+
+    function getWatchedEpisodes() {
+      try {
+        const saved = JSON.parse(localStorage.getItem(`watched_${animeId}`) || "[]");
+        return Array.isArray(saved) ? saved.map(Number) : [];
+      } catch {
+        return [];
+      }
+    }
+
+    function markEpisodeWatched(number) {
+      const watched = getWatchedEpisodes();
+      if (!watched.includes(Number(number))) {
+        watched.push(Number(number));
+        localStorage.setItem(`watched_${animeId}`, JSON.stringify(watched));
+      }
+    }
+
+    function renderEpisodes() {
+      if (!item || isMovie) return;
+      const watchedEpisodes = getWatchedEpisodes();
+      const grid = document.getElementById("episodeGrid");
+      grid.innerHTML = "";
+
+      for (let number = 1; number <= episodeCount; number++) {
+        const watched = watchedEpisodes.includes(number);
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = `episode${number === currentEpisode ? " active" : ""}${watched ? " watched" : ""}`;
+        button.textContent = `${watched ? "✓" : "▶"} ${episodeLabel(number)}`;
+        button.addEventListener("click", () => openEpisode(number));
+        grid.appendChild(button);
+      }
+    }
+
+    function episodeLabel(number) {
+      if (isMovie) return currentLanguage === "ru" ? "Фильм" : "Movie";
+      return currentLanguage === "ru" ? `Серия ${number}` : `Episode ${number}`;
+    }
+
+    function applyLanguage() {
+      const isRussian = currentLanguage === "ru";
+      document.documentElement.lang = currentLanguage;
+      document.getElementById("langBtn").textContent = isRussian ? "EN" : "RU";
+      document.getElementById("backAnime").textContent = isRussian
+        ? "← К странице аниме"
+        : "← Back to anime";
+      document.getElementById("episodeTitle").textContent = episodeLabel(currentEpisode);
+      document.getElementById("prevBtn").textContent = isMovie
+        ? (isRussian ? "Фильм" : "Movie")
+        : (isRussian ? "← Предыдущая серия" : "← Previous episode");
+      document.getElementById("nextBtn").textContent = isMovie
+        ? (isRussian ? "Фильм" : "Movie")
+        : (isRussian ? "Следующая серия →" : "Next episode →");
+      document.getElementById("episodesHeading").textContent = isMovie
+        ? (isRussian ? "Фильм" : "Movie")
+        : (isRussian ? "Все серии" : "All episodes");
+      if (!item) {
+        document.getElementById("animeTitle").textContent = isRussian
+          ? "Аниме не найдено"
+          : "Anime not found";
+      }
+      renderEpisodes();
+    }
+
+    function toggleLanguage() {
+      currentLanguage = currentLanguage === "ru" ? "en" : "ru";
+      localStorage.setItem(LANGUAGE_KEY, currentLanguage);
+      applyLanguage();
+    }
+
+    function openEpisode(number) {
+      window.location.href =
+        `watch.html?id=${encodeURIComponent(animeId)}&episode=${number}`;
+    }
+
+    renderEpisodes();
+    applyLanguage();
+  </script>
+</body>
+</html>
