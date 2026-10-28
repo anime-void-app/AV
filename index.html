@@ -1072,6 +1072,16 @@
       <div class="airing-row" id="airingRow"></div>
     </section>
 
+    <section class="airing-section" id="recommendedSection" hidden>
+      <div class="section-heading">
+        <div>
+          <h2 id="recommendedTitle">Тебе может понравиться</h2>
+          <div class="subtitle" id="recommendedSubtitle">Подобрано по твоим спискам и истории</div>
+        </div>
+      </div>
+      <div class="airing-row" id="recommendedRow"></div>
+    </section>
+
     <section id="catalog">
       <div class="section-heading">
         <div>
@@ -1652,6 +1662,121 @@ localStorage.setItem("animeVoidHasMore", String(apiHasMore));
       `;
     }
 
+    const RECOMMENDED_COUNT = 12;
+
+    function collectRecommendationSeeds() {
+      const seedMap = new Map();
+      const addSeed = (id, weight) => {
+        const key = String(id);
+        if (!key) return;
+        seedMap.set(key, Math.max(seedMap.get(key) || 0, weight));
+      };
+      try {
+        JSON.parse(localStorage.getItem("animeVoidFavorites") || "[]").forEach(id => addSeed(id, 2));
+      } catch (error) {}
+      const statuses = readStatusMap();
+      Object.keys(statuses).forEach(id => {
+        if (statuses[id] === "watching") addSeed(id, 3);
+        else if (statuses[id] === "completed") addSeed(id, 2);
+        else if (statuses[id] === "planned") addSeed(id, 1);
+      });
+      try {
+        for (let i = 0; i < localStorage.length; i++) {
+          const storageKey = localStorage.key(i);
+          if (storageKey && storageKey.startsWith("watched_")) {
+            addSeed(storageKey.slice("watched_".length), 1);
+          }
+        }
+      } catch (error) {}
+      const snapshots = readListSnapshots();
+      return [...seedMap.entries()]
+        .map(entry => {
+          const item = anime.find(candidate => String(candidate.id) === String(entry[0])) || snapshots[entry[0]];
+          return item ? { item, weight: entry[1] } : null;
+        })
+        .filter(Boolean);
+    }
+
+    function recommendationGenreList(item) {
+      const genres = [];
+      (Array.isArray(item.genres) ? item.genres : []).forEach(genre => {
+        genres.push(String(genre).toLowerCase());
+      });
+      if (item.genre) genres.push(String(item.genre).toLowerCase());
+      return genres;
+    }
+
+    function renderRecommendedSection() {
+      const section = document.getElementById("recommendedSection");
+      const row = document.getElementById("recommendedRow");
+      if (!section || !row) return;
+
+      const statuses = readStatusMap();
+      const seeds = collectRecommendationSeeds()
+        .filter(seed => statuses[String(seed.item.id)] !== "dropped");
+      if (!seeds.length) {
+        section.hidden = true;
+        return;
+      }
+
+      const genreWeights = new Map();
+      seeds.forEach(seed => {
+        recommendationGenreList(seed.item).forEach(genre => {
+          genreWeights.set(genre, (genreWeights.get(genre) || 0) + seed.weight);
+        });
+      });
+
+      const excluded = new Set();
+      Object.keys(statuses).forEach(id => excluded.add(String(id)));
+      seeds.forEach(seed => {
+        excluded.add(String(seed.item.id));
+        (seed.item.franchiseSeasonIds || []).forEach(id => excluded.add(String(id)));
+      });
+
+      const candidates = anime
+        .filter(item => String(item.id).startsWith("anilist-"))
+        .filter(item => !excluded.has(String(item.id)))
+        .filter(item => !(item.franchiseSeasonIds || []).some(id => excluded.has(String(id))))
+        .map(item => {
+          let genreScore = 0;
+          recommendationGenreList(item).forEach(genre => {
+            genreScore += genreWeights.get(genre) || 0;
+          });
+          if (!genreScore) return null;
+          return {
+            item,
+            score: genreScore + (Number(item.rating) || 0) / 40 + Math.random() * 1.5
+          };
+        })
+        .filter(Boolean)
+        .sort((a, b) => b.score - a.score)
+        .slice(0, RECOMMENDED_COUNT)
+        .map(entry => entry.item);
+
+      if (!candidates.length) {
+        section.hidden = true;
+        return;
+      }
+
+      const isRussian = localStorage.getItem("animeVoidLanguage") !== "en";
+      row.innerHTML = candidates.map(item => {
+        const displayTitle = isRussian ? (getRussianTitle(item) || item.title) : item.title;
+        const metaParts = [item.genre, item.year].filter(Boolean);
+        if (item.rating) metaParts.push(`⭐ ${item.rating}`);
+        return `
+          <button type="button" class="airing-card" onclick="openAnimePage('${encodeURIComponent(item.id)}')">
+            <img src="${item.image || 'image/poster1.jpg'}" alt="" loading="lazy"
+              onerror="this.onerror=null;this.src='image/poster1.jpg';">
+            <div class="airing-body">
+              <div class="airing-name" data-anime-title-id="${item.id}">${displayTitle}</div>
+              <div class="airing-countdown">${metaParts.join(" · ")}</div>
+            </div>
+          </button>`;
+      }).join("");
+      section.hidden = false;
+      translateCatalogTitles(candidates);
+    }
+
     const listTabsBar = document.getElementById("listTabs");
     let activeListTab = "favorites";
     try {
@@ -1826,6 +1951,7 @@ localStorage.setItem("animeVoidHasMore", String(apiHasMore));
       const savedItems = anime.filter(item => favorites.some(id => String(id) === String(item.id)));
       const savedCards = collapseSeasonCards(savedItems, seasonRoots);
       renderListsSection(savedCards);
+      renderRecommendedSection();
 
       translateCatalogTitles(visibleItems.concat(savedCards));
     }
@@ -3210,7 +3336,18 @@ if (resetFiltersBtn) {
     listsSubtitle.textContent = lang === "ru" ? "Твои коллекции тайтлов" : "Your anime collections";
   }
 
+  const recommendedTitle = document.getElementById("recommendedTitle");
+  if (recommendedTitle) {
+    recommendedTitle.textContent = lang === "ru" ? "Тебе может понравиться" : "You might like";
+  }
+
+  const recommendedSubtitle = document.getElementById("recommendedSubtitle");
+  if (recommendedSubtitle) {
+    recommendedSubtitle.textContent = lang === "ru" ? "Подобрано по твоим спискам и истории" : "Based on your lists and history";
+  }
+
   renderListsSection();
+  renderRecommendedSection();
 
   const airingTitle = document.getElementById("airingTitle");
   if (airingTitle) airingTitle.textContent = lang === "ru" ? "Сейчас выходит" : "Currently airing";
