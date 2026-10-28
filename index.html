@@ -2395,7 +2395,14 @@ if (resetFiltersBtn) {
 render();
 
 // Reuse the saved catalog instead of downloading a new API page on every reload.
-if (!anime.some(item => String(item.id).startsWith("anilist-"))) loadAnimeFromApi();
+// First-time visitors have no saved catalog, so load the first page for them automatically.
+let hasSavedCatalog = false;
+try {
+  hasSavedCatalog = JSON.parse(localStorage.getItem("animeVoidCatalog") || "[]").length > 0;
+} catch (error) {
+  hasSavedCatalog = false;
+}
+if (!hasSavedCatalog) loadAnimeFromApi();
 
 showContinueWatching();
 
