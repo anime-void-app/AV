@@ -243,6 +243,17 @@
   border-color: #c084fc;
 }
 
+.status-row { display:flex; flex-wrap:wrap; gap:8px; margin-top:14px; }
+.status-btn { flex:1 1 auto; min-height:40px; padding:9px 12px; border-radius:11px; border:1px solid rgba(192,132,252,.35); background:#171024; color:#e9d5ff; font:inherit; font-size:13px; font-weight:700; cursor:pointer; transition:background .2s ease, border-color .2s ease; }
+.status-btn:hover { border-color:#c084fc; background:#221635; }
+.status-btn.active { background:linear-gradient(110deg,#7c3aed,#a855f7); color:#fff; border-color:#c084fc; }
+.rating-row { display:flex; align-items:center; flex-wrap:wrap; gap:7px; margin-top:14px; }
+.rating-label { font-size:13px; color:#bdb5d0; font-weight:700; }
+.rating-stars { display:flex; flex-wrap:wrap; gap:5px; }
+.rating-star { min-width:34px; min-height:34px; padding:6px 8px; border-radius:9px; border:1px solid rgba(192,132,252,.25); background:#151020; color:#d8b4fe; font:inherit; font-size:13px; font-weight:800; cursor:pointer; }
+.rating-star:hover { border-color:#c084fc; background:#241634; }
+.rating-star.active { background:linear-gradient(110deg,#9333ea,#c026d3); color:#fff; border-color:#c084fc; }
+
     .episodes {
       margin-top: 50px;
     }
@@ -399,6 +410,8 @@
       .season-choice { width:100%; padding:9px 7px; font-size:12px; }
       .episode-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .favorite-page-btn { width:100%; }
+      .status-btn { flex:1 1 40%; font-size:12px; }
+      .rating-star { min-width:30px; min-height:30px; font-size:12px; }
     }
     .episodes-progress-text {
   margin: -8px 0 18px;
@@ -1092,6 +1105,18 @@ for (let i = 1; i <= episodeCount; i++) {
             ♡ В избранное
           </button>
 
+          <div class="status-row" id="statusRow">
+            <button type="button" class="status-btn" data-status="watching">▶ Смотрю</button>
+            <button type="button" class="status-btn" data-status="planned">📅 В планах</button>
+            <button type="button" class="status-btn" data-status="completed">✅ Пройдено</button>
+            <button type="button" class="status-btn" data-status="dropped">🚫 Брошено</button>
+          </div>
+
+          <div class="rating-row">
+            <span class="rating-label" id="myRatingLabel">Моя оценка:</span>
+            <div class="rating-stars" id="ratingStars"></div>
+          </div>
+
           <div class="episodes">
 
            <h2 id="episodesTitle">${isMovie ? (currentLanguage === "ru" ? "Фильм" : "Movie") : (currentLanguage === "ru" ? "Серии" : "Episodes")}</h2>
@@ -1273,6 +1298,125 @@ if (genreLabel) {
     updateFavoriteButton();
   }
 
+  function readStatusMap() {
+    try {
+      return JSON.parse(localStorage.getItem("animeVoidStatuses") || "{}");
+    } catch (error) {
+      return {};
+    }
+  }
+
+  function readRatingMap() {
+    try {
+      return JSON.parse(localStorage.getItem("animeVoidRatings") || "{}");
+    } catch (error) {
+      return {};
+    }
+  }
+
+  function saveListSnapshot() {
+    if (!item) return;
+    try {
+      const snapshots = JSON.parse(
+        localStorage.getItem("animeVoidListItems") || "{}"
+      );
+      snapshots[String(item.id)] = {
+        id: item.id,
+        title: item.title || "",
+        titleEnglish: item.titleEnglish || "",
+        titleRomaji: item.titleRomaji || "",
+        titleNative: item.titleNative || "",
+        image: item.image || "",
+        color: item.color || "#7c3aed",
+        label: item.label || "",
+        year: item.year || "",
+        genre: item.genre || "",
+        genres: Array.isArray(item.genres) ? item.genres : [],
+        format: item.format || "",
+        episodes: item.episodes || 0,
+        status: item.status || "",
+        rating: item.rating || ""
+      };
+      localStorage.setItem(
+        "animeVoidListItems",
+        JSON.stringify(snapshots)
+      );
+    } catch (error) {}
+  }
+
+  function renderStatusControls() {
+    const statusRow = document.getElementById("statusRow");
+    const ratingStars = document.getElementById("ratingStars");
+    if (!statusRow || !ratingStars || !item) return;
+
+    const ru = currentLanguage === "ru";
+    const statusTexts = {
+      watching: ru ? "▶ Смотрю" : "▶ Watching",
+      planned: ru ? "📅 В планах" : "📅 Planned",
+      completed: ru ? "✅ Пройдено" : "✅ Completed",
+      dropped: ru ? "🚫 Брошено" : "🚫 Dropped"
+    };
+    const statuses = readStatusMap();
+    const currentStatus = statuses[String(item.id)] || "";
+
+    statusRow.querySelectorAll(".status-btn").forEach(button => {
+      const status = button.dataset.status;
+      button.textContent = statusTexts[status] || status;
+      button.classList.toggle("active", status === currentStatus);
+    });
+
+    const label = document.getElementById("myRatingLabel");
+    if (label) label.textContent = ru ? "Моя оценка:" : "My score:";
+
+    const ratingMap = readRatingMap();
+    const currentRating = Number(ratingMap[String(item.id)]) || 0;
+    let starsHTML = "";
+    for (let value = 1; value <= 10; value++) {
+      starsHTML += `<button type="button" class="rating-star${value <= currentRating ? " active" : ""}" data-value="${value}" title="${value}/10">${value}</button>`;
+    }
+    ratingStars.innerHTML = starsHTML;
+  }
+
+  function toggleListStatus(status) {
+    if (!item) return;
+    const map = readStatusMap();
+    const key = String(item.id);
+    if (map[key] === status) {
+      delete map[key];
+    } else {
+      map[key] = status;
+      saveListSnapshot();
+    }
+    localStorage.setItem("animeVoidStatuses", JSON.stringify(map));
+    renderStatusControls();
+  }
+
+  function toggleListRating(value) {
+    if (!item) return;
+    const map = readRatingMap();
+    const key = String(item.id);
+    if (Number(map[key]) === value) {
+      delete map[key];
+    } else {
+      map[key] = value;
+      saveListSnapshot();
+    }
+    localStorage.setItem("animeVoidRatings", JSON.stringify(map));
+    renderStatusControls();
+  }
+
+  document.addEventListener("click", event => {
+    const statusButton = event.target.closest(".status-btn");
+    if (statusButton) {
+      toggleListStatus(statusButton.dataset.status);
+      return;
+    }
+    const ratingButton = event.target.closest(".rating-star");
+    if (ratingButton) {
+      toggleListRating(Number(ratingButton.dataset.value));
+    }
+  });
+
 
 function toggleLanguage() {
   currentLanguage =
@@ -1364,6 +1508,7 @@ function applyLanguage() {
   }
 
   updateFavoriteButton();
+  renderStatusControls();
 }
   </script>
 

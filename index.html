@@ -415,6 +415,10 @@
 
     .empty { color: var(--muted); grid-column: 1 / -1; padding: 30px 0; }
 
+    .list-tabs { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 18px; }
+    .list-tab { min-height:38px; padding:8px 14px; border-radius:999px; border:1px solid #30263f; background:#15111f; color:#bdb5d0; font:inherit; font-size:12px; font-weight:700; cursor:pointer; }
+    .list-tab:hover { border-color:#a855f7; color:#fff; }
+    .list-tab.active { background:linear-gradient(110deg,#8b36d3,#a855f7); border-color:#c084fc; color:#fff; }
     .history-section { margin-top: 42px; }
     .stats-row {
       display: grid;
@@ -1146,9 +1150,16 @@
     <section id="favorites">
       <div class="section-heading">
         <div>
-          <h2>Избранное ♥</h2>
-          <div class="subtitle">Тайтлы, которые ты сохранил</div>
+          <h2 id="listsTitle">Мои списки</h2>
+          <div class="subtitle" id="listsSubtitle">Твои коллекции тайтлов</div>
         </div>
+      </div>
+      <div class="list-tabs" id="listTabs">
+        <button type="button" class="list-tab" data-list="favorites">❤️ Избранное</button>
+        <button type="button" class="list-tab" data-list="watching">▶ Смотрю</button>
+        <button type="button" class="list-tab" data-list="planned">📅 В планах</button>
+        <button type="button" class="list-tab" data-list="completed">✅ Пройдено</button>
+        <button type="button" class="list-tab" data-list="dropped">🚫 Брошено</button>
       </div>
       <div class="grid" id="favoritesGrid"></div>
     </section>
@@ -1641,6 +1652,91 @@ localStorage.setItem("animeVoidHasMore", String(apiHasMore));
       `;
     }
 
+    const listTabsBar = document.getElementById("listTabs");
+    let activeListTab = "favorites";
+    try {
+      activeListTab = localStorage.getItem("animeVoidListTab") || "favorites";
+    } catch (error) {}
+
+    function readStatusMap() {
+      try {
+        return JSON.parse(localStorage.getItem("animeVoidStatuses") || "{}");
+      } catch (error) {
+        return {};
+      }
+    }
+
+    function readListSnapshots() {
+      try {
+        return JSON.parse(localStorage.getItem("animeVoidListItems") || "{}");
+      } catch (error) {
+        return {};
+      }
+    }
+
+    const listTabTexts = {
+      favorites: ["❤️ Избранное", "❤️ Favorites"],
+      watching: ["▶ Смотрю", "▶ Watching"],
+      planned: ["📅 В планах", "📅 Planned"],
+      completed: ["✅ Пройдено", "✅ Completed"],
+      dropped: ["🚫 Брошено", "🚫 Dropped"]
+    };
+
+    const listEmptyTexts = {
+      favorites: ["Здесь пока пусто. Нажми ♡ у понравившегося тайтла.", "No favorites yet. Press ♡ on an anime you like."],
+      watching: ["Пусто. Открой страницу аниме и нажми «Смотрю».", "Empty. Open an anime page and press \"Watching\"."],
+      planned: ["Пусто. Отмечай аниме кнопкой «В планах».", "Empty. Mark anime with \"Planned\"."],
+      completed: ["Пусто. Отмечай аниме кнопкой «Пройдено».", "Empty. Mark anime with \"Completed\"."],
+      dropped: ["Пусто. Сюда попадают брошенные тайтлы.", "Empty. Dropped titles will appear here."]
+    };
+
+    function renderListsSection(prebuiltFavorites) {
+      const isRussian = localStorage.getItem("animeVoidLanguage") !== "en";
+      let listCards;
+      if (activeListTab === "favorites") {
+        listCards = prebuiltFavorites || collapseSeasonCards(
+          anime.filter(entry => favorites.some(id => String(id) === String(entry.id))),
+          applySeasonGrouping(anime)
+        );
+      } else {
+        const statuses = readStatusMap();
+        const snapshots = readListSnapshots();
+        listCards = Object.keys(statuses)
+          .filter(id => statuses[id] === activeListTab)
+          .map(id => anime.find(entry => String(entry.id) === String(id)) || snapshots[id])
+          .filter(Boolean);
+      }
+      favoritesGrid.innerHTML = listCards.length
+        ? listCards.map(cardHTML).join("")
+        : `<p class="empty">${listEmptyTexts[activeListTab][isRussian ? 0 : 1]}</p>`;
+
+      const counts = { favorites: favorites.length, watching: 0, planned: 0, completed: 0, dropped: 0 };
+      const statusesForCounts = readStatusMap();
+      Object.keys(statusesForCounts).forEach(id => {
+        const status = statusesForCounts[id];
+        if (counts[status] !== undefined) counts[status] += 1;
+      });
+      if (listTabsBar) {
+        listTabsBar.querySelectorAll(".list-tab").forEach(button => {
+          const tab = button.dataset.list;
+          button.textContent = `${listTabTexts[tab][isRussian ? 0 : 1]} · ${counts[tab]}`;
+          button.classList.toggle("active", tab === activeListTab);
+        });
+      }
+    }
+
+    if (listTabsBar) {
+      listTabsBar.addEventListener("click", event => {
+        const button = event.target.closest(".list-tab");
+        if (!button) return;
+        activeListTab = button.dataset.list;
+        try {
+          localStorage.setItem("animeVoidListTab", activeListTab);
+        } catch (error) {}
+        renderListsSection();
+      });
+    }
+
         function render() {
       const currentLanguage = localStorage.getItem("animeVoidLanguage") || "ru";
       const genreAliases = {
@@ -1729,9 +1825,7 @@ localStorage.setItem("animeVoidHasMore", String(apiHasMore));
 
       const savedItems = anime.filter(item => favorites.some(id => String(id) === String(item.id)));
       const savedCards = collapseSeasonCards(savedItems, seasonRoots);
-      favoritesGrid.innerHTML = savedCards.length
-        ? savedCards.map(cardHTML).join("")
-        : `<p class="empty">${currentLanguage === "ru" ? "Здесь пока пусто. Нажми ♡ у понравившегося тайтла." : "No favorites yet. Press ♡ on an anime you like."}</p>`;
+      renderListsSection(savedCards);
 
       translateCatalogTitles(visibleItems.concat(savedCards));
     }
@@ -3105,6 +3199,18 @@ if (resetFiltersBtn) {
     .forEach(button => {
       button.textContent = lang === "ru" ? "▶ Смотреть" : "▶ Watch";
     });
+
+  const listsTitle = document.getElementById("listsTitle");
+  if (listsTitle) {
+    listsTitle.textContent = lang === "ru" ? "Мои списки" : "My lists";
+  }
+
+  const listsSubtitle = document.getElementById("listsSubtitle");
+  if (listsSubtitle) {
+    listsSubtitle.textContent = lang === "ru" ? "Твои коллекции тайтлов" : "Your anime collections";
+  }
+
+  renderListsSection();
 
   const airingTitle = document.getElementById("airingTitle");
   if (airingTitle) airingTitle.textContent = lang === "ru" ? "Сейчас выходит" : "Currently airing";
