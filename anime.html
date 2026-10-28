@@ -32,6 +32,13 @@
       filter: brightness(.35);
     }
 
+    /* When a portrait cover stands in for a wide banner, blur it on purpose
+       so the low resolution reads as a design choice, not a defect. */
+    .page-bg.bg-blurred {
+      filter: brightness(.35) blur(14px) saturate(1.05);
+      transform: scale(1.07);
+    }
+
     .page-overlay {
       position: fixed;
       inset: 0;
@@ -670,6 +677,54 @@ const russianTitleOverrides = {
     }
 
 
+  async function loadHighResArtwork(item) {
+    const numericId = Number(String(item.id).replace("anilist-", ""));
+    if (!numericId) return;
+    try {
+      const query = `
+        query ($id: Int) {
+          Media(id: $id) {
+            id
+            bannerImage
+            coverImage { extraLarge large }
+          }
+        }
+      `;
+      const response = await fetch("https://graphql.anilist.co", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({ query, variables: { id: numericId } })
+      });
+      if (!response.ok) return;
+      const media = (await response.json())?.data?.Media;
+      if (!media) return;
+      const banner = media.bannerImage || "";
+      const coverXL = media.coverImage?.extraLarge || media.coverImage?.large || "";
+      const pageBg = document.getElementById("pageBg");
+      if (pageBg) {
+        if (banner) {
+          pageBg.style.backgroundImage = `url("${banner}")`;
+          pageBg.classList.remove("bg-blurred");
+        } else if (coverXL) {
+          pageBg.style.backgroundImage = `url("${coverXL}")`;
+          pageBg.classList.add("bg-blurred");
+        }
+      }
+      const posterImg = document.querySelector(".anime-page .poster img");
+      if (posterImg && coverXL) posterImg.src = coverXL;
+      // Remember the best artwork so the next visit opens instantly.
+      try {
+        const savedCatalog = JSON.parse(localStorage.getItem("animeVoidCatalog") || "[]");
+        const entry = savedCatalog.find(entry => String(entry.id) === String(item.id));
+        if (entry) {
+          if (banner) entry.background = banner;
+          if (coverXL) entry.image = coverXL;
+          localStorage.setItem("animeVoidCatalog", JSON.stringify(savedCatalog));
+        }
+      } catch (error) { /* storage unavailable */ }
+    } catch (error) { /* network fail — keep current artwork */ }
+  }
+
   if (!item) {
 
     content.innerHTML = `
@@ -681,8 +736,13 @@ const russianTitleOverrides = {
 
   } else {
 
+    // Best available artwork right away: native banner, else the largest cover.
+    const hasNativeBanner = Boolean(item.background);
+    const coverExtraLarge = String(item.image || "").replace("/large/", "/extraLarge/") || item.image;
     document.getElementById("pageBg").style.backgroundImage =
-      `url("${item.background || item.image}")`;
+      `url("${item.background || coverExtraLarge}")`;
+    document.getElementById("pageBg").classList.toggle("bg-blurred", !hasNativeBanner);
+    loadHighResArtwork(item);
 
     const isMovie = String(item.format || "").toUpperCase() === "MOVIE";
     currentIsMovie = isMovie;
@@ -733,7 +793,7 @@ for (let i = 1; i <= episodeCount; i++) {
 
         <div class="poster">
           <img
-            src="${item.image}"
+            src="${coverExtraLarge}"
             alt="${item.title}"
           >
         </div>
