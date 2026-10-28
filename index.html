@@ -389,8 +389,10 @@
     .poster .year { font-size: 11px; color: #d0c8dc; margin-top: 7px; }
 
     .season-count { display:inline-flex; margin-top:5px; padding:3px 8px; border:1px solid rgba(192,132,252,.42); border-radius:999px; color:#d8b4fe; font-size:11px; }
-    .card-season-buttons { display:flex; flex-wrap:wrap; gap:6px; margin-top:9px; }
-    .card-season-button { min-height:34px; flex:1 1 auto; padding:6px 9px; border:1px solid rgba(192,132,252,.38); border-radius:9px; background:#171020; color:#e9d5ff; font:inherit; font-size:11px; font-weight:700; cursor:pointer; }
+    .card-actions { display:flex; flex-direction:column; gap:6px; margin-top:10px; }
+    .card-season-buttons { display:flex; flex-wrap:nowrap; gap:6px; }
+    .card-season-button { min-height:34px; flex:1 1 0; min-width:0; padding:6px 9px; border:1px solid rgba(192,132,252,.38); border-radius:9px; background:#171020; color:#e9d5ff; font:inherit; font-size:11px; font-weight:700; cursor:pointer; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .card-more-button { flex:0 0 auto; padding:6px 10px; }
     .card-season-button:hover, .card-season-button.active { background:linear-gradient(110deg,#7c3aed,#a855f7); border-color:#c084fc; color:#fff; }
     .card-info {
       display: flex;
@@ -1581,15 +1583,23 @@ localStorage.setItem("animeVoidHasMore", String(apiHasMore));
         .filter(season => season && ["TV", "TV_SHORT"].includes(String(season.format || "").toUpperCase()))
         .sort((a, b) => (Number(a.year) || 9999) - (Number(b.year) || 9999) ||
           String(a.id).localeCompare(String(b.id), undefined, { numeric: true }));
-      const seasonButtonsHTML = cardSeasonItems.length > 1
+      const hasSeasonButtons = cardSeasonItems.length > 1;
+      const shownSeasonItems = cardSeasonItems.slice(0, 3);
+      const hiddenSeasonCount = cardSeasonItems.length - shownSeasonItems.length;
+      const moreSeasonsTitle = isRussian ? `Ещё сезонов: ${hiddenSeasonCount}` : `More seasons: ${hiddenSeasonCount}`;
+      const seasonButtonsHTML = hasSeasonButtons
         ? `<div class="card-season-buttons" aria-label="${isRussian ? "Выбрать сезон" : "Choose season"}">
-            ${cardSeasonItems.map((season, index) => {
+            ${shownSeasonItems.map((season, index) => {
               const active = String(season.id) === String(item.id);
               const label = isRussian ? `Сезон ${index + 1}` : `Season ${index + 1}`;
-              return `<button type="button" class="card-season-button ${active ? "active" : ""}" onclick="event.stopPropagation(); openAnimePage('${encodeURIComponent(season.id)}')">${label}</button>`;
+              return `<button type="button" class="card-season-button ${active ? "active" : ""}" data-season-index="${index + 1}" onclick="event.stopPropagation(); openAnimePage('${encodeURIComponent(season.id)}')">${label}</button>`;
             }).join("")}
+            ${hiddenSeasonCount > 0 ? `<button type="button" class="card-season-button card-more-button" title="${moreSeasonsTitle}" onclick="event.stopPropagation(); openAnimePage('${encodeURIComponent(item.id)}')">+${hiddenSeasonCount}</button>` : ""}
           </div>`
         : "";
+      const watchButtonHTML = hasSeasonButtons
+        ? ""
+        : `<button type="button" class="primary card-watch-button" style="width:100%;margin:0" onclick="event.stopPropagation(); window.location.href='watch.html?id=${encodeURIComponent(item.id)}&episode=1'">${isRussian ? "▶ Смотреть" : "▶ Watch"}</button>`;
 
       return `
         <article class="card" role="link" tabindex="0"
@@ -1619,11 +1629,14 @@ localStorage.setItem("animeVoidHasMore", String(apiHasMore));
               ${saved ? "♥" : "♡"}
             </button>
           </div>
-          ${seasonButtonsHTML}
-          <button class="secondary" style="width:100%;margin-top:10px"
+          <div class="card-actions">
+            ${seasonButtonsHTML}
+            ${watchButtonHTML}
+            <button class="secondary" style="width:100%;margin:0"
   onclick="event.stopPropagation(); openAnimePage('${encodeURIComponent(item.id)}')">
   Подробнее ➜
 </button>
+          </div>
         </article>
       `;
     }
@@ -3071,6 +3084,26 @@ if (resetFiltersBtn) {
           detailsText;
       }
 
+    });
+
+  document
+    .querySelectorAll(
+      "#animeGrid .card-season-button, #favoritesGrid .card-season-button"
+    )
+    .forEach(button => {
+      const seasonIndex = Number(button.dataset.seasonIndex) || 0;
+      if (seasonIndex > 0) {
+        button.textContent =
+          lang === "ru" ? `Сезон ${seasonIndex}` : `Season ${seasonIndex}`;
+      }
+    });
+
+  document
+    .querySelectorAll(
+      "#animeGrid .card-watch-button, #favoritesGrid .card-watch-button"
+    )
+    .forEach(button => {
+      button.textContent = lang === "ru" ? "▶ Смотреть" : "▶ Watch";
     });
 
   const airingTitle = document.getElementById("airingTitle");
