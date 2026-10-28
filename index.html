@@ -1352,6 +1352,16 @@
         <div class="stat-card"><strong id="statFavorites">0</strong><span id="statFavoritesLabel">в избранном</span></div>
       </div>
       <div class="top-genres" id="topGenres"></div>
+      <div class="history-grid" id="historyGrid"></div>
+      <button type="button" class="secondary share-stats-btn" id="shareStatsBtn" hidden>📤 Поделиться статистикой</button>
+    </section>
+    <section class="history-section" id="chartsSection" hidden>
+      <div class="section-heading">
+        <div>
+          <h2 id="chartsSectionTitle">Твои графики</h2>
+          <div class="subtitle" id="chartsSectionSubtitle">Часы по жанрам и статусы тайтлов</div>
+        </div>
+      </div>
       <div class="charts-row" id="statsChartsRow">
         <div class="chart-card">
           <h3 id="chartGenresTitle">🎬 Часы по жанрам</h3>
@@ -1364,8 +1374,6 @@
           <div class="chart-legend" id="statusLegend"></div>
         </div>
       </div>
-      <div class="history-grid" id="historyGrid"></div>
-      <button type="button" class="secondary share-stats-btn" id="shareStatsBtn" hidden>📤 Поделиться статистикой</button>
     </section>
     <section class="achievements-section" id="achievementsSection" hidden>
       <div class="section-heading">
@@ -1393,7 +1401,7 @@
   </main>
 
   <footer>
-    ANIME VOID © 2026 · Твоя следующая история начинается здесь · Данные каталога: AniList
+    ANIME VOID © 2026 · Твоя следующая история начинается здесь · Данные каталога: AniList · v15
   </footer>
 
   <button id="toTopBtn" type="button" aria-label="Наверх" title="Наверх">↑</button>
@@ -2275,6 +2283,13 @@ localStorage.setItem("animeVoidHasMore", String(apiHasMore));
       if (genresTitle) genresTitle.textContent = isRussian ? "🎬 Часы по жанрам" : "🎬 Hours by genre";
       const statusesTitle = document.getElementById("chartStatusesTitle");
       if (statusesTitle) statusesTitle.textContent = isRussian ? "📋 Статусы тайтлов" : "📋 Title statuses";
+
+      const chartsSection = document.getElementById("chartsSection");
+      if (chartsSection) chartsSection.hidden = !(totalGenreMinutes > 0 || totalStatuses > 0);
+      const chartsSectionTitle = document.getElementById("chartsSectionTitle");
+      if (chartsSectionTitle) chartsSectionTitle.textContent = isRussian ? "Твои графики" : "Your charts";
+      const chartsSectionSubtitle = document.getElementById("chartsSectionSubtitle");
+      if (chartsSectionSubtitle) chartsSectionSubtitle.textContent = isRussian ? "Часы по жанрам и статусы тайтлов" : "Hours by genre and title statuses";
     }
     window.renderStatsCharts = renderStatsCharts;
     renderStatsCharts();
