@@ -262,6 +262,7 @@
 
     <div class="controls">
       <button class="control-btn" id="prevBtn" type="button">← Предыдущая серия</button>
+      <button class="control-btn" id="markWatchedBtn" type="button">✓ Отметить просмотренной</button>
       <button class="control-btn" id="nextBtn" type="button">Следующая серия →</button>
     </div>
 
@@ -348,6 +349,20 @@
       if (currentEpisode < episodeCount) openEpisode(currentEpisode + 1);
     });
 
+    document.getElementById("markWatchedBtn").addEventListener("click", () => {
+      const watched = getWatchedEpisodes();
+      const index = watched.indexOf(currentEpisode);
+      if (index === -1) {
+        watched.push(currentEpisode);
+        watched.sort((a, b) => a - b);
+      } else {
+        watched.splice(index, 1);
+      }
+      localStorage.setItem(`watched_${animeId}`, JSON.stringify(watched));
+      renderEpisodes();
+      updateMarkWatchedButton();
+    });
+
     document.getElementById("prevBtn").disabled = currentEpisode <= 1;
     document.getElementById("nextBtn").disabled = currentEpisode >= episodeCount;
 
@@ -368,6 +383,16 @@
       }
     }
 
+    function updateMarkWatchedButton() {
+      const button = document.getElementById("markWatchedBtn");
+      if (!button) return;
+      const isRussian = currentLanguage === "ru";
+      const isWatched = getWatchedEpisodes().includes(currentEpisode);
+      button.textContent = isWatched
+        ? (isRussian ? "✕ Снять отметку" : "✕ Unmark as watched")
+        : (isRussian ? "✓ Отметить просмотренной" : "✓ Mark as watched");
+    }
+
     function renderEpisodes() {
       if (!item || isMovie) return;
       const watchedEpisodes = getWatchedEpisodes();
@@ -383,6 +408,7 @@
         button.addEventListener("click", () => openEpisode(number));
         grid.appendChild(button);
       }
+      updateMarkWatchedButton();
     }
 
     function episodeLabel(number) {
@@ -409,6 +435,7 @@
       document.getElementById("nextBtn").textContent = isMovie
         ? (isRussian ? "Фильм" : "Movie")
         : (isRussian ? "Следующая серия →" : "Next episode →");
+      updateMarkWatchedButton();
       document.getElementById("episodesHeading").textContent = isMovie
         ? (isRussian ? "Фильм" : "Movie")
         : (isRussian ? "Все серии" : "All episodes");
