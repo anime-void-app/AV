@@ -1090,20 +1090,28 @@
       display:flex; flex-direction:column; gap:8px;
     }
     .calendar-day.today { border-color:rgba(192,132,252,.75); background:rgba(124,58,237,.16); }
-    .calendar-day-title { font-size:12px; font-weight:800; letter-spacing:.4px; color:#d8b4fe; display:flex; align-items:center; gap:6px; flex-wrap:wrap; }
+    .calendar-day-title { font-size:13px; font-weight:800; letter-spacing:.4px; color:#d8b4fe; display:flex; align-items:center; gap:6px; flex-wrap:wrap; }
     .calendar-today-badge { padding:2px 7px; border-radius:999px; background:linear-gradient(110deg,#7c3aed,#a855f7); color:#fff; font-size:10px; }
     .calendar-item { display:flex; gap:8px; align-items:center; padding:6px; border:1px solid rgba(168,85,247,.18); border-radius:10px; background:rgba(12,10,18,.75); cursor:pointer; font:inherit; color:#fff; text-align:left; }
     .calendar-item:hover { border-color:rgba(192,132,252,.6); }
-    .calendar-item img { width:34px; height:48px; object-fit:cover; border-radius:6px; flex:0 0 auto; }
+    .calendar-item img { width:40px; height:56px; object-fit:cover; border-radius:7px; flex:0 0 auto; }
     .calendar-item-body { min-width:0; display:flex; flex-direction:column; gap:2px; }
-    .calendar-item-name { font-size:11px; font-weight:700; line-height:1.25; display:-webkit-box; -webkit-line-clamp:2; line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
-    .calendar-item-meta { font-size:10px; color:#a99fc2; }
+    .calendar-item-name { font-size:12px; font-weight:700; line-height:1.25; display:-webkit-box; -webkit-line-clamp:2; line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+    .calendar-item-meta { font-size:11px; color:#a99fc2; }
+    .calendar-item.hidden-extra { display:none; }
+    .calendar-day.expanded .calendar-item.hidden-extra { display:flex; }
+    .calendar-more {
+      padding:9px 6px; border:1px dashed rgba(168,85,247,.45); border-radius:10px;
+      background:rgba(124,58,237,.08); color:#b79ce8; font:inherit; font-size:11px; font-weight:700; cursor:pointer;
+    }
+    .calendar-more:hover { background:rgba(124,58,237,.16); }
     .calendar-empty { color:#5c5470; font-size:12px; text-align:center; padding:14px 0; }
     body.theme-light .calendar-day { background:#fdfbff; }
     body.theme-light .calendar-day.today { background:rgba(124,58,237,.13); }
     body.theme-light .calendar-day-title { color:#5b21b6; }
     body.theme-light .calendar-item { background:#f2eafc; color:#2a1f45; }
     body.theme-light .calendar-item-meta { color:#5c5275; }
+    body.theme-light .calendar-more { color:#5b21b6; border-color:rgba(124,58,237,.45); background:rgba(124,58,237,.06); }
     body.theme-light .calendar-empty { color:#8a7fa8; }
     @media (max-width: 1000px) { .calendar-grid { grid-template-columns:repeat(4,minmax(0,1fr)); } }
     @media (max-width: 600px) { .calendar-grid { display:flex; overflow-x:auto; padding-bottom:10px; } .calendar-day { flex:0 0 200px; } }
@@ -2076,6 +2084,15 @@ localStorage.setItem("animeVoidHasMore", String(apiHasMore));
       });
       buckets.forEach(bucket => bucket.sort((a, b) => a.airingAt - b.airingAt));
       const todayIndex = (new Date().getDay() + 6) % 7;
+      const calendarItemHTML = (entry, hidden) => `
+              <button type="button" class="calendar-item${hidden ? " hidden-extra" : ""}" onclick="openAnimePage('${encodeURIComponent(entry.item.id)}')">
+                <img src="${entry.item.image || 'image/poster1.jpg'}" alt="" loading="lazy"
+                  onerror="this.onerror=null;this.src='image/poster1.jpg';">
+                <span class="calendar-item-body">
+                  <span class="calendar-item-name" data-anime-title-id="${entry.item.id}">${isRussian ? (getRussianTitle(entry.item) || entry.item.title) : entry.item.title}</span>
+                  <span class="calendar-item-meta">${isRussian ? "серия" : "ep."} ${entry.item.nextEpisode} · ${entry.time}</span>
+                </span>
+              </button>`;
       grid.innerHTML = buckets.map((bucket, index) => `
         <div class="calendar-day${index === todayIndex ? " today" : ""}">
           <div class="calendar-day-title">
@@ -2083,18 +2100,29 @@ localStorage.setItem("animeVoidHasMore", String(apiHasMore));
             ${index === todayIndex ? `<span class="calendar-today-badge">${isRussian ? "сегодня" : "today"}</span>` : ""}
           </div>
           ${bucket.length
-            ? bucket.map(entry => `
-              <button type="button" class="calendar-item" onclick="openAnimePage('${encodeURIComponent(entry.item.id)}')">
-                <img src="${entry.item.image || 'image/poster1.jpg'}" alt="" loading="lazy"
-                  onerror="this.onerror=null;this.src='image/poster1.jpg';">
-                <span class="calendar-item-body">
-                  <span class="calendar-item-name" data-anime-title-id="${entry.item.id}">${isRussian ? (getRussianTitle(entry.item) || entry.item.title) : entry.item.title}</span>
-                  <span class="calendar-item-meta">${isRussian ? "серия" : "ep."} ${entry.item.nextEpisode} · ${entry.time}</span>
-                </span>
-              </button>`).join("")
+            ? bucket.map((entry, entryIndex) => calendarItemHTML(entry, entryIndex >= 4)).join("") +
+              (bucket.length > 4
+                ? `<button type="button" class="calendar-more" data-count="${bucket.length - 4}">+${bucket.length - 4} ${isRussian ? "ещё" : "more"}</button>`
+                : "")
             : `<div class="calendar-empty">—</div>`}
         </div>`).join("");
       section.hidden = false;
+    }
+
+    const calendarGridElement = document.getElementById("calendarGrid");
+    if (calendarGridElement) {
+      calendarGridElement.addEventListener("click", event => {
+        const moreButton = event.target.closest(".calendar-more");
+        if (!moreButton) return;
+        const day = moreButton.closest(".calendar-day");
+        if (!day) return;
+        day.classList.toggle("expanded");
+        const isRussian = localStorage.getItem("animeVoidLanguage") !== "en";
+        const count = Number(moreButton.dataset.count) || 0;
+        moreButton.textContent = day.classList.contains("expanded")
+          ? (isRussian ? "− свернуть" : "− show less")
+          : `+${count} ${isRussian ? "ещё" : "more"}`;
+      });
     }
 
     /* ===== Баннер «вышло, пока тебя не было» ===== */
