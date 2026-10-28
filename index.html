@@ -445,6 +445,17 @@
     .stat-card strong { font-size: 24px; color: #d8b4fe; }
     .stat-card span { font-size: 12px; color: #8f879d; }
     .top-genres { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
+    .charts-row { display:grid; grid-template-columns:repeat(auto-fit,minmax(270px,1fr)); gap:14px; margin-bottom:18px; }
+    .chart-card {
+      background:#0f0b1a; border:1px solid rgba(168,85,247,.35); border-radius:20px;
+      padding:18px; display:flex; flex-direction:column; align-items:center; gap:12px;
+    }
+    .chart-card h3 { margin:0; font-size:15px; font-weight:800; color:#fff; }
+    .chart-legend { display:flex; flex-direction:column; gap:7px; width:100%; }
+    .chart-legend-row { display:flex; align-items:center; gap:8px; font-size:12px; color:#d0c8dc; min-width:0; }
+    .chart-dot { width:10px; height:10px; border-radius:3px; flex:0 0 auto; }
+    .chart-value { margin-left:auto; color:#b79ce8; font-weight:700; white-space:nowrap; }
+    .chart-empty { font-size:12px; color:#a99fc2; text-align:center; }
     .genre-chip {
       padding: 7px 12px;
       border-radius: 999px;
@@ -1092,26 +1103,26 @@
     .calendar-day.today { border-color:rgba(192,132,252,.75); background:rgba(124,58,237,.16); }
     .calendar-day-title { font-size:13px; font-weight:800; letter-spacing:.4px; color:#d8b4fe; display:flex; align-items:center; gap:6px; flex-wrap:wrap; }
     .calendar-today-badge { padding:2px 7px; border-radius:999px; background:linear-gradient(110deg,#7c3aed,#a855f7); color:#fff; font-size:10px; }
-    .calendar-item { display:flex; gap:8px; align-items:center; padding:6px; border:1px solid rgba(168,85,247,.18); border-radius:10px; background:rgba(12,10,18,.75); cursor:pointer; font:inherit; color:#fff; text-align:left; }
+    .calendar-item { display:flex; gap:7px; align-items:center; padding:5px; border:1px solid rgba(168,85,247,.18); border-radius:10px; background:rgba(12,10,18,.75); cursor:pointer; font:inherit; color:#fff; text-align:left; }
     .calendar-item:hover { border-color:rgba(192,132,252,.6); }
-    .calendar-item img { width:40px; height:56px; object-fit:cover; border-radius:7px; flex:0 0 auto; }
+    .calendar-item img { width:34px; height:48px; object-fit:cover; border-radius:6px; flex:0 0 auto; }
     .calendar-item-body { min-width:0; display:flex; flex-direction:column; gap:2px; }
-    .calendar-item-name { font-size:12px; font-weight:700; line-height:1.25; display:-webkit-box; -webkit-line-clamp:2; line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
-    .calendar-item-meta { font-size:11px; color:#a99fc2; }
+    .calendar-item-name { font-size:12px; font-weight:700; line-height:1.3; display:block; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .calendar-item-meta { font-size:10.5px; color:#a99fc2; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
     .calendar-item.hidden-extra { display:none; }
     .calendar-day.expanded .calendar-item.hidden-extra { display:flex; }
     .calendar-more {
-      padding:9px 6px; border:1px dashed rgba(168,85,247,.45); border-radius:10px;
-      background:rgba(124,58,237,.08); color:#b79ce8; font:inherit; font-size:11px; font-weight:700; cursor:pointer;
+      padding:8px 6px; border:1px solid rgba(168,85,247,.4); border-radius:10px;
+      background:rgba(124,58,237,.16); color:#c084fc; font:inherit; font-size:11px; font-weight:700; cursor:pointer;
     }
-    .calendar-more:hover { background:rgba(124,58,237,.16); }
+    .calendar-more:hover { background:rgba(124,58,237,.28); }
     .calendar-empty { color:#5c5470; font-size:12px; text-align:center; padding:14px 0; }
     body.theme-light .calendar-day { background:#fdfbff; }
     body.theme-light .calendar-day.today { background:rgba(124,58,237,.13); }
     body.theme-light .calendar-day-title { color:#5b21b6; }
     body.theme-light .calendar-item { background:#f2eafc; color:#2a1f45; }
     body.theme-light .calendar-item-meta { color:#5c5275; }
-    body.theme-light .calendar-more { color:#5b21b6; border-color:rgba(124,58,237,.45); background:rgba(124,58,237,.06); }
+    body.theme-light .calendar-more { color:#5b21b6; border-color:rgba(124,58,237,.45); background:rgba(124,58,237,.1); }
     body.theme-light .calendar-empty { color:#8a7fa8; }
     @media (max-width: 1000px) { .calendar-grid { grid-template-columns:repeat(4,minmax(0,1fr)); } }
     @media (max-width: 600px) { .calendar-grid { display:flex; overflow-x:auto; padding-bottom:10px; } .calendar-day { flex:0 0 200px; } }
@@ -1341,6 +1352,18 @@
         <div class="stat-card"><strong id="statFavorites">0</strong><span id="statFavoritesLabel">в избранном</span></div>
       </div>
       <div class="top-genres" id="topGenres"></div>
+      <div class="charts-row" id="statsChartsRow">
+        <div class="chart-card">
+          <h3 id="chartGenresTitle">🎬 Часы по жанрам</h3>
+          <canvas id="genreChart" width="220" height="220"></canvas>
+          <div class="chart-legend" id="genreLegend"></div>
+        </div>
+        <div class="chart-card">
+          <h3 id="chartStatusesTitle">📋 Статусы тайтлов</h3>
+          <canvas id="statusChart" width="220" height="220"></canvas>
+          <div class="chart-legend" id="statusLegend"></div>
+        </div>
+      </div>
       <div class="history-grid" id="historyGrid"></div>
       <button type="button" class="secondary share-stats-btn" id="shareStatsBtn" hidden>📤 Поделиться статистикой</button>
     </section>
@@ -2108,6 +2131,153 @@ localStorage.setItem("animeVoidHasMore", String(apiHasMore));
         </div>`).join("");
       section.hidden = false;
     }
+
+    /* ===== Графики статистики ===== */
+    const GENRE_RU = {
+      "Action":"Экшен","Adventure":"Приключения","Comedy":"Комедия","Drama":"Драма",
+      "Ecchi":"Этти","Fantasy":"Фэнтези","Horror":"Хоррор","Mahou Shoujo":"Махо-сёдзё",
+      "Mecha":"Меха","Music":"Музыка","Mystery":"Мистика","Psychological":"Психологическое",
+      "Romance":"Романтика","Sci-Fi":"Sci-Fi","Slice of Life":"Повседневность",
+      "Sports":"Спорт","Supernatural":"Сверхъестественное","Thriller":"Триллер"
+    };
+    const STATUS_LABELS = {
+      watching: { ru: "Смотрю", en: "Watching" },
+      planned: { ru: "В планах", en: "Planned" },
+      completed: { ru: "Завершено", en: "Completed" },
+      dropped: { ru: "Брошено", en: "Dropped" }
+    };
+    const CHART_PALETTE = ["#a855f7","#8b5cf6","#c084fc","#6d28d9","#d8b4fe"];
+    const STATUS_COLORS = { watching:"#a855f7", planned:"#818cf8", completed:"#34d399", dropped:"#f87171" };
+    const CHART_OTHER_COLOR = "#8f879d";
+
+    function drawDonutChart(canvas, entries, centerTop, centerBottom) {
+      if (!canvas) return;
+      const size = 220;
+      const dpr = window.devicePixelRatio || 1;
+      canvas.width = size * dpr;
+      canvas.height = size * dpr;
+      canvas.style.width = size + "px";
+      canvas.style.height = size + "px";
+      const ctx = canvas.getContext("2d");
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.clearRect(0, 0, size, size);
+      const cx = size / 2, cy = size / 2;
+      const R = size / 2 - 6;
+      const r = R * 0.6;
+      ctx.beginPath();
+      ctx.arc(cx, cy, R, 0, Math.PI * 2);
+      ctx.arc(cx, cy, r, 0, Math.PI * 2, true);
+      ctx.fillStyle = "rgba(168,85,247,.12)";
+      ctx.fill();
+      const total = entries.reduce((sum, e) => sum + e.value, 0);
+      if (total > 0) {
+        let angle = -Math.PI / 2;
+        entries.forEach(e => {
+          const slice = e.value / total * Math.PI * 2;
+          ctx.beginPath();
+          ctx.arc(cx, cy, R, angle, angle + slice);
+          ctx.arc(cx, cy, r, angle + slice, angle, true);
+          ctx.closePath();
+          ctx.fillStyle = e.color;
+          ctx.fill();
+          angle += slice;
+        });
+      }
+      ctx.textAlign = "center";
+      ctx.fillStyle = "#f5f3ff";
+      ctx.font = "800 26px system-ui, sans-serif";
+      ctx.fillText(centerTop, cx, cy - 2);
+      ctx.fillStyle = "#a99fc2";
+      ctx.font = "600 11px system-ui, sans-serif";
+      ctx.fillText(centerBottom, cx, cy + 18);
+    }
+
+    function renderChartLegend(element, entries, formatValue) {
+      if (!element) return;
+      if (!entries.length) {
+        element.innerHTML = "<div class=\"chart-empty\">—</div>";
+        return;
+      }
+      element.innerHTML = entries.map(e =>
+        "<div class=\"chart-legend-row\">" +
+        "<span class=\"chart-dot\" style=\"background:" + e.color + "\"></span>" +
+        "<span>" + e.label + "</span>" +
+        "<span class=\"chart-value\">" + formatValue(e) + "</span>" +
+        "</div>").join("");
+    }
+
+    function renderStatsCharts() {
+      const isRussian = localStorage.getItem("animeVoidLanguage") !== "en";
+      let catalog = [];
+      try { catalog = JSON.parse(localStorage.getItem("animeVoidCatalog")) || []; } catch (err) {}
+      const byId = new Map(catalog.map(t => [String(t.id), t]));
+
+      const genreMinutes = {};
+      for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        if (!key || key.indexOf("watched_") !== 0) continue;
+        const id = key.slice(8);
+        let episodes = [];
+        try { episodes = JSON.parse(localStorage.getItem(key)) || []; } catch (err) { continue; }
+        if (!episodes.length) continue;
+        const item = byId.get(id);
+        if (!item || !Array.isArray(item.genres) || !item.genres.length) continue;
+        let minutes = 0;
+        episodes.forEach(ep => {
+          const stored = Number(localStorage.getItem("duration_" + id + "_" + ep));
+          minutes += stored > 0 ? stored : 24;
+        });
+        const per = minutes / item.genres.length;
+        item.genres.forEach(g => { genreMinutes[g] = (genreMinutes[g] || 0) + per; });
+      }
+      const sortedGenres = Object.keys(genreMinutes)
+        .map(g => ({ label: isRussian ? (GENRE_RU[g] || g) : g, value: genreMinutes[g] }))
+        .sort((a, b) => b.value - a.value);
+      const TOP = 5;
+      const genreEntries = sortedGenres.slice(0, TOP).map((e, i) => ({ label: e.label, value: e.value, color: CHART_PALETTE[i] }));
+      if (sortedGenres.length > TOP) {
+        const rest = sortedGenres.slice(TOP).reduce((s, e) => s + e.value, 0);
+        genreEntries.push({ label: isRussian ? "Другое" : "Other", value: rest, color: CHART_OTHER_COLOR });
+      }
+      const totalGenreMinutes = sortedGenres.reduce((s, e) => s + e.value, 0);
+      drawDonutChart(
+        document.getElementById("genreChart"),
+        genreEntries,
+        totalGenreMinutes >= 60 ? Math.round(totalGenreMinutes / 60) + " ч" : Math.round(totalGenreMinutes) + " мин",
+        isRussian ? "всего просмотра" : "total watched"
+      );
+      renderChartLegend(document.getElementById("genreLegend"), genreEntries, e => {
+        const hours = e.value / 60;
+        const pct = totalGenreMinutes ? Math.round(e.value / totalGenreMinutes * 100) : 0;
+        return (hours >= 10 ? Math.round(hours) : hours.toFixed(1)) + " ч · " + pct + "%";
+      });
+
+      let statuses = {};
+      try { statuses = JSON.parse(localStorage.getItem("animeVoidStatuses")) || {}; } catch (err) {}
+      const counts = { watching: 0, planned: 0, completed: 0, dropped: 0 };
+      Object.keys(statuses).forEach(id => { const s = statuses[id]; if (counts[s] !== undefined) counts[s]++; });
+      const statusEntries = Object.keys(counts)
+        .map(s => ({ label: isRussian ? STATUS_LABELS[s].ru : STATUS_LABELS[s].en, value: counts[s], color: STATUS_COLORS[s] }))
+        .filter(e => e.value > 0);
+      const totalStatuses = statusEntries.reduce((s, e) => s + e.value, 0);
+      drawDonutChart(
+        document.getElementById("statusChart"),
+        statusEntries,
+        String(totalStatuses),
+        isRussian ? "тайтлов со статусом" : "tracked titles"
+      );
+      renderChartLegend(document.getElementById("statusLegend"), statusEntries, e => {
+        const pct = totalStatuses ? Math.round(e.value / totalStatuses * 100) : 0;
+        return e.value + " · " + pct + "%";
+      });
+
+      const genresTitle = document.getElementById("chartGenresTitle");
+      if (genresTitle) genresTitle.textContent = isRussian ? "🎬 Часы по жанрам" : "🎬 Hours by genre";
+      const statusesTitle = document.getElementById("chartStatusesTitle");
+      if (statusesTitle) statusesTitle.textContent = isRussian ? "📋 Статусы тайтлов" : "📋 Title statuses";
+    }
+    window.renderStatsCharts = renderStatsCharts;
+    renderStatsCharts();
 
     const calendarGridElement = document.getElementById("calendarGrid");
     if (calendarGridElement) {
@@ -3864,6 +4034,7 @@ if (resetFiltersBtn) {
 
   renderAchievementsSection();
   renderCalendarSection(currentAiringItems);
+  if (window.renderStatsCharts) window.renderStatsCharts();
 
   const airingTitle = document.getElementById("airingTitle");
   if (airingTitle) airingTitle.textContent = lang === "ru" ? "Сейчас выходит" : "Currently airing";
