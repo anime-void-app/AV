@@ -448,9 +448,15 @@
     .charts-row { display:grid; grid-template-columns:repeat(auto-fit,minmax(270px,1fr)); gap:14px; margin-bottom:18px; }
     .chart-card {
       background:#0f0b1a; border:1px solid rgba(168,85,247,.35); border-radius:20px;
-      padding:18px; display:flex; flex-direction:column; align-items:center; gap:12px;
+      padding:20px; display:flex; flex-direction:column; align-items:center; gap:14px;
+      box-shadow: 0 18px 45px rgba(0,0,0,.35);
     }
     .chart-card h3 { margin:0; font-size:15px; font-weight:800; color:#fff; }
+    .chart-card canvas { width:100%; max-width:260px; height:auto; aspect-ratio:1/1; display:block; }
+    .chart-legend-item { display:flex; flex-direction:column; gap:5px; }
+    .chart-bar { height:4px; border-radius:2px; background:rgba(168,85,247,.12); overflow:hidden; }
+    .chart-bar span { display:block; height:100%; border-radius:2px; }
+    .chart-label { min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
     .chart-legend { display:flex; flex-direction:column; gap:7px; width:100%; }
     .chart-legend-row { display:flex; align-items:center; gap:8px; font-size:12px; color:#d0c8dc; min-width:0; }
     .chart-dot { width:10px; height:10px; border-radius:3px; flex:0 0 auto; }
@@ -2160,44 +2166,51 @@ localStorage.setItem("animeVoidHasMore", String(apiHasMore));
 
     function drawDonutChart(canvas, entries, centerTop, centerBottom) {
       if (!canvas) return;
-      const size = 220;
-      const dpr = window.devicePixelRatio || 1;
-      canvas.width = size * dpr;
-      canvas.height = size * dpr;
-      canvas.style.width = size + "px";
-      canvas.style.height = size + "px";
+      const size = 260;
+      const scale = Math.max(2, window.devicePixelRatio || 1);
+      canvas.width = size * scale;
+      canvas.height = size * scale;
+      canvas.style.width = "100%";
+      canvas.style.maxWidth = size + "px";
       const ctx = canvas.getContext("2d");
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.setTransform(scale, 0, 0, scale, 0, 0);
       ctx.clearRect(0, 0, size, size);
       const cx = size / 2, cy = size / 2;
-      const R = size / 2 - 6;
-      const r = R * 0.6;
+      const R = size / 2 - 20;
+      const thickness = 26;
+      const gap = 0.07;
+      const total = entries.reduce((sum, e) => sum + e.value, 0);
+
       ctx.beginPath();
       ctx.arc(cx, cy, R, 0, Math.PI * 2);
-      ctx.arc(cx, cy, r, 0, Math.PI * 2, true);
-      ctx.fillStyle = "rgba(168,85,247,.12)";
-      ctx.fill();
-      const total = entries.reduce((sum, e) => sum + e.value, 0);
+      ctx.lineWidth = thickness;
+      ctx.strokeStyle = "rgba(168,85,247,.1)";
+      ctx.stroke();
+
       if (total > 0) {
         let angle = -Math.PI / 2;
         entries.forEach(e => {
-          const slice = e.value / total * Math.PI * 2;
-          ctx.beginPath();
-          ctx.arc(cx, cy, R, angle, angle + slice);
-          ctx.arc(cx, cy, r, angle + slice, angle, true);
-          ctx.closePath();
-          ctx.fillStyle = e.color;
-          ctx.fill();
+          let slice = e.value / total * Math.PI * 2;
+          if (slice < gap + 0.03) slice = gap + 0.03;
+          const start = angle + gap / 2;
+          const end = angle + slice - gap / 2;
+          if (end > start) {
+            ctx.beginPath();
+            ctx.arc(cx, cy, R, start, end);
+            ctx.lineWidth = thickness;
+            ctx.strokeStyle = e.color;
+            ctx.stroke();
+          }
           angle += slice;
         });
       }
       ctx.textAlign = "center";
       ctx.fillStyle = "#f5f3ff";
-      ctx.font = "800 26px system-ui, sans-serif";
-      ctx.fillText(centerTop, cx, cy - 2);
+      ctx.font = "800 32px system-ui, sans-serif";
+      ctx.fillText(centerTop, cx, cy);
       ctx.fillStyle = "#a99fc2";
-      ctx.font = "600 11px system-ui, sans-serif";
-      ctx.fillText(centerBottom, cx, cy + 18);
+      ctx.font = "600 12px system-ui, sans-serif";
+      ctx.fillText(centerBottom, cx, cy + 26);
     }
 
     function renderChartLegend(element, entries, formatValue) {
@@ -2206,12 +2219,18 @@ localStorage.setItem("animeVoidHasMore", String(apiHasMore));
         element.innerHTML = "<div class=\"chart-empty\">—</div>";
         return;
       }
-      element.innerHTML = entries.map(e =>
-        "<div class=\"chart-legend-row\">" +
-        "<span class=\"chart-dot\" style=\"background:" + e.color + "\"></span>" +
-        "<span>" + e.label + "</span>" +
-        "<span class=\"chart-value\">" + formatValue(e) + "</span>" +
-        "</div>").join("");
+      const total = entries.reduce((sum, e) => sum + e.value, 0) || 1;
+      element.innerHTML = entries.map(e => {
+        const pct = Math.max(1, Math.round(e.value / total * 100));
+        return "<div class=\"chart-legend-item\">" +
+          "<div class=\"chart-legend-row\">" +
+          "<span class=\"chart-dot\" style=\"background:" + e.color + "\"></span>" +
+          "<span class=\"chart-label\">" + e.label + "</span>" +
+          "<span class=\"chart-value\">" + formatValue(e) + "</span>" +
+          "</div>" +
+          "<div class=\"chart-bar\"><span style=\"width:" + pct + "%; background:" + e.color + "\"></span></div>" +
+          "</div>";
+      }).join("");
     }
 
     function renderStatsCharts() {
@@ -2293,6 +2312,12 @@ localStorage.setItem("animeVoidHasMore", String(apiHasMore));
     }
     window.renderStatsCharts = renderStatsCharts;
     renderStatsCharts();
+
+    let chartResizeTimer = null;
+    window.addEventListener("resize", () => {
+      clearTimeout(chartResizeTimer);
+      chartResizeTimer = setTimeout(() => renderStatsCharts(), 200);
+    });
 
     const calendarGridElement = document.getElementById("calendarGrid");
     if (calendarGridElement) {
