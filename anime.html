@@ -308,6 +308,39 @@
     }
     @keyframes loadingSpin { to { transform: rotate(360deg); } }
 
+    .characters-section { margin-top: 34px; }
+    .characters-section h2 { margin: 0 0 16px; }
+    .characters-row {
+      display: flex;
+      gap: 12px;
+      overflow-x: auto;
+      padding-bottom: 10px;
+      scroll-snap-type: x proximity;
+    }
+    .characters-row::-webkit-scrollbar { height: 8px; }
+    .characters-row::-webkit-scrollbar-track { background: #14101e; border-radius: 8px; }
+    .characters-row::-webkit-scrollbar-thumb { background: #2b2140; border-radius: 8px; }
+    .character-card {
+      flex: 0 0 150px;
+      scroll-snap-align: start;
+      border: 1px solid rgba(168, 85, 247, .25);
+      border-radius: 16px;
+      background: rgba(12, 10, 18, .9);
+      overflow: hidden;
+    }
+    .character-card img {
+      width: 100%;
+      aspect-ratio: 2 / 2.6;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+      background: #17121f;
+    }
+    .character-body { padding: 10px 11px 12px; }
+    .character-name { font-size: 13px; font-weight: 700; line-height: 1.3; }
+    .character-role { font-size: 11px; color: #b79ce8; margin-top: 3px; }
+    .character-va { font-size: 11px; color: #8f879d; margin-top: 5px; line-height: 1.35; }
+
     .trailer-section { margin-top: 34px; }
     .trailer-section h2 { margin: 0 0 16px; }
     .trailer-frame {
@@ -709,6 +742,35 @@ const russianTitleOverrides = {
     }
 
 
+  let currentCharacters = [];
+
+  function characterRoleLabel(role) {
+    if (currentLanguage === "ru") {
+      if (role === "MAIN") return "Главная роль";
+      if (role === "SUPPORTING") return "Второстепенная";
+      return "Эпизодическая";
+    }
+    if (role === "MAIN") return "Main";
+    if (role === "SUPPORTING") return "Supporting";
+    return "Background";
+  }
+
+  function renderCharacters() {
+    const section = document.getElementById("charactersSection");
+    if (!section || !currentCharacters.length) return;
+    section.hidden = false;
+    document.getElementById("charactersRow").innerHTML = currentCharacters.map(character => `
+      <div class="character-card">
+        <img src="${character.image}" alt="" loading="lazy"
+          onerror="this.onerror=null;this.src='image/poster1.jpg';">
+        <div class="character-body">
+          <div class="character-name">${character.name}</div>
+          <div class="character-role">${characterRoleLabel(character.role)}</div>
+          ${character.va ? `<div class="character-va">🎙 ${character.va}</div>` : ""}
+        </div>
+      </div>`).join("");
+  }
+
   async function loadHighResArtwork(item) {
     const numericId = Number(String(item.id).replace("anilist-", ""));
     if (!numericId) return;
@@ -720,6 +782,13 @@ const russianTitleOverrides = {
             bannerImage
             coverImage { extraLarge large }
             trailer { id site }
+            characters(perPage: 12, sort: [ROLE]) {
+              edges {
+                role
+                node { id name { full } image { large } }
+                voiceActors(language: JAPANESE) { id name { full } }
+              }
+            }
           }
         }
       `;
@@ -759,6 +828,17 @@ const russianTitleOverrides = {
             allowfullscreen
           ></iframe>`;
       }
+
+      currentCharacters = (media.characters?.edges || [])
+        .filter(edge => edge.node && edge.node.name?.full)
+        .slice(0, 12)
+        .map(edge => ({
+          name: edge.node.name.full,
+          image: edge.node.image?.large || "",
+          role: edge.role || "SUPPORTING",
+          va: (edge.voiceActors || []).filter(Boolean)[0]?.name?.full || ""
+        }));
+      renderCharacters();
       // Remember the best artwork so the next visit opens instantly.
       try {
         const savedCatalog = JSON.parse(localStorage.getItem("animeVoidCatalog") || "[]");
@@ -1025,6 +1105,11 @@ for (let i = 1; i <= episodeCount; i++) {
 
       </section>
 
+      <section class="characters-section" id="charactersSection" hidden>
+        <h2 id="charactersTitle">Персонажи</h2>
+        <div class="characters-row" id="charactersRow"></div>
+      </section>
+
       <section class="trailer-section" id="trailerSection" hidden>
         <h2 id="trailerTitle">Трейлер</h2>
         <div class="trailer-frame"></div>
@@ -1221,6 +1306,8 @@ function applyLanguage() {
   setText("yearLabel", "Год", "Year");
   setText("genreLabel", "Жанр", "Genre");
   setText("trailerTitle", "Трейлер", "Trailer");
+  setText("charactersTitle", "Персонажи", "Characters");
+  renderCharacters();
 
   const animeTitle = document.getElementById("animeTitle");
   if (animeTitle) {
