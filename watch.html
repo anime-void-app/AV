@@ -209,16 +209,24 @@
     }
     .theme-toggle:hover { filter: brightness(1.2); }
 
-    body.theme-light { background:#f5f2fc; color:#241c38; }
-    body.theme-light header { background:rgba(255,255,255,.86); border-bottom:1px solid #e4dcf5; }
+    body.theme-light {
+      color:#2a1f45;
+      background-color:#e6dafa;
+      background-image:
+        radial-gradient(ellipse at 88% -12%, rgba(168,85,247,.3), transparent 46%),
+        radial-gradient(ellipse at -12% 112%, rgba(139,54,211,.22), transparent 46%),
+        linear-gradient(160deg, #f2ebfd, #e2d3f6 55%, #d8c4f4);
+      background-attachment: fixed;
+    }
+    body.theme-light header { background:rgba(247,241,255,.87); border-bottom:1px solid #d9c6f2; }
     body.theme-light .logo { color:#241c38; }
     body.theme-light .back { color:#6d28d9; }
     body.theme-light .back:hover { color:#241c38; }
     body.theme-light .lang-btn { color:#241c38; }
     body.theme-light .theme-toggle { color:#241c38; }
-    body.theme-light .watch-top h1 { color:#241c38; }
-    body.theme-light .watch-top p { color:#4a4160; }
-    body.theme-light .episode { background:#ffffff; color:#241c38; border-color:#d9cfef; }
+    body.theme-light .watch-top h1 { color:#2a1f45; }
+    body.theme-light .watch-top p { color:#5b4a7d; }
+    body.theme-light .episode { background:#f7f1fd; color:#2a1f45; border-color:#d6c5f0; }
     body.theme-light .episode:hover, body.theme-light .episode.active { background:linear-gradient(110deg,#7c3aed,#a855f7); color:#fff; }
     body.theme-light .episode.watched { background:#efe9fb; color:#6d28d9; }
     body.theme-light .player-message p { color:#4a4160; }
