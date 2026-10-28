@@ -357,6 +357,44 @@
     .character-role { font-size: 11px; color: #b79ce8; margin-top: 3px; }
     .character-va { font-size: 11px; color: #8f879d; margin-top: 5px; line-height: 1.35; }
 
+    .similar-section { margin-top: 34px; }
+    .similar-section h2 { margin: 0 0 16px; }
+    .similar-row {
+      display: flex;
+      gap: 12px;
+      overflow-x: auto;
+      padding-bottom: 10px;
+      scroll-snap-type: x proximity;
+    }
+    .similar-row::-webkit-scrollbar { height: 8px; }
+    .similar-row::-webkit-scrollbar-track { background: #14101e; border-radius: 8px; }
+    .similar-row::-webkit-scrollbar-thumb { background: #2b2140; border-radius: 8px; }
+    .similar-card {
+      flex: 0 0 150px;
+      scroll-snap-align: start;
+      border: 1px solid rgba(168, 85, 247, .25);
+      border-radius: 16px;
+      background: rgba(12, 10, 18, .9);
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform .25s ease, border-color .25s ease;
+    }
+    .similar-card:hover { transform: translateY(-4px); border-color: rgba(168, 85, 247, .6); }
+    .similar-poster { position: relative; aspect-ratio: 2 / 2.7; overflow: hidden; background: #241a33; }
+    .similar-poster img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .similar-score {
+      position: absolute; right: 8px; bottom: 8px;
+      padding: 3px 8px; border-radius: 999px;
+      background: rgba(9, 8, 16, .85); color: #e9d5ff;
+      font-size: 11px; font-weight: 700;
+    }
+    .similar-body { padding: 10px 11px 12px; }
+    .similar-name {
+      font-size: 13px; font-weight: 700; line-height: 1.3;
+      display: -webkit-box; -webkit-line-clamp: 2; line-clamp: 2;
+      -webkit-box-orient: vertical; overflow: hidden;
+    }
+    .similar-meta { margin-top: 5px; font-size: 11px; color: #a99fc2; }
     .trailer-section { margin-top: 34px; }
     .trailer-section h2 { margin: 0 0 16px; }
     .trailer-frame {
@@ -789,6 +827,43 @@ const russianTitleOverrides = {
       </div>`).join("");
   }
 
+  let currentSimilar = [];
+
+  function similarFormatLabel(format) {
+    const value = String(format || "").toUpperCase();
+    if (!value) return "";
+    if (currentLanguage === "ru") {
+      if (value === "MOVIE") return "Фильм";
+      if (value === "TV") return "ТВ-сериал";
+      if (value === "TV_SHORT") return "короткометражка";
+      if (value === "SPECIAL") return "спецвыпуск";
+      if (value === "MUSIC") return "клип";
+      return value;
+    }
+    if (value === "TV_SHORT") return "TV short";
+    return value;
+  }
+
+  function renderSimilar() {
+    const section = document.getElementById("similarSection");
+    if (!section || !currentSimilar.length) return;
+    section.hidden = false;
+    document.getElementById("similarRow").innerHTML = currentSimilar.map(entry => `
+      <article class="similar-card" role="link" tabindex="0"
+        onclick="window.location.href='anime.html?id=${encodeURIComponent(entry.id)}'"
+        onkeydown="if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); window.location.href='anime.html?id=${encodeURIComponent(entry.id)}'; }">
+        <div class="similar-poster">
+          <img src="${entry.image}" alt="" loading="lazy"
+            onerror="this.onerror=null;this.src='image/poster1.jpg';">
+          ${entry.score ? `<span class="similar-score">⭐ ${entry.score}</span>` : ""}
+        </div>
+        <div class="similar-body">
+          <div class="similar-name">${entry.title}</div>
+          <div class="similar-meta">${[entry.year, similarFormatLabel(entry.format)].filter(Boolean).join(" · ")}</div>
+        </div>
+      </article>`).join("");
+  }
+
   async function loadHighResArtwork(item) {
     const numericId = Number(String(item.id).replace("anilist-", ""));
     if (!numericId) return;
@@ -805,6 +880,18 @@ const russianTitleOverrides = {
                 role
                 node { id name { full } image { large } }
                 voiceActors(language: JAPANESE) { id name { full } }
+              }
+            }
+            recommendations(perPage: 12, sort: [RATING_DESC]) {
+              nodes {
+                mediaRecommendation {
+                  id
+                  title { romaji english }
+                  coverImage { large }
+                  format
+                  averageScore
+                  seasonYear
+                }
               }
             }
           }
@@ -856,7 +943,21 @@ const russianTitleOverrides = {
           role: edge.role || "SUPPORTING",
           va: (edge.voiceActors || []).filter(Boolean)[0]?.name?.full || ""
         }));
+      currentSimilar = (media.recommendations?.nodes || [])
+        .map(node => node?.mediaRecommendation)
+        .filter(rec => rec && rec.id && (rec.title?.romaji || rec.title?.english))
+        .filter(rec => String(rec.id) !== String(numericId))
+        .slice(0, 12)
+        .map(rec => ({
+          id: "anilist-" + rec.id,
+          title: rec.title.english || rec.title.romaji || "",
+          image: rec.coverImage?.large || "",
+          year: rec.seasonYear || "",
+          format: rec.format || "",
+          score: rec.averageScore || 0
+        }));
       renderCharacters();
+      renderSimilar();
       // Remember the best artwork so the next visit opens instantly.
       try {
         const savedCatalog = JSON.parse(localStorage.getItem("animeVoidCatalog") || "[]");
@@ -1143,6 +1244,11 @@ for (let i = 1; i <= episodeCount; i++) {
       <section class="trailer-section" id="trailerSection" hidden>
         <h2 id="trailerTitle">Трейлер</h2>
         <div class="trailer-frame"></div>
+      </section>
+
+      <section class="similar-section" id="similarSection" hidden>
+        <h2 id="similarTitle">Похожие аниме</h2>
+        <div class="similar-row" id="similarRow"></div>
       </section>
     `;
     renderSeasonSwitcher(item, catalog);
@@ -1457,6 +1563,8 @@ function applyLanguage() {
   setText("trailerTitle", "Трейлер", "Trailer");
   setText("charactersTitle", "Персонажи", "Characters");
   renderCharacters();
+  setText("similarTitle", "Похожие аниме", "Similar anime");
+  renderSimilar();
 
   const animeTitle = document.getElementById("animeTitle");
   if (animeTitle) {
