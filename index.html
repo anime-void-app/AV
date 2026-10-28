@@ -408,6 +408,68 @@
 
     .empty { color: var(--muted); grid-column: 1 / -1; padding: 30px 0; }
 
+    .history-section { margin-top: 42px; }
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+    .stat-card {
+      padding: 16px 18px;
+      border: 1px solid rgba(168, 85, 247, .25);
+      border-radius: 16px;
+      background: rgba(12, 10, 18, .9);
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .stat-card strong { font-size: 24px; color: #d8b4fe; }
+    .stat-card span { font-size: 12px; color: #8f879d; }
+    .top-genres { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
+    .genre-chip {
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: rgba(168, 85, 247, .12);
+      border: 1px solid rgba(168, 85, 247, .35);
+      color: #d8b4fe;
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .history-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 14px;
+    }
+    .history-card {
+      display: flex;
+      flex-direction: column;
+      border: 1px solid rgba(168, 85, 247, .25);
+      border-radius: 16px;
+      background: rgba(12, 10, 18, .9);
+      overflow: hidden;
+      padding: 0;
+      cursor: pointer;
+      font: inherit;
+      color: #fff;
+      text-align: left;
+      transition: transform .2s ease, border-color .2s ease;
+    }
+    .history-card:hover { border-color: rgba(192, 132, 252, .55); transform: translateY(-3px); }
+    .history-card img {
+      width: 100%;
+      aspect-ratio: 2 / 2.4;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+      background: #17121f;
+    }
+    .history-body { padding: 10px 11px 12px; }
+    .history-name { font-size: 13px; font-weight: 700; line-height: 1.3; }
+    .history-progress-text { font-size: 11px; color: #8f879d; margin-top: 4px; }
+    .history-progress { height: 4px; border-radius: 4px; background: rgba(255,255,255,.14); margin-top: 8px; overflow: hidden; }
+    .history-progress-fill { height: 100%; background: linear-gradient(90deg, #7c3aed, #d946ef); border-radius: 4px; }
+
     .airing-section { margin: 30px 0 8px; }
     .airing-row {
       display: flex;
@@ -1082,6 +1144,23 @@
         </div>
       </div>
       <div class="grid" id="favoritesGrid"></div>
+    </section>
+
+    <section class="history-section" id="historySection" hidden>
+      <div class="section-heading">
+        <div>
+          <h2 id="historyTitle">История просмотров</h2>
+          <div class="subtitle" id="historySubtitle">Твоя статистика</div>
+        </div>
+      </div>
+      <div class="stats-row">
+        <div class="stat-card"><strong id="statEpisodes">0</strong><span id="statEpisodesLabel">серий просмотрено</span></div>
+        <div class="stat-card"><strong id="statHours">0</strong><span id="statHoursLabel">время просмотра</span></div>
+        <div class="stat-card"><strong id="statTitles">0</strong><span id="statTitlesLabel">тайтлов начато</span></div>
+        <div class="stat-card"><strong id="statFavorites">0</strong><span id="statFavoritesLabel">в избранном</span></div>
+      </div>
+      <div class="top-genres" id="topGenres"></div>
+      <div class="history-grid" id="historyGrid"></div>
     </section>
   </main>
 
@@ -1864,6 +1943,114 @@ localStorage.setItem("animeVoidHasMore", String(apiHasMore));
         }
       });
     }, 60000);
+
+    // ----- Watch history & statistics -----
+    function collectWatchHistory() {
+      const entries = [];
+      for (let i = 0; i < localStorage.length; i++) {
+        const storageKey = localStorage.key(i);
+        if (!storageKey || !storageKey.startsWith("watched_")) continue;
+        const animeId = storageKey.slice("watched_".length);
+        let episodes = [];
+        try {
+          const parsed = JSON.parse(localStorage.getItem(storageKey) || "[]");
+          if (Array.isArray(parsed)) episodes = parsed.map(Number).filter(number => number > 0);
+        } catch (error) { episodes = []; }
+        if (!episodes.length) continue;
+        const item = anime.find(entry => String(entry.id) === String(animeId));
+        if (!item || !String(item.id).startsWith("anilist-")) continue;
+        entries.push({ item, episodes });
+      }
+      let lastWatch = null;
+      try {
+        lastWatch = JSON.parse(localStorage.getItem("animeVoidLastWatch") || "null");
+      } catch (error) { lastWatch = null; }
+      entries.sort((a, b) => {
+        const aLast = lastWatch && String(lastWatch.animeId) === String(a.item.id) ? 1 : 0;
+        const bLast = lastWatch && String(lastWatch.animeId) === String(b.item.id) ? 1 : 0;
+        if (aLast !== bLast) return bLast - aLast;
+        return b.episodes.length - a.episodes.length;
+      });
+      return entries;
+    }
+
+    function estimateWatchMinutes(entry) {
+      let minutes = 0;
+      entry.episodes.forEach(episode => {
+        const duration = Number(localStorage.getItem(`duration_${entry.item.id}_${episode}`)) || 0;
+        minutes += duration > 0 ? duration / 60 : 24;
+      });
+      return minutes;
+    }
+
+    function renderHistorySection() {
+      const section = document.getElementById("historySection");
+      if (!section) return;
+      const isRussian = localStorage.getItem("animeVoidLanguage") !== "en";
+      const entries = collectWatchHistory();
+      if (!entries.length) {
+        section.hidden = true;
+        return;
+      }
+      section.hidden = false;
+
+      let favorites = [];
+      try {
+        favorites = JSON.parse(localStorage.getItem("animeVoidFavorites") || "[]");
+      } catch (error) { favorites = []; }
+
+      const totalEpisodes = entries.reduce((sum, entry) => sum + entry.episodes.length, 0);
+      const totalHours = Math.round(entries.reduce((sum, entry) => sum + estimateWatchMinutes(entry), 0) / 60);
+
+      const genreCounts = new Map();
+      entries.forEach(entry => {
+        const genres = [...(Array.isArray(entry.item.genres) ? entry.item.genres : [])];
+        if (entry.item.genre) genres.push(entry.item.genre);
+        genres.forEach(genre => {
+          genreCounts.set(genre, (genreCounts.get(genre) || 0) + entry.episodes.length);
+        });
+      });
+      const topGenres = [...genreCounts.entries()]
+        .sort((a, b) => b[1] - a[1])
+        .slice(0, 4)
+        .map(([genre]) => genre);
+
+      document.getElementById("historyTitle").textContent = isRussian ? "История просмотров" : "Watch history";
+      document.getElementById("historySubtitle").textContent = isRussian ? "Твоя статистика" : "Your statistics";
+      document.getElementById("statEpisodes").textContent = totalEpisodes;
+      document.getElementById("statHours").textContent = isRussian ? `≈ ${totalHours} ч` : `≈ ${totalHours} h`;
+      document.getElementById("statTitles").textContent = entries.length;
+      document.getElementById("statFavorites").textContent = favorites.length;
+      document.getElementById("statEpisodesLabel").textContent = isRussian ? "серий просмотрено" : "episodes watched";
+      document.getElementById("statHoursLabel").textContent = isRussian ? "время просмотра" : "watch time";
+      document.getElementById("statTitlesLabel").textContent = isRussian ? "тайтлов начато" : "titles started";
+      document.getElementById("statFavoritesLabel").textContent = isRussian ? "в избранном" : "in favorites";
+
+      document.getElementById("topGenres").innerHTML = topGenres
+        .map(genre => `<span class="genre-chip">${genre}</span>`)
+        .join("");
+
+      document.getElementById("historyGrid").innerHTML = entries.map(entry => {
+        const item = entry.item;
+        const displayTitle = isRussian ? (getRussianTitle(item) || item.title) : item.title;
+        const total = Number(item.episodes) || 0;
+        const percent = total > 0 ? Math.min(100, Math.round(entry.episodes.length / total * 100)) : 0;
+        const progressText = total > 0
+          ? (isRussian ? `${entry.episodes.length} из ${total} серий` : `${entry.episodes.length} of ${total} episodes`)
+          : (isRussian ? `${entry.episodes.length} серий` : `${entry.episodes.length} episodes`);
+        return `
+          <button type="button" class="history-card" onclick="openAnimePage('${encodeURIComponent(item.id)}')">
+            <img src="${item.image || 'image/poster1.jpg'}" alt="" loading="lazy"
+              onerror="this.onerror=null;this.src='image/poster1.jpg';">
+            <div class="history-body">
+              <div class="history-name" data-anime-title-id="${item.id}">${displayTitle}</div>
+              <div class="history-progress-text">${progressText}</div>
+              <div class="history-progress"><div class="history-progress-fill" style="width:${percent}%"></div></div>
+            </div>
+          </button>`;
+      }).join("");
+      translateCatalogTitles(entries.map(entry => entry.item));
+    }
 
     document.getElementById("sortFilter").addEventListener("change", event => {
       selectedSort = event.target.value;
@@ -2886,6 +3073,7 @@ if (resetFiltersBtn) {
   const airingSubtitle = document.getElementById("airingSubtitle");
   if (airingSubtitle) airingSubtitle.textContent = lang === "ru" ? "Тайтлы текущего сезона" : "This season's titles";
   if (airingItems.length) renderAiringSection(airingItems);
+  renderHistorySection();
 
   render();
   showContinueWatching();
