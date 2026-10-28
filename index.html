@@ -860,7 +860,7 @@
   </main>
 
   <footer>
-    ANIME VOID © 2026 · Твоя следующая история начинается здесь
+    ANIME VOID © 2026 · Твоя следующая история начинается здесь · Данные каталога: AniList
   </footer>
 
   <div class="modal" id="modal" onclick="closeOutside(event)">
@@ -1391,9 +1391,12 @@ localStorage.setItem("animeVoidHasMore", String(apiHasMore));
       const loadButton = document.getElementById("loadMoreBtn");
       loadButton.hidden = visibleCatalogCount >= filtered.length && !apiHasMore;
       loadButton.textContent = currentLanguage === "ru" ? "Загрузить ещё аниме" : "Load more anime";
+      const emptyCatalogMessage = apiLoading
+        ? (currentLanguage === "ru" ? "Загрузка каталога…" : "Loading catalog…")
+        : (currentLanguage === "ru" ? "Ничего не найдено. Попробуй другой запрос." : "Nothing found. Try another search.");
       grid.innerHTML = filtered.length
         ? visibleItems.map(cardHTML).join("")
-        : `<p class="empty">${currentLanguage === "ru" ? "Ничего не найдено. Попробуй другой запрос." : "Nothing found. Try another search."}</p>`;
+        : `<p class="empty">${emptyCatalogMessage}</p>`;
 
       const savedItems = anime.filter(item => favorites.some(id => String(id) === String(item.id)));
       const savedCards = collapseSeasonCards(savedItems, seasonRoots);
@@ -1809,11 +1812,25 @@ function toggleFavorite(id) {
 }
 
     function showAbout() {
-      document.getElementById("modalContent").innerHTML = `
-        <h2>Добро пожаловать в ANIME VOID</h2>
-        <p>Это наш первый прототип аниме-сайта.
-        Здесь мы постепенно создадим каталог, страницы серий
-        и просмотр видео.</p>
+      const isRussian = localStorage.getItem("animeVoidLanguage") !== "en";
+      document.getElementById("modalContent").innerHTML = isRussian ? `
+        <h2>О проекте ANIME VOID</h2>
+        <p>ANIME VOID — личный проект и демо-версия аниме-каталога. Сайт активно развивается.</p>
+        <p>Каталог, названия и описания собираются через открытый API AniList.
+        Все права на аниме принадлежат их правообладателям.</p>
+        <p>Видео пока недоступно: идёт работа над получением лицензий на показ.
+        Собственный плеер появится после оформления прав.</p>
+        <p>Что дальше: развитие каталога и поиска, мобильная версия,
+        лицензирование и запуск видеоплеера.</p>
+      ` : `
+        <h2>About ANIME VOID</h2>
+        <p>ANIME VOID is a personal project and a demo of an anime catalog. The site is actively developing.</p>
+        <p>The catalog, titles and descriptions are built with the open AniList API.
+        All anime rights belong to their respective owners.</p>
+        <p>Video is not available yet: licensing is in progress.
+        Our own player will launch once the rights are secured.</p>
+        <p>What's next: catalog and search improvements, mobile version,
+        licensing and the launch of a video player.</p>
       `;
       document.getElementById("modal").classList.add("open");
     }
@@ -2392,8 +2409,6 @@ if (resetFiltersBtn) {
 }
 
 
-render();
-
 // Reuse the saved catalog instead of downloading a new API page on every reload.
 // First-time visitors have no saved catalog, so load the first page for them automatically.
 let hasSavedCatalog = false;
@@ -2403,6 +2418,8 @@ try {
   hasSavedCatalog = false;
 }
 if (!hasSavedCatalog) loadAnimeFromApi();
+
+render();
 
 showContinueWatching();
 
