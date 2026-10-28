@@ -345,8 +345,53 @@
 
     .empty { color: var(--muted); grid-column: 1 / -1; padding: 30px 0; }
 
+    .card-skeleton { min-width: 0; }
+    .skel-poster {
+      height: 300px;
+      border-radius: 13px;
+      background: linear-gradient(100deg, #14101e 40%, #221a33 50%, #14101e 60%);
+      background-size: 200% 100%;
+      animation: skelShimmer 1.5s infinite linear;
+    }
+    .skel-line {
+      height: 14px;
+      border-radius: 7px;
+      margin-top: 12px;
+      background: linear-gradient(100deg, #14101e 40%, #221a33 50%, #14101e 60%);
+      background-size: 200% 100%;
+      animation: skelShimmer 1.5s infinite linear;
+    }
+    .skel-short { width: 60%; }
+    @keyframes skelShimmer {
+      from { background-position: 200% 0; }
+      to { background-position: -200% 0; }
+    }
+
     #loadMoreBtn { transition: transform .15s ease, filter .15s ease, box-shadow .15s ease; }
     #loadMoreBtn:hover { transform: translateY(-2px); filter: brightness(1.12); box-shadow: 0 12px 30px rgba(121, 40, 202, .35); }
+
+    #toTopBtn {
+      position: fixed;
+      right: 22px;
+      bottom: 22px;
+      width: 48px;
+      height: 48px;
+      border: 1px solid rgba(192, 132, 252, .5);
+      border-radius: 50%;
+      background: linear-gradient(135deg, #7c3aed, #a855f7);
+      color: #fff;
+      font-size: 20px;
+      font-weight: 800;
+      cursor: pointer;
+      z-index: 15;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(10px);
+      transition: opacity .25s ease, transform .25s ease, filter .25s ease;
+      box-shadow: 0 10px 26px rgba(124, 58, 237, .45);
+    }
+    #toTopBtn.visible { opacity: 1; pointer-events: auto; transform: none; }
+    #toTopBtn:hover { filter: brightness(1.12); }
 
     footer {
       border-top: 1px solid #211a30;
@@ -559,6 +604,7 @@
       .search { width: 160px; }
       .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
       .poster { height: 220px; }
+      .skel-poster { height: 220px; }
     }
 
     @media (max-width: 600px) {
@@ -571,6 +617,8 @@
       .hero p { font-size: 13px; }
       .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px 12px; }
       .poster { height: 210px; padding: 12px; }
+      .skel-poster { height: 210px; }
+      #toTopBtn { width: 42px; height: 42px; right: 14px; bottom: 14px; font-size: 17px; }
       .poster-symbol { font-size: 55px; }
       .poster h3 { font-size: 16px; }
       .card-season-buttons { gap:5px; }
@@ -814,6 +862,14 @@
 >
   О проекте
 </button>
+
+<button
+  id="randomBtn"
+  class="secondary"
+  onclick="openRandomAnime()"
+>
+  🎲 Случайное аниме
+</button>
       </div>
     </section>
 
@@ -906,6 +962,8 @@
   <footer>
     ANIME VOID © 2026 · Твоя следующая история начинается здесь · Данные каталога: AniList
   </footer>
+
+  <button id="toTopBtn" type="button" aria-label="Наверх" title="Наверх">↑</button>
 
   <div class="modal" id="modal" onclick="closeOutside(event)">
     <div class="modal-box">
@@ -1435,12 +1493,16 @@ localStorage.setItem("animeVoidHasMore", String(apiHasMore));
       const loadButton = document.getElementById("loadMoreBtn");
       loadButton.hidden = visibleCatalogCount >= filtered.length && !apiHasMore;
       loadButton.textContent = currentLanguage === "ru" ? "Загрузить ещё аниме" : "Load more anime";
-      const emptyCatalogMessage = apiLoading
-        ? (currentLanguage === "ru" ? "Загрузка каталога…" : "Loading catalog…")
-        : (currentLanguage === "ru" ? "Ничего не найдено. Попробуй другой запрос." : "Nothing found. Try another search.");
-      grid.innerHTML = filtered.length
+            grid.innerHTML = filtered.length
         ? visibleItems.map(cardHTML).join("")
-        : `<p class="empty">${emptyCatalogMessage}</p>`;
+        : (apiLoading
+            ? Array.from({ length: 8 }, () => `
+                <div class="card-skeleton" aria-hidden="true">
+                  <div class="skel-poster"></div>
+                  <div class="skel-line"></div>
+                  <div class="skel-line skel-short"></div>
+                </div>`).join("")
+            : `<p class="empty">${currentLanguage === "ru" ? "Ничего не найдено. Попробуй другой запрос." : "Nothing found. Try another search."}</p>`);
 
       const savedItems = anime.filter(item => favorites.some(id => String(id) === String(item.id)));
       const savedCards = collapseSeasonCards(savedItems, seasonRoots);
@@ -1519,6 +1581,22 @@ document.getElementById("resetFiltersBtn").addEventListener("click", () => {
 
 function openAnimePage(id) {
   window.location.href = `anime.html?id=${encodeURIComponent(id)}`;
+}
+
+function openRandomAnime() {
+  const pool = anime.filter(item => String(item.id).startsWith("anilist-"));
+  if (!pool.length) return;
+  openAnimePage(pool[Math.floor(Math.random() * pool.length)].id);
+}
+
+const toTopBtn = document.getElementById("toTopBtn");
+if (toTopBtn) {
+  window.addEventListener("scroll", () => {
+    toTopBtn.classList.toggle("visible", window.scrollY > 600);
+  }, { passive: true });
+  toTopBtn.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
 }
 
 function toggleFavorite(id) {
@@ -2089,6 +2167,9 @@ function setLanguage(lang) {
   const aboutBtn =
     document.getElementById("aboutBtn");
 
+  const randomBtn =
+    document.getElementById("randomBtn");
+
 
   const catalogTitle =
     document.getElementById("catalogTitle");
@@ -2211,6 +2292,10 @@ function setLanguage(lang) {
       aboutBtn.textContent =
         "О проекте";
 
+    if (randomBtn)
+      randomBtn.textContent =
+        "🎲 Случайное аниме";
+
 
     if (catalogTitle)
       catalogTitle.textContent =
@@ -2312,6 +2397,10 @@ function setLanguage(lang) {
     if (aboutBtn)
       aboutBtn.textContent =
         "About";
+
+    if (randomBtn)
+      randomBtn.textContent =
+        "🎲 Random anime";
 
 
     if (catalogTitle)

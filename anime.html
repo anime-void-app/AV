@@ -296,6 +296,26 @@
       color: #d8b4fe;
     }
 
+    .trailer-section { margin-top: 34px; }
+    .trailer-section h2 { margin: 0 0 16px; }
+    .trailer-frame {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid rgba(168, 85, 247, .35);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, .5);
+      background: #0b0812;
+    }
+    .trailer-frame iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
     @media (max-width: 800px) {
       main { padding: 32px 4% 55px; }
       .anime-page {
@@ -687,6 +707,7 @@ const russianTitleOverrides = {
             id
             bannerImage
             coverImage { extraLarge large }
+            trailer { id site }
           }
         }
       `;
@@ -712,6 +733,20 @@ const russianTitleOverrides = {
       }
       const posterImg = document.querySelector(".anime-page .poster img");
       if (posterImg && coverXL) posterImg.src = coverXL;
+
+      const trailer = media.trailer;
+      const trailerSection = document.getElementById("trailerSection");
+      if (trailerSection && trailer && trailer.site === "youtube" && trailer.id) {
+        trailerSection.hidden = false;
+        trailerSection.querySelector(".trailer-frame").innerHTML = `
+          <iframe
+            src="https://www.youtube-nocookie.com/embed/${trailer.id}"
+            title="Trailer"
+            loading="lazy"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>`;
+      }
       // Remember the best artwork so the next visit opens instantly.
       try {
         const savedCatalog = JSON.parse(localStorage.getItem("animeVoidCatalog") || "[]");
@@ -878,6 +913,11 @@ for (let i = 1; i <= episodeCount; i++) {
         </div>
 
       </section>
+
+      <section class="trailer-section" id="trailerSection" hidden>
+        <h2 id="trailerTitle">Трейлер</h2>
+        <div class="trailer-frame"></div>
+      </section>
     `;
     renderSeasonSwitcher(item, catalog);
     originalTitle = item.title || "";
@@ -1043,6 +1083,7 @@ function applyLanguage() {
   setText("statusLabel", "Статус", "Status");
   setText("yearLabel", "Год", "Year");
   setText("genreLabel", "Жанр", "Genre");
+  setText("trailerTitle", "Трейлер", "Trailer");
 
   const animeTitle = document.getElementById("animeTitle");
   if (animeTitle) {
