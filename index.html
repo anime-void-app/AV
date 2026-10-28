@@ -1960,9 +1960,11 @@ function toggleFavorite(id) {
 
   section.style.display = "block";
 
-  // Use the highest-resolution cover so the card does not look blurry.
-  const posterSrc = String(anime.image || "").replace("/large/", "/extraLarge/") || anime.image;
-  const backgroundSrc = anime.background || posterSrc;
+  // Keep the poster on its regular URL; only the wide background tries the
+  // higher-resolution cover, and a failed background simply stays dark.
+  const posterSrc = anime.image || "image/poster1.jpg";
+  const backgroundSrc = anime.background ||
+    String(anime.image || "").replace("/large/", "/extraLarge/");
 
   card.style.backgroundImage =
     `url("${backgroundSrc}")`;
@@ -1971,6 +1973,7 @@ function toggleFavorite(id) {
     <img
       src="${posterSrc}"
       alt="${anime.title}"
+      onerror="this.onerror=null;this.src='image/poster1.jpg';"
     >
 
     <div class="continue-info">
