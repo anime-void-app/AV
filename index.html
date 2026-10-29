@@ -1456,6 +1456,7 @@
   <button class="filter" data-genre="Мистика" data-ru="Мистика" data-en="Mystery">Мистика</button>
   <button class="filter" data-genre="Психология" data-ru="Психология" data-en="Psychological">Психология</button>
   <button class="filter" data-genre="Спорт" data-ru="Спорт" data-en="Sports">Спорт</button>
+  <button id="filterDonghua" class="filter" title="Китайское аниме">🐉 Дунхуа</button>
 </div>
 
 <div class="advanced-filters">
@@ -1688,7 +1689,7 @@ let selectedStatus = "";
 let selectedSort = "default";
     let favorites = JSON.parse(localStorage.getItem("animeVoidFavorites") || "[]");
     
-const animeVoidCatalogFeaturesVersion = "ru-search-season-groups-v2";
+const animeVoidCatalogFeaturesVersion = "donghua-tab-v1";
 if (localStorage.getItem("animeVoidCatalogFeaturesVersion") !== animeVoidCatalogFeaturesVersion) {
   localStorage.setItem("animeVoidCatalogFeaturesVersion", animeVoidCatalogFeaturesVersion);
   // Refresh the first popular page so older cached entries gain season relations.
@@ -1696,6 +1697,9 @@ if (localStorage.getItem("animeVoidCatalogFeaturesVersion") !== animeVoidCatalog
   localStorage.setItem("animeVoidHasMore", "true");
 }
 let apiPage = Number(localStorage.getItem("animeVoidApiPage")) || 1;
+let donghuaMode = false;
+let donghuaPage = 1;
+let donghuaHasMore = true;
 let visibleCatalogCount = 24;
 let currentFilteredCount = 0;
 let apiLoading = false;
@@ -1721,14 +1725,14 @@ function showNextCatalogPage() {
   if (visibleCatalogCount < currentFilteredCount) {
     visibleCatalogCount += 24;
     render();
-  } else if (apiHasMore && !apiLoading) {
+  } else if ((donghuaMode ? donghuaHasMore : apiHasMore) && !apiLoading) {
     visibleCatalogCount += 24;
     loadAnimeFromApi();
   }
 }
 
 async function loadAnimeFromApi() {
-  if (apiLoading || !apiHasMore) return;
+  if (apiLoading || !(donghuaMode ? donghuaHasMore : apiHasMore)) return;
 
   apiLoading = true;
 
@@ -1742,7 +1746,7 @@ async function loadAnimeFromApi() {
           media(
             type: ANIME,
             sort: POPULARITY_DESC,
-            isAdult: false
+            isAdult: false${donghuaMode ? ", countryOfOrigin: CN" : ""}
           ) {
             id
             title {
@@ -1765,6 +1769,7 @@ status
       seasonYear
       description
       format
+      countryOfOrigin
       relations {
         edges {
           relationType
@@ -1772,6 +1777,7 @@ status
             id
             type
             format
+            countryOfOrigin
             title { romaji english native }
             coverImage { extraLarge large }
             bannerImage
@@ -1797,7 +1803,7 @@ status
       },
       body: JSON.stringify({
         query,
-        variables: { page: apiPage }
+        variables: { page: donghuaMode ? donghuaPage : apiPage }
       })
     });
 
@@ -1831,8 +1837,9 @@ status
                 genre: node.genres?.[0] || "Other",
                 genres: node.genres || [],
                 year: node.seasonYear || "Unknown",
-                label: "ANIME",
-                color: "linear-gradient(145deg, #39285c, #090810)",
+                country: node.countryOfOrigin || "",
+                label: node.countryOfOrigin === "CN" ? "ДУНХУА" : "ANIME",
+                color: node.countryOfOrigin === "CN" ? "linear-gradient(145deg, #7a2f2f, #090810)" : "linear-gradient(145deg, #39285c, #090810)",
                 description: node.description || "Description unavailable",
                 rating: node.averageScore ? (node.averageScore / 10).toFixed(1) : null,
                 episodes: node.episodes,
@@ -1855,9 +1862,10 @@ status
         genre: item.genres?.[0] || "Other",
         genres: item.genres || [],
         year: item.seasonYear || "Unknown",
+        country: item.countryOfOrigin || "",
         symbol: "✦",
-        label: "ANIME",
-        color: "linear-gradient(145deg, #39285c, #090810)",
+        label: item.countryOfOrigin === "CN" ? "ДУНХУА" : "ANIME",
+        color: item.countryOfOrigin === "CN" ? "linear-gradient(145deg, #7a2f2f, #090810)" : "linear-gradient(145deg, #39285c, #090810)",
         description: item.description || "Description unavailable",
         rating: item.averageScore ? (item.averageScore / 10).toFixed(1) : null,
         episodes: item.episodes,
@@ -1895,15 +1903,22 @@ allNewItems.forEach(apiItem => {
 
     
 
-    apiHasMore = pageData.pageInfo.hasNextPage;
-    apiPage++;
+    if (donghuaMode) {
+      donghuaHasMore = pageData.pageInfo.hasNextPage;
+      donghuaPage++;
+    } else {
+      apiHasMore = pageData.pageInfo.hasNextPage;
+      apiPage++;
+    }
     localStorage.setItem(
   "animeVoidCatalog",
   JSON.stringify(anime.filter(item => String(item.id).startsWith("anilist-")))
 );
 
-localStorage.setItem("animeVoidApiPage", String(apiPage));
-localStorage.setItem("animeVoidHasMore", String(apiHasMore));
+if (!donghuaMode) {
+  localStorage.setItem("animeVoidApiPage", String(apiPage));
+  localStorage.setItem("animeVoidHasMore", String(apiHasMore));
+}
 
     render();
     showContinueWatching();
@@ -3784,8 +3799,9 @@ localStorage.setItem("animeVoidHasMore", String(apiHasMore));
           queryVariants.some(query => searchableText.includes(query));
         const matchesYear = !selectedYear || String(item.year) === selectedYear;
         const matchesStatus = !selectedStatus || item.status === selectedStatus;
+        const matchesDonghua = !donghuaMode || item.country === "CN";
 
-        return matchesGenre && matchesSearch && matchesYear && matchesStatus;
+        return matchesGenre && matchesSearch && matchesYear && matchesStatus && matchesDonghua;
       });
 
       const seasonRoots = applySeasonGrouping(anime);
@@ -3818,8 +3834,10 @@ localStorage.setItem("animeVoidHasMore", String(apiHasMore));
       currentFilteredCount = filtered.length;
       const visibleItems = filtered.slice(0, visibleCatalogCount);
       const loadButton = document.getElementById("loadMoreBtn");
-      loadButton.hidden = visibleCatalogCount >= filtered.length && !apiHasMore;
-      loadButton.textContent = currentLanguage === "ru" ? "Загрузить ещё аниме" : "Load more anime";
+      loadButton.hidden = visibleCatalogCount >= filtered.length && !(donghuaMode ? donghuaHasMore : apiHasMore);
+      loadButton.textContent = currentLanguage === "ru"
+        ? (donghuaMode ? "Загрузить ещё дунхуа" : "Загрузить ещё аниме")
+        : (donghuaMode ? "Load more donghua" : "Load more anime");
             grid.innerHTML = filtered.length
         ? visibleItems.map(cardHTML).join("")
         : (apiLoading
@@ -4186,11 +4204,20 @@ localStorage.setItem("animeVoidHasMore", String(apiHasMore));
 
     document.querySelectorAll(".filter").forEach(button => {
       button.addEventListener("click", () => {
+        if (button.id === "filterDonghua") {
+          donghuaMode = !donghuaMode;
+          button.classList.toggle("active", donghuaMode);
+          if (donghuaMode && !apiLoading && donghuaHasMore && !anime.some(item => item.country === "CN")) {
+            loadAnimeFromApi();
+          }
+          render();
+          return;
+        }
         selectedGenre = button.dataset.genre;
 
-        document.querySelectorAll(".filter").forEach(item =>
-          item.classList.remove("active")
-        );
+        document.querySelectorAll(".filter").forEach(item => {
+          if (item.id !== "filterDonghua") item.classList.remove("active");
+        });
 
         button.classList.add("active");
         render();
@@ -4211,6 +4238,7 @@ document.getElementById("resetFiltersBtn").addEventListener("click", () => {
   selectedStatus = "";
   selectedSort = "default";
   searchText = "";
+  donghuaMode = false;
 
   document.getElementById("search").value = "";
   buildSearchSuggestions("");
@@ -4278,7 +4306,16 @@ function toggleFavorite(id) {
       "anilist-21459": "Моя геройская академия",
       "anilist-11061": "Охотник x Охотник",
       "anilist-21087": "Ванпанчмен",
-      "anilist-21": "Ван-Пис"
+      "anilist-21": "Ван-Пис",
+      "anilist-137653": "Противостояние святого",
+      "anilist-113260": "Благословение небожителя",
+      "anilist-101972": "Основатель дьявольского культа",
+      "anilist-137667": "Господин тайн",
+      "anilist-98861": "Аватар короля",
+      "anilist-126403": "Связь кликов",
+      "anilist-114121": "Повседневная жизнь бессмертного короля",
+      "anilist-156092": "Быть героем Икс",
+      "anilist-107912": "Ножницы Семёрки"
     };
     const titleTranslationQueue = [];
     const activeTitleIds = new Set();
