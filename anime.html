@@ -535,6 +535,20 @@
     body.theme-light .back { color:#5b21b6; }
     body.theme-light .lang-btn { color:#241c38; }
     body.theme-light .theme-toggle { color:#241c38; }
+    .profile-btn {
+      margin-left: 4px;
+      padding: 8px 10px;
+      border: 1px solid rgba(168,85,247,.45);
+      border-radius: 9px;
+      background: transparent;
+      color: white;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .profile-btn:hover { background: rgba(168,85,247,.18); }
+    body.theme-light .profile-btn { color:#241c38; }
     body.theme-light .anime-page h1 { color:#2a1f45; }
     body.theme-light .description { color:#3f3757; }
     body.theme-light .info small { color:#5c5275; }
@@ -571,6 +585,7 @@
 <button id="langBtn" class="lang-btn" onclick="toggleLanguage()">
   EN
 </button>
+<a id="profileLink" href="profile.html" class="profile-btn">👤 Профиль</a>
 <button id="themeToggle" class="theme-toggle" onclick="toggleTheme()" title="Сменить тему" aria-label="Сменить тему">🌙</button>
   </header>
 
@@ -1626,6 +1641,7 @@ function applyLanguage() {
 
   setText("langBtn", "EN", "RU");
   setText("backCatalog", "← Назад в каталог", "← Back to catalog");
+  setText("profileLink", "👤 Профиль", "👤 Profile");
   setText("episodesTitle", currentIsMovie ? "Фильм" : "Серии", currentIsMovie ? "Movie" : "Episodes");
   setText("ratingLabel", "Рейтинг", "Rating");
   setText("episodesLabel", currentIsMovie ? "Формат" : "Серии", currentIsMovie ? "Format" : "Episodes");

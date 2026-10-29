@@ -1168,6 +1168,7 @@
       <a href="#">Главная</a>
       <a href="#catalog">Каталог</a>
       <a href="#favorites">Избранное</a>
+      <a href="profile.html" id="navProfile">👤 Профиль</a>
     </nav>
 <div class="language-switch">
   <button onclick="setLanguage('ru')" id="ruBtn">RU</button>
@@ -3615,6 +3616,11 @@ function setLanguage(lang) {
       'nav a[href="#favorites"]'
     );
 
+  const profileLink =
+    document.querySelector(
+      'nav a[href="profile.html"]'
+    );
+
 
   const heroTag =
     document.getElementById("heroTag");
@@ -3731,6 +3737,9 @@ function setLanguage(lang) {
       favoritesLink.textContent =
         "Избранное";
 
+    if (profileLink)
+      profileLink.textContent = "👤 Профиль";
+
     if (search)
       search.placeholder =
         "Найти аниме...";
@@ -3836,6 +3845,9 @@ function setLanguage(lang) {
     if (favoritesLink)
       favoritesLink.textContent =
         "Favorites";
+
+    if (profileLink)
+      profileLink.textContent = "👤 Profile";
 
     if (search)
       search.placeholder =

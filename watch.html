@@ -224,6 +224,19 @@
     body.theme-light .back:hover { color:#241c38; }
     body.theme-light .lang-btn { color:#241c38; }
     body.theme-light .theme-toggle { color:#241c38; }
+    .profile-btn {
+      padding: 8px 10px;
+      border: 1px solid rgba(168,85,247,.45);
+      border-radius: 9px;
+      background: transparent;
+      color: white;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .profile-btn:hover { background: rgba(168,85,247,.18); }
+    body.theme-light .profile-btn { color:#241c38; }
     body.theme-light .watch-top h1 { color:#2a1f45; }
     body.theme-light .watch-top p { color:#463a63; }
     body.theme-light .episode { background:#f7f1fd; color:#2a1f45; border-color:#d6c5f0; }
@@ -240,6 +253,7 @@
     <div class="header-actions">
       <button id="langBtn" class="lang-btn" type="button" onclick="toggleLanguage()">EN</button>
       <a id="backAnime" class="back" href="#">← К странице аниме</a>
+      <a id="profileLink" href="profile.html" class="profile-btn">👤 Профиль</a>
       <button id="themeToggle" class="theme-toggle" type="button" onclick="toggleTheme()" title="Сменить тему" aria-label="Сменить тему">🌙</button>
     </div>
   </header>
@@ -425,6 +439,7 @@
         ? "На данный момент видео для просмотра не подключено или недоступно."
         : "No video is connected for viewing, or it is currently unavailable.";
       document.getElementById("langBtn").textContent = isRussian ? "EN" : "RU";
+      document.getElementById("profileLink").textContent = isRussian ? "👤 Профиль" : "👤 Profile";
       document.getElementById("backAnime").textContent = isRussian
         ? "← К странице аниме"
         : "← Back to anime";
