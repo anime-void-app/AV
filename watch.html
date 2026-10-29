@@ -363,12 +363,23 @@
       if (currentEpisode < episodeCount) openEpisode(currentEpisode + 1);
     });
 
+    function logActivity(kind) {
+      try {
+        const today = new Date().toISOString().slice(0, 10);
+        const log = JSON.parse(localStorage.getItem("animeVoidActivityLog") || "{}");
+        log[today] = log[today] || { eps: 0, favs: 0, ratings: 0 };
+        log[today][kind] = (log[today][kind] || 0) + 1;
+        localStorage.setItem("animeVoidActivityLog", JSON.stringify(log));
+      } catch (error) {}
+    }
+
     document.getElementById("markWatchedBtn").addEventListener("click", () => {
       const watched = getWatchedEpisodes();
       const index = watched.indexOf(currentEpisode);
       if (index === -1) {
         watched.push(currentEpisode);
         watched.sort((a, b) => a - b);
+        logActivity("eps");
       } else {
         watched.splice(index, 1);
       }

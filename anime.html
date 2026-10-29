@@ -1574,6 +1574,16 @@ if (genreLabel) {
     renderStatusControls();
   }
 
+  function logActivity(kind) {
+    try {
+      const today = new Date().toISOString().slice(0, 10);
+      const log = JSON.parse(localStorage.getItem("animeVoidActivityLog") || "{}");
+      log[today] = log[today] || { eps: 0, favs: 0, ratings: 0 };
+      log[today][kind] = (log[today][kind] || 0) + 1;
+      localStorage.setItem("animeVoidActivityLog", JSON.stringify(log));
+    } catch (error) {}
+  }
+
   function toggleListRating(value) {
     if (!item) return;
     const map = readRatingMap();
@@ -1583,6 +1593,7 @@ if (genreLabel) {
     } else {
       map[key] = value;
       saveListSnapshot();
+      logActivity("ratings");
     }
     localStorage.setItem("animeVoidRatings", JSON.stringify(map));
     renderStatusControls();
