@@ -569,6 +569,8 @@
     body.theme-light .rating-star.active { background:linear-gradient(110deg,#9333ea,#c026d3); color:#fff; border-color:#c084fc; }
     body.theme-light .error, body.theme-light .loading { color:#3f3757; }
   </style>
+  <link rel="stylesheet" href="av-enhancements.css?v=1">
+  <script src="av-enhancements.js?v=1" defer></script>
 </head>
 
 <body>
@@ -826,7 +828,7 @@ const russianTitleOverrides = {
 
 
   const params = new URLSearchParams(window.location.search);
-  const animeId = params.get("id");
+  const animeId = params.get("id") || window.AV_PAGE?.id;
 
   const catalog = JSON.parse(
     localStorage.getItem("animeVoidCatalog") || "[]"
@@ -835,6 +837,11 @@ const russianTitleOverrides = {
   let item = catalog.find(
     anime => String(anime.id) === String(animeId)
   );
+
+  if (!item && window.AV_PAGE && String(window.AV_PAGE.id) === String(animeId)) {
+    item = window.AV_PAGE; catalog.push(item);
+    try { localStorage.setItem("animeVoidCatalog", JSON.stringify(catalog)); } catch(e) {}
+  }
 
   const content = document.getElementById("content");
 
@@ -864,7 +871,7 @@ const russianTitleOverrides = {
     function selectAnimeSeason(encodedId) {
       const id = decodeURIComponent(encodedId);
       // Keep the season switch in the same browser tab and reuse the same detail page.
-      window.location.href = `anime.html?id=${encodeURIComponent(id)}`;
+      window.location.href = (window.avAnimeUrl ? window.avAnimeUrl(id) : `anime.html?id=${encodeURIComponent(id)}`);
     }
 
 
@@ -1368,6 +1375,9 @@ for (let i = 1; i <= episodeCount; i++) {
       ? usableSavedDescription.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/\n/g, "<br>")
       : "";
 
+    if (window.AV_PAGE && String(window.AV_PAGE.id) === String(item.id)) {
+      russianTitle = window.AV_PAGE.ruTitle; russianDescription = window.AV_PAGE.ruDescription;
+    }
     applyLanguage();
     loadRussianAnimeText();
 

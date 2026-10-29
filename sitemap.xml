@@ -1,23 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://anime-void-app.github.io/AV/</loc>
-    <changefreq>daily</changefreq>
-    <priority>1.0</priority>
-  </url>
-  <url>
-    <loc>https://anime-void-app.github.io/AV/anime.html</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://anime-void-app.github.io/AV/watch.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.3</priority>
-  </url>
-  <url>
-    <loc>https://anime-void-app.github.io/AV/profile.html</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
+  <url><loc>https://anime-void-app.github.io/AV/</loc></url>
+  <url><loc>https://anime-void-app.github.io/AV/anime-death-note.html</loc></url>
+  <url><loc>https://anime-void-app.github.io/AV/anime-bakemonogatari.html</loc></url>
+  <url><loc>https://anime-void-app.github.io/AV/anime-attack-on-titan.html</loc></url>
+  <url><loc>https://anime-void-app.github.io/AV/anime-demon-slayer.html</loc></url>
+  <url><loc>https://anime-void-app.github.io/AV/anime-jujutsu-kaisen.html</loc></url>
+  <url><loc>https://anime-void-app.github.io/AV/anime-one-piece.html</loc></url>
+  <url><loc>https://anime-void-app.github.io/AV/anime-hunter-x-hunter.html</loc></url>
+  <url><loc>https://anime-void-app.github.io/AV/anime-one-punch-man.html</loc></url>
+  <url><loc>https://anime-void-app.github.io/AV/anime-a-silent-voice.html</loc></url>
+  <url><loc>https://anime-void-app.github.io/AV/anime-my-hero-academia.html</loc></url>
 </urlset>

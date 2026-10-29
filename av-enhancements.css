@@ -1,0 +1,25 @@
+
+/* ANIME VOID: mobile usability and sharing */
+header {height:auto;min-height:72px;flex-wrap:wrap;gap:10px;padding-top:12px;padding-bottom:12px;}
+header > * {min-width:0;}
+button,a,input,select,textarea {-webkit-tap-highlight-color:transparent;}
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible {outline:3px solid #c084fc;outline-offset:3px;}
+.av-share {display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:10px 14px;border:1px solid #a78bfa;border-radius:10px;background:#211431;color:#fff;font:600 14px Inter,Arial,sans-serif;cursor:pointer;}
+.av-toast {position:fixed;bottom:24px;left:50%;transform:translateX(-50%);max-width:calc(100vw - 32px);padding:12px 18px;border:1px solid #a78bfa;border-radius:12px;background:#211431;color:#fff;z-index:10000;text-align:center;}
+.av-directory {max-width:1200px;margin:32px auto;padding:24px 6%;color:inherit;}
+.av-directory h2 {font-size:22px;}
+.av-directory ul {display:flex;flex-wrap:wrap;gap:12px 24px;padding-left:20px;}
+.av-directory a {color:#c4b5fd;display:inline-block;padding:8px 0;}
+.theme-light .av-directory a {color:#5b21b6;}
+@media(max-width:600px){
+ header {padding-left:4%;padding-right:4%;justify-content:flex-start;}
+ header .logo {margin-right:auto;}
+ header button,header .profile-btn,header .back {min-height:44px;display:inline-flex;align-items:center;}
+ header .lang-btn {margin-left:0;}
+ .anime-page > *, .info-grid > * {min-width:0;}
+ .anime-page .poster img {max-width:100%;height:auto;}
+ .anime-page .rating-star {min-width:36px;min-height:44px;}
+ .description {overflow-wrap:anywhere;}
+ .otaku-path {max-width:100%;overflow-x:auto;overscroll-behavior-x:contain;padding-bottom:12px;}
+ .av-directory {padding:20px 5%;}
+}

@@ -1346,6 +1346,9 @@
     .backup-row .primary, .backup-row .secondary { margin:0; }
     .share-stats-btn { width:100%; margin-top:16px; }
   </style>
+  <link rel="stylesheet" href="av-enhancements.css?v=1">
+  <script src="av-enhancements.js?v=1" defer></script>
+<link rel="canonical" href="https://anime-void-app.github.io/AV/">
 </head>
 
 <body>
@@ -4512,7 +4515,7 @@ document.getElementById("resetFiltersBtn").addEventListener("click", () => {
     
 
 function openAnimePage(id) {
-  window.location.href = `anime.html?id=${encodeURIComponent(id)}`;
+  window.location.href = (window.avAnimeUrl ? window.avAnimeUrl(id) : `anime.html?id=${encodeURIComponent(id)}`);
 }
 
 function openRandomAnime() {
@@ -5635,5 +5638,6 @@ setLanguage(
   </script>
 <!-- Cloudflare Web Analytics -->
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "c9a10757745f4f5f9f2496ed6966c59f"}'></script>
+<nav class="av-directory" aria-label="Страницы аниме"><h2>Популярные аниме</h2><ul><li><a href="anime-death-note.html">Тетрадь смерти</a></li><li><a href="anime-bakemonogatari.html">Истории монстров</a></li><li><a href="anime-attack-on-titan.html">Атака титанов</a></li><li><a href="anime-demon-slayer.html">Клинок, рассекающий демонов</a></li><li><a href="anime-jujutsu-kaisen.html">Магическая битва</a></li><li><a href="anime-one-piece.html">Ван-Пис</a></li><li><a href="anime-hunter-x-hunter.html">Охотник x Охотник</a></li><li><a href="anime-one-punch-man.html">Ванпанчмен</a></li><li><a href="anime-a-silent-voice.html">Форма голоса</a></li><li><a href="anime-my-hero-academia.html">Моя геройская академия</a></li></ul></nav>
 </body>
 </html>
