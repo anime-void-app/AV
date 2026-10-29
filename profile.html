@@ -181,16 +181,57 @@
       gap: 12px;
     }
     .stat-card {
+      --accent: #a855f7;
+      position: relative;
+      overflow: hidden;
       display: flex;
       flex-direction: column;
-      gap: 6px;
-      padding: 18px 16px;
-      border: 1px solid rgba(168, 85, 247, .18);
-      border-radius: 16px;
-      background: rgba(18, 16, 29, .6);
+      gap: 8px;
+      padding: 20px 18px 22px;
+      border: 1px solid rgba(168, 85, 247, .25);
+      border-radius: 18px;
+      background: linear-gradient(160deg, rgba(124, 58, 237, .14), rgba(18, 16, 29, .65));
+      transition: transform .25s, border-color .25s, box-shadow .25s;
     }
-    .stat-card strong { font-size: 24px; color: #d8b4fe; }
-    .stat-card span { font-size: 12px; color: var(--muted); }
+    .stat-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 30% -40%, rgba(168, 85, 247, .22), transparent 65%);
+      pointer-events: none;
+    }
+    .stat-card::after {
+      content: "";
+      position: absolute;
+      left: 18px;
+      right: 18px;
+      bottom: 0;
+      height: 3px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+      opacity: .75;
+    }
+    .stat-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(192, 132, 252, .65);
+      box-shadow: 0 16px 34px rgba(0, 0, 0, .35);
+    }
+    .stat-card.c-episodes { --accent: #a855f7; }
+    .stat-card.c-hours { --accent: #38bdf8; }
+    .stat-card.c-titles { --accent: #4ade80; }
+    .stat-card.c-favorites { --accent: #f472b6; }
+    .stat-card.c-ratings { --accent: #fbbf24; }
+    .stat-icon { font-size: 24px; filter: drop-shadow(0 0 10px var(--accent)); }
+    .stat-card strong {
+      font-size: 32px;
+      font-weight: 900;
+      line-height: 1;
+      background: linear-gradient(90deg, #f5f3ff, var(--accent));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .stat-card span { font-size: 12px; color: var(--muted); font-weight: 600; }
 
     /* ===== Графики ===== */
     .charts-section { margin-top: 42px; }
@@ -300,15 +341,15 @@
     .tier-head-count { font-size: 13px; font-weight: 800; color: #fff; }
     .tier-progress { width: 100%; height: 5px; border-radius: 999px; background: rgba(255, 255, 255, .08); overflow: hidden; margin-top: 6px; }
     .tier-progress span { display: block; height: 100%; border-radius: 999px; background: var(--tier-color); box-shadow: 0 0 8px var(--tier-color); }
-    .tier-card { display: flex; flex-direction: column; gap: 3px; padding: 9px 10px; border-radius: 12px; border: 1px solid rgba(168, 85, 247, .15); background: #0d0a16; position: relative; overflow: hidden; opacity: .55; }
+    .tier-card { display: flex; flex-direction: column; gap: 3px; padding: 10px 11px; border-radius: 12px; border: 1px solid rgba(168, 85, 247, .15); background: #0d0a16; position: relative; overflow: hidden; opacity: .72; }
     .tier-card.unlocked { opacity: 1; border-color: var(--tier-border); background: linear-gradient(160deg, var(--tier-glow), #0d0a16 70%); }
     .tier-card-icon { font-size: 20px; }
     .tier-card.unlocked .tier-card-icon { filter: drop-shadow(0 0 7px var(--tier-color)); }
-    .tier-card-title { font-size: 12px; font-weight: 800; color: #fff; }
-    .tier-card-hint { font-size: 10px; color: #a99fc2; line-height: 1.35; }
+    .tier-card-title { font-size: 13px; font-weight: 800; color: #fff; }
+    .tier-card-hint { font-size: 11px; color: #b6add1; line-height: 1.45; }
     .tier-card-bar { height: 4px; border-radius: 2px; background: rgba(255, 255, 255, .09); overflow: hidden; margin-top: 4px; }
     .tier-card-bar span { display: block; height: 100%; border-radius: 2px; background: var(--tier-color); }
-    .tier-card-nums { font-size: 9.5px; color: #8f879d; font-weight: 700; }
+    .tier-card-nums { font-size: 10.5px; color: #a49bc0; font-weight: 700; }
     @keyframes tierShine { 0% { transform: translateX(-120%); } 60%, 100% { transform: translateX(260%); } }
     .tier-stellar .tier-card.unlocked::after, .tier-god .tier-card.unlocked::after { content: ""; position: absolute; top: 0; bottom: 0; left: 0; width: 45%; background: linear-gradient(105deg, transparent, rgba(255, 255, 255, .15), transparent); animation: tierShine 3.4s ease-in-out infinite; pointer-events: none; }
     @media (max-width: 1200px) { .tiers-board { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
@@ -353,8 +394,14 @@
     body.theme-light .level-bar { background: #fdfbff; border-color: rgba(124, 58, 237, .35); }
     body.theme-light .level-next { color: #5c5275; }
     body.theme-light .avatar-picker button { background: #fdfbff; border-color: #d6c5f0; }
-    body.theme-light .stat-card { background: #fdfbff; border-color: #d6c5f0; }
-    body.theme-light .stat-card strong { color: #5b21b6; }
+    body.theme-light .stat-card { background: linear-gradient(160deg, rgba(124, 58, 237, .1), #fdfbff); border-color: #d6c5f0; }
+    body.theme-light .stat-card strong {
+      background: linear-gradient(90deg, #5b21b6, var(--accent));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    body.theme-light .stat-card:hover { box-shadow: 0 14px 30px rgba(124, 58, 237, .18); }
     body.theme-light .section-heading h2 { color: #241c38; }
     body.theme-light .mini-card { background: #fdfbff; border-color: #d6c5f0; }
     body.theme-light .mini-title { color: #241b3d; }
@@ -416,11 +463,11 @@
 
     <section class="stats-section">
       <div class="stats-row">
-        <div class="stat-card"><strong id="statEpisodes">0</strong><span id="statEpisodesLabel">серий просмотрено</span></div>
-        <div class="stat-card"><strong id="statHours">0</strong><span id="statHoursLabel">время просмотра</span></div>
-        <div class="stat-card"><strong id="statTitles">0</strong><span id="statTitlesLabel">тайтлов начато</span></div>
-        <div class="stat-card"><strong id="statFavorites">0</strong><span id="statFavoritesLabel">в избранном</span></div>
-        <div class="stat-card"><strong id="statRatings">0</strong><span id="statRatingsLabel">оценок поставлено</span></div>
+        <div class="stat-card c-episodes"><span class="stat-icon">📺</span><strong id="statEpisodes">0</strong><span id="statEpisodesLabel">серий просмотрено</span></div>
+        <div class="stat-card c-hours"><span class="stat-icon">⏱️</span><strong id="statHours">0</strong><span id="statHoursLabel">время просмотра</span></div>
+        <div class="stat-card c-titles"><span class="stat-icon">🎬</span><strong id="statTitles">0</strong><span id="statTitlesLabel">тайтлов начато</span></div>
+        <div class="stat-card c-favorites"><span class="stat-icon">❤️</span><strong id="statFavorites">0</strong><span id="statFavoritesLabel">в избранном</span></div>
+        <div class="stat-card c-ratings"><span class="stat-icon">⭐</span><strong id="statRatings">0</strong><span id="statRatingsLabel">оценок поставлено</span></div>
       </div>
     </section>
 
@@ -760,14 +807,26 @@
       ];
     }
 
+    function animateValue(element, target, suffix, duration) {
+      if (!element) return;
+      const start = performance.now();
+      const step = now => {
+        const progress = Math.min(1, (now - start) / duration);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        element.textContent = Math.round(target * eased) + (suffix || "");
+        if (progress < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    }
+
     function renderStatsAndAchievements() {
       const isRussian = isRussianNow();
       const stats = collectStats();
-      setT("statEpisodes", String(stats.totalEpisodes));
-      setT("statHours", stats.hours + (isRussian ? " ч" : " h"));
-      setT("statTitles", String(stats.watchedTitles));
-      setT("statFavorites", String(stats.favoritesCount));
-      setT("statRatings", String(stats.ratingsCount));
+      animateValue(document.getElementById("statEpisodes"), stats.totalEpisodes, "", 900);
+      animateValue(document.getElementById("statHours"), stats.hours, isRussian ? " ч" : " h", 900);
+      animateValue(document.getElementById("statTitles"), stats.watchedTitles, "", 900);
+      animateValue(document.getElementById("statFavorites"), stats.favoritesCount, "", 900);
+      animateValue(document.getElementById("statRatings"), stats.ratingsCount, "", 900);
 
       const list = achievementsList(stats, isRussian);
       const unlockedCount = list.filter(achievement => achievement.unlocked).length;

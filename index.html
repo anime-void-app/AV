@@ -1195,15 +1195,15 @@
     .tier-head-count { font-size:13px; font-weight:800; color:#fff; }
     .tier-progress { width:100%; height:5px; border-radius:999px; background:rgba(255,255,255,.08); overflow:hidden; margin-top:6px; }
     .tier-progress span { display:block; height:100%; border-radius:999px; background:var(--tier-color); box-shadow:0 0 8px var(--tier-color); }
-    .tier-card { display:flex; flex-direction:column; gap:3px; padding:9px 10px; border-radius:12px; border:1px solid rgba(168,85,247,.15); background:#0d0a16; position:relative; overflow:hidden; opacity:.55; }
+    .tier-card { display:flex; flex-direction:column; gap:3px; padding:10px 11px; border-radius:12px; border:1px solid rgba(168,85,247,.15); background:#0d0a16; position:relative; overflow:hidden; opacity:.72; }
     .tier-card.unlocked { opacity:1; border-color:var(--tier-border); background:linear-gradient(160deg, var(--tier-glow), #0d0a16 70%); }
     .tier-card-icon { font-size:20px; }
     .tier-card.unlocked .tier-card-icon { filter:drop-shadow(0 0 7px var(--tier-color)); }
-    .tier-card-title { font-size:12px; font-weight:800; color:#fff; }
-    .tier-card-hint { font-size:10px; color:#a99fc2; line-height:1.35; }
+    .tier-card-title { font-size:13px; font-weight:800; color:#fff; }
+    .tier-card-hint { font-size:11px; color:#b6add1; line-height:1.45; }
     .tier-card-bar { height:4px; border-radius:2px; background:rgba(255,255,255,.09); overflow:hidden; margin-top:4px; }
     .tier-card-bar span { display:block; height:100%; border-radius:2px; background:var(--tier-color); }
-    .tier-card-nums { font-size:9.5px; color:#8f879d; font-weight:700; }
+    .tier-card-nums { font-size:10.5px; color:#a49bc0; font-weight:700; }
     @keyframes tierShine { 0% { transform:translateX(-120%); } 60%,100% { transform:translateX(260%); } }
     .tier-stellar .tier-card.unlocked::after, .tier-god .tier-card.unlocked::after { content:""; position:absolute; top:0; bottom:0; left:0; width:45%; background:linear-gradient(105deg, transparent, rgba(255,255,255,.15), transparent); animation:tierShine 3.4s ease-in-out infinite; pointer-events:none; }
     @media (max-width:1200px) { .tiers-board { grid-template-columns:repeat(3,minmax(0,1fr)); } }
