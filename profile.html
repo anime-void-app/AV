@@ -488,14 +488,20 @@
     .decor-option.active { background:rgba(168,85,247,.28); box-shadow:inset 0 0 0 1px rgba(192,132,252,.5); }
 
     /* ===== Боковые арт-баннеры ===== */
-    .side-art { position:fixed; top:50%; transform:translateY(-50%); width:clamp(150px,12vw,235px); height:min(76vh,730px); border-radius:22px; border:1px solid rgba(168,85,247,.4); overflow:hidden; z-index:0; pointer-events:none; box-shadow:0 24px 60px rgba(0,0,0,.55), 0 0 34px rgba(168,85,247,.14); opacity:.92; }
-    .side-art img { width:100%; height:100%; object-fit:cover; display:block; animation:artZoom 24s ease-in-out infinite alternate; }
-    .side-art::after { content:""; position:absolute; inset:0; background:linear-gradient(to top, rgba(9,8,16,.6), transparent 42%), linear-gradient(to bottom, rgba(9,8,16,.28), transparent 32%); pointer-events:none; }
-    .side-art-left { left:22px; }
-    .side-art-right { right:22px; }
-    .side-art-left img { animation-delay:-8s; }
-    @keyframes artZoom { from { transform:scale(1) translateY(0); } to { transform:scale(1.13) translateY(-1.6%); } }
-    @media (max-width:1699px) { .side-art { display:none; } }
+    .side-art { position:fixed; top:50%; transform:translateY(-50%); width:min(320px, calc((100vw - 1400px)/2 + 60px)); height:min(84vh, 820px); border-radius:24px; border:1px solid rgba(168,85,247,.4); overflow:hidden; z-index:0; pointer-events:none; box-shadow:0 24px 70px rgba(0,0,0,.6), 0 0 34px rgba(168,85,247,.16); opacity:.94; animation:artGlow 6s ease-in-out infinite alternate; }
+    .side-art img { width:100%; height:100%; object-fit:cover; display:block; animation:artZoom 26s ease-in-out infinite alternate; transition:opacity .7s ease; }
+    .side-art-left img { animation-duration:32s; animation-delay:-11s; }
+    .side-art::after { content:""; position:absolute; inset:0; background:linear-gradient(to top, rgba(9,8,16,.55), transparent 44%), linear-gradient(to bottom, rgba(9,8,16,.24), transparent 30%); pointer-events:none; z-index:2; }
+    .side-art::before { content:""; position:absolute; top:-20%; bottom:-20%; width:34%; left:0; z-index:1; background:linear-gradient(105deg, transparent, rgba(255,255,255,.17), transparent); transform:translateX(-160%) skewX(-8deg); animation:artShine 7.5s ease-in-out infinite; pointer-events:none; }
+    .side-art-right::before { animation-delay:-3.6s; }
+    .side-art-left { left:20px; }
+    .side-art-right { right:20px; }
+    @keyframes artZoom { from { transform:scale(1) translateX(0); } to { transform:scale(1.17) translateX(-2.4%); } }
+    @keyframes artShine { 0%, 55% { transform:translateX(-160%) skewX(-8deg); } 85%, 100% { transform:translateX(430%) skewX(-8deg); } }
+    @keyframes artGlow { from { box-shadow:0 24px 70px rgba(0,0,0,.6), 0 0 28px rgba(168,85,247,.1); } to { box-shadow:0 24px 70px rgba(0,0,0,.6), 0 0 54px rgba(168,85,247,.26); } }
+    .art-dust { position:absolute; bottom:-12px; border-radius:50%; background:radial-gradient(circle, rgba(255,255,255,.95), rgba(255,224,255,.25)); box-shadow:0 0 8px rgba(255,232,255,.85); z-index:1; pointer-events:none; animation:artDust linear infinite; opacity:0; }
+    @keyframes artDust { 0% { transform:translateY(0) translateX(0); opacity:0; } 12% { opacity:.85; } 85% { opacity:.35; } 100% { transform:translateY(-85vh) translateX(36px); opacity:0; } }
+    @media (max-width:1599px) { .side-art { display:none; } }
     .decor-sep { height:1px; background:rgba(168,85,247,.25); margin:5px 8px; }
     body.theme-light footer { color: #5c5275; border-top-color: #d9c6f2; }
 
@@ -1784,25 +1790,62 @@
     }
 
     /* ===== Боковые арт-баннеры ===== */
-    const SIDE_ARTS = ["art-station.jpg", "art-sakura.jpg", "art-rooftop.jpg", "art-torii.jpg", "art-crossing.jpg", "art-clouds.jpg", "art-snowlamp.jpg", "art-stairs.jpg", "art-gazebo.jpg", "art-city.jpg", "art-sea.jpg", "art-konbini.jpg"];
+    const SIDE_ARTS = ["art-station.jpg", "art-sakura.jpg", "art-rooftop.jpg", "art-torii.jpg", "art-crossing.jpg", "art-clouds.jpg", "art-snowlamp.jpg", "art-stairs.jpg", "art-gazebo.jpg", "art-city.jpg", "art-sea.jpg", "art-konbini.jpg", "art-bridge.jpg", "art-temple.jpg", "art-lake.jpg", "art-cafe.jpg", "art-paddy.jpg", "art-alley.jpg", "art-spring.jpg", "art-beach.jpg", "art-shrine.jpg", "art-balcony.jpg", "art-railway.jpg", "art-bamboo.jpg"];
+    let sideArtTimer = null;
 
     function artBannersEnabled() {
       try { return localStorage.getItem("animeVoidArtBanners") !== "off"; } catch (error) { return true; }
     }
 
+    function pickSideArtPair() {
+      let avoid = [];
+      try { avoid = JSON.parse(sessionStorage.getItem("animeVoidLastArts") || "[]"); } catch (error) {}
+      let pool = SIDE_ARTS.filter(art => avoid.indexOf(art) === -1);
+      if (pool.length < 2) pool = SIDE_ARTS.slice();
+      const picked = pool.slice().sort(() => Math.random() - 0.5).slice(0, 2);
+      try { sessionStorage.setItem("animeVoidLastArts", JSON.stringify(picked)); } catch (error) {}
+      return picked;
+    }
+
+    function buildSideArtElement(cls, file) {
+      const el = document.createElement("div");
+      el.className = "side-art " + cls;
+      let dust = "";
+      for (let i = 0; i < 7; i++) {
+        const size = 3 + Math.random() * 3.5;
+        dust += '<span class="art-dust" style="width:' + size.toFixed(1) + 'px;height:' + size.toFixed(1) + 'px;left:' + Math.round(Math.random() * 92) + '%;animation-duration:' + (7 + Math.random() * 6).toFixed(1) + 's;animation-delay:-' + (Math.random() * 10).toFixed(1) + 's"></span>';
+      }
+      el.innerHTML = dust + '<img src="' + file + '" alt="" loading="lazy" onerror="this.parentElement.remove()">';
+      return el;
+    }
+
     function renderSideArts() {
+      if (sideArtTimer) { clearInterval(sideArtTimer); sideArtTimer = null; }
       document.querySelectorAll(".side-art").forEach(el => el.remove());
-      if (!artBannersEnabled() || window.innerWidth < 1700) return;
-      const picked = SIDE_ARTS.slice().sort(() => Math.random() - 0.5);
-      [
-        { cls: "side-art-left", file: picked[0] },
-        { cls: "side-art-right", file: picked[1] }
-      ].forEach(side => {
-        const el = document.createElement("div");
-        el.className = "side-art " + side.cls;
-        el.innerHTML = '<img src="' + side.file + '" alt="" loading="lazy" onerror="this.parentElement.remove()">';
-        document.body.appendChild(el);
+      if (!artBannersEnabled() || window.innerWidth < 1600) return;
+      const pair = pickSideArtPair();
+      document.body.appendChild(buildSideArtElement("side-art-left", pair[0]));
+      document.body.appendChild(buildSideArtElement("side-art-right", pair[1]));
+      sideArtTimer = setInterval(rotateSideArts, 12000);
+    }
+
+    function rotateSideArts() {
+      const arts = document.querySelectorAll(".side-art");
+      if (arts.length !== 2) { renderSideArts(); return; }
+      const pair = pickSideArtPair();
+      arts.forEach(el => {
+        const img = el.querySelector("img");
+        if (img) img.style.opacity = "0";
       });
+      setTimeout(() => {
+        const left = document.querySelector(".side-art-left");
+        const right = document.querySelector(".side-art-right");
+        if (!left || !right) return;
+        const leftImg = left.querySelector("img");
+        const rightImg = right.querySelector("img");
+        if (leftImg) { leftImg.src = pair[0]; leftImg.style.opacity = ""; }
+        if (rightImg) { rightImg.src = pair[1]; rightImg.style.opacity = ""; }
+      }, 720);
     }
 
     function toggleArtBanners() {
@@ -1812,7 +1855,6 @@
       closeDecorMenu();
       setTimeout(() => { toggleDecor(); }, 40);
     }
-
     function closeDecorMenu() {
       const menu = document.querySelector(".decor-menu");
       if (menu) menu.remove();
