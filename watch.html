@@ -241,6 +241,7 @@
   </style>
   <link rel="stylesheet" href="av-enhancements.css?v=1">
   <script src="av-enhancements.js?v=1" defer></script>
+  <script src="av-safety.js?v=1"></script>
 </head>
 
 <body>
@@ -290,17 +291,42 @@
     const LANGUAGE_KEY = "animeVoidLanguage";
     const params = new URLSearchParams(window.location.search);
     const animeId = params.get("id");
-    const currentEpisode = Math.max(1, Number(params.get("episode")) || 1);
-    const catalog = JSON.parse(localStorage.getItem("animeVoidCatalog") || "[]");
+    const currentEpisode = params.has('episode') ? Number(params.get('episode')) : 1;
+    const episodeSyntaxValid = Number.isSafeInteger(currentEpisode) && currentEpisode >= 1;
+    function episodeAllowed(number = currentEpisode) {
+      const knownCount = isMovie ? 1 : Number(item?.episodes);
+      return Boolean(item) && /^(?:anilist-)?[1-9]\d*$/.test(String(animeId || '')) && Number.isSafeInteger(number) && number >= 1 && Number.isSafeInteger(knownCount) && knownCount > 0 && number <= knownCount;
+    }
+    function saveLastWatch() {
+      if (episodeAllowed()) localStorage.setItem('animeVoidLastWatch', JSON.stringify({animeId, episode:currentEpisode}));
+    }
+    function updateEpisodeValidation() {
+      const valid = episodeAllowed();
+      document.getElementById('markWatchedBtn').disabled = !valid;
+      document.getElementById('prevBtn').disabled = !valid || currentEpisode <= 1;
+      document.getElementById('nextBtn').disabled = !valid || currentEpisode >= episodeCount;
+      let notice = document.getElementById('avEpisodeNotice');
+      if (!notice) {notice=document.createElement('p');notice.id='avEpisodeNotice';notice.setAttribute('role','status');document.getElementById('episodeTitle').after(notice);}
+      const ru = currentLanguage === 'ru';
+      notice.replaceChildren();notice.hidden=valid;
+      if (!episodeSyntaxValid) document.getElementById('episodeTitle').textContent = ru ? 'Неверный номер серии' : 'Invalid episode number';
+      if (!valid) {
+        notice.textContent = !episodeSyntaxValid || (item && Number(item.episodes)>0 && currentEpisode>episodeCount) || (isMovie && currentEpisode!==1)
+          ? (ru?'Неверный номер серии. Отметки не изменены. ':'Invalid episode number. Progress unchanged. ')
+          : (ru?'Для отметки просмотра дождитесь загрузки числа серий. ':'Wait for episode information before marking progress. ');
+        if (item && episodeSyntaxValid === false || item && !valid && Number(item.episodes)>0) {const link=document.createElement('a');link.href='watch.html?id='+encodeURIComponent(animeId)+'&episode=1';link.textContent=ru?'Открыть первую серию':'Open episode one';notice.append(link);}
+      }
+      let retry=document.getElementById('avRetryStreaming');
+      if(!retry){retry=document.createElement('button');retry.id='avRetryStreaming';retry.type='button';retry.className='platform-btn';retry.textContent=ru?'Повторить загрузку':'Retry loading';document.getElementById('whereStatus').after(retry);retry.onclick=()=>{whereState='loading';applyLanguage();loadStreamingLinks();};}
+      retry.hidden=whereState!=='error';retry.textContent=ru?'Повторить загрузку':'Retry loading';
+    }
+    const catalog = AVSafe.read("animeVoidCatalog", []);
     let item = catalog.find(anime => String(anime.id) === String(animeId));
     let isMovie = String(item?.format || "").toUpperCase() === "MOVIE";
     let episodeCount = isMovie ? 1 : Math.max(1, Number(item?.episodes) || 1);
     let currentLanguage = localStorage.getItem(LANGUAGE_KEY) === "en" ? "en" : "ru";
 
-    localStorage.setItem("animeVoidLastWatch", JSON.stringify({
-      animeId: animeId,
-      episode: currentEpisode
-    }));
+    // Record history only after both the title and episode have been validated.
 
     // External links are title-level AniList links, not an in-site video player.
     const streamingHosts = {
@@ -375,6 +401,7 @@
     }
 
     async function loadStreamingLinks() {
+      streamingLinks = [];
       const idMatch = /^(?:anilist-)?(\d+)$/.exec(animeId || '');
       const numericId = idMatch ? Number(idMatch[1]) : 0;
       if (!numericId || numericId > 2147483647) {
@@ -395,6 +422,11 @@
         const result = await response.json();
         const media = result?.data?.Media;
         if (!media) throw new Error('Anime not found');
+        if (item) {
+          item = {...item, episodes:media.episodes ?? item.episodes, format:media.format || item.format};
+          isMovie = String(item.format || '').toUpperCase() === 'MOVIE';
+          episodeCount = isMovie ? 1 : Math.max(1, Number(item.episodes) || 1);
+        }
         if (!item) {
           item = {id: animeId, title: media.title?.english || media.title?.romaji || 'ANIME VOID', episodes: media.episodes, format: media.format};
           isMovie = String(item.format || '').toUpperCase() === 'MOVIE';
@@ -421,7 +453,7 @@
         }
         whereState = 'ready';
       } catch (_) { whereState = 'error'; }
-      if (item) updateWhere(); else applyLanguage();
+      applyLanguage();
     }
 
     if (item) {
@@ -440,17 +472,17 @@
     }
 
     document.getElementById("prevBtn").addEventListener("click", () => {
-      if (currentEpisode > 1) openEpisode(currentEpisode - 1);
+      if (episodeAllowed() && currentEpisode > 1) openEpisode(currentEpisode - 1);
     });
 
     document.getElementById("nextBtn").addEventListener("click", () => {
-      if (currentEpisode < episodeCount) openEpisode(currentEpisode + 1);
+      if (episodeAllowed() && currentEpisode < episodeCount) openEpisode(currentEpisode + 1);
     });
 
     function logActivity(kind) {
       try {
         const today = new Date().toISOString().slice(0, 10);
-        const log = JSON.parse(localStorage.getItem("animeVoidActivityLog") || "{}");
+        const log = AVSafe.read("animeVoidActivityLog", {});
         log[today] = log[today] || { eps: 0, favs: 0, ratings: 0 };
         log[today][kind] = (log[today][kind] || 0) + 1;
         localStorage.setItem("animeVoidActivityLog", JSON.stringify(log));
@@ -458,6 +490,7 @@
     }
 
     document.getElementById("markWatchedBtn").addEventListener("click", () => {
+      if (!episodeAllowed()) return;
       const watched = getWatchedEpisodes();
       const index = watched.indexOf(currentEpisode);
       if (index === -1) {
@@ -477,14 +510,15 @@
 
     function getWatchedEpisodes() {
       try {
-        const saved = JSON.parse(localStorage.getItem(`watched_${animeId}`) || "[]");
-        return Array.isArray(saved) ? saved.map(Number) : [];
+        const saved = AVSafe.read(`watched_${animeId}`, []);
+        return Array.isArray(saved) ? [...new Set(saved.map(Number).filter(n => Number.isSafeInteger(n) && n >= 1 && (!item?.episodes || n <= (isMovie ? 1 : Number(item.episodes)))))] : [];
       } catch {
         return [];
       }
     }
 
     function markEpisodeWatched(number) {
+      if (!episodeAllowed(Number(number))) return;
       const watched = getWatchedEpisodes();
       if (!watched.includes(Number(number))) {
         watched.push(Number(number));
@@ -551,6 +585,8 @@
           : (isRussian ? "Загрузка аниме…" : "Loading anime…");
       }
       renderEpisodes();
+      updateEpisodeValidation();
+      saveLastWatch();
     }
 
     function applyThemeFromStorage() {
@@ -583,6 +619,7 @@
 
     renderEpisodes();
     applyLanguage();
+    updateEpisodeValidation();
     loadStreamingLinks();
   </script>
   <script>

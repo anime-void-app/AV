@@ -1,7 +1,7 @@
 /* ANIME VOID — service worker: установка как приложение + офлайн-режим */
 
-const CORE_CACHE = "av-core-v1";
-const IMAGE_CACHE = "av-images-v1";
+const CORE_CACHE = "av-AV-core-v2";
+const IMAGE_CACHE = "av-AV-images-v2";
 const IMAGE_CACHE_LIMIT = 300;
 
 const CORE_FILES = [
@@ -9,6 +9,10 @@ const CORE_FILES = [
   "./index.html",
   "./anime.html",
   "./watch.html",
+  "./profile.html",
+  "./av-safety.js?v=1",
+  "./av-enhancements.js?v=1",
+  "./av-enhancements.css?v=1",
   "./manifest.json",
   "./icon-192.png",
   "./icon-512.png"
@@ -29,7 +33,7 @@ self.addEventListener("activate", (event) => {
     caches.keys()
       .then((names) => Promise.all(
         names
-          .filter((name) => name !== CORE_CACHE && name !== IMAGE_CACHE)
+          .filter((name) => (name.startsWith("av-AV-") || ["av-core-v1", "av-images-v1"].includes(name)) && name !== CORE_CACHE && name !== IMAGE_CACHE)
           .map((name) => caches.delete(name))
       ))
       .then(() => self.clients.claim())
@@ -62,21 +66,25 @@ self.addEventListener("fetch", (event) => {
 
 function canonicalPageKey(request) {
   const url = new URL(request.url);
-  if (url.pathname.endsWith("watch.html")) return "./watch.html";
-  if (url.pathname.endsWith("anime.html")) return "./anime.html";
-  return "./index.html";
+  const scope = new URL(self.registration.scope);
+  if (url.origin !== scope.origin || !url.pathname.startsWith(scope.pathname)) return url.href;
+  url.hash = "";
+  // HTML is a common shell for query-based pages; JS uses the actual URL to select title/episode.
+  url.search = "";
+  if (url.pathname === scope.pathname) url.pathname += "index.html";
+  return url.href;
 }
 
 async function networkFirstPage(request) {
   try {
     const response = await fetch(request);
     if (response && response.ok) {
-      updatePageCache(request, response.clone());
+      await updatePageCache(request, response.clone());
     }
     return response;
   } catch (error) {
     const cache = await caches.open(CORE_CACHE);
-    const cached = await cache.match(request, { ignoreSearch: true });
+    const cached = await cache.match(canonicalPageKey(request));
     if (cached) return cached;
     return new Response(
       '<!DOCTYPE html><html lang="ru"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>ANIME VOID</title></head>' +
@@ -92,7 +100,7 @@ async function updatePageCache(request, response) {
     const cache = await caches.open(CORE_CACHE);
     const key = canonicalPageKey(request);
     await cache.put(key, response.clone());
-    if (key === "./index.html" && new URL(request.url).pathname.endsWith("/")) {
+    if (new URL(request.url).pathname === new URL(self.registration.scope).pathname) {
       await cache.put("./", response.clone());
     }
   } catch (error) { /* ничего страшного */ }

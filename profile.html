@@ -514,6 +514,7 @@
   </style>
   <link rel="stylesheet" href="av-enhancements.css?v=1">
   <script src="av-enhancements.js?v=1" defer></script>
+  <script src="av-safety.js?v=1"></script>
 </head>
 <body>
   <header>
@@ -695,13 +696,13 @@
     }
 
     function readFavorites() {
-      try { return JSON.parse(localStorage.getItem("animeVoidFavorites") || "[]"); } catch (err) { return []; }
+      try { return AVSafe.read("animeVoidFavorites", []); } catch (err) { return []; }
     }
     function readStatuses() {
-      try { return JSON.parse(localStorage.getItem("animeVoidStatuses") || "{}"); } catch (err) { return {}; }
+      try { return AVSafe.read("animeVoidStatuses", {}); } catch (err) { return {}; }
     }
     function readCatalog() {
-      try { return JSON.parse(localStorage.getItem("animeVoidCatalog") || "[]"); } catch (err) { return []; }
+      try { return AVSafe.read("animeVoidCatalog", []); } catch (err) { return []; }
     }
 
     /* ===== Тема ===== */
@@ -853,7 +854,7 @@
         const storageKey = localStorage.key(i);
         if (!storageKey || storageKey.indexOf("watched_") !== 0) continue;
         let episodes = [];
-        try { episodes = JSON.parse(localStorage.getItem(storageKey) || "[]"); } catch (err) {}
+        try { episodes = AVSafe.read(storageKey, []); } catch (err) {}
         if (!Array.isArray(episodes) || !episodes.length) continue;
         totalEpisodes += episodes.length;
         watchedTitles += 1;
@@ -878,7 +879,7 @@
       let ratingsCount = 0;
       let maxRating = 0;
       try {
-        const ratings = JSON.parse(localStorage.getItem("animeVoidRatings") || "{}");
+        const ratings = AVSafe.read("animeVoidRatings", {});
         ratingsCount = Object.keys(ratings).length;
         Object.keys(ratings).forEach(id => { const value = Number(ratings[id]) || 0; if (value > maxRating) maxRating = value; });
       } catch (err) {}
@@ -1024,7 +1025,7 @@
     }
 
     function getActivityLogSafe() {
-      try { return JSON.parse(localStorage.getItem("animeVoidActivityLog") || "{}"); } catch (error) { return {}; }
+      try { return AVSafe.read("animeVoidActivityLog", {}); } catch (error) { return {}; }
     }
 
     function calcStreak(log) {
@@ -1517,7 +1518,7 @@
         if (!key || key.indexOf("watched_") !== 0) continue;
         const id = key.slice(8);
         let episodes = [];
-        try { episodes = JSON.parse(localStorage.getItem(key)) || []; } catch (err) { continue; }
+        try { episodes = AVSafe.read(key, null) || []; } catch (err) { continue; }
         if (!episodes.length) continue;
         const item = byId.get(id);
         if (!item || !Array.isArray(item.genres) || !item.genres.length) continue;

@@ -573,6 +573,7 @@
   <script src="av-enhancements.js?v=1" defer></script>
 <link rel="canonical" href="https://anime-void-app.github.io/AV/anime-demon-slayer.html">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "TVSeries", "name": "Клинок, рассекающий демонов", "alternateName": "Demon Slayer: Kimetsu no Yaiba", "description": "После нападения демона Тандзиро Камадо отправляется искать способ вернуть человеческий облик сестре Нэдзуко. На этом пути ему предстоят обучение, новые союзники и опасные сражения.", "url": "https://anime-void-app.github.io/AV/anime-demon-slayer.html", "inLanguage": "ja"}</script>
+  <script src="av-safety.js?v=1"></script>
 </head>
 
 <body>
@@ -833,9 +834,7 @@ const russianTitleOverrides = {
   const params = new URLSearchParams(window.location.search);
   const animeId = params.get("id") || window.AV_PAGE?.id;
 
-  const catalog = JSON.parse(
-    localStorage.getItem("animeVoidCatalog") || "[]"
-  );
+  const catalog = AVSafe.read("animeVoidCatalog", []);
 
   let item = catalog.find(
     anime => String(anime.id) === String(animeId)
@@ -867,7 +866,7 @@ const russianTitleOverrides = {
       nav.innerHTML = seasons.map((season, index) => {
         const active = String(season.id) === String(currentItem.id);
         const label = currentLanguage === "ru" ? `Сезон ${index + 1}` : `Season ${index + 1}`;
-        return `<button type="button" class="season-choice ${active ? "active" : ""}" onclick="selectAnimeSeason('${encodeURIComponent(season.id)}')">${label}</button>`;
+        return `<button type="button" class="season-choice ${active ? "active" : ""}" onclick="selectAnimeSeason('${AVSafe.escape(encodeURIComponent(season.id))}')">${label}</button>`;
       }).join("");
     }
 
@@ -897,10 +896,10 @@ const russianTitleOverrides = {
     section.hidden = false;
     document.getElementById("charactersRow").innerHTML = currentCharacters.map(character => `
       <div class="character-card">
-        <img src="${character.image}" alt="" loading="lazy"
+        <img src="${AVSafe.escape(character.image)}" alt="" loading="lazy"
           onerror="this.onerror=null;this.src='image/poster1.jpg';">
         <div class="character-body">
-          <div class="character-name">${character.name}</div>
+          <div class="character-name">${AVSafe.escape(character.name)}</div>
           <div class="character-role">${characterRoleLabel(character.role)}</div>
           ${character.va ? `<div class="character-va">🎙 ${character.va}</div>` : ""}
         </div>
@@ -930,16 +929,16 @@ const russianTitleOverrides = {
     section.hidden = false;
     document.getElementById("similarRow").innerHTML = currentSimilar.map(entry => `
       <article class="similar-card" role="link" tabindex="0"
-        onclick="window.location.href='anime.html?id=${encodeURIComponent(entry.id)}'"
-        onkeydown="if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); window.location.href='anime.html?id=${encodeURIComponent(entry.id)}'; }">
+        onclick="window.location.href='anime.html?id=${AVSafe.escape(encodeURIComponent(entry.id))}'"
+        onkeydown="if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); window.location.href='anime.html?id=${AVSafe.escape(encodeURIComponent(entry.id))}'; }">
         <div class="similar-poster">
-          <img src="${entry.image}" alt="" loading="lazy"
+          <img src="${AVSafe.escape(entry.image)}" alt="" loading="lazy"
             onerror="this.onerror=null;this.src='image/poster1.jpg';">
           ${entry.score ? `<span class="similar-score">⭐ ${entry.score}</span>` : ""}
         </div>
         <div class="similar-body">
-          <div class="similar-name">${entry.title}</div>
-          <div class="similar-meta">${[entry.year, similarFormatLabel(entry.format)].filter(Boolean).join(" · ")}</div>
+          <div class="similar-name">${AVSafe.escape(entry.title)}</div>
+          <div class="similar-meta">${AVSafe.escape([entry.year, similarFormatLabel(entry.format)].filter(Boolean).join(" · "))}</div>
         </div>
       </article>`).join("");
   }
@@ -977,11 +976,14 @@ const russianTitleOverrides = {
           }
         }
       `;
-      const response = await fetch("https://graphql.anilist.co", {
-        method: "POST",
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 12000);
+      let response;
+      try { response = await fetch("https://graphql.anilist.co", {
+        method: "POST", signal: controller.signal,
         headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify({ query, variables: { id: numericId } })
-      });
+      }); } finally { clearTimeout(timeout); }
       if (!response.ok) return;
       const media = (await response.json())?.data?.Media;
       if (!media) return;
@@ -1006,7 +1008,7 @@ const russianTitleOverrides = {
         trailerSection.hidden = false;
         trailerSection.querySelector(".trailer-frame").innerHTML = `
           <iframe
-            src="https://www.youtube-nocookie.com/embed/${trailer.id}"
+            src="https://www.youtube-nocookie.com/embed/${AVSafe.escape(trailer.id)}"
             title="Trailer"
             loading="lazy"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -1046,7 +1048,7 @@ const russianTitleOverrides = {
       renderSimilar();
       // Remember the best artwork so the next visit opens instantly.
       try {
-        const savedCatalog = JSON.parse(localStorage.getItem("animeVoidCatalog") || "[]");
+        const savedCatalog = AVSafe.read("animeVoidCatalog", []);
         const entry = savedCatalog.find(entry => String(entry.id) === String(item.id));
         if (entry) {
           if (banner) entry.background = banner;
@@ -1057,13 +1059,22 @@ const russianTitleOverrides = {
     } catch (error) { /* network fail — keep current artwork */ }
   }
 
+  let animeLoadFailure = 'network';
   function showAnimeError() {
-    content.innerHTML = `
-      <div class="error">
-        <h2>Аниме не найдено</h2>
-        <p>Вернись в каталог и попробуй ещё раз.</p>
-      </div>
-    `;
+    const ru = currentLanguage !== 'en';
+    const invalid = !/^(?:anilist-)?[1-9]\d*$/.test(String(animeId || ''));
+    const missing = invalid || animeLoadFailure === 'notfound';
+    content.replaceChildren();
+    const box = document.createElement('div'); box.className = 'error';
+    const title = document.createElement('h2');
+    title.textContent = missing ? (ru ? 'Аниме не найдено' : 'Anime not found') : (ru ? 'Не удалось связаться с AniList' : 'Could not connect to AniList');
+    const text = document.createElement('p');
+    text.textContent = missing ? (ru ? 'Проверьте адрес или вернитесь в каталог.' : 'Check the address or return to the catalog.') : (ru ? 'Это может быть временный сбой сети или сервиса. Ваши отметки сохранены.' : 'This may be a temporary network or service issue. Your progress is saved.');
+    box.append(title, text);
+    if (!missing) { const retry = document.createElement('button');retry.type='button';retry.id='avRetryAnime';retry.className='favorite-page-btn';retry.textContent=ru?'Повторить':'Retry';retry.onclick=()=>location.reload();box.append(retry); }
+    const route = window.avAnimeUrl ? window.avAnimeUrl(animeId) : '';
+    if (route && !route.startsWith('anime.html')) { const link=document.createElement('a');link.href=route;link.textContent=ru?'Открыть готовую страницу аниме':'Open the saved title page';link.className='back';box.append(document.createElement('br'),link); }
+    content.append(box);
   }
 
   function showAnimeLoading() {
@@ -1115,14 +1126,18 @@ const russianTitleOverrides = {
       }
     `;
     try {
-      const response = await fetch("https://graphql.anilist.co", {
-        method: "POST",
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 12000);
+      let response;
+      try { response = await fetch("https://graphql.anilist.co", {
+        method: "POST", signal: controller.signal,
         headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify({ query, variables: { id: numericId } })
-      });
+      }); } finally { clearTimeout(timeout); }
       if (!response.ok) return null;
-      const media = (await response.json())?.data?.Media;
-      if (!media) return null;
+      const payload = await response.json();
+      const media = payload?.data?.Media;
+      if (!media) { animeLoadFailure = !payload.errors?.length || payload.errors.some(e => /not found/i.test(e.message || '')) ? 'notfound' : 'network'; return null; }
       const mapNode = node => ({
         id: "anilist-" + node.id,
         title: node.title?.english || node.title?.romaji || node.title?.native || "Anime",
@@ -1187,9 +1202,7 @@ let watchedPercent = 0;
       episodesHTML = `<button class="episode" onclick="openEpisode(1)">${currentLanguage === "ru" ? "🔗 Где посмотреть фильм" : "🔗 Where to watch"}</button>`;
     } else if (episodeCount > 0) {
 
-      const watchedEpisodes = JSON.parse(
-  localStorage.getItem(`watched_${item.id}`) || "[]"
-);
+      const watchedEpisodes = AVSafe.read(`watched_${item.id}`, []);
  watchedCount = watchedEpisodes.length;
 
  watchedPercent =
@@ -1225,7 +1238,7 @@ for (let i = 1; i <= episodeCount; i++) {
         <div class="poster">
           <img
             src="${coverExtraLarge}"
-            alt="${item.title}"
+            alt="${AVSafe.escape(item.title)}"
           >
         </div>
 
@@ -1235,14 +1248,14 @@ for (let i = 1; i <= episodeCount; i++) {
             ✦ ANIME VOID
           </span>
 
-          <h1 id="animeTitle">${item.title}</h1>
+          <h1 id="animeTitle">${AVSafe.escape(item.title)}</h1>
           <nav class="season-switcher" id="seasonSwitcher" aria-label="Сезоны"></nav>
 
           <p
             class="description"
             id="animeDescription"
           >
-            ${item.description || "Описание пока отсутствует."}
+            ${AVSafe.description(item.description || "Описание пока отсутствует.")}
           </p>
 
           <div class="info-grid">
@@ -1250,7 +1263,7 @@ for (let i = 1; i <= episodeCount; i++) {
             <div class="info">
               <small id="ratingLabel">Рейтинг</small>
               <strong>
-                ★ ${item.rating || "Нет данных"}
+                ★ ${AVSafe.escape(item.rating || "Нет данных")}
               </strong>
             </div>
 
@@ -1264,14 +1277,14 @@ for (let i = 1; i <= episodeCount; i++) {
             <div class="info">
               <small id="statusLabel">Статус</small>
               <strong id="statusValue">
-            ${translateStatus(item.status)}
+            ${AVSafe.escape(translateStatus(item.status))}
                </strong>
               </div>
 
             <div class="info">
               <small id="yearLabel">Год</small>
               <strong>
-                ${item.year || "Неизвестно"}
+                ${AVSafe.escape(item.year || "Неизвестно")}
               </strong>
             </div>
 
@@ -1279,7 +1292,7 @@ for (let i = 1; i <= episodeCount; i++) {
              <small id="genreLabel">Жанр</small>
               <strong>
                 <strong id="genreValue">
-  ${translateGenre(item.genre)}
+  ${AVSafe.escape(translateGenre(item.genre))}
 </strong>
 </div>
           </div>
@@ -1360,9 +1373,9 @@ for (let i = 1; i <= episodeCount; i++) {
     const descriptionCacheKey = `animeVoidRuDescription_${item.id}`;
     const savedDescription = localStorage.getItem(descriptionCacheKey) || "";
     const descriptionHolder = document.createElement("div");
-    descriptionHolder.innerHTML = originalDescription
+    descriptionHolder.innerHTML = AVSafe.description(originalDescription
       .replace(/<br\s*\/?\s*>/gi, "\n")
-      .replace(/<\/(p|div|li)\s*>/gi, "\n\n");
+      .replace(/<\/(p|div|li)\s*>/gi, "\n\n"));
     const originalDescriptionPlain = (descriptionHolder.textContent || "")
       .replace(/\n{3,}/g, "\n\n")
       .trim();
@@ -1451,9 +1464,7 @@ if (genreLabel) {
 
     if (!button || !item) return;
 
-    const favorites = JSON.parse(
-      localStorage.getItem("animeVoidFavorites") || "[]"
-    );
+    const favorites = AVSafe.read("animeVoidFavorites", []);
 
     const saved = favorites.some(
       id => String(id) === String(item.id)
@@ -1469,9 +1480,7 @@ if (genreLabel) {
   function togglePageFavorite() {
     if (!item) return;
 
-    let favorites = JSON.parse(
-      localStorage.getItem("animeVoidFavorites") || "[]"
-    );
+    let favorites = AVSafe.read("animeVoidFavorites", []);
 
     const exists = favorites.some(
       id => String(id) === String(item.id)
@@ -1495,7 +1504,7 @@ if (genreLabel) {
 
   function readStatusMap() {
     try {
-      return JSON.parse(localStorage.getItem("animeVoidStatuses") || "{}");
+      return AVSafe.read("animeVoidStatuses", {});
     } catch (error) {
       return {};
     }
@@ -1503,7 +1512,7 @@ if (genreLabel) {
 
   function readRatingMap() {
     try {
-      return JSON.parse(localStorage.getItem("animeVoidRatings") || "{}");
+      return AVSafe.read("animeVoidRatings", {});
     } catch (error) {
       return {};
     }
@@ -1512,9 +1521,7 @@ if (genreLabel) {
   function saveListSnapshot() {
     if (!item) return;
     try {
-      const snapshots = JSON.parse(
-        localStorage.getItem("animeVoidListItems") || "{}"
-      );
+      const snapshots = AVSafe.read("animeVoidListItems", {});
       snapshots[String(item.id)] = {
         id: item.id,
         title: item.title || "",
@@ -1589,7 +1596,7 @@ if (genreLabel) {
   function logActivity(kind) {
     try {
       const today = new Date().toISOString().slice(0, 10);
-      const log = JSON.parse(localStorage.getItem("animeVoidActivityLog") || "{}");
+      const log = AVSafe.read("animeVoidActivityLog", {});
       log[today] = log[today] || { eps: 0, favs: 0, ratings: 0 };
       log[today][kind] = (log[today][kind] || 0) + 1;
       localStorage.setItem("animeVoidActivityLog", JSON.stringify(log));
@@ -1694,9 +1701,9 @@ function applyLanguage() {
   const description = document.getElementById("animeDescription");
 
   if (description) {
-    description.innerHTML = isRussian
+    description.innerHTML = AVSafe.description(isRussian
       ? (russianDescription || originalDescription)
-      : originalDescription;
+      : originalDescription);
   }
 
   if (item) {
@@ -1718,9 +1725,7 @@ function applyLanguage() {
     if (episodesProgressText) {
       const episodeCount = Number(item.episodes) || 0;
 
-      const watchedEpisodes = JSON.parse(
-        localStorage.getItem(`watched_${item.id}`) || "[]"
-      );
+      const watchedEpisodes = AVSafe.read(`watched_${item.id}`, []);
 
       const watchedCount = watchedEpisodes.length;
       const watchedPercent = episodeCount > 0

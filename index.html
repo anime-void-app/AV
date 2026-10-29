@@ -1378,6 +1378,7 @@
   <link rel="stylesheet" href="av-enhancements.css?v=1">
   <script src="av-enhancements.js?v=1" defer></script>
 <link rel="canonical" href="https://anime-void-app.github.io/AV/">
+  <script src="av-safety.js?v=1"></script>
 </head>
 
 <body>
@@ -1752,7 +1753,7 @@ const demoAnimeIds = new Set([
     let selectedYear = "";
 let selectedStatus = "";
 let selectedSort = "default";
-    let favorites = JSON.parse(localStorage.getItem("animeVoidFavorites") || "[]");
+    let favorites = AVSafe.read("animeVoidFavorites", []);
     
 const animeVoidCatalogFeaturesVersion = "donghua-tab-v1";
 if (localStorage.getItem("animeVoidCatalogFeaturesVersion") !== animeVoidCatalogFeaturesVersion) {
@@ -1771,9 +1772,7 @@ let apiLoading = false;
 let apiHasMore = localStorage.getItem("animeVoidHasMore") !== "false";
 
 try {
-  const savedCatalog = JSON.parse(
-    localStorage.getItem("animeVoidCatalog") || "[]"
-  );
+  const savedCatalog = AVSafe.read("animeVoidCatalog", []);
 
   const savedIds = new Set(anime.map(item => String(item.id)));
 
@@ -2111,39 +2110,39 @@ if (!donghuaMode) {
             ${shownSeasonItems.map((season, index) => {
               const active = String(season.id) === String(item.id);
               const label = isRussian ? `Сезон ${index + 1}` : `Season ${index + 1}`;
-              return `<button type="button" class="card-season-button ${active ? "active" : ""}" data-season-index="${index + 1}" onclick="event.stopPropagation(); openAnimePage('${encodeURIComponent(season.id)}')">${label}</button>`;
+              return `<button type="button" class="card-season-button ${active ? "active" : ""}" data-season-index="${index + 1}" onclick="event.stopPropagation(); openAnimePage('${AVSafe.escape(encodeURIComponent(season.id))}')">${label}</button>`;
             }).join("")}
-            ${hiddenSeasonCount > 0 ? `<button type="button" class="card-season-button card-more-button" title="${moreSeasonsTitle}" onclick="event.stopPropagation(); openAnimePage('${encodeURIComponent(item.id)}')">+${hiddenSeasonCount}</button>` : ""}
+            ${hiddenSeasonCount > 0 ? `<button type="button" class="card-season-button card-more-button" title="${moreSeasonsTitle}" onclick="event.stopPropagation(); openAnimePage('${AVSafe.escape(encodeURIComponent(item.id))}')">+${hiddenSeasonCount}</button>` : ""}
           </div>`
         : "";
       const watchButtonHTML = hasSeasonButtons
         ? ""
-        : `<button type="button" class="card-season-button card-watch-button" style="width:100%;margin:0" onclick="event.stopPropagation(); window.location.href='watch.html?id=${encodeURIComponent(item.id)}&episode=1'">${isRussian ? "▶ Смотреть" : "▶ Watch"}</button>`;
+        : `<button type="button" class="card-season-button card-watch-button" style="width:100%;margin:0" onclick="event.stopPropagation(); window.location.href='watch.html?id=${AVSafe.escape(encodeURIComponent(item.id))}&episode=1'">${isRussian ? "▶ Смотреть" : "▶ Watch"}</button>`;
 
       return `
         <article class="card" role="link" tabindex="0"
-          onclick="openAnimePage('${encodeURIComponent(item.id)}')"
-          onkeydown="if (event.target === this && (event.key === 'Enter' || event.key === ' ')) { event.preventDefault(); openAnimePage('${encodeURIComponent(item.id)}'); }">
+          onclick="openAnimePage('${AVSafe.escape(encodeURIComponent(item.id))}')"
+          onkeydown="if (event.target === this && (event.key === 'Enter' || event.key === ' ')) { event.preventDefault(); openAnimePage('${AVSafe.escape(encodeURIComponent(item.id))}'); }">
           <div class="poster" style="--poster:${item.color}">
 
-<img loading="lazy" decoding="async" src="${item.image || ('image/poster' + item.id + '.jpg')}" alt="${displayTitle}" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;" onerror="this.onerror=null;this.src='image/poster1.jpg';">
+<img loading="lazy" decoding="async" src="${AVSafe.escape(item.image || ('image/poster' + item.id + '.jpg'))}" alt="${AVSafe.escape(displayTitle)}" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;" onerror="this.onerror=null;this.src='image/poster1.jpg';">
 
 
 
-            <small>${item.label}</small>
-            <h3 data-anime-title-id="${item.id}">${displayTitle}</h3>
-            <div class="year">${item.year} · ${item.genre}</div>
+            <small>${AVSafe.escape(item.label)}</small>
+            <h3 data-anime-title-id="${AVSafe.escape(item.id)}">${AVSafe.escape(displayTitle)}</h3>
+            <div class="year">${AVSafe.escape(item.year)} · ${AVSafe.escape(item.genre)}</div>
             ${item.franchiseSeasonCount > 1 ? `<div class="season-count">${seasonCountLabel(item.franchiseSeasonCount)}</div>` : ""}
             <div class="anime-meta">
-    ${item.rating ? `⭐ ${item.rating}` : ""}
+    ${item.rating ? `⭐ ${AVSafe.escape(item.rating)}` : ""}
     ${item.episodes ? ` · ${item.episodes} ${isRussian ? "серий" : "eps"}` : ""}
-    ${item.status ? ` · ${item.status}` : ""}
+    ${item.status ? ` · ${AVSafe.escape(item.status)}` : ""}
 </div>
           </div>
           <div class="card-info">
-            <span class="genre">${item.genre}</span>
+            <span class="genre">${AVSafe.escape(item.genre)}</span>
             <button class="favorite ${saved ? "saved" : ""}"
-              onclick="event.stopPropagation(); toggleFavorite('${item.id}')"
+              onclick="event.stopPropagation(); toggleFavorite('${AVSafe.escape(item.id)}')"
               aria-label="Добавить в избранное">
               ${saved ? "♥" : "♡"}
             </button>
@@ -2152,7 +2151,7 @@ if (!donghuaMode) {
             ${seasonButtonsHTML}
             ${watchButtonHTML}
             <button class="secondary" style="width:100%;margin:0"
-  onclick="event.stopPropagation(); openAnimePage('${encodeURIComponent(item.id)}')">
+  onclick="event.stopPropagation(); openAnimePage('${AVSafe.escape(encodeURIComponent(item.id))}')">
   Подробнее ➜
 </button>
           </div>
@@ -2170,7 +2169,7 @@ if (!donghuaMode) {
         seedMap.set(key, Math.max(seedMap.get(key) || 0, weight));
       };
       try {
-        JSON.parse(localStorage.getItem("animeVoidFavorites") || "[]").forEach(id => addSeed(id, 2));
+        AVSafe.read("animeVoidFavorites", []).forEach(id => addSeed(id, 2));
       } catch (error) {}
       const statuses = readStatusMap();
       Object.keys(statuses).forEach(id => {
@@ -2262,11 +2261,11 @@ if (!donghuaMode) {
         const metaParts = [item.genre, item.year].filter(Boolean);
         if (item.rating) metaParts.push(`⭐ ${item.rating}`);
         return `
-          <button type="button" class="airing-card" onclick="openAnimePage('${encodeURIComponent(item.id)}')">
-            <img src="${item.image || 'image/poster1.jpg'}" alt="" loading="lazy"
+          <button type="button" class="airing-card" onclick="openAnimePage('${AVSafe.escape(encodeURIComponent(item.id))}')">
+            <img src="${AVSafe.escape(item.image || 'image/poster1.jpg')}" alt="" loading="lazy"
               onerror="this.onerror=null;this.src='image/poster1.jpg';">
             <div class="airing-body">
-              <div class="airing-name" data-anime-title-id="${item.id}">${displayTitle}</div>
+              <div class="airing-name" data-anime-title-id="${AVSafe.escape(item.id)}">${AVSafe.escape(displayTitle)}</div>
               <div class="airing-countdown">${metaParts.join(" · ")}</div>
             </div>
           </button>`;
@@ -2283,7 +2282,7 @@ if (!donghuaMode) {
 
     function readStatusMap() {
       try {
-        return JSON.parse(localStorage.getItem("animeVoidStatuses") || "{}");
+        return AVSafe.read("animeVoidStatuses", {});
       } catch (error) {
         return {};
       }
@@ -2291,7 +2290,7 @@ if (!donghuaMode) {
 
     function readListSnapshots() {
       try {
-        return JSON.parse(localStorage.getItem("animeVoidListItems") || "{}");
+        return AVSafe.read("animeVoidListItems", {});
       } catch (error) {
         return {};
       }
@@ -2398,7 +2397,7 @@ if (!donghuaMode) {
       const menu = document.createElement("div");
       menu.className = "theme-menu";
       menu.innerHTML = VOID_THEMES.map(t =>
-        `<button type="button" class="theme-option${t.id === current ? " active" : ""}" onclick="selectTheme('${t.id}')"><span>${t.icon}</span>${isRussian ? t.ru : t.en}</button>`
+        `<button type="button" class="theme-option${AVSafe.escape(t.id === current ? " active" : "")}" onclick="selectTheme('${AVSafe.escape(t.id)}')"><span>${t.icon}</span>${isRussian ? t.ru : t.en}</button>`
       ).join("");
       document.body.appendChild(menu);
       const btn = document.getElementById("themeToggle");
@@ -2999,11 +2998,11 @@ if (!donghuaMode) {
       buckets.forEach(bucket => bucket.sort((a, b) => a.airingAt - b.airingAt));
       const todayIndex = (new Date().getDay() + 6) % 7;
       const calendarItemHTML = (entry, hidden) => `
-              <button type="button" class="calendar-item${hidden ? " hidden-extra" : ""}" onclick="openAnimePage('${encodeURIComponent(entry.item.id)}')">
-                <img src="${entry.item.image || 'image/poster1.jpg'}" alt="" loading="lazy"
+              <button type="button" class="calendar-item${hidden ? " hidden-extra" : ""}" onclick="openAnimePage('${AVSafe.escape(encodeURIComponent(entry.item.id))}')">
+                <img src="${AVSafe.escape(entry.item.image || 'image/poster1.jpg')}" alt="" loading="lazy"
                   onerror="this.onerror=null;this.src='image/poster1.jpg';">
                 <span class="calendar-item-body">
-                  <span class="calendar-item-name" data-anime-title-id="${entry.item.id}">${isRussian ? (getRussianTitle(entry.item) || entry.item.title) : entry.item.title}</span>
+                  <span class="calendar-item-name" data-anime-title-id="${AVSafe.escape(entry.item.id)}">${AVSafe.escape(isRussian ? (getRussianTitle(entry.item) || entry.item.title) : entry.item.title)}</span>
                   <span class="calendar-item-meta">${isRussian ? "серия" : "ep."} ${entry.item.nextEpisode} · ${entry.time}</span>
                 </span>
               </button>`;
@@ -3113,7 +3112,7 @@ if (!donghuaMode) {
     function renderStatsCharts() {
       const isRussian = localStorage.getItem("animeVoidLanguage") !== "en";
       let catalog = [];
-      try { catalog = JSON.parse(localStorage.getItem("animeVoidCatalog")) || []; } catch (err) {}
+      try { catalog = AVSafe.read("animeVoidCatalog", null) || []; } catch (err) {}
       const byId = new Map(catalog.map(t => [String(t.id), t]));
 
       const genreMinutes = {};
@@ -3122,7 +3121,7 @@ if (!donghuaMode) {
         if (!key || key.indexOf("watched_") !== 0) continue;
         const id = key.slice(8);
         let episodes = [];
-        try { episodes = JSON.parse(localStorage.getItem(key)) || []; } catch (err) { continue; }
+        try { episodes = AVSafe.read(key, null) || []; } catch (err) { continue; }
         if (!episodes.length) continue;
         const item = byId.get(id);
         if (!item || !Array.isArray(item.genres) || !item.genres.length) continue;
@@ -3157,7 +3156,7 @@ if (!donghuaMode) {
       });
 
       let statuses = {};
-      try { statuses = JSON.parse(localStorage.getItem("animeVoidStatuses")) || {}; } catch (err) {}
+      try { statuses = AVSafe.read("animeVoidStatuses", null) || {}; } catch (err) {}
       const counts = { watching: 0, planned: 0, completed: 0, dropped: 0 };
       Object.keys(statuses).forEach(id => { const s = statuses[id]; if (counts[s] !== undefined) counts[s]++; });
       const statusEntries = Object.keys(counts)
@@ -3236,7 +3235,7 @@ if (!donghuaMode) {
         " — " + (isRussian ? "серия" : "ep.") + " " + item.nextEpisode
       ).join("; ");
       banner.innerHTML = `
-        <span class="missed-banner-text">🔔 ${isRussian ? "Пока тебя не было:" : "While you were away:"} ${titlesText}</span>
+        <span class="missed-banner-text">🔔 ${isRussian ? "Пока тебя не было:" : "While you were away:"} ${AVSafe.escape(titlesText)}</span>
         <button type="button" class="missed-banner-close" onclick="document.getElementById('missedBanner').hidden = true" aria-label="Закрыть">×</button>`;
       banner.hidden = false;
     }
@@ -3247,7 +3246,7 @@ if (!donghuaMode) {
       let watchedTitles = 0;
       let hours = 0;
       let catalog = [];
-      try { catalog = JSON.parse(localStorage.getItem("animeVoidCatalog") || "[]"); } catch (error) {}
+      try { catalog = AVSafe.read("animeVoidCatalog", []); } catch (error) {}
       const byId = new Map(catalog.map(t => [String(t.id), t]));
       const genreEpisodes = {};
       try {
@@ -3255,7 +3254,7 @@ if (!donghuaMode) {
           const storageKey = localStorage.key(i);
           if (!storageKey || !storageKey.startsWith("watched_")) continue;
           let episodes = [];
-          try { episodes = JSON.parse(localStorage.getItem(storageKey) || "[]"); } catch (error) {}
+          try { episodes = AVSafe.read(storageKey, []); } catch (error) {}
           if (!Array.isArray(episodes) || !episodes.length) continue;
           totalEpisodes += episodes.length;
           watchedTitles += 1;
@@ -3281,7 +3280,7 @@ if (!donghuaMode) {
       let ratingsCount = 0;
       let maxRating = 0;
       try {
-        const ratings = JSON.parse(localStorage.getItem("animeVoidRatings") || "{}");
+        const ratings = AVSafe.read("animeVoidRatings", {});
         ratingsCount = Object.keys(ratings).length;
         Object.keys(ratings).forEach(id => { const value = Number(ratings[id]) || 0; if (value > maxRating) maxRating = value; });
       } catch (error) {}
@@ -3363,7 +3362,7 @@ if (!donghuaMode) {
             if (!tierList.length) return "";
             const tierUnlocked = tierList.filter(achievement => achievement.unlocked).length;
             const tierPct = Math.round(tierUnlocked / tierList.length * 100);
-            return `<div class="tier-column tier-${tier.id}">
+            return `<div class="tier-column tier-${AVSafe.escape(tier.id)}">
               <div class="tier-head">
                 <span class="tier-head-icon">${tier.icon}</span>
                 <span class="tier-head-name">${isRussian ? tier.ru : tier.en}</span>
@@ -3377,7 +3376,7 @@ if (!donghuaMode) {
                 const cardPct = Number(achievement.target) ? Math.min(100, Math.round((Number(achievement.progress) || 0) / achievement.target * 100)) : 0;
                 return `<div class="tier-card${done ? " unlocked" : ""}">
                   <span class="tier-card-icon">${done ? achievement.icon : "🔒"}</span>
-                  <span class="tier-card-title">${achievement.title}</span>
+                  <span class="tier-card-title">${AVSafe.escape(achievement.title)}</span>
                   <span class="tier-card-hint">${achievement.hint}</span>
                   ${done ? "" : (achievement.target ? `<div class="tier-card-bar"><span style="width:${cardPct}%"></span></div><span class="tier-card-nums">${current}/${achievement.target}</span>` : "")}
                 </div>`;
@@ -3479,7 +3478,7 @@ if (!donghuaMode) {
           const toast = document.createElement("div");
           toast.className = "achv-toast";
           toast.style.setProperty("--toast-color", TIER_TOAST_COLORS[achievement.tier] || "#a855f7");
-          toast.innerHTML = `<span class="achv-toast-ico">${achievement.icon}</span><div><div class="achv-toast-title">${achievement.title}</div><div class="achv-toast-sub">${isRussian ? "Ачивка получена" : "Achievement unlocked"}</div></div>`;
+          toast.innerHTML = `<span class="achv-toast-ico">${achievement.icon}</span><div><div class="achv-toast-title">${AVSafe.escape(achievement.title)}</div><div class="achv-toast-sub">${isRussian ? "Ачивка получена" : "Achievement unlocked"}</div></div>`;
           wrap.appendChild(toast);
           setTimeout(() => toast.classList.add("show"), 30);
           setTimeout(() => {
@@ -3494,7 +3493,7 @@ if (!donghuaMode) {
     function celebrateNewAchievements(list) {
       try {
         let seen = [];
-        try { seen = JSON.parse(localStorage.getItem("animeVoidSeenAchievements") || "[]"); } catch (error) {}
+        try { seen = AVSafe.read("animeVoidSeenAchievements", []); } catch (error) {}
         const fresh = list.filter(a => a.unlocked && seen.indexOf(a.title) === -1);
         if (!fresh.length) return;
         if (seen.length) {
@@ -3513,7 +3512,7 @@ if (!donghuaMode) {
     function logActivity(kind) {
       try {
         const today = new Date().toISOString().slice(0, 10);
-        const log = JSON.parse(localStorage.getItem("animeVoidActivityLog") || "{}");
+        const log = AVSafe.read("animeVoidActivityLog", {});
         log[today] = log[today] || { eps: 0, favs: 0, ratings: 0 };
         log[today][kind] = (log[today][kind] || 0) + 1;
         localStorage.setItem("animeVoidActivityLog", JSON.stringify(log));
@@ -3521,7 +3520,7 @@ if (!donghuaMode) {
     }
 
     function getActivityLog() {
-      try { return JSON.parse(localStorage.getItem("animeVoidActivityLog") || "{}"); } catch (error) { return {}; }
+      try { return AVSafe.read("animeVoidActivityLog", {}); } catch (error) { return {}; }
     }
 
     function calcStreak(log) {
@@ -3590,7 +3589,7 @@ if (!donghuaMode) {
     let activeMood = 'any';
     const tonightState = {format:'any',length:'any',exclude:true,show:false,previous:[]};
     function tonightRu(){return localStorage.getItem('animeVoidLanguage')!=='en';}
-    function tonightRead(key, fallback){try{return JSON.parse(localStorage.getItem(key)||'null')||fallback;}catch(e){return fallback;}}
+    function tonightRead(key, fallback){try{return AVSafe.read(key, null)||fallback;}catch(e){return fallback;}}
     function tonightEscape(value){return String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
     function tonightPool(){
       const map=new Map(TONIGHT_SEEDS.map(x=>[String(x.id),x]));
@@ -3629,13 +3628,13 @@ if (!donghuaMode) {
     }
     function renderMoodChips(){
       const box=document.getElementById('moodChips');if(!box)return;const ru=tonightRu();
-      box.innerHTML=MOODS.map(m=>`<button type="button" class="mood-chip${m.id===activeMood?' active':''}" aria-pressed="${m.id===activeMood}" onclick="pickMood('${m.id}')">${m.icon} ${ru?m.ru:m.en}</button>`).join('');
+      box.innerHTML=MOODS.map(m=>`<button type="button" class="mood-chip${AVSafe.escape(m.id===activeMood?' active':'')}" aria-pressed="${AVSafe.escape(m.id===activeMood)}" onclick="pickMood('${AVSafe.escape(m.id)}')">${m.icon} ${ru?m.ru:m.en}</button>`).join('');
       document.getElementById('moodTitle').textContent=ru?'✨ Что посмотреть сегодня?':'✨ What to watch today?';
       document.getElementById('moodSubtitle').textContent=ru?'Выбери настроение и удобную длину — предложу до 6 вариантов и объясню выбор.':'Choose a mood and a length — get up to 6 suggestions with reasons.';
       let controls=document.getElementById('tonightControls');
       if(!controls){controls=document.createElement('div');controls.id='tonightControls';controls.className='tonight-controls';box.after(controls);}
       const option=(v,ruText,enText,current)=>`<option value="${v}"${current===v?' selected':''}>${ru?ruText:enText}</option>`;
-      controls.innerHTML=`<div class="tonight-fields"><label>${ru?'Формат':'Format'}<select id="tonightFormat">${option('any','Любой','Any',tonightState.format)}${option('movie','Аниме-фильм','Anime movie',tonightState.format)}${option('series','Аниме-сериал','Anime series',tonightState.format)}</select></label><label>${ru?'Длина сериала':'Series length'}<select id="tonightLength" ${tonightState.format==='movie'?'disabled':''}>${option('any','Любая','Any',tonightState.length)}${option('short','До 13 серий','Up to 13 episodes',tonightState.length)}${option('medium','14–26 серий','14–26 episodes',tonightState.length)}${option('long','27+ серий','27+ episodes',tonightState.length)}</select></label></div><label class="tonight-check"><input type="checkbox" id="tonightExclude" ${tonightState.exclude?'checked':''}>${ru?'Скрыть просмотренное и брошенное':'Hide completed and dropped titles'}</label><p class="tonight-note">${ru?'Длина относится к выбранному сезону, не ко всей франшизе. Фильмы не ограничиваются числом серий.':'Length refers to the selected season, not the whole franchise. The episode filter does not limit movies.'}</p><div class="tonight-actions"><button type="button" class="tonight-submit" id="tonightGo">${ru?'Подобрать аниме':'Find anime'}</button><button type="button" class="tonight-reset" id="tonightReset">${ru?'Сбросить':'Reset'}</button></div>`;
+      controls.innerHTML=`<div class="tonight-fields"><label>${ru?'Формат':'Format'}<select id="tonightFormat">${AVSafe.escape(option('any','Любой','Any',tonightState.format))}${AVSafe.escape(option('movie','Аниме-фильм','Anime movie',tonightState.format))}${AVSafe.escape(option('series','Аниме-сериал','Anime series',tonightState.format))}</select></label><label>${ru?'Длина сериала':'Series length'}<select id="tonightLength" ${AVSafe.escape(tonightState.format==='movie'?'disabled':'')}>${option('any','Любая','Any',tonightState.length)}${option('short','До 13 серий','Up to 13 episodes',tonightState.length)}${option('medium','14–26 серий','14–26 episodes',tonightState.length)}${option('long','27+ серий','27+ episodes',tonightState.length)}</select></label></div><label class="tonight-check"><input type="checkbox" id="tonightExclude" ${tonightState.exclude?'checked':''}>${ru?'Скрыть просмотренное и брошенное':'Hide completed and dropped titles'}</label><p class="tonight-note">${ru?'Длина относится к выбранному сезону, не ко всей франшизе. Фильмы не ограничиваются числом серий.':'Length refers to the selected season, not the whole franchise. The episode filter does not limit movies.'}</p><div class="tonight-actions"><button type="button" class="tonight-submit" id="tonightGo">${ru?'Подобрать аниме':'Find anime'}</button><button type="button" class="tonight-reset" id="tonightReset">${ru?'Сбросить':'Reset'}</button></div>`;
       document.getElementById('tonightFormat').onchange=e=>{tonightState.format=e.target.value;tonightState.previous=[];renderMoodChips();if(tonightState.show)renderMoodPicks();};
       document.getElementById('tonightLength').onchange=e=>{tonightState.length=e.target.value;tonightState.previous=[];if(tonightState.show)renderMoodPicks();};
       document.getElementById('tonightExclude').onchange=e=>{tonightState.exclude=e.target.checked;tonightState.previous=[];if(tonightState.show)renderMoodPicks();};
@@ -3696,19 +3695,19 @@ if (!donghuaMode) {
       if (!section || !grid || !items.length) return;
       const isRussian = localStorage.getItem("animeVoidLanguage") !== "en";
       grid.innerHTML = items.map((item, index) => `
-        <button type="button" class="top-card" onclick="openAnimePage('${encodeURIComponent(item.id)}')">
+        <button type="button" class="top-card" onclick="openAnimePage('${AVSafe.escape(encodeURIComponent(item.id))}')">
           <span class="top-rank">#${index + 1}</span>
-          <img src="${item.image || 'image/poster1.jpg'}" alt="" loading="lazy"
+          <img src="${AVSafe.escape(item.image || 'image/poster1.jpg')}" alt="" loading="lazy"
             onerror="this.onerror=null;this.src='image/poster1.jpg';">
-          <span class="top-name" data-anime-title-id="${item.id}">${isRussian ? (getRussianTitle(item) || item.title) : item.title}</span>
-          <span class="top-score">${item.rating ? "⭐ " + item.rating : ""}</span>
+          <span class="top-name" data-anime-title-id="${AVSafe.escape(item.id)}">${AVSafe.escape(isRussian ? (getRussianTitle(item) || item.title) : item.title)}</span>
+          <span class="top-score">${AVSafe.escape(item.rating ? "⭐ " + item.rating : "")}</span>
         </button>`).join("");
       section.hidden = false;
     }
 
     async function loadTopSection() {
       try {
-        const cache = JSON.parse(localStorage.getItem("animeVoidTopCacheV1") || "null");
+        const cache = AVSafe.read("animeVoidTopCacheV1", null);
         if (cache && Array.isArray(cache.items) && cache.items.length && Date.now() - cache.savedAt < 86400000) {
           topItems = cache.items;
           renderTopSection(topItems);
@@ -3738,45 +3737,8 @@ if (!donghuaMode) {
     }
 
     /* ===== Бэкап ===== */
-    function exportBackup() {
-      const data = {};
-      for (let i = 0; i < localStorage.length; i++) {
-        const key = localStorage.key(i);
-        if (key && (key.startsWith("animeVoid") || key.startsWith("watched_") || key.startsWith("duration_") || key.startsWith("progress_"))) {
-          data[key] = localStorage.getItem(key);
-        }
-      }
-      const blob = new Blob([JSON.stringify({ app: "ANIME VOID", version: 1, savedAt: new Date().toISOString(), data }, null, 2)], { type: "application/json" });
-      const link = document.createElement("a");
-      link.href = URL.createObjectURL(blob);
-      link.download = "anime-void-backup-" + new Date().toISOString().slice(0, 10) + ".json";
-      document.body.appendChild(link);
-      link.click();
-      link.remove();
-      setTimeout(() => URL.revokeObjectURL(link.href), 5000);
-    }
-
-    function importBackup(file) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        const isRussian = localStorage.getItem("animeVoidLanguage") !== "en";
-        try {
-          const parsed = JSON.parse(reader.result);
-          const data = parsed && typeof parsed === "object" && parsed.data && typeof parsed.data === "object" ? parsed.data : parsed;
-          if (!data || typeof data !== "object") throw new Error("bad file");
-          if (!confirm(isRussian ? "Заменить текущие данные данными из бэкапа?" : "Replace current data with the backup?")) return;
-          Object.keys(data).forEach(key => {
-            if (typeof data[key] === "string" && (key.startsWith("animeVoid") || key.startsWith("watched_") || key.startsWith("duration_") || key.startsWith("progress_"))) {
-              localStorage.setItem(key, data[key]);
-            }
-          });
-          location.reload();
-        } catch (error) {
-          alert(isRussian ? "Не удалось прочитать файл бэкапа." : "Could not read the backup file.");
-        }
-      };
-      reader.readAsText(file);
-    }
+    function exportBackup() { AVSafe.exportBackup(); }
+    function importBackup(file) { return AVSafe.importBackup(file); }
 
     const exportBtn = document.getElementById("exportBtn");
     if (exportBtn) exportBtn.addEventListener("click", exportBackup);
@@ -4173,11 +4135,11 @@ if (!donghuaMode) {
         const meta = [item.year, item.genre].filter(Boolean).join(" · ");
         return `
           <button type="button" class="search-suggestion"
-            onclick="openAnimePage('${encodeURIComponent(item.id)}')">
-            <img src="${item.image || 'image/poster1.jpg'}" alt="" loading="lazy"
+            onclick="openAnimePage('${AVSafe.escape(encodeURIComponent(item.id))}')">
+            <img src="${AVSafe.escape(item.image || 'image/poster1.jpg')}" alt="" loading="lazy"
               onerror="this.onerror=null;this.src='image/poster1.jpg';">
             <span class="sug-info">
-              <span class="sug-title">${displayTitle}</span>
+              <span class="sug-title">${AVSafe.escape(displayTitle)}</span>
               <span class="sug-meta">${meta}</span>
             </span>
           </button>`;
@@ -4257,11 +4219,11 @@ if (!donghuaMode) {
       row.innerHTML = items.slice(0, 14).map(item => {
         const displayTitle = isRussian ? (getRussianTitle(item) || item.title) : item.title;
         return `
-          <button type="button" class="airing-card" onclick="openAnimePage('${encodeURIComponent(item.id)}')">
-            <img src="${item.image || 'image/poster1.jpg'}" alt="" loading="lazy"
+          <button type="button" class="airing-card" onclick="openAnimePage('${AVSafe.escape(encodeURIComponent(item.id))}')">
+            <img src="${AVSafe.escape(item.image || 'image/poster1.jpg')}" alt="" loading="lazy"
               onerror="this.onerror=null;this.src='image/poster1.jpg';">
             <div class="airing-body">
-              <div class="airing-name" data-anime-title-id="${item.id}">${displayTitle}</div>
+              <div class="airing-name" data-anime-title-id="${AVSafe.escape(item.id)}">${AVSafe.escape(displayTitle)}</div>
               <div class="airing-countdown" data-airing-at="${item.airingAt}" data-next-episode="${item.nextEpisode}">
                 ${airingCountdownText(item.airingAt, item.nextEpisode)}
               </div>
@@ -4279,7 +4241,7 @@ if (!donghuaMode) {
       const cacheKey = "animeVoidAiringCacheV2";
       let items = null;
       try {
-        const cache = JSON.parse(localStorage.getItem(cacheKey) || "null");
+        const cache = AVSafe.read(cacheKey, null);
         if (cache && Date.now() - cache.savedAt < 60 * 60 * 1000 && Array.isArray(cache.items)) {
           items = cache.items;
         }
@@ -4338,11 +4300,11 @@ if (!donghuaMode) {
       row.innerHTML = items.slice(0, 14).map(item => {
         const displayTitle = isRussian ? (getRussianTitle(item) || item.title) : item.title;
         return `
-          <button type="button" class="airing-card" onclick="openAnimePage('${encodeURIComponent(item.id)}')">
-            <img src="${item.image || 'image/poster1.jpg'}" alt="" loading="lazy"
+          <button type="button" class="airing-card" onclick="openAnimePage('${AVSafe.escape(encodeURIComponent(item.id))}')">
+            <img src="${AVSafe.escape(item.image || 'image/poster1.jpg')}" alt="" loading="lazy"
               onerror="this.onerror=null;this.src='image/poster1.jpg';">
             <div class="airing-body">
-              <div class="airing-name" data-anime-title-id="${item.id}">${displayTitle}</div>
+              <div class="airing-name" data-anime-title-id="${AVSafe.escape(item.id)}">${AVSafe.escape(displayTitle)}</div>
               <div class="airing-countdown" data-airing-at="${item.airingAt}" data-next-episode="${item.nextEpisode}">
                 ${airingCountdownText(item.airingAt, item.nextEpisode)}
               </div>
@@ -4357,7 +4319,7 @@ if (!donghuaMode) {
       const cacheKey = "animeVoidDonghuaAiringCacheV1";
       let items = null;
       try {
-        const cache = JSON.parse(localStorage.getItem(cacheKey) || "null");
+        const cache = AVSafe.read(cacheKey, null);
         if (cache && Date.now() - cache.savedAt < 60 * 60 * 1000 && Array.isArray(cache.items)) {
           items = cache.items;
         }
@@ -4424,7 +4386,7 @@ if (!donghuaMode) {
         const animeId = storageKey.slice("watched_".length);
         let episodes = [];
         try {
-          const parsed = JSON.parse(localStorage.getItem(storageKey) || "[]");
+          const parsed = AVSafe.read(storageKey, []);
           if (Array.isArray(parsed)) episodes = parsed.map(Number).filter(number => number > 0);
         } catch (error) { episodes = []; }
         if (!episodes.length) continue;
@@ -4434,7 +4396,7 @@ if (!donghuaMode) {
       }
       let lastWatch = null;
       try {
-        lastWatch = JSON.parse(localStorage.getItem("animeVoidLastWatch") || "null");
+        lastWatch = AVSafe.read("animeVoidLastWatch", null);
       } catch (error) { lastWatch = null; }
       entries.sort((a, b) => {
         const aLast = lastWatch && String(lastWatch.animeId) === String(a.item.id) ? 1 : 0;
@@ -4470,7 +4432,7 @@ if (!donghuaMode) {
 
       let favorites = [];
       try {
-        favorites = JSON.parse(localStorage.getItem("animeVoidFavorites") || "[]");
+        favorites = AVSafe.read("animeVoidFavorites", []);
       } catch (error) { favorites = []; }
 
       const totalEpisodes = entries.reduce((sum, entry) => sum + entry.episodes.length, 0);
@@ -4501,7 +4463,7 @@ if (!donghuaMode) {
       document.getElementById("statFavoritesLabel").textContent = isRussian ? "в избранном" : "in favorites";
 
       document.getElementById("topGenres").innerHTML = topGenres
-        .map(genre => `<span class="genre-chip">${genre}</span>`)
+        .map(genre => `<span class="genre-chip">${AVSafe.escape(genre)}</span>`)
         .join("");
 
       document.getElementById("historyGrid").innerHTML = entries.map(entry => {
@@ -4513,11 +4475,11 @@ if (!donghuaMode) {
           ? (isRussian ? `${entry.episodes.length} из ${total} серий` : `${entry.episodes.length} of ${total} episodes`)
           : (isRussian ? `${entry.episodes.length} серий` : `${entry.episodes.length} episodes`);
         return `
-          <button type="button" class="history-card" onclick="openAnimePage('${encodeURIComponent(item.id)}')">
-            <img src="${item.image || 'image/poster1.jpg'}" alt="" loading="lazy"
+          <button type="button" class="history-card" onclick="openAnimePage('${AVSafe.escape(encodeURIComponent(item.id))}')">
+            <img src="${AVSafe.escape(item.image || 'image/poster1.jpg')}" alt="" loading="lazy"
               onerror="this.onerror=null;this.src='image/poster1.jpg';">
             <div class="history-body">
-              <div class="history-name" data-anime-title-id="${item.id}">${displayTitle}</div>
+              <div class="history-name" data-anime-title-id="${AVSafe.escape(item.id)}">${AVSafe.escape(displayTitle)}</div>
               <div class="history-progress-text">${progressText}</div>
               <div class="history-progress"><div class="history-progress-fill" style="width:${percent}%"></div></div>
             </div>
@@ -4874,7 +4836,7 @@ function toggleFavorite(id) {
       <div class="anime-detail-poster">
         <img
           src="${poster}"
-          alt="${item.title}"
+          alt="${AVSafe.escape(item.title)}"
           onerror="this.onerror=null;this.src='image/poster1.jpg';"
         >
       </div>
@@ -4882,16 +4844,16 @@ function toggleFavorite(id) {
       <div class="anime-detail-content">
 
         <span class="anime-tag">
-          ✦ ${item.label || "ANIME VOID"}
+          ✦ ${AVSafe.escape(item.label || "ANIME VOID")}
         </span>
 
-        <h2 id="modalAnimeTitle">${getRussianTitle(item) || item.title}</h2>
+        <h2 id="modalAnimeTitle">${AVSafe.escape(getRussianTitle(item) || item.title)}</h2>
 
         <p
           id="animeDescription"
           class="anime-detail-description"
         >
-          ${item.description || "Описание пока отсутствует."}
+          ${AVSafe.description(item.description || "Описание пока отсутствует.")}
         </p>
 
         <div class="anime-details">
@@ -4899,7 +4861,7 @@ function toggleFavorite(id) {
           <div class="detail-card">
             <span class="detail-label">Рейтинг</span>
             <span class="detail-value rating-value">
-              ★ ${item.rating || "Нет данных"}
+              ★ ${AVSafe.escape(item.rating || "Нет данных")}
             </span>
           </div>
 
@@ -4913,21 +4875,21 @@ function toggleFavorite(id) {
           <div class="detail-card">
             <span class="detail-label">Статус</span>
             <span class="detail-value">
-              ${translateStatus(item.status)}
+              ${AVSafe.escape(translateStatus(item.status))}
             </span>
           </div>
 
           <div class="detail-card">
             <span class="detail-label">Год</span>
             <span class="detail-value">
-              ${item.year || "Неизвестно"}
+              ${AVSafe.escape(item.year || "Неизвестно")}
             </span>
           </div>
 
           <div class="detail-card">
             <span class="detail-label">Жанр</span>
             <span class="detail-value">
-              ${item.genre || "Неизвестно"}
+              ${AVSafe.escape(item.genre || "Неизвестно")}
             </span>
           </div>
 
@@ -4946,7 +4908,7 @@ function toggleFavorite(id) {
       document.getElementById("animeDescription");
 
     if (descriptionElement && translatedText) {
-      descriptionElement.innerHTML = translatedText;
+      descriptionElement.innerHTML = AVSafe.description(translatedText);
     }
   });
 }
@@ -4985,13 +4947,9 @@ function toggleFavorite(id) {
   const section = document.getElementById("continueSection");
   const card = document.getElementById("continueCard");
 
-  const lastWatch = JSON.parse(
-    localStorage.getItem("animeVoidLastWatch") || "null"
-  );
+  const lastWatch = AVSafe.read("animeVoidLastWatch", null);
 
-  const catalog = JSON.parse(
-    localStorage.getItem("animeVoidCatalog") || "[]"
-  );
+  const catalog = AVSafe.read("animeVoidCatalog", []);
 
   if (!lastWatch || !section || !card) {
     if (section) section.style.display = "none";
@@ -5062,13 +5020,13 @@ function toggleFavorite(id) {
   card.innerHTML = `
     <img
       src="${posterSrc}"
-      alt="${anime.title}"
+      alt="${AVSafe.escape(anime.title)}"
       onerror="this.onerror=null;this.src='image/poster1.jpg';"
     >
 
     <div class="continue-info">
 
-      <h3 data-anime-title-id="${anime.id}">${displayTitle}</h3>
+      <h3 data-anime-title-id="${AVSafe.escape(anime.id)}">${AVSafe.escape(displayTitle)}</h3>
 
       <p id="continueEpisodeText">
         ${isMovie ? (currentLang === "ru" ? "Фильм" : "Movie") : (currentLang === "ru" ? `Серия ${lastWatch.episode}` : `Episode ${lastWatch.episode}`)}
@@ -5082,7 +5040,7 @@ function toggleFavorite(id) {
       <button
         id="continueWatchBtn"
         class="continue-btn"
-        onclick="window.location.href='watch.html?id=${encodeURIComponent(anime.id)}&episode=${lastWatch.episode}'"
+        onclick="window.location.href='watch.html?id=${AVSafe.escape(encodeURIComponent(anime.id))}&episode=${lastWatch.episode}'"
       >
         ${isMovie ? (currentLang === "ru" ? "▶ Продолжить фильм" : "▶ Continue movie") : (currentLang === "ru" ? "▶ Продолжить просмотр" : "▶ Continue watching")}
       </button>
@@ -5676,7 +5634,7 @@ if (resetFiltersBtn) {
 // First-time visitors have no saved catalog, so load the first page for them automatically.
 let hasSavedCatalog = false;
 try {
-  hasSavedCatalog = JSON.parse(localStorage.getItem("animeVoidCatalog") || "[]").length > 0;
+  hasSavedCatalog = AVSafe.read("animeVoidCatalog", []).length > 0;
 } catch (error) {
   hasSavedCatalog = false;
 }
