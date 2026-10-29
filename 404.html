@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 — ANIME VOID</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      min-height: 100vh; display: flex; align-items: center; justify-content: center;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      background: #090810; color: #f5f3ff; text-align: center; padding: 24px;
+      --accent: #a855f7; --accent2: #c084fc;
+      overflow-x: hidden;
+    }
+    .void-wrap { position: relative; z-index: 2; max-width: 560px; }
+    .portal {
+      width: 190px; height: 190px; margin: 0 auto 26px; border-radius: 50%;
+      background: conic-gradient(from 0deg, #090810, var(--accent), #090810, var(--accent2), #090810);
+      animation: spin 6s linear infinite;
+      position: relative;
+      filter: drop-shadow(0 0 40px var(--accent));
+    }
+    .portal::after {
+      content: ""; position: absolute; inset: 26%; border-radius: 50%;
+      background: #090810; box-shadow: inset 0 0 30px rgba(0,0,0,.9), 0 0 24px var(--accent);
+      animation: pulse 2.4s ease-in-out infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.12); } }
+    .code {
+      font-size: 88px; font-weight: 900; letter-spacing: 6px; line-height: 1;
+      background: linear-gradient(90deg, var(--accent), var(--accent2), var(--accent));
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+      animation: flicker 4s infinite;
+    }
+    @keyframes flicker { 0%, 91%, 94%, 97%, 100% { opacity: 1; } 92% { opacity: .5; } 96% { opacity: .7; } }
+    h1 { font-size: 24px; margin: 18px 0 10px; }
+    p { color: #9994ae; font-size: 15px; line-height: 1.6; }
+    .quote { font-style: italic; font-size: 13.5px; color: #7a6f9a; margin: 14px 0 26px; }
+    .btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .btn { padding: 13px 26px; border-radius: 14px; font-size: 15px; font-weight: 800; text-decoration: none; transition: transform .2s, box-shadow .2s, background .2s; }
+    .btn-main { background: linear-gradient(135deg, #7c3aed, var(--accent)); color: #fff; box-shadow: 0 10px 30px rgba(124, 58, 237, .4); }
+    .btn-main:hover { transform: translateY(-3px); box-shadow: 0 16px 40px rgba(124, 58, 237, .55); }
+    .btn-ghost { border: 1px solid rgba(168, 85, 247, .4); color: #d8b4fe; }
+    .btn-ghost:hover { transform: translateY(-3px); background: rgba(168, 85, 247, .12); }
+    .footer-note { margin-top: 34px; font-size: 12px; color: #5c5470; }
+    .star { position: fixed; border-radius: 50%; background: #fff; opacity: .6; animation: twinkle 3s ease-in-out infinite; z-index: 1; }
+    @keyframes twinkle { 0%, 100% { opacity: .15; transform: scale(.8); } 50% { opacity: .7; transform: scale(1.15); } }
+    @media (max-width: 560px) { .code { font-size: 64px; } .portal { width: 150px; height: 150px; } }
+  </style>
+</head>
+<body>
+  <div class="void-wrap">
+    <div class="portal"></div>
+    <div class="code">404</div>
+    <h1 id="t">Это аниме исчезло из этого мира</h1>
+    <p id="s">Страница растворилась в пустоте… Но твой путь ещё не окончен.</p>
+    <div class="quote" id="q"></div>
+    <div class="btns">
+      <a class="btn btn-main" id="home" href="/">🏠 На главную</a>
+      <a class="btn btn-ghost" id="prof" href="/profile.html">👤 В профиль</a>
+    </div>
+    <div class="footer-note">ANIME VOID © 2026 · anime-void-app.github.io/AV</div>
+  </div>
+  <script>
+    (function () {
+      var base = location.pathname.indexOf("/AV/") !== -1 ? "/AV/" : "/";
+      document.getElementById("home").href = base;
+      document.getElementById("prof").href = base + "profile.html";
+
+      var ru = true;
+      try { ru = localStorage.getItem("animeVoidLanguage") !== "en"; } catch (e) {}
+      if (!ru) {
+        document.getElementById("t").textContent = "This anime vanished from this world";
+        document.getElementById("s").textContent = "The page dissolved into the void... But your journey is not over.";
+        document.getElementById("home").textContent = "🏠 Home";
+        document.getElementById("prof").textContent = "👤 Profile";
+      }
+
+      var quotes = ru ? [
+        "«Пустота — это лишь место, где начнётся новая история»",
+        "«Даже герой иногда сворачивает не туда»",
+        "«Потерянная страница — это секретная арка сюжета»",
+        "«Сюжетная дыра? Нет, портал в другой мир»",
+        "«Здесь могла быть твоя следующая любимая серия»"
+      ] : [
+        "“The void is just where a new story begins”",
+        "“Even heroes take a wrong turn sometimes”",
+        "“A lost page is a secret story arc”",
+        "“Plot hole? No, a portal to another world”",
+        "“Your next favorite episode could have been here”"
+      ];
+      document.getElementById("q").textContent = quotes[Math.floor(Math.random() * quotes.length)];
+
+      try {
+        var theme = localStorage.getItem("animeVoidTheme");
+        var accents = {
+          sakura: ["#d6336e", "#ff5c97"],
+          ocean: ["#0f7fb5", "#38bdf8"],
+          forest: ["#2f9e44", "#4ade80"],
+          light: ["#7c3aed", "#a855f7"]
+        };
+        if (theme && accents[theme]) {
+          document.body.style.setProperty("--accent", accents[theme][0]);
+          document.body.style.setProperty("--accent2", accents[theme][1]);
+        }
+      } catch (e) {}
+
+      for (var i = 0; i < 26; i++) {
+        var star = document.createElement("div");
+        star.className = "star";
+        var size = 1 + Math.random() * 2.4;
+        star.style.width = size + "px";
+        star.style.height = size + "px";
+        star.style.left = Math.random() * 100 + "vw";
+        star.style.top = Math.random() * 100 + "vh";
+        star.style.animationDelay = (Math.random() * 3) + "s";
+        document.body.appendChild(star);
+      }
+    })();
+  </script>
+</body>
+</html>
