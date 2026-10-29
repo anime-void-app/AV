@@ -128,6 +128,7 @@
       line-height: 1;
       transition: transform .2s, border-color .2s;
       flex: 0 0 auto;
+      box-shadow: 0 0 34px rgba(124, 58, 237, .42);
     }
     .avatar-btn:hover { transform: scale(1.06); border-color: rgba(192, 132, 252, .8); }
     .profile-info { min-width: 0; }
@@ -142,6 +143,18 @@
     }
     .edit-name:hover { background: rgba(124, 58, 237, .26); }
     .profile-since { color: #b79ce8; font-size: 14px; margin: 8px 0 0; }
+    .rank-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-top: 10px; }
+    .rank-pill {
+      padding: 5px 13px; border-radius: 999px;
+      background: linear-gradient(110deg, #7c3aed, #a855f7);
+      color: #fff; font-size: 12px; font-weight: 800; letter-spacing: .3px;
+      box-shadow: 0 6px 18px rgba(124, 58, 237, .4);
+    }
+    .level-text { color: #d8b4fe; font-size: 13px; font-weight: 700; }
+    .level-box { width: 100%; margin-top: 8px; display: flex; flex-direction: column; gap: 7px; }
+    .level-bar { height: 10px; border-radius: 999px; background: rgba(18, 16, 29, .8); border: 1px solid rgba(168, 85, 247, .3); overflow: hidden; }
+    .level-bar span { display: block; height: 100%; border-radius: 999px; background: linear-gradient(90deg, #7c3aed, #a855f7, #c084fc); transition: width .4s ease; }
+    .level-next { font-size: 12px; color: #b79ce8; }
 
     .avatar-picker {
       display: grid;
@@ -301,6 +314,9 @@
     body.theme-light .avatar-btn { background: #f6effe; }
     body.theme-light .edit-name { color: #5b21b6; border-color: rgba(124, 58, 237, .4); background: rgba(124, 58, 237, .1); }
     body.theme-light .profile-since { color: #5c5275; }
+    body.theme-light .level-text { color: #5b21b6; }
+    body.theme-light .level-bar { background: #fdfbff; border-color: rgba(124, 58, 237, .35); }
+    body.theme-light .level-next { color: #5c5275; }
     body.theme-light .avatar-picker button { background: #fdfbff; border-color: #d6c5f0; }
     body.theme-light .stat-card { background: #fdfbff; border-color: #d6c5f0; }
     body.theme-light .stat-card strong { color: #5b21b6; }
@@ -348,8 +364,16 @@
             <h1 id="profileName">Смотрящий</h1>
             <button type="button" class="edit-name" id="editNameBtn" title="Изменить имя">✏️</button>
           </div>
+          <div class="rank-row">
+            <span class="rank-pill" id="rankPill">🌱 Новичок</span>
+            <span class="level-text" id="levelText">Уровень 1</span>
+          </div>
           <p class="profile-since" id="profileSince">в ANIME VOID</p>
         </div>
+      </div>
+      <div class="level-box">
+        <div class="level-bar"><span id="levelFill" style="width:0%"></span></div>
+        <div class="level-next" id="levelNext"></div>
       </div>
       <div class="avatar-picker" id="avatarPicker" hidden></div>
     </section>
@@ -513,6 +537,20 @@
     }
 
     /* ===== Шапка профиля ===== */
+    const LEVEL_HOURS = 5;
+    const RANKS = [
+      { minLevel: 20, icon: "👑", ru: "Легенда аниме", en: "Anime legend" },
+      { minLevel: 12, icon: "💜", ru: "Сенсей", en: "Senpai" },
+      { minLevel: 7, icon: "🔥", ru: "Отаку", en: "Otaku" },
+      { minLevel: 4, icon: "⭐", ru: "Фанат", en: "Fan" },
+      { minLevel: 2, icon: "📺", ru: "Зритель", en: "Viewer" },
+      { minLevel: 1, icon: "🌱", ru: "Новичок", en: "Newcomer" }
+    ];
+    function rankForLevel(level) {
+      for (let i = 0; i < RANKS.length; i++) if (level >= RANKS[i].minLevel) return RANKS[i];
+      return RANKS[RANKS.length - 1];
+    }
+
     function renderProfileHeader() {
       const isRussian = isRussianNow();
       const avatar = localStorage.getItem("animeVoidAvatar") || "🐉";
@@ -531,6 +569,21 @@
         ? "в ANIME VOID с " + date.getDate() + " " + RU_MONTHS[date.getMonth()] + " " + date.getFullYear()
         : "in ANIME VOID since " + EN_MONTHS[date.getMonth()] + " " + date.getDate() + ", " + date.getFullYear();
       setT("profileSince", sinceText);
+
+      const stats = collectStats();
+      const level = Math.floor(stats.hours / LEVEL_HOURS) + 1;
+      const inLevel = stats.hours % LEVEL_HOURS;
+      const rank = rankForLevel(level);
+      const rankPill = document.getElementById("rankPill");
+      if (rankPill) rankPill.textContent = rank.icon + " " + (isRussian ? rank.ru : rank.en);
+      const levelText = document.getElementById("levelText");
+      if (levelText) levelText.textContent = isRussian ? "Уровень " + level : "Level " + level;
+      const levelFill = document.getElementById("levelFill");
+      if (levelFill) levelFill.style.width = Math.min(100, Math.round(inLevel / LEVEL_HOURS * 100)) + "%";
+      const levelNext = document.getElementById("levelNext");
+      if (levelNext) levelNext.textContent = isRussian
+        ? "До уровня " + (level + 1) + ": " + (LEVEL_HOURS - inLevel) + " ч просмотра"
+        : "To level " + (level + 1) + ": " + (LEVEL_HOURS - inLevel) + " h of watching";
     }
 
     function renderAvatarPicker() {
@@ -573,6 +626,9 @@
       let totalEpisodes = 0;
       let watchedTitles = 0;
       let hours = 0;
+      const catalog = readCatalog();
+      const byId = new Map(catalog.map(t => [String(t.id), t]));
+      const genreEpisodes = {};
       for (let i = 0; i < localStorage.length; i++) {
         const storageKey = localStorage.key(i);
         if (!storageKey || storageKey.indexOf("watched_") !== 0) continue;
@@ -586,6 +642,10 @@
           const duration = Number(localStorage.getItem("duration_" + animeId + "_" + episode)) || 0;
           hours += duration > 0 ? duration / 60 : 24;
         });
+        const item = byId.get(animeId);
+        if (item && Array.isArray(item.genres)) {
+          item.genres.forEach(genre => { genreEpisodes[genre] = (genreEpisodes[genre] || 0) + episodes.length; });
+        }
       }
       hours = Math.round(hours / 60);
       const statuses = readStatuses();
@@ -596,14 +656,21 @@
         else if (statuses[id] === "dropped") dropped += 1;
       });
       let ratingsCount = 0;
-      try { ratingsCount = Object.keys(JSON.parse(localStorage.getItem("animeVoidRatings") || "{}")).length; } catch (err) {}
+      let maxRating = 0;
+      try {
+        const ratings = JSON.parse(localStorage.getItem("animeVoidRatings") || "{}");
+        ratingsCount = Object.keys(ratings).length;
+        Object.keys(ratings).forEach(id => { const value = Number(ratings[id]) || 0; if (value > maxRating) maxRating = value; });
+      } catch (err) {}
       return {
         totalEpisodes, watchedTitles, hours, planned, completed, dropped,
-        ratingsCount, favoritesCount: readFavorites().length
+        ratingsCount, favoritesCount: readFavorites().length,
+        genreEpisodes, distinctGenres: Object.keys(genreEpisodes).length, maxRating
       };
     }
 
     function achievementsList(stats, isRussian) {
+      const genreEpisodes = stats.genreEpisodes || {};
       return [
         { icon: "🌱", unlocked: stats.totalEpisodes >= 1, title: isRussian ? "Первые шаги" : "First steps", hint: isRussian ? "Посмотреть 1 серию" : "Watch 1 episode" },
         { icon: "📺", unlocked: stats.totalEpisodes >= 10, title: isRussian ? "Разогрев" : "Warming up", hint: isRussian ? "10 серий" : "10 episodes" },
@@ -616,7 +683,16 @@
         { icon: "⭐", unlocked: stats.ratingsCount >= 5, title: isRussian ? "Критик" : "Critic", hint: isRussian ? "5 оценок поставлено" : "5 ratings given" },
         { icon: "📅", unlocked: stats.planned >= 5, title: isRussian ? "Стратег" : "Planner", hint: isRussian ? "5 в «В планах»" : "5 planned" },
         { icon: "✅", unlocked: stats.completed >= 1, title: isRussian ? "Финишист" : "Finisher", hint: isRussian ? "1 тайтл пройден" : "1 title completed" },
-        { icon: "🚫", unlocked: stats.dropped >= 1, title: isRussian ? "Бросатель" : "Dropper", hint: isRussian ? "1 брошенный тайтл" : "1 title dropped" }
+        { icon: "🚫", unlocked: stats.dropped >= 1, title: isRussian ? "Это не моё" : "Not my thing", hint: isRussian ? "1 брошенный тайтл" : "1 title dropped" },
+        { icon: "🏅", unlocked: stats.completed >= 3, title: isRussian ? "Мастер финалов" : "Finale master", hint: isRussian ? "3 тайтла пройдено" : "3 titles completed" },
+        { icon: "👑", unlocked: stats.maxRating >= 10, title: isRussian ? "Перфекционист" : "Perfectionist", hint: isRussian ? "Поставить оценку 10" : "Give a 10 rating" },
+        { icon: "🐉", unlocked: (genreEpisodes["Fantasy"] || 0) >= 10, title: isRussian ? "Повелитель драконов" : "Dragon lord", hint: isRussian ? "10 серий фэнтези" : "10 fantasy episodes" },
+        { icon: "⚔️", unlocked: (genreEpisodes["Action"] || 0) >= 25, title: isRussian ? "Воин" : "Warrior", hint: isRussian ? "25 серий экшена" : "25 action episodes" },
+        { icon: "💜", unlocked: (genreEpisodes["Romance"] || 0) >= 10, title: isRussian ? "Сердцеед" : "Heartbreaker", hint: isRussian ? "10 серий романтики" : "10 romance episodes" },
+        { icon: "😭", unlocked: (genreEpisodes["Drama"] || 0) >= 10, title: isRussian ? "Слезинка" : "Teardrop", hint: isRussian ? "10 серий драмы" : "10 drama episodes" },
+        { icon: "🤖", unlocked: (genreEpisodes["Mecha"] || 0) >= 1, title: isRussian ? "Пилот мехи" : "Mecha pilot", hint: isRussian ? "Посмотреть меху" : "Watch a mecha" },
+        { icon: "😱", unlocked: (genreEpisodes["Horror"] || 0) >= 1, title: isRussian ? "Бесстрашный" : "Fearless", hint: isRussian ? "Посмотреть хоррор" : "Watch a horror" },
+        { icon: "🌍", unlocked: stats.distinctGenres >= 6, title: isRussian ? "Исследователь миров" : "World explorer", hint: isRussian ? "6 разных жанров" : "6 different genres" }
       ];
     }
 
