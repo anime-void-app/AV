@@ -486,6 +486,17 @@
     .decor-option { display:flex; align-items:center; gap:10px; padding:9px 12px; border:none; border-radius:10px; background:none; color:#f5f3ff; font:inherit; font-size:13.5px; font-weight:600; cursor:pointer; text-align:left; }
     .decor-option:hover { background:rgba(168,85,247,.18); }
     .decor-option.active { background:rgba(168,85,247,.28); box-shadow:inset 0 0 0 1px rgba(192,132,252,.5); }
+
+    /* ===== Боковые арт-баннеры ===== */
+    .side-art { position:fixed; top:50%; transform:translateY(-50%); width:clamp(150px,12vw,235px); height:min(76vh,730px); border-radius:22px; border:1px solid rgba(168,85,247,.4); overflow:hidden; z-index:0; pointer-events:none; box-shadow:0 24px 60px rgba(0,0,0,.55), 0 0 34px rgba(168,85,247,.14); opacity:.92; }
+    .side-art img { width:100%; height:100%; object-fit:cover; display:block; animation:artZoom 24s ease-in-out infinite alternate; }
+    .side-art::after { content:""; position:absolute; inset:0; background:linear-gradient(to top, rgba(9,8,16,.6), transparent 42%), linear-gradient(to bottom, rgba(9,8,16,.28), transparent 32%); pointer-events:none; }
+    .side-art-left { left:22px; }
+    .side-art-right { right:22px; }
+    .side-art-left img { animation-delay:-8s; }
+    @keyframes artZoom { from { transform:scale(1) translateY(0); } to { transform:scale(1.13) translateY(-1.6%); } }
+    @media (max-width:1699px) { .side-art { display:none; } }
+    .decor-sep { height:1px; background:rgba(168,85,247,.25); margin:5px 8px; }
     body.theme-light footer { color: #5c5275; border-top-color: #d9c6f2; }
 
     @media (max-width: 760px) {
@@ -1772,6 +1783,36 @@
       startDecor(mode);
     }
 
+    /* ===== Боковые арт-баннеры ===== */
+    const SIDE_ARTS = ["art-station.jpg", "art-sakura.jpg", "art-rooftop.jpg", "art-torii.jpg", "art-crossing.jpg", "art-clouds.jpg", "art-snowlamp.jpg", "art-stairs.jpg", "art-gazebo.jpg", "art-city.jpg", "art-sea.jpg", "art-konbini.jpg"];
+
+    function artBannersEnabled() {
+      try { return localStorage.getItem("animeVoidArtBanners") !== "off"; } catch (error) { return true; }
+    }
+
+    function renderSideArts() {
+      document.querySelectorAll(".side-art").forEach(el => el.remove());
+      if (!artBannersEnabled() || window.innerWidth < 1700) return;
+      const picked = SIDE_ARTS.slice().sort(() => Math.random() - 0.5);
+      [
+        { cls: "side-art-left", file: picked[0] },
+        { cls: "side-art-right", file: picked[1] }
+      ].forEach(side => {
+        const el = document.createElement("div");
+        el.className = "side-art " + side.cls;
+        el.innerHTML = '<img src="' + side.file + '" alt="" loading="lazy" onerror="this.parentElement.remove()">';
+        document.body.appendChild(el);
+      });
+    }
+
+    function toggleArtBanners() {
+      const enabled = artBannersEnabled();
+      try { localStorage.setItem("animeVoidArtBanners", enabled ? "off" : "on"); } catch (error) {}
+      renderSideArts();
+      closeDecorMenu();
+      setTimeout(() => { toggleDecor(); }, 40);
+    }
+
     function closeDecorMenu() {
       const menu = document.querySelector(".decor-menu");
       if (menu) menu.remove();
@@ -1785,7 +1826,11 @@
       menu.className = "decor-menu";
       menu.innerHTML = DECOR_MODES.map(m =>
         "<button type=\"button\" class=\"decor-option" + (m.id === current ? " active" : "") + "\" onclick=\"selectDecor('" + m.id + "')\"><span>" + m.icon + "</span>" + (isRussian ? m.ru : m.en) + "</button>"
-      ).join("");
+      ).join("") +
+        '<div class="decor-sep"></div>' +
+        '<button type="button" class="decor-option" onclick="toggleArtBanners()"><span>🖼️</span>' +
+        (isRussian ? "Боковые арты: " : "Side art: ") + (artBannersEnabled() ? (isRussian ? "вкл" : "on") : (isRussian ? "выкл" : "off")) +
+        '</button>';
       document.body.appendChild(menu);
       const btn = document.getElementById("decorToggle");
       if (btn) {
@@ -1810,6 +1855,12 @@
     }
 
     applyDecorFromStorage();
+    renderSideArts();
+    let sideArtsResizeTimer = null;
+    window.addEventListener("resize", () => {
+      clearTimeout(sideArtsResizeTimer);
+      sideArtsResizeTimer = setTimeout(renderSideArts, 250);
+    });
 
     applyThemeFromStorage();
     renderAvatarPicker();
