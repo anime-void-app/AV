@@ -1292,6 +1292,7 @@
     @keyframes artGlow { from { box-shadow:0 24px 70px rgba(0,0,0,.6), 0 0 28px rgba(168,85,247,.1); } to { box-shadow:0 24px 70px rgba(0,0,0,.6), 0 0 54px rgba(168,85,247,.26); } }
     @media (max-width:1599px) { .side-art { display:none; } }
     .decor-sep { height:1px; background:rgba(168,85,247,.25); margin:5px 8px; }
+    #skyTint { position:fixed; inset:0; z-index:-1; pointer-events:none; }
 
     /* ===== Новые темы (акценты поверх светлой раскладки) ===== */
     body.theme-sakura { --purple:#d6336e; --bg:#ffe4ef; --panel:#fffafc; --text:#3d1a2b; --muted:#8a5c6e;
@@ -1352,7 +1353,7 @@
   <button onclick="setLanguage('en')" id="enBtn">EN</button>
 </div>
 <button id="themeToggle" class="theme-toggle" onclick="toggleTheme()" title="Сменить тему" aria-label="Сменить тему">🌙</button>
-<button id="decorToggle" class="theme-toggle" onclick="toggleDecor()" title="Эффекты: сакура, снег, блёстки" aria-label="Эффекты">🌸</button>
+<button id="decorToggle" class="theme-toggle" onclick="toggleDecor()" title="Эффекты декора" aria-label="Эффекты">🌸</button>
     <div class="search-wrap">
       <input id="search" class="search" type="search" placeholder="⌕  Найти аниме...">
       <div id="searchSuggestions" class="search-suggestions" hidden></div>
@@ -2351,14 +2352,17 @@ localStorage.setItem("animeVoidHasMore", String(apiHasMore));
       { id: "off", icon: "🚫", ru: "Выключено", en: "Off" },
       { id: "sakura", icon: "🌸", ru: "Лепестки сакуры", en: "Sakura petals" },
       { id: "snow", icon: "❄️", ru: "Снег", en: "Snow" },
-      { id: "stars", icon: "✨", ru: "Блёстки", en: "Sparkles" },
-      { id: "hearts", icon: "💜", ru: "Сердечки", en: "Hearts" }
+      { id: "stars", icon: "✨", ru: "Звёздочки", en: "Stars" },
+      { id: "hearts", icon: "💜", ru: "Сердечки", en: "Hearts" },
+      { id: "cursor", icon: "🖱️", ru: "Блёстки за курсором", en: "Cursor sparkles" }
     ];
     let decorCanvas = null;
     let decorCtx = null;
     let decorParticles = [];
     let decorRunning = false;
     let decorLastSpawn = 0;
+    let cursorSparkListener = null;
+    let cursorSparkLast = 0;
 
     function currentDecorId() {
       let mode = "off";
@@ -2447,6 +2451,22 @@ localStorage.setItem("animeVoidHasMore", String(apiHasMore));
         ctx.bezierCurveTo(-s, -s * 0.35, -s * 0.5, -s, 0, -s * 0.4);
         ctx.bezierCurveTo(s * 0.5, -s, s, -s * 0.35, 0, s * 0.35);
         ctx.fill();
+      } else if (p.type === "spark") {
+        ctx.rotate(p.rot);
+        ctx.shadowColor = p.color;
+        ctx.shadowBlur = 7;
+        const s = p.size;
+        ctx.beginPath();
+        ctx.moveTo(0, -s);
+        ctx.lineTo(s * 0.22, -s * 0.22);
+        ctx.lineTo(s, 0);
+        ctx.lineTo(s * 0.22, s * 0.22);
+        ctx.lineTo(0, s);
+        ctx.lineTo(-s * 0.22, s * 0.22);
+        ctx.lineTo(-s, 0);
+        ctx.lineTo(-s * 0.22, -s * 0.22);
+        ctx.closePath();
+        ctx.fill();
       }
       ctx.restore();
     }
@@ -2459,7 +2479,7 @@ localStorage.setItem("animeVoidHasMore", String(apiHasMore));
       ctx.clearRect(0, 0, w, h);
       const mode = currentDecorId();
       if (mode === "off") return;
-      const target = mode === "sakura" ? 42 : mode === "snow" ? 70 : mode === "stars" ? 34 : 26;
+      const target = mode === "sakura" ? 42 : mode === "snow" ? 70 : mode === "stars" ? 34 : mode === "cursor" ? 0 : 26;
       if (decorParticles.length < target && now - decorLastSpawn > 90) {
         const particle = spawnDecorParticle(mode, w, h);
         if (particle) {
@@ -2468,6 +2488,17 @@ localStorage.setItem("animeVoidHasMore", String(apiHasMore));
         }
       }
       decorParticles.forEach(p => {
+        if (p.type === "spark") {
+          p.x += p.vx;
+          p.y += p.vy;
+          p.vx *= 0.985;
+          p.vy = p.vy * 0.985 + 0.045;
+          p.life -= 0.02;
+          p.alpha = Math.max(0, p.life);
+          if (p.vr) p.rot += p.vr;
+          drawDecorParticle(ctx, p);
+          return;
+        }
         p.x += p.vx + Math.sin(p.sway) * (p.type === "dot" ? 0.6 : 0.9);
         if (p.swaySpeed) p.sway += p.swaySpeed;
         p.y += p.vy;
@@ -2475,12 +2506,40 @@ localStorage.setItem("animeVoidHasMore", String(apiHasMore));
         if (p.twinkle !== undefined) p.alpha = 0.35 + Math.abs(Math.sin(p.twinkle += 0.05)) * 0.6;
         drawDecorParticle(ctx, p);
       });
-      decorParticles = decorParticles.filter(p => p.y > -60 && p.y < h + 80 && p.x > -80 && p.x < w + 80);
+      decorParticles = decorParticles.filter(p => (p.life === undefined || p.life > 0) && p.y > -60 && p.y < h + 80 && p.x > -80 && p.x < w + 80);
       requestAnimationFrame(decorFrame);
     }
 
     function startDecor(mode) {
       decorParticles = [];
+      if (cursorSparkListener) {
+        window.removeEventListener("pointermove", cursorSparkListener);
+        cursorSparkListener = null;
+      }
+      if (mode === "cursor") {
+        cursorSparkListener = function (e) {
+          const t = performance.now();
+          if (t - cursorSparkLast < 26 || decorParticles.length > 130) return;
+          cursorSparkLast = t;
+          const count = Math.random() < 0.5 ? 1 : 2;
+          for (let i = 0; i < count; i++) {
+            decorParticles.push({
+              type: "spark",
+              x: e.clientX + Math.random() * 12 - 6,
+              y: e.clientY + Math.random() * 12 - 6,
+              size: 1.6 + Math.random() * 2.6,
+              vx: -1 + Math.random() * 2,
+              vy: -1.7 + Math.random() * 1.3,
+              rot: Math.random() * Math.PI,
+              vr: -0.06 + Math.random() * 0.12,
+              color: ["#ffffff", "#ffe9a8", "#d6bbff", "#a8f0ff", "#ffc7dd"][Math.floor(Math.random() * 5)],
+              alpha: 1,
+              life: 0.8 + Math.random() * 0.35
+            });
+          }
+        };
+        window.addEventListener("pointermove", cursorSparkListener);
+      }
       if (mode === "off") {
         decorRunning = false;
         if (decorCanvas) {
@@ -2518,6 +2577,195 @@ localStorage.setItem("animeVoidHasMore", String(apiHasMore));
         button.textContent = meta ? meta.icon : "🌸";
       }
       startDecor(mode);
+    }
+
+    /* ===== Праздничные салюты ===== */
+    const HOLIDAY_FIREWORKS = [
+      { from: 1231, to: 107, colors: ["#ff5c5c", "#ffd166", "#6ee7ff", "#c084fc", "#ffffff"] },
+      { from: 214, to: 214, colors: ["#ff5c8a", "#ff9ec4", "#c084fc", "#ffffff"] },
+      { from: 308, to: 308, colors: ["#ffb3d1", "#ffd166", "#e9d5ff", "#ffffff"] },
+      { from: 509, to: 509, colors: ["#ff4b4b", "#ffd166", "#ffffff"] },
+      { from: 1031, to: 1031, colors: ["#ff8c2e", "#a855f7", "#8bd450", "#ffffff"] }
+    ];
+
+    function holidayPalette() {
+      const now = new Date();
+      const value = (now.getMonth() + 1) * 100 + now.getDate();
+      for (let i = 0; i < HOLIDAY_FIREWORKS.length; i++) {
+        const holiday = HOLIDAY_FIREWORKS[i];
+        if (holiday.from <= holiday.to ? (value >= holiday.from && value <= holiday.to) : (value >= holiday.from || value <= holiday.to)) return holiday.colors;
+      }
+      return null;
+    }
+
+    function holidayFireworksEnabled() {
+      try { return localStorage.getItem("animeVoidHoliday") !== "off"; } catch (error) { return true; }
+    }
+
+    let fwCanvas = null;
+    let fwCtx = null;
+    let fwRunning = false;
+    let fwRockets = [];
+    let fwSparks = [];
+    let fwLastLaunch = 0;
+
+    function launchFirework(width, height, colors) {
+      fwRockets.push({
+        x: width * (0.12 + Math.random() * 0.76),
+        y: height + 8,
+        vx: -0.6 + Math.random() * 1.2,
+        vy: -(5.5 + Math.random() * 2.8),
+        targetY: height * (0.16 + Math.random() * 0.34),
+        color: colors[Math.floor(Math.random() * colors.length)]
+      });
+    }
+
+    function explodeFirework(rocket, colors) {
+      const count = 42 + Math.floor(Math.random() * 26);
+      const tint = colors[Math.floor(Math.random() * colors.length)];
+      const twoTone = Math.random() < 0.5;
+      for (let i = 0; i < count; i++) {
+        const angle = (Math.PI * 2 * i) / count + Math.random() * 0.12;
+        const speed = 1.6 + Math.random() * 3.4;
+        fwSparks.push({
+          x: rocket.x, y: rocket.y,
+          vx: Math.cos(angle) * speed, vy: Math.sin(angle) * speed,
+          life: 1, decay: 0.007 + Math.random() * 0.008,
+          size: 1.4 + Math.random() * 1.4,
+          color: twoTone && i % 2 ? "#ffffff" : tint
+        });
+      }
+    }
+
+    function fireworksFrame(now) {
+      if (!fwRunning || !fwCanvas || !fwCtx) return;
+      const ctx = fwCtx;
+      const width = fwCanvas.width;
+      const height = fwCanvas.height;
+      ctx.clearRect(0, 0, width, height);
+      const colors = holidayPalette();
+      if (colors && now - fwLastLaunch > 1500 + Math.random() * 1800) {
+        fwLastLaunch = now;
+        launchFirework(width, height, colors);
+        if (Math.random() < 0.3) launchFirework(width, height, colors);
+      }
+      fwRockets.forEach(rocket => {
+        rocket.x += rocket.vx;
+        rocket.y += rocket.vy;
+        fwSparks.push({ x: rocket.x, y: rocket.y, vx: 0, vy: 0.3, life: 0.3, decay: 0.05, size: 1.1, color: rocket.color });
+        ctx.save();
+        ctx.globalAlpha = 0.95;
+        ctx.fillStyle = rocket.color;
+        ctx.shadowColor = rocket.color;
+        ctx.shadowBlur = 10;
+        ctx.beginPath();
+        ctx.arc(rocket.x, rocket.y, 2.2, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+        if (rocket.y <= rocket.targetY) {
+          rocket.done = true;
+          explodeFirework(rocket, colors || ["#ffffff"]);
+        }
+      });
+      fwRockets = fwRockets.filter(rocket => !rocket.done);
+      fwSparks.forEach(spark => {
+        spark.x += spark.vx;
+        spark.y += spark.vy;
+        spark.vx *= 0.982;
+        spark.vy = spark.vy * 0.982 + 0.045;
+        spark.life -= spark.decay;
+        ctx.save();
+        ctx.globalAlpha = Math.max(0, Math.min(1, spark.life));
+        ctx.fillStyle = spark.color;
+        ctx.shadowColor = spark.color;
+        ctx.shadowBlur = 8;
+        ctx.beginPath();
+        ctx.arc(spark.x, spark.y, spark.size, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+      });
+      fwSparks = fwSparks.filter(spark => spark.life > 0);
+      requestAnimationFrame(fireworksFrame);
+    }
+
+    function startHolidayFireworks() {
+      if (fwRunning || !holidayFireworksEnabled() || !holidayPalette()) return;
+      fwCanvas = document.createElement("canvas");
+      fwCanvas.className = "decor-canvas";
+      document.body.appendChild(fwCanvas);
+      fwCtx = fwCanvas.getContext("2d");
+      const resizeFireworks = () => {
+        if (fwCanvas) {
+          fwCanvas.width = window.innerWidth;
+          fwCanvas.height = window.innerHeight;
+        }
+      };
+      resizeFireworks();
+      window.addEventListener("resize", resizeFireworks);
+      fwRockets = [];
+      fwSparks = [];
+      fwLastLaunch = 0;
+      fwRunning = true;
+      requestAnimationFrame(fireworksFrame);
+    }
+
+    function stopHolidayFireworks() {
+      fwRunning = false;
+      if (fwCanvas) {
+        fwCanvas.remove();
+        fwCanvas = null;
+        fwCtx = null;
+      }
+      fwRockets = [];
+      fwSparks = [];
+    }
+
+    function toggleHolidayFireworks() {
+      try { localStorage.setItem("animeVoidHoliday", holidayFireworksEnabled() ? "off" : "on"); } catch (error) {}
+      if (holidayFireworksEnabled()) startHolidayFireworks();
+      else stopHolidayFireworks();
+      closeDecorMenu();
+      setTimeout(() => { toggleDecor(); }, 40);
+    }
+
+    /* ===== Фон по времени суток ===== */
+    let skyTintEl = null;
+
+    function skyByTimeEnabled() {
+      try { return localStorage.getItem("animeVoidDayNight") !== "off"; } catch (error) { return true; }
+    }
+
+    function applySkyTint() {
+      if (skyTintEl) {
+        skyTintEl.remove();
+        skyTintEl = null;
+      }
+      if (!skyByTimeEnabled()) return;
+      const lightTheme = document.body.classList.contains("theme-light");
+      const hour = new Date().getHours();
+      let gradient;
+      if (lightTheme) {
+        if (hour >= 22 || hour < 5) gradient = "radial-gradient(120% 70% at 50% -12%, rgba(90,100,200,.16), transparent 60%)";
+        else if (hour < 11) gradient = "radial-gradient(120% 70% at 50% -12%, rgba(255,170,120,.20), transparent 60%), radial-gradient(90% 55% at 15% 0%, rgba(255,140,180,.16), transparent 55%)";
+        else if (hour < 17) gradient = "radial-gradient(120% 70% at 50% -12%, rgba(130,170,255,.18), transparent 60%)";
+        else gradient = "radial-gradient(120% 70% at 50% -12%, rgba(255,150,90,.20), transparent 60%), radial-gradient(90% 55% at 82% 0%, rgba(190,120,220,.16), transparent 55%)";
+      } else {
+        if (hour >= 22 || hour < 5) gradient = "radial-gradient(120% 70% at 50% -12%, rgba(88,92,220,.32), transparent 62%), radial-gradient(90% 55% at 85% 0%, rgba(56,60,140,.22), transparent 55%)";
+        else if (hour < 11) gradient = "radial-gradient(120% 70% at 50% -12%, rgba(255,175,130,.22), transparent 60%), radial-gradient(90% 55% at 12% 0%, rgba(255,140,190,.18), transparent 55%)";
+        else if (hour < 17) gradient = "radial-gradient(120% 70% at 50% -12%, rgba(120,165,255,.20), transparent 60%)";
+        else gradient = "radial-gradient(120% 70% at 50% -12%, rgba(255,135,80,.22), transparent 60%), radial-gradient(90% 55% at 80% 0%, rgba(168,95,225,.18), transparent 55%)";
+      }
+      skyTintEl = document.createElement("div");
+      skyTintEl.id = "skyTint";
+      skyTintEl.style.background = gradient;
+      document.body.appendChild(skyTintEl);
+    }
+
+    function toggleSkyByTime() {
+      try { localStorage.setItem("animeVoidDayNight", skyByTimeEnabled() ? "off" : "on"); } catch (error) {}
+      applySkyTint();
+      closeDecorMenu();
+      setTimeout(() => { toggleDecor(); }, 40);
     }
 
     /* ===== Боковые арт-баннеры ===== */
@@ -2598,6 +2846,12 @@ localStorage.setItem("animeVoidHasMore", String(apiHasMore));
         '<div class="decor-sep"></div>' +
         '<button type="button" class="decor-option" onclick="toggleArtBanners()"><span>🖼️</span>' +
         (isRussian ? "Боковые арты: " : "Side art: ") + (artBannersEnabled() ? (isRussian ? "вкл" : "on") : (isRussian ? "выкл" : "off")) +
+        '</button>' +
+        '<button type="button" class="decor-option" onclick="toggleHolidayFireworks()"><span>🎆</span>' +
+        (isRussian ? "Праздничные салюты: " : "Holiday fireworks: ") + (holidayFireworksEnabled() ? (isRussian ? "вкл" : "on") : (isRussian ? "выкл" : "off")) +
+        '</button>' +
+        '<button type="button" class="decor-option" onclick="toggleSkyByTime()"><span>🌙</span>' +
+        (isRussian ? "Фон по времени суток: " : "Sky by time of day: ") + (skyByTimeEnabled() ? (isRussian ? "вкл" : "on") : (isRussian ? "выкл" : "off")) +
         '</button>';
       document.body.appendChild(menu);
       const btn = document.getElementById("decorToggle");
@@ -2631,6 +2885,11 @@ localStorage.setItem("animeVoidHasMore", String(apiHasMore));
     });
 
     applyThemeFromStorage();
+
+    /* ===== Фон по времени суток + праздничные салюты ===== */
+    applySkyTint();
+    setInterval(applySkyTint, 15 * 60 * 1000);
+    if (holidayFireworksEnabled()) startHolidayFireworks();
 
     /* ===== Календарь недели ===== */
     let currentAiringItems = [];
