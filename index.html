@@ -231,6 +231,18 @@
     .secondary { background: #ffffff12; color: white; border: 1px solid #ffffff20; }
     .primary:hover { filter: brightness(1.15); }
     .secondary:hover { background: #ffffff20; }
+    .donate-link { display:inline-block; text-decoration:none; font:inherit; font-weight:700; }
+    .donate-link:focus-visible { outline:3px solid #c084fc; outline-offset:3px; }
+    .support-panel { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:24px; align-items:center; margin:24px 0; padding:18px; border:1px solid rgba(168,85,247,.35); border-radius:20px; background:linear-gradient(120deg,#1b1230,#100b1d); }
+    .support-art { display:block; width:100%; height:auto; border-radius:13px; }
+    .support-copy { padding:10px 14px 10px 0; color:#f8f4ff; }
+    .support-copy h2 { margin:0 0 10px; font-size:clamp(22px,3vw,32px); line-height:1.2; }
+    .support-copy p { margin:0 0 18px; line-height:1.5; color:#ded0eb; }
+    .support-action { display:inline-flex; align-items:center; justify-content:center; padding:13px 18px; border-radius:12px; background:linear-gradient(110deg,#7c3aed,#a855f7); color:#fff; text-decoration:none; font-weight:800; }
+    .support-action:hover { filter:brightness(1.15); }
+    .support-action:focus-visible { outline:3px solid #e9d5ff; outline-offset:3px; }
+    @media(max-width:650px) { .support-panel { grid-template-columns:1fr; gap:12px; padding:14px; } .support-copy { padding:4px; } }
+
 
     .section-heading {
       display: flex;
@@ -1398,6 +1410,16 @@
 >
   🎲 Случайное аниме
 </button>
+<a id="donateBtn" class="secondary donate-link" href="https://www.donationalerts.com/r/tishecka" target="_blank" rel="noopener noreferrer">☕ Поддержать проект</a>
+      </div>
+    </section>
+
+    <section class="support-panel" aria-labelledby="supportTitle">
+      <img class="support-art" src="support-banner.jpg" alt="ANIME VOID — Поддержи наш мир аниме" width="1280" height="720" loading="lazy">
+      <div class="support-copy">
+        <h2 id="supportTitle">Помоги ANIME VOID стать ещё лучше ✨</h2>
+        <p id="supportText">Твоя поддержка помогает развивать наш мир аниме. Спасибо, что ты с нами! 💜</p>
+        <a id="supportAction" class="support-action" href="https://www.donationalerts.com/r/tishecka" target="_blank" rel="noopener noreferrer">☕ Поддержать проект</a>
       </div>
     </section>
 
@@ -5198,6 +5220,14 @@ function setLanguage(lang) {
 
     if (profileLink)
       profileLink.textContent = "👤 Профиль";
+    const donateBtnRu = document.getElementById("donateBtn");
+    if (donateBtnRu) donateBtnRu.textContent = "☕ Поддержать проект";
+    const supportTitleRu = document.getElementById("supportTitle");
+    const supportTextRu = document.getElementById("supportText");
+    const supportActionRu = document.getElementById("supportAction");
+    if (supportTitleRu) supportTitleRu.textContent = "Помоги ANIME VOID стать ещё лучше ✨";
+    if (supportTextRu) supportTextRu.textContent = "Твоя поддержка помогает развивать наш мир аниме. Спасибо, что ты с нами! 💜";
+    if (supportActionRu) supportActionRu.textContent = "☕ Поддержать проект";
 
     if (search)
       search.placeholder =
@@ -5307,6 +5337,14 @@ function setLanguage(lang) {
 
     if (profileLink)
       profileLink.textContent = "👤 Profile";
+    const donateBtnEn = document.getElementById("donateBtn");
+    if (donateBtnEn) donateBtnEn.textContent = "☕ Support the project";
+    const supportTitleEn = document.getElementById("supportTitle");
+    const supportTextEn = document.getElementById("supportText");
+    const supportActionEn = document.getElementById("supportAction");
+    if (supportTitleEn) supportTitleEn.textContent = "Help ANIME VOID grow ✨";
+    if (supportTextEn) supportTextEn.textContent = "Your support helps our anime world grow. Thank you for being here! 💜";
+    if (supportActionEn) supportActionEn.textContent = "☕ Support the project";
 
     if (search)
       search.placeholder =

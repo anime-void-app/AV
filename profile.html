@@ -416,6 +416,8 @@
     .share-row { display:flex; gap:10px; flex-wrap:wrap; margin-top:16px; }
     .share-btn { padding:10px 16px; border-radius:12px; border:1px solid rgba(168,85,247,.35); background:rgba(124,58,237,.14); color:var(--text); font:inherit; font-size:13px; font-weight:700; cursor:pointer; transition:transform .2s, border-color .2s, box-shadow .2s; }
     .share-btn:hover { transform:translateY(-2px); border-color:rgba(192,132,252,.7); box-shadow:0 8px 22px rgba(0,0,0,.3); }
+    .donate-link { display:inline-flex; align-items:center; text-decoration:none; }
+    .donate-link:focus-visible { outline:3px solid #c084fc; outline-offset:3px; }
     .share-btn.primary { background:linear-gradient(135deg,#7c3aed,#a855f7); border-color:transparent; color:#fff; }
     body.theme-light .share-btn { background:#fdfbff; color:#241b3d; }
 
@@ -556,6 +558,7 @@
         <button type="button" class="share-btn" id="shareCollectionBtn">📤 Поделиться коллекцией</button>
         <button type="button" class="share-btn" id="shareBannerBtn">🖼️ Шапка для соцсетей</button>
         <button type="button" class="share-btn" id="friendCodeBtn">🤝 Сравниться с другом</button>
+        <a class="share-btn donate-link" id="donateBtn" href="https://www.donationalerts.com/r/tishecka" target="_blank" rel="noopener noreferrer">☕ Поддержать проект</a>
       </div>
       <div class="avatar-picker" id="avatarPicker" hidden></div>
     </section>
@@ -1070,6 +1073,7 @@
       setTxt("shareCollectionBtn", "📤 Поделиться коллекцией", "📤 Share collection");
       setTxt("shareBannerBtn", "🖼️ Шапка для соцсетей", "🖼️ Social banner");
       setTxt("friendCodeBtn", "🤝 Сравниться с другом", "🤝 Compare with a friend");
+      setTxt("donateBtn", "☕ Поддержать проект", "☕ Support the project");
       setTxt("friendTitle", "🤝 Сравнение с другом", "🤝 Compare with a friend");
       setTxt("friendSubtitle", "Вставь код друга и узнай, кто больший отаку", "Paste a friend's code to see who is the bigger otaku");
       setTxt("copyMyCodeBtn", "📋 Мой код", "📋 My code");
