@@ -537,6 +537,8 @@
     }
     .top-score { font-size:12px; color:#b79ce8; font-weight:700; }
     body.theme-light .top-card { background:#fdfbff; border-color:#d6c5f0; }
+    body.theme-light .top-name { color:var(--text); }
+    body.theme-light .top-score { color:var(--muted); }
     @media (max-width:560px) { .top-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
 
     .airing-card {
@@ -1231,7 +1233,7 @@
     body.theme-light .sound-toggle { background:#fdfbff; border-color:#d6c5f0; }
 
     /* ===== Задания дня ===== */
-    .quests-card { margin-top:14px; padding:18px 20px; border-radius:18px; border:1px solid rgba(168,85,247,.22); background:linear-gradient(150deg, rgba(124,58,237,.12), rgba(18,16,29,.55)); display:flex; flex-direction:column; gap:12px; }
+    .quests-card { margin:14px 0 22px; padding:18px 20px; border-radius:18px; border:1px solid rgba(168,85,247,.22); background:linear-gradient(150deg, rgba(124,58,237,.12), rgba(18,16,29,.55)); display:flex; flex-direction:column; gap:12px; }
     .quests-head { display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; }
     .quests-title { font-size:16px; font-weight:900; color:var(--text); }
     .quests-streak { font-size:13.5px; font-weight:800; color:#fb923c; background:rgba(251,146,60,.12); border:1px solid rgba(251,146,60,.35); padding:5px 11px; border-radius:999px; }
@@ -1259,7 +1261,7 @@
     .mood-card { display:flex; flex-direction:column; gap:8px; padding:0; border:none; background:none; cursor:pointer; font:inherit; text-align:left; }
     .mood-card img { width:100%; aspect-ratio:2/3; object-fit:cover; border-radius:14px; border:1px solid rgba(168,85,247,.22); transition:transform .22s, box-shadow .22s; }
     .mood-card:hover img { transform:translateY(-4px) scale(1.03); box-shadow:0 14px 30px rgba(0,0,0,.45), 0 0 18px rgba(168,85,247,.35); }
-    .mood-card span { font-size:12.5px; font-weight:700; color:var(--text); line-height:1.35; display:-webkit-box; -webkit-line-clamp:2; line-clamp:2; -webkit-box-orient :vertical; overflow:hidden; }
+    .mood-card span { font-size:12.5px; font-weight:700; color:var(--text); line-height:1.35; display:-webkit-box; -webkit-line-clamp:2; line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
     .mood-empty { color:var(--muted); font-size:13.5px; font-weight:600; }
     .mood-shuffle { width:42px; height:42px; border-radius:12px; border:1px solid rgba(168,85,247,.3); background:rgba(18,16,29,.55); font-size:17px; cursor:pointer; transition:transform .2s; }
     .mood-shuffle:hover { transform:rotate(20deg) scale(1.1); }
