@@ -2474,7 +2474,17 @@ localStorage.setItem("animeVoidHasMore", String(apiHasMore));
         { icon: "😭", unlocked: (genreEpisodes["Drama"] || 0) >= 10, title: isRussian ? "Слезинка" : "Teardrop", hint: isRussian ? "10 серий драмы" : "10 drama episodes" },
         { icon: "🤖", unlocked: (genreEpisodes["Mecha"] || 0) >= 1, title: isRussian ? "Пилот мехи" : "Mecha pilot", hint: isRussian ? "Посмотреть меху" : "Watch a mecha" },
         { icon: "😱", unlocked: (genreEpisodes["Horror"] || 0) >= 1, title: isRussian ? "Бесстрашный" : "Fearless", hint: isRussian ? "Посмотреть хоррор" : "Watch a horror" },
-        { icon: "🌍", unlocked: stats.distinctGenres >= 6, title: isRussian ? "Исследователь миров" : "World explorer", hint: isRussian ? "6 разных жанров" : "6 different genres" }
+        { icon: "🌍", unlocked: stats.distinctGenres >= 6, title: isRussian ? "Исследователь миров" : "World explorer", hint: isRussian ? "6 разных жанров" : "6 different genres" },
+        { icon: "⏳", unlocked: stats.hours >= 24, title: isRussian ? "Сутки напролёт" : "Full day", hint: isRussian ? "24 часа просмотра" : "24 hours watched" },
+        { icon: "🥇", unlocked: stats.hours >= 100, title: isRussian ? "Вечный марафон" : "Eternal marathon", hint: isRussian ? "100 часов просмотра" : "100 hours watched" },
+        { icon: "🗃️", unlocked: stats.watchedTitles >= 20, title: isRussian ? "Архивариус" : "Archivist", hint: isRussian ? "20 тайтлов начато" : "20 titles started" },
+        { icon: "🌟", unlocked: stats.favoritesCount >= 25, title: isRussian ? "Звезда сайта" : "Site star", hint: isRussian ? "25 в избранном" : "25 favorites" },
+        { icon: "📖", unlocked: stats.ratingsCount >= 20, title: isRussian ? "Библиотекарь" : "Librarian", hint: isRussian ? "20 оценок поставлено" : "20 ratings given" },
+        { icon: "🌌", unlocked: (genreEpisodes["Sci-Fi"] || 0) >= 10, title: isRussian ? "Космонавт" : "Astronaut", hint: isRussian ? "10 серий Sci-Fi" : "10 sci-fi episodes" },
+        { icon: "🕵️", unlocked: (genreEpisodes["Mystery"] || 0) >= 10, title: isRussian ? "Сыщик" : "Detective", hint: isRussian ? "10 серий мистики" : "10 mystery episodes" },
+        { icon: "🍜", unlocked: (genreEpisodes["Slice of Life"] || 0) >= 10, title: isRussian ? "Гурман" : "Gourmet", hint: isRussian ? "10 серий повседневности" : "10 slice-of-life episodes" },
+        { icon: "🧙", unlocked: (genreEpisodes["Fantasy"] || 0) >= 50, title: isRussian ? "Архимаг" : "Archmage", hint: isRussian ? "50 серий фэнтези" : "50 fantasy episodes" },
+        { icon: "🏐", unlocked: (genreEpisodes["Sports"] || 0) >= 1, title: isRussian ? "Атлет" : "Athlete", hint: isRussian ? "Посмотреть спорт" : "Watch a sports" }
       ];
     }
 

@@ -104,7 +104,7 @@
     .anime-page {
     align-items: start;
       display: grid;
-      grid-template-columns: 300px 1fr;
+      grid-template-columns: 340px 1fr;
       gap: 45px;
 
       padding: 32px;
@@ -125,11 +125,15 @@
         0 0 40px rgba(147,51,234,.10);
     }
 
+    @media (min-width: 1400px) { .anime-page { grid-template-columns: 380px 1fr; } }
+
     .poster {
     aspect-ratio: 2 / 3;
       width: 100%;
       border-radius: 20px;
       overflow: hidden;
+      position: sticky;
+      top: 96px;
 
       border: 1px solid rgba(168,85,247,.45);
 
@@ -432,6 +436,7 @@
         aspect-ratio: 2 / 3;
         width: min(100%, 280px);
         margin: 0 auto;
+        position: static;
       }
       .info-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .season-switcher { gap: 7px; }
