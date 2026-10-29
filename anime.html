@@ -1174,7 +1174,7 @@ const russianTitleOverrides = {
 let watchedPercent = 0;
 
     if (isMovie) {
-      episodesHTML = `<button class="episode" onclick="openEpisode(1)">${currentLanguage === "ru" ? "▶ Смотреть фильм" : "▶ Watch movie"}</button>`;
+      episodesHTML = `<button class="episode" onclick="openEpisode(1)">${currentLanguage === "ru" ? "🔗 Где посмотреть фильм" : "🔗 Where to watch"}</button>`;
     } else if (episodeCount > 0) {
 
       const watchedEpisodes = JSON.parse(
@@ -1196,7 +1196,7 @@ for (let i = 1; i <= episodeCount; i++) {
       class="episode ${watched ? "watched" : ""}"
       onclick="openEpisode(${i})"
     >
-      ${watched ? "✓" : "▶"} Серия ${i}
+      ${watched ? "✓" : "○"} Серия ${i}
     </button>
   `;
 }

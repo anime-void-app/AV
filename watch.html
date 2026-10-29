@@ -9,9 +9,9 @@
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#a855f7">
   <link rel="apple-touch-icon" href="icon-192.png">
-  <meta name="description" content="ANIME VOID — просмотр аниме: плеер и список серий с отслеживанием прогресса.">
+  <meta name="description" content="ANIME VOID — где посмотреть аниме и как отметить просмотренные серии.">
   <meta property="og:title" content="ANIME VOID — Просмотр">
-  <meta property="og:description" content="Плеер и список серий с отслеживанием прогресса.">
+  <meta property="og:description" content="Ссылки на площадки и список просмотренных серий.">
   <meta property="og:image" content="https://anime-void-app.github.io/AV/icon-512.png">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://anime-void-app.github.io/AV/watch.html">
@@ -90,43 +90,25 @@
     .watch-top h1 { margin: 0 0 8px; font-size: 28px; }
     .watch-top p { margin: 0; color: #9994ae; }
 
-    .player-box {
-      width: 100%;
-      aspect-ratio: 16 / 9;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      overflow: hidden;
+    .where-box {
+      padding: clamp(22px, 4vw, 36px);
       border-radius: 20px;
-      background: radial-gradient(circle at center, rgba(168,85,247,.18), transparent 40%), #050409;
+      background: radial-gradient(circle at top right, rgba(168,85,247,.16), transparent 55%), #15111f;
       border: 1px solid rgba(168,85,247,.35);
-      box-shadow: 0 20px 60px rgba(0,0,0,.6), 0 0 35px rgba(168,85,247,.12);
+      box-shadow: 0 20px 60px rgba(0,0,0,.25);
     }
-
-    #animePlayer {
-      display: block;
-      width: 100%;
-      height: 100%;
-      background: #000;
-      border-radius: 20px;
-    }
-
-    .player-message {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 24px;
-      gap: 10px;
-      background: radial-gradient(circle at center, rgba(168,85,247,.18), transparent 55%), #0b0812;
-    }
-    .player-message[hidden] { display: none; }
-    .player-message strong { font-size: clamp(18px, 3vw, 26px); }
-    .player-message p { margin: 0; color: #bbb3ca; line-height: 1.5; }
+    .where-kicker { color: #d8b4fe; font-size: 13px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+    .where-box h2 { margin: 10px 0; font-size: clamp(24px, 4vw, 32px); }
+    .where-box p { color: #c5bdd4; line-height: 1.55; margin: 0 0 14px; }
+    .where-links { display: flex; flex-wrap: wrap; gap: 10px; margin: 18px 0; }
+    .where-link { display: inline-flex; align-items: center; gap: 8px; padding: 12px 16px; border-radius: 12px; background: #713ac3; color: white; font-weight: 700; text-decoration: none; transition: background .2s, transform .2s; }
+    .where-link:hover { background: #9254e3; transform: translateY(-2px); }
+    .where-link:focus-visible { outline: 3px solid #e9d5ff; outline-offset: 3px; }
+    .where-box .where-note { font-size: 13px; color: #aaa1bb; margin-bottom: 0; }
+    body.theme-light .where-box { background: #f3ecff; border-color: #d7b7fa; }
+    body.theme-light .where-box p { color: #51435d; }
+    body.theme-light .where-kicker { color: #7134a9; }
+    body.theme-light .where-box .where-note { color: #655673; }
 
     .controls {
       margin-top: 20px;
@@ -265,15 +247,14 @@
       <p id="episodeTitle"></p>
     </div>
 
-    <div class="player-box">
-      <video id="animePlayer" controls preload="metadata">
-        Ваш браузер не поддерживает видео.
-      </video>
-      <div id="playerMessage" class="player-message" role="status" hidden>
-        <strong id="playerMessageTitle">Видео пока недоступно</strong>
-        <p id="playerMessageDetail">На данный момент видео для просмотра не подключено или недоступно.</p>
-      </div>
-    </div>
+    <section class="where-box" aria-labelledby="whereTitle">
+      <div id="whereKicker" class="where-kicker">Ссылки на площадки</div>
+      <h2 id="whereTitle">Где посмотреть</h2>
+      <p id="whereIntro">Ищем площадки для этого аниме. Видео на ANIME VOID не размещено.</p>
+      <div id="whereLinks" class="where-links" aria-live="polite"></div>
+      <p id="whereStatus" role="status">Ищем ссылки…</p>
+      <p id="whereNote" class="where-note">Данные AniList могут устареть. Наличие, язык, цена и доступность зависят от площадки и страны. Ссылки ведут на страницу аниме, а не обязательно выбранной серии.</p>
+    </section>
 
     <div class="controls">
       <button class="control-btn" id="prevBtn" type="button">← Предыдущая серия</button>
@@ -292,11 +273,10 @@
     const params = new URLSearchParams(window.location.search);
     const animeId = params.get("id");
     const currentEpisode = Math.max(1, Number(params.get("episode")) || 1);
-    const player = document.getElementById("animePlayer");
     const catalog = JSON.parse(localStorage.getItem("animeVoidCatalog") || "[]");
-    const item = catalog.find(anime => String(anime.id) === String(animeId));
-    const isMovie = String(item?.format || "").toUpperCase() === "MOVIE";
-    const episodeCount = isMovie ? 1 : Math.max(1, Number(item?.episodes) || 1);
+    let item = catalog.find(anime => String(anime.id) === String(animeId));
+    let isMovie = String(item?.format || "").toUpperCase() === "MOVIE";
+    let episodeCount = isMovie ? 1 : Math.max(1, Number(item?.episodes) || 1);
     let currentLanguage = localStorage.getItem(LANGUAGE_KEY) === "en" ? "en" : "ru";
 
     localStorage.setItem("animeVoidLastWatch", JSON.stringify({
@@ -304,43 +284,93 @@
       episode: currentEpisode
     }));
 
-    const playerMessage = document.getElementById("playerMessage");
-    player.addEventListener("error", () => {
-      playerMessage.hidden = false;
-    });
-    player.addEventListener("loadeddata", () => {
-      playerMessage.hidden = true;
-    });
-    player.src = `video/${currentEpisode}.mp4`;
-    player.load();
+    // External links are title-level AniList links, not an in-site video player.
+    const streamingHosts = {
+      'crunchyroll.com': 'Crunchyroll', 'netflix.com': 'Netflix',
+      'hulu.com': 'Hulu', 'tubitv.com': 'Tubi', 'hidive.com': 'HIDIVE',
+      'primevideo.com': 'Prime Video', 'amazon.com': 'Prime Video',
+      'bilibili.tv': 'Bilibili', 'iq.com': 'iQIYI', 'kinopoisk.ru': 'Кинопоиск',
+      'ivi.ru': 'Иви', 'okko.tv': 'Okko', 'disneyplus.com': 'Disney+'
+    };
+    let whereState = 'loading';
+    let streamingLinks = [];
 
-    const progressKey = `progress_${animeId}_${currentEpisode}`;
-
-    player.addEventListener("loadedmetadata", () => {
-      localStorage.setItem(
-        `duration_${animeId}_${currentEpisode}`,
-        String(player.duration)
-      );
-
-      const savedTime = Number(localStorage.getItem(progressKey)) || 0;
-      if (savedTime > 0 && savedTime < player.duration) {
-        player.currentTime = savedTime;
+    function updateWhere() {
+      const ru = currentLanguage === 'ru';
+      document.getElementById('whereKicker').textContent = ru ? 'Ссылки на площадки' : 'Streaming platforms';
+      document.getElementById('whereTitle').textContent = ru ? 'Где посмотреть' : 'Where to watch';
+      document.getElementById('whereIntro').textContent = ru
+        ? 'Ссылки на площадки для этого аниме. Видео на ANIME VOID не размещено.'
+        : 'Platform links for this anime. ANIME VOID does not host video.';
+      document.getElementById('whereNote').textContent = ru
+        ? 'Данные AniList могут устареть. Наличие, язык, цена и доступность зависят от площадки и страны. Ссылки ведут на страницу аниме, а не обязательно выбранной серии.'
+        : 'AniList data may be outdated. Availability, language and pricing vary by platform and region. Links lead to the anime page, not necessarily the selected episode.';
+      const status = document.getElementById('whereStatus');
+      const list = document.getElementById('whereLinks');
+      list.replaceChildren();
+      if (whereState === 'loading') status.textContent = ru ? 'Ищем ссылки…' : 'Looking for links…';
+      else if (whereState === 'error') status.textContent = ru ? 'Не удалось загрузить ссылки. Попробуйте обновить страницу.' : 'Could not load links. Try refreshing the page.';
+      else if (!streamingLinks.length) status.textContent = ru ? 'В AniList пока нет подходящих ссылок для этого аниме.' : 'AniList has no suitable links for this anime yet.';
+      else {
+        status.textContent = '';
+        streamingLinks.forEach(link => {
+          const a = document.createElement('a');
+          a.className = 'where-link'; a.href = link.url; a.target = '_blank';
+          a.rel = 'noopener noreferrer'; a.textContent = link.name + ' ↗';
+          list.appendChild(a);
+        });
       }
-    });
+    }
 
-    player.addEventListener("timeupdate", () => {
-      localStorage.setItem(progressKey, String(player.currentTime));
-    });
-
-    player.addEventListener("ended", () => {
-      markEpisodeWatched(currentEpisode);
-      localStorage.removeItem(progressKey);
-      renderEpisodes();
-
-      if (currentEpisode < episodeCount) {
-        openEpisode(currentEpisode + 1);
+    async function loadStreamingLinks() {
+      const idMatch = /^(?:anilist-)?(\d+)$/.exec(animeId || '');
+      const numericId = idMatch ? Number(idMatch[1]) : 0;
+      if (!numericId || numericId > 2147483647) {
+        whereState = 'error'; applyLanguage(); return;
       }
-    });
+      const query = 'query($id:Int){Media(id:$id,type:ANIME){id title{romaji english} episodes format externalLinks{url type isDisabled}}}';
+      try {
+        const aborter = new AbortController();
+        const timer = setTimeout(() => aborter.abort(), 12000);
+        let response;
+        try {
+          response = await fetch('https://graphql.anilist.co', {
+            method: 'POST', headers: {'Content-Type': 'application/json', 'Accept': 'application/json'},
+            body: JSON.stringify({query, variables: {id: numericId}}), signal: aborter.signal
+          });
+        } finally { clearTimeout(timer); }
+        if (!response.ok) throw new Error('AniList HTTP error');
+        const result = await response.json();
+        const media = result?.data?.Media;
+        if (!media) throw new Error('Anime not found');
+        if (!item) {
+          item = {id: animeId, title: media.title?.english || media.title?.romaji || 'ANIME VOID', episodes: media.episodes, format: media.format};
+          isMovie = String(item.format || '').toUpperCase() === 'MOVIE';
+          episodeCount = isMovie ? 1 : Math.max(1, Number(item.episodes) || 1);
+          document.getElementById('animeTitle').textContent = item.title;
+          document.getElementById('backAnime').href = `anime.html?id=${encodeURIComponent(item.id)}`;
+          document.querySelector('.controls').style.display = isMovie ? 'none' : '';
+          document.querySelector('.episodes').style.display = isMovie ? 'none' : '';
+          document.getElementById('prevBtn').disabled = currentEpisode <= 1;
+          document.getElementById('nextBtn').disabled = currentEpisode >= episodeCount;
+          applyLanguage();
+        }
+        const seen = new Set();
+        for (const link of (media.externalLinks || [])) {
+          if (link.type !== 'STREAMING' || link.isDisabled || !link.url) continue;
+          try {
+            const u = new URL(link.url);
+            if (u.protocol !== 'https:' && u.protocol !== 'http:') continue;
+            const host = u.hostname.toLowerCase();
+            const domain = Object.keys(streamingHosts).find(d => host === d || host.endsWith('.' + d));
+            if (!domain || seen.has(u.href)) continue;
+            seen.add(u.href); streamingLinks.push({name: streamingHosts[domain], url: u.href});
+          } catch (_) {}
+        }
+        whereState = 'ready';
+      } catch (_) { whereState = 'error'; }
+      if (item) updateWhere(); else applyLanguage();
+    }
 
     if (item) {
       document.getElementById("animeTitle").textContent = item.title || "ANIME VOID";
@@ -352,7 +382,8 @@
         `anime.html?id=${encodeURIComponent(item.id)}`;
     } else {
       document.getElementById("animeTitle").textContent =
-        currentLanguage === "ru" ? "Аниме не найдено" : "Anime not found";
+        currentLanguage === "ru" ? "Загрузка аниме…" : "Loading anime…";
+      document.getElementById("backAnime").href = "index.html";
       document.getElementById("episodeGrid").innerHTML = "";
     }
 
@@ -430,7 +461,7 @@
         const button = document.createElement("button");
         button.type = "button";
         button.className = `episode${number === currentEpisode ? " active" : ""}${watched ? " watched" : ""}`;
-        button.textContent = `${watched ? "✓" : "▶"} ${episodeLabel(number)}`;
+        button.textContent = `${watched ? "✓" : "○"} ${episodeLabel(number)}`;
         button.addEventListener("click", () => openEpisode(number));
         grid.appendChild(button);
       }
@@ -445,11 +476,7 @@
     function applyLanguage() {
       const isRussian = currentLanguage === "ru";
       document.documentElement.lang = currentLanguage;
-      document.getElementById("playerMessageTitle").textContent = isRussian
-        ? "Видео пока недоступно" : "Video is currently unavailable";
-      document.getElementById("playerMessageDetail").textContent = isRussian
-        ? "На данный момент видео для просмотра не подключено или недоступно."
-        : "No video is connected for viewing, or it is currently unavailable.";
+      updateWhere();
       document.getElementById("langBtn").textContent = isRussian ? "EN" : "RU";
       document.getElementById("profileLink").textContent = isRussian ? "👤 Профиль" : "👤 Profile";
       document.getElementById("backAnime").textContent = isRussian
@@ -467,9 +494,9 @@
         ? (isRussian ? "Фильм" : "Movie")
         : (isRussian ? "Все серии" : "All episodes");
       if (!item) {
-        document.getElementById("animeTitle").textContent = isRussian
-          ? "Аниме не найдено"
-          : "Anime not found";
+        document.getElementById("animeTitle").textContent = whereState === "error"
+          ? (isRussian ? "Не удалось загрузить аниме" : "Could not load anime")
+          : (isRussian ? "Загрузка аниме…" : "Loading anime…");
       }
       renderEpisodes();
     }
@@ -504,6 +531,7 @@
 
     renderEpisodes();
     applyLanguage();
+    loadStreamingLinks();
   </script>
   <script>
     if ("serviceWorker" in navigator) {
