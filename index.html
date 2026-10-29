@@ -1274,6 +1274,13 @@
     .theme-option:hover { background:rgba(168,85,247,.18); }
     .theme-option.active { background:rgba(168,85,247,.28); box-shadow:inset 0 0 0 1px rgba(192,132,252,.5); }
 
+    /* ===== Меню эффектов ===== */
+    .decor-canvas { position:fixed; inset:0; z-index:9990; pointer-events:none; }
+    .decor-menu { position:fixed; z-index:10002; display:flex; flex-direction:column; gap:4px; min-width:210px; padding:8px; border-radius:14px; background:rgba(18,16,29,.97); border:1px solid rgba(168,85,247,.35); box-shadow:0 18px 44px rgba(0,0,0,.5); }
+    .decor-option { display:flex; align-items:center; gap:10px; padding:9px 12px; border:none; border-radius:10px; background:none; color:#f5f3ff; font:inherit; font-size:13.5px; font-weight:600; cursor:pointer; text-align:left; }
+    .decor-option:hover { background:rgba(168,85,247,.18); }
+    .decor-option.active { background:rgba(168,85,247,.28); box-shadow:inset 0 0 0 1px rgba(192,132,252,.5); }
+
     /* ===== Новые темы (акценты поверх светлой раскладки) ===== */
     body.theme-sakura { --purple:#d6336e; --bg:#ffe4ef; --panel:#fffafc; --text:#3d1a2b; --muted:#8a5c6e;
       background-color:#ffe4ef;
@@ -1333,6 +1340,7 @@
   <button onclick="setLanguage('en')" id="enBtn">EN</button>
 </div>
 <button id="themeToggle" class="theme-toggle" onclick="toggleTheme()" title="Сменить тему" aria-label="Сменить тему">🌙</button>
+<button id="decorToggle" class="theme-toggle" onclick="toggleDecor()" title="Эффекты: сакура, снег, блёстки" aria-label="Эффекты">🌸</button>
     <div class="search-wrap">
       <input id="search" class="search" type="search" placeholder="⌕  Найти аниме...">
       <div id="searchSuggestions" class="search-suggestions" hidden></div>
@@ -2326,6 +2334,219 @@ localStorage.setItem("animeVoidHasMore", String(apiHasMore));
       openThemeMenu();
     }
 
+    /* ===== Эффекты: сакура, снег, блёстки, сердечки ===== */
+    const DECOR_MODES = [
+      { id: "off", icon: "🚫", ru: "Выключено", en: "Off" },
+      { id: "sakura", icon: "🌸", ru: "Лепестки сакуры", en: "Sakura petals" },
+      { id: "snow", icon: "❄️", ru: "Снег", en: "Snow" },
+      { id: "stars", icon: "✨", ru: "Блёстки", en: "Sparkles" },
+      { id: "hearts", icon: "💜", ru: "Сердечки", en: "Hearts" }
+    ];
+    let decorCanvas = null;
+    let decorCtx = null;
+    let decorParticles = [];
+    let decorRunning = false;
+    let decorLastSpawn = 0;
+
+    function currentDecorId() {
+      let mode = "off";
+      try { mode = localStorage.getItem("animeVoidDecor") || "off"; } catch (error) {}
+      return DECOR_MODES.some(m => m.id === mode) ? mode : "off";
+    }
+
+    function decorIsRussian() {
+      try { return localStorage.getItem("animeVoidLanguage") !== "en"; } catch (error) { return true; }
+    }
+
+    function spawnDecorParticle(mode, w, h) {
+      if (mode === "sakura") {
+        return {
+          type: "petal", x: Math.random() * w, y: -30 - Math.random() * h * 0.3,
+          size: 7 + Math.random() * 8, vy: 0.6 + Math.random() * 1.1, vx: -0.5 + Math.random() * 1.4,
+          rot: Math.random() * Math.PI * 2, vr: -0.03 + Math.random() * 0.06,
+          sway: Math.random() * Math.PI * 2, swaySpeed: 0.012 + Math.random() * 0.02,
+          color: ["#ffc7dd", "#ffb3d1", "#ff9ec4", "#f78fb3"][Math.floor(Math.random() * 4)],
+          alpha: 0.75 + Math.random() * 0.25
+        };
+      }
+      if (mode === "snow") {
+        return {
+          type: "dot", x: Math.random() * w, y: -10 - Math.random() * h * 0.3,
+          size: 1.5 + Math.random() * 3.5, vy: 0.4 + Math.random() * 0.9, vx: -0.4 + Math.random() * 0.8,
+          sway: Math.random() * Math.PI * 2, swaySpeed: 0.008 + Math.random() * 0.015,
+          color: "rgba(255,255,255,.9)", alpha: 0.5 + Math.random() * 0.5
+        };
+      }
+      if (mode === "stars") {
+        return {
+          type: "star", x: Math.random() * w, y: h + 30 + Math.random() * h * 0.2,
+          size: 2 + Math.random() * 3, vy: -(0.3 + Math.random() * 0.7), vx: -0.3 + Math.random() * 0.6,
+          rot: Math.random() * Math.PI, vr: -0.02 + Math.random() * 0.04,
+          color: ["#fbbf24", "#fde68a", "#e9d5ff", "#a5f3fc"][Math.floor(Math.random() * 4)],
+          alpha: 0.6, twinkle: Math.random() * Math.PI * 2
+        };
+      }
+      if (mode === "hearts") {
+        return {
+          type: "heart", x: Math.random() * w, y: h + 30,
+          size: 8 + Math.random() * 8, vy: -(0.5 + Math.random() * 0.8), vx: -0.4 + Math.random() * 0.8,
+          sway: Math.random() * Math.PI * 2, swaySpeed: 0.01 + Math.random() * 0.02,
+          color: ["#c084fc", "#a855f7", "#f472b6"][Math.floor(Math.random() * 3)],
+          alpha: 0.5 + Math.random() * 0.4
+        };
+      }
+      return null;
+    }
+
+    function drawDecorParticle(ctx, p) {
+      ctx.save();
+      ctx.globalAlpha = p.alpha;
+      ctx.translate(p.x, p.y);
+      ctx.fillStyle = p.color;
+      if (p.type === "petal") {
+        ctx.rotate(p.rot);
+        ctx.beginPath();
+        ctx.ellipse(0, 0, p.size, p.size * 0.6, 0, 0, Math.PI * 2);
+        ctx.fill();
+      } else if (p.type === "dot") {
+        ctx.shadowColor = "rgba(100,80,140,.55)";
+        ctx.shadowBlur = 2;
+        ctx.beginPath();
+        ctx.arc(0, 0, p.size, 0, Math.PI * 2);
+        ctx.fill();
+      } else if (p.type === "star") {
+        ctx.rotate(p.rot);
+        const s = p.size;
+        ctx.beginPath();
+        ctx.moveTo(0, -s);
+        ctx.lineTo(s * 0.25, -s * 0.25);
+        ctx.lineTo(s, 0);
+        ctx.lineTo(s * 0.25, s * 0.25);
+        ctx.lineTo(0, s);
+        ctx.lineTo(-s * 0.25, s * 0.25);
+        ctx.lineTo(-s, 0);
+        ctx.lineTo(-s * 0.25, -s * 0.25);
+        ctx.closePath();
+        ctx.fill();
+      } else if (p.type === "heart") {
+        const s = p.size / 2;
+        ctx.beginPath();
+        ctx.moveTo(0, s * 0.35);
+        ctx.bezierCurveTo(-s, -s * 0.35, -s * 0.5, -s, 0, -s * 0.4);
+        ctx.bezierCurveTo(s * 0.5, -s, s, -s * 0.35, 0, s * 0.35);
+        ctx.fill();
+      }
+      ctx.restore();
+    }
+
+    function decorFrame(now) {
+      if (!decorRunning || !decorCanvas || !decorCtx) return;
+      const ctx = decorCtx;
+      const w = decorCanvas.width;
+      const h = decorCanvas.height;
+      ctx.clearRect(0, 0, w, h);
+      const mode = currentDecorId();
+      if (mode === "off") return;
+      const target = mode === "sakura" ? 42 : mode === "snow" ? 70 : mode === "stars" ? 34 : 26;
+      if (decorParticles.length < target && now - decorLastSpawn > 90) {
+        const particle = spawnDecorParticle(mode, w, h);
+        if (particle) {
+          decorParticles.push(particle);
+          decorLastSpawn = now;
+        }
+      }
+      decorParticles.forEach(p => {
+        p.x += p.vx + Math.sin(p.sway) * (p.type === "dot" ? 0.6 : 0.9);
+        if (p.swaySpeed) p.sway += p.swaySpeed;
+        p.y += p.vy;
+        if (p.vr) p.rot += p.vr;
+        if (p.twinkle !== undefined) p.alpha = 0.35 + Math.abs(Math.sin(p.twinkle += 0.05)) * 0.6;
+        drawDecorParticle(ctx, p);
+      });
+      decorParticles = decorParticles.filter(p => p.y > -60 && p.y < h + 80 && p.x > -80 && p.x < w + 80);
+      requestAnimationFrame(decorFrame);
+    }
+
+    function startDecor(mode) {
+      decorParticles = [];
+      if (mode === "off") {
+        decorRunning = false;
+        if (decorCanvas) {
+          decorCanvas.remove();
+          decorCanvas = null;
+          decorCtx = null;
+        }
+        return;
+      }
+      if (!decorCanvas) {
+        decorCanvas = document.createElement("canvas");
+        decorCanvas.className = "decor-canvas";
+        document.body.appendChild(decorCanvas);
+        decorCtx = decorCanvas.getContext("2d");
+        const resizeDecor = () => {
+          if (decorCanvas) {
+            decorCanvas.width = window.innerWidth;
+            decorCanvas.height = window.innerHeight;
+          }
+        };
+        resizeDecor();
+        window.addEventListener("resize", resizeDecor);
+      }
+      if (!decorRunning) {
+        decorRunning = true;
+        requestAnimationFrame(decorFrame);
+      }
+    }
+
+    function applyDecorFromStorage() {
+      const mode = currentDecorId();
+      const button = document.getElementById("decorToggle");
+      if (button) {
+        const meta = DECOR_MODES.find(m => m.id === mode);
+        button.textContent = meta ? meta.icon : "🌸";
+      }
+      startDecor(mode);
+    }
+
+    function closeDecorMenu() {
+      const menu = document.querySelector(".decor-menu");
+      if (menu) menu.remove();
+    }
+
+    function toggleDecor() {
+      if (document.querySelector(".decor-menu")) { closeDecorMenu(); return; }
+      const isRussian = decorIsRussian();
+      const current = currentDecorId();
+      const menu = document.createElement("div");
+      menu.className = "decor-menu";
+      menu.innerHTML = DECOR_MODES.map(m =>
+        "<button type=\"button\" class=\"decor-option" + (m.id === current ? " active" : "") + "\" onclick=\"selectDecor('" + m.id + "')\"><span>" + m.icon + "</span>" + (isRussian ? m.ru : m.en) + "</button>"
+      ).join("");
+      document.body.appendChild(menu);
+      const btn = document.getElementById("decorToggle");
+      if (btn) {
+        const rect = btn.getBoundingClientRect();
+        menu.style.top = (rect.bottom + 10) + "px";
+        menu.style.right = Math.max(10, window.innerWidth - rect.right) + "px";
+      } else {
+        menu.style.top = "70px";
+        menu.style.right = "16px";
+      }
+      setTimeout(() => {
+        document.addEventListener("click", function onDocClick() {
+          closeDecorMenu();
+          document.removeEventListener("click", onDocClick);
+        });
+      }, 0);
+    }
+
+    function selectDecor(id) {
+      try { localStorage.setItem("animeVoidDecor", id); } catch (error) {}
+      applyDecorFromStorage();
+    }
+
+    applyDecorFromStorage();
+
     applyThemeFromStorage();
 
     /* ===== Календарь недели ===== */
@@ -2996,6 +3217,7 @@ localStorage.setItem("animeVoidHasMore", String(apiHasMore));
         const suggestions = document.getElementById("searchSuggestions");
         if (suggestions) suggestions.hidden = true;
         closeThemeMenu();
+        if (typeof closeDecorMenu === "function") closeDecorMenu();
       }
     });
 
