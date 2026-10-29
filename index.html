@@ -3762,6 +3762,7 @@ if (!donghuaMode) {
 
         function render() {
       const currentLanguage = localStorage.getItem("animeVoidLanguage") || "ru";
+      const normalizedSearchStamp = normalizeSearchText(searchText);
       const genreAliases = {
         "Фэнтези": ["фэнтези", "fantasy"],
         "Экшен": ["экшен", "action"],
@@ -3796,7 +3797,8 @@ if (!donghuaMode) {
           .map(value => String(value || "").toLowerCase())
           .filter(Boolean);
         const matchesSearch = !queryVariants.length ||
-          queryVariants.some(query => searchableText.includes(query));
+          queryVariants.some(query => searchableText.includes(query)) ||
+          (item.searchHit && normalizeSearchText(item.searchHit) === normalizedSearchStamp);
         const matchesYear = !selectedYear || String(item.year) === selectedYear;
         const matchesStatus = !selectedStatus || item.status === selectedStatus;
         const matchesDonghua = !donghuaMode || item.country === "CN";
@@ -3857,6 +3859,141 @@ if (!donghuaMode) {
       translateCatalogTitles(visibleItems.concat(savedCards));
     }
 
+    const searchQueryAliases = {
+      "противостояние святого": "Xian Ni",
+      "благословение небожителя": "Heaven Official's Blessing",
+      "основатель дьявольского культа": "The Founder of Diabolism",
+      "господин тайн": "Lord of Mysteries",
+      "аватар короля": "The King's Avatar",
+      "связь кликов": "Link Click",
+      "повседневная жизнь бессмертного короля": "The Daily Life of the Immortal King",
+      "быть героем икс": "To Be Hero X",
+      "ножницы семёрки": "Scissor Seven",
+      "форма голоса": "A Silent Voice",
+      "атака титанов": "Attack on Titan",
+      "клинок, рассекающий демонов": "Kimetsu no Yaiba",
+      "магическая битва": "Jujutsu Kaisen",
+      "тетрадь смерти": "Death Note",
+      "моя геройская академия": "Boku no Hero Academia",
+      "ванпанчмен": "One Punch Man",
+      "ван-пис": "One Piece"
+    };
+
+    function normalizeSearchText(value) {
+      return String(value || "").replace(/\s+/g, " ").trim().toLocaleLowerCase();
+    }
+
+    let apiSearchTimer = null;
+    let apiSearchSequence = 0;
+
+    function mapSearchResult(item) {
+      return {
+        id: "anilist-" + item.id,
+        title: item.title?.english || item.title?.romaji || item.title?.native || "Anime",
+        titleEnglish: item.title?.english || "",
+        titleRomaji: item.title?.romaji || "",
+        titleNative: item.title?.native || "",
+        genre: item.genres?.[0] || "Other",
+        genres: item.genres || [],
+        year: item.seasonYear || "Unknown",
+        country: item.countryOfOrigin || "",
+        symbol: "\u2726",
+        label: item.countryOfOrigin === "CN" ? "\u0414\u0423\u041d\u0425\u0423\u0410" : "ANIME",
+        color: item.countryOfOrigin === "CN" ? "linear-gradient(145deg, #7a2f2f, #090810)" : "linear-gradient(145deg, #39285c, #090810)",
+        description: item.description || "Description unavailable",
+        rating: item.averageScore ? (item.averageScore / 10).toFixed(1) : null,
+        episodes: item.episodes,
+        status: item.status,
+        format: item.format || "",
+        relatedSeasons: [],
+        image: item.coverImage?.large || item.coverImage?.extraLarge || "",
+        background: item.bannerImage || item.coverImage?.extraLarge || item.coverImage?.large || ""
+      };
+    }
+
+    async function searchAniListIntoCatalog(queryText) {
+      const stamp = normalizeSearchText(queryText);
+      if (stamp.length < 2) return;
+      const sequence = ++apiSearchSequence;
+      const isCyrillic = /[\u0400-\u04FF]/.test(queryText);
+      let terms = [];
+      if (isCyrillic) {
+        Object.keys(searchQueryAliases).forEach(key => {
+          if ((key.startsWith(stamp) || stamp.includes(key)) && !terms.includes(searchQueryAliases[key])) {
+            terms.push(searchQueryAliases[key]);
+          }
+        });
+        const translated = String(translatedSearchText || "").trim();
+        if (translated && !terms.includes(translated)) terms.push(translated);
+      }
+      if (!terms.includes(String(queryText).trim())) terms.push(String(queryText).trim());
+      terms = terms.slice(0, 3);
+
+      const query = `
+        query ($search: String) {
+          Page(page: 1, perPage: 12) {
+            pageInfo {
+              hasNextPage
+            }
+            media(search: $search, type: ANIME, isAdult: false, sort: SEARCH_MATCH) {
+              id
+              title { romaji english native }
+              coverImage { extraLarge large }
+              bannerImage
+              averageScore
+              episodes
+              status
+              genres
+              seasonYear
+              description
+              format
+              countryOfOrigin
+            }
+          }
+        }
+      `;
+
+      for (const term of terms) {
+        try {
+          const response = await fetch("https://graphql.anilist.co", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "Accept": "application/json"
+            },
+            body: JSON.stringify({ query, variables: { search: term } })
+          });
+          if (sequence !== apiSearchSequence) return;
+          if (!response.ok) break;
+          const result = await response.json();
+          if (sequence !== apiSearchSequence) return;
+          if (result.errors) break;
+          const found = (result.data?.Page?.media || []).map(mapSearchResult);
+          if (!found.length) continue;
+          const animeById = new Map(anime.map(item => [String(item.id), item]));
+          found.forEach(apiItem => {
+            const existingItem = animeById.get(String(apiItem.id));
+            if (existingItem) {
+              Object.assign(existingItem, apiItem, {
+                relatedSeasons: existingItem.relatedSeasons || [],
+                searchHit: stamp
+              });
+            } else {
+              apiItem.searchHit = stamp;
+              anime.push(apiItem);
+              animeById.set(String(apiItem.id), apiItem);
+            }
+          });
+          try {
+            localStorage.setItem("animeVoidCatalog", JSON.stringify(anime.filter(item => String(item.id).startsWith("anilist-"))));
+          } catch (error) {}
+          render();
+        } catch (error) {
+          break;
+        }
+      }
+    }
+
     document.getElementById("search").addEventListener("input", event => {
       searchText = event.target.value.trim();
       translatedSearchText = "";
@@ -3865,6 +4002,13 @@ if (!donghuaMode) {
       render();
       buildSearchSuggestions(searchText);
 
+      if (apiSearchTimer) clearTimeout(apiSearchTimer);
+      if (searchText.length >= 2) {
+        apiSearchTimer = setTimeout(() => {
+          searchAniListIntoCatalog(searchText);
+        }, 600);
+      }
+
       if (!searchText || !/[\u0400-\u04FF]/.test(searchText)) return;
       searchDebounceTimer = setTimeout(async () => {
         try {
@@ -3872,6 +4016,8 @@ if (!donghuaMode) {
           if (requestId !== searchTranslationSequence) return;
           translatedSearchText = translated;
           render();
+          if (apiSearchTimer) clearTimeout(apiSearchTimer);
+          searchAniListIntoCatalog(searchText);
         } catch (error) {
           console.warn("Не удалось перевести поисковый запрос:", error);
         }
@@ -3902,7 +4048,7 @@ if (!donghuaMode) {
           const position = variants.reduce((best, value) => {
             const found = value.indexOf(q);
             return found >= 0 && (best === -1 || found < best) ? found : best;
-          }, -1);
+          }, normalizeSearchText(item.searchHit) === q ? 500 : -1);
           return position >= 0 ? { item, position } : null;
         })
         .filter(Boolean)
