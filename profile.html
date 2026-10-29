@@ -409,6 +409,47 @@
     body.theme-light .empty-note a { color: #5b21b6; }
     body.theme-light .achievement-card { background: #fdfbff; }
     body.theme-light .achievements-total-text { color: #5b21b6; }
+
+    /* ===== Титул ранга и серия дней ===== */
+    .tier-title-pill { display:inline-flex; align-items:center; gap:6px; padding:5px 12px; border-radius:999px; font-size:12.5px; font-weight:800; color:var(--tier-color,#c084fc); background:rgba(168,85,247,.12); border:1px solid var(--tier-color,#c084fc); box-shadow:0 0 14px rgba(168,85,247,.25); }
+    .streak-pill { display:inline-flex; align-items:center; gap:6px; padding:5px 12px; border-radius:999px; font-size:12.5px; font-weight:800; color:#fb923c; background:rgba(251,146,60,.12); border:1px solid rgba(251,146,60,.4); }
+    .share-row { display:flex; gap:10px; flex-wrap:wrap; margin-top:16px; }
+    .share-btn { padding:10px 16px; border-radius:12px; border:1px solid rgba(168,85,247,.35); background:rgba(124,58,237,.14); color:var(--text); font:inherit; font-size:13px; font-weight:700; cursor:pointer; transition:transform .2s, border-color .2s, box-shadow .2s; }
+    .share-btn:hover { transform:translateY(-2px); border-color:rgba(192,132,252,.7); box-shadow:0 8px 22px rgba(0,0,0,.3); }
+    .share-btn.primary { background:linear-gradient(135deg,#7c3aed,#a855f7); border-color:transparent; color:#fff; }
+    body.theme-light .share-btn { background:#fdfbff; color:#241b3d; }
+
+    /* ===== Путь отаку ===== */
+    .otaku-path { position:relative; display:flex; justify-content:space-between; gap:6px; padding:8px 6px 4px; margin-bottom:18px; }
+    .path-line { position:absolute; left:44px; right:44px; top:37px; height:6px; border-radius:999px; background:rgba(255,255,255,.09); overflow:hidden; z-index:0; }
+    .path-line span { display:block; height:100%; background:linear-gradient(90deg,#4ade80,#818cf8,#c084fc,#38bdf8,#fbbf24); box-shadow:0 0 12px rgba(168,85,247,.6); transition:width .6s ease; }
+    .path-node { position:relative; z-index:1; display:flex; flex-direction:column; align-items:center; gap:6px; width:64px; flex:0 0 64px; }
+    .path-node-icon { width:52px; height:52px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:22px; background:#120e1e; border:2px solid rgba(255,255,255,.12); filter:grayscale(1); opacity:.5; transition:all .3s; }
+    .path-node.reached .path-node-icon { filter:none; opacity:1; border-color:var(--tier-color,#a855f7); box-shadow:0 0 18px var(--tier-color,#a855f7); background:#1a1330; }
+    .path-node.current .path-node-icon { animation:pathPulse 1.8s ease-in-out infinite; }
+    @keyframes pathPulse { 0%,100% { box-shadow:0 0 10px var(--tier-color,#a855f7); } 50% { box-shadow:0 0 28px var(--tier-color,#a855f7); transform:scale(1.07); } }
+    .path-node-name { font-size:10.5px; font-weight:800; color:var(--muted); text-align:center; line-height:1.2; }
+    .path-node.reached .path-node-name { color:var(--tier-color,#a855f7); }
+    .path-node-count { font-size:9.5px; font-weight:700; color:var(--muted); opacity:.8; }
+    body.theme-light .path-node-icon { background:#fdfbff; }
+    body.theme-light .path-node.reached .path-node-icon { background:#fdfbff; }
+
+    /* ===== Сравнение с другом ===== */
+    .friend-box { display:flex; flex-direction:column; gap:14px; padding:20px; border-radius:18px; border:1px solid rgba(168,85,247,.22); background:linear-gradient(150deg, rgba(124,58,237,.1), rgba(18,16,29,.5)); }
+    .friend-actions { display:flex; gap:10px; flex-wrap:wrap; }
+    .friend-input-row { display:flex; gap:10px; flex-wrap:wrap; }
+    .friend-input-row input { flex:1; min-width:220px; padding:11px 14px; border-radius:12px; border:1px solid rgba(168,85,247,.3); background:rgba(18,16,29,.6); color:var(--text); font:inherit; font-size:13px; }
+    .friend-input-row input:focus { outline:none; border-color:#c084fc; }
+    body.theme-light .friend-box { background:#fdfbff; border-color:#d6c5f0; }
+    body.theme-light .friend-input-row input { background:#fbf8ff; color:#241b3d; }
+    .friend-result { display:flex; flex-direction:column; gap:8px; }
+    .friend-verdict { font-size:15px; font-weight:900; text-align:center; padding:12px; border-radius:12px; background:rgba(168,85,247,.12); border:1px solid rgba(168,85,247,.3); color:var(--text); }
+    .compare-row { display:grid; grid-template-columns:1fr auto 1fr; align-items:center; gap:10px; padding:10px 14px; border-radius:12px; background:rgba(9,8,16,.4); border:1px solid rgba(168,85,247,.12); }
+    body.theme-light .compare-row { background:#fbf8ff; }
+    .compare-label { font-size:12px; font-weight:700; color:var(--muted); text-align:center; }
+    .compare-val { font-size:15px; font-weight:900; color:var(--muted); }
+    .compare-val.win { color:#4ade80; text-shadow:0 0 12px rgba(74,222,128,.5); }
+    .compare-me { text-align:right; }
     body.theme-light footer { color: #5c5275; border-top-color: #d9c6f2; }
 
     @media (max-width: 760px) {
@@ -449,6 +490,8 @@
           </div>
           <div class="rank-row">
             <span class="rank-pill" id="rankPill">🌱 Новичок</span>
+            <span class="tier-title-pill" id="tierTitlePill" hidden></span>
+            <span class="streak-pill" id="streakPill" hidden>🔥 0</span>
             <span class="level-text" id="levelText">Уровень 1</span>
           </div>
           <p class="profile-since" id="profileSince">в ANIME VOID</p>
@@ -457,6 +500,11 @@
       <div class="level-box">
         <div class="level-bar"><span id="levelFill" style="width:0%"></span></div>
         <div class="level-next" id="levelNext"></div>
+      </div>
+      <div class="share-row">
+        <button type="button" class="share-btn" id="shareCollectionBtn">📤 Поделиться коллекцией</button>
+        <button type="button" class="share-btn" id="shareBannerBtn">🖼️ Шапка для соцсетей</button>
+        <button type="button" class="share-btn" id="friendCodeBtn">🤝 Сравниться с другом</button>
       </div>
       <div class="avatar-picker" id="avatarPicker" hidden></div>
     </section>
@@ -519,7 +567,28 @@
           <div class="subtitle" id="achievementsSubtitle">Открыто 0 из 12</div>
         </div>
       </div>
+      <div class="otaku-path" id="otakuPath"></div>
       <div class="achievements-grid" id="achievementsGrid"></div>
+    </section>
+
+    <section class="friend-section" id="friendSection" hidden>
+      <div class="section-heading">
+        <div>
+          <h2 id="friendTitle">🤝 Сравнение с другом</h2>
+          <div class="subtitle" id="friendSubtitle">Вставь код друга и узнай, кто больший отаку</div>
+        </div>
+      </div>
+      <div class="friend-box">
+        <div class="friend-actions">
+          <button type="button" class="share-btn primary" id="copyMyCodeBtn">📋 Мой код</button>
+          <button type="button" class="share-btn" id="closeFriendBtn">✕ Закрыть</button>
+        </div>
+        <div class="friend-input-row">
+          <input type="text" id="friendCodeInput" placeholder="Вставь код друга сюда...">
+          <button type="button" class="share-btn primary" id="compareBtn">⚡ Сравнить</button>
+        </div>
+        <div class="friend-result" id="friendResult"></div>
+      </div>
     </section>
   </main>
 
@@ -873,7 +942,370 @@
           }).join("") +
           "</div>";
       }
+      renderProfileExtras(stats, list);
     }
+
+    /* ===== Титул ранга, серия дней, путь отаку, шаринг, друг ===== */
+    const TIER_HEX = { mortal: "#4ade80", seeker: "#818cf8", mythic: "#c084fc", stellar: "#38bdf8", god: "#fbbf24" };
+
+    function getCurrentTierId(list) {
+      let current = null;
+      ACHIEVEMENT_TIERS.forEach(tier => {
+        if (list.some(a => a.tier === tier.id && a.unlocked)) current = tier.id;
+      });
+      return current;
+    }
+
+    function getActivityLogSafe() {
+      try { return JSON.parse(localStorage.getItem("animeVoidActivityLog") || "{}"); } catch (error) { return {}; }
+    }
+
+    function calcStreak(log) {
+      const days = Object.keys(log).sort();
+      if (!days.length) return 0;
+      const dayMs = 86400000;
+      const today = new Date();
+      today.setHours(12, 0, 0, 0);
+      const last = new Date(days[days.length - 1] + "T12:00:00");
+      if (Math.round((today - last) / dayMs) > 1) return 0;
+      const set = new Set(days);
+      let streak = 0;
+      let cursor = new Date(last);
+      while (set.has(cursor.toISOString().slice(0, 10))) {
+        streak++;
+        cursor = new Date(cursor.getTime() - dayMs);
+      }
+      return streak;
+    }
+
+    function renderProfileExtras(stats, list) {
+      const isRussian = isRussianNow();
+      if (!list) list = achievementsList(stats || collectStats(), isRussian);
+      const currentId = getCurrentTierId(list);
+      const tierPill = document.getElementById("tierTitlePill");
+      if (tierPill) {
+        const tier = ACHIEVEMENT_TIERS.find(t => t.id === currentId);
+        if (tier) {
+          tierPill.hidden = false;
+          tierPill.style.setProperty("--tier-color", TIER_HEX[tier.id] || "#c084fc");
+          tierPill.textContent = tier.icon + " " + (isRussian ? tier.ru : tier.en);
+        } else {
+          tierPill.hidden = true;
+        }
+      }
+      const streakPill = document.getElementById("streakPill");
+      if (streakPill) {
+        const streak = calcStreak(getActivityLogSafe());
+        streakPill.hidden = streak <= 0;
+        streakPill.textContent = "🔥 " + streak + (isRussian ? " дн. подряд" : " day streak");
+      }
+      renderOtakuPath(list, isRussian);
+      const setTxt = (id, ru, en) => { const el = document.getElementById(id); if (el) el.textContent = isRussian ? ru : en; };
+      setTxt("shareCollectionBtn", "📤 Поделиться коллекцией", "📤 Share collection");
+      setTxt("shareBannerBtn", "🖼️ Шапка для соцсетей", "🖼️ Social banner");
+      setTxt("friendCodeBtn", "🤝 Сравниться с другом", "🤝 Compare with a friend");
+      setTxt("friendTitle", "🤝 Сравнение с другом", "🤝 Compare with a friend");
+      setTxt("friendSubtitle", "Вставь код друга и узнай, кто больший отаку", "Paste a friend's code to see who is the bigger otaku");
+      setTxt("copyMyCodeBtn", "📋 Мой код", "📋 My code");
+      setTxt("closeFriendBtn", "✕ Закрыть", "✕ Close");
+      setTxt("compareBtn", "⚡ Сравнить", "⚡ Compare");
+      const friendInput = document.getElementById("friendCodeInput");
+      if (friendInput) friendInput.placeholder = isRussian ? "Вставь код друга сюда..." : "Paste your friend's code here...";
+    }
+
+    function renderOtakuPath(list, isRussian) {
+      const box = document.getElementById("otakuPath");
+      if (!box) return;
+      const currentId = getCurrentTierId(list);
+      const unlockedCount = list.filter(a => a.unlocked).length;
+      const totalPct = Math.round(unlockedCount / list.length * 100);
+      let nodes = "";
+      ACHIEVEMENT_TIERS.forEach(tier => {
+        const tierList = list.filter(a => a.tier === tier.id);
+        const tierUnlocked = tierList.filter(a => a.unlocked).length;
+        nodes += "<div class=\"path-node" + (tierUnlocked > 0 ? " reached" : "") + (tier.id === currentId ? " current" : "") + "\" style=\"--tier-color:" + (TIER_HEX[tier.id] || "#a855f7") + "\">" +
+          "<span class=\"path-node-icon\">" + tier.icon + "</span>" +
+          "<span class=\"path-node-name\">" + (isRussian ? tier.ru : tier.en) + "</span>" +
+          "<span class=\"path-node-count\">" + tierUnlocked + "/" + tierList.length + "</span>" +
+          "</div>";
+      });
+      box.innerHTML = "<div class=\"path-line\"><span style=\"width:" + totalPct + "%\"></span></div>" + nodes;
+    }
+
+    function getShareData() {
+      const isRussian = isRussianNow();
+      const stats = collectStats();
+      const list = achievementsList(stats, isRussian);
+      const unlockedCount = list.filter(a => a.unlocked).length;
+      const totalPct = Math.round(unlockedCount / list.length * 100);
+      return {
+        isRussian: isRussian,
+        stats: stats,
+        list: list,
+        unlockedCount: unlockedCount,
+        totalPct: totalPct,
+        nickname: localStorage.getItem("animeVoidNickname") || (isRussian ? "Смотрящий" : "Watcher")
+      };
+    }
+
+    function roundRectPath(ctx, x, y, w, h, r) {
+      ctx.beginPath();
+      ctx.moveTo(x + r, y);
+      ctx.arcTo(x + w, y, x + w, y + h, r);
+      ctx.arcTo(x + w, y + h, x, y + h, r);
+      ctx.arcTo(x, y + h, x, y, r);
+      ctx.arcTo(x, y, x + w, y, r);
+      ctx.closePath();
+    }
+
+    function downloadCanvas(canvas, filename) {
+      const link = document.createElement("a");
+      link.download = filename;
+      link.href = canvas.toDataURL("image/png");
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+    }
+
+    function shareCollectionImage() {
+      const data = getShareData();
+      const canvas = document.createElement("canvas");
+      canvas.width = 1000;
+      canvas.height = 1200;
+      const ctx = canvas.getContext("2d");
+      const bg = ctx.createLinearGradient(0, 0, 1000, 1200);
+      bg.addColorStop(0, "#0d0a1a");
+      bg.addColorStop(1, "#160f2b");
+      ctx.fillStyle = bg;
+      ctx.fillRect(0, 0, 1000, 1200);
+      const glow = ctx.createRadialGradient(500, 180, 40, 500, 180, 600);
+      glow.addColorStop(0, "rgba(168,85,247,.25)");
+      glow.addColorStop(1, "rgba(168,85,247,0)");
+      ctx.fillStyle = glow;
+      ctx.fillRect(0, 0, 1000, 700);
+      ctx.textAlign = "center";
+      ctx.fillStyle = "#f5f3ff";
+      ctx.font = "900 58px system-ui, sans-serif";
+      ctx.fillText("ANIME VOID", 500, 110);
+      ctx.fillStyle = "#a855f7";
+      ctx.font = "700 26px system-ui, sans-serif";
+      ctx.fillText(data.isRussian ? "КОЛЛЕКЦИЯ ДОСТИЖЕНИЙ" : "ACHIEVEMENT COLLECTION", 500, 150);
+      ctx.fillStyle = "#f5f3ff";
+      ctx.font = "800 34px system-ui, sans-serif";
+      ctx.fillText(data.nickname, 500, 215);
+      ctx.font = "900 88px system-ui, sans-serif";
+      ctx.fillStyle = "#c084fc";
+      ctx.fillText(data.totalPct + "%", 500, 330);
+      ctx.font = "700 24px system-ui, sans-serif";
+      ctx.fillStyle = "#9994ae";
+      ctx.fillText((data.isRussian ? "Открыто " : "Unlocked ") + data.unlockedCount + " / " + data.list.length, 500, 370);
+      ctx.fillStyle = "rgba(255,255,255,.08)";
+      roundRectPath(ctx, 150, 395, 700, 14, 7);
+      ctx.fill();
+      const totalGrad = ctx.createLinearGradient(150, 0, 850, 0);
+      totalGrad.addColorStop(0, "#4ade80");
+      totalGrad.addColorStop(1, "#fbbf24");
+      ctx.fillStyle = totalGrad;
+      roundRectPath(ctx, 150, 395, Math.max(14, 700 * data.totalPct / 100), 14, 7);
+      ctx.fill();
+      let y = 480;
+      ACHIEVEMENT_TIERS.forEach(tier => {
+        const tierList = data.list.filter(a => a.tier === tier.id);
+        const unlocked = tierList.filter(a => a.unlocked).length;
+        const pct = tierList.length ? Math.round(unlocked / tierList.length * 100) : 0;
+        const hex = TIER_HEX[tier.id] || "#a855f7";
+        ctx.textAlign = "left";
+        ctx.font = "400 34px system-ui, sans-serif";
+        ctx.fillText(tier.icon, 110, y + 10);
+        ctx.fillStyle = hex;
+        ctx.font = "800 24px system-ui, sans-serif";
+        ctx.fillText((data.isRussian ? tier.ru : tier.en).toUpperCase(), 175, y);
+        ctx.textAlign = "right";
+        ctx.fillStyle = "#9994ae";
+        ctx.font = "700 20px system-ui, sans-serif";
+        ctx.fillText(unlocked + "/" + tierList.length, 890, y);
+        ctx.textAlign = "left";
+        ctx.fillStyle = "rgba(255,255,255,.08)";
+        roundRectPath(ctx, 175, y + 14, 715, 10, 5);
+        ctx.fill();
+        ctx.fillStyle = hex;
+        roundRectPath(ctx, 175, y + 14, Math.max(8, 715 * pct / 100), 10, 5);
+        ctx.fill();
+        y += 110;
+      });
+      ctx.textAlign = "center";
+      ctx.fillStyle = "#7a6f9a";
+      ctx.font = "600 20px system-ui, sans-serif";
+      ctx.fillText("anime-void-app.github.io/AV", 500, 1150);
+      downloadCanvas(canvas, "anime-void-achievements.png");
+    }
+
+    function shareBannerImage() {
+      const data = getShareData();
+      const canvas = document.createElement("canvas");
+      canvas.width = 1200;
+      canvas.height = 400;
+      const ctx = canvas.getContext("2d");
+      const bg = ctx.createLinearGradient(0, 0, 1200, 400);
+      bg.addColorStop(0, "#0d0a1a");
+      bg.addColorStop(0.55, "#1b1038");
+      bg.addColorStop(1, "#2a1454");
+      ctx.fillStyle = bg;
+      ctx.fillRect(0, 0, 1200, 400);
+      const glow = ctx.createRadialGradient(980, 60, 20, 980, 60, 520);
+      glow.addColorStop(0, "rgba(168,85,247,.35)");
+      glow.addColorStop(1, "rgba(168,85,247,0)");
+      ctx.fillStyle = glow;
+      ctx.fillRect(0, 0, 1200, 400);
+      ctx.textAlign = "left";
+      ctx.fillStyle = "#f5f3ff";
+      ctx.font = "900 62px system-ui, sans-serif";
+      ctx.fillText("ANIME VOID", 60, 105);
+      ctx.font = "800 30px system-ui, sans-serif";
+      ctx.fillStyle = "#c084fc";
+      ctx.fillText(data.nickname, 60, 155);
+      const tier = ACHIEVEMENT_TIERS.find(t => t.id === getCurrentTierId(data.list));
+      if (tier) {
+        ctx.fillStyle = TIER_HEX[tier.id];
+        ctx.font = "800 26px system-ui, sans-serif";
+        ctx.fillText(tier.icon + " " + (data.isRussian ? tier.ru : tier.en), 60, 200);
+      }
+      ctx.font = "700 24px system-ui, sans-serif";
+      ctx.fillStyle = "#d8b4fe";
+      ctx.fillText("⏱️ " + data.stats.hours + (data.isRussian ? " ч" : " h") + "   📺 " + data.stats.totalEpisodes + (data.isRussian ? " серий" : " eps") + "   🎬 " + data.stats.watchedTitles + (data.isRussian ? " тайтлов" : " titles"), 60, 262);
+      ctx.fillStyle = "#9994ae";
+      ctx.font = "700 20px system-ui, sans-serif";
+      ctx.fillText((data.isRussian ? "Путь отаку: " : "Otaku path: ") + data.totalPct + "%  ·  " + data.unlockedCount + "/" + data.list.length, 60, 302);
+      ctx.fillStyle = "rgba(255,255,255,.1)";
+      roundRectPath(ctx, 60, 322, 640, 12, 6);
+      ctx.fill();
+      const grad = ctx.createLinearGradient(60, 0, 700, 0);
+      grad.addColorStop(0, "#7c3aed");
+      grad.addColorStop(1, "#c084fc");
+      ctx.fillStyle = grad;
+      roundRectPath(ctx, 60, 322, Math.max(12, 640 * data.totalPct / 100), 12, 6);
+      ctx.fill();
+      let x = 880;
+      ACHIEVEMENT_TIERS.forEach(tier => {
+        const tierList = data.list.filter(a => a.tier === tier.id);
+        const unlocked = tierList.filter(a => a.unlocked).length;
+        ctx.textAlign = "center";
+        ctx.globalAlpha = unlocked > 0 ? 1 : 0.3;
+        ctx.font = "400 42px system-ui, sans-serif";
+        ctx.fillText(tier.icon, x, 130);
+        ctx.font = "700 18px system-ui, sans-serif";
+        ctx.fillStyle = unlocked > 0 ? (TIER_HEX[tier.id] || "#a855f7") : "#9994ae";
+        ctx.fillText(unlocked + "/" + tierList.length, x, 165);
+        ctx.globalAlpha = 1;
+        x += 72;
+      });
+      ctx.textAlign = "right";
+      ctx.fillStyle = "#7a6f9a";
+      ctx.font = "600 18px system-ui, sans-serif";
+      ctx.fillText("anime-void-app.github.io/AV", 1140, 372);
+      downloadCanvas(canvas, "anime-void-banner.png");
+    }
+
+    function buildMyFriendCode() {
+      const data = getShareData();
+      const payload = {
+        v: 1,
+        n: data.nickname,
+        e: data.stats.totalEpisodes,
+        h: data.stats.hours,
+        t: data.stats.watchedTitles,
+        f: data.stats.favoritesCount,
+        a: data.totalPct
+      };
+      return btoa(unescape(encodeURIComponent(JSON.stringify(payload))));
+    }
+
+    function copyMyFriendCode() {
+      const code = buildMyFriendCode();
+      const isRussian = isRussianNow();
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(code).then(() => {
+          alert(isRussian ? "Код скопирован! Отправь его другу 🤝" : "Code copied! Send it to your friend 🤝");
+        }, () => {
+          window.prompt(isRussian ? "Скопируй свой код:" : "Copy your code:", code);
+        });
+      } else {
+        window.prompt(isRussian ? "Скопируй свой код:" : "Copy your code:", code);
+      }
+    }
+
+    function decodeFriendCode(code) {
+      try {
+        const parsed = JSON.parse(decodeURIComponent(escape(atob(code))));
+        if (parsed && typeof parsed.e === "number") return parsed;
+      } catch (error) {}
+      return null;
+    }
+
+    function compareWithFriend() {
+      const isRussian = isRussianNow();
+      const input = document.getElementById("friendCodeInput");
+      const result = document.getElementById("friendResult");
+      if (!input || !result) return;
+      const code = input.value.trim();
+      if (!code) return;
+      const friend = decodeFriendCode(code);
+      if (!friend) {
+        result.innerHTML = "<div class=\"friend-verdict\">" + (isRussian ? "❌ Код не распознан — проверь, что скопировал целиком" : "❌ Code not recognized — check that you copied it fully") + "</div>";
+        return;
+      }
+      const me = decodeFriendCode(buildMyFriendCode());
+      const rows = [
+        { label: isRussian ? "📺 Серий" : "📺 Episodes", me: me.e, friend: friend.e },
+        { label: isRussian ? "⏱️ Часов" : "⏱️ Hours", me: me.h, friend: friend.h },
+        { label: isRussian ? "🎬 Тайтлов" : "🎬 Titles", me: me.t, friend: friend.t },
+        { label: isRussian ? "❤️ В избранном" : "❤️ Favorites", me: me.f, friend: friend.f },
+        { label: isRussian ? "🏆 Ачивки" : "🏆 Achievements", me: me.a, friend: friend.a, suffix: "%" }
+      ];
+      let meWins = 0, friendWins = 0;
+      rows.forEach(row => {
+        if (row.me > row.friend) meWins++;
+        else if (row.friend > row.me) friendWins++;
+      });
+      const verdict = meWins === friendWins
+        ? (isRussian ? "🤝 Ничья " + meWins + ":" + friendWins + "!" : "🤝 Tie " + meWins + ":" + friendWins + "!")
+        : (meWins > friendWins
+          ? (isRussian ? "🏆 Ты выигрываешь " + meWins + ":" + friendWins + "!" : "🏆 You win " + meWins + ":" + friendWins + "!")
+          : "😱 " + (isRussian ? "Друг выигрывает " + friendWins + ":" + meWins + "!" : "Your friend wins " + friendWins + ":" + meWins + "!"));
+      result.innerHTML = "<div class=\"friend-verdict\">" + verdict + "</div>" +
+        "<div class=\"compare-row\"><span class=\"compare-val compare-me\">" + escapeHtml(me.n) + "</span><span class=\"compare-label\">VS</span><span class=\"compare-val\">" + escapeHtml(friend.n || (isRussian ? "Друг" : "Friend")) + "</span></div>" +
+        rows.map(row => "<div class=\"compare-row\">" +
+          "<span class=\"compare-val compare-me" + (row.me >= row.friend ? " win" : "") + "\">" + row.me + (row.suffix || "") + "</span>" +
+          "<span class=\"compare-label\">" + row.label + "</span>" +
+          "<span class=\"compare-val" + (row.friend >= row.me ? " win" : "") + "\">" + row.friend + (row.suffix || "") + "</span>" +
+          "</div>").join("");
+    }
+
+    (function bindProfileShare() {
+      const bind = (id, handler) => {
+        const el = document.getElementById(id);
+        if (el) el.addEventListener("click", handler);
+      };
+      bind("shareCollectionBtn", shareCollectionImage);
+      bind("shareBannerBtn", shareBannerImage);
+      bind("friendCodeBtn", function () {
+        const section = document.getElementById("friendSection");
+        if (section) {
+          section.hidden = !section.hidden;
+          if (!section.hidden && section.scrollIntoView) section.scrollIntoView({ behavior: "smooth" });
+        }
+      });
+      bind("closeFriendBtn", function () {
+        const section = document.getElementById("friendSection");
+        if (section) section.hidden = true;
+      });
+      bind("copyMyCodeBtn", copyMyFriendCode);
+      bind("compareBtn", compareWithFriend);
+      const codeInput = document.getElementById("friendCodeInput");
+      if (codeInput) codeInput.addEventListener("keydown", event => {
+        if (event.key === "Enter") compareWithFriend();
+      });
+    })();
 
     /* ===== Графики ===== */
     function drawDonutChart(canvas, entries, centerTop, centerBottom) {
