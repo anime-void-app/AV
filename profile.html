@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Мой профиль — ANIME VOID</title>
+  <meta name="description" content="Твой профиль в ANIME VOID: статистика просмотров, графики по жанрам, достижения и избранное.">
+  <meta property="og:title" content="Мой профиль — ANIME VOID">
+  <meta property="og:description" content="Статистика, графики, достижения и избранное.">
+  <meta property="og:image" content="https://anime-void-app.github.io/AV/icon-512.png">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://anime-void-app.github.io/AV/profile.html">
+  <link rel="icon" href="icon-192.png">
+  <link rel="manifest" href="manifest.json">
+  <style>
+    :root {
+      --bg: #090810;
+      --panel: #12101d;
+      --purple: #a855f7;
+      --text: #f5f3ff;
+      --muted: #9994ae;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, Arial, sans-serif;
+    }
+
+    button { font: inherit; cursor: pointer; }
+    a { text-decoration: none; }
+
+    ::selection { background: rgba(168, 85, 247, .45); color: #fff; }
+    ::-webkit-scrollbar { width: 10px; }
+    ::-webkit-scrollbar-track { background: #0b0913; }
+    ::-webkit-scrollbar-thumb { background: #2b2140; border-radius: 8px; }
+
+    header {
+      height: 76px;
+      padding: 0 7%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      background: rgba(12, 10, 20, .82);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid #211a30;
+      position: sticky;
+      top: 0;
+      z-index: 20;
+    }
+
+    .logo {
+      font-weight: 900;
+      font-size: 22px;
+      letter-spacing: 2px;
+      color: #fff;
+    }
+    .logo span { color: var(--purple); }
+
+    nav { display: flex; gap: 22px; }
+    nav a {
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 600;
+      transition: color .2s;
+    }
+    nav a:hover { color: #fff; }
+    nav a.active { color: #c084fc; }
+
+    .header-actions { display: flex; align-items: center; gap: 10px; }
+
+    .language-switch { display: flex; gap: 6px; }
+    .language-switch button {
+      padding: 4px 10px;
+      border-radius: 8px;
+      border: 1px solid rgba(168, 85, 247, .3);
+      background: transparent;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .language-switch button.active {
+      background: rgba(168, 85, 247, .2);
+      color: #fff;
+      border-color: rgba(168, 85, 247, .55);
+    }
+
+    .theme-toggle {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      border: 1px solid rgba(168, 85, 247, .3);
+      background: transparent;
+      font-size: 16px;
+    }
+
+    main { padding: 34px 7% 60px; max-width: 1280px; margin: 0 auto; }
+
+    .section-heading { margin-bottom: 18px; }
+    .section-heading h2 { margin: 0; font-size: 24px; }
+    .subtitle { color: var(--muted); font-size: 14px; margin-top: 4px; }
+
+    /* ===== Профиль-карточка ===== */
+    .profile-hero {
+      display: flex;
+      align-items: center;
+      gap: 26px;
+      padding: 28px;
+      border: 1px solid rgba(168, 85, 247, .35);
+      border-radius: 24px;
+      background: linear-gradient(150deg, rgba(124, 58, 237, .22), rgba(18, 16, 29, .75));
+      box-shadow: 0 18px 45px rgba(0, 0, 0, .35);
+      flex-wrap: wrap;
+      position: relative;
+    }
+    .avatar-btn {
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      border: 2px solid rgba(168, 85, 247, .5);
+      background: #17121f;
+      font-size: 48px;
+      line-height: 1;
+      transition: transform .2s, border-color .2s;
+      flex: 0 0 auto;
+    }
+    .avatar-btn:hover { transform: scale(1.06); border-color: rgba(192, 132, 252, .8); }
+    .profile-info { min-width: 0; }
+    .name-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .profile-info h1 { margin: 0; font-size: 28px; }
+    .edit-name {
+      padding: 6px 10px;
+      border-radius: 10px;
+      border: 1px solid rgba(168, 85, 247, .35);
+      background: rgba(124, 58, 237, .14);
+      font-size: 14px;
+    }
+    .edit-name:hover { background: rgba(124, 58, 237, .26); }
+    .profile-since { color: #b79ce8; font-size: 14px; margin: 8px 0 0; }
+
+    .avatar-picker {
+      display: grid;
+      grid-template-columns: repeat(6, 44px);
+      gap: 8px;
+      margin-top: 16px;
+      width: 100%;
+    }
+    .avatar-picker[hidden] { display: none; }
+    .avatar-picker button {
+      height: 44px;
+      border-radius: 12px;
+      border: 1px solid rgba(168, 85, 247, .25);
+      background: rgba(18, 16, 29, .7);
+      font-size: 22px;
+    }
+    .avatar-picker button:hover { border-color: rgba(192, 132, 252, .7); background: rgba(124, 58, 237, .18); }
+
+    /* ===== Цифры ===== */
+    .stats-section { margin-top: 34px; }
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 12px;
+    }
+    .stat-card {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      padding: 18px 16px;
+      border: 1px solid rgba(168, 85, 247, .18);
+      border-radius: 16px;
+      background: rgba(18, 16, 29, .6);
+    }
+    .stat-card strong { font-size: 24px; color: #d8b4fe; }
+    .stat-card span { font-size: 12px; color: var(--muted); }
+
+    /* ===== Графики ===== */
+    .charts-section { margin-top: 42px; }
+    .charts-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 14px; }
+    .chart-card {
+      background: #0f0b1a;
+      border: 1px solid rgba(168, 85, 247, .35);
+      border-radius: 20px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      box-shadow: 0 18px 45px rgba(0, 0, 0, .35);
+    }
+    .chart-card h3 { margin: 0; font-size: 15px; font-weight: 800; color: #fff; }
+    .chart-card canvas { width: 100%; max-width: 260px; height: auto; aspect-ratio: 1/1; display: block; }
+    .chart-legend { display: flex; flex-direction: column; gap: 9px; width: 100%; }
+    .chart-legend-item { display: flex; flex-direction: column; gap: 5px; }
+    .chart-legend-row { display: flex; align-items: center; gap: 8px; font-size: 12px; color: #d0c8dc; min-width: 0; }
+    .chart-dot { width: 10px; height: 10px; border-radius: 3px; flex: 0 0 auto; }
+    .chart-label { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .chart-value { margin-left: auto; color: #b79ce8; font-weight: 700; white-space: nowrap; }
+    .chart-bar { height: 4px; border-radius: 2px; background: rgba(168, 85, 247, .12); overflow: hidden; }
+    .chart-bar span { display: block; height: 100%; border-radius: 2px; }
+    .chart-empty { font-size: 12px; color: #a99fc2; text-align: center; }
+
+    /* ===== Списки тайтлов ===== */
+    .list-section { margin-top: 42px; }
+    .mini-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 12px; }
+    .mini-card {
+      display: flex;
+      flex-direction: column;
+      border: 1px solid rgba(168, 85, 247, .18);
+      border-radius: 14px;
+      background: #17121f;
+      overflow: hidden;
+      transition: transform .25s, border-color .25s;
+    }
+    .mini-card:hover { transform: translateY(-4px); border-color: rgba(192, 132, 252, .6); }
+    .mini-card img {
+      width: 100%;
+      aspect-ratio: 2/3;
+      object-fit: cover;
+      display: block;
+    }
+    .mini-title {
+      padding: 10px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      color: #fff;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .empty-note {
+      padding: 26px 18px;
+      border: 1px dashed rgba(168, 85, 247, .35);
+      border-radius: 16px;
+      color: var(--muted);
+      font-size: 14px;
+      text-align: center;
+    }
+    .empty-note a { color: #c084fc; font-weight: 700; }
+
+    /* ===== Достижения ===== */
+    .achievements-section { margin-top: 42px; }
+    .achievements-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 12px; }
+    .achievement-card {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      padding: 14px;
+      border: 1px solid rgba(168, 85, 247, .18);
+      border-radius: 14px;
+      background: rgba(18, 16, 29, .6);
+      opacity: .55;
+      filter: grayscale(.6);
+    }
+    .achievement-card.unlocked {
+      opacity: 1;
+      filter: none;
+      border-color: rgba(192, 132, 252, .6);
+      background: linear-gradient(150deg, rgba(124, 58, 237, .22), rgba(18, 16, 29, .6));
+    }
+    .achievement-icon { font-size: 26px; }
+    .achievement-title { font-size: 13px; font-weight: 800; color: #fff; }
+    .achievement-hint { font-size: 11px; color: #a99fc2; }
+
+    footer {
+      padding: 26px 7%;
+      border-top: 1px solid #211a30;
+      color: var(--muted);
+      font-size: 13px;
+      text-align: center;
+    }
+
+    /* ===== Светлая тема «лаванда» ===== */
+    body.theme-light {
+      --bg: #e6dafa;
+      --panel: #fdfbff;
+      --text: #241b3d;
+      --muted: #5c5275;
+      color: var(--text);
+      background-color: #e6dafa;
+      background-image:
+        radial-gradient(ellipse at 88% -12%, rgba(168, 85, 247, .3), transparent 46%),
+        radial-gradient(ellipse at -12% 112%, rgba(139, 54, 211, .22), transparent 46%),
+        linear-gradient(160deg, #f2ebfd, #e2d3f6 55%, #d8c4f4);
+      background-attachment: fixed;
+    }
+    body.theme-light header { background: rgba(247, 241, 255, .87); border-bottom: 1px solid #d9c6f2; }
+    body.theme-light .logo { color: #241c38; }
+    body.theme-light nav a { color: #4a4160; }
+    body.theme-light nav a:hover { color: #241b3d; }
+    body.theme-light nav a.active { color: #5b21b6; }
+    body.theme-light .language-switch button { color: #5c5275; border-color: rgba(124, 58, 237, .35); }
+    body.theme-light .language-switch button.active { color: #5b21b6; background: rgba(124, 58, 237, .12); border-color: rgba(124, 58, 237, .55); }
+    body.theme-light .theme-toggle { border-color: rgba(124, 58, 237, .35); }
+    body.theme-light .profile-hero { background: linear-gradient(150deg, rgba(124, 58, 237, .16), rgba(253, 251, 255, .9)); border-color: #d6c5f0; }
+    body.theme-light .avatar-btn { background: #f6effe; }
+    body.theme-light .edit-name { color: #5b21b6; border-color: rgba(124, 58, 237, .4); background: rgba(124, 58, 237, .1); }
+    body.theme-light .profile-since { color: #5c5275; }
+    body.theme-light .avatar-picker button { background: #fdfbff; border-color: #d6c5f0; }
+    body.theme-light .stat-card { background: #fdfbff; border-color: #d6c5f0; }
+    body.theme-light .stat-card strong { color: #5b21b6; }
+    body.theme-light .section-heading h2 { color: #241c38; }
+    body.theme-light .mini-card { background: #fdfbff; border-color: #d6c5f0; }
+    body.theme-light .mini-title { color: #241b3d; }
+    body.theme-light .empty-note { border-color: rgba(124, 58, 237, .4); }
+    body.theme-light .empty-note a { color: #5b21b6; }
+    body.theme-light .achievement-card { background: #fdfbff; }
+    body.theme-light footer { color: #5c5275; border-top-color: #d9c6f2; }
+
+    @media (max-width: 760px) {
+      header { height: auto; flex-wrap: wrap; padding: 12px 5%; gap: 10px; }
+      nav { order: 3; width: 100%; justify-content: center; }
+      main { padding: 24px 5% 40px; }
+      .profile-hero { padding: 20px; gap: 18px; }
+      .profile-info h1 { font-size: 22px; }
+      .avatar-picker { grid-template-columns: repeat(4, 44px); }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="index.html" class="logo">ANIME<span>VOID</span></a>
+    <nav>
+      <a href="index.html" id="navHome">Главная</a>
+      <a href="index.html#catalog" id="navCatalog">Каталог</a>
+      <a href="profile.html" id="navProfile" class="active">Профиль</a>
+    </nav>
+    <div class="header-actions">
+      <div class="language-switch">
+        <button onclick="setLanguage('ru')" id="ruBtn" class="active">RU</button>
+        <button onclick="setLanguage('en')" id="enBtn">EN</button>
+      </div>
+      <button id="themeToggle" class="theme-toggle" onclick="toggleTheme()" title="Сменить тему" aria-label="Сменить тему">☀️</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="profile-hero">
+      <div class="profile-top" style="display:flex;align-items:center;gap:26px;flex-wrap:wrap">
+        <button type="button" id="avatarButton" class="avatar-btn" title="Сменить аватар">🐉</button>
+        <div class="profile-info">
+          <div class="name-row">
+            <h1 id="profileName">Смотрящий</h1>
+            <button type="button" class="edit-name" id="editNameBtn" title="Изменить имя">✏️</button>
+          </div>
+          <p class="profile-since" id="profileSince">в ANIME VOID</p>
+        </div>
+      </div>
+      <div class="avatar-picker" id="avatarPicker" hidden></div>
+    </section>
+
+    <section class="stats-section">
+      <div class="stats-row">
+        <div class="stat-card"><strong id="statEpisodes">0</strong><span id="statEpisodesLabel">серий просмотрено</span></div>
+        <div class="stat-card"><strong id="statHours">0</strong><span id="statHoursLabel">время просмотра</span></div>
+        <div class="stat-card"><strong id="statTitles">0</strong><span id="statTitlesLabel">тайтлов начато</span></div>
+        <div class="stat-card"><strong id="statFavorites">0</strong><span id="statFavoritesLabel">в избранном</span></div>
+        <div class="stat-card"><strong id="statRatings">0</strong><span id="statRatingsLabel">оценок поставлено</span></div>
+      </div>
+    </section>
+
+    <section class="charts-section" id="chartsSection">
+      <div class="section-heading">
+        <div>
+          <h2 id="chartsSectionTitle">Твои графики</h2>
+          <div class="subtitle" id="chartsSectionSubtitle">Часы по жанрам и статусы тайтлов</div>
+        </div>
+      </div>
+      <div class="charts-row">
+        <div class="chart-card">
+          <h3 id="chartGenresTitle">🎬 Часы по жанрам</h3>
+          <canvas id="genreChart" width="260" height="260"></canvas>
+          <div class="chart-legend" id="genreLegend"></div>
+        </div>
+        <div class="chart-card">
+          <h3 id="chartStatusesTitle">📋 Статусы тайтлов</h3>
+          <canvas id="statusChart" width="260" height="260"></canvas>
+          <div class="chart-legend" id="statusLegend"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="list-section" id="watchingSection">
+      <div class="section-heading">
+        <div>
+          <h2 id="watchingTitle">▶️ Смотрю сейчас</h2>
+          <div class="subtitle" id="watchingSubtitle">Тайтлы со статусом «Смотрю»</div>
+        </div>
+      </div>
+      <div class="mini-grid" id="watchingGrid"></div>
+    </section>
+
+    <section class="list-section" id="favoritesSection">
+      <div class="section-heading">
+        <div>
+          <h2 id="favoritesTitle">❤️ Избранное</h2>
+          <div class="subtitle" id="favoritesSubtitle">Твои самые любимые тайтлы</div>
+        </div>
+      </div>
+      <div class="mini-grid" id="favoritesGrid"></div>
+    </section>
+
+    <section class="achievements-section">
+      <div class="section-heading">
+        <div>
+          <h2 id="achievementsTitle">Достижения</h2>
+          <div class="subtitle" id="achievementsSubtitle">Открыто 0 из 12</div>
+        </div>
+      </div>
+      <div class="achievements-grid" id="achievementsGrid"></div>
+    </section>
+  </main>
+
+  <footer>ANIME VOID © 2026 · Твоя следующая история начинается здесь · Данные каталога: AniList</footer>
+
+  <script>
+    /* ===== ANIME VOID — страница профиля ===== */
+
+    const AVATARS = ["🐉", "🦊", "🐺", "⚔️", "🔮", "🌸", "👑", "⚡", "🔥", "💜", "🎭", "🌙"];
+    const RU_MONTHS = ["января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа", "сентября", "октября", "ноября", "декабря"];
+    const EN_MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+    const GENRE_RU = {
+      "Action": "Экшен", "Adventure": "Приключения", "Comedy": "Комедия", "Drama": "Драма",
+      "Ecchi": "Этти", "Fantasy": "Фэнтези", "Horror": "Хоррор", "Mahou Shoujo": "Махо-сёдзё",
+      "Mecha": "Меха", "Music": "Музыка", "Mystery": "Мистика", "Psychological": "Психологическое",
+      "Romance": "Романтика", "Sci-Fi": "Sci-Fi", "Slice of Life": "Повседневность",
+      "Sports": "Спорт", "Supernatural": "Сверхъестественное", "Thriller": "Триллер"
+    };
+    const STATUS_LABELS = {
+      watching: { ru: "Смотрю", en: "Watching" },
+      planned: { ru: "В планах", en: "Planned" },
+      completed: { ru: "Завершено", en: "Completed" },
+      dropped: { ru: "Брошено", en: "Dropped" }
+    };
+    const CHART_PALETTE = ["#a855f7", "#8b5cf6", "#c084fc", "#6d28d9", "#d8b4fe"];
+    const STATUS_COLORS = { watching: "#a855f7", planned: "#818cf8", completed: "#34d399", dropped: "#f87171" };
+    const CHART_OTHER_COLOR = "#8f879d";
+
+    function isRussianNow() { return localStorage.getItem("animeVoidLanguage") !== "en"; }
+
+    function escapeHtml(value) {
+      return String(value).replace(/[&<>"']/g, c => (
+        { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]
+      ));
+    }
+
+    function readFavorites() {
+      try { return JSON.parse(localStorage.getItem("animeVoidFavorites") || "[]"); } catch (err) { return []; }
+    }
+    function readStatuses() {
+      try { return JSON.parse(localStorage.getItem("animeVoidStatuses") || "{}"); } catch (err) { return {}; }
+    }
+    function readCatalog() {
+      try { return JSON.parse(localStorage.getItem("animeVoidCatalog") || "[]"); } catch (err) { return []; }
+    }
+
+    /* ===== Тема ===== */
+    function applyThemeFromStorage() {
+      const light = localStorage.getItem("animeVoidTheme") === "light";
+      document.body.classList.toggle("theme-light", light);
+      const button = document.getElementById("themeToggle");
+      if (button) button.textContent = light ? "🌙" : "☀️";
+    }
+    function toggleTheme() {
+      const light = document.body.classList.toggle("theme-light");
+      localStorage.setItem("animeVoidTheme", light ? "light" : "dark");
+      const button = document.getElementById("themeToggle");
+      if (button) button.textContent = light ? "🌙" : "☀️";
+    }
+
+    /* ===== Язык ===== */
+    function setT(id, text) {
+      const element = document.getElementById(id);
+      if (element) element.textContent = text;
+    }
+
+    function applyLanguage() {
+      const isRussian = isRussianNow();
+      document.documentElement.lang = isRussian ? "ru" : "en";
+      const ruBtn = document.getElementById("ruBtn");
+      const enBtn = document.getElementById("enBtn");
+      if (ruBtn) ruBtn.classList.toggle("active", isRussian);
+      if (enBtn) enBtn.classList.toggle("active", !isRussian);
+      document.title = isRussian ? "Мой профиль — ANIME VOID" : "My profile — ANIME VOID";
+      setT("navHome", isRussian ? "Главная" : "Home");
+      setT("navCatalog", isRussian ? "Каталог" : "Catalog");
+      setT("navProfile", isRussian ? "Профиль" : "Profile");
+      setT("statEpisodesLabel", isRussian ? "серий просмотрено" : "episodes watched");
+      setT("statHoursLabel", isRussian ? "время просмотра" : "watch time");
+      setT("statTitlesLabel", isRussian ? "тайтлов начато" : "titles started");
+      setT("statFavoritesLabel", isRussian ? "в избранном" : "favorites");
+      setT("statRatingsLabel", isRussian ? "оценок поставлено" : "ratings given");
+      setT("chartsSectionTitle", isRussian ? "Твои графики" : "Your charts");
+      setT("chartsSectionSubtitle", isRussian ? "Часы по жанрам и статусы тайтлов" : "Hours by genre and title statuses");
+      setT("chartGenresTitle", isRussian ? "🎬 Часы по жанрам" : "🎬 Hours by genre");
+      setT("chartStatusesTitle", isRussian ? "📋 Статусы тайтлов" : "📋 Title statuses");
+      setT("watchingTitle", isRussian ? "▶️ Смотрю сейчас" : "▶️ Watching now");
+      setT("watchingSubtitle", isRussian ? "Тайтлы со статусом «Смотрю»" : "Titles marked as watching");
+      setT("favoritesTitle", isRussian ? "❤️ Избранное" : "❤️ Favorites");
+      setT("favoritesSubtitle", isRussian ? "Твои самые любимые тайтлы" : "Your most loved titles");
+      setT("achievementsTitle", isRussian ? "Достижения" : "Achievements");
+    }
+
+    function setLanguage(lang) {
+      localStorage.setItem("animeVoidLanguage", lang);
+      renderAll();
+    }
+
+    /* ===== Шапка профиля ===== */
+    function renderProfileHeader() {
+      const isRussian = isRussianNow();
+      const avatar = localStorage.getItem("animeVoidAvatar") || "🐉";
+      const avatarButton = document.getElementById("avatarButton");
+      if (avatarButton) avatarButton.textContent = avatar;
+      const name = localStorage.getItem("animeVoidNickname") || (isRussian ? "Смотрящий" : "Watcher");
+      setT("profileName", name);
+
+      let since = localStorage.getItem("animeVoidMemberSince");
+      if (!since) {
+        since = new Date().toISOString().slice(0, 10);
+        localStorage.setItem("animeVoidMemberSince", since);
+      }
+      const date = new Date(since + "T12:00:00");
+      const sinceText = isRussian
+        ? "в ANIME VOID с " + date.getDate() + " " + RU_MONTHS[date.getMonth()] + " " + date.getFullYear()
+        : "in ANIME VOID since " + EN_MONTHS[date.getMonth()] + " " + date.getDate() + ", " + date.getFullYear();
+      setT("profileSince", sinceText);
+    }
+
+    function renderAvatarPicker() {
+      const picker = document.getElementById("avatarPicker");
+      if (!picker) return;
+      picker.innerHTML = "";
+      AVATARS.forEach(emoji => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.textContent = emoji;
+        button.addEventListener("click", () => {
+          localStorage.setItem("animeVoidAvatar", emoji);
+          picker.hidden = true;
+          renderProfileHeader();
+        });
+        picker.appendChild(button);
+      });
+      const avatarButton = document.getElementById("avatarButton");
+      if (avatarButton) {
+        avatarButton.addEventListener("click", () => { picker.hidden = !picker.hidden; });
+      }
+      const editNameBtn = document.getElementById("editNameBtn");
+      if (editNameBtn) {
+        editNameBtn.addEventListener("click", () => {
+          const isRussian = isRussianNow();
+          const current = localStorage.getItem("animeVoidNickname") || "";
+          const input = prompt(isRussian ? "Как тебя зовут?" : "What's your name?", current);
+          if (input === null) return;
+          const trimmed = String(input).trim().slice(0, 24);
+          if (trimmed) {
+            localStorage.setItem("animeVoidNickname", trimmed);
+            renderProfileHeader();
+          }
+        });
+      }
+    }
+
+    /* ===== Цифры и ачивки ===== */
+    function collectStats() {
+      let totalEpisodes = 0;
+      let watchedTitles = 0;
+      let hours = 0;
+      for (let i = 0; i < localStorage.length; i++) {
+        const storageKey = localStorage.key(i);
+        if (!storageKey || storageKey.indexOf("watched_") !== 0) continue;
+        let episodes = [];
+        try { episodes = JSON.parse(localStorage.getItem(storageKey) || "[]"); } catch (err) {}
+        if (!Array.isArray(episodes) || !episodes.length) continue;
+        totalEpisodes += episodes.length;
+        watchedTitles += 1;
+        const animeId = storageKey.slice(8);
+        episodes.forEach(episode => {
+          const duration = Number(localStorage.getItem("duration_" + animeId + "_" + episode)) || 0;
+          hours += duration > 0 ? duration / 60 : 24;
+        });
+      }
+      hours = Math.round(hours / 60);
+      const statuses = readStatuses();
+      let planned = 0, completed = 0, dropped = 0;
+      Object.keys(statuses).forEach(id => {
+        if (statuses[id] === "planned") planned += 1;
+        else if (statuses[id] === "completed") completed += 1;
+        else if (statuses[id] === "dropped") dropped += 1;
+      });
+      let ratingsCount = 0;
+      try { ratingsCount = Object.keys(JSON.parse(localStorage.getItem("animeVoidRatings") || "{}")).length; } catch (err) {}
+      return {
+        totalEpisodes, watchedTitles, hours, planned, completed, dropped,
+        ratingsCount, favoritesCount: readFavorites().length
+      };
+    }
+
+    function achievementsList(stats, isRussian) {
+      return [
+        { icon: "🌱", unlocked: stats.totalEpisodes >= 1, title: isRussian ? "Первые шаги" : "First steps", hint: isRussian ? "Посмотреть 1 серию" : "Watch 1 episode" },
+        { icon: "📺", unlocked: stats.totalEpisodes >= 10, title: isRussian ? "Разогрев" : "Warming up", hint: isRussian ? "10 серий" : "10 episodes" },
+        { icon: "💯", unlocked: stats.totalEpisodes >= 100, title: isRussian ? "Сотня" : "Century", hint: isRussian ? "100 серий" : "100 episodes" },
+        { icon: "🏆", unlocked: stats.totalEpisodes >= 500, title: isRussian ? "Легенда" : "Legend", hint: isRussian ? "500 серий" : "500 episodes" },
+        { icon: "🎬", unlocked: stats.watchedTitles >= 5, title: isRussian ? "Киноман" : "Cinephile", hint: isRussian ? "5 тайтлов начато" : "5 titles started" },
+        { icon: "❤️", unlocked: stats.favoritesCount >= 10, title: isRussian ? "Коллекционер" : "Collector", hint: isRussian ? "10 в избранном" : "10 favorites" },
+        { icon: "⏱️", unlocked: stats.hours >= 10, title: isRussian ? "Марафонец" : "Marathoner", hint: isRussian ? "10 часов просмотра" : "10 hours watched" },
+        { icon: "⏰", unlocked: stats.hours >= 50, title: isRussian ? "Хардкор" : "Hardcore", hint: isRussian ? "50 часов просмотра" : "50 hours watched" },
+        { icon: "⭐", unlocked: stats.ratingsCount >= 5, title: isRussian ? "Критик" : "Critic", hint: isRussian ? "5 оценок поставлено" : "5 ratings given" },
+        { icon: "📅", unlocked: stats.planned >= 5, title: isRussian ? "Стратег" : "Planner", hint: isRussian ? "5 в «В планах»" : "5 planned" },
+        { icon: "✅", unlocked: stats.completed >= 1, title: isRussian ? "Финишист" : "Finisher", hint: isRussian ? "1 тайтл пройден" : "1 title completed" },
+        { icon: "🚫", unlocked: stats.dropped >= 1, title: isRussian ? "Бросатель" : "Dropper", hint: isRussian ? "1 брошенный тайтл" : "1 title dropped" }
+      ];
+    }
+
+    function renderStatsAndAchievements() {
+      const isRussian = isRussianNow();
+      const stats = collectStats();
+      setT("statEpisodes", String(stats.totalEpisodes));
+      setT("statHours", stats.hours + (isRussian ? " ч" : " h"));
+      setT("statTitles", String(stats.watchedTitles));
+      setT("statFavorites", String(stats.favoritesCount));
+      setT("statRatings", String(stats.ratingsCount));
+
+      const list = achievementsList(stats, isRussian);
+      const unlockedCount = list.filter(achievement => achievement.unlocked).length;
+      setT("achievementsSubtitle", isRussian
+        ? "Открыто " + unlockedCount + " из " + list.length
+        : unlockedCount + " of " + list.length + " unlocked");
+      const grid = document.getElementById("achievementsGrid");
+      if (grid) {
+        grid.innerHTML = list.map(achievement =>
+          "<div class=\"achievement-card" + (achievement.unlocked ? " unlocked" : "") + "\" title=\"" + escapeHtml(achievement.hint) + "\">" +
+          "<span class=\"achievement-icon\">" + (achievement.unlocked ? achievement.icon : "🔒") + "</span>" +
+          "<span class=\"achievement-title\">" + escapeHtml(achievement.title) + "</span>" +
+          "<span class=\"achievement-hint\">" + escapeHtml(achievement.hint) + "</span>" +
+          "</div>").join("");
+      }
+    }
+
+    /* ===== Графики ===== */
+    function drawDonutChart(canvas, entries, centerTop, centerBottom) {
+      if (!canvas) return;
+      const size = 260;
+      const scale = Math.max(2, window.devicePixelRatio || 1);
+      canvas.width = size * scale;
+      canvas.height = size * scale;
+      canvas.style.width = "100%";
+      canvas.style.maxWidth = size + "px";
+      const ctx = canvas.getContext("2d");
+      ctx.setTransform(scale, 0, 0, scale, 0, 0);
+      ctx.clearRect(0, 0, size, size);
+      const cx = size / 2, cy = size / 2;
+      const R = size / 2 - 20;
+      const thickness = 26;
+      const gap = 0.07;
+      const total = entries.reduce((sum, e) => sum + e.value, 0);
+
+      ctx.beginPath();
+      ctx.arc(cx, cy, R, 0, Math.PI * 2);
+      ctx.lineWidth = thickness;
+      ctx.strokeStyle = "rgba(168,85,247,.1)";
+      ctx.stroke();
+
+      if (total > 0) {
+        let angle = -Math.PI / 2;
+        entries.forEach(e => {
+          let slice = e.value / total * Math.PI * 2;
+          if (slice < gap + 0.03) slice = gap + 0.03;
+          const start = angle + gap / 2;
+          const end = angle + slice - gap / 2;
+          if (end > start) {
+            ctx.beginPath();
+            ctx.arc(cx, cy, R, start, end);
+            ctx.lineWidth = thickness;
+            ctx.strokeStyle = e.color;
+            ctx.stroke();
+          }
+          angle += slice;
+        });
+      }
+      ctx.textAlign = "center";
+      ctx.fillStyle = "#f5f3ff";
+      ctx.font = "800 32px system-ui, sans-serif";
+      ctx.fillText(centerTop, cx, cy);
+      ctx.fillStyle = "#a99fc2";
+      ctx.font = "600 12px system-ui, sans-serif";
+      ctx.fillText(centerBottom, cx, cy + 26);
+    }
+
+    function renderChartLegend(element, entries, formatValue) {
+      if (!element) return;
+      if (!entries.length) {
+        element.innerHTML = "<div class=\"chart-empty\">—</div>";
+        return;
+      }
+      const total = entries.reduce((sum, e) => sum + e.value, 0) || 1;
+      element.innerHTML = entries.map(e => {
+        const pct = Math.max(1, Math.round(e.value / total * 100));
+        return "<div class=\"chart-legend-item\">" +
+          "<div class=\"chart-legend-row\">" +
+          "<span class=\"chart-dot\" style=\"background:" + e.color + "\"></span>" +
+          "<span class=\"chart-label\">" + escapeHtml(e.label) + "</span>" +
+          "<span class=\"chart-value\">" + formatValue(e) + "</span>" +
+          "</div>" +
+          "<div class=\"chart-bar\"><span style=\"width:" + pct + "%; background:" + e.color + "\"></span></div>" +
+          "</div>";
+      }).join("");
+    }
+
+    function renderStatsCharts() {
+      const isRussian = isRussianNow();
+      const catalog = readCatalog();
+      const byId = new Map(catalog.map(t => [String(t.id), t]));
+
+      const genreMinutes = {};
+      for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        if (!key || key.indexOf("watched_") !== 0) continue;
+        const id = key.slice(8);
+        let episodes = [];
+        try { episodes = JSON.parse(localStorage.getItem(key)) || []; } catch (err) { continue; }
+        if (!episodes.length) continue;
+        const item = byId.get(id);
+        if (!item || !Array.isArray(item.genres) || !item.genres.length) continue;
+        let minutes = 0;
+        episodes.forEach(ep => {
+          const stored = Number(localStorage.getItem("duration_" + id + "_" + ep));
+          minutes += stored > 0 ? stored : 24;
+        });
+        const per = minutes / item.genres.length;
+        item.genres.forEach(g => { genreMinutes[g] = (genreMinutes[g] || 0) + per; });
+      }
+      const sortedGenres = Object.keys(genreMinutes)
+        .map(g => ({ label: isRussian ? (GENRE_RU[g] || g) : g, value: genreMinutes[g] }))
+        .sort((a, b) => b.value - a.value);
+      const TOP = 5;
+      const genreEntries = sortedGenres.slice(0, TOP).map((e, i) => ({ label: e.label, value: e.value, color: CHART_PALETTE[i] }));
+      if (sortedGenres.length > TOP) {
+        const rest = sortedGenres.slice(TOP).reduce((s, e) => s + e.value, 0);
+        genreEntries.push({ label: isRussian ? "Другое" : "Other", value: rest, color: CHART_OTHER_COLOR });
+      }
+      const totalGenreMinutes = sortedGenres.reduce((s, e) => s + e.value, 0);
+      drawDonutChart(
+        document.getElementById("genreChart"),
+        genreEntries,
+        totalGenreMinutes >= 60 ? Math.round(totalGenreMinutes / 60) + " ч" : Math.round(totalGenreMinutes) + " мин",
+        isRussian ? "всего просмотра" : "total watched"
+      );
+      renderChartLegend(document.getElementById("genreLegend"), genreEntries, e => {
+        const hours = e.value / 60;
+        const pct = totalGenreMinutes ? Math.round(e.value / totalGenreMinutes * 100) : 0;
+        return (hours >= 10 ? Math.round(hours) : hours.toFixed(1)) + " ч · " + pct + "%";
+      });
+
+      const statuses = readStatuses();
+      const counts = { watching: 0, planned: 0, completed: 0, dropped: 0 };
+      Object.keys(statuses).forEach(id => { const s = statuses[id]; if (counts[s] !== undefined) counts[s]++; });
+      const statusEntries = Object.keys(counts)
+        .map(s => ({ label: isRussian ? STATUS_LABELS[s].ru : STATUS_LABELS[s].en, value: counts[s], color: STATUS_COLORS[s] }))
+        .filter(e => e.value > 0);
+      const totalStatuses = statusEntries.reduce((s, e) => s + e.value, 0);
+      drawDonutChart(
+        document.getElementById("statusChart"),
+        statusEntries,
+        String(totalStatuses),
+        isRussian ? "тайтлов со статусом" : "tracked titles"
+      );
+      renderChartLegend(document.getElementById("statusLegend"), statusEntries, e => {
+        const pct = totalStatuses ? Math.round(e.value / totalStatuses * 100) : 0;
+        return e.value + " · " + pct + "%";
+      });
+    }
+
+    /* ===== Списки тайтлов ===== */
+    function miniCardHTML(item) {
+      return "<a class=\"mini-card\" href=\"anime.html?id=" + encodeURIComponent(item.id) + "\">" +
+        "<img src=\"" + escapeHtml(item.image || "image/poster1.jpg") + "\" alt=\"\" loading=\"lazy\" " +
+        "onerror=\"this.onerror=null;this.src='image/poster1.jpg';\">" +
+        "<span class=\"mini-title\">" + escapeHtml(item.title || "") + "</span>" +
+        "</a>";
+    }
+
+    function renderLists() {
+      const isRussian = isRussianNow();
+      const catalog = readCatalog();
+      const byId = new Map(catalog.map(t => [String(t.id), t]));
+
+      const statuses = readStatuses();
+      const watchingIds = Object.keys(statuses).filter(id => statuses[id] === "watching");
+      const watchingGrid = document.getElementById("watchingGrid");
+      if (watchingGrid) {
+        const items = watchingIds.map(id => byId.get(id)).filter(Boolean);
+        watchingGrid.innerHTML = items.length
+          ? items.map(miniCardHTML).join("")
+          : "<div class=\"empty-note\">" + (isRussian
+            ? "Пока ничего. Поставь тайтлу статус «Смотрю» на его странице — он появится здесь."
+            : "Nothing yet. Set a title's status to “Watching” on its page — it will show up here.") +
+            " <a href=\"index.html#catalog\">" + (isRussian ? "Открыть каталог →" : "Open catalog →") + "</a></div>";
+      }
+
+      const favoritesGrid = document.getElementById("favoritesGrid");
+      if (favoritesGrid) {
+        const items = readFavorites().map(id => byId.get(String(id))).filter(Boolean);
+        favoritesGrid.innerHTML = items.length
+          ? items.map(miniCardHTML).join("")
+          : "<div class=\"empty-note\">" + (isRussian
+            ? "Пока пусто. Добавляй аниме в избранное ❤️ — они будут собираться здесь."
+            : "Nothing here yet. Add anime to favorites ❤️ — they will gather here.") +
+            " <a href=\"index.html#catalog\">" + (isRussian ? "Открыть каталог →" : "Open catalog →") + "</a></div>";
+      }
+    }
+
+    /* ===== Запуск ===== */
+    function renderAll() {
+      applyLanguage();
+      renderProfileHeader();
+      renderStatsAndAchievements();
+      renderStatsCharts();
+      renderLists();
+    }
+
+    applyThemeFromStorage();
+    renderAvatarPicker();
+    renderAll();
+
+    let chartResizeTimer = null;
+    window.addEventListener("resize", () => {
+      clearTimeout(chartResizeTimer);
+      chartResizeTimer = setTimeout(() => renderStatsCharts(), 200);
+    });
+  </script>
+</body>
+</html>
