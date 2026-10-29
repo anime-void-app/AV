@@ -391,11 +391,11 @@
     }
 
     .poster small { font-size: 10px; letter-spacing: 2px; color: #e9d5ff; }
-    .poster h3 { font-size: 19px; margin: 8px 0 0; line-height: 1.2; color: #fff; }
-    .poster .year { font-size: 11px; color: #d0c8dc; margin-top: 7px; }
-    .poster .anime-meta { color: #d0c8dc; }
+    .poster h3 { font-size: 19px; margin: 8px 0 0; line-height: 1.2; color: #fff; display:-webkit-box; -webkit-line-clamp:2; line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; min-height:2.4em; }
+    .poster .year { font-size: 11px; color: #d0c8dc; margin-top: 7px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .poster .anime-meta { color: #d0c8dc; min-height:1.2em; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
 
-    .season-count { display:inline-flex; margin-top:5px; padding:3px 8px; border:1px solid rgba(192,132,252,.42); border-radius:999px; color:#d8b4fe; font-size:11px; }
+    .season-count { position:absolute; top:12px; right:12px; z-index:2; display:inline-flex; padding:4px 9px; border:1px solid rgba(192,132,252,.55); border-radius:999px; background:rgba(12,10,18,.72); color:#d8b4fe; font-size:11px; font-weight:700; }
     .card-actions { display:flex; flex-direction:column; gap:6px; margin-top:10px; }
     .card-season-buttons { display:flex; flex-wrap:nowrap; gap:6px; }
     .card-season-button { min-height:34px; flex:1 1 0; min-width:0; padding:6px 9px; border:1px solid rgba(192,132,252,.38); border-radius:9px; background:#171020; color:#e9d5ff; font:inherit; font-size:11px; font-weight:700; cursor:pointer; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
@@ -516,6 +516,29 @@
     .airing-row::-webkit-scrollbar { height: 8px; }
     .airing-row::-webkit-scrollbar-track { background: #14101e; border-radius: 8px; }
     .airing-row::-webkit-scrollbar-thumb { background: #2b2140; border-radius: 8px; }
+    .top-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:12px; }
+    .top-card {
+      position:relative; display:flex; flex-direction:column; gap:8px; padding:10px;
+      border:1px solid rgba(168,85,247,.25); border-radius:16px;
+      background:rgba(12,10,18,.75); cursor:pointer; font:inherit; text-align:left; color:#fff;
+      transition:transform .25s, border-color .25s;
+    }
+    .top-card:hover { transform:translateY(-4px); border-color:rgba(192,132,252,.6); }
+    .top-card img { width:100%; aspect-ratio:2/3; object-fit:cover; border-radius:11px; display:block; }
+    .top-rank {
+      position:absolute; top:16px; left:16px; z-index:2; padding:4px 10px;
+      border-radius:999px; background:linear-gradient(110deg,#7c3aed,#a855f7);
+      color:#fff; font-size:12px; font-weight:800; box-shadow:0 6px 18px rgba(124,58,237,.45);
+    }
+    .top-name {
+      font-size:13px; font-weight:700; color:#fff; line-height:1.3;
+      display:-webkit-box; -webkit-line-clamp:2; line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;
+      min-height:2.6em;
+    }
+    .top-score { font-size:12px; color:#b79ce8; font-weight:700; }
+    body.theme-light .top-card { background:#fdfbff; border-color:#d6c5f0; }
+    @media (max-width:560px) { .top-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+
     .airing-card {
       flex: 0 0 168px;
       scroll-snap-align: start;
@@ -1131,7 +1154,13 @@
     body.theme-light .calendar-more { color:#5b21b6; border-color:rgba(124,58,237,.45); background:rgba(124,58,237,.1); }
     body.theme-light .calendar-empty { color:#8a7fa8; }
     @media (max-width: 1000px) { .calendar-grid { grid-template-columns:repeat(4,minmax(0,1fr)); } }
-    @media (max-width: 600px) { .calendar-grid { display:flex; overflow-x:auto; padding-bottom:10px; } .calendar-day { flex:0 0 200px; } }
+    @media (max-width: 600px) {
+      .calendar-grid { display:flex; flex-direction:column; }
+      .calendar-day { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px; }
+      .calendar-day-title { grid-column:1 / -1; }
+      .calendar-more { grid-column:1 / -1; }
+      .calendar-empty { grid-column:1 / -1; }
+    }
 
     /* ===== Достижения ===== */
     .achievements-section { margin-top:42px; }
@@ -1241,6 +1270,16 @@
         </div>
       </div>
       <div class="airing-row" id="recommendedRow"></div>
+    </section>
+
+    <section class="airing-section" id="topSection" hidden>
+      <div class="section-heading">
+        <div>
+          <h2 id="topTitle">🏆 Топ аниме всех времён</h2>
+          <div class="subtitle" id="topSubtitle">Лучшее по оценкам зрителей — по данным AniList</div>
+        </div>
+      </div>
+      <div class="top-grid" id="topGrid"></div>
     </section>
 
     <section id="catalog">
@@ -1835,7 +1874,7 @@ localStorage.setItem("animeVoidHasMore", String(apiHasMore));
         : "";
       const watchButtonHTML = hasSeasonButtons
         ? ""
-        : `<button type="button" class="primary card-watch-button" style="width:100%;margin:0" onclick="event.stopPropagation(); window.location.href='watch.html?id=${encodeURIComponent(item.id)}&episode=1'">${isRussian ? "▶ Смотреть" : "▶ Watch"}</button>`;
+        : `<button type="button" class="card-season-button card-watch-button" style="width:100%;margin:0" onclick="event.stopPropagation(); window.location.href='watch.html?id=${encodeURIComponent(item.id)}&episode=1'">${isRussian ? "▶ Смотреть" : "▶ Watch"}</button>`;
 
       return `
         <article class="card" role="link" tabindex="0"
@@ -1853,7 +1892,7 @@ localStorage.setItem("animeVoidHasMore", String(apiHasMore));
             ${item.franchiseSeasonCount > 1 ? `<div class="season-count">${seasonCountLabel(item.franchiseSeasonCount)}</div>` : ""}
             <div class="anime-meta">
     ${item.rating ? `⭐ ${item.rating}` : ""}
-    ${item.episodes ? ` · ${item.episodes} серий` : ""}
+    ${item.episodes ? ` · ${item.episodes} ${isRussian ? "серий" : "eps"}` : ""}
     ${item.status ? ` · ${item.status}` : ""}
 </div>
           </div>
@@ -2370,6 +2409,10 @@ localStorage.setItem("animeVoidHasMore", String(apiHasMore));
       let totalEpisodes = 0;
       let watchedTitles = 0;
       let hours = 0;
+      let catalog = [];
+      try { catalog = JSON.parse(localStorage.getItem("animeVoidCatalog") || "[]"); } catch (error) {}
+      const byId = new Map(catalog.map(t => [String(t.id), t]));
+      const genreEpisodes = {};
       try {
         for (let i = 0; i < localStorage.length; i++) {
           const storageKey = localStorage.key(i);
@@ -2384,6 +2427,10 @@ localStorage.setItem("animeVoidHasMore", String(apiHasMore));
             const duration = Number(localStorage.getItem("duration_" + animeId + "_" + episode)) || 0;
             hours += duration > 0 ? duration / 60 : 24;
           });
+          const item = byId.get(animeId);
+          if (item && Array.isArray(item.genres)) {
+            item.genres.forEach(genre => { genreEpisodes[genre] = (genreEpisodes[genre] || 0) + episodes.length; });
+          }
         }
       } catch (error) {}
       hours = Math.round(hours / 60);
@@ -2395,11 +2442,17 @@ localStorage.setItem("animeVoidHasMore", String(apiHasMore));
         else if (statuses[id] === "dropped") dropped += 1;
       });
       let ratingsCount = 0;
-      try { ratingsCount = Object.keys(JSON.parse(localStorage.getItem("animeVoidRatings") || "{}")).length; } catch (error) {}
-      return { totalEpisodes, watchedTitles, hours, planned, completed, dropped, ratingsCount, favoritesCount: favorites.length };
+      let maxRating = 0;
+      try {
+        const ratings = JSON.parse(localStorage.getItem("animeVoidRatings") || "{}");
+        ratingsCount = Object.keys(ratings).length;
+        Object.keys(ratings).forEach(id => { const value = Number(ratings[id]) || 0; if (value > maxRating) maxRating = value; });
+      } catch (error) {}
+      return { totalEpisodes, watchedTitles, hours, planned, completed, dropped, ratingsCount, favoritesCount: favorites.length, genreEpisodes, distinctGenres: Object.keys(genreEpisodes).length, maxRating };
     }
 
     function achievementsList(stats, isRussian) {
+      const genreEpisodes = stats.genreEpisodes || {};
       return [
         { icon: "🌱", unlocked: stats.totalEpisodes >= 1, title: isRussian ? "Первые шаги" : "First steps", hint: isRussian ? "Посмотреть 1 серию" : "Watch 1 episode" },
         { icon: "📺", unlocked: stats.totalEpisodes >= 10, title: isRussian ? "Разогрев" : "Warming up", hint: isRussian ? "10 серий" : "10 episodes" },
@@ -2412,7 +2465,16 @@ localStorage.setItem("animeVoidHasMore", String(apiHasMore));
         { icon: "⭐", unlocked: stats.ratingsCount >= 5, title: isRussian ? "Критик" : "Critic", hint: isRussian ? "5 оценок поставлено" : "5 ratings given" },
         { icon: "📅", unlocked: stats.planned >= 5, title: isRussian ? "Стратег" : "Planner", hint: isRussian ? "5 в «В планах»" : "5 planned" },
         { icon: "✅", unlocked: stats.completed >= 1, title: isRussian ? "Финишист" : "Finisher", hint: isRussian ? "1 тайтл пройден" : "1 title completed" },
-        { icon: "🚫", unlocked: stats.dropped >= 1, title: isRussian ? "Бросатель" : "Dropper", hint: isRussian ? "1 брошенный тайтл" : "1 title dropped" }
+        { icon: "🚫", unlocked: stats.dropped >= 1, title: isRussian ? "Это не моё" : "Not my thing", hint: isRussian ? "1 брошенный тайтл" : "1 title dropped" },
+        { icon: "🏅", unlocked: stats.completed >= 3, title: isRussian ? "Мастер финалов" : "Finale master", hint: isRussian ? "3 тайтла пройдено" : "3 titles completed" },
+        { icon: "👑", unlocked: stats.maxRating >= 10, title: isRussian ? "Перфекционист" : "Perfectionist", hint: isRussian ? "Поставить оценку 10" : "Give a 10 rating" },
+        { icon: "🐉", unlocked: (genreEpisodes["Fantasy"] || 0) >= 10, title: isRussian ? "Повелитель драконов" : "Dragon lord", hint: isRussian ? "10 серий фэнтези" : "10 fantasy episodes" },
+        { icon: "⚔️", unlocked: (genreEpisodes["Action"] || 0) >= 25, title: isRussian ? "Воин" : "Warrior", hint: isRussian ? "25 серий экшена" : "25 action episodes" },
+        { icon: "💜", unlocked: (genreEpisodes["Romance"] || 0) >= 10, title: isRussian ? "Сердцеед" : "Heartbreaker", hint: isRussian ? "10 серий романтики" : "10 romance episodes" },
+        { icon: "😭", unlocked: (genreEpisodes["Drama"] || 0) >= 10, title: isRussian ? "Слезинка" : "Teardrop", hint: isRussian ? "10 серий драмы" : "10 drama episodes" },
+        { icon: "🤖", unlocked: (genreEpisodes["Mecha"] || 0) >= 1, title: isRussian ? "Пилот мехи" : "Mecha pilot", hint: isRussian ? "Посмотреть меху" : "Watch a mecha" },
+        { icon: "😱", unlocked: (genreEpisodes["Horror"] || 0) >= 1, title: isRussian ? "Бесстрашный" : "Fearless", hint: isRussian ? "Посмотреть хоррор" : "Watch a horror" },
+        { icon: "🌍", unlocked: stats.distinctGenres >= 6, title: isRussian ? "Исследователь миров" : "World explorer", hint: isRussian ? "6 разных жанров" : "6 different genres" }
       ];
     }
 
@@ -2433,6 +2495,56 @@ localStorage.setItem("animeVoidHasMore", String(apiHasMore));
           <span class="achievement-hint">${achievement.hint}</span>
         </div>`).join("");
       section.hidden = false;
+    }
+
+    /* ===== Топ аниме всех времён ===== */
+    let topItems = [];
+
+    function renderTopSection(items) {
+      const section = document.getElementById("topSection");
+      const grid = document.getElementById("topGrid");
+      if (!section || !grid || !items.length) return;
+      const isRussian = localStorage.getItem("animeVoidLanguage") !== "en";
+      grid.innerHTML = items.map((item, index) => `
+        <button type="button" class="top-card" onclick="openAnimePage('${encodeURIComponent(item.id)}')">
+          <span class="top-rank">#${index + 1}</span>
+          <img src="${item.image || 'image/poster1.jpg'}" alt="" loading="lazy"
+            onerror="this.onerror=null;this.src='image/poster1.jpg';">
+          <span class="top-name" data-anime-title-id="${item.id}">${isRussian ? (getRussianTitle(item) || item.title) : item.title}</span>
+          <span class="top-score">${item.rating ? "⭐ " + item.rating : ""}</span>
+        </button>`).join("");
+      section.hidden = false;
+    }
+
+    async function loadTopSection() {
+      try {
+        const cache = JSON.parse(localStorage.getItem("animeVoidTopCacheV1") || "null");
+        if (cache && Array.isArray(cache.items) && cache.items.length && Date.now() - cache.savedAt < 86400000) {
+          topItems = cache.items;
+          renderTopSection(topItems);
+          return;
+        }
+      } catch (error) {}
+      try {
+        const response = await fetch("https://graphql.anilist.co", {
+          method: "POST",
+          headers: { "Content-Type": "application/json", Accept: "application/json" },
+          body: JSON.stringify({
+            query: "query { Page(perPage: 20) { media(sort: SCORE_DESC, type: ANIME, isAdult: false) { id title { romaji english } coverImage { large } averageScore } } }"
+          })
+        });
+        const result = await response.json();
+        const media = (result.data && result.data.Page && result.data.Page.media) || [];
+        if (!media.length) return;
+        topItems = media.map(node => ({
+          id: "anilist-" + node.id,
+          title: (node.title && (node.title.english || node.title.romaji)) || "",
+          image: (node.coverImage && node.coverImage.large) || "",
+          rating: node.averageScore ? (node.averageScore / 10).toFixed(1) : ""
+        }));
+        try { localStorage.setItem("animeVoidTopCacheV1", JSON.stringify({ savedAt: Date.now(), items: topItems })); } catch (error) {}
+        renderTopSection(topItems);
+      } catch (error) {}
     }
 
     /* ===== Бэкап ===== */
@@ -4093,6 +4205,11 @@ if (resetFiltersBtn) {
   const airingSubtitle = document.getElementById("airingSubtitle");
   if (airingSubtitle) airingSubtitle.textContent = lang === "ru" ? "Тайтлы текущего сезона" : "This season's titles";
   if (airingItems.length) renderAiringSection(airingItems);
+  const topTitle = document.getElementById("topTitle");
+  if (topTitle) topTitle.textContent = lang === "ru" ? "🏆 Топ аниме всех времён" : "🏆 Top anime of all time";
+  const topSubtitle = document.getElementById("topSubtitle");
+  if (topSubtitle) topSubtitle.textContent = lang === "ru" ? "Лучшее по оценкам зрителей — по данным AniList" : "The best by viewer scores — via AniList";
+  if (topItems.length) renderTopSection(topItems);
   renderHistorySection();
 
   render();
@@ -4115,6 +4232,8 @@ render();
 showContinueWatching();
 
 loadAiringSection();
+
+loadTopSection();
 
 setLanguage(
   localStorage.getItem(
