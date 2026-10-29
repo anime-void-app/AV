@@ -4883,22 +4883,16 @@ function toggleFavorite(id) {
       const isRussian = localStorage.getItem("animeVoidLanguage") !== "en";
       document.getElementById("modalContent").innerHTML = isRussian ? `
         <h2>О проекте ANIME VOID</h2>
-        <p>ANIME VOID — личный проект и демо-версия аниме-каталога. Сайт активно развивается.</p>
-        <p>Каталог, названия и описания собираются через открытый API AniList.
-        Все права на аниме принадлежат их правообладателям.</p>
-        <p>Видео пока недоступно: идёт работа над получением лицензий на показ.
-        Собственный плеер появится после оформления прав.</p>
-        <p>Что дальше: развитие каталога и поиска, мобильная версия,
-        лицензирование и запуск видеоплеера.</p>
+        <p>ANIME VOID — независимый проект для тех, кто любит аниме. Здесь можно искать тайтлы, следить за выходом серий, сохранять избранное и отмечать просмотренное.</p>
+        <p>Данные каталога, включая названия и описания, поступают из открытого API AniList. Права на аниме принадлежат их правообладателям.</p>
+        <p>ANIME VOID не размещает серии. В разделе «Где посмотреть» можно найти ссылки и поиск по сторонним площадкам. Наличие, язык и стоимость просмотра зависят от площадки и региона.</p>
+        <p>Проект развивается благодаря обратной связи и добровольной поддержке пользователей. Спасибо, что ты с нами! 💜</p>
       ` : `
         <h2>About ANIME VOID</h2>
-        <p>ANIME VOID is a personal project and a demo of an anime catalog. The site is actively developing.</p>
-        <p>The catalog, titles and descriptions are built with the open AniList API.
-        All anime rights belong to their respective owners.</p>
-        <p>Video is not available yet: licensing is in progress.
-        Our own player will launch once the rights are secured.</p>
-        <p>What's next: catalog and search improvements, mobile version,
-        licensing and the launch of a video player.</p>
+        <p>ANIME VOID is an independent project for anime fans. Discover titles, follow episode schedules, save favorites, and mark episodes as watched.</p>
+        <p>Catalog data, including titles and descriptions, comes from the public AniList API. All rights to the anime belong to their respective owners.</p>
+        <p>ANIME VOID does not host episodes. The “Where to watch” section offers links and searches on third-party platforms. Availability, language, and pricing depend on the platform and region.</p>
+        <p>The project grows with feedback and voluntary support from its users. Thank you for being here! 💜</p>
       `;
       document.getElementById("modal").classList.add("open");
     }
