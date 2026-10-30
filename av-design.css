@@ -69,3 +69,57 @@ body.theme-sakura{--av-glow:165,44,89}body.theme-ocean{--av-glow:23,98,136}body.
  .secondary:hover,.mood-chip:hover,.status-btn:hover,.episode:hover,.control-btn:hover,.season-choice:hover,.favorite-page-btn:hover{border-color:var(--av-accent)!important;box-shadow:0 0 18px rgba(var(--av-glow),.18)!important}
 }
 @media(prefers-reduced-motion:reduce){.hero-content,.anime-page .description,.anime-page .info,.anime-page .where-box{animation:none!important}*,*::before,*::after{transition-duration:.01ms!important;animation-duration:.01ms!important;animation-iteration-count:1!important}.av-home .card:hover,.av-home .card .poster:hover img,.airing-card:hover{transform:none!important}}
+
+/* 16.3 — artwork restored without covering text or touch controls. */
+body.av-detail{isolation:isolate;min-height:100vh}
+body.av-detail #pageBg{z-index:-3;opacity:.75;filter:brightness(.72);pointer-events:none}
+body.av-detail #pageBg.bg-blurred{filter:brightness(.65) blur(4px);transform:scale(1.03)}
+body.av-detail .page-overlay{z-index:-2;opacity:1;pointer-events:none;background:linear-gradient(90deg,color-mix(in srgb,var(--av-bg) 25%,transparent),color-mix(in srgb,var(--av-bg) 82%,transparent) 38%,color-mix(in srgb,var(--av-bg) 82%,transparent) 62%,color-mix(in srgb,var(--av-bg) 25%,transparent))!important}
+#avTitleArt{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:0;transition:opacity .65s ease}
+#avTitleArt.is-ready{opacity:1}
+.av-title-art-panel{position:absolute;top:140px;bottom:32px;width:clamp(64px,calc((100vw - 1100px)/2 - 28px),290px);max-height:820px;overflow:hidden;border-radius:22px;border:1px solid rgba(var(--av-glow),.32);box-shadow:0 16px 45px #0005}
+.av-title-art-left{left:18px}.av-title-art-right{right:18px}
+.av-title-art-panel img{display:block;width:100%;height:100%;object-fit:cover;object-position:25% center;opacity:.85}
+.av-title-art-right img{object-position:75% center}
+.av-title-art-panel::after{content:'';position:absolute;inset:0;background:linear-gradient(0deg,var(--av-bg),transparent 35%,transparent 80%,color-mix(in srgb,var(--av-bg) 30%,transparent))}
+.av-anime-mobile-banner{display:none}
+@media(max-width:1239px){#avTitleArt{display:none}.av-anime-mobile-banner.is-ready{display:block;height:190px;margin:0 0 20px;border:1px solid rgba(var(--av-glow),.3);border-radius:22px;overflow:hidden;background:var(--av-surface)}.av-anime-mobile-banner img{display:block;width:100%;height:100%;object-fit:cover;object-position:center 30%}}
+@media(max-width:760px){.av-anime-mobile-banner.is-ready{height:150px;margin-bottom:16px;border-radius:18px}body.av-detail #pageBg{opacity:.4}}
+/* A small increase, not a second full-size hero. */
+.av-home .continue-card{min-height:208px;padding:26px 28px;background-color:var(--av-surface)!important}
+.av-home .continue-card>img{width:120px;height:166px;object-fit:cover}
+.av-home .continue-info h3{overflow-wrap:anywhere}
+@media(max-width:760px){.av-home .continue-card{min-height:0;padding:24px;gap:14px}.av-home .continue-card>img{width:118px;height:164px}}
+/* Profile showcase and native, keyboard-accessible achievement picker. */
+.av-ach-showcase{flex:1 0 100%;min-width:0;width:100%;margin-top:4px;padding-top:20px;border-top:1px solid var(--av-line)}
+.av-ach-heading{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:16px;flex-wrap:wrap}
+.av-ach-heading h2{font-size:19px;margin:0;color:var(--av-text)}.av-ach-heading p{font-size:13px;color:var(--av-muted);margin:6px 0 0}
+.av-ach-heading button{padding:10px 16px;cursor:pointer}
+.av-ach-slots{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.av-ach-slot{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;min-height:140px;padding:16px 12px;border-radius:16px;border:1px solid var(--av-line);overflow:hidden;text-align:center;overflow-wrap:anywhere}
+.av-ach-slot.is-empty{border-style:dashed;color:var(--av-muted);font-size:13px;background:var(--av-surface)}
+.av-ach-slot.is-equipped{background:radial-gradient(ellipse at top,rgba(var(--av-glow),.23),transparent 80%),var(--av-surface);border-color:rgba(var(--av-glow),.55);animation:avBadgeEntrance .45s ease both}
+.av-ach-slot.is-equipped:nth-child(2){animation-delay:.08s}.av-ach-slot.is-equipped:nth-child(3){animation-delay:.16s}
+.av-ach-slot strong{font-size:14px;line-height:1.4;color:var(--av-text)}.av-ach-slot small{font-size:12px;line-height:1.5;color:var(--av-muted)}
+.av-ach-icon{font-size:34px;line-height:1.3;filter:drop-shadow(0 0 9px rgba(var(--av-glow),.45));animation:avBadgeFloat 4s ease-in-out infinite}
+.av-ach-slot:nth-child(2) .av-ach-icon{animation-delay:-1.3s}.av-ach-slot:nth-child(3) .av-ach-icon{animation-delay:-2.6s}
+@keyframes avBadgeEntrance{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}
+@keyframes avBadgeFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+.av-ach-dialog{box-sizing:border-box;width:min(720px,calc(100vw - 24px));max-width:calc(100vw - 24px);max-height:calc(100dvh - 32px);padding:24px;border:1px solid var(--av-accent);border-radius:22px;background:var(--av-surface);color:var(--av-text);box-shadow:0 24px 90px #0008;overflow:auto;overscroll-behavior:contain}
+.av-ach-dialog::backdrop{background:#07050dcc;backdrop-filter:blur(5px)}
+.av-ach-dialog h2{font-size:23px;line-height:1.3;margin:0 0 10px}.av-ach-dialog p{font-size:14px;color:var(--av-muted);line-height:1.6}.av-ach-dialog .av-ach-counter{color:var(--av-accent);font-weight:700}
+.av-ach-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.av-ach-option{display:flex;align-items:center;gap:12px;min-width:0;min-height:84px;padding:14px;border:1px solid var(--av-line);border-radius:14px;background:var(--av-raised);color:var(--av-text);text-align:left;cursor:pointer;transition:border-color .2s,background .2s,box-shadow .2s}
+.av-ach-option>span:last-child{min-width:0}.av-ach-option strong,.av-ach-option small{display:block;overflow-wrap:anywhere}.av-ach-option strong{font-size:14px}.av-ach-option small{font-size:12px;color:var(--av-muted);margin-top:4px}.av-ach-option-icon{font-size:27px;flex-shrink:0}
+.av-ach-option.is-selected{border-color:var(--av-accent);background:var(--av-tint);box-shadow:inset 0 0 0 1px var(--av-accent)}
+.av-ach-dialog-actions{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:8px;position:sticky;bottom:-24px;background:var(--av-surface);padding:14px 0 2px}.av-ach-dialog-actions button{min-height:44px;padding:10px 16px;cursor:pointer}.av-ach-dialog .av-ach-message{color:var(--av-accent);min-height:22px}
+@media(max-width:760px){.av-ach-slots{gap:8px}.av-ach-slot{min-height:135px;padding:12px 7px}.av-ach-slot strong{font-size:12px}.av-ach-slot small{font-size:11px}.av-ach-icon{font-size:28px}.av-ach-dialog{padding:18px}.av-ach-dialog-actions{bottom:-18px}.av-ach-options{grid-template-columns:1fr}.av-ach-heading{gap:12px}.av-ach-heading h2{font-size:18px}}
+@media(max-width:380px){.av-ach-slots{grid-template-columns:1fr}.av-ach-slot{min-height:96px;display:grid;grid-template-columns:42px minmax(0,1fr);text-align:left;column-gap:12px}.av-ach-icon{grid-row:1/3}.av-ach-slot small{grid-column:2}.av-ach-slot.is-empty{display:flex;min-height:50px}.av-ach-dialog-actions button{flex:1 1 auto;font-size:13px;padding:10px}}
+@media(prefers-reduced-motion:reduce){#avTitleArt{transition:none}.av-ach-slot.is-equipped,.av-ach-icon{animation:none!important}}
+
+.av-home .continue-card{background-image:var(--av-continue-bg,none)!important;background-size:cover!important;background-position:center!important}
+.av-home .continue-card::before{background:linear-gradient(90deg,color-mix(in srgb,var(--av-surface) 96%,transparent),color-mix(in srgb,var(--av-surface) 89%,transparent) 45%,color-mix(in srgb,var(--av-surface) 65%,transparent))}
+.av-home .continue-info p,.av-home .continue-stats span{color:var(--av-muted)}.av-home .continue-stats strong{color:var(--av-text)}
+/* Earned ranks and populated chart legends must stay readable in light themes too. */
+#tierTitlePill{color:var(--av-accent)!important;background:var(--av-tint)!important;border-color:var(--av-line)!important}
+.chart-legend .chart-label{color:var(--av-muted)!important}.chart-legend .chart-value{color:var(--av-accent)!important}

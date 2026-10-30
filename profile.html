@@ -514,12 +514,12 @@
   </style>
   <link rel="stylesheet" href="av-enhancements.css?v=1">
   <script src="av-enhancements.js?v=1" defer></script>
-  <script src="av-safety.js?v=1"></script>
+  <script src="av-safety.js?v=2"></script>
   <script src="av-state.js?v=16"></script>
   <script src="av-titles.js?v=20261030-2"></script>
   <script>window.AVTitles=window.AVTitles||{russian:()=>'',display:(x,l)=>(l==='en'?x?.titleEnglish:'')||x?.title||'',normalize:v=>String(v||'').toLowerCase().trim(),plan:q=>({variants:[String(q||'').toLowerCase()],ids:[],terms:[],correction:''}),match:(x,q)=>[x.title,x.titleEnglish,x.titleRomaji,x.titleNative].some(v=>String(v||'').toLowerCase().includes(String(q||'').toLowerCase())),score:()=>0,count:0};</script>
-  <link rel="stylesheet" href="av-design.css?v=16.2">
-  <script src="av-design.js?v=16.2" defer></script>
+  <link rel="stylesheet" href="av-design.css?v=16.3">
+  <script src="av-design.js?v=16.3" defer></script>
 </head>
 <body class="av-shell">
   <header>
@@ -907,46 +907,46 @@
     function achievementsList(stats, isRussian) {
       const genreEpisodes = stats.genreEpisodes || {};
       return [
-        { tier: "mortal", icon: "🌱", unlocked: stats.totalEpisodes >= 1, progress: stats.totalEpisodes, target: 1, title: isRussian ? "Первые шаги" : "First steps", hint: isRussian ? "Посмотреть 1 серию" : "Watch 1 episode" },
-        { tier: "mortal", icon: "📺", unlocked: stats.totalEpisodes >= 10, progress: stats.totalEpisodes, target: 10, title: isRussian ? "Разогрев" : "Warming up", hint: isRussian ? "10 серий" : "10 episodes" },
-        { tier: "mortal", icon: "🕐", unlocked: stats.hours >= 1, progress: stats.hours, target: 1, title: isRussian ? "Час в пустоте" : "Hour in the void", hint: isRussian ? "1 час просмотра" : "1 hour watched" },
-        { tier: "mortal", icon: "❤️", unlocked: stats.favoritesCount >= 1, progress: stats.favoritesCount, target: 1, title: isRussian ? "Первая любовь" : "First love", hint: isRussian ? "1 тайтл в избранном" : "1 favorite" },
-        { tier: "mortal", icon: "🎬", unlocked: stats.watchedTitles >= 5, progress: stats.watchedTitles, target: 5, title: isRussian ? "Киноман" : "Cinephile", hint: isRussian ? "5 тайтлов начато" : "5 titles started" },
-        { tier: "mortal", icon: "✅", unlocked: stats.completed >= 1, progress: stats.completed, target: 1, title: isRussian ? "Финишист" : "Finisher", hint: isRussian ? "1 тайтл пройден" : "1 title completed" },
-        { tier: "mortal", icon: "🎯", unlocked: stats.ratingsCount >= 1, progress: stats.ratingsCount, target: 1, title: isRussian ? "Дебютант" : "Debutant", hint: isRussian ? "1 оценка поставлена" : "1 rating given" },
-        { tier: "mortal", icon: "⭐", unlocked: stats.ratingsCount >= 5, progress: stats.ratingsCount, target: 5, title: isRussian ? "Критик" : "Critic", hint: isRussian ? "5 оценок поставлено" : "5 ratings given" },
-        { tier: "seeker", icon: "⏱️", unlocked: stats.hours >= 10, progress: stats.hours, target: 10, title: isRussian ? "Марафонец" : "Marathoner", hint: isRussian ? "10 часов просмотра" : "10 hours watched" },
-        { tier: "seeker", icon: "📅", unlocked: stats.planned >= 5, progress: stats.planned, target: 5, title: isRussian ? "Стратег" : "Planner", hint: isRussian ? "5 в «В планах»" : "5 planned" },
-        { tier: "seeker", icon: "❤️", unlocked: stats.favoritesCount >= 10, progress: stats.favoritesCount, target: 10, title: isRussian ? "Коллекционер" : "Collector", hint: isRussian ? "10 в избранном" : "10 favorites" },
-        { tier: "seeker", icon: "🏅", unlocked: stats.completed >= 3, progress: stats.completed, target: 3, title: isRussian ? "Мастер финалов" : "Finale master", hint: isRussian ? "3 тайтла пройдено" : "3 titles completed" },
-        { tier: "seeker", icon: "👑", unlocked: stats.maxRating >= 10, progress: stats.maxRating, target: 10, title: isRussian ? "Перфекционист" : "Perfectionist", hint: isRussian ? "Поставить оценку 10" : "Give a 10 rating" },
-        { tier: "seeker", icon: "🚫", unlocked: stats.dropped >= 1, progress: stats.dropped, target: 1, title: isRussian ? "Это не моё" : "Not my thing", hint: isRussian ? "1 брошенный тайтл" : "1 title dropped" },
-        { tier: "seeker", icon: "🌍", unlocked: stats.distinctGenres >= 6, progress: stats.distinctGenres, target: 6, title: isRussian ? "Исследователь миров" : "World explorer", hint: isRussian ? "6 разных жанров" : "6 different genres" },
-        { tier: "seeker", icon: "💯", unlocked: stats.totalEpisodes >= 100, progress: stats.totalEpisodes, target: 100, title: isRussian ? "Сотня" : "Century", hint: isRussian ? "100 серий" : "100 episodes" },
-        { tier: "mythic", icon: "⏳", unlocked: stats.hours >= 24, progress: stats.hours, target: 24, title: isRussian ? "Сутки напролёт" : "Full day", hint: isRussian ? "24 часа просмотра" : "24 hours watched" },
-        { tier: "mythic", icon: "⏰", unlocked: stats.hours >= 50, progress: stats.hours, target: 50, title: isRussian ? "Хардкор" : "Hardcore", hint: isRussian ? "50 часов просмотра" : "50 hours watched" },
-        { tier: "mythic", icon: "🗃️", unlocked: stats.watchedTitles >= 20, progress: stats.watchedTitles, target: 20, title: isRussian ? "Архивариус" : "Archivist", hint: isRussian ? "20 тайтлов начато" : "20 titles started" },
-        { tier: "mythic", icon: "🌟", unlocked: stats.favoritesCount >= 25, progress: stats.favoritesCount, target: 25, title: isRussian ? "Звезда сайта" : "Site star", hint: isRussian ? "25 в избранном" : "25 favorites" },
-        { tier: "mythic", icon: "📖", unlocked: stats.ratingsCount >= 20, progress: stats.ratingsCount, target: 20, title: isRussian ? "Библиотекарь" : "Librarian", hint: isRussian ? "20 оценок поставлено" : "20 ratings given" },
-        { tier: "mythic", icon: "🐉", unlocked: (genreEpisodes["Fantasy"] || 0) >= 10, progress: genreEpisodes["Fantasy"] || 0, target: 10, title: isRussian ? "Повелитель драконов" : "Dragon lord", hint: isRussian ? "10 серий фэнтези" : "10 fantasy episodes" },
-        { tier: "mythic", icon: "⚔️", unlocked: (genreEpisodes["Action"] || 0) >= 25, progress: genreEpisodes["Action"] || 0, target: 25, title: isRussian ? "Воин" : "Warrior", hint: isRussian ? "25 серий экшена" : "25 action episodes" },
-        { tier: "mythic", icon: "🏆", unlocked: stats.totalEpisodes >= 500, progress: stats.totalEpisodes, target: 500, title: isRussian ? "Ветеран" : "Veteran", hint: isRussian ? "500 серий" : "500 episodes" },
-        { tier: "stellar", icon: "🥇", unlocked: stats.hours >= 100, progress: stats.hours, target: 100, title: isRussian ? "Вечный марафон" : "Eternal marathon", hint: isRussian ? "100 часов просмотра" : "100 hours watched" },
-        { tier: "stellar", icon: "💜", unlocked: (genreEpisodes["Romance"] || 0) >= 50, progress: genreEpisodes["Romance"] || 0, target: 50, title: isRussian ? "Сердцеед" : "Heartbreaker", hint: isRussian ? "50 серий романтики" : "50 romance episodes" },
-        { tier: "stellar", icon: "🕵️", unlocked: (genreEpisodes["Mystery"] || 0) >= 50, progress: genreEpisodes["Mystery"] || 0, target: 50, title: isRussian ? "Сыщик" : "Detective", hint: isRussian ? "50 серий мистики" : "50 mystery episodes" },
-        { tier: "stellar", icon: "🌌", unlocked: (genreEpisodes["Sci-Fi"] || 0) >= 50, progress: genreEpisodes["Sci-Fi"] || 0, target: 50, title: isRussian ? "Космонавт" : "Astronaut", hint: isRussian ? "50 серий Sci-Fi" : "50 sci-fi episodes" },
-        { tier: "stellar", icon: "🧙", unlocked: (genreEpisodes["Fantasy"] || 0) >= 100, progress: genreEpisodes["Fantasy"] || 0, target: 100, title: isRussian ? "Архимаг" : "Archmage", hint: isRussian ? "100 серий фэнтези" : "100 fantasy episodes" },
-        { tier: "stellar", icon: "🏯", unlocked: stats.watchedTitles >= 100, progress: stats.watchedTitles, target: 100, title: isRussian ? "Хранитель архива" : "Archive keeper", hint: isRussian ? "100 тайтлов начато" : "100 titles started" },
-        { tier: "stellar", icon: "💀", unlocked: stats.totalEpisodes >= 1000, progress: stats.totalEpisodes, target: 1000, title: isRussian ? "Жнец серий" : "Reaper of episodes", hint: isRussian ? "1000 серий" : "1000 episodes" },
-        { tier: "stellar", icon: "⚡", unlocked: stats.hours >= 500, progress: stats.hours, target: 500, title: isRussian ? "Полубог отаку" : "Otaku demigod", hint: isRussian ? "500 часов просмотра" : "500 hours watched" },
-        { tier: "god", icon: "☠️", unlocked: stats.hours >= 1000, progress: stats.hours, target: 1000, title: isRussian ? "Бессмертный" : "Immortal", hint: isRussian ? "1000 часов просмотра" : "1000 hours watched" },
-        { tier: "god", icon: "🌠", unlocked: stats.watchedTitles >= 500, progress: stats.watchedTitles, target: 500, title: isRussian ? "Галактика тайтлов" : "Galaxy of titles", hint: isRussian ? "500 тайтлов начато" : "500 titles started" },
-        { tier: "god", icon: "🌌", unlocked: stats.totalEpisodes >= 5000, progress: stats.totalEpisodes, target: 5000, title: isRussian ? "За гранью" : "Beyond the limit", hint: isRussian ? "5000 серий — ты серьёзно?" : "5000 episodes — seriously?" },
-        { tier: "god", icon: "💫", unlocked: stats.hours >= 2500, progress: stats.hours, target: 2500, title: isRussian ? "Сингулярность" : "Singularity", hint: isRussian ? "2500 часов просмотра" : "2500 hours watched" },
-        { tier: "god", icon: "🤖", unlocked: (genreEpisodes["Mecha"] || 0) >= 200, progress: genreEpisodes["Mecha"] || 0, target: 200, title: isRussian ? "Повелитель мехи" : "Mecha overlord", hint: isRussian ? "200 серий мехи" : "200 mecha episodes" },
-        { tier: "god", icon: "😢", unlocked: (genreEpisodes["Drama"] || 0) >= 200, progress: genreEpisodes["Drama"] || 0, target: 200, title: isRussian ? "Бог слёз" : "God of tears", hint: isRussian ? "200 серий драмы" : "200 drama episodes" },
-        { tier: "god", icon: "⚔️", unlocked: (genreEpisodes["Action"] || 0) >= 300, progress: genreEpisodes["Action"] || 0, target: 300, title: isRussian ? "Аватар войны" : "Avatar of war", hint: isRussian ? "300 серий экшена" : "300 action episodes" },
-        { tier: "god", icon: "🌌", unlocked: stats.totalEpisodes >= 10000, progress: stats.totalEpisodes, target: 10000, title: isRussian ? "Создатель Вселенной" : "Universe creator", hint: isRussian ? "10000 серий. Ты — создатель" : "10000 episodes. You are the creator" }
+        { id: "ach-001", tier: "mortal", icon: "🌱", unlocked: stats.totalEpisodes >= 1, progress: stats.totalEpisodes, target: 1, title: isRussian ? "Первые шаги" : "First steps", hint: isRussian ? "Посмотреть 1 серию" : "Watch 1 episode" },
+        { id: "ach-002", tier: "mortal", icon: "📺", unlocked: stats.totalEpisodes >= 10, progress: stats.totalEpisodes, target: 10, title: isRussian ? "Разогрев" : "Warming up", hint: isRussian ? "10 серий" : "10 episodes" },
+        { id: "ach-003", tier: "mortal", icon: "🕐", unlocked: stats.hours >= 1, progress: stats.hours, target: 1, title: isRussian ? "Час в пустоте" : "Hour in the void", hint: isRussian ? "1 час просмотра" : "1 hour watched" },
+        { id: "ach-004", tier: "mortal", icon: "❤️", unlocked: stats.favoritesCount >= 1, progress: stats.favoritesCount, target: 1, title: isRussian ? "Первая любовь" : "First love", hint: isRussian ? "1 тайтл в избранном" : "1 favorite" },
+        { id: "ach-005", tier: "mortal", icon: "🎬", unlocked: stats.watchedTitles >= 5, progress: stats.watchedTitles, target: 5, title: isRussian ? "Киноман" : "Cinephile", hint: isRussian ? "5 тайтлов начато" : "5 titles started" },
+        { id: "ach-006", tier: "mortal", icon: "✅", unlocked: stats.completed >= 1, progress: stats.completed, target: 1, title: isRussian ? "Финишист" : "Finisher", hint: isRussian ? "1 тайтл пройден" : "1 title completed" },
+        { id: "ach-007", tier: "mortal", icon: "🎯", unlocked: stats.ratingsCount >= 1, progress: stats.ratingsCount, target: 1, title: isRussian ? "Дебютант" : "Debutant", hint: isRussian ? "1 оценка поставлена" : "1 rating given" },
+        { id: "ach-008", tier: "mortal", icon: "⭐", unlocked: stats.ratingsCount >= 5, progress: stats.ratingsCount, target: 5, title: isRussian ? "Критик" : "Critic", hint: isRussian ? "5 оценок поставлено" : "5 ratings given" },
+        { id: "ach-009", tier: "seeker", icon: "⏱️", unlocked: stats.hours >= 10, progress: stats.hours, target: 10, title: isRussian ? "Марафонец" : "Marathoner", hint: isRussian ? "10 часов просмотра" : "10 hours watched" },
+        { id: "ach-010", tier: "seeker", icon: "📅", unlocked: stats.planned >= 5, progress: stats.planned, target: 5, title: isRussian ? "Стратег" : "Planner", hint: isRussian ? "5 в «В планах»" : "5 planned" },
+        { id: "ach-011", tier: "seeker", icon: "❤️", unlocked: stats.favoritesCount >= 10, progress: stats.favoritesCount, target: 10, title: isRussian ? "Коллекционер" : "Collector", hint: isRussian ? "10 в избранном" : "10 favorites" },
+        { id: "ach-012", tier: "seeker", icon: "🏅", unlocked: stats.completed >= 3, progress: stats.completed, target: 3, title: isRussian ? "Мастер финалов" : "Finale master", hint: isRussian ? "3 тайтла пройдено" : "3 titles completed" },
+        { id: "ach-013", tier: "seeker", icon: "👑", unlocked: stats.maxRating >= 10, progress: stats.maxRating, target: 10, title: isRussian ? "Перфекционист" : "Perfectionist", hint: isRussian ? "Поставить оценку 10" : "Give a 10 rating" },
+        { id: "ach-014", tier: "seeker", icon: "🚫", unlocked: stats.dropped >= 1, progress: stats.dropped, target: 1, title: isRussian ? "Это не моё" : "Not my thing", hint: isRussian ? "1 брошенный тайтл" : "1 title dropped" },
+        { id: "ach-015", tier: "seeker", icon: "🌍", unlocked: stats.distinctGenres >= 6, progress: stats.distinctGenres, target: 6, title: isRussian ? "Исследователь миров" : "World explorer", hint: isRussian ? "6 разных жанров" : "6 different genres" },
+        { id: "ach-016", tier: "seeker", icon: "💯", unlocked: stats.totalEpisodes >= 100, progress: stats.totalEpisodes, target: 100, title: isRussian ? "Сотня" : "Century", hint: isRussian ? "100 серий" : "100 episodes" },
+        { id: "ach-017", tier: "mythic", icon: "⏳", unlocked: stats.hours >= 24, progress: stats.hours, target: 24, title: isRussian ? "Сутки напролёт" : "Full day", hint: isRussian ? "24 часа просмотра" : "24 hours watched" },
+        { id: "ach-018", tier: "mythic", icon: "⏰", unlocked: stats.hours >= 50, progress: stats.hours, target: 50, title: isRussian ? "Хардкор" : "Hardcore", hint: isRussian ? "50 часов просмотра" : "50 hours watched" },
+        { id: "ach-019", tier: "mythic", icon: "🗃️", unlocked: stats.watchedTitles >= 20, progress: stats.watchedTitles, target: 20, title: isRussian ? "Архивариус" : "Archivist", hint: isRussian ? "20 тайтлов начато" : "20 titles started" },
+        { id: "ach-020", tier: "mythic", icon: "🌟", unlocked: stats.favoritesCount >= 25, progress: stats.favoritesCount, target: 25, title: isRussian ? "Звезда сайта" : "Site star", hint: isRussian ? "25 в избранном" : "25 favorites" },
+        { id: "ach-021", tier: "mythic", icon: "📖", unlocked: stats.ratingsCount >= 20, progress: stats.ratingsCount, target: 20, title: isRussian ? "Библиотекарь" : "Librarian", hint: isRussian ? "20 оценок поставлено" : "20 ratings given" },
+        { id: "ach-022", tier: "mythic", icon: "🐉", unlocked: (genreEpisodes["Fantasy"] || 0) >= 10, progress: genreEpisodes["Fantasy"] || 0, target: 10, title: isRussian ? "Повелитель драконов" : "Dragon lord", hint: isRussian ? "10 серий фэнтези" : "10 fantasy episodes" },
+        { id: "ach-023", tier: "mythic", icon: "⚔️", unlocked: (genreEpisodes["Action"] || 0) >= 25, progress: genreEpisodes["Action"] || 0, target: 25, title: isRussian ? "Воин" : "Warrior", hint: isRussian ? "25 серий экшена" : "25 action episodes" },
+        { id: "ach-024", tier: "mythic", icon: "🏆", unlocked: stats.totalEpisodes >= 500, progress: stats.totalEpisodes, target: 500, title: isRussian ? "Ветеран" : "Veteran", hint: isRussian ? "500 серий" : "500 episodes" },
+        { id: "ach-025", tier: "stellar", icon: "🥇", unlocked: stats.hours >= 100, progress: stats.hours, target: 100, title: isRussian ? "Вечный марафон" : "Eternal marathon", hint: isRussian ? "100 часов просмотра" : "100 hours watched" },
+        { id: "ach-026", tier: "stellar", icon: "💜", unlocked: (genreEpisodes["Romance"] || 0) >= 50, progress: genreEpisodes["Romance"] || 0, target: 50, title: isRussian ? "Сердцеед" : "Heartbreaker", hint: isRussian ? "50 серий романтики" : "50 romance episodes" },
+        { id: "ach-027", tier: "stellar", icon: "🕵️", unlocked: (genreEpisodes["Mystery"] || 0) >= 50, progress: genreEpisodes["Mystery"] || 0, target: 50, title: isRussian ? "Сыщик" : "Detective", hint: isRussian ? "50 серий мистики" : "50 mystery episodes" },
+        { id: "ach-028", tier: "stellar", icon: "🌌", unlocked: (genreEpisodes["Sci-Fi"] || 0) >= 50, progress: genreEpisodes["Sci-Fi"] || 0, target: 50, title: isRussian ? "Космонавт" : "Astronaut", hint: isRussian ? "50 серий Sci-Fi" : "50 sci-fi episodes" },
+        { id: "ach-029", tier: "stellar", icon: "🧙", unlocked: (genreEpisodes["Fantasy"] || 0) >= 100, progress: genreEpisodes["Fantasy"] || 0, target: 100, title: isRussian ? "Архимаг" : "Archmage", hint: isRussian ? "100 серий фэнтези" : "100 fantasy episodes" },
+        { id: "ach-030", tier: "stellar", icon: "🏯", unlocked: stats.watchedTitles >= 100, progress: stats.watchedTitles, target: 100, title: isRussian ? "Хранитель архива" : "Archive keeper", hint: isRussian ? "100 тайтлов начато" : "100 titles started" },
+        { id: "ach-031", tier: "stellar", icon: "💀", unlocked: stats.totalEpisodes >= 1000, progress: stats.totalEpisodes, target: 1000, title: isRussian ? "Жнец серий" : "Reaper of episodes", hint: isRussian ? "1000 серий" : "1000 episodes" },
+        { id: "ach-032", tier: "stellar", icon: "⚡", unlocked: stats.hours >= 500, progress: stats.hours, target: 500, title: isRussian ? "Полубог отаку" : "Otaku demigod", hint: isRussian ? "500 часов просмотра" : "500 hours watched" },
+        { id: "ach-033", tier: "god", icon: "☠️", unlocked: stats.hours >= 1000, progress: stats.hours, target: 1000, title: isRussian ? "Бессмертный" : "Immortal", hint: isRussian ? "1000 часов просмотра" : "1000 hours watched" },
+        { id: "ach-034", tier: "god", icon: "🌠", unlocked: stats.watchedTitles >= 500, progress: stats.watchedTitles, target: 500, title: isRussian ? "Галактика тайтлов" : "Galaxy of titles", hint: isRussian ? "500 тайтлов начато" : "500 titles started" },
+        { id: "ach-035", tier: "god", icon: "🌌", unlocked: stats.totalEpisodes >= 5000, progress: stats.totalEpisodes, target: 5000, title: isRussian ? "За гранью" : "Beyond the limit", hint: isRussian ? "5000 серий — ты серьёзно?" : "5000 episodes — seriously?" },
+        { id: "ach-036", tier: "god", icon: "💫", unlocked: stats.hours >= 2500, progress: stats.hours, target: 2500, title: isRussian ? "Сингулярность" : "Singularity", hint: isRussian ? "2500 часов просмотра" : "2500 hours watched" },
+        { id: "ach-037", tier: "god", icon: "🤖", unlocked: (genreEpisodes["Mecha"] || 0) >= 200, progress: genreEpisodes["Mecha"] || 0, target: 200, title: isRussian ? "Повелитель мехи" : "Mecha overlord", hint: isRussian ? "200 серий мехи" : "200 mecha episodes" },
+        { id: "ach-038", tier: "god", icon: "😢", unlocked: (genreEpisodes["Drama"] || 0) >= 200, progress: genreEpisodes["Drama"] || 0, target: 200, title: isRussian ? "Бог слёз" : "God of tears", hint: isRussian ? "200 серий драмы" : "200 drama episodes" },
+        { id: "ach-039", tier: "god", icon: "⚔️", unlocked: (genreEpisodes["Action"] || 0) >= 300, progress: genreEpisodes["Action"] || 0, target: 300, title: isRussian ? "Аватар войны" : "Avatar of war", hint: isRussian ? "300 серий экшена" : "300 action episodes" },
+        { id: "ach-040", tier: "god", icon: "🌌", unlocked: stats.totalEpisodes >= 10000, progress: stats.totalEpisodes, target: 10000, title: isRussian ? "Создатель Вселенной" : "Universe creator", hint: isRussian ? "10000 серий. Ты — создатель" : "10000 episodes. You are the creator" }
       ];
     }
 
@@ -961,6 +961,77 @@
       };
       requestAnimationFrame(step);
     }
+
+
+    /* 16.3: cosmetic showcase; progress/achievement conditions remain authoritative. */
+    const FEATURED_ACHIEVEMENTS_KEY = 'animeVoidFeaturedAchievements';
+    function renderAchievementShowcase(list) {
+      const russian = isRussianNow();
+      let section = document.getElementById('achievementShowcase');
+      if (!section) {
+        section = document.createElement('section');
+        section.id = 'achievementShowcase';
+        section.className = 'av-ach-showcase';
+        section.setAttribute('aria-labelledby','achievementShowcaseTitle');
+        const hero = document.querySelector('.profile-hero');
+        if (!hero) return;
+        hero.append(section);
+      }
+      const earned = new Map(list.filter(a=>a.unlocked).map(a=>[a.id,a]));
+      const stored = AVSafe.read(FEATURED_ACHIEVEMENTS_KEY, []);
+      const selected = [...new Set(stored)].filter(id=>earned.has(id)).slice(0,3);
+      section.innerHTML = '<div class="av-ach-heading"><div><h2 id="achievementShowcaseTitle">'+(russian?'Витрина достижений':'Achievement showcase')+'</h2><p>'+(russian?'Выбери до трёх полученных ачивок для своего профиля.':'Choose up to three earned achievements for your profile.')+'</p></div><button type="button" class="secondary" id="editAchievementShowcase">'+(russian?'Выбрать ачивки':'Choose achievements')+'</button></div><div class="av-ach-slots"></div>';
+      const slots = section.querySelector('.av-ach-slots');
+      for (let i=0;i<3;i++) {
+        const a=earned.get(selected[i]);
+        const slot=document.createElement('div');
+        slot.className='av-ach-slot'+(a?' is-equipped':' is-empty');
+        if(a) {
+          slot.dataset.achievementId=a.id;
+          slot.dataset.tier=a.tier;
+          const icon=document.createElement('span');icon.className='av-ach-icon';icon.setAttribute('aria-hidden','true');icon.textContent=a.icon;
+          const title=document.createElement('strong');title.textContent=a.title;
+          const hint=document.createElement('small');hint.textContent=a.hint;
+          slot.append(icon,title,hint);
+        } else {
+          slot.textContent=russian?'Свободное место':'Empty slot';
+        }
+        slots.append(slot);
+      }
+      section.querySelector('#editAchievementShowcase').onclick=openAchievementShowcase;
+    }
+    function openAchievementShowcase() {
+      const ru=isRussianNow(), list=achievementsList(collectStats(),ru), earned=list.filter(a=>a.unlocked);
+      const valid=new Set(earned.map(a=>a.id));
+      let draft=[...new Set(AVSafe.read(FEATURED_ACHIEVEMENTS_KEY,[]))].filter(id=>valid.has(id)).slice(0,3);
+      document.getElementById('achievementShowcaseDialog')?.remove();
+      const dialog=document.createElement('dialog');dialog.id='achievementShowcaseDialog';dialog.className='av-ach-dialog';dialog.setAttribute('aria-labelledby','achievementPickerTitle');
+      dialog.innerHTML='<h2 id="achievementPickerTitle">'+(ru?'Твои полученные ачивки':'Your earned achievements')+'</h2><p>'+(ru?'Выбранные достижения появятся в шапке профиля. Порядок — по очереди выбора.':'Selected achievements appear in your profile in selection order.')+'</p><p class="av-ach-counter" aria-live="polite"></p><div class="av-ach-options"></div><p class="av-ach-message" role="status" aria-live="polite"></p><div class="av-ach-dialog-actions"><button type="button" class="secondary" data-action="clear">'+(ru?'Снять все':'Clear all')+'</button><button type="button" class="secondary" data-action="cancel">'+(ru?'Отмена':'Cancel')+'</button><button type="button" class="primary" data-action="save">'+(ru?'Сохранить':'Save')+'</button></div>';
+      const options=dialog.querySelector('.av-ach-options'),message=dialog.querySelector('.av-ach-message');
+      function paint(){
+        dialog.querySelector('.av-ach-counter').textContent=(ru?'Выбрано: ':'Selected: ')+draft.length+' / 3';
+        for(const b of options.querySelectorAll('button')){const selected=draft.includes(b.dataset.achievementId);b.setAttribute('aria-pressed',String(selected));b.classList.toggle('is-selected',selected);}
+      }
+      if(!earned.length){const p=document.createElement('p');p.textContent=ru?'Пока нет открытых ачивок. Отметь просмотренную серию или добавь любимый тайтл в избранное — и возвращайся!':'No earned achievements yet. Mark an episode watched or favorite a title, then come back!';options.append(p);}
+      for(const a of earned){
+        const b=document.createElement('button');b.type='button';b.className='av-ach-option';b.dataset.achievementId=a.id;
+        const icon=document.createElement('span');icon.className='av-ach-option-icon';icon.setAttribute('aria-hidden','true');icon.textContent=a.icon;
+        const copy=document.createElement('span'),title=document.createElement('strong'),hint=document.createElement('small');title.textContent=a.title;hint.textContent=a.hint;copy.append(title,hint);b.append(icon,copy);
+        b.onclick=()=>{message.textContent='';if(draft.includes(a.id))draft=draft.filter(id=>id!==a.id);else if(draft.length<3)draft.push(a.id);else message.textContent=ru?'Можно поставить до трёх ачивок. Сначала сними одну из выбранных.':'Choose up to three. Deselect one first.';paint();};options.append(b);
+      }
+      dialog.querySelector('[data-action="clear"]').onclick=()=>{draft=[];message.textContent='';paint();};
+      dialog.querySelector('[data-action="cancel"]').onclick=()=>dialog.close();
+      dialog.querySelector('[data-action="save"]').onclick=()=>{
+        const latest=achievementsList(collectStats(),isRussianNow()),allowed=new Set(latest.filter(a=>a.unlocked).map(a=>a.id));
+        const clean=draft.filter(id=>allowed.has(id)).slice(0,3);
+        try{localStorage.setItem(FEATURED_ACHIEVEMENTS_KEY,JSON.stringify(clean));renderAchievementShowcase(latest);dialog.close();}
+        catch(e){message.textContent=ru?'Не удалось сохранить: хранилище недоступно или заполнено. Текущий выбор не изменён.':'Could not save: storage unavailable or full. Your current selection is unchanged.';}
+      };
+      dialog.addEventListener('click',e=>{if(e.target===dialog){const r=dialog.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)dialog.close();}});
+      dialog.addEventListener('close',()=>{dialog.remove();document.getElementById('editAchievementShowcase')?.focus({preventScroll:true});});
+      paint();document.body.append(dialog);dialog.showModal();
+    }
+    addEventListener('storage',e=>{if(e.key===FEATURED_ACHIEVEMENTS_KEY)renderAchievementShowcase(achievementsList(collectStats(),isRussianNow()));});
 
     function renderStatsAndAchievements() {
       const isRussian = isRussianNow();
@@ -1017,6 +1088,7 @@
           "</div>";
       }
       renderProfileExtras(stats, list);
+      renderAchievementShowcase(list);
     }
 
     /* ===== Титул ранга, серия дней, путь отаку, шаринг, друг ===== */

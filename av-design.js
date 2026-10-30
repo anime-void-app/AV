@@ -47,3 +47,41 @@ input.addEventListener('keydown',e=>{if(!['ArrowDown','ArrowUp'].includes(e.key)
 if(window.ResizeObserver)new ResizeObserver(schedule).observe(document.querySelector('header'));
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!box.hidden){box.hidden=true;schedule();}});schedule();
 })();
+
+/* 16.3: title-specific art, above the body background and below readable content. */
+(()=>{'use strict';
+const bg=document.getElementById('pageBg');if(!bg)return;
+document.body.classList.add('av-detail');
+const art=document.createElement('div');art.id='avTitleArt';art.setAttribute('aria-hidden','true');
+for(const side of ['left','right']){const panel=document.createElement('div');panel.className='av-title-art-panel av-title-art-'+side;const img=document.createElement('img');img.alt='';img.decoding='async';panel.append(img);art.append(panel);}document.body.append(art);
+const mobile=document.createElement('div');mobile.className='av-anime-mobile-banner';mobile.setAttribute('aria-hidden','true');const mobileImg=document.createElement('img');mobileImg.alt='';mobileImg.decoding='async';mobile.append(mobileImg);
+let signature='',ticket=0,pending=false;
+function sync(){
+ pending=false;
+ const page=document.querySelector('.anime-page');if(page&&!mobile.isConnected)page.before(mobile);
+ const poster=document.querySelector('.anime-page .poster img');
+ const match=/url\(["']?(.*?)["']?\)/.exec(bg.style.backgroundImage||'');
+ const primary=window.AVSafe?.url(match?.[1]||'')||'',fallback=window.AVSafe?.url(poster?.getAttribute('src')||'')||'';
+ const key=primary+'|'+fallback;if(!primary&&!fallback||key===signature)return;signature=key;const version=++ticket;
+ const candidates=[...new Set([primary,fallback].filter(Boolean))];
+ function load(index){
+  if(index>=candidates.length)return;
+  const src=candidates[index],probe=new Image();let settled=false;
+  const timer=setTimeout(()=>{if(settled)return;settled=true;if(version===ticket)load(index+1);},8000);
+  probe.decoding='async';probe.onload=()=>{
+   if(settled)return;settled=true;clearTimeout(timer);if(version!==ticket)return;
+   mobileImg.src=src;mobile.classList.add('is-ready');
+   const setPanels=panelSrc=>{if(version!==ticket)return;for(const img of art.querySelectorAll('img'))img.src=panelSrc;art.classList.add('is-ready');};
+   // A portrait cover fits tall side banners; native wide art fits the full backdrop and mobile strip.
+   if(fallback&&fallback!==src){const cover=new Image();cover.onload=()=>setPanels(fallback);cover.onerror=()=>setPanels(src);cover.src=fallback;}else setPanels(src);
+   if(index>0){bg.style.backgroundImage='url('+JSON.stringify(src)+')';bg.classList.add('bg-blurred');}
+  };
+  probe.onerror=()=>{if(settled)return;settled=true;clearTimeout(timer);if(version===ticket)load(index+1);};probe.src=src;
+ }
+ load(0);
+}
+function schedule(){if(!pending){pending=true;requestAnimationFrame(sync);}}
+new MutationObserver(schedule).observe(bg,{attributes:true,attributeFilter:['style','class']});
+const main=document.querySelector('main');if(main)new MutationObserver(schedule).observe(main,{childList:true,subtree:true,attributes:true,attributeFilter:['src']});
+schedule();
+})();

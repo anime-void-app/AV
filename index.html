@@ -1392,12 +1392,12 @@
   <link rel="stylesheet" href="av-enhancements.css?v=1">
   <script src="av-enhancements.js?v=1" defer></script>
 <link rel="canonical" href="https://anime-void-app.github.io/AV/">
-  <script src="av-safety.js?v=1"></script>
+  <script src="av-safety.js?v=2"></script>
   <script src="av-state.js?v=16"></script>
   <script src="av-titles.js?v=20261030-2"></script>
   <script>window.AVTitles=window.AVTitles||{russian:()=>'',display:(x,l)=>(l==='en'?x?.titleEnglish:'')||x?.title||'',normalize:v=>String(v||'').toLowerCase().trim(),plan:q=>({variants:[String(q||'').toLowerCase()],ids:[],terms:[],correction:''}),match:(x,q)=>[x.title,x.titleEnglish,x.titleRomaji,x.titleNative].some(v=>String(v||'').toLowerCase().includes(String(q||'').toLowerCase())),score:()=>0,count:0};</script>
-  <link rel="stylesheet" href="av-design.css?v=16.2">
-  <script src="av-design.js?v=16.2" defer></script>
+  <link rel="stylesheet" href="av-design.css?v=16.3">
+  <script src="av-design.js?v=16.3" defer></script>
 </head>
 
 <body class="av-shell av-home">
@@ -4983,14 +4983,14 @@ function toggleFavorite(id) {
 
   section.style.display = "block";
 
-  // Keep the poster on its regular URL; only the wide background tries the
-  // higher-resolution cover, and a failed background simply stays dark.
+  // Use known artwork URLs, never guess an extraLarge CDN path.
   const posterSrc = anime.image || "image/poster1.jpg";
   const backgroundSrc = anime.background ||
-    String(anime.image || "").replace("/large/", "/extraLarge/");
+    String(anime.image || "");
 
   card.style.backgroundImage =
     `url("${backgroundSrc}")`;
+  card.style.setProperty("--av-continue-bg", `url("${backgroundSrc}")`);
 
   card.innerHTML = `
     <img
