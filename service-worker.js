@@ -1,6 +1,6 @@
 /* ANIME VOID — service worker: установка как приложение + офлайн-режим */
 
-const CORE_CACHE = "av-AV-core-v12";
+const CORE_CACHE = "av-AV-core-v13";
 const IMAGE_CACHE = "av-AV-images-v2";
 const IMAGE_CACHE_LIMIT = 300;
 
@@ -10,13 +10,27 @@ const CORE_FILES = [
   "./anime.html",
   "./watch.html",
   "./profile.html",
-  "./av-safety.js?v=4",
+  "./profile-studio.css?v=17.0",
+  "./profile-studio.js?v=17.0",
+  "./profile-catalog.json?v=17.0",
+  "./studio-config.js?v=17.0",
+  "./studio/void.svg",
+  "./studio/city.svg",
+  "./studio/sakura.svg",
+  "./studio/orbit.svg",
+  "./studio/shrine.svg",
+  "./studio/forest.svg",
+  "./studio/ocean.svg",
+  "./studio/aurora.svg",
+  "./studio/library.svg",
+
+  "./av-safety.js?v=5",
   "./av-titles.js?v=20261030-2",
   "./av-state.js?v=16",
   "./av-atmosphere.js?v=16.6",
   "./av-atmosphere.css?v=16.6",
-  "./av-design.css?v=16.7",
-  "./av-design.js?v=16.7",
+  "./av-design.css?v=17.0",
+  "./av-design.js?v=17.0",
   "./updates.html",
   "./universe.html",
   "./universe.js?v=16.7",
@@ -58,6 +72,9 @@ self.addEventListener("fetch", (event) => {
   if (request.method !== "GET") return;
 
   const url = new URL(request.url);
+
+  // Account, inventory and payment responses must NEVER enter a shared service-worker cache.
+  if (url.pathname.includes("/api/")) return;
 
   /* страницы сайта: сначала интернет, без интернета — из кеша */
   if (request.mode === "navigate") {
