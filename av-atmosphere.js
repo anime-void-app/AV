@@ -1,7 +1,7 @@
-/* ANIME VOID 16.5 — attributed local field recordings + original synthesis; no autoplay or microphone. */
+/* ANIME VOID 16.6 — attributed local field recordings + original synthesis; no autoplay or microphone. */
 (()=>{'use strict';
-const KEY='animeVoidAmbience',modes=[['rain','🌧️','Дождь по крыше','Rain on a roof'],['wind','🍃','Тихий ветер','Gentle wind'],['train','🚆','Вечерний поезд','Evening train'],['crickets','🌙','Ночь и кузнечики','Night crickets'],['ocean','🌊','Морской прибой','Ocean waves'],['brook','💧','Лесной ручей','Forest brook'],['fire','🔥','Треск огня','Crackling fire'],['birds','🐦','Птицы в лесу','Woodland birds']];
-const recordings={rain:'audio/rain-v165.mp3',ocean:'audio/ocean-v165.mp3',brook:'audio/brook-v165.mp3',fire:'audio/fire-v165.mp3',birds:'audio/birds-v165.mp3'};
+const KEY='animeVoidAmbience',modes=[['rain','🌧️','Дождь за окном','Rain outside the window'],['wind','🍃','Вечерний двор','Evening courtyard'],['train','🚆','Вечерний поезд','Evening train'],['crickets','🌙','Ночь и кузнечики','Night crickets'],['ocean','☕','Тихое кафе','Quiet cafe'],['brook','📖','Шелест книги','Turning pages'],['fire','🔥','Камин вдали','Distant fireplace'],['birds','🕰️','Комната с часами','Room with a clock']];
+const recordings={rain:'audio/rain-v166.mp3',wind:'audio/wind-v166.mp3',ocean:'audio/ocean-v166.mp3',brook:'audio/brook-v166.mp3',fire:'audio/fire-v166.mp3',birds:'audio/birds-v166.mp3'};
 const decoded=new Map();let download=null;
 function recordingHeadroom(buffer){
  let peak=0;
@@ -93,7 +93,7 @@ async function start(){
 function paint(){
  if(!panel)return;
  panel.querySelector('#avAmbienceTitle').textContent=ru()?'Атмосфера для отдыха':'Relaxing atmosphere';
- panel.querySelector('.av-ambience-intro').textContent=ru()?'Настоящие записи природы и лёгкие синтезированные фоны.':'Real nature recordings and lightweight synthesized soundscapes.';
+ panel.querySelector('.av-ambience-intro').textContent=ru()?'Уютные сцены и вечерняя аниме-атмосфера. Поезд и кузнечики — прежние.':'Cozy scenes and an evening anime atmosphere. Train and crickets are unchanged.';
  panel.querySelector('#avAmbienceSelectLabel').textContent=ru()?'Выбери звук':'Choose a sound';
  for(const option of panel.querySelectorAll('option')){const m=modes.find(x=>x[0]===option.value);option.textContent=m[1]+' '+(ru()?m[2]:m[3])+(recordings[m[0]]?(ru()?' · запись':' · recording'):(ru()?' · синтез':' · synthesized'));}
  panel.querySelector('#avAmbienceSelect').value=prefs.sound;
