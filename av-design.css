@@ -129,3 +129,6 @@ body.av-detail #avTitleArt,body.av-detail .av-title-art-panel,body.av-detail .av
 body.av-detail #pageBg{opacity:.85;filter:brightness(.72);background-size:cover;background-position:center top;image-rendering:auto}
 body.av-detail #pageBg.bg-blurred{filter:brightness(.7) blur(1.5px);transform:scale(1.01)}
 @media(max-width:760px){body.av-detail #pageBg{opacity:.55}}
+
+/* 16.4.1: restore soft backdrop blur; never blur the foreground poster. */
+body.av-detail #pageBg,body.av-detail #pageBg.bg-blurred{filter:brightness(.65) blur(14px);transform:scale(1.07)}

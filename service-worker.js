@@ -1,6 +1,6 @@
 /* ANIME VOID — service worker: установка как приложение + офлайн-режим */
 
-const CORE_CACHE = "av-AV-core-v8";
+const CORE_CACHE = "av-AV-core-v9";
 const IMAGE_CACHE = "av-AV-images-v2";
 const IMAGE_CACHE_LIMIT = 300;
 
@@ -15,7 +15,7 @@ const CORE_FILES = [
   "./av-state.js?v=16",
   "./av-atmosphere.js?v=16.4",
   "./av-atmosphere.css?v=16.4",
-  "./av-design.css?v=16.4",
+  "./av-design.css?v=16.4.1",
   "./av-design.js?v=16.4",
   "./updates.html",
   "./av-enhancements.js?v=1",
