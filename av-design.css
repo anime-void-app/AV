@@ -45,3 +45,27 @@ body.av-shell{--bg:var(--av-bg);--panel:var(--av-surface);--text:var(--av-text);
  .theme-menu,.decor-menu{z-index:400!important}
  .modal.open{z-index:1000!important}
 }
+
+/* 16.2: restore the expressive accent and motion without undoing mobile search. */
+body{--av-glow:168,85,247}
+body:not(.theme-light):not(.theme-sakura):not(.theme-ocean):not(.theme-forest){--av-bg:#0b0713;--av-surface:#171020;--av-raised:#241632;--av-tint:#301b48;--av-line:#49305f;--av-solid:#7c3aed;background-image:radial-gradient(ellipse at 8% 0%,rgba(124,58,237,.20),transparent 48%),radial-gradient(ellipse at 100% 38%,rgba(168,85,247,.11),transparent 52%);background-attachment:fixed}
+body.theme-sakura{--av-glow:165,44,89}body.theme-ocean{--av-glow:23,98,136}body.theme-forest{--av-glow:40,105,60}
+.hero{background:radial-gradient(ellipse at 90% 15%,rgba(var(--av-glow),.24),transparent 68%),linear-gradient(115deg,var(--av-surface),var(--av-tint));border-color:rgba(var(--av-glow),.38);box-shadow:0 12px 42px rgba(var(--av-glow),.10)}
+.hero-content{animation:avSoftReveal .65s cubic-bezier(.2,.7,.2,1) both}
+.av-home .card,.airing-card,.top-card,.history-card,.tonight-card,.similar-card,.character-card{transition:transform .3s ease,border-color .3s ease,box-shadow .3s ease}
+.av-home .card .poster img{transition:transform .5s ease!important}
+.av-home .card:focus-within{border-color:var(--av-accent);box-shadow:0 0 0 1px rgba(var(--av-glow),.28),0 12px 32px rgba(var(--av-glow),.22)}
+.primary,.continue-btn,.support-action{background:linear-gradient(120deg,var(--av-solid),color-mix(in srgb,var(--av-solid) 70%,var(--av-accent)))!important;box-shadow:0 8px 24px rgba(var(--av-glow),.24)!important;transition:transform .25s ease,box-shadow .25s ease,filter .25s ease}
+.secondary,.filter,.mood-chip,.status-btn,.episode,.control-btn,.season-choice,.favorite-page-btn{transition:background .25s ease,border-color .25s ease,box-shadow .25s ease,transform .25s ease}
+.anime-page{background:radial-gradient(ellipse at 100% 0%,rgba(var(--av-glow),.13),transparent 60%),var(--av-surface)!important;border-color:rgba(var(--av-glow),.28)!important;box-shadow:0 16px 48px #0003,0 0 36px rgba(var(--av-glow),.08)!important}
+.anime-page .description,.anime-page .info,.anime-page .where-box{animation:avSoftReveal .6s ease both}
+.anime-page .description{animation-delay:.08s}.anime-page .info{animation-delay:.12s}.anime-page .where-box{animation-delay:.16s}
+@keyframes avSoftReveal{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@media(hover:hover) and (pointer:fine){
+ .av-home .card:hover,.top-card:hover,.history-card:hover,.tonight-card:hover,.similar-card:hover,.character-card:hover{transform:translateY(-5px);border-color:var(--av-accent)!important;box-shadow:0 0 0 1px rgba(var(--av-glow),.18),0 12px 30px rgba(var(--av-glow),.25)!important}
+ .airing-card:hover{transform:translateY(-3px)!important;border-color:var(--av-accent)!important;box-shadow:0 10px 26px rgba(var(--av-glow),.24)!important}
+ .av-home .card .poster:hover img{transform:scale(1.07)!important}
+ .primary:hover,.continue-btn:hover,.support-action:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(var(--av-glow),.36)!important}
+ .secondary:hover,.mood-chip:hover,.status-btn:hover,.episode:hover,.control-btn:hover,.season-choice:hover,.favorite-page-btn:hover{border-color:var(--av-accent)!important;box-shadow:0 0 18px rgba(var(--av-glow),.18)!important}
+}
+@media(prefers-reduced-motion:reduce){.hero-content,.anime-page .description,.anime-page .info,.anime-page .where-box{animation:none!important}*,*::before,*::after{transition-duration:.01ms!important;animation-duration:.01ms!important;animation-iteration-count:1!important}.av-home .card:hover,.av-home .card .poster:hover img,.airing-card:hover{transform:none!important}}
