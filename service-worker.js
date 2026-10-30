@@ -1,18 +1,92 @@
 /* ANIME VOID — service worker: установка как приложение + офлайн-режим */
 
-const CORE_CACHE = "av-AV-core-v14";
+const CORE_CACHE = "av-AV-core-v15";
 const IMAGE_CACHE = "av-AV-images-v2";
 const IMAGE_CACHE_LIMIT = 300;
 
 const CORE_FILES = [
+  "./studio/cinema/clouds-thumb.jpg",
+  "./studio/cinema/balcony-thumb.jpg",
+  "./studio/cinema/beach-thumb.jpg",
+  "./studio/cinema/shrine-thumb.jpg",
+  "./studio/cinema/city-thumb.jpg",
+  "./studio/cinema/crossing-thumb.jpg",
+  "./studio/cinema/lake-thumb.jpg",
+  "./studio/cinema/alley-thumb.jpg",
+  "./studio/cinema/bridge-thumb.jpg",
+  "./studio/cinema/konbini-thumb.jpg",
+  "./studio/cinema/spring-thumb.jpg",
+  "./studio/cinema/rooftop-thumb.jpg",
+  "./studio/cinema/torii-thumb.jpg",
+  "./studio/cinema/station-thumb.jpg",
+  "./studio/cinema/paddy-thumb.jpg",
+  "./studio/cinema/railway-thumb.jpg",
+  "./studio/cinema/sakura-thumb.jpg",
+  "./studio/cinema/sea-thumb.jpg",
+  "./studio/cinema/temple-thumb.jpg",
+  "./studio/cinema/bamboo-thumb.jpg",
+  "./studio/cinema/gazebo-thumb.jpg",
+  "./studio/cinema/snowlamp-thumb.jpg",
+  "./studio/cinema/stairs-thumb.jpg",
+  "./studio/cinema/cafe-thumb.jpg",
+
+  "./visual-studio.js?v=17.2",
+  "./visual-studio.css?v=17.2",
+  "./visual-gallery.json",
+  "./visual-avatars.json",
+  "./studio/cinema/eclipse.svg",
+  "./studio/cinema/clouds.webp",
+  "./studio/cinema/balcony.webp",
+  "./studio/cinema/beach.webp",
+  "./studio/cinema/shrine.webp",
+  "./studio/cinema/city.webp",
+  "./studio/cinema/crossing.webp",
+  "./studio/cinema/lake.webp",
+  "./studio/cinema/alley.webp",
+  "./studio/cinema/bridge.webp",
+  "./studio/cinema/glacier.svg",
+  "./studio/cinema/singularity.svg",
+  "./studio/cinema/konbini.webp",
+  "./studio/cinema/emerald.svg",
+  "./studio/cinema/spring.webp",
+  "./studio/cinema/rooftop.webp",
+  "./studio/cinema/torii.webp",
+  "./studio/cinema/station.webp",
+  "./studio/cinema/synthwave.svg",
+  "./studio/cinema/paddy.webp",
+  "./studio/cinema/railway.webp",
+  "./studio/cinema/sakura.webp",
+  "./studio/cinema/sea.webp",
+  "./studio/cinema/inferno.svg",
+  "./studio/cinema/celestial.svg",
+  "./studio/cinema/temple.webp",
+  "./studio/cinema/bamboo.webp",
+  "./studio/cinema/matrix.svg",
+  "./studio/cinema/gazebo.webp",
+  "./studio/cinema/snowlamp.webp",
+  "./studio/cinema/stairs.webp",
+  "./studio/cinema/cafe.webp",
+  "./studio/avatars/dusk-her.webp",
+  "./studio/avatars/cosmic-pilot.svg",
+  "./studio/avatars/ocean-singer.svg",
+  "./studio/avatars/autumn-letter.svg",
+  "./studio/avatars/immortal-him.webp",
+  "./studio/avatars/neon-heart.svg",
+  "./studio/avatars/dusk-him.webp",
+  "./studio/avatars/sakura-muse.svg",
+  "./studio/avatars/ember-knight.svg",
+  "./studio/avatars/moon-witch.svg",
+  "./studio/avatars/red-ronin.svg",
+  "./studio/avatars/immortal-her.webp",
+
   "./",
   "./index.html",
   "./anime.html",
   "./watch.html",
   "./profile.html",
-  "./profile-studio.css?v=17.1",
-  "./profile-studio.js?v=17.1",
-  "./profile-catalog.json?v=17.1",
+  "./profile-studio.css?v=17.2",
+  "./profile-studio.js?v=17.2",
+  "./profile-catalog.json?v=17.2",
   "./studio-config.js?v=17.0",
   "./studio/void.svg",
   "./studio/city.svg",
@@ -41,6 +115,7 @@ const CORE_FILES = [
 
   "./av-safety.js?v=5",
   "./av-safety.js?v=6",
+  "./av-safety.js?v=7",
   "./av-titles.js?v=20261030-2",
   "./av-state.js?v=16",
   "./av-atmosphere.js?v=16.6",
@@ -95,6 +170,13 @@ self.addEventListener("fetch", (event) => {
   /* страницы сайта: сначала интернет, без интернета — из кеша */
   if (request.mode === "navigate") {
     event.respondWith(networkFirstPage(request));
+    return;
+  }
+
+  // Bundled decorative art is immutable within this cache version: avoid dozens of
+  // redundant network requests and interrupted in-flight images when going offline.
+  if (url.origin === self.location.origin && url.pathname.includes('/studio/')) {
+    event.respondWith(studioArtCacheFirst(request));
     return;
   }
 
@@ -191,4 +273,15 @@ async function trimImageCache(cache) {
       );
     }
   } catch (error) { /* ничего страшного */ }
+}
+
+async function studioArtCacheFirst(request) {
+  const cache = await caches.open(CORE_CACHE);
+  const cached = await cache.match(request, { ignoreSearch: true });
+  if (cached) return cached;
+  try {
+    const response = await fetch(request);
+    if (response && response.ok) await cache.put(request, response.clone());
+    return response;
+  } catch (error) { return Response.error(); }
 }

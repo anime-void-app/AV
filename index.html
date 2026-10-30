@@ -1392,7 +1392,7 @@
   <link rel="stylesheet" href="av-enhancements.css?v=1">
   <script src="av-enhancements.js?v=1" defer></script>
 <link rel="canonical" href="https://anime-void-app.github.io/AV/">
-  <script src="av-safety.js?v=5"></script>
+  <script src="av-safety.js?v=7"></script>
   <script src="av-state.js?v=16"></script>
   <script src="av-titles.js?v=20261030-2"></script>
   <script>window.AVTitles=window.AVTitles||{russian:()=>'',display:(x,l)=>(l==='en'?x?.titleEnglish:'')||x?.title||'',normalize:v=>String(v||'').toLowerCase().trim(),plan:q=>({variants:[String(q||'').toLowerCase()],ids:[],terms:[],correction:''}),match:(x,q)=>[x.title,x.titleEnglish,x.titleRomaji,x.titleNative].some(v=>String(v||'').toLowerCase().includes(String(q||'').toLowerCase())),score:()=>0,count:0};</script>
@@ -1400,7 +1400,7 @@
   <script src="av-design.js?v=17.0" defer></script>
   <link rel="stylesheet" href="av-atmosphere.css?v=16.6">
   <script src="av-atmosphere.js?v=16.6" defer></script>
-</head>
+<link rel="stylesheet" href="visual-studio.css?v=17.2"><script src="visual-studio.js?v=17.2" defer></script></head>
 
 <body class="av-shell av-home">
   <header>
@@ -2921,67 +2921,9 @@ if (!donghuaMode) {
       setTimeout(() => { toggleDecor(); }, 40);
     }
 
-    /* ===== Боковые арт-баннеры ===== */
-    const SIDE_ARTS = ["art-station.jpg", "art-sakura.jpg", "art-rooftop.jpg", "art-torii.jpg", "art-crossing.jpg", "art-clouds.jpg", "art-snowlamp.jpg", "art-stairs.jpg", "art-gazebo.jpg", "art-city.jpg", "art-sea.jpg", "art-konbini.jpg", "art-bridge.jpg", "art-temple.jpg", "art-lake.jpg", "art-cafe.jpg", "art-paddy.jpg", "art-alley.jpg", "art-spring.jpg", "art-beach.jpg", "art-shrine.jpg", "art-balcony.jpg", "art-railway.jpg", "art-bamboo.jpg"];
-    let sideArtTimer = null;
-
-    function artBannersEnabled() {
-      try { return localStorage.getItem("animeVoidArtBanners") !== "off"; } catch (error) { return true; }
-    }
-
-    function pickSideArtPair() {
-      let avoid = [];
-      try { avoid = JSON.parse(sessionStorage.getItem("animeVoidLastArts") || "[]"); } catch (error) {}
-      let pool = SIDE_ARTS.filter(art => avoid.indexOf(art) === -1);
-      if (pool.length < 2) pool = SIDE_ARTS.slice();
-      const picked = pool.slice().sort(() => Math.random() - 0.5).slice(0, 2);
-      try { sessionStorage.setItem("animeVoidLastArts", JSON.stringify(picked)); } catch (error) {}
-      return picked;
-    }
-
-    function buildSideArtElement(cls, file) {
-      const el = document.createElement("div");
-      el.className = "side-art " + cls;
-      el.innerHTML = '<img src="' + file + '" alt="" loading="lazy" onerror="this.parentElement.remove()">';
-      return el;
-    }
-
-    function renderSideArts() {
-      if (sideArtTimer) { clearInterval(sideArtTimer); sideArtTimer = null; }
-      document.querySelectorAll(".side-art").forEach(el => el.remove());
-      if (!artBannersEnabled() || window.innerWidth < 1600) return;
-      const pair = pickSideArtPair();
-      document.body.appendChild(buildSideArtElement("side-art-left", pair[0]));
-      document.body.appendChild(buildSideArtElement("side-art-right", pair[1]));
-      sideArtTimer = setInterval(rotateSideArts, 12000);
-    }
-
-    function rotateSideArts() {
-      const arts = document.querySelectorAll(".side-art");
-      if (arts.length !== 2) { renderSideArts(); return; }
-      const pair = pickSideArtPair();
-      arts.forEach(el => {
-        const img = el.querySelector("img");
-        if (img) img.style.opacity = "0";
-      });
-      setTimeout(() => {
-        const left = document.querySelector(".side-art-left");
-        const right = document.querySelector(".side-art-right");
-        if (!left || !right) return;
-        const leftImg = left.querySelector("img");
-        const rightImg = right.querySelector("img");
-        if (leftImg) { leftImg.src = pair[0]; leftImg.style.opacity = ""; }
-        if (rightImg) { rightImg.src = pair[1]; rightImg.style.opacity = ""; }
-      }, 720);
-    }
-
-    function toggleArtBanners() {
-      const enabled = artBannersEnabled();
-      try { localStorage.setItem("animeVoidArtBanners", enabled ? "off" : "on"); } catch (error) {}
-      renderSideArts();
-      closeDecorMenu();
-      setTimeout(() => { toggleDecor(); }, 40);
-    }
+    // 17.2: home-only art rails are managed by visual-studio.js.
+    function artBannersEnabled(){if(window.AVVisual)return window.AVVisual.homeEnabled();try{return localStorage.getItem('animeVoidArtBanners')!=='off';}catch(e){return true;}}
+    function toggleArtBanners(){window.AVVisual?.toggleHome();closeDecorMenu();}
     function closeDecorMenu() {
       const menu = document.querySelector(".decor-menu");
       if (menu) menu.remove();
@@ -3030,12 +2972,7 @@ if (!donghuaMode) {
     }
 
     applyDecorFromStorage();
-    renderSideArts();
-    let sideArtsResizeTimer = null;
-    window.addEventListener("resize", () => {
-      clearTimeout(sideArtsResizeTimer);
-      sideArtsResizeTimer = setTimeout(renderSideArts, 250);
-    });
+
 
     applyThemeFromStorage();
 

@@ -505,7 +505,7 @@
   </style>
   <link rel="stylesheet" href="av-enhancements.css?v=1">
   <script src="av-enhancements.js?v=1" defer></script>
-  <script src="av-safety.js?v=6"></script>
+  <script src="av-safety.js?v=7"></script>
   <script src="av-state.js?v=16"></script>
   <script src="av-titles.js?v=20261030-2"></script>
   <script>window.AVTitles=window.AVTitles||{russian:()=>'',display:(x,l)=>(l==='en'?x?.titleEnglish:'')||x?.title||'',normalize:v=>String(v||'').toLowerCase().trim(),plan:q=>({variants:[String(q||'').toLowerCase()],ids:[],terms:[],correction:''}),match:(x,q)=>[x.title,x.titleEnglish,x.titleRomaji,x.titleNative].some(v=>String(v||'').toLowerCase().includes(String(q||'').toLowerCase())),score:()=>0,count:0};</script>
@@ -513,7 +513,7 @@
   <script src="av-design.js?v=17.0" defer></script>
   <link rel="stylesheet" href="av-atmosphere.css?v=16.6">
   <script src="av-atmosphere.js?v=16.6" defer></script>
-<link rel="stylesheet" href="profile-studio.css?v=17.1"><script src="studio-config.js?v=17.0" defer></script><script src="profile-studio.js?v=17.1" defer></script></head>
+<link rel="stylesheet" href="profile-studio.css?v=17.2"><script src="studio-config.js?v=17.0" defer></script><script src="profile-studio.js?v=17.2" defer></script><link rel="stylesheet" href="visual-studio.css?v=17.2"><script src="visual-studio.js?v=17.2" defer></script></head>
 <body class="av-shell">
   <header>
     <a href="index.html" class="logo">ANIME<span>VOID</span></a>
@@ -536,7 +536,7 @@
   <main>
     <section class="profile-hero">
       <div class="profile-top" style="display:flex;align-items:center;gap:26px;flex-wrap:wrap">
-        <button type="button" id="avatarButton" class="avatar-btn" title="Сменить аватар">🐉</button>
+        <button type="button" id="avatarButton" class="avatar-btn ym-hide-content" title="Сменить аватар">🐉</button>
         <div class="profile-info">
           <div class="name-row">
             <h1 id="profileName">Смотрящий</h1>
@@ -774,7 +774,7 @@
       const isRussian = isRussianNow();
       const avatar = localStorage.getItem("animeVoidAvatar") || "🐉";
       const avatarButton = document.getElementById("avatarButton");
-      if (avatarButton) avatarButton.textContent = avatar;
+      if (avatarButton) { if(window.AVVisual)window.AVVisual.paintAvatar();else avatarButton.textContent = avatar; }
       const name = localStorage.getItem("animeVoidNickname") || (isRussian ? "Смотрящий" : "Watcher");
       setT("profileName", name);
 
@@ -815,6 +815,7 @@
         button.textContent = emoji;
         button.addEventListener("click", () => {
           localStorage.setItem("animeVoidAvatar", emoji);
+          localStorage.removeItem("animeVoidAvatarImageV1");localStorage.removeItem("animeVoidAvatarBuiltinV1");
           picker.hidden = true;
           renderProfileHeader();
         });
