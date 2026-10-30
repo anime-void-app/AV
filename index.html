@@ -1392,12 +1392,14 @@
   <link rel="stylesheet" href="av-enhancements.css?v=1">
   <script src="av-enhancements.js?v=1" defer></script>
 <link rel="canonical" href="https://anime-void-app.github.io/AV/">
-  <script src="av-safety.js?v=2"></script>
+  <script src="av-safety.js?v=3"></script>
   <script src="av-state.js?v=16"></script>
   <script src="av-titles.js?v=20261030-2"></script>
   <script>window.AVTitles=window.AVTitles||{russian:()=>'',display:(x,l)=>(l==='en'?x?.titleEnglish:'')||x?.title||'',normalize:v=>String(v||'').toLowerCase().trim(),plan:q=>({variants:[String(q||'').toLowerCase()],ids:[],terms:[],correction:''}),match:(x,q)=>[x.title,x.titleEnglish,x.titleRomaji,x.titleNative].some(v=>String(v||'').toLowerCase().includes(String(q||'').toLowerCase())),score:()=>0,count:0};</script>
-  <link rel="stylesheet" href="av-design.css?v=16.3">
-  <script src="av-design.js?v=16.3" defer></script>
+  <link rel="stylesheet" href="av-design.css?v=16.4">
+  <script src="av-design.js?v=16.4" defer></script>
+  <link rel="stylesheet" href="av-atmosphere.css?v=16.4">
+  <script src="av-atmosphere.js?v=16.4" defer></script>
 </head>
 
 <body class="av-shell av-home">
@@ -2469,12 +2471,17 @@ if (!donghuaMode) {
       { id: "snow", icon: "❄️", ru: "Снег", en: "Snow" },
       { id: "stars", icon: "✨", ru: "Звёздочки", en: "Stars" },
       { id: "hearts", icon: "💜", ru: "Сердечки", en: "Hearts" },
-      { id: "cursor", icon: "🖱️", ru: "Блёстки за курсором", en: "Cursor sparkles" }
+      { id: "cursor", icon: "🖱️", ru: "Блёстки за курсором", en: "Cursor sparkles" },
+      { id: "rain", icon: "🌧️", ru: "Дождик", en: "Rain" },
+      { id: "fireflies", icon: "🟡", ru: "Светлячки", en: "Fireflies" },
+      { id: "autumn", icon: "🍂", ru: "Осенние листья", en: "Autumn leaves" }
     ];
     let decorCanvas = null;
     let decorCtx = null;
     let decorParticles = [];
     let decorRunning = false;
+    let decorFrameId = 0;
+    let decorResizeListener = null;
     let decorLastSpawn = 0;
     let cursorSparkListener = null;
     let cursorSparkLast = 0;
@@ -2490,6 +2497,10 @@ if (!donghuaMode) {
     }
 
     function spawnDecorParticle(mode, w, h) {
+      if(mode === "rain")return {type:"rain",x:Math.random()*w,y:-24-Math.random()*20,size:13+Math.random()*12,vy:9+Math.random()*8,vx:-1.1,sway:0,swaySpeed:.001,color:"#aacbe5",alpha:.22+Math.random()*.22};
+      if(mode === "fireflies")return {type:"firefly",x:Math.random()*w,y:Math.random()*h,size:2+Math.random()*1.7,vy:-.08+Math.random()*.16,vx:-.15+Math.random()*.3,sway:Math.random()*6.28,swaySpeed:.009,color:"#e7e58b",alpha:.6,twinkle:Math.random()*6.28};
+      if(mode === "autumn")return {type:"leaf",x:Math.random()*w,y:-25-Math.random()*20,size:6+Math.random()*6,vy:.65+Math.random()*.95,vx:.2+Math.random()*.6,rot:Math.random()*6.28,vr:-.018+Math.random()*.036,sway:Math.random()*6.28,swaySpeed:.016,color:["#dba24a","#bd6a3e","#da8050"][Math.floor(Math.random()*3)],alpha:.65};
+
       if (mode === "sakura") {
         return {
           type: "petal", x: Math.random() * w, y: -30 - Math.random() * h * 0.3,
@@ -2534,7 +2545,13 @@ if (!donghuaMode) {
       ctx.globalAlpha = p.alpha;
       ctx.translate(p.x, p.y);
       ctx.fillStyle = p.color;
-      if (p.type === "petal") {
+      if(p.type === "rain"){
+        ctx.strokeStyle=p.color;ctx.lineWidth=.85;ctx.beginPath();ctx.moveTo(0,0);ctx.lineTo(2,-p.size);ctx.stroke();
+      }else if(p.type === "firefly"){
+        const glow=ctx.createRadialGradient(0,0,0,0,0,p.size*3);glow.addColorStop(0,"#fffbc4");glow.addColorStop(.25,p.color);glow.addColorStop(1,"rgba(231,229,139,0)");ctx.fillStyle=glow;ctx.beginPath();ctx.arc(0,0,p.size*3,0,Math.PI*2);ctx.fill();
+      }else if(p.type === "leaf"){
+        ctx.rotate(p.rot);ctx.beginPath();ctx.moveTo(-p.size,0);ctx.quadraticCurveTo(0,-p.size*1.2,p.size,0);ctx.quadraticCurveTo(0,p.size*.8,-p.size,0);ctx.fill();ctx.strokeStyle="rgba(70,35,15,.35)";ctx.lineWidth=.6;ctx.beginPath();ctx.moveTo(-p.size,0);ctx.lineTo(p.size,0);ctx.stroke();
+      }else if (p.type === "petal") {
         ctx.rotate(p.rot);
         ctx.beginPath();
         ctx.ellipse(0, 0, p.size, p.size * 0.6, 0, 0, Math.PI * 2);
@@ -2594,8 +2611,8 @@ if (!donghuaMode) {
       ctx.clearRect(0, 0, w, h);
       const mode = currentDecorId();
       if (mode === "off") return;
-      const target = mode === "sakura" ? 42 : mode === "snow" ? 70 : mode === "stars" ? 34 : mode === "cursor" ? 0 : 26;
-      if (decorParticles.length < target && now - decorLastSpawn > 90) {
+      const target = mode === "rain" ? (innerWidth<761?54:84) : mode === "fireflies" ? 22 : mode === "autumn" ? 28 : mode === "sakura" ? 42 : mode === "snow" ? 70 : mode === "stars" ? 34 : mode === "cursor" ? 0 : 26;
+      if (decorParticles.length < target && now - decorLastSpawn > (mode === "rain" ? 18 : 90)) {
         const particle = spawnDecorParticle(mode, w, h);
         if (particle) {
           decorParticles.push(particle);
@@ -2618,14 +2635,15 @@ if (!donghuaMode) {
         if (p.swaySpeed) p.sway += p.swaySpeed;
         p.y += p.vy;
         if (p.vr) p.rot += p.vr;
-        if (p.twinkle !== undefined) p.alpha = 0.35 + Math.abs(Math.sin(p.twinkle += 0.05)) * 0.6;
+        if (p.twinkle !== undefined) p.alpha = 0.35 + Math.abs(Math.sin(p.twinkle += (p.type === "firefly" ? .014 : .05))) * 0.6;
         drawDecorParticle(ctx, p);
       });
       decorParticles = decorParticles.filter(p => (p.life === undefined || p.life > 0) && p.y > -60 && p.y < h + 80 && p.x > -80 && p.x < w + 80);
-      requestAnimationFrame(decorFrame);
+      decorFrameId = requestAnimationFrame(decorFrame);
     }
 
     function startDecor(mode) {
+      if(matchMedia("(prefers-reduced-motion: reduce)").matches || document.hidden) mode="off";
       decorParticles = [];
       if (cursorSparkListener) {
         window.removeEventListener("pointermove", cursorSparkListener);
@@ -2656,6 +2674,8 @@ if (!donghuaMode) {
         window.addEventListener("pointermove", cursorSparkListener);
       }
       if (mode === "off") {
+        cancelAnimationFrame(decorFrameId);decorFrameId=0;
+        if(decorResizeListener){window.removeEventListener("resize",decorResizeListener);decorResizeListener=null;}
         decorRunning = false;
         if (decorCanvas) {
           decorCanvas.remove();
@@ -2667,20 +2687,21 @@ if (!donghuaMode) {
       if (!decorCanvas) {
         decorCanvas = document.createElement("canvas");
         decorCanvas.className = "decor-canvas";
+        decorCanvas.setAttribute("aria-hidden","true");
         document.body.appendChild(decorCanvas);
         decorCtx = decorCanvas.getContext("2d");
-        const resizeDecor = () => {
+        decorResizeListener = () => {
           if (decorCanvas) {
             decorCanvas.width = window.innerWidth;
             decorCanvas.height = window.innerHeight;
           }
         };
-        resizeDecor();
-        window.addEventListener("resize", resizeDecor);
+        decorResizeListener();
+        window.addEventListener("resize", decorResizeListener);
       }
       if (!decorRunning) {
         decorRunning = true;
-        requestAnimationFrame(decorFrame);
+        decorFrameId = requestAnimationFrame(decorFrame);
       }
     }
 

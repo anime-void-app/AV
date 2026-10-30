@@ -1,0 +1,22 @@
+/* ANIME VOID 16.4 — compact, theme-aware ambience controls. */
+#avAmbienceToggle{min-width:44px;min-height:44px;flex:0 0 44px;margin:0;cursor:pointer;font-size:20px}
+#avAmbienceToggle.is-playing{border-color:var(--av-accent);box-shadow:0 0 16px rgba(var(--av-glow),.25);background:var(--av-tint)}
+.av-ambience-panel{box-sizing:border-box;width:min(440px,calc(100vw - 24px));max-width:calc(100vw - 24px);max-height:calc(100dvh - 24px);overflow:auto;overscroll-behavior:contain;border:1px solid var(--av-accent);border-radius:22px;background:var(--av-surface);color:var(--av-text);padding:24px;box-shadow:0 24px 90px #0008}
+.av-ambience-panel::backdrop{background:#080610ba;backdrop-filter:blur(5px)}
+.av-ambience-panel h2{font-size:24px;line-height:1.3;margin:0 0 10px;letter-spacing:-.025em}
+.av-ambience-panel p{font-size:14px;line-height:1.65;color:var(--av-muted)}
+.av-ambience-panel label{display:block;font-size:14px;font-weight:700;margin-bottom:8px}
+.av-ambience-panel select{width:100%;min-height:48px;border-radius:12px;padding:10px 12px;background:var(--av-raised);border:1px solid var(--av-line);color:var(--av-text);font:inherit;font-size:16px}
+.av-ambience-volume-heading{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:22px}
+.av-ambience-volume-heading output{font-size:14px;color:var(--av-accent);font-variant-numeric:tabular-nums}
+.av-ambience-panel input[type="range"]{display:block;width:100%;min-height:44px;margin:0;accent-color:var(--av-solid);cursor:pointer;touch-action:pan-y}
+.av-ambience-panel .av-ambience-status{min-height:24px;color:var(--av-accent)}
+.av-ambience-actions{display:flex;gap:10px;flex-wrap:wrap}.av-ambience-actions button{flex:1;min-height:46px;padding:10px 16px;cursor:pointer;white-space:nowrap}
+.av-ambience-panel .av-ambience-note{font-size:12px;margin:18px 0 0}
+.av-ambience-panel button:disabled{cursor:wait;opacity:.65}
+.decor-menu{max-height:calc(100dvh - 24px);overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin}
+.decor-option{min-height:44px;flex-shrink:0}
+@media(max-width:760px){.av-ambience-panel{padding:20px}.av-ambience-panel h2{font-size:22px}}
+@media(prefers-reduced-motion:reduce){.decor-canvas{display:none!important}}
+
+@media(max-width:760px){body.av-home header{grid-template-columns:minmax(0,1fr) 44px 44px 44px}.av-home header #avAmbienceToggle{grid-column:3;grid-row:1}.av-home header .av-menu-toggle{grid-column:4;grid-row:1}}
