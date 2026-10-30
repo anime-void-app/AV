@@ -574,11 +574,13 @@
 <link rel="canonical" href="https://anime-void-app.github.io/AV/anime-my-hero-academia.html">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "TVSeries", "name": "Моя геройская академия", "alternateName": "My Hero Academia", "description": "В мире, где суперспособности стали обычным явлением, Идзуку Мидория мечтает стать героем. Встреча с кумиром открывает ему путь в академию и к серьёзным испытаниям.", "url": "https://anime-void-app.github.io/AV/anime-my-hero-academia.html", "inLanguage": "ja"}</script>
   <script src="av-safety.js?v=1"></script>
-  <script src="av-titles.js?v=20261030-1"></script>
+  <script src="av-titles.js?v=20261030-2"></script>
   <script>window.AVTitles=window.AVTitles||{russian:()=>'',display:(x,l)=>(l==='en'?x?.titleEnglish:'')||x?.title||'',normalize:v=>String(v||'').toLowerCase().trim(),plan:q=>({variants:[String(q||'').toLowerCase()],ids:[],terms:[],correction:''}),match:(x,q)=>[x.title,x.titleEnglish,x.titleRomaji,x.titleNative].some(v=>String(v||'').toLowerCase().includes(String(q||'').toLowerCase())),score:()=>0,count:0};</script>
+  <link rel="stylesheet" href="av-design.css?v=16">
+  <script src="av-design.js?v=16" defer></script>
 </head>
 
-<body>
+<body class="av-shell">
 
   <div class="page-bg" id="pageBg"></div>
   <div class="page-overlay"></div>
@@ -1089,7 +1091,7 @@ const russianTitleOverrides = {
           coverImage { extraLarge large }
           bannerImage
           averageScore
-          episodes
+          episodes duration
           status
           genres
           seasonYear
@@ -1106,7 +1108,7 @@ const russianTitleOverrides = {
                 coverImage { extraLarge large }
                 bannerImage
                 averageScore
-                episodes
+                episodes duration
                 status
                 genres
                 seasonYear
@@ -1146,9 +1148,10 @@ const russianTitleOverrides = {
         description: node.description || "Description unavailable",
         rating: node.averageScore ? (node.averageScore / 10).toFixed(1) : null,
         episodes: node.episodes,
+        duration: node.duration || null,
         status: node.status,
         format: node.format || "",
-        image: node.coverImage?.large || node.coverImage?.extraLarge || "",
+        image: node.coverImage?.extraLarge || node.coverImage?.large || "",
         background: node.bannerImage || node.coverImage?.extraLarge || node.coverImage?.large || "",
         relatedSeasons: []
       });
@@ -1178,7 +1181,7 @@ const russianTitleOverrides = {
 
     // Best available artwork right away: native banner, else the largest cover.
     const hasNativeBanner = Boolean(item.background);
-    const coverExtraLarge = String(item.image || "").replace("/large/", "/extraLarge/") || item.image;
+    const coverExtraLarge = String(item.image || "");
     document.getElementById("pageBg").style.backgroundImage =
       `url("${item.background || coverExtraLarge}")`;
     document.getElementById("pageBg").classList.toggle("bg-blurred", !hasNativeBanner);

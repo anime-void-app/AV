@@ -515,10 +515,13 @@
   <link rel="stylesheet" href="av-enhancements.css?v=1">
   <script src="av-enhancements.js?v=1" defer></script>
   <script src="av-safety.js?v=1"></script>
-  <script src="av-titles.js?v=20261030-1"></script>
+  <script src="av-state.js?v=16"></script>
+  <script src="av-titles.js?v=20261030-2"></script>
   <script>window.AVTitles=window.AVTitles||{russian:()=>'',display:(x,l)=>(l==='en'?x?.titleEnglish:'')||x?.title||'',normalize:v=>String(v||'').toLowerCase().trim(),plan:q=>({variants:[String(q||'').toLowerCase()],ids:[],terms:[],correction:''}),match:(x,q)=>[x.title,x.titleEnglish,x.titleRomaji,x.titleNative].some(v=>String(v||'').toLowerCase().includes(String(q||'').toLowerCase())),score:()=>0,count:0};</script>
+  <link rel="stylesheet" href="av-design.css?v=16">
+  <script src="av-design.js?v=16" defer></script>
 </head>
-<body>
+<body class="av-shell">
   <header>
     <a href="index.html" class="logo">ANIME<span>VOID</span></a>
     <nav>
@@ -846,6 +849,7 @@
 
     /* ===== Цифры и ачивки ===== */
     function collectStats() {
+      if(window.AVState)return AVState.stats();
       let totalEpisodes = 0;
       let watchedTitles = 0;
       let hours = 0;
@@ -962,7 +966,7 @@
       const isRussian = isRussianNow();
       const stats = collectStats();
       animateValue(document.getElementById("statEpisodes"), stats.totalEpisodes, "", 900);
-      animateValue(document.getElementById("statHours"), stats.hours, isRussian ? " ч" : " h", 900);
+      animateValue(document.getElementById("statHours"), stats.hours, isRussian ? " ч ≈" : " h ≈", 900);
       animateValue(document.getElementById("statTitles"), stats.watchedTitles, "", 900);
       animateValue(document.getElementById("statFavorites"), stats.favoritesCount, "", 900);
       animateValue(document.getElementById("statRatings"), stats.ratingsCount, "", 900);
@@ -1481,10 +1485,10 @@
         });
       }
       ctx.textAlign = "center";
-      ctx.fillStyle = "#f5f3ff";
+      ctx.fillStyle = getComputedStyle(document.body).getPropertyValue("--av-text") || "#f5f3ff";
       ctx.font = "800 32px system-ui, sans-serif";
       ctx.fillText(centerTop, cx, cy);
-      ctx.fillStyle = "#a99fc2";
+      ctx.fillStyle = getComputedStyle(document.body).getPropertyValue("--av-muted") || "#a99fc2";
       ctx.font = "600 12px system-ui, sans-serif";
       ctx.fillText(centerBottom, cx, cy + 26);
     }
@@ -1527,7 +1531,7 @@
         let minutes = 0;
         episodes.forEach(ep => {
           const stored = Number(localStorage.getItem("duration_" + id + "_" + ep));
-          minutes += stored > 0 ? stored : 24;
+          minutes += window.AVState ? AVState.episodeMinutes(id,ep,item) : (stored > 0 ? stored/60 : 24);
         });
         const per = minutes / item.genres.length;
         item.genres.forEach(g => { genreMinutes[g] = (genreMinutes[g] || 0) + per; });
@@ -2132,7 +2136,7 @@
       if (btn) {
         const rect = btn.getBoundingClientRect();
         menu.style.top = (rect.bottom + 10) + "px";
-        menu.style.right = Math.max(10, window.innerWidth - rect.right) + "px";
+        menu.style.right = Math.max(12, Math.min(window.innerWidth - 232, window.innerWidth - rect.right)) + "px";
       } else {
         menu.style.top = "70px";
         menu.style.right = "16px";
@@ -2173,5 +2177,6 @@
   </script>
 <!-- Cloudflare Web Analytics -->
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "c9a10757745f4f5f9f2496ed6966c59f"}'></script>
+<script>window.avRefreshView=()=>{renderAll();};document.addEventListener('av:theme',()=>renderStatsCharts());document.addEventListener('av:charts-visible',()=>renderStatsCharts());</script>
 </body>
 </html>

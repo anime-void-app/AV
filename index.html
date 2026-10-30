@@ -1393,11 +1393,14 @@
   <script src="av-enhancements.js?v=1" defer></script>
 <link rel="canonical" href="https://anime-void-app.github.io/AV/">
   <script src="av-safety.js?v=1"></script>
-  <script src="av-titles.js?v=20261030-1"></script>
+  <script src="av-state.js?v=16"></script>
+  <script src="av-titles.js?v=20261030-2"></script>
   <script>window.AVTitles=window.AVTitles||{russian:()=>'',display:(x,l)=>(l==='en'?x?.titleEnglish:'')||x?.title||'',normalize:v=>String(v||'').toLowerCase().trim(),plan:q=>({variants:[String(q||'').toLowerCase()],ids:[],terms:[],correction:''}),match:(x,q)=>[x.title,x.titleEnglish,x.titleRomaji,x.titleNative].some(v=>String(v||'').toLowerCase().includes(String(q||'').toLowerCase())),score:()=>0,count:0};</script>
+  <link rel="stylesheet" href="av-design.css?v=16">
+  <script src="av-design.js?v=16" defer></script>
 </head>
 
-<body>
+<body class="av-shell av-home">
   <header>
     <a href="#" class="logo" style="text-decoration:none;color:white">
       ANIME<span>VOID</span>
@@ -1461,16 +1464,15 @@
 </button>
 <a id="donateBtn" class="secondary donate-link" href="https://www.donationalerts.com/r/tishecka" target="_blank" rel="noopener noreferrer">☕ Поддержать проект</a>
       </div>
-    </section>
+    </section><nav class="av-shortcuts" aria-label="Быстрые переходы"><a href="#catalog" class="av-copy" data-ru="01 / Каталог" data-en="01 / Catalog">01 / Каталог</a><a href="#moodSection" class="av-copy" data-ru="02 / Подбор по настроению" data-en="02 / Find your mood">02 / Подбор по настроению</a><a href="#favorites" class="av-copy" data-ru="03 / Мои списки" data-en="03 / My lists">03 / Мои списки</a><a href="updates.html" class="av-copy" data-ru="04 / Что нового ↗" data-en="04 / What’s new ↗">04 / Что нового ↗</a></nav>
+<section class="continue-section" id="continueSection" style="display: none;">
+  <h2 class="continue-title" id="continueTitle">Продолжить просмотр</h2>
+  <div class="continue-card" id="continueCard">
+    <!-- Сюда JavaScript сам подставит аниме -->
+  </div>
+</section>
 
-    <section class="support-panel" aria-labelledby="supportTitle">
-      <img class="support-art" src="support-banner.jpg" alt="ANIME VOID — Поддержи наш мир аниме" width="1280" height="720" loading="lazy">
-      <div class="support-copy">
-        <h2 id="supportTitle">Помоги ANIME VOID стать ещё лучше ✨</h2>
-        <p id="supportText">Твоя поддержка помогает развивать наш мир аниме. Спасибо, что ты с нами! 💜</p>
-        <a id="supportAction" class="support-action" href="https://www.donationalerts.com/r/tishecka" target="_blank" rel="noopener noreferrer">☕ Поддержать проект</a>
-      </div>
-    </section>
+    
 
     <div class="missed-banner" id="missedBanner" hidden></div>
 
@@ -1525,7 +1527,8 @@
         </div>
       </div>
 
-      <div class="filters">
+      <p class="av-filter-hint av-copy" data-ru="Жанры можно листать →" data-en="Scroll through genres →">Жанры можно листать →</p>
+<div class="filters">
   <button id="filterAll" class="filter active" data-genre="Все">Все</button>
   <button id="filterFantasy" class="filter" data-genre="Фэнтези">Фэнтези</button>
   <button id="filterAction" class="filter" data-genre="Экшен">Экшен</button>
@@ -1563,12 +1566,7 @@
   <button id="resetFiltersBtn" class="reset-filter" type="button">Сбросить фильтры</button>
 </div>
 
-<section class="continue-section" id="continueSection" style="display: none;">
-  <h2 class="continue-title" id="continueTitle">Продолжить просмотр</h2>
-  <div class="continue-card" id="continueCard">
-    <!-- Сюда JavaScript сам подставит аниме -->
-  </div>
-</section>
+
 
 <div class="grid" id="animeGrid"></div>
       <div style="text-align:center; margin:30px 0;">
@@ -1630,7 +1628,7 @@
       <div class="grid" id="favoritesGrid"></div>
     </section>
 
-    <section class="history-section" id="historySection" hidden>
+    <details class="av-insights" id="myJourney"><summary class="av-copy" data-ru="Твой путь · история, графики и достижения" data-en="Your journey · history, charts and achievements">Твой путь · история, графики и достижения</summary><section class="history-section" id="historySection" hidden>
       <div class="section-heading">
         <div>
           <h2 id="historyTitle">История просмотров</h2>
@@ -1679,7 +1677,16 @@
       <div class="achievements-grid" id="achievementsGrid"></div>
     </section>
 
-    <section class="backup-section" id="backupSection">
+    </details>
+<section class="support-panel" aria-labelledby="supportTitle">
+      <img class="support-art" src="support-banner.jpg" alt="ANIME VOID — Поддержи наш мир аниме" width="1280" height="720" loading="lazy">
+      <div class="support-copy">
+        <h2 id="supportTitle">Помоги ANIME VOID стать ещё лучше ✨</h2>
+        <p id="supportText">Твоя поддержка помогает развивать наш мир аниме. Спасибо, что ты с нами! 💜</p>
+        <a id="supportAction" class="support-action" href="https://www.donationalerts.com/r/tishecka" target="_blank" rel="noopener noreferrer">☕ Поддержать проект</a>
+      </div>
+    </section>
+<section class="backup-section" id="backupSection">
       <div class="section-heading">
         <div>
           <h2 id="backupTitle">Данные и бэкап</h2>
@@ -1695,7 +1702,7 @@
   </main>
 
   <footer>
-    ANIME VOID © 2026 · Твоя следующая история начинается здесь · Данные каталога: AniList · v15
+    ANIME VOID © 2026 · Твоя следующая история начинается здесь · Данные каталога: AniList · v16
   </footer>
 
   <button id="toTopBtn" type="button" aria-label="Наверх" title="Наверх">↑</button>
@@ -1845,7 +1852,7 @@ coverImage {
 bannerImage
 
 averageScore
-episodes
+episodes duration
 status
       genres
       seasonYear
@@ -1864,7 +1871,7 @@ status
             coverImage { extraLarge large }
             bannerImage
             averageScore
-            episodes
+            episodes duration
             status
             genres
             seasonYear
@@ -1927,11 +1934,12 @@ status
                 description: node.description || "Description unavailable",
                 rating: node.averageScore ? (node.averageScore / 10).toFixed(1) : null,
                 episodes: node.episodes,
+        duration: node.duration || null,
                 status: node.status,
                 format: node.format,
                 relationType: edge.relationType,
                 relatedSeasons: [],
-                image: node.coverImage?.large || node.coverImage?.extraLarge || "",
+                image: node.coverImage?.extraLarge || node.coverImage?.large || "",
                 background: node.bannerImage || node.coverImage?.extraLarge || node.coverImage?.large || ""
               };
             })
@@ -1955,12 +1963,13 @@ status
         description: item.description || "Description unavailable",
         rating: item.averageScore ? (item.averageScore / 10).toFixed(1) : null,
         episodes: item.episodes,
+        duration: item.duration || null,
         status: item.status,
         format: item.format || "",
         relatedSeasons: relatedSeasons
           .flatMap(season => [season, ...(season.relatedSeasons || [])])
           .map(season => ({ ...season, relatedSeasons: [] })),
-        image: item.coverImage?.large || item.coverImage?.extraLarge || "",
+        image: item.coverImage?.extraLarge || item.coverImage?.large || "",
         background: item.bannerImage || item.coverImage?.extraLarge || item.coverImage?.large || ""
       };
     }
@@ -2144,27 +2153,30 @@ if (!donghuaMode) {
         : `<button type="button" class="card-season-button card-watch-button" style="width:100%;margin:0" onclick="event.stopPropagation(); window.location.href='watch.html?id=${AVSafe.escape(encodeURIComponent(item.id))}&episode=1'">${isRussian ? "▶ Смотреть" : "▶ Watch"}</button>`;
 
       return `
-        <article class="card" role="link" tabindex="0"
-          onclick="openAnimePage('${AVSafe.escape(encodeURIComponent(item.id))}')"
-          onkeydown="if (event.target === this && (event.key === 'Enter' || event.key === ' ')) { event.preventDefault(); openAnimePage('${AVSafe.escape(encodeURIComponent(item.id))}'); }">
+        <article class="card">
+          <a class="av-card-entry" href="${AVSafe.escape(window.avAnimeUrl?window.avAnimeUrl(item.id):'anime.html?id='+encodeURIComponent(item.id))}">
           <div class="poster" style="--poster:${item.color}">
 
 <img loading="lazy" decoding="async" src="${AVSafe.escape(item.image || ('image/poster' + item.id + '.jpg'))}" alt="${AVSafe.escape(displayTitle)}" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;" onerror="this.onerror=null;this.src='image/poster1.jpg';">
 
 
 
-            <small>${AVSafe.escape(item.label)}</small>
-            <h3 data-anime-title-id="${AVSafe.escape(item.id)}">${AVSafe.escape(displayTitle)}</h3>
-            <div class="year">${AVSafe.escape(item.year)} · ${AVSafe.escape(item.genre)}</div>
+            ${item.country==='CN'?'<small>'+(isRussian?'Дунхуа':'Donghua')+'</small>':''}
             ${item.franchiseSeasonCount > 1 ? `<div class="season-count">${seasonCountLabel(item.franchiseSeasonCount)}</div>` : ""}
+          </div>
+          <div class="av-card-copy">            <h3 data-anime-title-id="${AVSafe.escape(item.id)}">${AVSafe.escape(displayTitle)}</h3>
+            <div class="year">${AVSafe.escape(Number(item.year)>0?item.year:(isRussian?"Дата уточняется":"Date TBA"))} · ${AVSafe.escape(isRussian?(GENRE_RU[item.genre]||item.genre):item.genre)}</div>
+
             <div class="anime-meta">
     ${item.rating ? `⭐ ${AVSafe.escape(item.rating)}` : ""}
     ${item.episodes ? ` · ${item.episodes} ${isRussian ? "серий" : "eps"}` : ""}
-    ${item.status ? ` · ${AVSafe.escape(item.status)}` : ""}
+    ${item.status ? ` · ${AVSafe.escape(isRussian?translateStatus(item.status):item.status)}` : ""}
 </div>
+
           </div>
+          </a>
           <div class="card-info">
-            <span class="genre">${AVSafe.escape(item.genre)}</span>
+            <span class="genre">${item.format==='MOVIE'?(isRussian?'Аниме-фильм':'Anime movie'):(isRussian?'Аниме-сериал':'Anime series')}</span>
             <button class="favorite ${saved ? "saved" : ""}"
               onclick="event.stopPropagation(); toggleFavorite('${AVSafe.escape(item.id)}')"
               aria-label="Добавить в избранное">
@@ -2428,7 +2440,7 @@ if (!donghuaMode) {
       if (btn) {
         const rect = btn.getBoundingClientRect();
         menu.style.top = (rect.bottom + 10) + "px";
-        menu.style.right = Math.max(10, window.innerWidth - rect.right) + "px";
+        menu.style.right = Math.max(12, Math.min(window.innerWidth - 232, window.innerWidth - rect.right)) + "px";
       } else {
         menu.style.top = "70px";
         menu.style.right = "16px";
@@ -2961,7 +2973,7 @@ if (!donghuaMode) {
       if (btn) {
         const rect = btn.getBoundingClientRect();
         menu.style.top = (rect.bottom + 10) + "px";
-        menu.style.right = Math.max(10, window.innerWidth - rect.right) + "px";
+        menu.style.right = Math.max(12, Math.min(window.innerWidth - 232, window.innerWidth - rect.right)) + "px";
       } else {
         menu.style.top = "70px";
         menu.style.right = "16px";
@@ -3105,10 +3117,10 @@ if (!donghuaMode) {
         });
       }
       ctx.textAlign = "center";
-      ctx.fillStyle = "#f5f3ff";
+      ctx.fillStyle = getComputedStyle(document.body).getPropertyValue("--av-text") || "#f5f3ff";
       ctx.font = "800 32px system-ui, sans-serif";
       ctx.fillText(centerTop, cx, cy);
-      ctx.fillStyle = "#a99fc2";
+      ctx.fillStyle = getComputedStyle(document.body).getPropertyValue("--av-muted") || "#a99fc2";
       ctx.font = "600 12px system-ui, sans-serif";
       ctx.fillText(centerBottom, cx, cy + 26);
     }
@@ -3152,7 +3164,7 @@ if (!donghuaMode) {
         let minutes = 0;
         episodes.forEach(ep => {
           const stored = Number(localStorage.getItem("duration_" + id + "_" + ep));
-          minutes += stored > 0 ? stored : 24;
+          minutes += window.AVState ? AVState.episodeMinutes(id,ep,item) : (stored > 0 ? stored/60 : 24);
         });
         const per = minutes / item.genres.length;
         item.genres.forEach(g => { genreMinutes[g] = (genreMinutes[g] || 0) + per; });
@@ -3266,6 +3278,7 @@ if (!donghuaMode) {
 
     /* ===== Достижения ===== */
     function collectAchievementStats() {
+      if(window.AVState)return AVState.stats();
       let totalEpisodes = 0;
       let watchedTitles = 0;
       let hours = 0;
@@ -3450,6 +3463,7 @@ if (!donghuaMode) {
     }
 
     function launchConfetti() {
+      if(matchMedia("(prefers-reduced-motion:reduce)").matches)return;
       const canvas = document.createElement("canvas");
       canvas.className = "confetti-canvas";
       canvas.width = window.innerWidth;
@@ -3496,7 +3510,7 @@ if (!donghuaMode) {
       const wrap = document.createElement("div");
       wrap.className = "achv-toasts";
       document.body.appendChild(wrap);
-      const shown = fresh.slice(0, 4);
+      const shown = fresh.slice(0, 1);
       shown.forEach((achievement, index) => {
         setTimeout(() => {
           const toast = document.createElement("div");
@@ -3518,16 +3532,15 @@ if (!donghuaMode) {
       try {
         let seen = [];
         try { seen = AVSafe.read("animeVoidSeenAchievements", []); } catch (error) {}
-        const fresh = list.filter(a => a.unlocked && seen.indexOf(a.title) === -1);
+        const alternate=achievementsList(collectAchievementStats(),localStorage.getItem('animeVoidLanguage')==='en');
+        const fresh = list.filter((a,i) => a.unlocked && !seen.includes(a.title) && !seen.includes(alternate[i]?.title));
         if (!fresh.length) return;
         if (seen.length) {
           showAchievementToasts(fresh);
           launchConfetti();
           playDing();
         }
-        list.forEach(a => {
-          if (a.unlocked && seen.indexOf(a.title) === -1) seen.push(a.title);
-        });
+        list.forEach((a,i) => {if(a.unlocked){for(const title of [a.title,alternate[i]?.title])if(title&&!seen.includes(title))seen.push(title);}});
         localStorage.setItem("animeVoidSeenAchievements", JSON.stringify(seen));
       } catch (error) {}
     }
@@ -4038,10 +4051,11 @@ if (!donghuaMode) {
         description: item.description || "Description unavailable",
         rating: item.averageScore ? (item.averageScore / 10).toFixed(1) : null,
         episodes: item.episodes,
+        duration: item.duration || null,
         status: item.status,
         format: item.format || "",
         relatedSeasons: [],
-        image: item.coverImage?.large || item.coverImage?.extraLarge || "",
+        image: item.coverImage?.extraLarge || item.coverImage?.large || "",
         background: item.bannerImage || item.coverImage?.extraLarge || item.coverImage?.large || ""
       };
     }
@@ -4060,7 +4074,7 @@ if (!donghuaMode) {
       const ids = plan.ids.map(id=>Number(id.slice(8))).filter(Number.isSafeInteger);
       const alias = searchQueryAliases[AVTitles.normalize(queryText)];
       const term = alias || plan.terms[0] || translatedSearchText || String(queryText).trim();
-      const fields = 'id idMal title{romaji english native} synonyms coverImage{extraLarge large} bannerImage averageScore episodes status genres seasonYear description format countryOfOrigin';
+      const fields = 'id idMal title{romaji english native} synonyms coverImage{extraLarge large} bannerImage averageScore episodes duration status genres seasonYear description format countryOfOrigin';
       const query = 'query($search:String,$ids:[Int],$known:Boolean!){known:Page(perPage:50) @include(if:$known){media(id_in:$ids,type:ANIME,isAdult:false,sort:POPULARITY_DESC){'+fields+'}} hits:Page(perPage:12){media(search:$search,type:ANIME,isAdult:false,sort:SEARCH_MATCH){'+fields+'}}}';
       try {
         const response = await fetch('https://graphql.anilist.co',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},signal:controller.signal,body:JSON.stringify({query,variables:{search:term,ids,known:ids.length>0}})});
@@ -4284,7 +4298,7 @@ if (!donghuaMode) {
         idMal: entry.idMal || null,
         synonyms: Array.isArray(entry.synonyms) ? entry.synonyms : [],
             title: entry.title?.english || entry.title?.romaji || entry.title?.native || "Anime",
-            image: entry.coverImage?.large || entry.coverImage?.extraLarge || "",
+            image: entry.coverImage?.extraLarge || entry.coverImage?.large || "",
             rating: entry.averageScore ? (entry.averageScore / 10).toFixed(1) : null,
             nextEpisode: entry.nextAiringEpisode?.episode || null,
             airingAt: entry.nextAiringEpisode?.airingAt || null
@@ -4363,7 +4377,7 @@ if (!donghuaMode) {
         idMal: entry.idMal || null,
         synonyms: Array.isArray(entry.synonyms) ? entry.synonyms : [],
             title: entry.title?.english || entry.title?.romaji || entry.title?.native || "Anime",
-            image: entry.coverImage?.large || entry.coverImage?.extraLarge || "",
+            image: entry.coverImage?.extraLarge || entry.coverImage?.large || "",
             rating: entry.averageScore ? (entry.averageScore / 10).toFixed(1) : null,
             nextEpisode: entry.nextAiringEpisode?.episode || null,
             airingAt: entry.nextAiringEpisode?.airingAt || null
@@ -4392,6 +4406,7 @@ if (!donghuaMode) {
 
     // ----- Watch history & statistics -----
     function collectWatchHistory() {
+      if(window.AVState){const entries=AVState.entries();const last=AVSafe.read("animeVoidLastWatch",null);return entries.sort((a,b)=>Number(b.item.id===last?.animeId)-Number(a.item.id===last?.animeId)||b.episodes.length-a.episodes.length);}
       const entries = [];
       for (let i = 0; i < localStorage.length; i++) {
         const storageKey = localStorage.key(i);
@@ -4421,6 +4436,7 @@ if (!donghuaMode) {
     }
 
     function estimateWatchMinutes(entry) {
+      if(window.AVState)return entry.episodes.reduce((n,ep)=>n+AVState.episodeMinutes(entry.item.id,ep,entry.item),0);
       let minutes = 0;
       entry.episodes.forEach(episode => {
         const duration = Number(localStorage.getItem(`duration_${entry.item.id}_${episode}`)) || 0;
@@ -5049,6 +5065,7 @@ function toggleFavorite(id) {
 
 
 function setLanguage(lang) {
+  lang=lang==='en'?'en':'ru';document.documentElement.lang=lang;
 
   localStorage.setItem(
     "animeVoidLanguage",
@@ -5629,5 +5646,6 @@ setLanguage(
 <!-- Cloudflare Web Analytics -->
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "c9a10757745f4f5f9f2496ed6966c59f"}'></script>
 <nav class="av-directory" aria-label="Страницы аниме"><h2>Популярные аниме</h2><ul><li><a href="anime-death-note.html">Тетрадь смерти</a></li><li><a href="anime-bakemonogatari.html">Истории монстров</a></li><li><a href="anime-attack-on-titan.html">Атака титанов</a></li><li><a href="anime-demon-slayer.html">Клинок, рассекающий демонов</a></li><li><a href="anime-jujutsu-kaisen.html">Магическая битва</a></li><li><a href="anime-one-piece.html">Ван-Пис</a></li><li><a href="anime-hunter-x-hunter.html">Охотник x Охотник</a></li><li><a href="anime-one-punch-man.html">Ванпанчмен</a></li><li><a href="anime-a-silent-voice.html">Форма голоса</a></li><li><a href="anime-my-hero-academia.html">Моя геройская академия</a></li></ul></nav>
+<script>window.avRefreshView=()=>{favorites=AVSafe.read('animeVoidFavorites',[]);const stored=AVSafe.read('animeVoidCatalog',[]);const map=new Map(anime.map(x=>[String(x.id),x]));for(const item of stored){if(map.has(item.id))Object.assign(map.get(item.id),item);else anime.push(item);}const lang=localStorage.getItem('animeVoidLanguage')==='en'?'en':'ru';setLanguage(lang);showContinueWatching();};document.addEventListener('av:theme',()=>renderStatsCharts());document.addEventListener('av:charts-visible',()=>renderStatsCharts());</script>
 </body>
 </html>
