@@ -574,6 +574,8 @@
 <link rel="canonical" href="https://anime-void-app.github.io/AV/anime-jujutsu-kaisen.html">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "TVSeries", "name": "Магическая битва", "alternateName": "JUJUTSU KAISEN", "description": "Юдзи Итадори оказывается вовлечён в мир проклятий и магов. Получив опасную силу, он начинает учиться управлять ею и защищать людей от сверхъестественных угроз.", "url": "https://anime-void-app.github.io/AV/anime-jujutsu-kaisen.html", "inLanguage": "ja"}</script>
   <script src="av-safety.js?v=1"></script>
+  <script src="av-titles.js?v=20261030-1"></script>
+  <script>window.AVTitles=window.AVTitles||{russian:()=>'',display:(x,l)=>(l==='en'?x?.titleEnglish:'')||x?.title||'',normalize:v=>String(v||'').toLowerCase().trim(),plan:q=>({variants:[String(q||'').toLowerCase()],ids:[],terms:[],correction:''}),match:(x,q)=>[x.title,x.titleEnglish,x.titleRomaji,x.titleNative].some(v=>String(v||'').toLowerCase().includes(String(q||'').toLowerCase())),score:()=>0,count:0};</script>
 </head>
 
 <body>
@@ -796,24 +798,12 @@ const russianTitleOverrides = {
 
     const titleKey = `animeVoidRuTitle_${item.id}`;
     const descriptionKey = `animeVoidRuDescription_${item.id}`;
-    const titleOverride = russianTitleOverrides[String(item.id)] || "";
+    const titleOverride = AVTitles.russian(item) || russianTitleOverrides[String(item.id)] || "";
 
     if (titleOverride) {
       russianTitle = titleOverride;
       localStorage.setItem(titleKey, titleOverride);
-    } else if (!russianTitle && !titleTranslationPromise) {
-      titleTranslationPromise = translatePlainTextToRussian(
-        originalTitle,
-        titleKey
-      ).then(result => {
-        russianTitle = result || "";
-        if (currentLanguage === "ru") applyLanguage();
-      }).catch(error => {
-        console.error("Не удалось перевести название:", error);
-      }).finally(() => {
-        titleTranslationPromise = null;
-      });
-    }
+    } else { russianTitle = ''; }
 
     if (!russianDescription && !descriptionTranslationPromise) {
       descriptionTranslationPromise = translateToRussian(
@@ -937,7 +927,7 @@ const russianTitleOverrides = {
           ${entry.score ? `<span class="similar-score">⭐ ${entry.score}</span>` : ""}
         </div>
         <div class="similar-body">
-          <div class="similar-name">${AVSafe.escape(entry.title)}</div>
+          <div class="similar-name">${AVSafe.escape(AVTitles.display(entry,currentLanguage))}</div>
           <div class="similar-meta">${AVSafe.escape([entry.year, similarFormatLabel(entry.format)].filter(Boolean).join(" · "))}</div>
         </div>
       </article>`).join("");
@@ -950,7 +940,7 @@ const russianTitleOverrides = {
       const query = `
         query ($id: Int) {
           Media(id: $id) {
-            id
+            id idMal
             bannerImage
             coverImage { extraLarge large }
             trailer { id site }
@@ -964,7 +954,7 @@ const russianTitleOverrides = {
             recommendations(perPage: 20, sort: [RATING_DESC]) {
               nodes {
                 mediaRecommendation {
-                  id
+                  id idMal
                   title { romaji english }
                   coverImage { large }
                   format
@@ -1038,6 +1028,8 @@ const russianTitleOverrides = {
         .slice(0, 12)
         .map(rec => ({
           id: "anilist-" + rec.id,
+        idMal: rec.idMal || null,
+        synonyms: Array.isArray(rec.synonyms) ? rec.synonyms : [],
           title: rec.title.english || rec.title.romaji || "",
           image: rec.coverImage?.large || "",
           year: rec.seasonYear || "",
@@ -1092,8 +1084,8 @@ const russianTitleOverrides = {
     const query = `
       query ($id: Int) {
         Media(id: $id) {
-          id
-          title { romaji english native }
+          id idMal
+          title { romaji english native } synonyms
           coverImage { extraLarge large }
           bannerImage
           averageScore
@@ -1107,10 +1099,10 @@ const russianTitleOverrides = {
             edges {
               relationType
               node {
-                id
+                id idMal
                 type
                 format
-                title { romaji english native }
+                title { romaji english native } synonyms
                 coverImage { extraLarge large }
                 bannerImage
                 averageScore
@@ -1140,6 +1132,8 @@ const russianTitleOverrides = {
       if (!media) { animeLoadFailure = !payload.errors?.length || payload.errors.some(e => /not found/i.test(e.message || '')) ? 'notfound' : 'network'; return null; }
       const mapNode = node => ({
         id: "anilist-" + node.id,
+        idMal: node.idMal || null,
+        synonyms: Array.isArray(node.synonyms) ? node.synonyms : [],
         title: node.title?.english || node.title?.romaji || node.title?.native || "Anime",
         titleEnglish: node.title?.english || "",
         titleRomaji: node.title?.romaji || "",
@@ -1358,16 +1352,12 @@ for (let i = 1; i <= episodeCount; i++) {
       .replace(/\s+/g, " ")
       .trim()
       .toLocaleLowerCase();
-    const titleOverride = russianTitleOverrides[String(item.id)] || "";
+    const titleOverride = AVTitles.russian(item) || russianTitleOverrides[String(item.id)] || "";
     if (savedTitle && normalizeText(savedTitle) === normalizeText(originalTitle)) {
       // Remove an untranslated value cached by an older version.
       localStorage.removeItem(titleCacheKey);
     }
-    russianTitle = titleOverride || (
-      savedTitle && normalizeText(savedTitle) !== normalizeText(originalTitle)
-        ? savedTitle
-        : ""
-    );
+    russianTitle = titleOverride || "";
 
     originalDescription = item.description || "Description unavailable";
     const descriptionCacheKey = `animeVoidRuDescription_${item.id}`;
@@ -1527,6 +1517,8 @@ if (genreLabel) {
         title: item.title || "",
         titleEnglish: item.titleEnglish || "",
         titleRomaji: item.titleRomaji || "",
+        idMal: item.idMal || null,
+        synonyms: item.synonyms || [],
         titleNative: item.titleNative || "",
         image: item.image || "",
         color: item.color || "#7c3aed",

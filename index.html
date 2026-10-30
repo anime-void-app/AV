@@ -1393,6 +1393,8 @@
   <script src="av-enhancements.js?v=1" defer></script>
 <link rel="canonical" href="https://anime-void-app.github.io/AV/">
   <script src="av-safety.js?v=1"></script>
+  <script src="av-titles.js?v=20261030-1"></script>
+  <script>window.AVTitles=window.AVTitles||{russian:()=>'',display:(x,l)=>(l==='en'?x?.titleEnglish:'')||x?.title||'',normalize:v=>String(v||'').toLowerCase().trim(),plan:q=>({variants:[String(q||'').toLowerCase()],ids:[],terms:[],correction:''}),match:(x,q)=>[x.title,x.titleEnglish,x.titleRomaji,x.titleNative].some(v=>String(v||'').toLowerCase().includes(String(q||'').toLowerCase())),score:()=>0,count:0};</script>
 </head>
 
 <body>
@@ -1415,7 +1417,7 @@
 <script type="text/javascript">(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})(window,document,"script","https://mc.yandex.ru/metrika/tag.js?id=113896888","ym");ym(113896888,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true,webvisor:true,ssr:true,ecommerce:"dataLayer",referrer:document.referrer,url:location.href});</script>
 <button id="decorToggle" class="theme-toggle" onclick="toggleDecor()" title="Эффекты декора" aria-label="Эффекты">🌸</button>
     <div class="search-wrap">
-      <input id="search" class="search" type="search" placeholder="⌕  Найти аниме...">
+      <input id="search" class="search" type="search" maxlength="160" placeholder="⌕  Найти аниме...">
       <div id="searchSuggestions" class="search-suggestions" hidden></div>
     </div>
   </header>
@@ -1827,7 +1829,8 @@ async function loadAnimeFromApi() {
             sort: POPULARITY_DESC,
             isAdult: false${donghuaMode ? ", countryOfOrigin: CN" : ""}
           ) {
-            id
+            id idMal
+            synonyms
             title {
               romaji
               english
@@ -1853,11 +1856,11 @@ status
         edges {
           relationType
           node {
-            id
+            id idMal
             type
             format
             countryOfOrigin
-            title { romaji english native }
+            title { romaji english native } synonyms
             coverImage { extraLarge large }
             bannerImage
             averageScore
@@ -1909,6 +1912,8 @@ status
               const node = edge.node;
               return {
                 id: "anilist-" + node.id,
+        idMal: node.idMal || null,
+        synonyms: Array.isArray(node.synonyms) ? node.synonyms : [],
                 title: node.title?.english || node.title?.romaji || node.title?.native || "Anime",
                 titleEnglish: node.title?.english || "",
                 titleRomaji: node.title?.romaji || "",
@@ -1934,6 +1939,8 @@ status
 
       return {
         id: "anilist-" + item.id,
+        idMal: item.idMal || null,
+        synonyms: Array.isArray(item.synonyms) ? item.synonyms : [],
         title: item.title?.english || item.title?.romaji || item.title?.native || "Anime",
         titleEnglish: item.title?.english || "",
         titleRomaji: item.title?.romaji || "",
@@ -2084,23 +2091,25 @@ if (!donghuaMode) {
     }
 
     async function translateSearchQueryToEnglish(query) {
-      const params = new URLSearchParams({ client: "gtx", sl: "ru", tl: "en", dt: "t", q: query });
-      try {
-        const response = await fetch(`https://translate.googleapis.com/translate_a/single?${params}`);
-        if (!response.ok) throw new Error(`Search translation HTTP ${response.status}`);
-        const data = await response.json();
-        const translated = (data?.[0] || []).map(part => part?.[0] || "").join("").trim();
-        if (translated) return translated;
-      } catch (googleError) {
-        console.warn("Google search translation unavailable; trying MyMemory", googleError);
-      }
-      const backupParams = new URLSearchParams({ q: query, langpair: "ru|en" });
-      const backup = await fetch(`https://api.mymemory.translated.net/get?${backupParams}`);
-      if (!backup.ok) throw new Error(`Search translation HTTP ${backup.status}`);
-      const backupData = await backup.json();
-      const translated = backupData?.responseData?.translatedText;
-      if (backupData.responseStatus !== 200 || !translated) throw new Error("Search translation unavailable");
-      return translated;
+      searchTranslationController?.abort();
+      const controller=new AbortController();searchTranslationController=controller;
+      const timer=setTimeout(()=>controller.abort(),5000);
+      try{
+        try{
+          const params=new URLSearchParams({client:'gtx',sl:'ru',tl:'en',dt:'t',q:query});
+          const response=await fetch('https://translate.googleapis.com/translate_a/single?'+params,{signal:controller.signal});
+          if(!response.ok)throw new Error('Query translation unavailable');
+          const data=await response.json();
+          const translated=(data?.[0]||[]).map(x=>x?.[0]||'').join('').trim();
+          if(translated)return translated;
+        }catch(e){if(controller.signal.aborted)throw e;}
+        const params=new URLSearchParams({q:query,langpair:'ru|en'});
+        const response=await fetch('https://api.mymemory.translated.net/get?'+params,{signal:controller.signal});
+        if(!response.ok)throw new Error('Query translation unavailable');
+        const data=await response.json();
+        if(data.responseStatus!==200||!data.responseData?.translatedText)throw new Error('Query translation unavailable');
+        return data.responseData.translatedText;
+      }finally{clearTimeout(timer);if(searchTranslationController===controller)searchTranslationController=null;}
     }
 
     const grid = document.getElementById("animeGrid");
@@ -3710,7 +3719,7 @@ if (!donghuaMode) {
         const length=x.format==='MOVIE'?(Number(x.duration)>0?`${x.duration} ${ru?'мин':'min'}`:''):(episodes?`${episodes} ${ru?'серий':'episodes'}`:(ru?'Число серий уточняется':'Episode count unknown'));
         const matches=(x.genres||[]).filter(g=>mood.genres.includes(g));
         const reason=matches.length?(ru?'Совпадает с настроением: '+matches.map(g=>genreNames[g]||g).join(', '):'Matches your mood: '+matches.join(', ')):(ru?'Подходит под выбранные формат и длину.':'Matches your format and length choices.');
-        const title=ru?(x.ruTitle || (typeof getRussianTitle==='function'?getRussianTitle(x):'') || x.title):x.title;
+        const title=ru?((typeof getRussianTitle==='function'?getRussianTitle(x):'') || x.ruTitle || x.title):x.title;
         const href=typeof window.avAnimeUrl==='function'?window.avAnimeUrl(x.id):'anime.html?id='+encodeURIComponent(x.id);
         const image = AVSafe.url(x.imageExtraLarge || x.coverImage?.extraLarge || x.image, 'poster-unavailable.svg'); const safeImage = TONIGHT_COVERS[x.id] || tonightPosterURL(image);
         return `<a class="mood-card tonight-card" href="${tonightEscape(href)}" data-tonight-id="${tonightEscape(x.id)}"><span class="tonight-poster"><img src="${tonightEscape(safeImage)}" data-poster-fallback="${tonightEscape(image)}" alt="" loading="lazy" decoding="async" width="460" height="650" onerror="tonightPosterError(this)"></span><span class="tonight-card-title">${tonightEscape(title)}</span><span class="tonight-meta">${tonightEscape([format,length,x.year].filter(Boolean).join(' · '))}</span><span class="tonight-reason">${tonightEscape(reason)}</span></a>`;
@@ -3779,6 +3788,8 @@ if (!donghuaMode) {
         if (!media.length) return;
         topItems = media.map(node => ({
           id: "anilist-" + node.id,
+        idMal: node.idMal || null,
+        synonyms: Array.isArray(node.synonyms) ? node.synonyms : [],
           title: (node.title && (node.title.english || node.title.romaji)) || "",
           image: (node.coverImage && node.coverImage.large) || "",
           rating: node.averageScore ? (node.averageScore / 10).toFixed(1) : ""
@@ -3917,6 +3928,7 @@ if (!donghuaMode) {
           .filter(Boolean);
         const matchesSearch = !queryVariants.length ||
           queryVariants.some(query => searchableText.includes(query)) ||
+          AVTitles.match(item, searchText) ||
           (item.searchHit && normalizeSearchText(item.searchHit) === normalizedSearchStamp);
         const matchesYear = !selectedYear || String(item.year) === selectedYear;
         const matchesStatus = !selectedStatus || item.status === selectedStatus;
@@ -3934,6 +3946,7 @@ if (!donghuaMode) {
       }
 
       filtered.sort((a, b) => {
+        if(searchText && selectedSort !== "rating" && selectedSort !== "newest" && selectedSort !== "oldest" && selectedSort !== "title") return AVTitles.score(a,searchText)-AVTitles.score(b,searchText);
         if (selectedSort === "rating") {
           return (Number(b.rating) || 0) - (Number(a.rating) || 0);
         }
@@ -4004,10 +4017,13 @@ if (!donghuaMode) {
 
     let apiSearchTimer = null;
     let apiSearchSequence = 0;
+    let searchTranslationController = null;
 
     function mapSearchResult(item) {
       return {
         id: "anilist-" + item.id,
+        idMal: item.idMal || null,
+        synonyms: Array.isArray(item.synonyms) ? item.synonyms : [],
         title: item.title?.english || item.title?.romaji || item.title?.native || "Anime",
         titleEnglish: item.title?.english || "",
         titleRomaji: item.title?.romaji || "",
@@ -4030,117 +4046,61 @@ if (!donghuaMode) {
       };
     }
 
+    let searchApiState = '';
+    let searchApiController = null;
     async function searchAniListIntoCatalog(queryText) {
       const stamp = normalizeSearchText(queryText);
       if (stamp.length < 2) return;
       const sequence = ++apiSearchSequence;
-      const isCyrillic = /[\u0400-\u04FF]/.test(queryText);
-      let terms = [];
-      if (isCyrillic) {
-        Object.keys(searchQueryAliases).forEach(key => {
-          if ((key.startsWith(stamp) || stamp.includes(key)) && !terms.includes(searchQueryAliases[key])) {
-            terms.push(searchQueryAliases[key]);
-          }
-        });
-        const translated = String(translatedSearchText || "").trim();
-        if (translated && !terms.includes(translated)) terms.push(translated);
-      }
-      if (!terms.includes(String(queryText).trim())) terms.push(String(queryText).trim());
-      terms = terms.slice(0, 3);
-
-      const query = `
-        query ($search: String) {
-          Page(page: 1, perPage: 12) {
-            pageInfo {
-              hasNextPage
-            }
-            media(search: $search, type: ANIME, isAdult: false, sort: SEARCH_MATCH) {
-              id
-              title { romaji english native }
-              coverImage { extraLarge large }
-              bannerImage
-              averageScore
-              episodes
-              status
-              genres
-              seasonYear
-              description
-              format
-              countryOfOrigin
-            }
-          }
-        }
-      `;
-
-      for (const term of terms) {
-        try {
-          const response = await fetch("https://graphql.anilist.co", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              "Accept": "application/json"
-            },
-            body: JSON.stringify({ query, variables: { search: term } })
-          });
-          if (sequence !== apiSearchSequence) return;
-          if (!response.ok) break;
-          const result = await response.json();
-          if (sequence !== apiSearchSequence) return;
-          if (result.errors) break;
-          const found = (result.data?.Page?.media || []).map(mapSearchResult);
-          if (!found.length) continue;
-          const animeById = new Map(anime.map(item => [String(item.id), item]));
-          found.forEach(apiItem => {
-            const existingItem = animeById.get(String(apiItem.id));
-            if (existingItem) {
-              Object.assign(existingItem, apiItem, {
-                relatedSeasons: existingItem.relatedSeasons || [],
-                searchHit: stamp
-              });
-            } else {
-              apiItem.searchHit = stamp;
-              anime.push(apiItem);
-              animeById.set(String(apiItem.id), apiItem);
-            }
-          });
-          try {
-            localStorage.setItem("animeVoidCatalog", JSON.stringify(anime.filter(item => String(item.id).startsWith("anilist-"))));
-          } catch (error) {}
-          render();
-        } catch (error) {
-          break;
-        }
-      }
+      searchApiController?.abort();
+      const controller = new AbortController(); searchApiController = controller;
+      const timer = setTimeout(()=>controller.abort(),8000);
+      searchApiState = 'loading'; buildSearchSuggestions(queryText);
+      const plan = AVTitles.plan(queryText);
+      const ids = plan.ids.map(id=>Number(id.slice(8))).filter(Number.isSafeInteger);
+      const alias = searchQueryAliases[AVTitles.normalize(queryText)];
+      const term = alias || plan.terms[0] || translatedSearchText || String(queryText).trim();
+      const fields = 'id idMal title{romaji english native} synonyms coverImage{extraLarge large} bannerImage averageScore episodes status genres seasonYear description format countryOfOrigin';
+      const query = 'query($search:String,$ids:[Int],$known:Boolean!){known:Page(perPage:50) @include(if:$known){media(id_in:$ids,type:ANIME,isAdult:false,sort:POPULARITY_DESC){'+fields+'}} hits:Page(perPage:12){media(search:$search,type:ANIME,isAdult:false,sort:SEARCH_MATCH){'+fields+'}}}';
+      try {
+        const response = await fetch('https://graphql.anilist.co',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},signal:controller.signal,body:JSON.stringify({query,variables:{search:term,ids,known:ids.length>0}})});
+        if(sequence!==apiSearchSequence) return;
+        if(!response.ok) throw new Error('Search HTTP '+response.status);
+        const result = await response.json();
+        if(sequence!==apiSearchSequence) return;
+        if(result.errors?.length) throw new Error('Search API error');
+        const raw = [...(result.data?.known?.media||[]),...(result.data?.hits?.media||[])];
+        // The old Page response is also accepted for compatible test/offline fixtures.
+        if(!raw.length && result.data?.Page?.media) raw.push(...result.data.Page.media);
+        const found = [...new Map(raw.filter(x=>x&&Number.isSafeInteger(x.id)).map(x=>[x.id,x])).values()].map(mapSearchResult);
+        const byId = new Map(anime.map(item=>[String(item.id),item]));
+        for(const apiItem of found){const existing=byId.get(apiItem.id);if(existing)Object.assign(existing,apiItem,{relatedSeasons:existing.relatedSeasons||[],searchHit:stamp});else{apiItem.searchHit=stamp;anime.push(apiItem);byId.set(apiItem.id,apiItem);}}
+        try{localStorage.setItem('animeVoidCatalog',JSON.stringify(anime.filter(x=>String(x.id).startsWith('anilist-'))));}catch(e){}
+        searchApiState = '';render();buildSearchSuggestions(queryText);
+      } catch(error) {
+        if(sequence===apiSearchSequence){searchApiState='error';buildSearchSuggestions(queryText);}
+      } finally {clearTimeout(timer);if(searchApiController===controller)searchApiController=null;}
     }
 
-    document.getElementById("search").addEventListener("input", event => {
-      searchText = event.target.value.trim();
-      translatedSearchText = "";
-      const requestId = ++searchTranslationSequence;
-      if (searchDebounceTimer) clearTimeout(searchDebounceTimer);
-      render();
-      buildSearchSuggestions(searchText);
-
-      if (apiSearchTimer) clearTimeout(apiSearchTimer);
-      if (searchText.length >= 2) {
-        apiSearchTimer = setTimeout(() => {
-          searchAniListIntoCatalog(searchText);
-        }, 600);
-      }
-
-      if (!searchText || !/[\u0400-\u04FF]/.test(searchText)) return;
-      searchDebounceTimer = setTimeout(async () => {
-        try {
-          const translated = await translateSearchQueryToEnglish(searchText);
-          if (requestId !== searchTranslationSequence) return;
-          translatedSearchText = translated;
-          render();
-          if (apiSearchTimer) clearTimeout(apiSearchTimer);
-          searchAniListIntoCatalog(searchText);
-        } catch (error) {
-          console.warn("Не удалось перевести поисковый запрос:", error);
+    document.getElementById('search').addEventListener('input',event=>{
+      searchText=event.target.value.trim().slice(0,160);translatedSearchText='';
+      const requestId=++searchTranslationSequence;
+      ++apiSearchSequence;searchApiController?.abort();searchTranslationController?.abort();searchApiState=searchText.length>=2?'loading':'';
+      if(searchDebounceTimer)clearTimeout(searchDebounceTimer);
+      if(apiSearchTimer)clearTimeout(apiSearchTimer);
+      render();buildSearchSuggestions(searchText);
+      if(searchText.length<2)return;
+      apiSearchTimer=setTimeout(async()=>{
+        const queryText=searchText;
+        const plan=AVTitles.plan(queryText);
+        if(!plan.ids.length && !searchQueryAliases[AVTitles.normalize(queryText)] && /[\u0400-\u04ff]/.test(queryText)){
+          // Translation is only an optional aid for an unknown search query, never a title source.
+          let timeout, translated='';try{translated=await Promise.race([translateSearchQueryToEnglish(queryText),new Promise(resolve=>{timeout=setTimeout(()=>resolve(''),5000);})]);}catch(e){}finally{clearTimeout(timeout);}
+          if(requestId!==searchTranslationSequence)return;
+          translatedSearchText=translated;
         }
-      }, 350);
+        if(requestId===searchTranslationSequence)searchAniListIntoCatalog(queryText);
+      },600);
     });
 
     // ----- Live search suggestions -----
@@ -4160,14 +4120,7 @@ if (!donghuaMode) {
       const matches = anime
         .filter(item => String(item.id).startsWith("anilist-"))
         .map(item => {
-          const variants = [item.title, item.titleEnglish, item.titleRomaji, item.titleNative, getRussianTitle(item)]
-            .filter(Boolean)
-            .map(value => String(value).toLowerCase());
-          if (!variants.length) return null;
-          const position = variants.reduce((best, value) => {
-            const found = value.indexOf(q);
-            return found >= 0 && (best === -1 || found < best) ? found : best;
-          }, normalizeSearchText(item.searchHit) === q ? 500 : -1);
+          const position = AVTitles.match(item,q) ? AVTitles.score(item,q) : (normalizeSearchText(item.searchHit) === normalizeSearchText(q) ? 500 : -1);
           return position >= 0 ? { item, position } : null;
         })
         .filter(Boolean)
@@ -4175,14 +4128,18 @@ if (!donghuaMode) {
         .slice(0, 7)
         .map(entry => entry.item);
 
+      const plan = AVTitles.plan(query);
+      const hint = plan.correction ? (isRussian ? 'Ищем также: «'+plan.correction+'»' : 'Also searching: “'+plan.correction+'”') : '';
+      const status = searchApiState === 'loading' ? (isRussian ? 'Поиск в каталоге…' : 'Searching the catalog…') : searchApiState === 'error' ? (isRussian ? 'Онлайн-поиск недоступен. Показаны сохранённые совпадения.' : 'Online search unavailable. Showing saved matches.') : '';
+      const notice = [hint,status].filter(Boolean).map(x=>'<div class="sug-empty" role="status">'+AVSafe.escape(x)+'</div>').join('');
       if (!matches.length) {
-        searchSuggestionsBox.innerHTML = `<div class="sug-empty">${isRussian ? "Ничего не найдено" : "Nothing found"}</div>`;
+        searchSuggestionsBox.innerHTML = notice || `<div class="sug-empty">${isRussian ? "Ничего не найдено" : "Nothing found"}</div>`;
         searchSuggestionsBox.hidden = false;
         suggestionState = { items: [], activeIndex: -1 };
         return;
       }
       suggestionState = { items: matches, activeIndex: -1 };
-      searchSuggestionsBox.innerHTML = matches.map(item => {
+      searchSuggestionsBox.innerHTML = notice + matches.map(item => {
         const displayTitle = isRussian ? (getRussianTitle(item) || item.title) : item.title;
         const meta = [item.year, item.genre].filter(Boolean).join(" · ");
         return `
@@ -4192,7 +4149,7 @@ if (!donghuaMode) {
               onerror="this.onerror=null;this.src='image/poster1.jpg';">
             <span class="sug-info">
               <span class="sug-title">${AVSafe.escape(displayTitle)}</span>
-              <span class="sug-meta">${meta}</span>
+              <span class="sug-meta">${AVSafe.escape(meta)}</span>
             </span>
           </button>`;
       }).join("");
@@ -4306,8 +4263,8 @@ if (!donghuaMode) {
             query ($season: MediaSeason, $year: Int) {
               Page(page: 1, perPage: 40) {
                 media(type: ANIME, season: $season, seasonYear: $year, sort: POPULARITY_DESC, isAdult: false) {
-                  id
-                  title { romaji english native }
+                  id idMal
+                  title { romaji english native } synonyms
                   coverImage { large extraLarge }
                   averageScore
                   nextAiringEpisode { airingAt episode }
@@ -4324,6 +4281,8 @@ if (!donghuaMode) {
           const media = (await response.json())?.data?.Page?.media || [];
           items = media.map(entry => ({
             id: "anilist-" + entry.id,
+        idMal: entry.idMal || null,
+        synonyms: Array.isArray(entry.synonyms) ? entry.synonyms : [],
             title: entry.title?.english || entry.title?.romaji || entry.title?.native || "Anime",
             image: entry.coverImage?.large || entry.coverImage?.extraLarge || "",
             rating: entry.averageScore ? (entry.averageScore / 10).toFixed(1) : null,
@@ -4383,8 +4342,8 @@ if (!donghuaMode) {
             query {
               Page(page: 1, perPage: 50) {
                 media(type: ANIME, countryOfOrigin: CN, status: RELEASING, sort: POPULARITY_DESC, isAdult: false) {
-                  id
-                  title { romaji english native }
+                  id idMal
+                  title { romaji english native } synonyms
                   coverImage { large extraLarge }
                   averageScore
                   nextAiringEpisode { airingAt episode }
@@ -4401,6 +4360,8 @@ if (!donghuaMode) {
           const media = (await response.json())?.data?.Page?.media || [];
           items = media.map(entry => ({
             id: "anilist-" + entry.id,
+        idMal: entry.idMal || null,
+        synonyms: Array.isArray(entry.synonyms) ? entry.synonyms : [],
             title: entry.title?.english || entry.title?.romaji || entry.title?.native || "Anime",
             image: entry.coverImage?.large || entry.coverImage?.extraLarge || "",
             rating: entry.averageScore ? (entry.averageScore / 10).toFixed(1) : null,
@@ -4670,21 +4631,7 @@ function toggleFavorite(id) {
     }
 
     function getRussianTitle(item) {
-      const override = russianTitleOverrides[String(item.id)];
-      if (override) {
-        localStorage.setItem(titleCacheKey(item), override);
-        return override;
-      }
-      const key = titleCacheKey(item);
-      const cached = localStorage.getItem(key) || "";
-      const source = String(item.titleEnglish || item.title || "");
-      const normalize = value => String(value || "").replace(/\s+/g, " ").trim().toLocaleLowerCase();
-      if (cached && normalize(cached) === normalize(source)) {
-        // Remove an untranslated value cached by an older version.
-        localStorage.removeItem(key);
-        return "";
-      }
-      return cached;
+      return AVTitles.russian(item) || russianTitleOverrides[String(item.id)] || '';
     }
 
                 async function translatePlainTextToRussian(text, cacheKey = "") {
@@ -4795,48 +4742,8 @@ function toggleFavorite(id) {
     }
 
     function translateCatalogTitles(items) {
-      if (localStorage.getItem("animeVoidLanguage") !== "ru") return;
-      const uniqueItems = [...new Map(items.map(item => [String(item.id), item])).values()];
-
-      // Discard queued work for cards no longer displayed after filtering.
-      const visibleIds = new Set(uniqueItems.map(item => String(item.id)));
-      for (let i = titleTranslationQueue.length - 1; i >= 0; i--) {
-        if (!visibleIds.has(String(titleTranslationQueue[i].item.id))) titleTranslationQueue.splice(i, 1);
-      }
-      uniqueItems.forEach(item => {
-        if (!String(item.id).startsWith("anilist-")) return;
-        const override = russianTitleOverrides[String(item.id)];
-        if (override) {
-          localStorage.setItem(titleCacheKey(item), override);
-          updateRenderedTitle(item.id, override);
-          return;
-        }
-        if (getRussianTitle(item)) {
-          updateRenderedTitle(item.id, getRussianTitle(item));
-          return;
-        }
-        if (activeTitleIds.has(String(item.id)) || titleTranslationQueue.some(entry => String(entry.item.id) === String(item.id))) return;
-        titleTranslationQueue.push({ item, cacheKey: titleCacheKey(item) });
-      });
-      runTitleTranslationQueue();
-    }
-
-    function runTitleTranslationQueue() {
-      while (activeTitleTranslations < MAX_TITLE_TRANSLATIONS && titleTranslationQueue.length) {
-        const job = titleTranslationQueue.shift();
-        activeTitleTranslations++;
-        activeTitleIds.add(String(job.item.id));
-        translatePlainTextToRussian(job.item.titleEnglish || job.item.title, job.cacheKey)
-          .then(result => {
-            if (result) updateRenderedTitle(job.item.id, result);
-          })
-          .catch(error => console.error("Не удалось перевести название:", error))
-          .finally(() => {
-            activeTitleTranslations--;
-            activeTitleIds.delete(String(job.item.id));
-            runTitleTranslationQueue();
-          });
-      }
+      if (localStorage.getItem('animeVoidLanguage') !== 'ru') return;
+      for (const item of items) updateRenderedTitle(item.id, getRussianTitle(item) || item.title);
     }
 
     function updateRenderedTitle(id, title) {
@@ -4847,7 +4754,7 @@ function toggleFavorite(id) {
         }
       });
       const modalTitle = document.getElementById("modalAnimeTitle");
-      if (modalTitle) modalTitle.textContent = title;
+      if (modalTitle && modalTitle.dataset.titleId === String(id)) modalTitle.textContent = title;
     }
 
     function translateStatus(status) {
@@ -4899,7 +4806,7 @@ function toggleFavorite(id) {
           ✦ ${AVSafe.escape(item.label || "ANIME VOID")}
         </span>
 
-        <h2 id="modalAnimeTitle">${AVSafe.escape(getRussianTitle(item) || item.title)}</h2>
+        <h2 id="modalAnimeTitle" data-title-id="${AVSafe.escape(item.id)}">${AVSafe.escape(getRussianTitle(item) || item.title)}</h2>
 
         <p
           id="animeDescription"
@@ -4970,7 +4877,7 @@ function toggleFavorite(id) {
       document.getElementById("modalContent").innerHTML = isRussian ? `
         <h2>О проекте ANIME VOID</h2>
         <p>ANIME VOID — независимый проект для тех, кто любит аниме. Здесь можно искать тайтлы, следить за выходом серий, сохранять избранное и отмечать просмотренное.</p>
-        <p>Данные каталога, включая названия и описания, поступают из открытого API AniList. Права на аниме принадлежат их правообладателям.</p>
+        <p>Данные каталога поступают из API AniList; проверенные русские названия — из каталога Shikimori. Права на аниме принадлежат их правообладателям.</p>
         <p>ANIME VOID не размещает серии. В разделе «Где посмотреть» можно найти ссылки и поиск по сторонним площадкам. Наличие, язык и стоимость просмотра зависят от площадки и региона.</p>
         <p>Проект развивается благодаря обратной связи и добровольной поддержке пользователей. Спасибо, что ты с нами! 💜</p>
       ` : `
