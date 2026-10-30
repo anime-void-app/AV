@@ -1,12 +1,12 @@
 /* ANIME VOID — service worker: установка как приложение + офлайн-режим */
 
-const CORE_CACHE = "av-AV-core-v16";
+const CORE_CACHE = "av-AV-core-v17";
 const IMAGE_CACHE = "av-AV-images-v2";
 const IMAGE_CACHE_LIMIT = 300;
 
 const CORE_FILES = [
-  "./visual-studio.js?v=17.2",
-  "./visual-studio.css?v=17.2",
+  "./visual-studio.js?v=17.4",
+  "./visual-studio.css?v=17.4",
   "./visual-gallery.json",
   "./visual-avatars.json",
   "./studio/avatars/dusk-her.webp",
@@ -27,10 +27,10 @@ const CORE_FILES = [
   "./watch.html",
   "./profile.html",
   "./profile-studio.css?v=17.2",
-  "./profile-studio.js?v=17.3",
+  "./profile-studio.js?v=17.4",
   "./profile-catalog.json?v=17.3",
   "./studio-config.js?v=17.0",
-  "./av-safety.js?v=8",
+  "./av-safety.js?v=9",
   "./av-titles.js?v=20261030-2",
   "./av-state.js?v=16",
   "./av-atmosphere.js?v=16.6",
@@ -101,7 +101,12 @@ const CORE_FILES = [
   "./studio/atelier/snow.webp",
   "./studio/atelier/snow-thumb.webp",
   "./studio/atelier/shichimi.webp",
-  "./studio/atelier/shichimi-thumb.webp"
+  "./studio/atelier/shichimi-thumb.webp",
+  "./community.html",
+  "./void-custom.js?v=17.4",
+  "./void-social.js?v=17.4",
+  "./void-social.css?v=17.4",
+  "./community-rules.html"
 ];
 
 self.addEventListener("install", (event) => {
@@ -133,7 +138,7 @@ self.addEventListener("fetch", (event) => {
   const url = new URL(request.url);
 
   // Account, inventory and payment responses must NEVER enter a shared service-worker cache.
-  if (url.pathname.includes("/api/") || url.pathname.includes("/auth/v1/") || url.pathname.includes("/rest/v1/")) return;
+  if (url.pathname.includes("/api/") || url.pathname.includes("/auth/v1/") || url.pathname.includes("/rest/v1/") || url.pathname.includes("/storage/v1/")) return;
 
   /* страницы сайта: сначала интернет, без интернета — из кеша */
   if (request.mode === "navigate") {
