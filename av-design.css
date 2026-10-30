@@ -135,3 +135,7 @@ body.av-detail #pageBg,body.av-detail #pageBg.bg-blurred{filter:brightness(.65) 
 
 /* 16.5: moderate blur between the sharp and heavily blurred versions. */
 body.av-detail #pageBg,body.av-detail #pageBg.bg-blurred{filter:brightness(.65) blur(6px);transform:scale(1.04)}
+
+/* Entry links are additive; existing season and watch-order controls stay intact. */
+.av-universe-entry{display:inline-flex;align-items:center;gap:8px;padding:10px 16px;margin:12px 0;border:1px solid var(--av-accent,#a855f7);border-radius:12px;color:var(--av-accent,#c4a0ff)!important;background:var(--av-tint,#261337);text-decoration:none;font:600 14px/1.4 Inter,system-ui,sans-serif}.av-universe-entry:hover{box-shadow:0 0 22px var(--av-tint,#452160)}
+@media(max-width:760px){.av-mobile-nav{grid-template-columns:repeat(5,minmax(0,1fr))}}
