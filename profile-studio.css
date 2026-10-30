@@ -12,3 +12,6 @@
 .avp-active .profile-hero>.level-box{width:calc(100% - 56px)}.avp-active .profile-hero>#achievementShowcase{padding:20px 28px;margin:0!important;border-top:1px solid var(--av-line)}.avp-preview .avp-preview-avatar{position:absolute!important}.avp-saving-note{font-size:12px;color:var(--av-muted);margin:12px 0}.avp-saving-note summary{cursor:pointer;min-height:34px;padding:6px 0}
 @media(min-width:1051px)and(min-height:850px){.avp-sidebar{position:sticky;top:100px;align-self:start}}
 @media(max-width:760px){.avp-active .profile-hero>.level-box{width:calc(100% - 36px)}.avp-active .profile-hero>#achievementShowcase{padding:18px}.avp-sidebar>.avp-saving-note{grid-column:1/-1;margin:0}.avp-sidebar>#avpPreview[data-selection=false]>p{display:none}.avp-preview{height:155px}.avp-preview-banner{height:64px}.avp-preview .avp-preview-avatar{top:36px;width:54px!important;height:54px!important;left:16px}.avp-preview-info{padding:29px 16px 10px}.avp-preview-info strong{font-size:15px}.avp-preview-info span{font-size:10px}}
+
+/* 17.1: keep character portraits visible in wide headers and compact previews. */
+.avp-banner,.avp-preview-banner{background-position:65% 42%}.avp-item-art{background-position:65% center}

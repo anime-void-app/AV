@@ -489,16 +489,7 @@
     .decor-option:hover { background:rgba(168,85,247,.18); }
     .decor-option.active { background:rgba(168,85,247,.28); box-shadow:inset 0 0 0 1px rgba(192,132,252,.5); }
 
-    /* ===== Боковые арт-баннеры ===== */
-    .side-art { position:fixed; top:56%; transform:translateY(-50%); width:min(320px, calc((100vw - 1400px)/2 + 60px)); height:min(84vh, 820px); border-radius:24px; border:1px solid rgba(168,85,247,.4); overflow:hidden; z-index:0; pointer-events:none; box-shadow:0 24px 70px rgba(0,0,0,.6), 0 0 34px rgba(168,85,247,.16); opacity:.94; animation:artGlow 6s ease-in-out infinite alternate; }
-    .side-art img { width:100%; height:100%; object-fit:cover; display:block; animation:artZoom 26s ease-in-out infinite alternate; transition:opacity .7s ease; }
-    .side-art-left img { animation-duration:32s; animation-delay:-11s; }
-    .side-art::after { content:""; position:absolute; inset:0; background:linear-gradient(to top, rgba(9,8,16,.55), transparent 44%), linear-gradient(to bottom, rgba(9,8,16,.24), transparent 30%); pointer-events:none; z-index:2; }
-    .side-art-left { left:20px; }
-    .side-art-right { right:20px; }
-    @keyframes artZoom { from { transform:scale(1) translateX(0); } to { transform:scale(1.17) translateX(-2.4%); } }
-    @keyframes artGlow { from { box-shadow:0 24px 70px rgba(0,0,0,.6), 0 0 28px rgba(168,85,247,.1); } to { box-shadow:0 24px 70px rgba(0,0,0,.6), 0 0 54px rgba(168,85,247,.26); } }
-    @media (max-width:1599px) { .side-art { display:none; } }
+    /* 17.1: profile side illustrations permanently removed. */
     .decor-sep { height:1px; background:rgba(168,85,247,.25); margin:5px 8px; }
     #skyTint { position:fixed; inset:0; z-index:-1; pointer-events:none; }
     body.theme-light footer { color: #5c5275; border-top-color: #d9c6f2; }
@@ -514,7 +505,7 @@
   </style>
   <link rel="stylesheet" href="av-enhancements.css?v=1">
   <script src="av-enhancements.js?v=1" defer></script>
-  <script src="av-safety.js?v=5"></script>
+  <script src="av-safety.js?v=6"></script>
   <script src="av-state.js?v=16"></script>
   <script src="av-titles.js?v=20261030-2"></script>
   <script>window.AVTitles=window.AVTitles||{russian:()=>'',display:(x,l)=>(l==='en'?x?.titleEnglish:'')||x?.title||'',normalize:v=>String(v||'').toLowerCase().trim(),plan:q=>({variants:[String(q||'').toLowerCase()],ids:[],terms:[],correction:''}),match:(x,q)=>[x.title,x.titleEnglish,x.titleRomaji,x.titleNative].some(v=>String(v||'').toLowerCase().includes(String(q||'').toLowerCase())),score:()=>0,count:0};</script>
@@ -522,7 +513,7 @@
   <script src="av-design.js?v=17.0" defer></script>
   <link rel="stylesheet" href="av-atmosphere.css?v=16.6">
   <script src="av-atmosphere.js?v=16.6" defer></script>
-<link rel="stylesheet" href="profile-studio.css?v=17.0"><script src="studio-config.js?v=17.0" defer></script><script src="profile-studio.js?v=17.0" defer></script></head>
+<link rel="stylesheet" href="profile-studio.css?v=17.1"><script src="studio-config.js?v=17.0" defer></script><script src="profile-studio.js?v=17.1" defer></script></head>
 <body class="av-shell">
   <header>
     <a href="index.html" class="logo">ANIME<span>VOID</span></a>
@@ -2156,67 +2147,7 @@
       setTimeout(() => { toggleDecor(); }, 40);
     }
 
-    /* ===== Боковые арт-баннеры ===== */
-    const SIDE_ARTS = ["art-station.jpg", "art-sakura.jpg", "art-rooftop.jpg", "art-torii.jpg", "art-crossing.jpg", "art-clouds.jpg", "art-snowlamp.jpg", "art-stairs.jpg", "art-gazebo.jpg", "art-city.jpg", "art-sea.jpg", "art-konbini.jpg", "art-bridge.jpg", "art-temple.jpg", "art-lake.jpg", "art-cafe.jpg", "art-paddy.jpg", "art-alley.jpg", "art-spring.jpg", "art-beach.jpg", "art-shrine.jpg", "art-balcony.jpg", "art-railway.jpg", "art-bamboo.jpg"];
-    let sideArtTimer = null;
-
-    function artBannersEnabled() {
-      try { return localStorage.getItem("animeVoidArtBanners") !== "off"; } catch (error) { return true; }
-    }
-
-    function pickSideArtPair() {
-      let avoid = [];
-      try { avoid = JSON.parse(sessionStorage.getItem("animeVoidLastArts") || "[]"); } catch (error) {}
-      let pool = SIDE_ARTS.filter(art => avoid.indexOf(art) === -1);
-      if (pool.length < 2) pool = SIDE_ARTS.slice();
-      const picked = pool.slice().sort(() => Math.random() - 0.5).slice(0, 2);
-      try { sessionStorage.setItem("animeVoidLastArts", JSON.stringify(picked)); } catch (error) {}
-      return picked;
-    }
-
-    function buildSideArtElement(cls, file) {
-      const el = document.createElement("div");
-      el.className = "side-art " + cls;
-      el.innerHTML = '<img src="' + file + '" alt="" loading="lazy" onerror="this.parentElement.remove()">';
-      return el;
-    }
-
-    function renderSideArts() {
-      if (sideArtTimer) { clearInterval(sideArtTimer); sideArtTimer = null; }
-      document.querySelectorAll(".side-art").forEach(el => el.remove());
-      if (!artBannersEnabled() || window.innerWidth < 1600) return;
-      const pair = pickSideArtPair();
-      document.body.appendChild(buildSideArtElement("side-art-left", pair[0]));
-      document.body.appendChild(buildSideArtElement("side-art-right", pair[1]));
-      sideArtTimer = setInterval(rotateSideArts, 12000);
-    }
-
-    function rotateSideArts() {
-      const arts = document.querySelectorAll(".side-art");
-      if (arts.length !== 2) { renderSideArts(); return; }
-      const pair = pickSideArtPair();
-      arts.forEach(el => {
-        const img = el.querySelector("img");
-        if (img) img.style.opacity = "0";
-      });
-      setTimeout(() => {
-        const left = document.querySelector(".side-art-left");
-        const right = document.querySelector(".side-art-right");
-        if (!left || !right) return;
-        const leftImg = left.querySelector("img");
-        const rightImg = right.querySelector("img");
-        if (leftImg) { leftImg.src = pair[0]; leftImg.style.opacity = ""; }
-        if (rightImg) { rightImg.src = pair[1]; rightImg.style.opacity = ""; }
-      }, 720);
-    }
-
-    function toggleArtBanners() {
-      const enabled = artBannersEnabled();
-      try { localStorage.setItem("animeVoidArtBanners", enabled ? "off" : "on"); } catch (error) {}
-      renderSideArts();
-      closeDecorMenu();
-      setTimeout(() => { toggleDecor(); }, 40);
-    }
+    // 17.1: no side-art builders, rotation timers or setting on the profile.
     function closeDecorMenu() {
       const menu = document.querySelector(".decor-menu");
       if (menu) menu.remove();
@@ -2232,9 +2163,6 @@
         "<button type=\"button\" class=\"decor-option" + (m.id === current ? " active" : "") + "\" onclick=\"selectDecor('" + m.id + "')\"><span>" + m.icon + "</span>" + (isRussian ? m.ru : m.en) + "</button>"
       ).join("") +
         '<div class="decor-sep"></div>' +
-        '<button type="button" class="decor-option" onclick="toggleArtBanners()"><span>🖼️</span>' +
-        (isRussian ? "Боковые арты: " : "Side art: ") + (artBannersEnabled() ? (isRussian ? "вкл" : "on") : (isRussian ? "выкл" : "off")) +
-        '</button>' +
         '<button type="button" class="decor-option" onclick="toggleHolidayFireworks()"><span>🎆</span>' +
         (isRussian ? "Праздничные салюты: " : "Holiday fireworks: ") + (holidayFireworksEnabled() ? (isRussian ? "вкл" : "on") : (isRussian ? "выкл" : "off")) +
         '</button>' +
@@ -2265,13 +2193,6 @@
     }
 
     applyDecorFromStorage();
-    renderSideArts();
-    let sideArtsResizeTimer = null;
-    window.addEventListener("resize", () => {
-      clearTimeout(sideArtsResizeTimer);
-      sideArtsResizeTimer = setTimeout(renderSideArts, 250);
-    });
-
     applyThemeFromStorage();
     applySkyTint();
     setInterval(applySkyTint, 15 * 60 * 1000);

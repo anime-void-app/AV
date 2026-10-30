@@ -1,6 +1,6 @@
 /* ANIME VOID — service worker: установка как приложение + офлайн-режим */
 
-const CORE_CACHE = "av-AV-core-v13";
+const CORE_CACHE = "av-AV-core-v14";
 const IMAGE_CACHE = "av-AV-images-v2";
 const IMAGE_CACHE_LIMIT = 300;
 
@@ -10,9 +10,9 @@ const CORE_FILES = [
   "./anime.html",
   "./watch.html",
   "./profile.html",
-  "./profile-studio.css?v=17.0",
-  "./profile-studio.js?v=17.0",
-  "./profile-catalog.json?v=17.0",
+  "./profile-studio.css?v=17.1",
+  "./profile-studio.js?v=17.1",
+  "./profile-catalog.json?v=17.1",
   "./studio-config.js?v=17.0",
   "./studio/void.svg",
   "./studio/city.svg",
@@ -23,8 +23,24 @@ const CORE_FILES = [
   "./studio/ocean.svg",
   "./studio/aurora.svg",
   "./studio/library.svg",
+  "./studio/banners/neon-heart.svg",
+  "./studio/banners/moon-witch.svg",
+  "./studio/banners/sakura-muse.svg",
+  "./studio/banners/red-ronin.svg",
+  "./studio/banners/star-promise.svg",
+  "./studio/banners/sky-dragon.svg",
+  "./studio/banners/ocean-singer.svg",
+  "./studio/banners/ember-knight.svg",
+  "./studio/banners/cosmic-pilot.svg",
+  "./studio/banners/autumn-letter.svg",
+  "./studio/banners/lantern-road.svg",
+  "./studio/banners/rainy-window.svg",
+  "./studio/banners/dusk-duo.webp",
+  "./studio/banners/immortal-promise.webp",
+
 
   "./av-safety.js?v=5",
+  "./av-safety.js?v=6",
   "./av-titles.js?v=20261030-2",
   "./av-state.js?v=16",
   "./av-atmosphere.js?v=16.6",
