@@ -1,0 +1,578 @@
+[
+  {
+    "id": "healer",
+    "name": [
+      "Земли целителя",
+      "Healer lands"
+    ],
+    "asset": "studio/atelier/healer.webp",
+    "thumb": "studio/atelier/healer-thumb.webp",
+    "author": "David Revoy",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "source": "https://www.peppercarrot.com/0_sources/0ther/wallpapers/hi-res/2023-04-26_Episode-38-The-Healer-landscape_by-David-Revoy.jpg",
+    "sourcePage": "https://www.peppercarrot.com/en/wallpapers/index.html",
+    "originalSize": [
+      4200,
+      2625
+    ],
+    "size": [
+      2560,
+      1600
+    ],
+    "sourceSha256": "3badaea591acb4069e07c6c5d3a6f6791cfb3cad37f038b1d2ac9aea578505db",
+    "modifications": "Resized and WebP-encoded; display crops adjustable by user."
+  },
+  {
+    "id": "savepoint",
+    "name": [
+      "Дуэль волшебниц",
+      "Witch duel"
+    ],
+    "asset": "studio/atelier/savepoint.webp",
+    "thumb": "studio/atelier/savepoint-thumb.webp",
+    "author": "David Revoy",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "source": "https://www.peppercarrot.com/0_sources/0ther/wallpapers/hi-res/2018-05-22_Episode-25-page-7_by-David-Revoy.jpg",
+    "sourcePage": "https://www.peppercarrot.com/en/wallpapers/index.html",
+    "originalSize": [
+      2560,
+      1600
+    ],
+    "size": [
+      2560,
+      1600
+    ],
+    "sourceSha256": "e0b386738e0ba9648f28c850d8113a0a9efd6111d93c296c2a4ae564e40085e1",
+    "modifications": "Resized and WebP-encoded; display crops adjustable by user."
+  },
+  {
+    "id": "rain",
+    "name": [
+      "После дождя",
+      "After rain"
+    ],
+    "asset": "studio/atelier/rain.webp",
+    "thumb": "studio/atelier/rain-thumb.webp",
+    "author": "David Revoy",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "source": "https://www.peppercarrot.com/0_sources/0ther/wallpapers/hi-res/2023-01-09_The-after-rain-smell_by-David-Revoy.jpg",
+    "sourcePage": "https://www.peppercarrot.com/en/wallpapers/index.html",
+    "originalSize": [
+      3840,
+      2047
+    ],
+    "size": [
+      2560,
+      1365
+    ],
+    "sourceSha256": "1ae67b08013f4e52bb992224bb9bd3eee674b72f5d77d1abee02691565537e31",
+    "modifications": "Resized and WebP-encoded; display crops adjustable by user."
+  },
+  {
+    "id": "horizon",
+    "name": [
+      "За горизонтом",
+      "Beyond the horizon"
+    ],
+    "asset": "studio/atelier/horizon.webp",
+    "thumb": "studio/atelier/horizon-thumb.webp",
+    "author": "David Revoy",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "source": "https://www.peppercarrot.com/0_sources/0ther/wallpapers/hi-res/2022-12-18_Point-of-View_by-David-Revoy.jpg",
+    "sourcePage": "https://www.peppercarrot.com/en/wallpapers/index.html",
+    "originalSize": [
+      3840,
+      2047
+    ],
+    "size": [
+      2560,
+      1365
+    ],
+    "sourceSha256": "7fe56fd1c7ddbd557e5921f3772c1ea55c8fef91839d24873189b514c2862684",
+    "modifications": "Resized and WebP-encoded; display crops adjustable by user."
+  },
+  {
+    "id": "raincity",
+    "name": [
+      "Город дождя",
+      "Rain city"
+    ],
+    "asset": "studio/atelier/raincity.webp",
+    "thumb": "studio/atelier/raincity-thumb.webp",
+    "author": "David Revoy",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "source": "https://www.peppercarrot.com/0_sources/0ther/wallpapers/hi-res/2022-12-06_Rain-City_by-David-Revoy.jpg",
+    "sourcePage": "https://www.peppercarrot.com/en/wallpapers/index.html",
+    "originalSize": [
+      3840,
+      2047
+    ],
+    "size": [
+      2560,
+      1365
+    ],
+    "sourceSha256": "0067099d1121e269b3a6f9dab0b803a90b28fd3bb0fbb30a1ccb060ff67ef1d3",
+    "modifications": "Resized and WebP-encoded; display crops adjustable by user."
+  },
+  {
+    "id": "dream",
+    "name": [
+      "Хранительница снов",
+      "Dream keeper"
+    ],
+    "asset": "studio/atelier/dream.webp",
+    "thumb": "studio/atelier/dream-thumb.webp",
+    "author": "David Revoy",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "source": "https://www.peppercarrot.com/0_sources/0ther/wallpapers/hi-res/2022-06-30_Asleep_by-David-Revoy.jpg",
+    "sourcePage": "https://www.peppercarrot.com/en/wallpapers/index.html",
+    "originalSize": [
+      3669,
+      2019
+    ],
+    "size": [
+      2560,
+      1409
+    ],
+    "sourceSha256": "788176eaf97e98b5a1e9154a22238110d786d7af7269134d53e6f63bdae5e96a",
+    "modifications": "Resized and WebP-encoded; display crops adjustable by user."
+  },
+  {
+    "id": "council",
+    "name": [
+      "Совет чародеек",
+      "Witch council"
+    ],
+    "asset": "studio/atelier/council.webp",
+    "thumb": "studio/atelier/council-thumb.webp",
+    "author": "David Revoy",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "source": "https://www.peppercarrot.com/0_sources/0ther/wallpapers/hi-res/2022-05-31_Episode-37-page-1_by-David-Revoy.jpg",
+    "sourcePage": "https://www.peppercarrot.com/en/wallpapers/index.html",
+    "originalSize": [
+      3840,
+      2400
+    ],
+    "size": [
+      2560,
+      1600
+    ],
+    "sourceSha256": "1881da8aab6476e566f44ad91b0ef9b3cf8baa73909776d7138f32d2a92ac1fb",
+    "modifications": "Resized and WebP-encoded; display crops adjustable by user."
+  },
+  {
+    "id": "market",
+    "name": [
+      "Рынок чудес",
+      "Market of wonders"
+    ],
+    "asset": "studio/atelier/market.webp",
+    "thumb": "studio/atelier/market-thumb.webp",
+    "author": "David Revoy",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "source": "https://www.peppercarrot.com/0_sources/0ther/wallpapers/hi-res/2022-02-21_The-market_by-David-Revoy.jpg",
+    "sourcePage": "https://www.peppercarrot.com/en/wallpapers/index.html",
+    "originalSize": [
+      5689,
+      3200
+    ],
+    "size": [
+      2560,
+      1440
+    ],
+    "sourceSha256": "63ade69b863f1a35afc37fcc0ef8423d2bd1a9d05c7688d59b549115cbc50816",
+    "modifications": "Resized and WebP-encoded; display crops adjustable by user."
+  },
+  {
+    "id": "temple",
+    "name": [
+      "Храм тишины",
+      "Temple of silence"
+    ],
+    "asset": "studio/atelier/temple.webp",
+    "thumb": "studio/atelier/temple-thumb.webp",
+    "author": "David Revoy",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "source": "https://www.peppercarrot.com/0_sources/0ther/wallpapers/hi-res/2021-12-15_Episode-36-The-temple-of-Ah_by-David-Revoy.jpg",
+    "sourcePage": "https://www.peppercarrot.com/en/wallpapers/index.html",
+    "originalSize": [
+      4200,
+      2625
+    ],
+    "size": [
+      2560,
+      1600
+    ],
+    "sourceSha256": "e06eed9fb6f586489eea326caf5f06b7ddc33bf0c1987afa004e3bdabf50fdd6",
+    "modifications": "Resized and WebP-encoded; display crops adjustable by user."
+  },
+  {
+    "id": "treasure",
+    "name": [
+      "Забытое сокровище",
+      "Forgotten treasure"
+    ],
+    "asset": "studio/atelier/treasure.webp",
+    "thumb": "studio/atelier/treasure-thumb.webp",
+    "author": "David Revoy",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "source": "https://www.peppercarrot.com/0_sources/0ther/wallpapers/hi-res/2021-08-28_The-Treasure_by-David-Revoy.jpg",
+    "sourcePage": "https://www.peppercarrot.com/en/wallpapers/index.html",
+    "originalSize": [
+      4200,
+      2625
+    ],
+    "size": [
+      2560,
+      1600
+    ],
+    "sourceSha256": "20b048a68dd13ae50f654635628ef477bb4b539af3152759da225ab5f8ec3354",
+    "modifications": "Resized and WebP-encoded; display crops adjustable by user."
+  },
+  {
+    "id": "cottage",
+    "name": [
+      "Дом на краю леса",
+      "Forest cottage"
+    ],
+    "asset": "studio/atelier/cottage.webp",
+    "thumb": "studio/atelier/cottage-thumb.webp",
+    "author": "David Revoy",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "source": "https://www.peppercarrot.com/0_sources/0ther/wallpapers/hi-res/2021-05-19_Spooky-Cute-House_by-David-Revoy.jpg",
+    "sourcePage": "https://www.peppercarrot.com/en/wallpapers/index.html",
+    "originalSize": [
+      3510,
+      1740
+    ],
+    "size": [
+      2560,
+      1269
+    ],
+    "sourceSha256": "2e15776959edbfec298004012dbe9138b7ee3e333257871ce28551bd99150432",
+    "modifications": "Resized and WebP-encoded; display crops adjustable by user."
+  },
+  {
+    "id": "fairytree",
+    "name": [
+      "Древо фей",
+      "Fairy tree"
+    ],
+    "asset": "studio/atelier/fairytree.webp",
+    "thumb": "studio/atelier/fairytree-thumb.webp",
+    "author": "David Revoy",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "source": "https://www.peppercarrot.com/0_sources/0ther/wallpapers/hi-res/2020-12-21_The-fairy-fir-tree_by-David-Revoy.jpg",
+    "sourcePage": "https://www.peppercarrot.com/en/wallpapers/index.html",
+    "originalSize": [
+      2560,
+      1600
+    ],
+    "size": [
+      2560,
+      1600
+    ],
+    "sourceSha256": "c40c28ef18ca44de76a4edbf13d5553cd0e8d5e179d924aec057661ebad96355",
+    "modifications": "Resized and WebP-encoded; display crops adjustable by user."
+  },
+  {
+    "id": "autumn",
+    "name": [
+      "Осенний полёт",
+      "Autumn flight"
+    ],
+    "asset": "studio/atelier/autumn.webp",
+    "thumb": "studio/atelier/autumn-thumb.webp",
+    "author": "David Revoy",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "source": "https://www.peppercarrot.com/0_sources/0ther/wallpapers/hi-res/2020-09-06_Autumn-Run_by-David-Revoy.jpg",
+    "sourcePage": "https://www.peppercarrot.com/en/wallpapers/index.html",
+    "originalSize": [
+      4032,
+      2526
+    ],
+    "size": [
+      2554,
+      1600
+    ],
+    "sourceSha256": "4b703ab5d5d8ea8aa9918b0b6fe60b612309d63b227ff15209be206a0a959e5c",
+    "modifications": "Resized and WebP-encoded; display crops adjustable by user."
+  },
+  {
+    "id": "sunrise",
+    "name": [
+      "Утро в волшебном мире",
+      "Magic morning"
+    ],
+    "asset": "studio/atelier/sunrise.webp",
+    "thumb": "studio/atelier/sunrise-thumb.webp",
+    "author": "David Revoy",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "source": "https://www.peppercarrot.com/0_sources/0ther/wallpapers/hi-res/2020-08-07_Episode-27-page-1_by-David-Revoy.jpg",
+    "sourcePage": "https://www.peppercarrot.com/en/wallpapers/index.html",
+    "originalSize": [
+      2560,
+      1600
+    ],
+    "size": [
+      2560,
+      1600
+    ],
+    "sourceSha256": "6418c5f736430360d38443db2c9b1474429f5d3b5519656c124298e43611c132",
+    "modifications": "Resized and WebP-encoded; display crops adjustable by user."
+  },
+  {
+    "id": "unity",
+    "name": [
+      "Дерево единства",
+      "Unity tree"
+    ],
+    "asset": "studio/atelier/unity.webp",
+    "thumb": "studio/atelier/unity-thumb.webp",
+    "author": "David Revoy",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "source": "https://www.peppercarrot.com/0_sources/0ther/wallpapers/hi-res/2019-12-09_Unity-tree_by-David-Revoy.jpg",
+    "sourcePage": "https://www.peppercarrot.com/en/wallpapers/index.html",
+    "originalSize": [
+      4200,
+      2625
+    ],
+    "size": [
+      2560,
+      1600
+    ],
+    "sourceSha256": "cd0f2d60bdbf632467678b2fd5b277c43cab750e5198d492911de2771ac65af3",
+    "modifications": "Resized and WebP-encoded; display crops adjustable by user."
+  },
+  {
+    "id": "storm",
+    "name": [
+      "Над облаками",
+      "Above the clouds"
+    ],
+    "asset": "studio/atelier/storm.webp",
+    "thumb": "studio/atelier/storm-thumb.webp",
+    "author": "David Revoy",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "source": "https://www.peppercarrot.com/0_sources/0ther/wallpapers/hi-res/2019-07-20_Episode-30-page-1_by-David-Revoy.jpg",
+    "sourcePage": "https://www.peppercarrot.com/en/wallpapers/index.html",
+    "originalSize": [
+      2560,
+      1600
+    ],
+    "size": [
+      2560,
+      1600
+    ],
+    "sourceSha256": "4aa35d62d31e35bc42060e72f9a0df53b7632130a4404a49c8989a022bcb92fd",
+    "modifications": "Resized and WebP-encoded; display crops adjustable by user."
+  },
+  {
+    "id": "moon",
+    "name": [
+      "Секреты чародеек",
+      "Witch secrets"
+    ],
+    "asset": "studio/atelier/moon.webp",
+    "thumb": "studio/atelier/moon-thumb.webp",
+    "author": "David Revoy",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "source": "https://www.peppercarrot.com/0_sources/0ther/wallpapers/hi-res/2019-04-25_Episode-29-page-1_by-David-Revoy.jpg",
+    "sourcePage": "https://www.peppercarrot.com/en/wallpapers/index.html",
+    "originalSize": [
+      2560,
+      1600
+    ],
+    "size": [
+      2560,
+      1600
+    ],
+    "sourceSha256": "2b6012cb1c13c550648b1a53c59373c9eb748d5a55654d0d8021ddce4941e15d",
+    "modifications": "Resized and WebP-encoded; display crops adjustable by user."
+  },
+  {
+    "id": "forest",
+    "name": [
+      "Лесная тропа",
+      "Forest path"
+    ],
+    "asset": "studio/atelier/forest.webp",
+    "thumb": "studio/atelier/forest-thumb.webp",
+    "author": "David Revoy",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "source": "https://www.peppercarrot.com/0_sources/0ther/wallpapers/hi-res/2018-07-04_Episode-26-page-1_by-David-Revoy.jpg",
+    "sourcePage": "https://www.peppercarrot.com/en/wallpapers/index.html",
+    "originalSize": [
+      2560,
+      1600
+    ],
+    "size": [
+      2560,
+      1600
+    ],
+    "sourceSha256": "64a87378befe26d12b7ee483c2c165e2bb4918041b6517182ff79e5d131fff74",
+    "modifications": "Resized and WebP-encoded; display crops adjustable by user."
+  },
+  {
+    "id": "komona",
+    "name": [
+      "Закат над Комоной",
+      "Komona sunset"
+    ],
+    "asset": "studio/atelier/komona.webp",
+    "thumb": "studio/atelier/komona-thumb.webp",
+    "author": "David Revoy",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "source": "https://www.peppercarrot.com/0_sources/0ther/wallpapers/hi-res/2018-06-03_Komona-sunset_by-David-Revoy.jpg",
+    "sourcePage": "https://www.peppercarrot.com/en/wallpapers/index.html",
+    "originalSize": [
+      2560,
+      1600
+    ],
+    "size": [
+      2560,
+      1600
+    ],
+    "sourceSha256": "7b1d0a18c0e005c7f3bb8f3e799314dff82956dcafae2a939ff65a08afe96399",
+    "modifications": "Resized and WebP-encoded; display crops adjustable by user."
+  },
+  {
+    "id": "meeting",
+    "name": [
+      "Встреча на закате",
+      "Sunset rendezvous"
+    ],
+    "asset": "studio/atelier/meeting.webp",
+    "thumb": "studio/atelier/meeting-thumb.webp",
+    "author": "David Revoy",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "source": "https://www.peppercarrot.com/0_sources/0ther/wallpapers/hi-res/2018-03-30_The-rendezvous_by-David-Revoy.jpg",
+    "sourcePage": "https://www.peppercarrot.com/en/wallpapers/index.html",
+    "originalSize": [
+      4200,
+      2625
+    ],
+    "size": [
+      2560,
+      1600
+    ],
+    "sourceSha256": "95d0490636afcfa41c155b69e27b7525d07ea8c1cbbed9044d6f7839195c3cc9",
+    "modifications": "Resized and WebP-encoded; display crops adjustable by user."
+  },
+  {
+    "id": "micro",
+    "name": [
+      "Карманная вселенная",
+      "Pocket universe"
+    ],
+    "asset": "studio/atelier/micro.webp",
+    "thumb": "studio/atelier/micro-thumb.webp",
+    "author": "David Revoy",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "source": "https://www.peppercarrot.com/0_sources/0ther/wallpapers/hi-res/2017-12-13_The-micro-dimension_by-David-Revoy.jpg",
+    "sourcePage": "https://www.peppercarrot.com/en/wallpapers/index.html",
+    "originalSize": [
+      2560,
+      1600
+    ],
+    "size": [
+      2560,
+      1600
+    ],
+    "sourceSha256": "fb7a732454b6ff4120d6e0e5095dda48fb6d0c8fc07384affb63789041341339",
+    "modifications": "Resized and WebP-encoded; display crops adjustable by user."
+  },
+  {
+    "id": "pepper",
+    "name": [
+      "Сила волшебницы",
+      "Witch power"
+    ],
+    "asset": "studio/atelier/pepper.webp",
+    "thumb": "studio/atelier/pepper-thumb.webp",
+    "author": "David Revoy",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "source": "https://www.peppercarrot.com/0_sources/0ther/wallpapers/hi-res/2016-12-04_Episode-7_by-David-Revoy.jpg",
+    "sourcePage": "https://www.peppercarrot.com/en/wallpapers/index.html",
+    "originalSize": [
+      2560,
+      1600
+    ],
+    "size": [
+      2560,
+      1600
+    ],
+    "sourceSha256": "8fdc390ae839ebe4a002af081c4a787981234e60e1f7ce4733e1f10287cc8847",
+    "modifications": "Resized and WebP-encoded; display crops adjustable by user."
+  },
+  {
+    "id": "snow",
+    "name": [
+      "Снежные ангелы",
+      "Snow angels"
+    ],
+    "asset": "studio/atelier/snow.webp",
+    "thumb": "studio/atelier/snow-thumb.webp",
+    "author": "David Revoy",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "source": "https://www.peppercarrot.com/0_sources/0ther/wallpapers/hi-res/2016-12-04_Snow-Angels_by-David-Revoy.jpg",
+    "sourcePage": "https://www.peppercarrot.com/en/wallpapers/index.html",
+    "originalSize": [
+      2560,
+      1600
+    ],
+    "size": [
+      2560,
+      1600
+    ],
+    "sourceSha256": "934fa11733cf5cfbc1fc2c7021be34e6071ab33c2c13b9be63c0befa86a3b5ff",
+    "modifications": "Resized and WebP-encoded; display crops adjustable by user."
+  },
+  {
+    "id": "shichimi",
+    "name": [
+      "Пеппер и Кэррот",
+      "Pepper and Carrot"
+    ],
+    "asset": "studio/atelier/shichimi.webp",
+    "thumb": "studio/atelier/shichimi-thumb.webp",
+    "author": "David Revoy",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "source": "https://www.peppercarrot.com/0_sources/0ther/wallpapers/hi-res/2016-12-04_Second-cover_by-David-Revoy.jpg",
+    "sourcePage": "https://www.peppercarrot.com/en/wallpapers/index.html",
+    "originalSize": [
+      2560,
+      1600
+    ],
+    "size": [
+      2560,
+      1600
+    ],
+    "sourceSha256": "c416e94669dee7dc16c639bb8afdf7d2ebf86736297ee0eca7c78e96d277b785",
+    "modifications": "Resized and WebP-encoded; display crops adjustable by user."
+  }
+]
