@@ -132,3 +132,6 @@ body.av-detail #pageBg.bg-blurred{filter:brightness(.7) blur(1.5px);transform:sc
 
 /* 16.4.1: restore soft backdrop blur; never blur the foreground poster. */
 body.av-detail #pageBg,body.av-detail #pageBg.bg-blurred{filter:brightness(.65) blur(14px);transform:scale(1.07)}
+
+/* 16.5: moderate blur between the sharp and heavily blurred versions. */
+body.av-detail #pageBg,body.av-detail #pageBg.bg-blurred{filter:brightness(.65) blur(6px);transform:scale(1.04)}

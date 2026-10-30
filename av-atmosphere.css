@@ -20,3 +20,5 @@
 @media(prefers-reduced-motion:reduce){.decor-canvas{display:none!important}}
 
 @media(max-width:760px){body.av-home header{grid-template-columns:minmax(0,1fr) 44px 44px 44px}.av-home header #avAmbienceToggle{grid-column:3;grid-row:1}.av-home header .av-menu-toggle{grid-column:4;grid-row:1}}
+
+.av-audio-credits{display:inline-flex;align-items:center;min-height:44px;color:var(--av-accent);font-size:12px;line-height:1.5;text-underline-offset:3px}

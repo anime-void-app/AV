@@ -514,14 +514,14 @@
   </style>
   <link rel="stylesheet" href="av-enhancements.css?v=1">
   <script src="av-enhancements.js?v=1" defer></script>
-  <script src="av-safety.js?v=3"></script>
+  <script src="av-safety.js?v=4"></script>
   <script src="av-state.js?v=16"></script>
   <script src="av-titles.js?v=20261030-2"></script>
   <script>window.AVTitles=window.AVTitles||{russian:()=>'',display:(x,l)=>(l==='en'?x?.titleEnglish:'')||x?.title||'',normalize:v=>String(v||'').toLowerCase().trim(),plan:q=>({variants:[String(q||'').toLowerCase()],ids:[],terms:[],correction:''}),match:(x,q)=>[x.title,x.titleEnglish,x.titleRomaji,x.titleNative].some(v=>String(v||'').toLowerCase().includes(String(q||'').toLowerCase())),score:()=>0,count:0};</script>
-  <link rel="stylesheet" href="av-design.css?v=16.4.1">
-  <script src="av-design.js?v=16.4" defer></script>
-  <link rel="stylesheet" href="av-atmosphere.css?v=16.4">
-  <script src="av-atmosphere.js?v=16.4" defer></script>
+  <link rel="stylesheet" href="av-design.css?v=16.5">
+  <script src="av-design.js?v=16.5" defer></script>
+  <link rel="stylesheet" href="av-atmosphere.css?v=16.5">
+  <script src="av-atmosphere.js?v=16.5" defer></script>
 </head>
 <body class="av-shell">
   <header>
@@ -1709,7 +1709,11 @@
       { id: "cursor", icon: "🖱️", ru: "Блёстки за курсором", en: "Cursor sparkles" },
       { id: "rain", icon: "🌧️", ru: "Дождик", en: "Rain" },
       { id: "fireflies", icon: "🟡", ru: "Светлячки", en: "Fireflies" },
-      { id: "autumn", icon: "🍂", ru: "Осенние листья", en: "Autumn leaves" }
+      { id: "autumn", icon: "🍂", ru: "Осенние листья", en: "Autumn leaves" },
+      { id: "bubbles", icon: "🫧", ru: "Воздушные пузыри", en: "Floating bubbles" },
+      { id: "meteors", icon: "☄️", ru: "Метеоры", en: "Meteors" },
+      { id: "dandelions", icon: "🌾", ru: "Пух одуванчиков", en: "Dandelion seeds" },
+      { id: "bokeh", icon: "🔮", ru: "Мягкое боке", en: "Soft bokeh" }
     ];
     let decorCanvas = null;
     let decorCtx = null;
@@ -1732,6 +1736,11 @@
     }
 
     function spawnDecorParticle(mode, w, h) {
+      if(mode === "bubbles")return {type:"bubble",x:Math.random()*w,y:h+28,size:6+Math.random()*11,vy:-.5-Math.random()*.65,vx:-.12+Math.random()*.24,sway:Math.random()*6.28,swaySpeed:.012,color:"#b5d8f2",alpha:.22};
+      if(mode === "meteors")return {type:"meteor",x:Math.random()*w+40,y:Math.random()*h*.6,size:24+Math.random()*22,vy:2.2,vx:-5.5,sway:0,swaySpeed:0,color:"#d3c0ff",alpha:.38};
+      if(mode === "dandelions")return {type:"dandelion",x:Math.random()*w,y:h+22,size:5+Math.random()*4,vy:-.45-Math.random()*.45,vx:.15,sway:Math.random()*6.28,swaySpeed:.013,rot:Math.random(),vr:.006,color:"#f1ebd6",alpha:.5};
+      if(mode === "bokeh")return {type:"bokeh",x:Math.random()*w,y:Math.random()*h,size:16+Math.random()*25,vy:-.06,vx:-.05+Math.random()*.1,sway:Math.random()*6.28,swaySpeed:.006,color:Math.random()>.5?"#b8a0ee":"#9bcde8",alpha:.11};
+
       if(mode === "rain")return {type:"rain",x:Math.random()*w,y:-24-Math.random()*20,size:13+Math.random()*12,vy:9+Math.random()*8,vx:-1.1,sway:0,swaySpeed:.001,color:"#aacbe5",alpha:.22+Math.random()*.22};
       if(mode === "fireflies")return {type:"firefly",x:Math.random()*w,y:Math.random()*h,size:2+Math.random()*1.7,vy:-.08+Math.random()*.16,vx:-.15+Math.random()*.3,sway:Math.random()*6.28,swaySpeed:.009,color:"#e7e58b",alpha:.6,twinkle:Math.random()*6.28};
       if(mode === "autumn")return {type:"leaf",x:Math.random()*w,y:-25-Math.random()*20,size:6+Math.random()*6,vy:.65+Math.random()*.95,vx:.2+Math.random()*.6,rot:Math.random()*6.28,vr:-.018+Math.random()*.036,sway:Math.random()*6.28,swaySpeed:.016,color:["#dba24a","#bd6a3e","#da8050"][Math.floor(Math.random()*3)],alpha:.65};
@@ -1780,7 +1789,15 @@
       ctx.globalAlpha = p.alpha;
       ctx.translate(p.x, p.y);
       ctx.fillStyle = p.color;
-      if(p.type === "rain"){
+      if(p.type === "bubble"){
+        ctx.strokeStyle=p.color;ctx.lineWidth=.8;ctx.beginPath();ctx.arc(0,0,p.size,0,Math.PI*2);ctx.stroke();ctx.beginPath();ctx.arc(-p.size*.15,-p.size*.15,p.size*.65,Math.PI*1.05,Math.PI*1.55);ctx.stroke();
+      }else if(p.type === "meteor"){
+        const tail=ctx.createLinearGradient(0,0,p.size,-p.size*.4);tail.addColorStop(0,p.color);tail.addColorStop(1,"rgba(211,192,255,0)");ctx.strokeStyle=tail;ctx.lineWidth=1.2;ctx.beginPath();ctx.moveTo(0,0);ctx.lineTo(p.size,-p.size*.4);ctx.stroke();
+      }else if(p.type === "dandelion"){
+        ctx.rotate(p.rot);ctx.strokeStyle=p.color;ctx.lineWidth=.7;ctx.beginPath();ctx.moveTo(0,p.size*1.8);ctx.lineTo(0,0);for(let a=0;a<7;a++){const angle=Math.PI+a*Math.PI/6;ctx.moveTo(0,0);ctx.lineTo(Math.cos(angle)*p.size,Math.sin(angle)*p.size);}ctx.stroke();
+      }else if(p.type === "bokeh"){
+        const halo=ctx.createRadialGradient(0,0,0,0,0,p.size);halo.addColorStop(0,p.color);halo.addColorStop(.55,p.color);halo.addColorStop(1,"rgba(160,160,220,0)");ctx.fillStyle=halo;ctx.beginPath();ctx.arc(0,0,p.size,0,Math.PI*2);ctx.fill();
+      }else if(p.type === "rain"){
         ctx.strokeStyle=p.color;ctx.lineWidth=.85;ctx.beginPath();ctx.moveTo(0,0);ctx.lineTo(2,-p.size);ctx.stroke();
       }else if(p.type === "firefly"){
         const glow=ctx.createRadialGradient(0,0,0,0,0,p.size*3);glow.addColorStop(0,"#fffbc4");glow.addColorStop(.25,p.color);glow.addColorStop(1,"rgba(231,229,139,0)");ctx.fillStyle=glow;ctx.beginPath();ctx.arc(0,0,p.size*3,0,Math.PI*2);ctx.fill();
@@ -1846,7 +1863,7 @@
       ctx.clearRect(0, 0, w, h);
       const mode = currentDecorId();
       if (mode === "off") return;
-      const target = mode === "rain" ? (innerWidth<761?54:84) : mode === "fireflies" ? 22 : mode === "autumn" ? 28 : mode === "sakura" ? 42 : mode === "snow" ? 70 : mode === "stars" ? 34 : mode === "cursor" ? 0 : 26;
+      const target = mode === "bubbles" ? 16 : mode === "meteors" ? 5 : mode === "dandelions" ? 22 : mode === "bokeh" ? 12 : mode === "rain" ? (innerWidth<761?54:84) : mode === "fireflies" ? 22 : mode === "autumn" ? 28 : mode === "sakura" ? 42 : mode === "snow" ? 70 : mode === "stars" ? 34 : mode === "cursor" ? 0 : 26;
       if (decorParticles.length < target && now - decorLastSpawn > (mode === "rain" ? 18 : 90)) {
         const particle = spawnDecorParticle(mode, w, h);
         if (particle) {
