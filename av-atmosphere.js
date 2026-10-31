@@ -1,5 +1,7 @@
 /* ANIME VOID v18 — seven attributed real field recordings; no synthesis, autoplay or microphone. */
 (()=>{'use strict';
+try{if(parent!==window&&parent.location.origin===location.origin&&parent.AVSoundShell){const header=document.querySelector('header');if(header){const b=document.createElement('button');b.id='avAmbienceToggle';b.className='theme-toggle av-ambience-toggle';b.type='button';b.textContent='🎧';b.setAttribute('aria-label','Звуки для отдыха');b.onclick=()=>parent.AVSoundShell.openAudio();(header.querySelector('.header-actions')||header).append(b);}document.addEventListener('play',e=>{if(e.target instanceof HTMLMediaElement&&!e.target.muted&&e.target.volume>0)parent.AVSoundShell.stopForMedia();},true);return;}}catch{}
+
 const KEY='animeVoidAmbience',modes=[['train','🚆','Поезд · линия Дзёбан','Train · Joban Line'],['hokkaido','🚃','Поезд · Хоккайдо','Train · Hokkaido'],['japan-rain','🌧️','Дождь · Япония','Rain · Japan'],['rain-wind','🌬️','Дождь и ветер · Лондон','Rain and wind · London'],['stream','💧','Ручей рядом','Nearby stream'],['night-forest','🌲','Ночной лес · Мёдлинг','Night forest · Mödling'],['forest-water','🏞️','Лесной ручей · Канада','Forest stream · Canada']];
 const recordings=Object.fromEntries(modes.map(m=>[m[0],'audio/'+m[0]+'-v18.mp3']));
 const decoded=new Map();let download=null;
@@ -65,7 +67,7 @@ function paint(){
  panel.querySelector('#avAmbienceVolumeLabel').textContent=ru()?'Громкость':'Volume';panel.querySelector('#avAmbienceVolume').value=String(Math.round(prefs.volume*100));panel.querySelector('output').textContent=Math.round(prefs.volume*100)+'%';
  const play=panel.querySelector('#avAmbiencePlay');play.disabled=false;play.setAttribute('aria-busy',String(busy));play.textContent=busy?(ru()?'✕ Отменить загрузку':'✕ Cancel loading'):playing?(ru()?'⏸ Выключить':'⏸ Stop'):(ru()?'▶ Включить':'▶ Play');play.setAttribute('aria-pressed',String(playing));
  panel.querySelector('#avAmbienceClose').textContent=ru()?'Закрыть':'Close';
- panel.querySelector('.av-ambience-note').textContent=ru()?'Запись загружается при первом включении; офлайн доступна, если сохранена и браузер не очистил кэш. Звук включается только тобой. При переходе на другую страницу или сворачивании он останавливается — запусти снова, когда захочешь.':'Recordings download on first play; offline playback requires a retained cached copy. Audio starts only when you choose. Navigation or hiding the app stops playback; press Play again whenever you want.';
+ panel.querySelector('.av-ambience-note').textContent=ru()?'Запись загружается при первом включении; офлайн доступна, если сохранена и браузер не очистил кэш. Звук включается только тобой. При обычных переходах внутри сайта плеер сохраняется. Перезагрузка, новая вкладка или ограничения телефона могут прервать звук. Для остановки нажми «Выключить».':'Recordings download on first play; offline playback requires a retained cached copy. Audio starts only when you choose. Internal navigation preserves the player. Reloading, a new tab or operating-system restrictions may interrupt audio.';
  const credits=panel.querySelector('.av-audio-credits');credits.textContent=ru()?'Источники и лицензии записей':'Recording sources and licenses';credits.href='audio-sources.html'+(recordings[prefs.sound]?'#'+prefs.sound:'');
  panel.querySelector('.av-ambience-status').textContent=message||(playing?(prefs.volume===0?(ru()?'Включено, громкость 0%.':'Playing at 0% volume.'):(ru()?'Играет: ':'Playing: ')+(ru()?modes.find(m=>m[0]===prefs.sound)[2]:modes.find(m=>m[0]===prefs.sound)[3])):(ru()?'Сейчас выключено':'Currently off'));
 }
@@ -82,11 +84,11 @@ function open(){
  panel.addEventListener('close',()=>{panel.remove();panel=null;button.setAttribute('aria-expanded','false');(invoker?.checkVisibility?.()?invoker:header.querySelector(".av-menu-toggle"))?.focus({preventScroll:true});});
  paint();document.body.append(panel);button.setAttribute('aria-expanded','true');panel.showModal();
 }
-button.onclick=open;
+window.AVAmbience={active:()=>playing||busy,open,stopForMedia:()=>{if(playing||busy)stop(ru()?'Фон выключен, чтобы не мешать видео.':'Ambience stopped for video.');},debug:()=>({playing,busy,operation,state:context?.state})};button.onclick=open;
 new MutationObserver(labels).observe(document.documentElement,{attributes:true,attributeFilter:['lang']});
-document.addEventListener('visibilitychange',()=>{if(document.hidden&&(playing||busy))stop();});
+// Background playback remains active; the OS may still suspend audio.
 addEventListener('pagehide',()=>stop());
-document.addEventListener('play',e=>{if(e.target instanceof HTMLMediaElement&&(playing||busy))stop(ru()?'Фон выключен, чтобы не мешать видео.':'Ambience stopped so it does not interfere with video.');},true);
+document.addEventListener('play',e=>{if(e.target instanceof HTMLMediaElement&&!e.target.muted&&e.target.volume>0&&(playing||busy))stop(ru()?'Фон выключен, чтобы не мешать видео.':'Ambience stopped so it does not interfere with video.');},true);
 addEventListener('storage',e=>{if(e.key===KEY){stop();read();labels();}});
 matchMedia('(forced-colors: active)').addEventListener('change',()=>window.applyDecorFromStorage?.());
 const motion=matchMedia('(prefers-reduced-motion: reduce)');motion.addEventListener('change',()=>{if(typeof window.applyDecorFromStorage==='function')window.applyDecorFromStorage();});

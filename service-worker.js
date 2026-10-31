@@ -1,18 +1,19 @@
 /* ANIME VOID — service worker: установка как приложение + офлайн-режим */
 
-const CORE_CACHE = "av-AV-core-v18.1.2-gift";
+const CORE_CACHE = "av-AV-core-v19-profile";
 const IMAGE_CACHE = "av-AV-images-v3";
 const IMAGE_CACHE_LIMIT = 80;
 const AUDIO_CACHE = "av-AV-audio-v1";
 const LICENSED_AUDIO = {"audio/japan-rain-v18.mp3": "e8adbedb517c7c30837ac4046dd9d1df3bfc6f98b53e6730af3b07d45b6e9220", "audio/night-forest-v18.mp3": "97a6b3e8973636796c9dd5821b827c94ddcdf6bf33f997ad639e2f6fad3d674b", "audio/train-v18.mp3": "c9dd82787d3846c17cde46b2f8d7b0dba4055d12c35557d26a830f88e483bfe1", "audio/hokkaido-v18.mp3": "8e1678c2f3b594303658e9d60e208cd8be90a5256f948ed1b205457ac53a04ea", "audio/rain-wind-v18.mp3": "f8250ba7c86da6a1acdda757b099beb01e37e1ec64b68f2fa33fc17e8f1028fb", "audio/stream-v18.mp3": "ecbf0faa79d994eb2e975a65684e346d5b428b94e0a91f8735bacf93cf521e68", "audio/forest-water-v18.mp3": "d46547199952e9d64c32a42db23a49511f8d45b3cffad2a6165b2395e31bd8f7"};
 
 
-const NEW_CORE = ["./void-legacy-layout.css?v=18.1","./void-title-layout.css?v=18.1","./void-watch-layout.css?v=18.1","./void-community-layout.css?v=18.1","./void-profile-layout.css?v=18.1","./void-display-charts.js?v=18.1","./void-display-charts.css?v=18.1","./eras.html","./void-eras.js?v=18.1","./void-eras.css?v=18.1","./collections.html","./void-collections.js?v=18.1","./void-collections.css?v=18.1","./void-evolution.js?v=18.1","./void-evolution.css?v=18.1","./taste.html","./void-taste.js?v=18.1","./void-taste.css?v=18.1","./explore.html","./void-explore.js?v=18.1","./void-explore.css?v=18.1","./secrets.html","./void-secrets.js?v=18.1","./void-secrets.css?v=18.1","./festivals.html","./void-festivals.js?v=18.1","./void-festivals.css?v=18.1","./studios.html","./void-studios.js?v=18.1","./void-studios-data.js?v=18.1","./void-studios.css?v=18.1","./music.html","./void-music.js?v=18.1","./void-music.css?v=18.1","./story-dna.html","./void-story-dna.js?v=18.1","./void-story-dna.css?v=18.1","./anime-a-silent-voice.html","./anime-attack-on-titan.html","./anime-bakemonogatari.html","./anime-death-note.html","./anime-demon-slayer.html","./anime-hunter-x-hunter.html","./anime-jujutsu-kaisen.html","./anime-my-hero-academia.html","./anime-one-piece.html","./anime-one-punch-man.html","./void-catalog-view.js?v=18.1","./void-daily-card.js?v=18.1","./void-daily-card.css?v=18.1","./void-title-scene.js?v=18.1","./void-title-scene.css?v=18.1","./void-title-accent.js?v=18.1","./void-title-accent.css?v=18.1","./void-tv.js?v=18.1","./void-tv.css?v=18.1","./av-atmosphere.js?v=16.6","./av-atmosphere.css?v=16.6","./audio-sources.html","./field-recordings-v18.json","./void-reading-stats.js?v=18.1","./void-reading-stats.css?v=18.1","./av-progress.js?v=18.1","./av-progress.css?v=18.1","./void-reader-bookmarks.js?v=18.1","./void-lexicon.js?v=18.1","./quotes.html","./void-quotes.js?v=18.1","./void-quotes.css?v=18.1","./av-rewards.js?v=18.1","./profile-studio.js?v=18.1","./av-state.js?v=18.1","./void-social.js?v=18.1","./void-social.css?v=18.1","./void-dashboard.js?v=18.1","./void-dashboard.css?v=18.1","./journal.html","./void-journal.js?v=18.1","./void-journal.css?v=18.1","./reading.html","./reading.css","./reading.js","./vendor/fflate.js","./void-interface.js?v=18.1","./void-interface.css?v=18.1","./av-safety.js?v=18.1"];
+const NEW_CORE = ["./void-legacy-layout.css?v=18.1","./void-title-layout.css?v=18.1","./void-watch-layout.css?v=18.1","./void-community-layout.css?v=18.1","./void-profile-layout.css?v=18.1","./void-display-charts.js?v=18.1","./void-display-charts.css?v=18.1","./eras.html","./void-eras.js?v=18.1","./void-eras.css?v=18.1","./collections.html","./void-collections.js?v=18.1","./void-collections.css?v=18.1","./void-evolution.js?v=18.1","./void-evolution.css?v=18.1","./taste.html","./void-taste.js?v=18.1","./void-taste.css?v=18.1","./explore.html","./void-explore.js?v=18.1","./void-explore.css?v=18.1","./secrets.html","./void-secrets.js?v=18.1","./void-secrets.css?v=18.1","./festivals.html","./void-festivals.js?v=18.1","./void-festivals.css?v=18.1","./studios.html","./void-studios.js?v=18.1","./void-studios-data.js?v=18.1","./void-studios.css?v=18.1","./music.html","./void-music.js?v=18.1","./void-music.css?v=18.1","./story-dna.html","./void-story-dna.js?v=18.1","./void-story-dna.css?v=18.1","./anime-a-silent-voice.html","./anime-attack-on-titan.html","./anime-bakemonogatari.html","./anime-death-note.html","./anime-demon-slayer.html","./anime-hunter-x-hunter.html","./anime-jujutsu-kaisen.html","./anime-my-hero-academia.html","./anime-one-piece.html","./anime-one-punch-man.html","./void-catalog-view.js?v=18.1","./void-daily-card.js?v=18.1","./void-daily-card.css?v=18.1","./void-title-scene.js?v=18.1","./void-title-scene.css?v=18.1","./void-title-accent.js?v=18.1","./void-title-accent.css?v=18.1","./void-tv.js?v=18.1","./void-tv.css?v=18.1","./av-atmosphere.js?v=19","./av-atmosphere.css?v=16.6","./audio-sources.html","./field-recordings-v18.json","./void-reading-stats.js?v=18.1","./void-reading-stats.css?v=18.1","./av-progress.js?v=18.1","./av-progress.css?v=18.1","./void-reader-bookmarks.js?v=18.1","./void-lexicon.js?v=18.1","./quotes.html","./void-quotes.js?v=18.1","./void-quotes.css?v=18.1","./av-rewards.js?v=18.1","./profile-studio.js?v=19","./av-state.js?v=18.1","./void-social.js?v=19","./void-social.css?v=18.1","./void-dashboard.js?v=18.1","./void-dashboard.css?v=18.1","./journal.html","./void-journal.js?v=18.1","./void-journal.css?v=18.1","./reading.html","./reading.css","./reading.js","./vendor/fflate.js","./void-interface.js?v=18.1","./void-interface.css?v=18.1","./av-safety.js?v=19"];
 const CORE_FILES = [
+"./av-shell.js?v=19","./void-profile-next.js?v=19","./void-profile-next.css?v=19","./void-messages.js?v=19","./void-messages.css?v=19","./messages.html","./studio/v19/neon-rain.webp","./studio/v19/neon-rain-thumb.webp","./studio/v19/moon-sanctuary.webp","./studio/v19/moon-sanctuary-thumb.webp","./studio/v19/void-orbit.webp","./studio/v19/void-orbit-thumb.webp",
   ...NEW_CORE,
-  "./visual-studio.js?v=17.4.1",
+  "./visual-studio.js?v=19",
   "./visual-studio.css?v=17.4",
-  "./visual-gallery.json",
+  "./visual-gallery.json?v=19",
   "./visual-avatars.json",
   "./studio/avatars/dusk-her.webp",
   "./studio/avatars/cosmic-pilot.svg",
@@ -32,13 +33,13 @@ const CORE_FILES = [
   "./watch.html",
   "./profile.html",
   "./profile-studio.css?v=17.2",
-  "./profile-studio.js?v=18.1",
-  "./profile-catalog.json?v=17.3",
+  "./profile-studio.js?v=19",
+  "./profile-catalog.json?v=19",
   "./studio-config.js?v=17.0",
-  "./av-safety.js?v=9",
+  "./av-safety.js?v=19",
   "./av-titles.js?v=20261030-2",
   "./av-state.js?v=18.1",
-  "./av-atmosphere.js?v=16.6",
+  "./av-atmosphere.js?v=19",
   "./av-atmosphere.css?v=16.6",
   "./av-design.css?v=17.0",
   "./av-design.js?v=17.0",
@@ -54,9 +55,9 @@ const CORE_FILES = [
   "./manifest.json",
   "./icon-192.png",
   "./icon-512.png",
-  "./banner-atelier.js?v=17.3",
+  "./banner-atelier.js?v=19",
   "./banner-atelier.css?v=17.3",
-  "./atelier-catalog.json",
+  "./atelier-catalog.json?v=19",
   "./art-credits.html",
   "./supabase-client.js?v=2.49.8",
   "./studio/atelier/healer.webp",
@@ -109,7 +110,7 @@ const CORE_FILES = [
   "./studio/atelier/shichimi-thumb.webp",
   "./community.html",
   "./void-custom.js?v=17.4.1",
-  "./void-social.js?v=18.1",
+  "./void-social.js?v=19",
   "./void-social.css?v=18.1",
   "./community-rules.html"
 ];
@@ -148,6 +149,9 @@ self.addEventListener("fetch", (event) => {
     event.respondWith(networkFirstPage(request));
     return;
   }
+
+  // Animated banners are optional streamed media; never cache partial Range responses.
+  if (url.origin === self.location.origin && url.pathname.includes('/studio/v19/') && url.pathname.endsWith('.mp4')) return;
 
   // Bundled decorative art is immutable within this cache version: avoid dozens of
   // redundant network requests and interrupted in-flight images when going offline.
