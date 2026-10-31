@@ -1,32 +1,6 @@
 {
-  "name": "ANIME VOID",
-  "short_name": "ANIME VOID",
-  "description": "Аниме-каталог: описания, трейлеры, персонажи, «сейчас выходит» и история просмотра.",
-  "lang": "ru",
-  "start_url": "./",
-  "scope": "./",
-  "display": "standalone",
-  "background_color": "#090810",
-  "theme_color": "#a855f7",
-  "categories": ["entertainment"],
-  "icons": [
-    {
-      "src": "icon-192.png",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any"
-    },
-    {
-      "src": "icon-512.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any"
-    },
-    {
-      "src": "icon-512.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "maskable"
-    }
-  ]
+  "profile-studio.js": "66cc0ae3b8d5da15ec9c0bc5637868ddaac22fbc9d929a9dcd3257be10c681d8",
+  "av-safety.js": "8ed7f04c72f4aa073088a7656580259a1b0b474c0537ef7b97cbcd5acfe9fa1b",
+  "void-social.js": "7c0e158f8fe1a08b2f12d867e244b03edf0ef2323d0c032ba61a1fe5381327bf",
+  "service-worker.js": "fd8681f05e52eaa3b16bc7b69ebc6184252d1ce5a5f0fdfb79c982679cc0b4a4"
 }
