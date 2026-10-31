@@ -39,9 +39,10 @@ function rightsSchema(x){const valid=/^ach-(?:00[1-9]|0[1-3]\d|040)$/;if(!plain(
    const integer=(x,min,max)=>Number.isInteger(x)&&x>=min&&x<=max;
    if(!plain(value)||value.version!==1||!integer(value.coins,0,1000000)||!integer(value.totalEarned,0,1000000)||!Array.isArray(value.owned)||value.owned.length>256||value.owned.some(id=>!kinds[id])||!plain(value.equipped)||!Array.isArray(value.claimed)||value.claimed.length>100000||typeof value.animation!=='boolean'||typeof value.day!=='string'||!/^$|^\d{4}-\d{2}-\d{2}$/.test(value.day)||!integer(value.dayEarned,0,200)||!Array.isArray(value.ledger)||value.ledger.length>60)throw Error('Invalid Studio wallet');
    const own=[...new Set(value.owned)],equipped={};for(const kind of ['background','banner','frame','effect']){const id=value.equipped[kind];if(kinds[id]!==kind||!own.includes(id))throw Error('Invalid Studio equipment');equipped[kind]=id;}
-   if(value.claimed.some(k=>typeof k!=='string'||!/^e:anilist-[1-9]\d{0,9}:[1-9]\d{0,3}$|^a:ach-00[1-9]$|^a:ach-0[1-3]\d$|^a:ach-040$/.test(k)))throw Error('Invalid reward claim');
+   if(value.giftWallet!==undefined&&(typeof value.giftWallet!=='string'||! /^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/i.test(value.giftWallet)))throw Error('Invalid gift wallet');
+   if(value.claimed.some(k=>typeof k!=='string'||!/^g:[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$|^e:anilist-[1-9]\d{0,9}:[1-9]\d{0,3}$|^a:ach-00[1-9]$|^a:ach-0[1-3]\d$|^a:ach-040$/.test(k)))throw Error('Invalid reward claim');
    const ledger=value.ledger.map(x=>{if(!plain(x)||typeof x.id!=='string'||x.id.length>80||!integer(x.delta,-1000000,1000000)||!Number.isFinite(x.at)||x.at<0||typeof x.label!=='string'||x.label.length>160)throw Error('Invalid Studio ledger');return{id:x.id,at:x.at,delta:x.delta,label:x.label};});
-   return{version:1,mode:'local',coins:value.coins,totalEarned:value.totalEarned,owned:own,equipped,claimed:[...new Set(value.claimed)],ledger,animation:value.animation,day:value.day,dayEarned:value.dayEarned};
+   return{...(value.giftWallet?{giftWallet:value.giftWallet}:{}),version:1,mode:'local',coins:value.coins,totalEarned:value.totalEarned,owned:own,equipped,claimed:[...new Set(value.claimed)],ledger,animation:value.animation,day:value.day,dayEarned:value.dayEarned};
   }
 
 
