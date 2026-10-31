@@ -1,0 +1,29 @@
+/* Shared dynamic + ten static title pages. No new artwork, requests or progress writes. */
+.av-title-page.vi-ready{background-color:var(--vi-bg);color:var(--vi-text)}
+.av-title-page.vi-ready>header{height:auto;min-height:76px;gap:12px;flex-wrap:wrap;background:var(--vi-glass);border-bottom:1px solid var(--vi-line);padding:14px clamp(16px,5vw,72px)}
+.av-title-page.vi-ready :is(.logo,.back,.profile-btn){color:var(--vi-text)}
+.av-title-page.vi-ready .logo span{color:var(--vi-accent)}
+.av-title-page.vi-ready>main{max-width:1320px;padding:clamp(24px,4vw,52px) clamp(12px,4vw,52px) 64px}
+.av-title-page.vi-ready .anime-page{grid-template-columns:minmax(220px,30%) minmax(0,1fr);gap:clamp(24px,4vw,48px);padding:clamp(20px,3vw,38px);background:var(--vi-panel)!important;border-color:var(--vi-line)!important;box-shadow:var(--vi-shadow)!important}
+.av-title-page.vi-ready .anime-page>*{min-width:0}
+.av-title-page.vi-ready .anime-page>.poster{position:relative!important;top:auto!important;align-self:start;max-width:100%;border-color:var(--vi-line);box-shadow:0 12px 28px #0003}
+.av-title-page.vi-ready .anime-page h1{font-size:clamp(28px,3.3vw,46px);line-height:1.15;overflow-wrap:anywhere;letter-spacing:-.035em;color:var(--vi-text)!important;-webkit-text-fill-color:var(--vi-text)!important}
+.av-title-page.vi-ready :is(.description,.info small,.rating-label,.character-role,.character-va,.similar-meta,.avp-explain,.loading){color:var(--vi-muted)!important}
+.av-title-page.vi-ready :is(.description,.info strong,.character-name,.similar-name){overflow-wrap:anywhere}
+.av-title-page.vi-ready :is(.info,.character-card,.similar-card){background:var(--vi-panel)!important;color:var(--vi-text)!important;border-color:var(--vi-line)!important}
+.av-title-page.vi-ready .info-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:24px}
+.av-title-page.vi-ready .info{padding:14px;min-width:0;box-shadow:none}
+.av-title-page.vi-ready :is(.episodes h2,.characters-section h2,.trailer-section h2,.similar-section h2,.character-name,.similar-name,.info strong){color:var(--vi-text)!important}
+.av-title-page.vi-ready .episodes{margin-top:32px;padding-top:24px;border-top:1px solid var(--vi-line)}
+.av-title-page.vi-ready .episode-grid{grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:10px}
+.av-title-page.vi-ready :is(.episode,.status-btn,.rating-star,.season-choice,.lang-btn,.theme-toggle){min-height:44px;color:var(--vi-text);border-color:var(--vi-line);background:var(--vi-panel)}
+.av-title-page.vi-ready :is(.vj-detail-link,.sc-discuss-link){color:var(--vi-text);text-decoration:underline;text-underline-offset:3px;min-height:44px;display:inline-flex;align-items:center;line-height:1.5;padding-block:6px;overflow-wrap:anywhere}
+.av-title-page.vi-ready :is(button,a):focus-visible{outline:3px solid var(--vi-accent);outline-offset:3px}
+.av-title-page.vi-ready :is(.characters-section,.trailer-section,.similar-section){margin-top:36px;min-width:0}
+.av-title-page.vi-ready .error{background:var(--vi-panel);color:var(--vi-text);border:1px solid var(--vi-line);border-radius:16px;overflow-wrap:anywhere}
+html[data-av-interface=astral] .av-title-page.vi-ready .anime-page{background:linear-gradient(145deg,var(--vi-panel),var(--vi-bg))!important}
+html[data-av-interface=manga] .av-title-page.vi-ready :is(.anime-page,.info,.character-card,.similar-card,.episode,.status-btn,.rating-star,.season-choice){border-radius:3px;box-shadow:none!important}
+html[data-av-interface=manga] .av-title-page.vi-ready .anime-page{border-top:4px solid var(--vi-accent)}
+@media(max-width:800px){.av-title-page.vi-ready .anime-page{grid-template-columns:minmax(0,1fr);gap:24px}.av-title-page.vi-ready .anime-page>.poster{width:min(100%,260px);margin-inline:auto}.av-title-page.vi-ready .info-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:760px){.av-title-page.vi-ready>header{position:relative!important}.av-title-page.vi-ready .logo{flex-basis:100%}.av-title-page.vi-ready .back{margin-right:auto;white-space:normal}.av-title-page.vi-ready .lang-btn{margin-left:0}.av-title-page.vi-ready .anime-page{padding:18px}.av-title-page.vi-ready .rating-row{gap:8px}.av-title-page.vi-ready .rating-stars{gap:6px}.av-title-page.vi-ready .rating-star{min-width:38px}.av-title-page.vi-ready .episode-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(forced-colors:active){.av-title-page.vi-ready :is(.anime-page,.info,.character-card,.similar-card){border-color:CanvasText!important}.av-title-page.vi-ready .anime-page h1{-webkit-text-fill-color:CanvasText!important}}

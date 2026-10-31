@@ -505,16 +505,18 @@
   </style>
   <link rel="stylesheet" href="av-enhancements.css?v=1">
   <script src="av-enhancements.js?v=1" defer></script>
-  <script src="av-safety.js?v=9"></script>
-  <script src="av-state.js?v=16"></script>
+  <script src="av-safety.js?v=18.1"></script>
+  <script src="av-state.js?v=18.1"></script><script defer src="void-display-charts.js?v=18.1"></script><link rel="stylesheet" href="void-display-charts.css?v=18.1"><script src="av-rewards.js?v=18.1"></script>
   <script src="av-titles.js?v=20261030-2"></script>
   <script>window.AVTitles=window.AVTitles||{russian:()=>'',display:(x,l)=>(l==='en'?x?.titleEnglish:'')||x?.title||'',normalize:v=>String(v||'').toLowerCase().trim(),plan:q=>({variants:[String(q||'').toLowerCase()],ids:[],terms:[],correction:''}),match:(x,q)=>[x.title,x.titleEnglish,x.titleRomaji,x.titleNative].some(v=>String(v||'').toLowerCase().includes(String(q||'').toLowerCase())),score:()=>0,count:0};</script>
   <link rel="stylesheet" href="av-design.css?v=17.0">
   <script src="av-design.js?v=17.0" defer></script>
   <link rel="stylesheet" href="av-atmosphere.css?v=16.6">
   <script src="av-atmosphere.js?v=16.6" defer></script>
-<link rel="stylesheet" href="profile-studio.css?v=17.2"><script src="studio-config.js?v=17.0" defer></script><script src="supabase-client.js?v=2.49.8" defer></script><script src="profile-studio.js?v=17.4" defer></script><link rel="stylesheet" href="visual-studio.css?v=17.4"><script src="visual-studio.js?v=17.4" defer></script><link rel="stylesheet" href="banner-atelier.css?v=17.3"><script src="banner-atelier.js?v=17.3" defer></script><link rel="stylesheet" href="void-social.css?v=17.4"><script src="void-custom.js?v=17.4" defer></script><script src="void-social.js?v=17.4" defer></script><meta name="av-release" content="17.4-identity-community"></head>
-<body class="av-shell">
+<link rel="stylesheet" href="profile-studio.css?v=17.2"><script src="studio-config.js?v=17.0" defer></script><script src="supabase-client.js?v=2.49.8" defer></script><script src="profile-studio.js?v=18.1" defer></script><link rel="stylesheet" href="visual-studio.css?v=17.4"><script src="visual-studio.js?v=17.4.1" defer></script><link rel="stylesheet" href="banner-atelier.css?v=17.3"><script src="banner-atelier.js?v=17.3" defer></script><link rel="stylesheet" href="void-social.css?v=18.1"><script src="void-custom.js?v=17.4.1" defer></script><script src="void-social.js?v=18.1" defer></script><meta name="av-release" content="18.1-unified"><link rel="stylesheet" href="void-interface.css?v=18.1"><script src="void-interface.js?v=18.1"></script>
+<script src="void-journal.js?v=18.1"></script>
+<link rel="stylesheet" href="void-reading-stats.css?v=18.1"><script src="void-reading-stats.js?v=18.1" defer></script><link rel="stylesheet" href="void-tv.css?v=18.1"><script src="void-tv.js?v=18.1" defer></script><link rel="stylesheet" href="void-evolution.css?v=18.1"><script src="void-evolution.js?v=18.1" defer></script><link rel="stylesheet" href="void-profile-layout.css?v=18.1"></head>
+<body class="av-shell av-profile-page">
   <header>
     <a href="index.html" class="logo">ANIME<span>VOID</span></a>
     <nav>
@@ -553,21 +555,23 @@
       </div>
       <div class="level-box">
         <div class="level-bar"><span id="levelFill" style="width:0%"></span></div>
-        <div class="level-next" id="levelNext"></div>
+        <div class="level-next" id="levelNext" aria-describedby="legacyRankBasis"></div>
+        <p class="dc-basis" id="legacyRankBasis">Уровень использует прежнюю расчётную шкалу, а не таймер просмотра; он может отличаться от новой сводки без дублей ID. Ранее открытые достижения и покупки не отзываются.</p>
       </div>
-      <div class="share-row">
-        <button type="button" class="share-btn" id="shareCollectionBtn">📤 Поделиться коллекцией</button>
+      <div class="share-row"><a class="share-btn ve-copy" href="collections.html" data-ru="Мои коллекции" data-en="My collections">Мои коллекции</a><a class="share-btn ve-copy" href="taste.html" data-ru="Выбранные вкусы" data-en="Selected tastes">Выбранные вкусы</a>
+        <button type="button" class="share-btn" id="shareCollectionBtn">📤 Карточка достижений</button>
         <button type="button" class="share-btn" id="shareBannerBtn">🖼️ Шапка для соцсетей</button>
         <button type="button" class="share-btn" id="friendCodeBtn">🤝 Сравниться с другом</button>
         <a class="share-btn donate-link" id="donateBtn" href="https://www.donationalerts.com/r/tishecka" target="_blank" rel="noopener noreferrer">☕ Поддержать проект</a>
       </div>
+      <p class="dc-basis" id="sharePrivacyBasis">PNG сохраняется только на устройство: ник и достижения; баннер также содержит сводные ручные отметки и оценку времени. Автоматической публикации нет.</p>
       <div class="avatar-picker" id="avatarPicker" hidden></div>
     </section>
 
     <section class="stats-section">
       <div class="stats-row">
-        <div class="stat-card c-episodes"><span class="stat-icon">📺</span><strong id="statEpisodes">0</strong><span id="statEpisodesLabel">серий просмотрено</span></div>
-        <div class="stat-card c-hours"><span class="stat-icon">⏱️</span><strong id="statHours">0</strong><span id="statHoursLabel">время просмотра</span></div>
+        <div class="stat-card c-episodes"><span class="stat-icon">📺</span><strong id="statEpisodes">0</strong><span id="statEpisodesLabel">отмеченных серий</span></div>
+        <div class="stat-card c-hours"><span class="stat-icon">⏱️</span><strong id="statHours">0</strong><span id="statHoursLabel">расчёт по отметкам</span></div>
         <div class="stat-card c-titles"><span class="stat-icon">🎬</span><strong id="statTitles">0</strong><span id="statTitlesLabel">тайтлов начато</span></div>
         <div class="stat-card c-favorites"><span class="stat-icon">❤️</span><strong id="statFavorites">0</strong><span id="statFavoritesLabel">в избранном</span></div>
         <div class="stat-card c-ratings"><span class="stat-icon">⭐</span><strong id="statRatings">0</strong><span id="statRatingsLabel">оценок поставлено</span></div>
@@ -575,6 +579,7 @@
       <div class="quests-card" id="dailyQuests"></div>
     </section>
 
+<section id="readingStats" class="vrs-panel ym-hide-content" data-reading-stats aria-label="Личная статистика чтения"></section>
     <section class="activity-section" id="activitySection">
       <div class="section-heading">
         <div>
@@ -641,7 +646,7 @@
       <div class="section-heading">
         <div>
           <h2 id="friendTitle">🤝 Сравнение с другом</h2>
-          <div class="subtitle" id="friendSubtitle">Вставь код друга и узнай, кто больший отаку</div>
+          <div class="subtitle" id="friendSubtitle">Только добровольные счётчики. Код не доказывает личность, просмотр или согласие. Часы расчётные, не таймер просмотра.</div>
         </div>
       </div>
       <div class="friend-box">
@@ -650,7 +655,7 @@
           <button type="button" class="share-btn" id="closeFriendBtn">✕ Закрыть</button>
         </div>
         <div class="friend-input-row">
-          <input type="text" id="friendCodeInput" placeholder="Вставь код друга сюда...">
+          <input type="text" id="friendCodeInput" maxlength="4096" autocomplete="off" aria-label="Код статистики / Statistics code" placeholder="Вставь код друга сюда...">
           <button type="button" class="share-btn primary" id="compareBtn">⚡ Сравнить</button>
         </div>
         <div class="friend-result" id="friendResult"></div>
@@ -734,8 +739,9 @@
       setT("navHome", isRussian ? "Главная" : "Home");
       setT("navCatalog", isRussian ? "Каталог" : "Catalog");
       setT("navProfile", isRussian ? "Профиль" : "Profile");
-      setT("statEpisodesLabel", isRussian ? "серий просмотрено" : "episodes watched");
-      setT("statHoursLabel", isRussian ? "время просмотра" : "watch time");
+      setT("legacyRankBasis", isRussian ? "Уровень использует прежнюю расчётную шкалу, а не таймер просмотра; он может отличаться от новой сводки без дублей ID. Ранее открытые достижения и покупки не отзываются." : "Level uses the legacy estimated scale, not a viewing timer; it may differ from the new ID-deduplicated summary. Previously unlocked achievements and purchases are not revoked.");
+      setT("statEpisodesLabel", isRussian ? "отмеченных серий" : "manually marked episodes");
+      setT("statHoursLabel", isRussian ? "расчёт по отметкам" : "estimated from marks");
       setT("statTitlesLabel", isRussian ? "тайтлов начато" : "titles started");
       setT("statFavoritesLabel", isRussian ? "в избранном" : "favorites");
       setT("statRatingsLabel", isRussian ? "оценок поставлено" : "ratings given");
@@ -801,8 +807,8 @@
       if (levelFill) levelFill.style.width = Math.min(100, Math.round(inLevel / LEVEL_HOURS * 100)) + "%";
       const levelNext = document.getElementById("levelNext");
       if (levelNext) levelNext.textContent = isRussian
-        ? "До уровня " + (level + 1) + ": " + (LEVEL_HOURS - inLevel) + " ч просмотра"
-        : "To level " + (level + 1) + ": " + (LEVEL_HOURS - inLevel) + " h of watching";
+        ? "До уровня " + (level + 1) + ": " + (LEVEL_HOURS - inLevel) + " ч по прежней расчётной шкале"
+        : "To level " + (level + 1) + ": " + (LEVEL_HOURS - inLevel) + " h on the legacy estimated scale";
     }
 
     function renderAvatarPicker() {
@@ -898,9 +904,10 @@
       { id: "god", icon: "👑", ru: "Бог Аниме", en: "Anime God", subRu: "абсолютная власть", subEn: "absolute power" }
     ];
 
-    function achievementsList(stats, isRussian) {
+    function achievementsList(stats, isRussian, readOnly = false) {
+      if(window.AVRewards?.ready())stats=AVRewards.stats();
       const genreEpisodes = stats.genreEpisodes || {};
-      return [
+      const list = [
         { id: "ach-001", tier: "mortal", icon: "🌱", unlocked: stats.totalEpisodes >= 1, progress: stats.totalEpisodes, target: 1, title: isRussian ? "Первые шаги" : "First steps", hint: isRussian ? "Посмотреть 1 серию" : "Watch 1 episode" },
         { id: "ach-002", tier: "mortal", icon: "📺", unlocked: stats.totalEpisodes >= 10, progress: stats.totalEpisodes, target: 10, title: isRussian ? "Разогрев" : "Warming up", hint: isRussian ? "10 серий" : "10 episodes" },
         { id: "ach-003", tier: "mortal", icon: "🕐", unlocked: stats.hours >= 1, progress: stats.hours, target: 1, title: isRussian ? "Час в пустоте" : "Hour in the void", hint: isRussian ? "1 час просмотра" : "1 hour watched" },
@@ -941,7 +948,14 @@
         { id: "ach-038", tier: "god", icon: "😢", unlocked: (genreEpisodes["Drama"] || 0) >= 200, progress: genreEpisodes["Drama"] || 0, target: 200, title: isRussian ? "Бог слёз" : "God of tears", hint: isRussian ? "200 серий драмы" : "200 drama episodes" },
         { id: "ach-039", tier: "god", icon: "⚔️", unlocked: (genreEpisodes["Action"] || 0) >= 300, progress: genreEpisodes["Action"] || 0, target: 300, title: isRussian ? "Аватар войны" : "Avatar of war", hint: isRussian ? "300 серий экшена" : "300 action episodes" },
         { id: "ach-040", tier: "god", icon: "🌌", unlocked: stats.totalEpisodes >= 10000, progress: stats.totalEpisodes, target: 10000, title: isRussian ? "Создатель Вселенной" : "Universe creator", hint: isRussian ? "10000 серий. Ты — создатель" : "10000 episodes. You are the creator" }
-      ].map(a => window.AVAuthorAccess?.hasAllAchievements() ? {...a, unlocked:true, progress:a.target, hint:(isRussian ? "Авторская выдача · " : "Author grant · ")+a.hint} : a);
+      ];
+      if (readOnly) {
+        const rights = window.AVRewards?.ready() ? AVRewards.get() : null;
+        const retained = new Set([...(rights?.legacy || []), ...(rights?.earned || [])]);
+        const granted = !!window.AVAuthorAccess?.hasAllAchievements();
+        return list.map(a => ({...a, unlocked: retained.has(a.id) || granted, virtual: granted && !retained.has(a.id)}));
+      }
+      return window.AVRewards?AVRewards.decorate(list,isRussian):list.map(a => window.AVAuthorAccess?.hasAllAchievements()?{...a,unlocked:true,progress:a.target}:a);
     }
 
     function animateValue(element, target, suffix, duration) {
@@ -1030,11 +1044,13 @@
     function renderStatsAndAchievements() {
       const isRussian = isRussianNow();
       const stats = collectStats();
-      animateValue(document.getElementById("statEpisodes"), stats.totalEpisodes, "", 900);
-      animateValue(document.getElementById("statHours"), stats.hours, isRussian ? " ч ≈" : " h ≈", 900);
-      animateValue(document.getElementById("statTitles"), stats.watchedTitles, "", 900);
-      animateValue(document.getElementById("statFavorites"), stats.favoritesCount, "", 900);
-      animateValue(document.getElementById("statRatings"), stats.ratingsCount, "", 900);
+      const display=window.AVState?.metrics?.();
+      animateValue(document.getElementById("statEpisodes"), (display||stats).totalEpisodes, "", 900);
+      if(display){const node=document.getElementById('statHours');node.textContent=AVState.formatHours(display.minutes,isRussian);node.title=isRussian?'Оценка по ручным отметкам: сохранённая длительность, каталог или24минуты на серию. Это не измеренное время плеера.':'Estimate from manual marks: saved duration, catalogue or24 minutes per episode; not measured player time.';}
+      else animateValue(document.getElementById("statHours"), stats.hours, isRussian ? " ч ≈" : " h ≈", 900);
+      animateValue(document.getElementById("statTitles"), (display||stats).watchedTitles, "", 900);
+      animateValue(document.getElementById("statFavorites"), (display||stats).favoritesCount, "", 900);
+      animateValue(document.getElementById("statRatings"), (display||stats).ratingsCount, "", 900);
 
       const list = achievementsList(stats, isRussian);
       const unlockedCount = list.filter(achievement => achievement.unlocked).length;
@@ -1067,13 +1083,14 @@
               tierList.map(achievement => {
                 const done = achievement.unlocked;
                 const current = Math.min(Number(achievement.progress) || 0, Number(achievement.target) || 0);
-                const cardPct = Number(achievement.target) ? Math.min(100, Math.round((Number(achievement.progress) || 0) / achievement.target * 100)) : 0;
+                const currentText=(Math.floor(current*100)/100).toLocaleString(isRussian?"ru":"en",{maximumFractionDigits:2});
+                const cardPct = Number(achievement.target) ? Math.min(100, Math.floor((Number(achievement.progress) || 0) / achievement.target * 100)) : 0;
                 return "<div class=\"tier-card" + (done ? " unlocked" : "") + "\">" +
                   "<span class=\"tier-card-icon\">" + (done ? achievement.icon : "🔒") + "</span>" +
                   "<span class=\"tier-card-title\">" + escapeHtml(achievement.title) + "</span>" +
                   "<span class=\"tier-card-hint\">" + escapeHtml(achievement.hint) + "</span>" +
                   (done ? "" : (achievement.target
-                    ? "<div class=\"tier-card-bar\"><span style=\"width:" + cardPct + "%\"></span></div><span class=\"tier-card-nums\">" + current + "/" + achievement.target + "</span>"
+                    ? "<div class=\"tier-card-bar\"><span style=\"width:" + cardPct + "%\"></span></div><span class=\"tier-card-nums\">" + currentText + "/" + achievement.target + "</span>"
                     : "")) +
                   "</div>";
               }).join("") +
@@ -1135,22 +1152,23 @@
       }
       const streakPill = document.getElementById("streakPill");
       if (streakPill) {
-        const streak = calcStreak(getActivityLogSafe());
-        streakPill.hidden = streak <= 0;
-        streakPill.textContent = "🔥 " + streak + (isRussian ? " дн. подряд" : " day streak");
+        const streak = AVState.activity().streak;
+        streakPill.hidden = streak === null || streak <= 0;
+        streakPill.textContent = "🔥 " + streak + (isRussian ? " дн. с действиями" : " action-day streak");
       }
       renderOtakuPath(list, isRussian);
       renderDailyQuests();
       renderActivityChart();
       const setTxt = (id, ru, en) => { const el = document.getElementById(id); if (el) el.textContent = isRussian ? ru : en; };
       setTxt("activityTitle", "🔥 Твоя активность", "🔥 Your activity");
-      setTxt("activitySubtitle", "Серий отмечено за последние 14 дней", "Episodes marked in the last 14 days");
-      setTxt("shareCollectionBtn", "📤 Поделиться коллекцией", "📤 Share collection");
+      setTxt("activitySubtitle", "Действия отметки серий за 14 дней UTC — не уникальные серии и не измеренный просмотр", "Episode-mark actions over 14 UTC days — not unique episodes or measured viewing");
+      setTxt("sharePrivacyBasis", "PNG сохраняется только на устройство: ник и достижения; баннер также содержит сводные ручные отметки и оценку времени. Автоматической публикации нет.", "PNG is saved only to your device: nickname and achievements; the banner also includes aggregate manual marks and estimated time. Nothing is published automatically.");
+      setTxt("shareCollectionBtn", "📤 Карточка достижений", "📤 Achievement card");
       setTxt("shareBannerBtn", "🖼️ Шапка для соцсетей", "🖼️ Social banner");
       setTxt("friendCodeBtn", "🤝 Сравниться с другом", "🤝 Compare with a friend");
       setTxt("donateBtn", "☕ Поддержать проект", "☕ Support the project");
       setTxt("friendTitle", "🤝 Сравнение с другом", "🤝 Compare with a friend");
-      setTxt("friendSubtitle", "Вставь код друга и узнай, кто больший отаку", "Paste a friend's code to see who is the bigger otaku");
+      setTxt("friendSubtitle", "Только добровольные счётчики. Код не доказывает личность, просмотр или согласие. Часы расчётные, не таймер просмотра.", "Voluntary counters only. A code does not verify identity, viewing or consent. Hours are estimates, not a viewing timer.");
       setTxt("copyMyCodeBtn", "📋 Мой код", "📋 My code");
       setTxt("closeFriendBtn", "✕ Закрыть", "✕ Close");
       setTxt("compareBtn", "⚡ Сравнить", "⚡ Compare");
@@ -1178,71 +1196,37 @@
     }
 
     function renderDailyQuests() {
-      const box = document.getElementById("dailyQuests");
-      if (!box) return;
-      const isRussian = isRussianNow();
-      const log = getActivityLogSafe();
-      const today = new Date().toISOString().slice(0, 10);
-      const day = log[today] || { eps: 0, favs: 0, ratings: 0 };
-      const streak = calcStreak(log);
-      const quests = [
-        { icon: "📺", ru: "Отметь 2 серии", en: "Mark 2 episodes", cur: day.eps || 0, target: 2 },
-        { icon: "❤️", ru: "Добавь в избранное", en: "Add to favorites", cur: day.favs || 0, target: 1 },
-        { icon: "⭐", ru: "Поставь оценку", en: "Rate an anime", cur: day.ratings || 0, target: 1 }
-      ];
-      box.innerHTML =
-        "<div class=\"quests-head\">" +
-        "<span class=\"quests-title\">" + (isRussian ? "🎯 Задания дня" : "🎯 Daily quests") + "</span>" +
-        "<span class=\"quests-streak\">🔥 " + streak + (isRussian ? " дн. подряд" : " day streak") + "</span>" +
-        "</div>" +
-        "<div class=\"quests-list\">" +
-        quests.map(quest => {
-          const ok = quest.cur >= quest.target;
-          const pct = Math.min(100, Math.round(quest.cur / quest.target * 100));
-          return "<div class=\"quest-item" + (ok ? " done" : "") + "\"><span class=\"quest-ico\">" + quest.icon + "</span>" +
-            "<div class=\"quest-body\"><span class=\"quest-text\">" + (isRussian ? quest.ru : quest.en) + "</span>" +
-            "<div class=\"quest-bar\"><span style=\"width:" + pct + "%\"></span></div></div>" +
-            "<span class=\"quest-check\">" + (ok ? "✅" : Math.min(quest.cur, quest.target) + "/" + quest.target) + "</span></div>";
-        }).join("") +
-        "</div>";
+      const box=document.getElementById('dailyQuests');if(!box)return;
+      const ru=localStorage.getItem('animeVoidLanguage')!=='en',a=AVState.activity();box.replaceChildren();
+      const make=(tag,cls,text)=>{const n=document.createElement(tag);n.className=cls;if(text!==undefined)n.textContent=text;return n;};
+      const head=make('div','quests-head');head.append(make('span','quests-title',ru?'🎯 Задания дня':'🎯 Daily quests'));
+      if(a.known)head.append(make('span','quests-streak','🔥 '+a.streak+(ru?' дн. с действиями':' action-day streak')));box.append(head);
+      box.append(make('p','subtitle',ru?'Локальные действия за день UTC. Повторная отметка — новое действие, не уникальная серия. Не таймер просмотра; этот блок не начисляет награды.':'Local actions during a UTC day. A repeated mark is another action, not a unique episode. Not a viewing timer; this panel awards no rewards.'));
+      if(!a.known){box.append(make('p','subtitle',ru?'Журнал недоступен или повреждён. Его сырьё сохранено, выполнение заданий неизвестно.':'The log is unavailable or malformed. Raw data is untouched; quest progress is unknown.'));return;}
+      const list=make('div','quests-list');for(const q of [{icon:'📺',ru:'Отметь 2 серии',en:'Mark 2 episodes',cur:a.day.eps,target:2},{icon:'❤️',ru:'Добавь в избранное',en:'Add to favorites',cur:a.day.favs,target:1},{icon:'⭐',ru:'Поставь оценку',en:'Rate an anime',cur:a.day.ratings,target:1}]){
+        const ok=q.cur>=q.target,item=make('div','quest-item'+(ok?' done':'')),body=make('div','quest-body'),bar=make('div','quest-bar'),fill=document.createElement('span');fill.style.width=Math.min(100,Math.round(q.cur/q.target*100))+'%';bar.setAttribute('aria-hidden','true');bar.append(fill);body.append(make('span','quest-text',ru?q.ru:q.en),bar);item.append(make('span','quest-ico',q.icon),body,make('span','quest-check',ok?'✅':Math.min(q.cur,q.target)+'/'+q.target));list.append(item);
+      }box.append(list);
     }
 
     function renderActivityChart() {
-      const box = document.getElementById("activityBox");
-      if (!box) return;
-      const isRussian = isRussianNow();
-      const log = getActivityLogSafe();
-      const dayMs = 86400000;
-      const base = new Date();
-      base.setHours(12, 0, 0, 0);
-      const days = [];
-      for (let i = 13; i >= 0; i--) {
-        const date = new Date(base.getTime() - i * dayMs);
-        const key = date.toISOString().slice(0, 10);
-        days.push({ key: key, day: date.getDate(), eps: (log[key] && log[key].eps) || 0, today: i === 0 });
-      }
-      const total = days.reduce((sum, d) => sum + d.eps, 0);
-      if (!total) {
-        box.innerHTML = "<div class=\"activity-empty\">" + (isRussian
-          ? "Пока тихо… Открой плеер и отметь серии — график оживёт! 📺"
-          : "Quiet so far... Mark some episodes to bring this chart to life! 📺") + "</div>";
-        return;
-      }
-      const max = Math.max.apply(null, days.map(d => d.eps));
-      box.innerHTML = days.map(d =>
-        "<div class=\"activity-col" + (d.today ? " today" : "") + "\" title=\"" + d.key + ": " + d.eps + "\"><div class=\"activity-bar-zone\"><div class=\"activity-bar\" style=\"height:" + Math.max(4, Math.round(d.eps / max * 100)) + "%\"></div></div><span class=\"activity-day\">" + d.day + "</span></div>"
-      ).join("");
+      const box=document.getElementById('activityBox');if(!box)return;const ru=isRussianNow(),a=AVState.activity();box.replaceChildren();
+      let summary=document.getElementById('activityYearSummary');if(!summary){summary=document.createElement('p');summary.id='activityYearSummary';summary.className='subtitle';box.after(summary);}
+      if(!a.known){const n=document.createElement('p');n.className='activity-empty';n.textContent=ru?'Журнал недоступен или повреждён. Числа неизвестны, сырьё не изменено.':'The log is unavailable or malformed. Counts are unknown; raw data is untouched.';box.append(n);summary.textContent=ru?'Годовой итог неизвестен. Старым отметкам не придумываются даты.':'Annual totals are unknown. Undated marks are not assigned invented dates.';return;}
+      summary.textContent=(ru?'Датированные действия за ':'Dated actions during ')+a.year+': '+a.annual.eps+(ru?' отметок серий · ':' episode marks · ')+a.annual.favs+(ru?' добавлений в избранное · ':' favorite additions · ')+a.annual.ratings+(ru?' действий оценки. Только сохранённый журнал UTC, не полная история просмотра.':' rating actions. Saved UTC log only, not complete viewing history.')+(a.ignoredFuture?(ru?' Будущие записи исключены.':' Future-dated entries excluded.'):'');
+      const max=Math.max(0,...a.days.map(d=>d.eps));if(!max){const n=document.createElement('p');n.className='activity-empty';n.textContent=ru?'В эти 14 дней нет записанных действий отметки. Старым сериям даты не назначаются.':'No episode-mark actions recorded in these 14 days. Old episodes are not assigned dates.';box.append(n);return;}
+      for(const d of a.days){const col=document.createElement('div');col.className='activity-col'+(d.today?' today':'');col.title=d.key+': '+d.eps;const zone=document.createElement('div');zone.className='activity-bar-zone';const bar=document.createElement('div');bar.className='activity-bar';bar.style.height=Math.max(4,Math.round(d.eps/max*100))+'%';zone.append(bar);const label=document.createElement('span');label.className='activity-day';label.textContent=d.day;col.append(zone,label);box.append(col);}
     }
 
     function getShareData() {
       const isRussian = isRussianNow();
-      const stats = collectStats();
-      const list = achievementsList(stats, isRussian);
+      const analysis = AVState.analytics(), stats = analysis.metrics;
+      const list = achievementsList(stats, isRussian, true);
       const unlockedCount = list.filter(a => a.unlocked).length;
       const totalPct = Math.round(unlockedCount / list.length * 100);
       return {
         isRussian: isRussian,
         stats: stats,
+        dataQuality: {marksKnown: analysis.marksKnown, catalogueKnown: analysis.catalogueKnown},
         list: list,
         unlockedCount: unlockedCount,
         totalPct: totalPct,
@@ -1374,7 +1358,7 @@
       }
       ctx.font = "700 24px system-ui, sans-serif";
       ctx.fillStyle = "#d8b4fe";
-      ctx.fillText("⏱️ " + data.stats.hours + (data.isRussian ? " ч" : " h") + "   📺 " + data.stats.totalEpisodes + (data.isRussian ? " серий" : " eps") + "   🎬 " + data.stats.watchedTitles + (data.isRussian ? " тайтлов" : " titles"), 60, 262);
+      ctx.fillText("⏱️ " + (data.dataQuality.marksKnown || data.stats.minutes > 0 ? AVState.formatHours(data.stats.minutes, data.isRussian) : "—") + "   📺 " + (data.dataQuality.marksKnown || data.stats.totalEpisodes > 0 ? data.stats.totalEpisodes : "—") + (data.isRussian ? " отметок" : " marks") + "   🎬 " + (data.dataQuality.marksKnown || data.stats.watchedTitles > 0 ? data.stats.watchedTitles : "—") + (data.isRussian ? " тайтлов" : " titles"), 60, 262);
       ctx.fillStyle = "#9994ae";
       ctx.font = "700 20px system-ui, sans-serif";
       ctx.fillText((data.isRussian ? "Путь отаку: " : "Otaku path: ") + data.totalPct + "%  ·  " + data.unlockedCount + "/" + data.list.length, 60, 302);
@@ -1404,44 +1388,58 @@
       ctx.textAlign = "right";
       ctx.fillStyle = "#7a6f9a";
       ctx.font = "600 18px system-ui, sans-serif";
+      ctx.textAlign = "left";
+      ctx.fillStyle = "#c3b8d6";
+      ctx.font = "500 15px system-ui, sans-serif";
+      ctx.fillText(!data.dataQuality.marksKnown ? (data.isRussian ? "Читаемая часть · отметки повреждены · время оценочное" : "Readable part · damaged marks · estimated time") : (data.isRussian ? "Ручные отметки · время оценочное, не замер просмотра" : "Manual marks · estimated time, not measured viewing"), 60, 372);
+      ctx.textAlign = "right";
+      ctx.fillStyle = "#a99cbf";
+      ctx.font = "600 18px system-ui, sans-serif";
       ctx.fillText("anime-void-app.github.io/AV", 1140, 372);
       downloadCanvas(canvas, "anime-void-banner.png");
     }
 
     function buildMyFriendCode() {
-      const data = getShareData();
-      const payload = {
-        v: 1,
-        n: data.nickname,
-        e: data.stats.totalEpisodes,
-        h: data.stats.hours,
-        t: data.stats.watchedTitles,
-        f: data.stats.favoritesCount,
-        a: data.totalPct
-      };
-      return btoa(unescape(encodeURIComponent(JSON.stringify(payload))));
+      try {
+        if (!window.AVState?.metrics || !window.AVRewards?.ready()) return "";
+        const stats = AVState.metrics(), rights = AVRewards.get(), retained = new Set([...rights.legacy, ...rights.earned]);
+        let unlocked = 0;
+        for (let i=1; i<=40; i++) if(retained.has("ach-"+String(i).padStart(3,"0"))) unlocked++;
+        if(window.AVAuthorAccess?.hasAllAchievements()) unlocked=40;
+        const payload = {v:1,n:localStorage.getItem("animeVoidNickname")||(isRussianNow()?"Смотрящий":"Watcher"),e:stats.totalEpisodes,h:Math.round(stats.minutes/60),t:stats.watchedTitles,f:stats.favoritesCount,a:Math.round(unlocked/40*100)};
+        return btoa(unescape(encodeURIComponent(JSON.stringify(payload))));
+      } catch { return ""; }
     }
 
     function copyMyFriendCode() {
-      const code = buildMyFriendCode();
-      const isRussian = isRussianNow();
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(code).then(() => {
-          alert(isRussian ? "Код скопирован! Отправь его другу 🤝" : "Code copied! Send it to your friend 🤝");
-        }, () => {
-          window.prompt(isRussian ? "Скопируй свой код:" : "Copy your code:", code);
-        });
-      } else {
-        window.prompt(isRussian ? "Скопируй свой код:" : "Copy your code:", code);
-      }
+      if (document.getElementById("friendCodePreview")) return;
+      const code = buildMyFriendCode(), payload = decodeFriendCode(code), ru = isRussianNow();
+      if (!payload) { document.getElementById("friendResult").textContent = ru ? "Не удалось проверить собственные счётчики. Данные не изменены." : "Could not validate your own counters. Data unchanged."; return; }
+      const invoker = document.activeElement, d = document.createElement("dialog");
+      d.id = "friendCodePreview"; d.className = "vi-dialog"; d.setAttribute("aria-labelledby", "friendCodePreviewTitle");
+      const title = document.createElement("h2"); title.id = "friendCodePreviewTitle"; title.textContent = ru ? "Проверь состав кода" : "Review the code contents";
+      const note = document.createElement("p"); note.textContent = ru ? "В код попадут только показанные имя и счётчики. Это не проверенная история. Сайт ничего не отправляет другу; перед передачей проверь состав. Оценки отдельных тайтлов, списки, покупки, почта и токены не включены." : "Only the displayed name and counters go into this code. This is not verified history. The site sends nothing to a friend; review before sharing. Individual ratings, lists, purchases, email and tokens are excluded.";
+      const pre = document.createElement("pre"); pre.textContent = JSON.stringify(payload, null, 2); pre.style.cssText = "white-space:pre-wrap;overflow-wrap:anywhere;font-size:13px;max-height:35dvh;overflow:auto"; pre.tabIndex = 0;
+      const output = document.createElement("textarea"); output.readOnly = true; output.value = code; output.setAttribute("aria-label", ru ? "Точный код для ручного копирования" : "Exact code for manual copying"); output.style.cssText = "width:100%;min-height:90px;box-sizing:border-box;color:var(--vi-text);background:var(--vi-panel);border:1px solid var(--vi-line);padding:12px;border-radius:10px";
+      const status = document.createElement("p"); status.setAttribute("role", "status");
+      const copy = document.createElement("button"); copy.type = "button"; copy.textContent = ru ? "Скопировать именно этот код" : "Copy exactly this code";
+      const close = document.createElement("button"); close.type = "button"; close.textContent = ru ? "Закрыть без отправки" : "Close without sending";
+      copy.onclick = () => { if (navigator.clipboard?.writeText) navigator.clipboard.writeText(code).then(() => { if (d.isConnected) status.textContent = ru ? "Код скопирован. Самостоятельно передавай только после проверки." : "Code copied. Share it yourself only after review."; }, () => { if (d.isConnected) { status.textContent = ru ? "Буфер недоступен. Выдели код и скопируй вручную." : "Clipboard unavailable. Select the code and copy manually."; output.focus(); output.select(); } }); else { status.textContent = ru ? "Выдели код и скопируй вручную." : "Select the code and copy manually."; output.focus(); output.select(); } };
+      const finish = () => { d.close(); d.remove(); if (invoker?.isConnected) invoker.focus({preventScroll:true}); };
+      close.onclick = finish; d.addEventListener("cancel", e => { e.preventDefault(); finish(); });
+      d.addEventListener("keydown", e => { if(e.key!=="Tab")return; const first=pre,last=close;if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();} });
+      d.append(title,note,pre,output,status,copy,close); document.body.append(d); d.showModal(); close.focus();
     }
 
     function decodeFriendCode(code) {
       try {
+        if (typeof code !== "string" || code.length > 4096) return null;
         const parsed = JSON.parse(decodeURIComponent(escape(atob(code))));
-        if (parsed && typeof parsed.e === "number") return parsed;
-      } catch (error) {}
-      return null;
+        if (!parsed || typeof parsed !== "object" || Array.isArray(parsed) || Object.keys(parsed).sort().join(",") !== "a,e,f,h,n,t,v" || parsed.v !== 1 || typeof parsed.n !== "string" || !parsed.n.trim() || parsed.n.length > 250) return null;
+        for (const key of ["e", "h", "t", "f", "a"]) if (typeof parsed[key] !== "number" || !Number.isFinite(parsed[key]) || parsed[key] < 0 || parsed[key] > (key === "a" ? 100 : 1e9)) return null;
+        for (const key of ["e", "t", "f", "a"]) if (!Number.isInteger(parsed[key])) return null;
+        return parsed;
+      } catch (error) { return null; }
     }
 
     function compareWithFriend() {
@@ -1457,12 +1455,13 @@
         return;
       }
       const me = decodeFriendCode(buildMyFriendCode());
+      if (!me) { result.textContent = isRussian ? "Собственные счётчики недоступны; сравнение не выполнено." : "Your counters are unavailable; comparison was not performed."; return; }
       const rows = [
         { label: isRussian ? "📺 Серий" : "📺 Episodes", me: me.e, friend: friend.e },
-        { label: isRussian ? "⏱️ Часов" : "⏱️ Hours", me: me.h, friend: friend.h },
+        { label: isRussian ? "⏱️ Расчётных часов" : "⏱️ Estimated hours", me: me.h, friend: friend.h },
         { label: isRussian ? "🎬 Тайтлов" : "🎬 Titles", me: me.t, friend: friend.t },
         { label: isRussian ? "❤️ В избранном" : "❤️ Favorites", me: me.f, friend: friend.f },
-        { label: isRussian ? "🏆 Ачивки" : "🏆 Achievements", me: me.a, friend: friend.a, suffix: "%" }
+        { label: isRussian ? "🏆 Сохранённые открытия" : "🏆 Retained unlocks", me: me.a, friend: friend.a, suffix: "%" }
       ];
       let meWins = 0, friendWins = 0;
       rows.forEach(row => {
@@ -1580,85 +1579,23 @@
     }
 
     function renderStatsCharts() {
-      const isRussian = isRussianNow();
-      const catalog = readCatalog();
-      const byId = new Map(catalog.map(t => [String(t.id), t]));
-
-      const genreMinutes = {};
-      for (let i = 0; i < localStorage.length; i++) {
-        const key = localStorage.key(i);
-        if (!key || key.indexOf("watched_") !== 0) continue;
-        const id = key.slice(8);
-        let episodes = [];
-        try { episodes = AVSafe.read(key, null) || []; } catch (err) { continue; }
-        if (!episodes.length) continue;
-        const item = byId.get(id);
-        if (!item || !Array.isArray(item.genres) || !item.genres.length) continue;
-        let minutes = 0;
-        episodes.forEach(ep => {
-          const stored = Number(localStorage.getItem("duration_" + id + "_" + ep));
-          minutes += window.AVState ? AVState.episodeMinutes(id,ep,item) : (stored > 0 ? stored/60 : 24);
-        });
-        const per = minutes / item.genres.length;
-        item.genres.forEach(g => { genreMinutes[g] = (genreMinutes[g] || 0) + per; });
-      }
-      const sortedGenres = Object.keys(genreMinutes)
-        .map(g => ({ label: isRussian ? (GENRE_RU[g] || g) : g, value: genreMinutes[g] }))
-        .sort((a, b) => b.value - a.value);
-      const TOP = 5;
-      const genreEntries = sortedGenres.slice(0, TOP).map((e, i) => ({ label: e.label, value: e.value, color: CHART_PALETTE[i] }));
-      if (sortedGenres.length > TOP) {
-        const rest = sortedGenres.slice(TOP).reduce((s, e) => s + e.value, 0);
-        genreEntries.push({ label: isRussian ? "Другое" : "Other", value: rest, color: CHART_OTHER_COLOR });
-      }
-      const totalGenreMinutes = sortedGenres.reduce((s, e) => s + e.value, 0);
-      drawDonutChart(
-        document.getElementById("genreChart"),
-        genreEntries,
-        totalGenreMinutes >= 60 ? Math.round(totalGenreMinutes / 60) + " ч" : Math.round(totalGenreMinutes) + " мин",
-        isRussian ? "всего просмотра" : "total watched"
-      );
-      renderChartLegend(document.getElementById("genreLegend"), genreEntries, e => {
-        const hours = e.value / 60;
-        const pct = totalGenreMinutes ? Math.round(e.value / totalGenreMinutes * 100) : 0;
-        return (hours >= 10 ? Math.round(hours) : hours.toFixed(1)) + " ч · " + pct + "%";
-      });
-
-      const statuses = readStatuses();
-      const counts = { watching: 0, planned: 0, completed: 0, dropped: 0 };
-      Object.keys(statuses).forEach(id => { const s = statuses[id]; if (counts[s] !== undefined) counts[s]++; });
-      const statusEntries = Object.keys(counts)
-        .map(s => ({ label: isRussian ? STATUS_LABELS[s].ru : STATUS_LABELS[s].en, value: counts[s], color: STATUS_COLORS[s] }))
-        .filter(e => e.value > 0);
-      const totalStatuses = statusEntries.reduce((s, e) => s + e.value, 0);
-      drawDonutChart(
-        document.getElementById("statusChart"),
-        statusEntries,
-        String(totalStatuses),
-        isRussian ? "тайтлов со статусом" : "tracked titles"
-      );
-      renderChartLegend(document.getElementById("statusLegend"), statusEntries, e => {
-        const pct = totalStatuses ? Math.round(e.value / totalStatuses * 100) : 0;
-        return e.value + " · " + pct + "%";
-      });
+      return window.AVDisplayCharts?.render();
     }
 
     /* ===== Списки тайтлов ===== */
     function miniCardHTML(item) {
       return "<a class=\"mini-card\" href=\"anime.html?id=" + encodeURIComponent(item.id) + "\">" +
-        "<img src=\"" + escapeHtml(item.image || "image/poster1.jpg") + "\" alt=\"\" loading=\"lazy\" " +
-        "onerror=\"this.onerror=null;this.src='image/poster1.jpg';\">" +
+        "<img src=\"" + escapeHtml(item.image || "poster-unavailable.svg") + "\" alt=\"\" loading=\"lazy\" " +
+        "onerror=\"this.onerror=null;this.src='poster-unavailable.svg';\">" +
         "<span class=\"mini-title\">" + escapeHtml(AVTitles.display(item,isRussianNow()?"ru":"en")) + "</span>" +
         "</a>";
     }
 
     function renderLists() {
       const isRussian = isRussianNow();
-      const catalog = readCatalog();
-      const byId = new Map(catalog.map(t => [String(t.id), t]));
-
-      const statuses = readStatuses();
-      const watchingIds = Object.keys(statuses).filter(id => statuses[id] === "watching");
+      const saved = AVState.savedView();
+      const byId = saved.items;
+      const watchingIds = [...saved.statuses].filter(([,status]) => status === "watching").map(([id]) => id);
       const watchingGrid = document.getElementById("watchingGrid");
       if (watchingGrid) {
         const items = watchingIds.map(id => byId.get(id)).filter(Boolean);
@@ -1672,7 +1609,7 @@
 
       const favoritesGrid = document.getElementById("favoritesGrid");
       if (favoritesGrid) {
-        const items = readFavorites().map(id => byId.get(String(id))).filter(Boolean);
+        const items = [...saved.favorites].map(id => byId.get(id)).filter(Boolean);
         favoritesGrid.innerHTML = items.length
           ? items.map(miniCardHTML).join("")
           : "<div class=\"empty-note\">" + (isRussian
@@ -1693,6 +1630,12 @@
 
     /* ===== Эффекты: сакура, снег, блёстки, сердечки ===== */
     const DECOR_MODES = [
+      { id: "deep-space", icon: "✧", ru: "Глубокий космос", en: "Deep space" },
+      { id: "quiet-mist", icon: "≋", ru: "Тихий туман", en: "Quiet mist" },
+      { id: "night-city", icon: "▥", ru: "Ночной город", en: "Night city" },
+      { id: "crimson-eyes", icon: "◉", ru: "Багровый взгляд", en: "Crimson gaze" },
+      { id: "celestial-eyes", icon: "◈", ru: "Небесный взгляд", en: "Celestial gaze" },
+      { id: "qi-rings", icon: "◎", ru: "Кольца духовной энергии", en: "Spiritual energy rings" },
       { id: "off", icon: "🚫", ru: "Выключено", en: "Off" },
       { id: "sakura", icon: "🌸", ru: "Лепестки сакуры", en: "Sakura petals" },
       { id: "snow", icon: "❄️", ru: "Снег", en: "Snow" },
@@ -1718,6 +1661,7 @@
     let cursorSparkLast = 0;
 
     function currentDecorId() {
+      if(matchMedia("(forced-colors: active)").matches)return "off";
       let mode = "off";
       try { mode = localStorage.getItem("animeVoidDecor") || "off"; } catch (error) {}
       return DECOR_MODES.some(m => m.id === mode) ? mode : "off";
@@ -1728,6 +1672,13 @@
     }
 
     function spawnDecorParticle(mode, w, h) {
+      if(['deep-space','quiet-mist','night-city'].includes(mode)){
+        const paper=document.documentElement.dataset.avInterface==='manga';
+        return {type:mode,x:mode==='night-city'?0:Math.random()*w,y:mode==='night-city'?h-8:Math.random()*h,size:mode==='quiet-mist'?Math.min(220,w*.7):1+Math.random()*2,w,h,vx:mode==='quiet-mist'?.025:0,vy:mode==='deep-space'?-.025:0,sway:0,swaySpeed:0,rot:0,vr:0,alpha:mode==='quiet-mist'?.12:mode==='night-city'?.18:.45,life:1,age:0,color:paper?'#a71e35':mode==='deep-space'?'#b8c9fa':mode==='quiet-mist'?'#b6aad4':'#8397c7'};
+      }
+
+      if(['crimson-eyes','celestial-eyes','qi-rings'].includes(mode))return {type:mode,x:w*(mode==='qi-rings'?(.3+Math.random()*.4):.76),y:h*(mode==='qi-rings'?(.25+Math.random()*.4):.49),size:(innerWidth<761?44:82)+Math.random()*10,vy:-.06,vx:0,sway:0,swaySpeed:0,alpha:mode==='qi-rings'?.24:.42,rot:0,vr:.0006,life:1,age:0,color:mode==='crimson-eyes'?'#e96391':mode==='celestial-eyes'?'#7dd9eb':'#d5b16d'};
+
       if(mode === "bubbles")return {type:"bubble",x:Math.random()*w,y:h+28,size:6+Math.random()*11,vy:-.5-Math.random()*.65,vx:-.12+Math.random()*.24,sway:Math.random()*6.28,swaySpeed:.012,color:"#b5d8f2",alpha:.22};
       if(mode === "meteors")return {type:"meteor",x:Math.random()*w+40,y:Math.random()*h*.6,size:24+Math.random()*22,vy:2.2,vx:-5.5,sway:0,swaySpeed:0,color:"#d3c0ff",alpha:.38};
       if(mode === "dandelions")return {type:"dandelion",x:Math.random()*w,y:h+22,size:5+Math.random()*4,vy:-.45-Math.random()*.45,vx:.15,sway:Math.random()*6.28,swaySpeed:.013,rot:Math.random(),vr:.006,color:"#f1ebd6",alpha:.5};
@@ -1781,6 +1732,20 @@
       ctx.globalAlpha = p.alpha;
       ctx.translate(p.x, p.y);
       ctx.fillStyle = p.color;
+      if(['deep-space','quiet-mist','night-city'].includes(p.type)){
+        p.age+=.001;p.life-=.00015;ctx.globalAlpha=p.alpha*Math.min(1,p.age*3)*Math.min(1,p.life*4);
+        if(p.type==='deep-space'){ctx.beginPath();ctx.arc(0,0,p.size,0,Math.PI*2);ctx.fill();ctx.strokeStyle=p.color;ctx.lineWidth=.6;if(p.size>2){ctx.beginPath();ctx.moveTo(-6,0);ctx.lineTo(6,0);ctx.moveTo(0,-6);ctx.lineTo(0,6);ctx.stroke();}}
+        else if(p.type==='quiet-mist'){const g=ctx.createRadialGradient(0,0,0,0,0,p.size);g.addColorStop(0,p.color);g.addColorStop(1,p.color+'00');ctx.fillStyle=g;ctx.scale(1,.45);ctx.fillRect(-p.size,-p.size,p.size*2,p.size*2);}
+        else{const count=12,bw=Math.ceil(p.w/count);for(let i=0;i<count;i++){const bh=Math.min(95,p.h*.28)*(0.4+Math.abs(Math.sin(i*1.7))*.6);ctx.fillStyle=p.color;ctx.fillRect(i*bw,-bh,bw-3,bh);ctx.save();ctx.globalAlpha*=.4+Math.sin(p.age+i)*.1;ctx.fillStyle=document.documentElement.dataset.avInterface==='manga'?'#fffdf7':'#f1d9a6';for(let y=-bh+8;y<-8;y+=13)for(let x=6;x<bw-6;x+=13){if((Math.floor(x/13)+Math.floor(y/13)+i)%3)ctx.fillRect(i*bw+x,y,3,5);}ctx.restore();}}
+        ctx.restore();return;
+      }
+      if(['crimson-eyes','celestial-eyes','qi-rings'].includes(p.type)){
+        p.age+=.004;p.life-=.001;ctx.globalAlpha=p.alpha*Math.min(1,p.age)*Math.min(1,p.life*5);ctx.strokeStyle=p.color;ctx.lineWidth=1.3;const s=p.size;
+        if(p.type==='qi-rings'){ctx.rotate(p.rot);for(let j=0;j<3;j++){ctx.beginPath();ctx.ellipse(0,0,s*(1-j*.19),s*(.36+j*.1),j*Math.PI/3,0,Math.PI*2);ctx.stroke();}for(let j=0;j<8;j++){const a=j*Math.PI/4;ctx.beginPath();ctx.arc(Math.cos(a)*s,Math.sin(a)*s*.36,1.5,0,Math.PI*2);ctx.fill();}}
+        else{for(const side of [-1,1]){ctx.save();ctx.translate(side*s*.78,0);ctx.scale(side,1);ctx.beginPath();ctx.moveTo(-s*.64,0);ctx.quadraticCurveTo(0,-s*.53,s*.67,-s*.08);ctx.quadraticCurveTo(0,s*.32,-s*.64,0);ctx.closePath();ctx.stroke();ctx.save();ctx.clip();const r=s*.24,g=ctx.createRadialGradient(0,-s*.035,0,0,-s*.035,r);g.addColorStop(0,'#f0dfff');g.addColorStop(.5,p.color);g.addColorStop(1,'rgba(20,8,40,0)');ctx.fillStyle=g;ctx.beginPath();ctx.arc(0,-s*.035,r,0,Math.PI*2);ctx.fill();ctx.stroke();ctx.beginPath();ctx.arc(0,-s*.035,r*.7,0,Math.PI*2);ctx.stroke();ctx.beginPath();ctx.ellipse(0,-s*.035,r*.18,r*.8,0,0,Math.PI*2);ctx.fillStyle='#0b0816';ctx.fill();ctx.fillStyle='#f4eaff';ctx.beginPath();ctx.arc(-r*.28,-r*.35,r*.12,0,Math.PI*2);ctx.fill();ctx.translate(0,-s*.035);ctx.rotate(p.rot*(p.type==='crimson-eyes'?4:-3));for(let j=0;j<6;j++){const a=j*Math.PI/3;ctx.beginPath();ctx.moveTo(Math.cos(a)*r*.72,Math.sin(a)*r*.72);ctx.lineTo(Math.cos(a+.25)*r,Math.sin(a+.25)*r);ctx.stroke();}ctx.restore();ctx.beginPath();ctx.moveTo(-s*.62,-s*.15);ctx.quadraticCurveTo(0,-s*.62,s*.78,-s*.2);ctx.stroke();ctx.restore();}}
+        ctx.restore();return;
+      }
+
       if(p.type === "bubble"){
         ctx.strokeStyle=p.color;ctx.lineWidth=.8;ctx.beginPath();ctx.arc(0,0,p.size,0,Math.PI*2);ctx.stroke();ctx.beginPath();ctx.arc(-p.size*.15,-p.size*.15,p.size*.65,Math.PI*1.05,Math.PI*1.55);ctx.stroke();
       }else if(p.type === "meteor"){
@@ -1855,7 +1820,7 @@
       ctx.clearRect(0, 0, w, h);
       const mode = currentDecorId();
       if (mode === "off") return;
-      const target = mode === "bubbles" ? 16 : mode === "meteors" ? 5 : mode === "dandelions" ? 22 : mode === "bokeh" ? 12 : mode === "rain" ? (innerWidth<761?54:84) : mode === "fireflies" ? 22 : mode === "autumn" ? 28 : mode === "sakura" ? 42 : mode === "snow" ? 70 : mode === "stars" ? 34 : mode === "cursor" ? 0 : 26;
+      const target = mode==="night-city"?1:mode==="quiet-mist"?3:mode==="deep-space"?24:["crimson-eyes","celestial-eyes"].includes(mode)?1:mode==="qi-rings"?(innerWidth<761?1:2):mode === "bubbles" ? 16 : mode === "meteors" ? 5 : mode === "dandelions" ? 22 : mode === "bokeh" ? 12 : mode === "rain" ? (innerWidth<761?54:84) : mode === "fireflies" ? 22 : mode === "autumn" ? 28 : mode === "sakura" ? 42 : mode === "snow" ? 70 : mode === "stars" ? 34 : mode === "cursor" ? 0 : 26;
       if (decorParticles.length < target && now - decorLastSpawn > (mode === "rain" ? 18 : 90)) {
         const particle = spawnDecorParticle(mode, w, h);
         if (particle) {
@@ -1887,6 +1852,7 @@
     }
 
     function startDecor(mode) {
+      if(window.AVInterface&&!AVInterface.effectsAllowed())mode="off";
       if(matchMedia("(prefers-reduced-motion: reduce)").matches || document.hidden) mode="off";
       decorParticles = [];
       if (cursorSparkListener) {
@@ -1936,13 +1902,16 @@
         decorCtx = decorCanvas.getContext("2d");
         decorResizeListener = () => {
           if (decorCanvas) {
-            decorCanvas.width = window.innerWidth;
-            decorCanvas.height = window.innerHeight;
+            const host=decorCanvas.parentElement;decorCanvas.width=host===document.body?window.innerWidth:host.clientWidth;decorCanvas.height=host===document.body?window.innerHeight:host.clientHeight;
           }
         };
         decorResizeListener();
         window.addEventListener("resize", decorResizeListener);
       }
+      decorCanvas.dataset.avScene=mode;
+      const eyeScene=["deep-space","quiet-mist","night-city","crimson-eyes","celestial-eyes","qi-rings"].includes(mode),sceneHost=eyeScene?document.querySelector('.hero,.profile-hero'):null;
+      if(sceneHost){sceneHost.classList.add('av-scene-host');sceneHost.appendChild(decorCanvas);}else if(decorCanvas.parentElement!==document.body)document.body.appendChild(decorCanvas);
+      decorResizeListener?.();
       if (!decorRunning) {
         decorRunning = true;
         decorFrameId = requestAnimationFrame(decorFrame);
@@ -2210,5 +2179,6 @@
 <!-- Cloudflare Web Analytics -->
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "c9a10757745f4f5f9f2496ed6966c59f"}'></script>
 <script>window.avRefreshView=()=>{renderAll();};document.addEventListener('av:theme',()=>renderStatsCharts());document.addEventListener('av:charts-visible',()=>renderStatsCharts());</script>
+<script>addEventListener('av:rewards',()=>renderStatsAndAchievements());</script>
 </body>
 </html>

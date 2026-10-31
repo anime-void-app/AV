@@ -1,0 +1,27 @@
+/* Scoped composition only: native outbound links and manual marks remain unchanged. */
+.av-watch-page.vi-ready{background:var(--vi-bg);color:var(--vi-text)}
+.av-watch-page.vi-ready>header{background:var(--vi-glass);border-bottom:1px solid var(--vi-line);gap:16px}
+.av-watch-page.vi-ready :is(.logo,.back,.profile-btn){color:var(--vi-text)}
+.av-watch-page.vi-ready .logo span{color:var(--vi-accent)}
+.av-watch-page.vi-ready>main{max-width:1200px;padding-top:clamp(24px,5vw,56px)}
+.av-watch-page.vi-ready .watch-top{margin-bottom:28px;max-width:900px;overflow-wrap:anywhere}
+.av-watch-page.vi-ready .watch-top h1{font-size:clamp(25px,4vw,44px);line-height:1.15;letter-spacing:-.025em;color:var(--vi-text)}
+.av-watch-page.vi-ready :is(.watch-top p,.where-box p,.where-note,.platform-card-label small){color:var(--vi-muted)}
+.av-watch-page.vi-ready .where-box{background:var(--vi-panel);border:1px solid var(--vi-line);box-shadow:var(--vi-shadow);color:var(--vi-text)}
+.av-watch-page.vi-ready :is(.where-box h2,.where-box h3,.episodes h2){color:var(--vi-text)}
+.av-watch-page.vi-ready .where-kicker{color:var(--vi-accent)}
+.av-watch-page.vi-ready :is(.platform-card,.control-btn,.episode,.lang-btn,.theme-toggle,.platform-btn){background:var(--vi-panel);border:1px solid var(--vi-line);color:var(--vi-text);min-height:44px}
+.av-watch-page.vi-ready .platform-card{box-shadow:none}
+.av-watch-page.vi-ready .platform-card:hover{border-color:var(--vi-accent)}
+.av-watch-page.vi-ready .controls{display:grid;grid-template-columns:1fr 1.3fr 1fr;align-items:stretch}
+.av-watch-page.vi-ready .control-btn{white-space:normal;overflow-wrap:anywhere;padding:14px;line-height:1.4}
+.av-watch-page.vi-ready :is(.episode.active,.control-btn:hover:not(:disabled),.episode:hover,.where-link){background:var(--av-solid,#7140bf);border-color:var(--vi-line);color:#fff}
+.av-watch-page.vi-ready .episode.watched:not(.active){color:var(--vi-accent);border-color:var(--vi-accent);background:var(--vi-panel)}
+.av-watch-page.vi-ready :is(button,a):focus-visible{outline:3px solid var(--vi-accent);outline-offset:3px}
+.av-watch-page.vi-ready #avEpisodeNotice a{color:var(--vi-text);text-decoration:underline}
+.av-watch-page.vi-ready .platform-card-label{overflow-wrap:anywhere}
+html[data-av-interface=astral] .av-watch-page.vi-ready .where-box{background:linear-gradient(135deg,var(--vi-panel),var(--vi-bg))}
+html[data-av-interface=manga] .av-watch-page.vi-ready :is(.where-box,.platform-card,.control-btn,.episode,.where-link){border-radius:3px;box-shadow:none}
+html[data-av-interface=manga] .av-watch-page.vi-ready .where-box{border-top:4px solid var(--vi-accent)}
+@media(max-width:760px){.av-watch-page.vi-ready>header{position:relative!important;flex-wrap:wrap;padding:16px 5%}.av-watch-page.vi-ready .header-actions{display:flex;flex-wrap:wrap;gap:10px;max-width:100%}.av-watch-page.vi-ready .back{white-space:normal}.av-watch-page.vi-ready .controls{grid-template-columns:1fr 1fr}.av-watch-page.vi-ready #markWatchedBtn{grid-column:1/-1;grid-row:1}.av-watch-page.vi-ready .where-box{padding:20px}.av-watch-page.vi-ready .episode-grid{grid-template-columns:repeat(auto-fill,minmax(110px,1fr))}}
+@media(forced-colors:active){.av-watch-page.vi-ready :is(.where-box,.platform-card,.episode,.control-btn){border-color:CanvasText}.av-watch-page.vi-ready .episode.active{outline:2px solid Highlight}}

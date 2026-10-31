@@ -18,3 +18,16 @@ html[data-av-quiet=true] .vc-profile{animation:none!important}
 @keyframes vc-banner-drift{from{transform:scale(1.06) translateX(-1.5%)}to{transform:scale(1.06) translateX(1.5%)}}
 .vc-public-shade{z-index:3}
 .sc-dialog label{display:grid;gap:7px;margin:12px 0}.sc-dialog textarea,.sc-dialog input:not([type=checkbox]){width:100%;box-sizing:border-box;padding:12px;background:#100d19;color:#fff;border:1px solid #75578d;border-radius:10px;font:14px system-ui}.sc-dialog textarea{min-height:110px;resize:vertical}
+
+/* 17.4.1: the cover is one image, the profile body never repeats it. */
+.vc-public-profile{background-image:none!important;background-color:#15101f!important;isolation:isolate}
+.vc-public-profile>.sc-public-info{background:linear-gradient(140deg,#1b1326,#120f1b)!important;padding-top:24px}
+.sc-profile-edit{position:absolute;right:16px;top:16px;z-index:6;width:42px;height:42px;display:grid;place-items:center;font:23px system-ui;text-decoration:none!important;color:#f2e3ff!important;background:#180e29da;border:1px solid #c89bff88;border-radius:12px;box-shadow:0 4px 18px #0005}
+.sc-profile-edit:hover{background:#553078}.sc-profile-edit:focus-visible{outline:3px solid #e1bbff;outline-offset:3px}
+.sc-public-info>a.sc-muted{display:inline-block;font-size:11px;margin-top:10px;max-width:100%;overflow-wrap:anywhere}
+.vc-public-name{display:flex;flex-wrap:wrap;gap:10px;align-items:center}.vc-public-name>.sc-foundation,.vc-public-name>h1{flex-basis:100%}.vc-public-name>h1{margin:0 0 7px}
+.vc-founder-title{flex-shrink:1}.rank-row .vc-founder-title{max-width:100%}
+@media(max-width:760px){.sc-profile-edit{right:12px;top:12px}.vc-public-name .vc-exclusive{font-size:12px;letter-spacing:.7px;white-space:normal}.vc-public-profile>.sc-public-info{padding:20px}.vc-public-name{gap:9px}}
+
+/* Thread comfort: a stable scrollable feed, separate composer, no online presence badge. */
+.sc-message-list{max-height:62dvh;min-height:100px;overflow:auto;overscroll-behavior:contain;scrollbar-width:thin;padding:4px 8px 4px 0;scroll-padding:12px}.sc-message-list:focus-visible{outline:3px solid var(--vi-accent,#b681ff);outline-offset:3px}.sc-message-body{white-space:pre-wrap;overflow-wrap:anywhere}.sc-thread-tools{position:relative;display:flex;flex-wrap:wrap;gap:10px;margin:14px 0}.sc-thread-tools button{min-height:44px}.sc-compose{margin-top:20px;padding-top:18px;border-top:1px solid var(--vi-line,#684880)}.sc-compose textarea{min-height:115px;resize:vertical}.sc-network{padding:12px;border:1px solid #b57777;border-radius:10px;color:var(--vi-text,#f7f1ff);font-size:13px}.sc-draft-note{font-size:12px;color:var(--vi-muted,#c1afd5);margin:0}.sc-draft-note:empty{display:none}.sc-message-head{flex-wrap:wrap;gap:8px}.sc-message-list .sc-message{min-width:0}.sc-message-list .sc-message time{font-size:11px;color:var(--vi-muted,#c1afd5)}@media(max-width:760px){.sc-message-list{max-height:55dvh;padding-right:2px}.sc-message{padding:14px}.sc-message .sc-actions button{min-height:44px;font-size:12px}.sc-compose textarea{font-size:16px}.sc-thread{padding:16px}.sc-message-head>a{overflow-wrap:anywhere;min-width:0}.sc-thread-tools button{flex:1 1 auto}}

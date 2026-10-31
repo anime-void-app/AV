@@ -1392,15 +1392,17 @@
   <link rel="stylesheet" href="av-enhancements.css?v=1">
   <script src="av-enhancements.js?v=1" defer></script>
 <link rel="canonical" href="https://anime-void-app.github.io/AV/">
-  <script src="av-safety.js?v=9"></script>
-  <script src="av-state.js?v=16"></script>
+  <script src="av-safety.js?v=18.1"></script>
+  <script src="av-state.js?v=18.1"></script><script defer src="void-display-charts.js?v=18.1"></script><link rel="stylesheet" href="void-display-charts.css?v=18.1"><script src="av-progress.js?v=18.1"></script><link rel="stylesheet" href="av-progress.css?v=18.1"><script src="av-rewards.js?v=18.1"></script>
   <script src="av-titles.js?v=20261030-2"></script>
   <script>window.AVTitles=window.AVTitles||{russian:()=>'',display:(x,l)=>(l==='en'?x?.titleEnglish:'')||x?.title||'',normalize:v=>String(v||'').toLowerCase().trim(),plan:q=>({variants:[String(q||'').toLowerCase()],ids:[],terms:[],correction:''}),match:(x,q)=>[x.title,x.titleEnglish,x.titleRomaji,x.titleNative].some(v=>String(v||'').toLowerCase().includes(String(q||'').toLowerCase())),score:()=>0,count:0};</script>
   <link rel="stylesheet" href="av-design.css?v=17.0">
   <script src="av-design.js?v=17.0" defer></script>
   <link rel="stylesheet" href="av-atmosphere.css?v=16.6">
   <script src="av-atmosphere.js?v=16.6" defer></script>
-<link rel="stylesheet" href="visual-studio.css?v=17.4"><script src="visual-studio.js?v=17.4" defer></script><link rel="stylesheet" href="banner-atelier.css?v=17.3"><script src="banner-atelier.js?v=17.3" defer></script><link rel="stylesheet" href="void-social.css?v=17.4"><script src="supabase-client.js?v=2.49.8" defer></script><script src="void-custom.js?v=17.4" defer></script><script src="void-social.js?v=17.4" defer></script><meta name="av-release" content="17.4-identity-community"></head>
+<link rel="stylesheet" href="visual-studio.css?v=17.4"><script src="visual-studio.js?v=17.4.1" defer></script><link rel="stylesheet" href="banner-atelier.css?v=17.3"><script src="banner-atelier.js?v=17.3" defer></script><link rel="stylesheet" href="void-social.css?v=18.1"><script src="supabase-client.js?v=2.49.8" defer></script><script src="void-custom.js?v=17.4.1" defer></script><script src="void-social.js?v=18.1" defer></script><meta name="av-release" content="18.1-unified"><link rel="stylesheet" href="void-interface.css?v=18.1"><script src="void-interface.js?v=18.1"></script>
+<script src="void-journal.js?v=18.1"></script>
+<link rel="stylesheet" href="void-dashboard.css?v=18.1"><script src="void-dashboard.js?v=18.1"></script><link rel="stylesheet" href="void-tv.css?v=18.1"><script src="void-tv.js?v=18.1" defer></script><link rel="stylesheet" href="void-title-accent.css?v=18.1"><script src="void-title-accent.js?v=18.1" defer></script><link rel="stylesheet" href="void-title-scene.css?v=18.1"><script src="void-title-scene.js?v=18.1"></script><link rel="stylesheet" href="void-daily-card.css?v=18.1"><script src="void-daily-card.js?v=18.1" defer></script><script src="void-catalog-view.js?v=18.1"></script><link rel="stylesheet" href="void-festivals.css?v=18.1"><script src="void-festivals.js?v=18.1" defer></script></head>
 
 <body class="av-shell av-home">
   <header>
@@ -1428,6 +1430,7 @@
   </header>
 
   <main>
+    <section id="festivalHome" hidden aria-label="Выбранное фестивальное оформление"></section>
     <section class="hero">
       <div class="hero-content">
         <span class="tag" id="heroTag">ТВОЙ МИР АНИМЕ</span>
@@ -1595,7 +1598,7 @@
       <div class="section-heading">
         <div>
           <h2 id="moodTitle">💭 Что посмотреть?</h2>
-          <div class="subtitle" id="moodSubtitle">Выбери настроение — подберу из твоего каталога</div>
+          <div class="subtitle" id="moodSubtitle">Выбери настроение — подберу из твоего каталога</div><a class="dna-home-entry av-copy vx-home-entry" href="explore.html" data-ru="Исследовать VOID: атласы, музыка и открытия ↗" data-en="Explore VOID: atlases, music & discoveries ↗">Исследовать VOID: атласы, музыка и открытия ↗</a>
         </div>
         <button type="button" class="mood-shuffle" id="moodShuffle" onclick="renderMoodPicks()" title="Другие варианты">🎲</button>
       </div>
@@ -1638,7 +1641,7 @@
         </div>
       </div>
       <div class="stats-row">
-        <div class="stat-card"><strong id="statEpisodes">0</strong><span id="statEpisodesLabel">серий просмотрено</span></div>
+        <div class="stat-card"><strong id="statEpisodes">0</strong><span id="statEpisodesLabel">отмеченных серий</span></div>
         <div class="stat-card"><strong id="statHours">0</strong><span id="statHoursLabel">время просмотра</span></div>
         <div class="stat-card"><strong id="statTitles">0</strong><span id="statTitlesLabel">тайтлов начато</span></div>
         <div class="stat-card"><strong id="statFavorites">0</strong><span id="statFavoritesLabel">в избранном</span></div>
@@ -1720,7 +1723,7 @@
   <script>
     const anime = [
       {
-        id: 1, title: "Тень бездны", genre: "Фэнтези",image: "image/poster1.jpg",
+        id: 1, title: "Тень бездны", genre: "Фэнтези",image: "poster-unavailable.svg",
         year: 2026, symbol: "☽", label: "DARK FANTASY",
         color: "linear-gradient(145deg,#54217b,#17152e 65%,#090810)",
         description: "Молодой странник отправляется в забытые земли, где древняя магия меняет судьбы."
@@ -1809,6 +1812,22 @@ try {
   });
 } catch (error) {
   console.error("Не удалось восстановить каталог:", error);
+}
+
+/* Cache refresh must not discard saved legacy-ID metadata or overwrite an unreadable source. */
+function persistHomeCatalog() {
+  try {
+    const raw = localStorage.getItem("animeVoidCatalog");
+    const saved = raw === null ? [] : AVSafe.catalog(JSON.parse(raw), true);
+    const merged = new Map(saved.map(item => [String(item.id), item]));
+    for (const item of anime) if (String(item.id).startsWith("anilist-")) merged.set(String(item.id), item);
+    const validated = AVSafe.catalog([...merged.values()], true);
+    localStorage.setItem("animeVoidCatalog", JSON.stringify(validated));
+    return true;
+  } catch (error) {
+    console.warn("Каталог не перезаписан; исходная запись сохранена / Catalogue not overwritten; original record preserved.", error);
+    return false;
+  }
 }
 
 function showNextCatalogPage() {
@@ -2007,10 +2026,7 @@ allNewItems.forEach(apiItem => {
       apiHasMore = pageData.pageInfo.hasNextPage;
       apiPage++;
     }
-    localStorage.setItem(
-  "animeVoidCatalog",
-  JSON.stringify(anime.filter(item => String(item.id).startsWith("anilist-")))
-);
+    persistHomeCatalog();
 
 if (!donghuaMode) {
   localStorage.setItem("animeVoidApiPage", String(apiPage));
@@ -2159,7 +2175,7 @@ if (!donghuaMode) {
           <a class="av-card-entry" href="${AVSafe.escape(window.avAnimeUrl?window.avAnimeUrl(item.id):'anime.html?id='+encodeURIComponent(item.id))}">
           <div class="poster" style="--poster:${item.color}">
 
-<img loading="lazy" decoding="async" src="${AVSafe.escape(item.image || ('image/poster' + item.id + '.jpg'))}" alt="${AVSafe.escape(displayTitle)}" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;" onerror="this.onerror=null;this.src='image/poster1.jpg';">
+<img loading="lazy" decoding="async" src="${AVSafe.escape(item.image || ('image/poster' + item.id + '.jpg'))}" alt="${AVSafe.escape(displayTitle)}" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;" onerror="this.onerror=null;this.src='poster-unavailable.svg';">
 
 
 
@@ -2174,6 +2190,7 @@ if (!donghuaMode) {
     ${item.episodes ? ` · ${item.episodes} ${isRussian ? "серий" : "eps"}` : ""}
     ${item.status ? ` · ${AVSafe.escape(isRussian?translateStatus(item.status):item.status)}` : ""}
 </div>
+            ${AVProgress.html(item)}
 
           </div>
           </a>
@@ -2300,8 +2317,8 @@ if (!donghuaMode) {
         if (item.rating) metaParts.push(`⭐ ${item.rating}`);
         return `
           <button type="button" class="airing-card" onclick="openAnimePage('${AVSafe.escape(encodeURIComponent(item.id))}')">
-            <img src="${AVSafe.escape(item.image || 'image/poster1.jpg')}" alt="" loading="lazy"
-              onerror="this.onerror=null;this.src='image/poster1.jpg';">
+            <img src="${AVSafe.escape(item.image || 'poster-unavailable.svg')}" alt="" loading="lazy"
+              onerror="this.onerror=null;this.src='poster-unavailable.svg';">
             <div class="airing-body">
               <div class="airing-name" data-anime-title-id="${AVSafe.escape(item.id)}">${AVSafe.escape(displayTitle)}</div>
               <div class="airing-countdown">${metaParts.join(" · ")}</div>
@@ -2466,6 +2483,12 @@ if (!donghuaMode) {
 
     /* ===== Эффекты: сакура, снег, блёстки, сердечки ===== */
     const DECOR_MODES = [
+      { id: "deep-space", icon: "✧", ru: "Глубокий космос", en: "Deep space" },
+      { id: "quiet-mist", icon: "≋", ru: "Тихий туман", en: "Quiet mist" },
+      { id: "night-city", icon: "▥", ru: "Ночной город", en: "Night city" },
+      { id: "crimson-eyes", icon: "◉", ru: "Багровый взгляд", en: "Crimson gaze" },
+      { id: "celestial-eyes", icon: "◈", ru: "Небесный взгляд", en: "Celestial gaze" },
+      { id: "qi-rings", icon: "◎", ru: "Кольца духовной энергии", en: "Spiritual energy rings" },
       { id: "off", icon: "🚫", ru: "Выключено", en: "Off" },
       { id: "sakura", icon: "🌸", ru: "Лепестки сакуры", en: "Sakura petals" },
       { id: "snow", icon: "❄️", ru: "Снег", en: "Snow" },
@@ -2491,6 +2514,8 @@ if (!donghuaMode) {
     let cursorSparkLast = 0;
 
     function currentDecorId() {
+      if(matchMedia("(forced-colors: active)").matches)return "off";
+      if(window.AVInterface&&!AVInterface.effectsAllowed())return "off";
       let mode = "off";
       try { mode = localStorage.getItem("animeVoidDecor") || "off"; } catch (error) {}
       return DECOR_MODES.some(m => m.id === mode) ? mode : "off";
@@ -2501,6 +2526,13 @@ if (!donghuaMode) {
     }
 
     function spawnDecorParticle(mode, w, h) {
+      if(['deep-space','quiet-mist','night-city'].includes(mode)){
+        const paper=document.documentElement.dataset.avInterface==='manga';
+        return {type:mode,x:mode==='night-city'?0:Math.random()*w,y:mode==='night-city'?h-8:Math.random()*h,size:mode==='quiet-mist'?Math.min(220,w*.7):1+Math.random()*2,w,h,vx:mode==='quiet-mist'?.025:0,vy:mode==='deep-space'?-.025:0,sway:0,swaySpeed:0,rot:0,vr:0,alpha:mode==='quiet-mist'?.12:mode==='night-city'?.18:.45,life:1,age:0,color:paper?'#a71e35':mode==='deep-space'?'#b8c9fa':mode==='quiet-mist'?'#b6aad4':'#8397c7'};
+      }
+
+      if(['crimson-eyes','celestial-eyes','qi-rings'].includes(mode))return {type:mode,x:w*(mode==='qi-rings'?(.3+Math.random()*.4):.76),y:h*(mode==='qi-rings'?(.25+Math.random()*.4):.49),size:(innerWidth<761?44:82)+Math.random()*10,vy:-.06,vx:0,sway:0,swaySpeed:0,alpha:mode==='qi-rings'?.24:.42,rot:0,vr:.0006,life:1,age:0,color:mode==='crimson-eyes'?'#e96391':mode==='celestial-eyes'?'#7dd9eb':'#d5b16d'};
+
       if(mode === "bubbles")return {type:"bubble",x:Math.random()*w,y:h+28,size:6+Math.random()*11,vy:-.5-Math.random()*.65,vx:-.12+Math.random()*.24,sway:Math.random()*6.28,swaySpeed:.012,color:"#b5d8f2",alpha:.22};
       if(mode === "meteors")return {type:"meteor",x:Math.random()*w+40,y:Math.random()*h*.6,size:24+Math.random()*22,vy:2.2,vx:-5.5,sway:0,swaySpeed:0,color:"#d3c0ff",alpha:.38};
       if(mode === "dandelions")return {type:"dandelion",x:Math.random()*w,y:h+22,size:5+Math.random()*4,vy:-.45-Math.random()*.45,vx:.15,sway:Math.random()*6.28,swaySpeed:.013,rot:Math.random(),vr:.006,color:"#f1ebd6",alpha:.5};
@@ -2554,6 +2586,20 @@ if (!donghuaMode) {
       ctx.globalAlpha = p.alpha;
       ctx.translate(p.x, p.y);
       ctx.fillStyle = p.color;
+      if(['deep-space','quiet-mist','night-city'].includes(p.type)){
+        p.age+=.001;p.life-=.00015;ctx.globalAlpha=p.alpha*Math.min(1,p.age*3)*Math.min(1,p.life*4);
+        if(p.type==='deep-space'){ctx.beginPath();ctx.arc(0,0,p.size,0,Math.PI*2);ctx.fill();ctx.strokeStyle=p.color;ctx.lineWidth=.6;if(p.size>2){ctx.beginPath();ctx.moveTo(-6,0);ctx.lineTo(6,0);ctx.moveTo(0,-6);ctx.lineTo(0,6);ctx.stroke();}}
+        else if(p.type==='quiet-mist'){const g=ctx.createRadialGradient(0,0,0,0,0,p.size);g.addColorStop(0,p.color);g.addColorStop(1,p.color+'00');ctx.fillStyle=g;ctx.scale(1,.45);ctx.fillRect(-p.size,-p.size,p.size*2,p.size*2);}
+        else{const count=12,bw=Math.ceil(p.w/count);for(let i=0;i<count;i++){const bh=Math.min(95,p.h*.28)*(0.4+Math.abs(Math.sin(i*1.7))*.6);ctx.fillStyle=p.color;ctx.fillRect(i*bw,-bh,bw-3,bh);ctx.save();ctx.globalAlpha*=.4+Math.sin(p.age+i)*.1;ctx.fillStyle=document.documentElement.dataset.avInterface==='manga'?'#fffdf7':'#f1d9a6';for(let y=-bh+8;y<-8;y+=13)for(let x=6;x<bw-6;x+=13){if((Math.floor(x/13)+Math.floor(y/13)+i)%3)ctx.fillRect(i*bw+x,y,3,5);}ctx.restore();}}
+        ctx.restore();return;
+      }
+      if(['crimson-eyes','celestial-eyes','qi-rings'].includes(p.type)){
+        p.age+=.004;p.life-=.001;ctx.globalAlpha=p.alpha*Math.min(1,p.age)*Math.min(1,p.life*5);ctx.strokeStyle=p.color;ctx.lineWidth=1.3;const s=p.size;
+        if(p.type==='qi-rings'){ctx.rotate(p.rot);for(let j=0;j<3;j++){ctx.beginPath();ctx.ellipse(0,0,s*(1-j*.19),s*(.36+j*.1),j*Math.PI/3,0,Math.PI*2);ctx.stroke();}for(let j=0;j<8;j++){const a=j*Math.PI/4;ctx.beginPath();ctx.arc(Math.cos(a)*s,Math.sin(a)*s*.36,1.5,0,Math.PI*2);ctx.fill();}}
+        else{for(const side of [-1,1]){ctx.save();ctx.translate(side*s*.78,0);ctx.scale(side,1);ctx.beginPath();ctx.moveTo(-s*.64,0);ctx.quadraticCurveTo(0,-s*.53,s*.67,-s*.08);ctx.quadraticCurveTo(0,s*.32,-s*.64,0);ctx.closePath();ctx.stroke();ctx.save();ctx.clip();const r=s*.24,g=ctx.createRadialGradient(0,-s*.035,0,0,-s*.035,r);g.addColorStop(0,'#f0dfff');g.addColorStop(.5,p.color);g.addColorStop(1,'rgba(20,8,40,0)');ctx.fillStyle=g;ctx.beginPath();ctx.arc(0,-s*.035,r,0,Math.PI*2);ctx.fill();ctx.stroke();ctx.beginPath();ctx.arc(0,-s*.035,r*.7,0,Math.PI*2);ctx.stroke();ctx.beginPath();ctx.ellipse(0,-s*.035,r*.18,r*.8,0,0,Math.PI*2);ctx.fillStyle='#0b0816';ctx.fill();ctx.fillStyle='#f4eaff';ctx.beginPath();ctx.arc(-r*.28,-r*.35,r*.12,0,Math.PI*2);ctx.fill();ctx.translate(0,-s*.035);ctx.rotate(p.rot*(p.type==='crimson-eyes'?4:-3));for(let j=0;j<6;j++){const a=j*Math.PI/3;ctx.beginPath();ctx.moveTo(Math.cos(a)*r*.72,Math.sin(a)*r*.72);ctx.lineTo(Math.cos(a+.25)*r,Math.sin(a+.25)*r);ctx.stroke();}ctx.restore();ctx.beginPath();ctx.moveTo(-s*.62,-s*.15);ctx.quadraticCurveTo(0,-s*.62,s*.78,-s*.2);ctx.stroke();ctx.restore();}}
+        ctx.restore();return;
+      }
+
       if(p.type === "bubble"){
         ctx.strokeStyle=p.color;ctx.lineWidth=.8;ctx.beginPath();ctx.arc(0,0,p.size,0,Math.PI*2);ctx.stroke();ctx.beginPath();ctx.arc(-p.size*.15,-p.size*.15,p.size*.65,Math.PI*1.05,Math.PI*1.55);ctx.stroke();
       }else if(p.type === "meteor"){
@@ -2628,7 +2674,7 @@ if (!donghuaMode) {
       ctx.clearRect(0, 0, w, h);
       const mode = currentDecorId();
       if (mode === "off") return;
-      const target = mode === "bubbles" ? 16 : mode === "meteors" ? 5 : mode === "dandelions" ? 22 : mode === "bokeh" ? 12 : mode === "rain" ? (innerWidth<761?54:84) : mode === "fireflies" ? 22 : mode === "autumn" ? 28 : mode === "sakura" ? 42 : mode === "snow" ? 70 : mode === "stars" ? 34 : mode === "cursor" ? 0 : 26;
+      const target = mode==="night-city"?1:mode==="quiet-mist"?3:mode==="deep-space"?24:["crimson-eyes","celestial-eyes"].includes(mode)?1:mode==="qi-rings"?(innerWidth<761?1:2):mode === "bubbles" ? 16 : mode === "meteors" ? 5 : mode === "dandelions" ? 22 : mode === "bokeh" ? 12 : mode === "rain" ? (innerWidth<761?54:84) : mode === "fireflies" ? 22 : mode === "autumn" ? 28 : mode === "sakura" ? 42 : mode === "snow" ? 70 : mode === "stars" ? 34 : mode === "cursor" ? 0 : 26;
       if (decorParticles.length < target && now - decorLastSpawn > (mode === "rain" ? 18 : 90)) {
         const particle = spawnDecorParticle(mode, w, h);
         if (particle) {
@@ -2660,6 +2706,7 @@ if (!donghuaMode) {
     }
 
     function startDecor(mode) {
+      if(window.AVInterface&&!AVInterface.effectsAllowed())mode="off";
       if(matchMedia("(prefers-reduced-motion: reduce)").matches || document.hidden) mode="off";
       decorParticles = [];
       if (cursorSparkListener) {
@@ -2709,13 +2756,16 @@ if (!donghuaMode) {
         decorCtx = decorCanvas.getContext("2d");
         decorResizeListener = () => {
           if (decorCanvas) {
-            decorCanvas.width = window.innerWidth;
-            decorCanvas.height = window.innerHeight;
+            const host=decorCanvas.parentElement;decorCanvas.width=host===document.body?window.innerWidth:host.clientWidth;decorCanvas.height=host===document.body?window.innerHeight:host.clientHeight;
           }
         };
         decorResizeListener();
         window.addEventListener("resize", decorResizeListener);
       }
+      decorCanvas.dataset.avScene=mode;
+      const eyeScene=["deep-space","quiet-mist","night-city","crimson-eyes","celestial-eyes","qi-rings"].includes(mode),sceneHost=eyeScene?document.querySelector('.hero,.profile-hero'):null;
+      if(sceneHost){sceneHost.classList.add('av-scene-host');sceneHost.appendChild(decorCanvas);}else if(decorCanvas.parentElement!==document.body)document.body.appendChild(decorCanvas);
+      decorResizeListener?.();
       if (!decorRunning) {
         decorRunning = true;
         decorFrameId = requestAnimationFrame(decorFrame);
@@ -2752,12 +2802,14 @@ if (!donghuaMode) {
     }
 
     function holidayFireworksEnabled() {
+      if(window.AVInterface&&!AVInterface.effectsAllowed())return false;
       try { return localStorage.getItem("animeVoidHoliday") !== "off"; } catch (error) { return true; }
     }
 
     let fwCanvas = null;
     let fwCtx = null;
     let fwRunning = false;
+    let fwFrameId=0,fwResizeListener=null;
     let fwRockets = [];
     let fwSparks = [];
     let fwLastLaunch = 0;
@@ -2838,7 +2890,7 @@ if (!donghuaMode) {
         ctx.restore();
       });
       fwSparks = fwSparks.filter(spark => spark.life > 0);
-      requestAnimationFrame(fireworksFrame);
+      fwFrameId=requestAnimationFrame(fireworksFrame);
     }
 
     function startHolidayFireworks() {
@@ -2854,15 +2906,16 @@ if (!donghuaMode) {
         }
       };
       resizeFireworks();
-      window.addEventListener("resize", resizeFireworks);
+      fwResizeListener=resizeFireworks;window.addEventListener("resize", fwResizeListener);
       fwRockets = [];
       fwSparks = [];
       fwLastLaunch = 0;
       fwRunning = true;
-      requestAnimationFrame(fireworksFrame);
+      fwFrameId=requestAnimationFrame(fireworksFrame);
     }
 
     function stopHolidayFireworks() {
+      cancelAnimationFrame(fwFrameId);fwFrameId=0;if(fwResizeListener){window.removeEventListener("resize",fwResizeListener);fwResizeListener=null;}
       fwRunning = false;
       if (fwCanvas) {
         fwCanvas.remove();
@@ -3010,8 +3063,8 @@ if (!donghuaMode) {
       const todayIndex = (new Date().getDay() + 6) % 7;
       const calendarItemHTML = (entry, hidden) => `
               <button type="button" class="calendar-item${hidden ? " hidden-extra" : ""}" onclick="openAnimePage('${AVSafe.escape(encodeURIComponent(entry.item.id))}')">
-                <img src="${AVSafe.escape(entry.item.image || 'image/poster1.jpg')}" alt="" loading="lazy"
-                  onerror="this.onerror=null;this.src='image/poster1.jpg';">
+                <img src="${AVSafe.escape(entry.item.image || 'poster-unavailable.svg')}" alt="" loading="lazy"
+                  onerror="this.onerror=null;this.src='poster-unavailable.svg';">
                 <span class="calendar-item-body">
                   <span class="calendar-item-name" data-anime-title-id="${AVSafe.escape(entry.item.id)}">${AVSafe.escape(isRussian ? (getRussianTitle(entry.item) || entry.item.title) : entry.item.title)}</span>
                   <span class="calendar-item-meta">${isRussian ? "серия" : "ep."} ${entry.item.nextEpisode} · ${entry.time}</span>
@@ -3112,7 +3165,7 @@ if (!donghuaMode) {
         return "<div class=\"chart-legend-item\">" +
           "<div class=\"chart-legend-row\">" +
           "<span class=\"chart-dot\" style=\"background:" + e.color + "\"></span>" +
-          "<span class=\"chart-label\">" + e.label + "</span>" +
+          "<span class=\"chart-label\">" + AVSafe.escape(e.label) + "</span>" +
           "<span class=\"chart-value\">" + formatValue(e) + "</span>" +
           "</div>" +
           "<div class=\"chart-bar\"><span style=\"width:" + pct + "%; background:" + e.color + "\"></span></div>" +
@@ -3121,82 +3174,9 @@ if (!donghuaMode) {
     }
 
     function renderStatsCharts() {
-      const isRussian = localStorage.getItem("animeVoidLanguage") !== "en";
-      let catalog = [];
-      try { catalog = AVSafe.read("animeVoidCatalog", null) || []; } catch (err) {}
-      const byId = new Map(catalog.map(t => [String(t.id), t]));
-
-      const genreMinutes = {};
-      for (let i = 0; i < localStorage.length; i++) {
-        const key = localStorage.key(i);
-        if (!key || key.indexOf("watched_") !== 0) continue;
-        const id = key.slice(8);
-        let episodes = [];
-        try { episodes = AVSafe.read(key, null) || []; } catch (err) { continue; }
-        if (!episodes.length) continue;
-        const item = byId.get(id);
-        if (!item || !Array.isArray(item.genres) || !item.genres.length) continue;
-        let minutes = 0;
-        episodes.forEach(ep => {
-          const stored = Number(localStorage.getItem("duration_" + id + "_" + ep));
-          minutes += window.AVState ? AVState.episodeMinutes(id,ep,item) : (stored > 0 ? stored/60 : 24);
-        });
-        const per = minutes / item.genres.length;
-        item.genres.forEach(g => { genreMinutes[g] = (genreMinutes[g] || 0) + per; });
-      }
-      const sortedGenres = Object.keys(genreMinutes)
-        .map(g => ({ label: isRussian ? (GENRE_RU[g] || g) : g, value: genreMinutes[g] }))
-        .sort((a, b) => b.value - a.value);
-      const TOP = 5;
-      const genreEntries = sortedGenres.slice(0, TOP).map((e, i) => ({ label: e.label, value: e.value, color: CHART_PALETTE[i] }));
-      if (sortedGenres.length > TOP) {
-        const rest = sortedGenres.slice(TOP).reduce((s, e) => s + e.value, 0);
-        genreEntries.push({ label: isRussian ? "Другое" : "Other", value: rest, color: CHART_OTHER_COLOR });
-      }
-      const totalGenreMinutes = sortedGenres.reduce((s, e) => s + e.value, 0);
-      drawDonutChart(
-        document.getElementById("genreChart"),
-        genreEntries,
-        totalGenreMinutes >= 60 ? Math.round(totalGenreMinutes / 60) + " ч" : Math.round(totalGenreMinutes) + " мин",
-        isRussian ? "всего просмотра" : "total watched"
-      );
-      renderChartLegend(document.getElementById("genreLegend"), genreEntries, e => {
-        const hours = e.value / 60;
-        const pct = totalGenreMinutes ? Math.round(e.value / totalGenreMinutes * 100) : 0;
-        return (hours >= 10 ? Math.round(hours) : hours.toFixed(1)) + " ч · " + pct + "%";
-      });
-
-      let statuses = {};
-      try { statuses = AVSafe.read("animeVoidStatuses", null) || {}; } catch (err) {}
-      const counts = { watching: 0, planned: 0, completed: 0, dropped: 0 };
-      Object.keys(statuses).forEach(id => { const s = statuses[id]; if (counts[s] !== undefined) counts[s]++; });
-      const statusEntries = Object.keys(counts)
-        .map(s => ({ label: isRussian ? STATUS_LABELS[s].ru : STATUS_LABELS[s].en, value: counts[s], color: STATUS_COLORS[s] }))
-        .filter(e => e.value > 0);
-      const totalStatuses = statusEntries.reduce((s, e) => s + e.value, 0);
-      drawDonutChart(
-        document.getElementById("statusChart"),
-        statusEntries,
-        String(totalStatuses),
-        isRussian ? "тайтлов со статусом" : "tracked titles"
-      );
-      renderChartLegend(document.getElementById("statusLegend"), statusEntries, e => {
-        const pct = totalStatuses ? Math.round(e.value / totalStatuses * 100) : 0;
-        return e.value + " · " + pct + "%";
-      });
-
-      const genresTitle = document.getElementById("chartGenresTitle");
-      if (genresTitle) genresTitle.textContent = isRussian ? "🎬 Часы по жанрам" : "🎬 Hours by genre";
-      const statusesTitle = document.getElementById("chartStatusesTitle");
-      if (statusesTitle) statusesTitle.textContent = isRussian ? "📋 Статусы тайтлов" : "📋 Title statuses";
-
-      const chartsSection = document.getElementById("chartsSection");
-      if (chartsSection) chartsSection.hidden = !(totalGenreMinutes > 0 || totalStatuses > 0);
-      const chartsSectionTitle = document.getElementById("chartsSectionTitle");
-      if (chartsSectionTitle) chartsSectionTitle.textContent = isRussian ? "Твои графики" : "Your charts";
-      const chartsSectionSubtitle = document.getElementById("chartsSectionSubtitle");
-      if (chartsSectionSubtitle) chartsSectionSubtitle.textContent = isRussian ? "Часы по жанрам и статусы тайтлов" : "Hours by genre and title statuses";
+      return window.AVDisplayCharts?.render();
     }
+
     window.renderStatsCharts = renderStatsCharts;
     renderStatsCharts();
 
@@ -3308,8 +3288,9 @@ if (!donghuaMode) {
     ];
 
     function achievementsList(stats, isRussian) {
+      if(window.AVRewards?.ready())stats=AVRewards.stats();
       const genreEpisodes = stats.genreEpisodes || {};
-      return [
+      const list = [
         { tier: "mortal", icon: "🌱", unlocked: stats.totalEpisodes >= 1, progress: stats.totalEpisodes, target: 1, title: isRussian ? "Первые шаги" : "First steps", hint: isRussian ? "Посмотреть 1 серию" : "Watch 1 episode" },
         { tier: "mortal", icon: "📺", unlocked: stats.totalEpisodes >= 10, progress: stats.totalEpisodes, target: 10, title: isRussian ? "Разогрев" : "Warming up", hint: isRussian ? "10 серий" : "10 episodes" },
         { tier: "mortal", icon: "🕐", unlocked: stats.hours >= 1, progress: stats.hours, target: 1, title: isRussian ? "Час в пустоте" : "Hour in the void", hint: isRussian ? "1 час просмотра" : "1 hour watched" },
@@ -3351,6 +3332,7 @@ if (!donghuaMode) {
         { tier: "god", icon: "⚔️", unlocked: (genreEpisodes["Action"] || 0) >= 300, progress: genreEpisodes["Action"] || 0, target: 300, title: isRussian ? "Аватар войны" : "Avatar of war", hint: isRussian ? "300 серий экшена" : "300 action episodes" },
         { tier: "god", icon: "🌌", unlocked: stats.totalEpisodes >= 10000, progress: stats.totalEpisodes, target: 10000, title: isRussian ? "Создатель Вселенной" : "Universe creator", hint: isRussian ? "10000 серий. Ты — создатель" : "10000 episodes. You are the creator" }
       ];
+      return window.AVRewards?AVRewards.decorate(list,isRussian):list;
     }
 
     function renderAchievementsSection() {
@@ -3385,12 +3367,13 @@ if (!donghuaMode) {
               ${tierList.map(achievement => {
                 const done = achievement.unlocked;
                 const current = Math.min(Number(achievement.progress) || 0, Number(achievement.target) || 0);
-                const cardPct = Number(achievement.target) ? Math.min(100, Math.round((Number(achievement.progress) || 0) / achievement.target * 100)) : 0;
+                const currentText=(Math.floor(current*100)/100).toLocaleString(isRussian?"ru":"en",{maximumFractionDigits:2});
+                const cardPct = Number(achievement.target) ? Math.min(100, Math.floor((Number(achievement.progress) || 0) / achievement.target * 100)) : 0;
                 return `<div class="tier-card${done ? " unlocked" : ""}">
                   <span class="tier-card-icon">${done ? achievement.icon : "🔒"}</span>
                   <span class="tier-card-title">${AVSafe.escape(achievement.title)}</span>
                   <span class="tier-card-hint">${achievement.hint}</span>
-                  ${done ? "" : (achievement.target ? `<div class="tier-card-bar"><span style="width:${cardPct}%"></span></div><span class="tier-card-nums">${current}/${achievement.target}</span>` : "")}
+                  ${done ? "" : (achievement.target ? `<div class="tier-card-bar"><span style="width:${cardPct}%"></span></div><span class="tier-card-nums">${currentText}/${achievement.target}</span>` : "")}
                 </div>`;
               }).join("")}
             </div>`;
@@ -3508,14 +3491,14 @@ if (!donghuaMode) {
         let seen = [];
         try { seen = AVSafe.read("animeVoidSeenAchievements", []); } catch (error) {}
         const alternate=achievementsList(collectAchievementStats(),localStorage.getItem('animeVoidLanguage')==='en');
-        const fresh = list.filter((a,i) => a.unlocked && !seen.includes(a.title) && !seen.includes(alternate[i]?.title));
+        const fresh = list.filter((a,i) => !a.virtual && a.unlocked && !seen.includes(a.title) && !seen.includes(alternate[i]?.title));
         if (!fresh.length) return;
         if (seen.length) {
           showAchievementToasts(fresh);
           launchConfetti();
           playDing();
         }
-        list.forEach((a,i) => {if(a.unlocked){for(const title of [a.title,alternate[i]?.title])if(title&&!seen.includes(title))seen.push(title);}});
+        list.forEach((a,i) => {if(a.unlocked&&!a.virtual){for(const title of [a.title,alternate[i]?.title])if(title&&!seen.includes(title))seen.push(title);}});
         localStorage.setItem("animeVoidSeenAchievements", JSON.stringify(seen));
       } catch (error) {}
     }
@@ -3554,37 +3537,16 @@ if (!donghuaMode) {
     }
 
     function renderDailyQuests() {
-      const box = document.getElementById("dailyQuests");
-      if (!box) return;
-      const isRussian = localStorage.getItem("animeVoidLanguage") !== "en";
-      const log = getActivityLog();
-      const today = new Date().toISOString().slice(0, 10);
-      const day = log[today] || { eps: 0, favs: 0, ratings: 0 };
-      const streak = calcStreak(log);
-      const quests = [
-        { icon: "📺", ru: "Отметь 2 серии", en: "Mark 2 episodes", cur: day.eps || 0, target: 2 },
-        { icon: "❤️", ru: "Добавь в избранное", en: "Add to favorites", cur: day.favs || 0, target: 1 },
-        { icon: "⭐", ru: "Поставь оценку", en: "Rate an anime", cur: day.ratings || 0, target: 1 }
-      ];
-      box.innerHTML = `
-        <div class="quests-head">
-          <span class="quests-title">${isRussian ? "🎯 Задания дня" : "🎯 Daily quests"}</span>
-          <span class="quests-streak">🔥 ${streak}${isRussian ? " дн. подряд" : " day streak"}</span>
-        </div>
-        <div class="quests-list">
-          ${quests.map(quest => {
-            const ok = quest.cur >= quest.target;
-            const pct = Math.min(100, Math.round(quest.cur / quest.target * 100));
-            return `<div class="quest-item${ok ? " done" : ""}">
-              <span class="quest-ico">${quest.icon}</span>
-              <div class="quest-body">
-                <span class="quest-text">${isRussian ? quest.ru : quest.en}</span>
-                <div class="quest-bar"><span style="width:${pct}%"></span></div>
-              </div>
-              <span class="quest-check">${ok ? "✅" : Math.min(quest.cur, quest.target) + "/" + quest.target}</span>
-            </div>`;
-          }).join("")}
-        </div>`;
+      const box=document.getElementById('dailyQuests');if(!box)return;
+      const ru=localStorage.getItem('animeVoidLanguage')!=='en',a=AVState.activity();box.replaceChildren();
+      const make=(tag,cls,text)=>{const n=document.createElement(tag);n.className=cls;if(text!==undefined)n.textContent=text;return n;};
+      const head=make('div','quests-head');head.append(make('span','quests-title',ru?'🎯 Задания дня':'🎯 Daily quests'));
+      if(a.known)head.append(make('span','quests-streak','🔥 '+a.streak+(ru?' дн. с действиями':' action-day streak')));box.append(head);
+      box.append(make('p','subtitle',ru?'Локальные действия за день UTC. Повторная отметка — новое действие, не уникальная серия. Не таймер просмотра; этот блок не начисляет награды.':'Local actions during a UTC day. A repeated mark is another action, not a unique episode. Not a viewing timer; this panel awards no rewards.'));
+      if(!a.known){box.append(make('p','subtitle',ru?'Журнал недоступен или повреждён. Его сырьё сохранено, выполнение заданий неизвестно.':'The log is unavailable or malformed. Raw data is untouched; quest progress is unknown.'));return;}
+      const list=make('div','quests-list');for(const q of [{icon:'📺',ru:'Отметь 2 серии',en:'Mark 2 episodes',cur:a.day.eps,target:2},{icon:'❤️',ru:'Добавь в избранное',en:'Add to favorites',cur:a.day.favs,target:1},{icon:'⭐',ru:'Поставь оценку',en:'Rate an anime',cur:a.day.ratings,target:1}]){
+        const ok=q.cur>=q.target,item=make('div','quest-item'+(ok?' done':'')),body=make('div','quest-body'),bar=make('div','quest-bar'),fill=document.createElement('span');fill.style.width=Math.min(100,Math.round(q.cur/q.target*100))+'%';bar.setAttribute('aria-hidden','true');bar.append(fill);body.append(make('span','quest-text',ru?q.ru:q.en),bar);item.append(make('span','quest-ico',q.icon),body,make('span','quest-check',ok?'✅':Math.min(q.cur,q.target)+'/'+q.target));list.append(item);
+      }box.append(list);
     }
 
     /* ===== Что посмотреть сегодня: фильтры + объяснимые рекомендации ===== */
@@ -3746,8 +3708,8 @@ if (!donghuaMode) {
       grid.innerHTML = items.map((item, index) => `
         <button type="button" class="top-card" onclick="openAnimePage('${AVSafe.escape(encodeURIComponent(item.id))}')">
           <span class="top-rank">#${index + 1}</span>
-          <img src="${AVSafe.escape(item.image || 'image/poster1.jpg')}" alt="" loading="lazy"
-            onerror="this.onerror=null;this.src='image/poster1.jpg';">
+          <img src="${AVSafe.escape(item.image || 'poster-unavailable.svg')}" alt="" loading="lazy"
+            onerror="this.onerror=null;this.src='poster-unavailable.svg';">
           <span class="top-name" data-anime-title-id="${AVSafe.escape(item.id)}">${AVSafe.escape(isRussian ? (getRussianTitle(item) || item.title) : item.title)}</span>
           <span class="top-score">${AVSafe.escape(item.rating ? "⭐ " + item.rating : "")}</span>
         </button>`).join("");
@@ -3842,8 +3804,8 @@ if (!donghuaMode) {
       ctx.font = "700 30px Arial, sans-serif";
       ctx.fillText(isRussian ? "моя статистика просмотра" : "my watch stats", 72, 168);
       const cells = [
-        { value: String(stats.totalEpisodes), label: isRussian ? "серий просмотрено" : "episodes watched" },
-        { value: "≈ " + stats.hours + " " + (isRussian ? "ч" : "h"), label: isRussian ? "время просмотра" : "watch time" },
+        { value: String(stats.totalEpisodes), label: isRussian ? "отмеченных серий" : "manually marked episodes" },
+        { value: window.AVState?.formatHours?AVState.formatHours(AVState.metrics().minutes,isRussian):"≈ " + stats.hours + " " + (isRussian ? "ч" : "h"), label: isRussian ? "расчёт по отметкам" : "estimated from marks" },
         { value: String(stats.watchedTitles), label: isRussian ? "тайтлов начато" : "titles started" },
         { value: String(stats.favoritesCount), label: isRussian ? "в избранном" : "favorites" }
       ];
@@ -3928,7 +3890,7 @@ if (!donghuaMode) {
       const seasonRoots = applySeasonGrouping(anime);
       const filtered = collapseSeasonCards(matchingItems, seasonRoots);
       try {
-        localStorage.setItem("animeVoidCatalog", JSON.stringify(anime.filter(item => String(item.id).startsWith("anilist-"))));
+        persistHomeCatalog();
       } catch (error) {
         console.warn("Не удалось сохранить сгруппированные сезоны:", error);
       }
@@ -4064,7 +4026,7 @@ if (!donghuaMode) {
         const found = [...new Map(raw.filter(x=>x&&Number.isSafeInteger(x.id)).map(x=>[x.id,x])).values()].map(mapSearchResult);
         const byId = new Map(anime.map(item=>[String(item.id),item]));
         for(const apiItem of found){const existing=byId.get(apiItem.id);if(existing)Object.assign(existing,apiItem,{relatedSeasons:existing.relatedSeasons||[],searchHit:stamp});else{apiItem.searchHit=stamp;anime.push(apiItem);byId.set(apiItem.id,apiItem);}}
-        try{localStorage.setItem('animeVoidCatalog',JSON.stringify(anime.filter(x=>String(x.id).startsWith('anilist-'))));}catch(e){}
+        try{persistHomeCatalog();}catch(e){}
         searchApiState = '';render();buildSearchSuggestions(queryText);
       } catch(error) {
         if(sequence===apiSearchSequence){searchApiState='error';buildSearchSuggestions(queryText);}
@@ -4134,8 +4096,8 @@ if (!donghuaMode) {
         return `
           <button type="button" class="search-suggestion"
             onclick="openAnimePage('${AVSafe.escape(encodeURIComponent(item.id))}')">
-            <img src="${AVSafe.escape(item.image || 'image/poster1.jpg')}" alt="" loading="lazy"
-              onerror="this.onerror=null;this.src='image/poster1.jpg';">
+            <img src="${AVSafe.escape(item.image || 'poster-unavailable.svg')}" alt="" loading="lazy"
+              onerror="this.onerror=null;this.src='poster-unavailable.svg';">
             <span class="sug-info">
               <span class="sug-title">${AVSafe.escape(displayTitle)}</span>
               <span class="sug-meta">${AVSafe.escape(meta)}</span>
@@ -4218,8 +4180,8 @@ if (!donghuaMode) {
         const displayTitle = isRussian ? (getRussianTitle(item) || item.title) : item.title;
         return `
           <button type="button" class="airing-card" onclick="openAnimePage('${AVSafe.escape(encodeURIComponent(item.id))}')">
-            <img src="${AVSafe.escape(item.image || 'image/poster1.jpg')}" alt="" loading="lazy"
-              onerror="this.onerror=null;this.src='image/poster1.jpg';">
+            <img src="${AVSafe.escape(item.image || 'poster-unavailable.svg')}" alt="" loading="lazy"
+              onerror="this.onerror=null;this.src='poster-unavailable.svg';">
             <div class="airing-body">
               <div class="airing-name" data-anime-title-id="${AVSafe.escape(item.id)}">${AVSafe.escape(displayTitle)}</div>
               <div class="airing-countdown" data-airing-at="${item.airingAt}" data-next-episode="${item.nextEpisode}">
@@ -4301,8 +4263,8 @@ if (!donghuaMode) {
         const displayTitle = isRussian ? (getRussianTitle(item) || item.title) : item.title;
         return `
           <button type="button" class="airing-card" onclick="openAnimePage('${AVSafe.escape(encodeURIComponent(item.id))}')">
-            <img src="${AVSafe.escape(item.image || 'image/poster1.jpg')}" alt="" loading="lazy"
-              onerror="this.onerror=null;this.src='image/poster1.jpg';">
+            <img src="${AVSafe.escape(item.image || 'poster-unavailable.svg')}" alt="" loading="lazy"
+              onerror="this.onerror=null;this.src='poster-unavailable.svg';">
             <div class="airing-body">
               <div class="airing-name" data-anime-title-id="${AVSafe.escape(item.id)}">${AVSafe.escape(displayTitle)}</div>
               <div class="airing-countdown" data-airing-at="${item.airingAt}" data-next-episode="${item.nextEpisode}">
@@ -4381,7 +4343,7 @@ if (!donghuaMode) {
 
     // ----- Watch history & statistics -----
     function collectWatchHistory() {
-      if(window.AVState){const entries=AVState.entries();const last=AVSafe.read("animeVoidLastWatch",null);return entries.sort((a,b)=>Number(b.item.id===last?.animeId)-Number(a.item.id===last?.animeId)||b.episodes.length-a.episodes.length);}
+      if(window.AVState){const entries=AVState.metrics?AVState.metrics().titles:AVState.entries();const last=AVSafe.read("animeVoidLastWatch",null),lastId=AVState.canonicalId?AVState.canonicalId(last?.animeId):last?.animeId;return entries.sort((a,b)=>Number(b.item.id===lastId)-Number(a.item.id===lastId)||b.episodes.length-a.episodes.length);}
       const entries = [];
       for (let i = 0; i < localStorage.length; i++) {
         const storageKey = localStorage.key(i);
@@ -4411,6 +4373,7 @@ if (!donghuaMode) {
     }
 
     function estimateWatchMinutes(entry) {
+      if(Number.isFinite(entry.minutes))return entry.minutes;
       if(window.AVState)return entry.episodes.reduce((n,ep)=>n+AVState.episodeMinutes(entry.item.id,ep,entry.item),0);
       let minutes = 0;
       entry.episodes.forEach(episode => {
@@ -4458,11 +4421,12 @@ if (!donghuaMode) {
       document.getElementById("historyTitle").textContent = isRussian ? "История просмотров" : "Watch history";
       document.getElementById("historySubtitle").textContent = isRussian ? "Твоя статистика" : "Your statistics";
       document.getElementById("statEpisodes").textContent = totalEpisodes;
-      document.getElementById("statHours").textContent = isRussian ? `≈ ${totalHours} ч` : `≈ ${totalHours} h`;
+      document.getElementById("statHours").textContent = window.AVState?.formatHours?AVState.formatHours(entries.reduce((sum,entry)=>sum+estimateWatchMinutes(entry),0),isRussian):(isRussian ? `≈ ${totalHours} ч` : `≈ ${totalHours} h`);
+      document.getElementById("statHours").title=isRussian?"Расчёт по ручным отметкам, не измеренное время плеера.":"Estimated from manual marks, not measured player time.";
       document.getElementById("statTitles").textContent = entries.length;
       document.getElementById("statFavorites").textContent = favorites.length;
-      document.getElementById("statEpisodesLabel").textContent = isRussian ? "серий просмотрено" : "episodes watched";
-      document.getElementById("statHoursLabel").textContent = isRussian ? "время просмотра" : "watch time";
+      document.getElementById("statEpisodesLabel").textContent = isRussian ? "отмеченных серий" : "manually marked episodes";
+      document.getElementById("statHoursLabel").textContent = isRussian ? "расчёт по отметкам" : "estimated from marks";
       document.getElementById("statTitlesLabel").textContent = isRussian ? "тайтлов начато" : "titles started";
       document.getElementById("statFavoritesLabel").textContent = isRussian ? "в избранном" : "in favorites";
 
@@ -4473,19 +4437,21 @@ if (!donghuaMode) {
       document.getElementById("historyGrid").innerHTML = entries.map(entry => {
         const item = entry.item;
         const displayTitle = isRussian ? (getRussianTitle(item) || item.title) : item.title;
-        const total = Number(item.episodes) || 0;
-        const percent = total > 0 ? Math.min(100, Math.round(entry.episodes.length / total * 100)) : 0;
+        const total = entry.progress?.total ?? (Number(item.episodes) || 0);
+        const completion=entry.progress||(window.AVState?.completion?AVState.completion(entry.episodes,total):null);
+        const percent=completion?completion.percent??0:total>0?Math.min(100,Math.floor(entry.episodes.length/total*100)):0;
         const progressText = total > 0
           ? (isRussian ? `${entry.episodes.length} из ${total} серий` : `${entry.episodes.length} of ${total} episodes`)
-          : (isRussian ? `${entry.episodes.length} серий` : `${entry.episodes.length} episodes`);
+          : (isRussian ? `${entry.episodes.length} серий · всего неизвестно` : `${entry.episodes.length} episodes · total unknown`);
+        const actualProgressText=completion?.outsideCatalog?(isRussian?`${entry.episodes.length} отметок · число серий уточняется`:`${entry.episodes.length} marks · episode total needs review`):progressText;
         return `
           <button type="button" class="history-card" onclick="openAnimePage('${AVSafe.escape(encodeURIComponent(item.id))}')">
-            <img src="${AVSafe.escape(item.image || 'image/poster1.jpg')}" alt="" loading="lazy"
-              onerror="this.onerror=null;this.src='image/poster1.jpg';">
+            <img src="${AVSafe.escape(item.image || 'poster-unavailable.svg')}" alt="" loading="lazy"
+              onerror="this.onerror=null;this.src='poster-unavailable.svg';">
             <div class="history-body">
               <div class="history-name" data-anime-title-id="${AVSafe.escape(item.id)}">${AVSafe.escape(displayTitle)}</div>
-              <div class="history-progress-text">${progressText}</div>
-              <div class="history-progress"><div class="history-progress-fill" style="width:${percent}%"></div></div>
+              <div class="history-progress-text">${actualProgressText}</div>
+              <div class="history-progress" ${completion && completion.percent===null?"hidden":""}><div class="history-progress-fill" style="width:${percent}%"></div></div>
             </div>
           </button>`;
       }).join("");
@@ -4528,6 +4494,16 @@ document.getElementById("statusFilter").addEventListener("change", event => {
   render();
 });
 document.getElementById("resetFiltersBtn").addEventListener("click", () => {
+  // Reset cancels pending translation/search work as well as visible controls.
+  ++searchTranslationSequence;
+  ++apiSearchSequence;
+  searchApiController?.abort();
+  searchTranslationController?.abort();
+  if (apiSearchTimer) clearTimeout(apiSearchTimer);
+  if (searchDebounceTimer) clearTimeout(searchDebounceTimer);
+  translatedSearchText = "";
+  searchApiState = "";
+  visibleCatalogCount = 24;
   selectedGenre = "Все";
   selectedYear = "";
   selectedStatus = "";
@@ -4787,7 +4763,7 @@ function toggleFavorite(id) {
         <img
           src="${poster}"
           alt="${AVSafe.escape(item.title)}"
-          onerror="this.onerror=null;this.src='image/poster1.jpg';"
+          onerror="this.onerror=null;this.src='poster-unavailable.svg';"
         >
       </div>
 
@@ -4906,46 +4882,27 @@ function toggleFavorite(id) {
     return;
   }
 
-  const anime = catalog.find(
-    item => String(item.id) === String(lastWatch.animeId)
-  );
+  const anime = catalog.find(item=>String(item.id)===AVState.canonicalId(lastWatch.animeId))||catalog.find(item=>AVState.canonicalId(item.id)===AVState.canonicalId(lastWatch.animeId));
 
   if (!anime) {
     section.style.display = "none";
     return;
   }
 
-  const savedSeconds = Number(
-    localStorage.getItem(
-      `progress_${anime.id}_${lastWatch.episode}`
-    )
-  ) || 0;
-
-  const realDuration = Number(
-    localStorage.getItem(
-      `duration_${anime.id}_${lastWatch.episode}`
-    )
-  ) || 0;
-
-  const progressPercent =
-    realDuration > 0
-      ? Math.min(
-          (savedSeconds / realDuration) * 100,
-          100
-        )
-      : 0;
-
-  const isMovie = String(anime.format || "").toUpperCase() === "MOVIE";
+  const savedSeconds = AVProgress.position(anime.id,Number(lastWatch.episode)) ?? 0;
+  const markedProgress = AVProgress.title(anime.id,anime);
+  const progressPercent = markedProgress.percent ?? 0;
+  const isMovie = markedProgress.isMovie;
   const currentLang = localStorage.getItem("animeVoidLanguage") || "ru";
   const displayTitle = currentLang === "ru"
     ? (getRussianTitle(anime) || anime.title)
     : anime.title;
   const totalEpisodes = isMovie
     ? (currentLang === "ru" ? "Фильм" : "Movie")
-    : (Number(anime.episodes) || "?");
+    : (markedProgress.total || "?");
 
   const progressRounded =
-    Math.round(progressPercent);
+    Math.floor(progressPercent);
 
   const minutes =
     Math.floor(savedSeconds / 60);
@@ -4959,7 +4916,7 @@ function toggleFavorite(id) {
   section.style.display = "block";
 
   // Use known artwork URLs, never guess an extraLarge CDN path.
-  const posterSrc = anime.image || "image/poster1.jpg";
+  const posterSrc = anime.image || "poster-unavailable.svg";
   const backgroundSrc = anime.background ||
     String(anime.image || "");
 
@@ -4971,7 +4928,7 @@ function toggleFavorite(id) {
     <img
       src="${posterSrc}"
       alt="${AVSafe.escape(anime.title)}"
-      onerror="this.onerror=null;this.src='image/poster1.jpg';"
+      onerror="this.onerror=null;this.src='poster-unavailable.svg';"
     >
 
     <div class="continue-info">
@@ -4982,7 +4939,7 @@ function toggleFavorite(id) {
         ${isMovie ? (currentLang === "ru" ? "Фильм" : "Movie") : (currentLang === "ru" ? `Серия ${lastWatch.episode}` : `Episode ${lastWatch.episode}`)}
         ${
           savedSeconds > 0
-            ? ` • продолжить с ${savedTime}`
+            ? (currentLang === "ru" ? ` • старая позиция ${savedTime} (не замер просмотра)` : ` • legacy position ${savedTime} (not measured playback)`)
             : ""
         }
       </p>
@@ -5004,12 +4961,12 @@ function toggleFavorite(id) {
       </strong>
 
       <span id="continueStatsPercent">
-        ${progressRounded}% просмотрено
+        ${AVProgress.text(markedProgress,currentLang === "ru")}
       </span>
 
     </div>
 
-    <div class="continue-progress">
+    <div class="continue-progress" ${markedProgress.percent===null?"hidden":""} role="progressbar" aria-label="${currentLang === 'ru' ? 'Ручные отметки серий' : 'Manual episode marks'}" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${progressPercent}">
 
       <div
         class="continue-progress-fill"
@@ -5019,6 +4976,7 @@ function toggleFavorite(id) {
     </div>
   `;
 
+  card.dataset.progressId = String(anime.id);
   card.dataset.episode =
     String(lastWatch.episode);
   card.dataset.isMovie = String(isMovie);
@@ -5038,6 +4996,7 @@ function toggleFavorite(id) {
   translateCatalogTitles([anime]);
 }
 
+window.avRefreshContinueProgress=()=>{const card=document.getElementById('continueCard');if(!card?.dataset.progressId)return;const ru=(localStorage.getItem('animeVoidLanguage')||'ru')==='ru',p=AVProgress.title(card.dataset.progressId),n=document.getElementById('continueStatsPercent'),bar=card.querySelector('.continue-progress'),seconds=AVProgress.position(card.dataset.progressId,Number(card.dataset.episode));if(n)n.textContent=AVProgress.text(p,ru);if(bar){bar.hidden=p.percent===null;bar.setAttribute('aria-label',ru?'Ручные отметки серий':'Manual episode marks');bar.setAttribute('aria-valuenow',String(p.percent??0));bar.querySelector('.continue-progress-fill').style.width=(p.percent??0)+'%';}card.dataset.progressRounded=String(p.percent??0);card.dataset.savedSeconds=String(seconds??0);const time=Math.floor((seconds??0)/60)+':'+String(Math.floor((seconds??0)%60)).padStart(2,'0');card.dataset.savedTime=time;const desc=document.getElementById('continueEpisodeText');if(desc)desc.textContent=(card.dataset.isMovie==='true'?(ru?'Фильм':'Movie'):(ru?'Серия ':'Episode ')+card.dataset.episode)+(seconds!==null&&seconds>0?(ru?' • старая позиция ':' • legacy position ')+time+(ru?' (не замер просмотра)':' (not measured playback)'):'');};
 
 function setLanguage(lang) {
   lang=lang==='en'?'en':'ru';document.documentElement.lang=lang;
@@ -5275,7 +5234,7 @@ function setLanguage(lang) {
         (isMovie ? "Фильм" : `Серия ${episode}`) +
         (
           savedSeconds > 0
-            ? ` • продолжить с ${savedTime}`
+            ? ` • старая позиция ${savedTime} (не замер просмотра)`
             : ""
         );
     }
@@ -5295,7 +5254,7 @@ function setLanguage(lang) {
 
     if (continueStatsPercent) {
       continueStatsPercent.textContent =
-        `${progressRounded}% просмотрено`;
+        AVProgress.text(AVProgress.title(continueCard.dataset.progressId),true);
     }
 
   } else {
@@ -5392,7 +5351,7 @@ function setLanguage(lang) {
         (isMovie ? "Movie" : `Episode ${episode}`) +
         (
           savedSeconds > 0
-            ? ` • continue from ${savedTime}`
+            ? ` • legacy position ${savedTime} (not measured playback)`
             : ""
         );
     }
@@ -5412,7 +5371,7 @@ function setLanguage(lang) {
 
     if (continueStatsPercent) {
       continueStatsPercent.textContent =
-        `${progressRounded}% watched`;
+        AVProgress.text(AVProgress.title(continueCard.dataset.progressId),false);
     }
   }
 
@@ -5585,6 +5544,8 @@ if (resetFiltersBtn) {
 }
 
 
+window.AVCatalogView?.restore();
+
 // Reuse the saved catalog instead of downloading a new API page on every reload.
 // First-time visitors have no saved catalog, so load the first page for them automatically.
 let hasSavedCatalog = false;
@@ -5622,5 +5583,6 @@ setLanguage(
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "c9a10757745f4f5f9f2496ed6966c59f"}'></script>
 <nav class="av-directory" aria-label="Страницы аниме"><h2>Популярные аниме</h2><ul><li><a href="anime-death-note.html">Тетрадь смерти</a></li><li><a href="anime-bakemonogatari.html">Истории монстров</a></li><li><a href="anime-attack-on-titan.html">Атака титанов</a></li><li><a href="anime-demon-slayer.html">Клинок, рассекающий демонов</a></li><li><a href="anime-jujutsu-kaisen.html">Магическая битва</a></li><li><a href="anime-one-piece.html">Ван-Пис</a></li><li><a href="anime-hunter-x-hunter.html">Охотник x Охотник</a></li><li><a href="anime-one-punch-man.html">Ванпанчмен</a></li><li><a href="anime-a-silent-voice.html">Форма голоса</a></li><li><a href="anime-my-hero-academia.html">Моя геройская академия</a></li></ul></nav>
 <script>window.avRefreshView=()=>{favorites=AVSafe.read('animeVoidFavorites',[]);const stored=AVSafe.read('animeVoidCatalog',[]);const map=new Map(anime.map(x=>[String(x.id),x]));for(const item of stored){if(map.has(item.id))Object.assign(map.get(item.id),item);else anime.push(item);}const lang=localStorage.getItem('animeVoidLanguage')==='en'?'en':'ru';setLanguage(lang);showContinueWatching();};document.addEventListener('av:theme',()=>renderStatsCharts());document.addEventListener('av:charts-visible',()=>renderStatsCharts());</script>
+<script>addEventListener('av:rewards',()=>renderAchievementsSection());</script>
 </body>
 </html>

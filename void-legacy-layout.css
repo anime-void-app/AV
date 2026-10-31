@@ -1,0 +1,11 @@
+/* Remaining token-driven legacy tools; custom quote poster palettes remain independent. */
+:is(.vj-page,.vq-page,.av-universe).vi-ready>header{background:var(--vi-glass);border-bottom:1px solid var(--vi-line);height:auto;min-height:76px;gap:14px}
+:is(.vj-page,.vq-page,.av-universe).vi-ready>header a{color:var(--vi-text);min-height:44px;display:inline-flex;align-items:center}
+:is(.vj-page,.vq-page,.av-universe).vi-ready main{min-width:0}
+:is(.vj-page,.vq-page,.av-universe).vi-ready h1{overflow-wrap:anywhere}
+:is(.vj-page,.vq-page).vi-ready :is(button,input,textarea,select){border-color:var(--vi-line)}
+html[data-av-interface=manga] .vj-page.vi-ready #journalStatus[data-error=true]{color:#8f1f31;border-color:#8f1f31}
+html[data-av-interface=manga] :is(.vj-page,.vq-page).vi-ready :is(.vj-panel,.vq-card,.vq-empty,dialog){border-radius:3px;box-shadow:none}
+html[data-av-interface=manga] .av-universe.vi-ready :is(.u-panel,.u-detail,.u-node,button,input,select){border-radius:3px}
+html[data-av-interface=manga] .av-universe.vi-ready .u-intro{border-left:4px solid var(--vi-accent);padding-left:20px}
+@media(max-width:760px){:is(.vj-page,.vq-page,.av-universe).vi-ready>header{position:relative!important;padding:16px}.av-universe.vi-ready .header-actions{flex-wrap:wrap;max-width:100%;margin-left:0}:is(.vj-page,.vq-page).vi-ready>header nav{gap:8px 18px}}

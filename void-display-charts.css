@@ -1,0 +1,9 @@
+/* Shared chart semantics, without replacing cards, art or saved layout. */
+#chartsSection .chart-card { min-width:0; }
+#chartsSection .chart-legend-row { flex-wrap:wrap; color:var(--vi-text,#e9e2f5); }
+#chartsSection .chart-label { flex:1 1 95px; white-space:normal; overflow-wrap:anywhere; }
+#chartsSection .chart-value { color:var(--vi-text,#e9e2f5); font-size:11px; }
+#chartsSection .chart-empty,.dc-basis { color:var(--vi-muted,#bdb2cf); font-size:12px; line-height:1.6; overflow-wrap:anywhere; }
+#chartsSection .dc-basis { margin:0; width:100%; }
+#chartsSection canvas { color:var(--vi-text,#f5f3ff); }
+#chartsSection .chart-card h3 { color:var(--vi-text,#f5f3ff); }

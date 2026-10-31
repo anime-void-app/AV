@@ -1,0 +1,62 @@
+/* Community chrome follows the viewer's explicit interface choice. Published
+   image URLs/crops, role checks, message controls and custom cosmetics are not replaced. */
+.vs-community.vi-ready { color:var(--vi-text); background-color:var(--vi-bg); }
+.vs-community.vi-ready > main { max-width:1160px; padding:36px clamp(16px,4vw,40px) 80px; }
+.vs-community.vi-ready > header { background:var(--vi-glass); border-color:var(--vi-line); gap:14px; }
+.vs-community.vi-ready > header a { color:var(--vi-text); min-height:44px; display:inline-flex; align-items:center; }
+.vs-community.vi-ready :is(h1,h2,h3) { color:var(--vi-text); overflow-wrap:anywhere; }
+.vs-community.vi-ready h1 { max-width:24ch; margin:12px 0 20px; }
+.vs-community.vi-ready :is(.sc-eyebrow,.sc-muted,.sc-kicker,.sc-counter,.sc-message time,.sc-notice,.sc-draft-note) { color:var(--vi-muted); }
+.vs-community.vi-ready a { color:var(--vi-accent); }
+.vs-community.vi-ready :is(.sc-panel,.sc-person,.sc-dialog) { background:var(--vi-panel); color:var(--vi-text); border-color:var(--vi-line); }
+.vs-community.vi-ready :is(.sc-button,.sc-tabs a) { background:var(--vi-panel); color:var(--vi-text); border-color:var(--vi-line); line-height:1.45; }
+.vs-community.vi-ready :is(.sc-button:hover,.sc-tabs a:hover) { background:color-mix(in srgb,var(--vi-accent) 12%,var(--vi-panel)); border-color:var(--vi-accent); }
+.vs-community.vi-ready :is(.sc-tabs a[aria-current=page],.sc-primary) { background:var(--av-solid,#7041a5); color:#fff; border-color:var(--av-solid,#7041a5); }
+.vs-community.vi-ready :is(.sc-form input,.sc-form textarea,.sc-form select,.sc-search,.sc-dialog textarea,.sc-dialog input:not([type=checkbox])) { background:var(--vi-panel); color:var(--vi-text); border-color:var(--vi-line); }
+.vs-community.vi-ready :is(input,textarea)::placeholder { color:var(--vi-muted); opacity:1; }
+.vs-community.vi-ready :is(input[type=checkbox],input[type=radio]) { accent-color:var(--av-solid,#7041a5); }
+.vs-community.vi-ready .sc-status { background:color-mix(in srgb,var(--vi-accent) 10%,var(--vi-panel)); color:var(--vi-text); }
+.vs-community.vi-ready .sc-error { border-color:var(--vi-accent); }
+.vs-community.vi-ready .sc-grid { grid-template-columns:repeat(auto-fit,minmax(min(240px,100%),1fr)); gap:18px; }
+.vs-community.vi-ready .sc-person { padding:22px; }
+.vs-community.vi-ready .sc-person strong { color:var(--vi-text); }
+.vs-community.vi-ready .sc-foundation { color:var(--vi-accent); }
+.vs-community.vi-ready .sc-tabs { gap:10px; padding:10px 0 18px; border-bottom:1px solid var(--vi-line); }
+.vs-community.vi-ready .sc-tabs a { flex:1 1 160px; }
+.vs-community.vi-ready .sc-thread { max-width:920px; padding:clamp(16px,3vw,28px); }
+.vs-community.vi-ready .sc-message { margin:12px 0; padding:16px; border:1px solid var(--vi-line); border-radius:12px; background:color-mix(in srgb,var(--vi-bg) 25%,var(--vi-panel)); }
+.vs-community.vi-ready .sc-message .sc-actions button { min-height:44px; font-size:12px; }
+.vs-community.vi-ready .sc-message-body { color:var(--vi-text); line-height:1.7; }
+.vs-community.vi-ready .sc-compose textarea { min-height:140px; }
+.vs-community.vi-ready .sc-network { border-color:var(--vi-line); }
+.vs-community.vi-ready :is(.sc-notice,.sc-compose) { border-color:var(--vi-line); }
+.vs-community.vi-ready .sc-notice { line-height:1.8; margin-top:32px; }
+.vs-community.vi-ready .sc-rating { color:var(--vi-accent); }
+.vs-community.vi-ready .vc-public-profile { background-color:var(--vi-panel)!important; }
+.vs-community.vi-ready .vc-public-profile > .sc-public-info { background:var(--vi-panel)!important; color:var(--vi-text); }
+.vs-community.vi-ready .sc-public-info > p { color:var(--vi-text); }
+.vs-community.vi-ready .sc-public-info > .sc-kicker { color:var(--vi-muted); }
+.vs-community.vi-ready .sc-public-info > a.sc-muted { color:var(--vi-accent); }
+.vs-community.vi-ready .sc-public-info .vc-public-avatar { border-color:var(--vi-panel); }
+/* The selected published background is kept behind chrome, even in Manga.
+   The legacy inline backgroundImage remains the source, mirrored only for CSS priority. */
+html[data-av-interface=manga] .vs-community.vi-ready { color-scheme:light; background-image:var(--sc-public-art,none)!important; }
+html[data-av-interface=manga] .vs-community.vi-ready :is(.sc-panel,.sc-person,.sc-message,.sc-tabs a,.sc-button) { border-radius:3px; box-shadow:none; }
+html[data-av-interface=manga] .vs-community.vi-ready .sc-thread { border-top:3px solid #a71e35; }
+html:is([data-av-interface=astral],[data-av-interface=manga]) .vs-community.vi-ready { background-color:var(--vi-bg)!important; }
+.vs-community.vi-ready :is(a,button,input,textarea,select):focus-visible { outline:3px solid var(--vi-accent); outline-offset:3px; }
+@media(max-width:760px) {
+ .vs-community.vi-ready > header { position:relative; top:auto; align-items:center; padding:14px 16px; }
+ .vs-community.vi-ready > header .sc-eyebrow { flex-basis:100%; order:3; font-size:10px; }
+ .vs-community.vi-ready > header a { white-space:normal; font-size:12px; }
+ .vs-community.vi-ready > main { padding:24px 16px 64px; }
+ .vs-community.vi-ready .sc-tabs a { flex:1 1 110px; }
+ .vs-community.vi-ready .sc-message { padding:14px; }
+ .vs-community.vi-ready .sc-message-list { max-height:52dvh; }
+ .vs-community.vi-ready .sc-search-box input { flex-basis:100%; }
+ .vs-community.vi-ready .sc-search-box button { width:100%; }
+}
+@media(forced-colors:active) { .vs-community.vi-ready :is(.sc-person,.sc-message,.sc-panel) { border:1px solid CanvasText; } .vs-community.vi-ready .sc-tabs a[aria-current=page] { border:2px solid Highlight; } }
+/* Uploaded/published scenery must never be used as the contrast surface for
+   headings and navigation. Keep its chosen image visible at the sides. */
+.vs-community.vi-ready[data-sc-public-art=true] > main { background:var(--vi-bg); border-inline:1px solid var(--vi-line); }

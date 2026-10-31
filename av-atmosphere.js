@@ -1,7 +1,7 @@
-/* ANIME VOID 16.6 — attributed local field recordings + original synthesis; no autoplay or microphone. */
+/* ANIME VOID v18 — seven attributed real field recordings; no synthesis, autoplay or microphone. */
 (()=>{'use strict';
-const KEY='animeVoidAmbience',modes=[['rain','🌧️','Дождь за окном','Rain outside the window'],['wind','🍃','Вечерний двор','Evening courtyard'],['train','🚆','Вечерний поезд','Evening train'],['crickets','🌙','Ночь и кузнечики','Night crickets'],['ocean','☕','Тихое кафе','Quiet cafe'],['brook','📖','Шелест книги','Turning pages'],['fire','🔥','Камин вдали','Distant fireplace'],['birds','🕰️','Комната с часами','Room with a clock']];
-const recordings={rain:'audio/rain-v166.mp3',wind:'audio/wind-v166.mp3',ocean:'audio/ocean-v166.mp3',brook:'audio/brook-v166.mp3',fire:'audio/fire-v166.mp3',birds:'audio/birds-v166.mp3'};
+const KEY='animeVoidAmbience',modes=[['train','🚆','Поезд · линия Дзёбан','Train · Joban Line'],['hokkaido','🚃','Поезд · Хоккайдо','Train · Hokkaido'],['japan-rain','🌧️','Дождь · Япония','Rain · Japan'],['rain-wind','🌬️','Дождь и ветер · Лондон','Rain and wind · London'],['stream','💧','Ручей рядом','Nearby stream'],['night-forest','🌲','Ночной лес · Мёдлинг','Night forest · Mödling'],['forest-water','🏞️','Лесной ручей · Канада','Forest stream · Canada']];
+const recordings=Object.fromEntries(modes.map(m=>[m[0],'audio/'+m[0]+'-v18.mp3']));
 const decoded=new Map();let download=null;
 function recordingHeadroom(buffer){
  let peak=0;
@@ -11,51 +11,14 @@ function recordingHeadroom(buffer){
  return buffer;
 }
 const ru=()=>document.documentElement.lang!=='en';
-let prefs={sound:'rain',volume:.25};
-function read(){try{const v=JSON.parse(localStorage.getItem(KEY)||'null');if(v&&modes.some(m=>m[0]===v.sound)&&Number.isFinite(v.volume)&&v.volume>=0&&v.volume<=1)prefs={sound:v.sound,volume:v.volume};}catch(e){}}
+let prefs={sound:'train',volume:.25};
+function read(){prefs={sound:'train',volume:.25};try{const v=JSON.parse(localStorage.getItem(KEY)||'null');if(v&&Number.isFinite(v.volume)&&v.volume>=0&&v.volume<=1)prefs={sound:modes.some(m=>m[0]===v.sound)?v.sound:'train',volume:v.volume};}catch(e){}}
 read();let context=null,source=null,master=null,playing=false,panel=null,invoker=null,operation=0,message='',busy=false;
 const header=document.querySelector('header');if(!header)return;
 const button=document.createElement('button');button.id='avAmbienceToggle';button.className='theme-toggle av-ambience-toggle';button.type='button';button.textContent='🎧';button.setAttribute('aria-haspopup','dialog');button.setAttribute('aria-expanded','false');
 (document.body.classList.contains('av-home')?header:(header.querySelector('.header-actions')||header)).append(button);
 function labels(){button.title=ru()?'Звуки для отдыха':'Relaxing sounds';button.setAttribute('aria-label',(ru()?'Звуки для отдыха':'Relaxing sounds')+(playing?(ru()?' — включены':' — playing'):''));button.classList.toggle('is-playing',playing);if(panel)paint();}
 function save(){try{localStorage.setItem(KEY,JSON.stringify(prefs));}catch(e){message=ru()?'Настройки действуют сейчас, но сохранить их не удалось.':'Settings work now but could not be saved.';}}
-/* Finite buffers keep CPU low on phones: one loop + gain, not hundreds of live oscillators. */
-function synth(ctx,mode){
- const rate=22050,seconds=16,n=rate*seconds,fade=Math.floor(rate*.16),buffer=ctx.createBuffer(2,n,rate);
- for(let channel=0;channel<2;channel++){
-  const raw=new Float32Array(n+fade);let low=0,brown=0,roof=0,roofFreq=700,phase=0;
-  const shift=channel*.067;
-  for(let i=0;i<raw.length;i++){
-   const t=i/rate+shift,w=Math.random()*2-1;low+=.045*(w-low);brown=(brown+.018*w)/1.018;
-   let sample=0;
-   if(mode==='rain'){
-    if(Math.random()<27/rate){roof=.12+Math.random()*.18;roofFreq=650+Math.random()*1800;phase=0;}
-    phase+=2*Math.PI*roofFreq/rate;roof*=.9964;
-    sample=.19*w+.20*low+roof*(.55*Math.sin(phase)+.3*w);
-   }else if(mode==='wind'){
-    const gust=.5+.22*Math.sin(2*Math.PI*t/8)+.15*Math.sin(2*Math.PI*t/3.2);
-    sample=gust*(1.5*low+.6*brown)+.008*w;
-   }else if(mode==='train'){
-    const wheel=(t% .8),p1=Math.exp(-wheel*75),p2=wheel>.105?Math.exp(-(wheel-.105)*75):0;
-    const clack=(p1+p2)*(.16*w+.07*Math.sin(t*2*Math.PI*850));
-    sample=.42*low+.28*brown+.018*Math.sin(2*Math.PI*55*t)+clack;
-   }else{
-    const cycle=t%1.6,burst=cycle<.68?Math.pow(Math.max(0,Math.sin(2*Math.PI*6.25*cycle)),4)*Math.pow(Math.sin(Math.PI*cycle/.68),2):0;
-    const far=(t+.55)%2.0,reply=far<.38?Math.pow(Math.max(0,Math.sin(2*Math.PI*8*far)),4)*Math.pow(Math.sin(Math.PI*far/.38),2):0;
-    sample=.065*burst*Math.sin(2*Math.PI*(channel?4050:3950)*t)+.025*reply*Math.sin(2*Math.PI*4550*t)+.06*low+.004*w;
-   }
-   raw[i]=Math.max(-.8,Math.min(.8,sample));
-  }
-  const out=buffer.getChannelData(channel);
-  out.set(raw.subarray(0,n));
-  for(let i=0;i<fade;i++){const mix=i/fade;out[i]=raw[n+i]*(1-mix)+raw[i]*mix;}
- }
- let energy=0,peak=0;
- for(let c=0;c<2;c++){const a=buffer.getChannelData(c);for(let i=0;i<a.length;i++){energy+=a[i]*a[i];peak=Math.max(peak,Math.abs(a[i]));}}
- const scale=Math.min(.1/Math.sqrt(energy/(2*n)||1),.7/(peak||1));
- for(let c=0;c<2;c++){const a=buffer.getChannelData(c);for(let i=0;i<a.length;i++)a[i]*=scale;}
- return buffer;
-}
 function stop(note=''){
  download?.abort();download=null;
  operation++;playing=false;busy=false;
@@ -81,8 +44,10 @@ async function start(){
     try{const response=await fetch(new URL(recordings[selected],document.baseURI),{signal:controller.signal});if(!response.ok)throw Error('audio-download');const bytes=await response.arrayBuffer();if(version!==operation)return;buffer=recordingHeadroom(await ctx.decodeAudioData(bytes));if(version!==operation)return;decoded.set(selected,buffer);while(decoded.size>2)decoded.delete(decoded.keys().next().value);}
     finally{clearTimeout(timeout);if(download===controller)download=null;}
    }
-  }else buffer=synth(ctx,selected);
+  }else throw Error('unknown-recording');
+  let savedOffline=false;try{if(navigator.serviceWorker?.controller){const cache=await caches.open('av-AV-audio-v1');savedOffline=!!await cache.match(new URL(recordings[selected],document.baseURI),{ignoreSearch:true});}}catch{}
   if(version!==operation){ctx.close().catch(()=>{});return;}
+  if(!savedOffline)message=ru()?'Играет запись. Офлайн-копия не подтверждена: хранилище недоступно или переполнено.':'Recording is playing. An offline copy is not confirmed: storage is unavailable or full.';
   master=ctx.createGain();master.gain.setValueAtTime(0,ctx.currentTime);master.connect(ctx.destination);
   source=ctx.createBufferSource();source.buffer=buffer;source.loop=true;source.connect(master);source.start();
   master.gain.setTargetAtTime(prefs.volume,ctx.currentTime,.12);playing=true;busy=false;
@@ -93,14 +58,14 @@ async function start(){
 function paint(){
  if(!panel)return;
  panel.querySelector('#avAmbienceTitle').textContent=ru()?'Атмосфера для отдыха':'Relaxing atmosphere';
- panel.querySelector('.av-ambience-intro').textContent=ru()?'Уютные сцены и вечерняя аниме-атмосфера. Поезд и кузнечики — прежние.':'Cozy scenes and an evening anime atmosphere. Train and crickets are unchanged.';
+ panel.querySelector('.av-ambience-intro').textContent=ru()?'Настоящие полевые записи: японские поезда и дождь, лес и вода. География указана только там, где её подтверждает источник.':'Real field recordings: Japanese trains and rain, forests and water. Locations are stated only when supported by the source.';
  panel.querySelector('#avAmbienceSelectLabel').textContent=ru()?'Выбери звук':'Choose a sound';
  for(const option of panel.querySelectorAll('option')){const m=modes.find(x=>x[0]===option.value);option.textContent=m[1]+' '+(ru()?m[2]:m[3])+(recordings[m[0]]?(ru()?' · запись':' · recording'):(ru()?' · синтез':' · synthesized'));}
  panel.querySelector('#avAmbienceSelect').value=prefs.sound;
  panel.querySelector('#avAmbienceVolumeLabel').textContent=ru()?'Громкость':'Volume';panel.querySelector('#avAmbienceVolume').value=String(Math.round(prefs.volume*100));panel.querySelector('output').textContent=Math.round(prefs.volume*100)+'%';
  const play=panel.querySelector('#avAmbiencePlay');play.disabled=false;play.setAttribute('aria-busy',String(busy));play.textContent=busy?(ru()?'✕ Отменить загрузку':'✕ Cancel loading'):playing?(ru()?'⏸ Выключить':'⏸ Stop'):(ru()?'▶ Включить':'▶ Play');play.setAttribute('aria-pressed',String(playing));
  panel.querySelector('#avAmbienceClose').textContent=ru()?'Закрыть':'Close';
- panel.querySelector('.av-ambience-note').textContent=ru()?'Запись загружается при первом включении и затем доступна офлайн. Звук включается только тобой. При переходе на другую страницу или сворачивании он останавливается — запусти снова, когда захочешь.':'Recordings download on first play and are then available offline. Audio starts only when you choose. Navigation or hiding the app stops playback; press Play again whenever you want.';
+ panel.querySelector('.av-ambience-note').textContent=ru()?'Запись загружается при первом включении; офлайн доступна, если сохранена и браузер не очистил кэш. Звук включается только тобой. При переходе на другую страницу или сворачивании он останавливается — запусти снова, когда захочешь.':'Recordings download on first play; offline playback requires a retained cached copy. Audio starts only when you choose. Navigation or hiding the app stops playback; press Play again whenever you want.';
  const credits=panel.querySelector('.av-audio-credits');credits.textContent=ru()?'Источники и лицензии записей':'Recording sources and licenses';credits.href='audio-sources.html'+(recordings[prefs.sound]?'#'+prefs.sound:'');
  panel.querySelector('.av-ambience-status').textContent=message||(playing?(prefs.volume===0?(ru()?'Включено, громкость 0%.':'Playing at 0% volume.'):(ru()?'Играет: ':'Playing: ')+(ru()?modes.find(m=>m[0]===prefs.sound)[2]:modes.find(m=>m[0]===prefs.sound)[3])):(ru()?'Сейчас выключено':'Currently off'));
 }
@@ -123,6 +88,7 @@ document.addEventListener('visibilitychange',()=>{if(document.hidden&&(playing||
 addEventListener('pagehide',()=>stop());
 document.addEventListener('play',e=>{if(e.target instanceof HTMLMediaElement&&(playing||busy))stop(ru()?'Фон выключен, чтобы не мешать видео.':'Ambience stopped so it does not interfere with video.');},true);
 addEventListener('storage',e=>{if(e.key===KEY){stop();read();labels();}});
+matchMedia('(forced-colors: active)').addEventListener('change',()=>window.applyDecorFromStorage?.());
 const motion=matchMedia('(prefers-reduced-motion: reduce)');motion.addEventListener('change',()=>{if(typeof window.applyDecorFromStorage==='function')window.applyDecorFromStorage();});
 document.addEventListener('visibilitychange',()=>{if(typeof window.startDecor==='function'&&typeof window.applyDecorFromStorage==='function'){if(document.hidden)window.startDecor('off');else window.applyDecorFromStorage();}});
 // Bound the longer existing effects menu to the visual viewport, including a phone keyboard.

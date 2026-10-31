@@ -241,16 +241,18 @@
   </style>
   <link rel="stylesheet" href="av-enhancements.css?v=1">
   <script src="av-enhancements.js?v=1" defer></script>
-  <script src="av-safety.js?v=5"></script>
+  <script src="av-safety.js?v=18.1"></script><script src="av-state.js?v=18.1"></script><script src="av-rewards.js?v=18.1"></script>
   <script src="av-titles.js?v=20261030-2"></script>
   <script>window.AVTitles=window.AVTitles||{russian:()=>'',display:(x,l)=>(l==='en'?x?.titleEnglish:'')||x?.title||'',normalize:v=>String(v||'').toLowerCase().trim(),plan:q=>({variants:[String(q||'').toLowerCase()],ids:[],terms:[],correction:''}),match:(x,q)=>[x.title,x.titleEnglish,x.titleRomaji,x.titleNative].some(v=>String(v||'').toLowerCase().includes(String(q||'').toLowerCase())),score:()=>0,count:0};</script>
   <link rel="stylesheet" href="av-design.css?v=17.0">
   <script src="av-design.js?v=17.0" defer></script>
   <link rel="stylesheet" href="av-atmosphere.css?v=16.6">
   <script src="av-atmosphere.js?v=16.6" defer></script>
-</head>
+<link rel="stylesheet" href="void-interface.css?v=18.1"><script src="void-interface.js?v=18.1"></script>
+<script src="void-journal.js?v=18.1"></script>
+<link rel="stylesheet" href="void-tv.css?v=18.1"><script src="void-tv.js?v=18.1" defer></script><link rel="stylesheet" href="void-watch-layout.css?v=18.1"></head>
 
-<body class="av-shell">
+<body class="av-shell av-watch-page">
   <header>
     <a href="index.html" class="logo">ANIME<span>VOID</span></a>
     <div class="header-actions">
@@ -495,20 +497,16 @@
       } catch (error) {}
     }
 
-    document.getElementById("markWatchedBtn").addEventListener("click", () => {
-      if (!episodeAllowed()) return;
-      const watched = getWatchedEpisodes();
-      const index = watched.indexOf(currentEpisode);
-      if (index === -1) {
-        watched.push(currentEpisode);
-        watched.sort((a, b) => a - b);
-        logActivity("eps");
-      } else {
-        watched.splice(index, 1);
-      }
-      localStorage.setItem(`watched_${animeId}`, JSON.stringify(watched));
-      renderEpisodes();
-      updateMarkWatchedButton();
+    document.getElementById("markWatchedBtn").addEventListener("click", async () => {
+      const button=document.getElementById('markWatchedBtn');if(!episodeAllowed()||button.disabled)return;button.disabled=true;
+      try{const change=async()=>{if(window.AVRewards)try{await AVRewards.sync();}catch{}
+        const key=`watched_${animeId}`,raw=localStorage.getItem(key);if(raw!==null)AVSafe.validateBackup({app:'ANIME VOID',version:1,data:{[key]:raw}});
+        const watched=getWatchedEpisodes(),index=watched.indexOf(currentEpisode);if(index===-1){watched.push(currentEpisode);watched.sort((a,b)=>a-b);}else watched.splice(index,1);
+        localStorage.setItem(key,JSON.stringify(watched));if(index===-1)logActivity('eps');renderEpisodes();updateMarkWatchedButton();
+        if(window.AVRewards)try{await AVRewards.sync();}catch{}dispatchEvent(new Event('av:progress'));
+      };if(navigator.locks?.request)await navigator.locks.request('av-watch:'+animeId,change);else await change();}
+      catch(e){const note=document.getElementById('avEpisodeNotice');if(note){note.hidden=false;note.textContent=currentLanguage==='ru'?'Отметка не изменена. Проверь свободное место и бэкап: '+e.message:'Mark not changed. Check storage and backup: '+e.message;}}
+      finally{button.disabled=!episodeAllowed();}
     });
 
     document.getElementById("prevBtn").disabled = currentEpisode <= 1;

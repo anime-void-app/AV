@@ -1,0 +1,62 @@
+/* Private profile chrome only. Existing banner/background URLs, crops, frames,
+   progress, reward classes and native editor nodes remain owned by their modules. */
+.av-profile-page.vi-ready > main { max-width:1280px; padding:32px clamp(16px,4vw,56px) 64px; }
+.av-profile-page.vi-ready main > section { min-width:0; }
+.av-profile-page.vi-ready :is(.section-heading h2,.tiers-section h2) { font-size:clamp(22px,2.4vw,30px); line-height:1.25; letter-spacing:-.035em; color:var(--vi-text); }
+.av-profile-page.vi-ready .section-heading { margin-bottom:20px; }
+.av-profile-page.vi-ready :is(.subtitle,.profile-since,.level-next,.path-node-count) { color:var(--vi-muted); opacity:1; }
+.av-profile-page.vi-ready .profile-hero > #sharePrivacyBasis { padding:0 28px 18px; margin:0; }
+.av-profile-page.vi-ready :is(.activity-box,.friend-box,.tier-column,.tier-card,.quest-item) { background:var(--vi-panel); border-color:var(--vi-line); color:var(--vi-text); box-shadow:none; }
+.av-profile-page.vi-ready :is(.tier-head-count,.tier-card-title,.quest-text,.quests-title,.compare-val) { color:var(--vi-text); }
+.av-profile-page.vi-ready :is(.tier-head-sub,.tier-card-hint,.tier-card-nums,.quest-check,.compare-label) { color:var(--vi-muted); }
+.av-profile-page.vi-ready .tier-card { opacity:1; }
+.av-profile-page.vi-ready .tier-card.unlocked { border-color:var(--tier-color); background:color-mix(in srgb,var(--tier-color) 8%,var(--vi-panel)); }
+.av-profile-page.vi-ready :is(.tier-progress,.tier-card-bar,.path-line,.achievements-total-bar,.quest-bar) { background:color-mix(in srgb,var(--vi-text) 12%,var(--vi-panel)); }
+.av-profile-page.vi-ready .friend-input-row input { background:var(--vi-panel); color:var(--vi-text); border-color:var(--vi-line); min-width:min(220px,100%); }
+.av-profile-page.vi-ready .compare-row { background:var(--vi-panel); border-color:var(--vi-line); }
+.av-profile-page.vi-ready .friend-verdict { background:var(--av-tint); color:var(--vi-text); border-color:var(--vi-line); }
+.av-profile-page.vi-ready :is(.level-text,.achievements-total-text,.empty-note a) { color:var(--vi-accent); }
+.av-profile-page.vi-ready :is(.share-btn,.edit-name,.vs-social-link) { min-height:44px; display:inline-flex; align-items:center; justify-content:center; }
+.av-profile-page.vi-ready .stats-row { gap:14px; }
+.av-profile-page.vi-ready .stat-card { min-width:0; padding:20px 16px; }
+.av-profile-page.vi-ready .stat-card strong { font-size:clamp(22px,2.5vw,34px); overflow-wrap:anywhere; line-height:1.35; }
+.av-profile-page.vi-ready .mini-card { min-width:0; }
+.av-profile-page.vi-ready .mini-title { overflow-wrap:anywhere; }
+html[data-av-interface=manga] .av-profile-page.vi-ready { color-scheme:light; }
+html[data-av-interface=manga] .av-profile-page.vi-ready :is(.tier-mortal,.path-node.tier-mortal) { --tier-color:#176b41; }
+html[data-av-interface=manga] .av-profile-page.vi-ready :is(.tier-seeker,.path-node.tier-seeker) { --tier-color:#414d9b; }
+html[data-av-interface=manga] .av-profile-page.vi-ready :is(.tier-mythic,.path-node.tier-mythic) { --tier-color:#74349b; }
+html[data-av-interface=manga] .av-profile-page.vi-ready :is(.tier-stellar,.path-node.tier-stellar) { --tier-color:#17648b; }
+html[data-av-interface=manga] .av-profile-page.vi-ready :is(.tier-god,.path-node.tier-god) { --tier-color:#805515; }
+html[data-av-interface=manga] .av-profile-page.vi-ready :is(.stat-card,.chart-card,.friend-box,.activity-box,.vrs-panel,.tier-column,.tier-card,.quest-item) { border-radius:3px; box-shadow:none; }
+html[data-av-interface=manga] .av-profile-page.vi-ready :is(.activity-col.today .activity-day,.quests-streak) { color:#805515; }
+html[data-av-interface=manga] .av-profile-page.vi-ready .compare-val.win { color:#176b41; text-shadow:none; }
+html[data-av-interface=manga] .av-profile-page.vi-ready :is(.share-btn,.edit-name) { background:var(--vi-panel); border-color:var(--vi-line); color:var(--vi-text); }
+html[data-av-interface=manga] .av-profile-page.vi-ready .chart-card { border-left:3px solid #a71e35; }
+/* Art Atelier has its own intentionally dark image-proofing surface. Do not
+   recolour the artwork or make inherited Manga heading tokens dark-on-dark. */
+.av-profile-page.vi-ready :is(.at-dialog,.at-full) { --vi-text:#f5efff; --vi-muted:#c2b4d6; --av-bg:#110e19; --av-surface:#181222; --av-text:#f5efff; --av-muted:#c2b4d6; --av-line:#8b6dae; --av-accent:#d4b7ff; --av-solid:#7041a5; --av-tint:#30203e; color-scheme:dark; }
+@media(max-width:1050px) { .av-profile-page.vi-ready > header { height:auto; flex-wrap:wrap; } }
+@media(max-width:760px) {
+ .av-profile-page.vi-ready > header { position:relative!important; top:auto; display:grid; grid-template-columns:minmax(0,1fr) auto; gap:8px 12px; padding:12px 16px; }
+ .av-profile-page.vi-ready > header > .logo { grid-column:1; grid-row:1; min-width:0; }
+ .av-profile-page.vi-ready > header > #scCommunityLink { grid-column:2; grid-row:1; margin:0; }
+ .av-profile-page.vi-ready > header > .header-actions { grid-column:1/-1; grid-row:2; justify-content:center; min-width:0; }
+ .av-profile-page.vi-ready > header > nav { grid-column:1/-1; grid-row:3; width:100%; gap:10px; margin:0; justify-content:center; }
+ .av-profile-page.vi-ready > main { padding:20px 16px 48px; }
+ .av-profile-page.vi-ready .profile-hero > #sharePrivacyBasis { padding:0 18px 18px; }
+ .av-profile-page.vi-ready :is(.charts-section,.list-section,.activity-section,.achievements-section) { margin-top:32px; }
+ .av-profile-page.vi-ready .tiers-board { gap:14px; }
+ .av-profile-page.vi-ready :is(.friend-actions,.friend-input-row) { gap:10px; }
+}
+@media(forced-colors:active) { .av-profile-page.vi-ready .tier-card.unlocked { border:2px solid Highlight; } .av-profile-page.vi-ready :is(.chart-card,.stat-card,.tier-card) { box-shadow:none; } }
+@media(min-width:761px) {
+ .av-profile-page.vi-ready .profile-top { align-items:flex-start!important; }
+ .av-profile-page.vi-ready .profile-top .profile-info { padding-top:72px; }
+}
+@media(max-width:760px) {
+ .av-profile-page.vi-ready > header > nav { grid-column:1; justify-content:space-between; gap:6px; }
+ .av-profile-page.vi-ready > header > #vsOpenSettings { grid-column:2; grid-row:3; }
+}
+.av-profile-page.vi-ready .avp-dialog .at-shop-credit { color:var(--vi-accent)!important; }
+html:is([data-av-interface=manga],[data-av-interface=astral]) .av-profile-page.vi-ready { background-color:var(--vi-bg)!important; color:var(--vi-text)!important; }

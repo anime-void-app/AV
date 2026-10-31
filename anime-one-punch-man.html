@@ -573,16 +573,17 @@
   <script src="av-enhancements.js?v=1" defer></script>
 <link rel="canonical" href="https://anime-void-app.github.io/AV/anime-one-punch-man.html">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "TVSeries", "name": "Ванпанчмен", "alternateName": "One-Punch Man", "description": "Сайтама способен победить противника одним ударом, но такая сила лишила бои азарта. Он ищет достойный вызов, пока вокруг разворачивается жизнь героев и монстров.", "url": "https://anime-void-app.github.io/AV/anime-one-punch-man.html", "inLanguage": "ja"}</script>
-  <script src="av-safety.js?v=5"></script>
+  <script src="av-safety.js?v=5"></script><script src="av-state.js?v=18.1"></script><script src="av-progress.js?v=18.1"></script><link rel="stylesheet" href="av-progress.css?v=18.1">
   <script src="av-titles.js?v=20261030-2"></script>
   <script>window.AVTitles=window.AVTitles||{russian:()=>'',display:(x,l)=>(l==='en'?x?.titleEnglish:'')||x?.title||'',normalize:v=>String(v||'').toLowerCase().trim(),plan:q=>({variants:[String(q||'').toLowerCase()],ids:[],terms:[],correction:''}),match:(x,q)=>[x.title,x.titleEnglish,x.titleRomaji,x.titleNative].some(v=>String(v||'').toLowerCase().includes(String(q||'').toLowerCase())),score:()=>0,count:0};</script>
   <link rel="stylesheet" href="av-design.css?v=17.0">
   <script src="av-design.js?v=17.0" defer></script>
   <link rel="stylesheet" href="av-atmosphere.css?v=16.6">
   <script src="av-atmosphere.js?v=16.6" defer></script>
-</head>
+<script src="void-journal.js?v=18.1"></script>
+<link rel="stylesheet" href="void-interface.css?v=18.1"><script src="void-interface.js?v=18.1"></script><link rel="stylesheet" href="void-tv.css?v=18.1"><script src="void-tv.js?v=18.1" defer></script><link rel="stylesheet" href="void-title-scene.css?v=18.1"><script src="void-title-scene.js?v=18.1"></script><link rel="stylesheet" href="void-title-layout.css?v=18.1"></head>
 
-<body class="av-shell">
+<body class="av-shell av-title-page">
 
   <div class="page-bg" id="pageBg"></div>
   <div class="page-overlay"></div>
@@ -891,7 +892,7 @@ const russianTitleOverrides = {
     document.getElementById("charactersRow").innerHTML = currentCharacters.map(character => `
       <div class="character-card">
         <img src="${AVSafe.escape(character.image)}" alt="" loading="lazy"
-          onerror="this.onerror=null;this.src='image/poster1.jpg';">
+          onerror="this.onerror=null;this.src='poster-unavailable.svg';">
         <div class="character-body">
           <div class="character-name">${AVSafe.escape(character.name)}</div>
           <div class="character-role">${characterRoleLabel(character.role)}</div>
@@ -927,7 +928,7 @@ const russianTitleOverrides = {
         onkeydown="if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); window.location.href='anime.html?id=${AVSafe.escape(encodeURIComponent(entry.id))}'; }">
         <div class="similar-poster">
           <img src="${AVSafe.escape(entry.image)}" alt="" loading="lazy"
-            onerror="this.onerror=null;this.src='image/poster1.jpg';">
+            onerror="this.onerror=null;this.src='poster-unavailable.svg';">
           ${entry.score ? `<span class="similar-score">⭐ ${entry.score}</span>` : ""}
         </div>
         <div class="similar-body">
@@ -1189,25 +1190,15 @@ const russianTitleOverrides = {
     document.getElementById("pageBg").classList.toggle("bg-blurred", !hasNativeBanner);
     loadHighResArtwork(item);
 
-    const isMovie = String(item.format || "").toUpperCase() === "MOVIE";
+    const displayProgress = AVProgress.title(item.id,item);
+    const isMovie = displayProgress.isMovie;
     currentIsMovie = isMovie;
-    const episodeCount = isMovie ? 1 : (Number(item.episodes) || 0);
-
+    const episodeCount = displayProgress.total || 0;
+    const watchedEpisodes = displayProgress.episodes;
     let episodesHTML = "";
-    let watchedCount = 0;
-let watchedPercent = 0;
-
     if (isMovie) {
       episodesHTML = `<button class="episode" onclick="openEpisode(1)">${currentLanguage === "ru" ? "🔗 Где посмотреть фильм" : "🔗 Where to watch"}</button>`;
     } else if (episodeCount > 0) {
-
-      const watchedEpisodes = AVSafe.read(`watched_${item.id}`, []);
- watchedCount = watchedEpisodes.length;
-
- watchedPercent =
-  episodeCount > 0
-    ? Math.round((watchedCount / episodeCount) * 100)
-    : 0;
 
 for (let i = 1; i <= episodeCount; i++) {
 
@@ -1314,15 +1305,15 @@ for (let i = 1; i <= episodeCount; i++) {
           <div class="rating-row">
             <span class="rating-label" id="myRatingLabel">Моя оценка:</span>
             <div class="rating-stars" id="ratingStars"></div>
+<a class="vj-detail-link" href="journal.html?id=${encodeURIComponent(String(item.id))}">Подробная оценка и история ↗</a>
+<a class="sc-discuss-link" href="community.html?anime=${encodeURIComponent(String(item.id).replace(/^anilist-/,''))}&amp;name=${encodeURIComponent(String(item.title))}">Обсуждение и оценки сообщества ↗</a>
           </div>
 
           <div class="episodes">
 
            <h2 id="episodesTitle">${isMovie ? (currentLanguage === "ru" ? "Фильм" : "Movie") : (currentLanguage === "ru" ? "Серии" : "Episodes")}</h2>
-            ${isMovie
-              ? `<p class="episodes-progress-text">${currentLanguage === "ru" ? "Полнометражный фильм — без списка серий." : "Feature film — no episode list."}</p>`
-              : `<p class="episodes-progress-text" id="episodesProgressText">Просмотрено ${watchedCount} из ${episodeCount} • ${watchedPercent}%</p>
-                 <div class="episodes-progress-bar"><div class="episodes-progress-fill" style="width: ${watchedPercent}%"></div></div>`}
+            <div id="episodesProgressSummary">${AVProgress.html(item)}</div>
+            <p class="avp-explain">${currentLanguage === 'ru' ? 'Считаются ручные отметки серий, не время работы плеера. Открытие ссылки ничего не засчитывает.' : 'Based on manual episode marks, not player runtime. Opening a link does not mark an episode.'}</p>
 
             <div class="episode-grid">
               ${episodesHTML}
@@ -1568,7 +1559,7 @@ if (genreLabel) {
     if (label) label.textContent = ru ? "Моя оценка:" : "My score:";
 
     const ratingMap = readRatingMap();
-    const currentRating = Number(ratingMap[String(item.id)]) || 0;
+    const currentRating = AVJournal.getOverall(item.id) || 0;
     let starsHTML = "";
     for (let value = 1; value <= 10; value++) {
       starsHTML += `<button type="button" class="rating-star${value <= currentRating ? " active" : ""}" data-value="${value}" title="${value}/10">${value}</button>`;
@@ -1600,20 +1591,23 @@ if (genreLabel) {
     } catch (error) {}
   }
 
-  function toggleListRating(value) {
-    if (!item) return;
-    const map = readRatingMap();
-    const key = String(item.id);
-    if (Number(map[key]) === value) {
-      delete map[key];
-    } else {
-      map[key] = value;
-      saveListSnapshot();
-      logActivity("ratings");
-    }
-    localStorage.setItem("animeVoidRatings", JSON.stringify(map));
-    renderStatusControls();
+  async function toggleListRating(value) {
+    if (!item || window.__avRatingBusy) return;
+    window.__avRatingBusy=true;
+    try {
+      const before=AVJournal.getOverall(item.id),next=before===value?null:value;
+      await AVJournal.setOverall(item.id,next,'revision',before);
+      if(next!==null){try{saveListSnapshot();}catch(e){}logActivity('ratings');}
+      document.getElementById('vjRatingError')?.remove();
+      renderStatusControls();
+    }catch(e){
+      let error=document.getElementById('vjRatingError');
+      if(!error){error=document.createElement('p');error.id='vjRatingError';error.setAttribute('role','alert');document.getElementById('ratingStars')?.parentElement.append(error);}
+      error.textContent=e.message;
+    }finally{window.__avRatingBusy=false;}
   }
+  window.avRefreshEpisodeProgress=()=>{if(!item)return;const p=AVProgress.title(item.id,item);const ru=(localStorage.getItem('animeVoidLanguage')||'ru')==='ru';for(const n of document.querySelectorAll('#episodesProgressSummary [data-av-progress-id]')){n.innerHTML='<span class="avp-label"></span>';n.querySelector('span').textContent=AVProgress.text(p,ru);if(p.percent!==null){const bar=document.createElement('progress');bar.max=100;bar.value=p.percent;bar.setAttribute('aria-label',ru?'Отмеченные серии — не замер просмотра':'Episode marks — not measured playback');n.append(bar);}}for(const button of document.querySelectorAll('.episode-grid .episode[onclick]')){const match=button.getAttribute('onclick').match(/openEpisode\((\d+)\)/);if(!match||p.isMovie)continue;const ep=Number(match[1]),yes=p.episodes.includes(ep);button.classList.toggle('watched',yes);button.textContent=(yes?'✓ ':'○ ')+(ru?'Серия ':'Episode ')+ep;}const note=document.querySelector('.avp-explain');if(note)note.textContent=ru?'Считаются ручные отметки серий, не время работы плеера. Открытие ссылки ничего не засчитывает.':'Based on manual episode marks, not player runtime. Opening a link does not mark an episode.';};
+  window.addEventListener('storage',e=>{if(e.key==='animeVoidRatings')renderStatusControls();});
 
   document.addEventListener("click", event => {
     const statusButton = event.target.closest(".status-btn");
@@ -1716,23 +1710,7 @@ function applyLanguage() {
       genreValue.textContent = translateGenre(item.genre, language);
     }
 
-    const episodesProgressText =
-      document.getElementById("episodesProgressText");
-
-    if (episodesProgressText) {
-      const episodeCount = Number(item.episodes) || 0;
-
-      const watchedEpisodes = AVSafe.read(`watched_${item.id}`, []);
-
-      const watchedCount = watchedEpisodes.length;
-      const watchedPercent = episodeCount > 0
-        ? Math.round((watchedCount / episodeCount) * 100)
-        : 0;
-
-      episodesProgressText.textContent = isRussian
-        ? `Просмотрено ${watchedCount} из ${episodeCount} • ${watchedPercent}%`
-        : `Watched ${watchedCount} of ${episodeCount} • ${watchedPercent}%`;
-    }
+    window.avRefreshEpisodeProgress?.();
   }
 
   updateFavoriteButton();
