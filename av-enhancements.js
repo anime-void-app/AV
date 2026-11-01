@@ -1,3 +1,5 @@
+/* source-localized24 */
+var I24=window.AVSiteI18n24;
 "use strict";
 (() => {
  const base = "https://anime-void-app.github.io/AV/";
@@ -17,7 +19,7 @@
  const header = document.querySelector("header"); if (!header) return;
  const button = document.createElement("button"); button.type="button";button.className="av-share";button.id="avShare";header.append(button);
  const ru = () => document.documentElement.lang !== "en";
- const label = () => {button.textContent=ru()?"Поделиться":"Share";button.setAttribute("aria-label",ru()?"Поделиться ссылкой на аниме":"Share anime link");};
+ const label = () => {I24.text(button,()=>((ru()?I24.t("Поделиться"):"Share")));I24.attr(button,"aria-label",()=>((ru()?I24.t("Поделиться ссылкой на аниме"):"Share anime link")));};
  label();new MutationObserver(label).observe(document.documentElement,{attributes:true,attributeFilter:["lang"]});
  const toast=document.createElement("div");toast.className="av-toast";toast.setAttribute("role","status");toast.hidden=true;document.body.append(toast);let timer;
  function notify(text){clearTimeout(timer);toast.textContent=text;toast.hidden=false;timer=setTimeout(()=>toast.hidden=true,3500);}
@@ -28,9 +30,9 @@
    return new URL(location.pathname,location.origin).href;
  }
  async function copy(url){
-   try {if(navigator.clipboard && window.isSecureContext){await navigator.clipboard.writeText(url);notify(ru()?"Ссылка скопирована":"Link copied");return;}}catch(e){}
+   try {if(navigator.clipboard && window.isSecureContext){await navigator.clipboard.writeText(url);notify((ru()?I24.t("Ссылка скопирована"):"Link copied"));return;}}catch(e){}
    const area=document.createElement("textarea");area.value=url;area.readOnly=true;area.style.cssText="position:fixed;top:0;left:0;opacity:0";document.body.append(area);area.select();let ok=false;try{ok=document.execCommand("copy");}catch(e){}area.remove();
-   if(ok)notify(ru()?"Ссылка скопирована":"Link copied");else window.prompt(ru()?"Скопируй ссылку:":"Copy this link:",url);
+   if(ok)notify((ru()?I24.t("Ссылка скопирована"):"Link copied"));else window.prompt((ru()?I24.t("Скопируй ссылку:"):"Copy this link:"),url);
  }
  button.addEventListener("click",async()=>{
    const url=shareURL();const title=document.querySelector("#animeTitle")?.textContent || document.title;

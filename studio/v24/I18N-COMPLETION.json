@@ -1,0 +1,31 @@
+{
+  "implemented": true,
+  "coverage": "Authored interface, static editorial pages and curated catalogues; not user data, original local filenames, original-language comic pixels or unknown external metadata",
+  "auditedHTMLFiles": 37,
+  "actualSitePages": 36,
+  "englishVisibleUntranslatedUI": 0,
+  "englishUntranslatedAccessibilityAttributes": 0,
+  "responsiveWidths": [
+    360,
+    390,
+    768,
+    1440
+  ],
+  "responsivePageOverflow": 0,
+  "hiddenStatesTested": [
+    "reading catalogue/shelf/reader/glossary",
+    "saved-book metadata/edit",
+    "licensed native chapter UI",
+    "quote spoiler/context/archive deletion",
+    "journal scales/history/radar/notes",
+    "dashboard",
+    "profile/crop/comfort",
+    "workshop/purchases",
+    "DM",
+    "community"
+  ],
+  "userTextProtected": true,
+  "noStorageWritesOnLocaleChangeExceptLanguage": true,
+  "nativeLanguageChoicePersistsAcrossPages": true,
+  "productionChanged": false
+}

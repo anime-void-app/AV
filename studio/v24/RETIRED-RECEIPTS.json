@@ -1,0 +1,1525 @@
+{
+  "note": "Historical catalogue metadata only. Existing local ownership, ledger, coins and currently equipped/published appearance are not erased. Friend-specific VIP is not retired.",
+  "items": [
+    {
+      "id": "v20-banner-beach1",
+      "kind": "banner",
+      "cost": 460,
+      "name": [
+        "Лазурный берег · 1",
+        "Лазурный берег · 1"
+      ],
+      "asset": "studio/v21/beach1.webp"
+    },
+    {
+      "id": "v20-background-beach1",
+      "kind": "background",
+      "cost": 460,
+      "name": [
+        "Лазурный берег · 1",
+        "Лазурный берег · 1"
+      ],
+      "asset": "studio/v21/beach1.webp"
+    },
+    {
+      "id": "v20-banner-beach2",
+      "kind": "banner",
+      "cost": 460,
+      "name": [
+        "Лазурный берег · 2",
+        "Лазурный берег · 2"
+      ],
+      "asset": "studio/v21/beach2.webp"
+    },
+    {
+      "id": "v20-background-beach2",
+      "kind": "background",
+      "cost": 460,
+      "name": [
+        "Лазурный берег · 2",
+        "Лазурный берег · 2"
+      ],
+      "asset": "studio/v21/beach2.webp"
+    },
+    {
+      "id": "v20-banner-beach3",
+      "kind": "banner",
+      "cost": 460,
+      "name": [
+        "Лазурный берег · 3",
+        "Лазурный берег · 3"
+      ],
+      "asset": "studio/v21/beach3.webp"
+    },
+    {
+      "id": "v20-background-beach3",
+      "kind": "background",
+      "cost": 460,
+      "name": [
+        "Лазурный берег · 3",
+        "Лазурный берег · 3"
+      ],
+      "asset": "studio/v21/beach3.webp"
+    },
+    {
+      "id": "v20-banner-beach4",
+      "kind": "banner",
+      "cost": 460,
+      "name": [
+        "Лазурный берег · 4",
+        "Лазурный берег · 4"
+      ],
+      "asset": "studio/v21/beach4.webp"
+    },
+    {
+      "id": "v20-background-beach4",
+      "kind": "background",
+      "cost": 460,
+      "name": [
+        "Лазурный берег · 4",
+        "Лазурный берег · 4"
+      ],
+      "asset": "studio/v21/beach4.webp"
+    },
+    {
+      "id": "v20-banner-forest1",
+      "kind": "banner",
+      "cost": 460,
+      "name": [
+        "Лесная сказка · 1",
+        "Лесная сказка · 1"
+      ],
+      "asset": "studio/v21/forest1.webp"
+    },
+    {
+      "id": "v20-background-forest1",
+      "kind": "background",
+      "cost": 460,
+      "name": [
+        "Лесная сказка · 1",
+        "Лесная сказка · 1"
+      ],
+      "asset": "studio/v21/forest1.webp"
+    },
+    {
+      "id": "v20-banner-forest2",
+      "kind": "banner",
+      "cost": 460,
+      "name": [
+        "Лесная сказка · 2",
+        "Лесная сказка · 2"
+      ],
+      "asset": "studio/v21/forest2.webp"
+    },
+    {
+      "id": "v20-background-forest2",
+      "kind": "background",
+      "cost": 460,
+      "name": [
+        "Лесная сказка · 2",
+        "Лесная сказка · 2"
+      ],
+      "asset": "studio/v21/forest2.webp"
+    },
+    {
+      "id": "v20-banner-forest3",
+      "kind": "banner",
+      "cost": 460,
+      "name": [
+        "Лесная сказка · 3",
+        "Лесная сказка · 3"
+      ],
+      "asset": "studio/v21/forest3.webp"
+    },
+    {
+      "id": "v20-background-forest3",
+      "kind": "background",
+      "cost": 460,
+      "name": [
+        "Лесная сказка · 3",
+        "Лесная сказка · 3"
+      ],
+      "asset": "studio/v21/forest3.webp"
+    },
+    {
+      "id": "v20-banner-forest4",
+      "kind": "banner",
+      "cost": 460,
+      "name": [
+        "Лесная сказка · 4",
+        "Лесная сказка · 4"
+      ],
+      "asset": "studio/v21/forest4.webp"
+    },
+    {
+      "id": "v20-background-forest4",
+      "kind": "background",
+      "cost": 460,
+      "name": [
+        "Лесная сказка · 4",
+        "Лесная сказка · 4"
+      ],
+      "asset": "studio/v21/forest4.webp"
+    },
+    {
+      "id": "v20-banner-uneon",
+      "kind": "banner",
+      "cost": 640,
+      "name": [
+        "Неоновый сон",
+        "Неоновый сон"
+      ],
+      "asset": "studio/v21/uneon.webp"
+    },
+    {
+      "id": "v20-background-uneon",
+      "kind": "background",
+      "cost": 640,
+      "name": [
+        "Неоновый сон",
+        "Неоновый сон"
+      ],
+      "asset": "studio/v21/uneon.webp"
+    },
+    {
+      "id": "v20-banner-love-triangle",
+      "kind": "banner",
+      "cost": 640,
+      "name": [
+        "Лиловый пульс",
+        "Лиловый пульс"
+      ],
+      "asset": "studio/v21/love-triangle.webp"
+    },
+    {
+      "id": "v20-background-love-triangle",
+      "kind": "background",
+      "cost": 640,
+      "name": [
+        "Лиловый пульс",
+        "Лиловый пульс"
+      ],
+      "asset": "studio/v21/love-triangle.webp"
+    },
+    {
+      "id": "v20-banner-spring",
+      "kind": "banner",
+      "cost": 640,
+      "name": [
+        "Дыхание весны",
+        "Дыхание весны"
+      ],
+      "asset": "studio/v21/spring.webp"
+    },
+    {
+      "id": "v20-background-spring",
+      "kind": "background",
+      "cost": 640,
+      "name": [
+        "Дыхание весны",
+        "Дыхание весны"
+      ],
+      "asset": "studio/v21/spring.webp"
+    },
+    {
+      "id": "v20-banner-crimson",
+      "kind": "banner",
+      "cost": 0,
+      "name": [
+        "Алый горизонт автора",
+        "Алый горизонт автора"
+      ],
+      "asset": "studio/v20/starry-night.webp"
+    },
+    {
+      "id": "v20-background-crimson",
+      "kind": "background",
+      "cost": 0,
+      "name": [
+        "Алый горизонт автора",
+        "Алый горизонт автора"
+      ],
+      "asset": "studio/v20/starry-night.webp"
+    },
+    {
+      "id": "v20-banner-eden",
+      "kind": "banner",
+      "cost": 0,
+      "name": [
+        "Сад создателя",
+        "Сад создателя"
+      ],
+      "asset": "studio/v20/great-forest-spirit.webp"
+    },
+    {
+      "id": "v20-background-eden",
+      "kind": "background",
+      "cost": 0,
+      "name": [
+        "Сад создателя",
+        "Сад создателя"
+      ],
+      "asset": "studio/v20/great-forest-spirit.webp"
+    },
+    {
+      "id": "v20-background-japan1",
+      "kind": "background",
+      "cost": 0,
+      "name": [
+        "Сакура у реки",
+        "Сакура у реки"
+      ],
+      "asset": "studio/v20/japan1.webp"
+    },
+    {
+      "id": "v20-banner-japan1",
+      "kind": "banner",
+      "cost": 0,
+      "name": [
+        "Сакура у реки",
+        "Сакура у реки"
+      ],
+      "asset": "studio/v20/japan1.webp"
+    },
+    {
+      "id": "v20-background-japan2",
+      "kind": "background",
+      "cost": 480,
+      "name": [
+        "Тихий Киото",
+        "Тихий Киото"
+      ],
+      "asset": "studio/v20/japan2.webp"
+    },
+    {
+      "id": "v20-banner-japan2",
+      "kind": "banner",
+      "cost": 480,
+      "name": [
+        "Тихий Киото",
+        "Тихий Киото"
+      ],
+      "asset": "studio/v20/japan2.webp"
+    },
+    {
+      "id": "v20-background-japan3",
+      "kind": "background",
+      "cost": 480,
+      "name": [
+        "Дом за клёнами",
+        "Дом за клёнами"
+      ],
+      "asset": "studio/v20/japan3.webp"
+    },
+    {
+      "id": "v20-banner-japan3",
+      "kind": "banner",
+      "cost": 480,
+      "name": [
+        "Дом за клёнами",
+        "Дом за клёнами"
+      ],
+      "asset": "studio/v20/japan3.webp"
+    },
+    {
+      "id": "v20-background-japan4",
+      "kind": "background",
+      "cost": 480,
+      "name": [
+        "Лунная тропа",
+        "Лунная тропа"
+      ],
+      "asset": "studio/v20/japan4.webp"
+    },
+    {
+      "id": "v20-banner-japan4",
+      "kind": "banner",
+      "cost": 480,
+      "name": [
+        "Лунная тропа",
+        "Лунная тропа"
+      ],
+      "asset": "studio/v20/japan4.webp"
+    },
+    {
+      "id": "v20-background-the-void",
+      "kind": "background",
+      "cost": 650,
+      "name": [
+        "Синяя сингулярность",
+        "Синяя сингулярность"
+      ],
+      "asset": "studio/v20/the-void.webp"
+    },
+    {
+      "id": "v20-banner-the-void",
+      "kind": "banner",
+      "cost": 650,
+      "name": [
+        "Синяя сингулярность",
+        "Синяя сингулярность"
+      ],
+      "asset": "studio/v20/the-void.webp"
+    },
+    {
+      "id": "v20-background-interstella",
+      "kind": "background",
+      "cost": 650,
+      "name": [
+        "Между звёздами",
+        "Между звёздами"
+      ],
+      "asset": "studio/v20/interstella.webp"
+    },
+    {
+      "id": "v20-banner-interstella",
+      "kind": "banner",
+      "cost": 650,
+      "name": [
+        "Между звёздами",
+        "Между звёздами"
+      ],
+      "asset": "studio/v20/interstella.webp"
+    },
+    {
+      "id": "v20-background-great-forest-spirit",
+      "kind": "background",
+      "cost": 650,
+      "name": [
+        "Лесной дух",
+        "Лесной дух"
+      ],
+      "asset": "studio/v20/great-forest-spirit.webp"
+    },
+    {
+      "id": "v20-banner-great-forest-spirit",
+      "kind": "banner",
+      "cost": 650,
+      "name": [
+        "Лесной дух",
+        "Лесной дух"
+      ],
+      "asset": "studio/v20/great-forest-spirit.webp"
+    },
+    {
+      "id": "v20-background-starry-night",
+      "kind": "background",
+      "cost": 650,
+      "name": [
+        "Звёздный поток",
+        "Звёздный поток"
+      ],
+      "asset": "studio/v20/starry-night.webp"
+    },
+    {
+      "id": "v20-banner-starry-night",
+      "kind": "banner",
+      "cost": 650,
+      "name": [
+        "Звёздный поток",
+        "Звёздный поток"
+      ],
+      "asset": "studio/v20/starry-night.webp"
+    },
+    {
+      "id": "v20-background-founder",
+      "kind": "background",
+      "cost": 0,
+      "name": [
+        "Обитель основателя",
+        "Обитель основателя"
+      ],
+      "asset": "studio/v20/interstella.webp"
+    },
+    {
+      "id": "v20-banner-founder",
+      "kind": "banner",
+      "cost": 0,
+      "name": [
+        "Обитель основателя",
+        "Обитель основателя"
+      ],
+      "asset": "studio/v20/interstella.webp"
+    },
+    {
+      "id": "bg-v19-neon-rain",
+      "kind": "background",
+      "cost": 500,
+      "name": [
+        "Неоновый дождь · фон",
+        "Neon rain · background"
+      ],
+      "asset": "studio/v19/neon-rain.webp"
+    },
+    {
+      "id": "bn-v19-neon-rain",
+      "kind": "banner",
+      "cost": 700,
+      "name": [
+        "Неоновый дождь · баннер",
+        "Neon rain · banner"
+      ],
+      "asset": "studio/v19/neon-rain.webp"
+    },
+    {
+      "id": "bg-v19-moon-sanctuary",
+      "kind": "background",
+      "cost": 500,
+      "name": [
+        "Лунное святилище · фон",
+        "Moon sanctuary · background"
+      ],
+      "asset": "studio/v19/moon-sanctuary.webp"
+    },
+    {
+      "id": "bn-v19-moon-sanctuary",
+      "kind": "banner",
+      "cost": 700,
+      "name": [
+        "Лунное святилище · баннер",
+        "Moon sanctuary · banner"
+      ],
+      "asset": "studio/v19/moon-sanctuary.webp"
+    },
+    {
+      "id": "bg-v19-void-orbit",
+      "kind": "background",
+      "cost": 500,
+      "name": [
+        "Орбита Бездны · фон",
+        "Void orbit · background"
+      ],
+      "asset": "studio/v19/void-orbit.webp"
+    },
+    {
+      "id": "bn-v19-void-orbit",
+      "kind": "banner",
+      "cost": 700,
+      "name": [
+        "Орбита Бездны · баннер",
+        "Void orbit · banner"
+      ],
+      "asset": "studio/v19/void-orbit.webp"
+    },
+    {
+      "id": "bg-premium-singularity",
+      "kind": "background",
+      "cost": 300,
+      "name": [
+        "Земли целителя",
+        "Healer lands"
+      ],
+      "asset": "studio/atelier/healer.webp"
+    },
+    {
+      "id": "bn-premium-singularity",
+      "kind": "banner",
+      "cost": 220,
+      "name": [
+        "Земли целителя",
+        "Healer lands"
+      ],
+      "asset": "studio/atelier/healer.webp"
+    },
+    {
+      "id": "bg-premium-inferno",
+      "kind": "background",
+      "cost": 300,
+      "name": [
+        "Дуэль волшебниц",
+        "Witch duel"
+      ],
+      "asset": "studio/atelier/savepoint.webp"
+    },
+    {
+      "id": "bn-premium-inferno",
+      "kind": "banner",
+      "cost": 220,
+      "name": [
+        "Дуэль волшебниц",
+        "Witch duel"
+      ],
+      "asset": "studio/atelier/savepoint.webp"
+    },
+    {
+      "id": "bg-premium-glacier",
+      "kind": "background",
+      "cost": 300,
+      "name": [
+        "После дождя",
+        "After rain"
+      ],
+      "asset": "studio/atelier/rain.webp"
+    },
+    {
+      "id": "bn-premium-glacier",
+      "kind": "banner",
+      "cost": 220,
+      "name": [
+        "После дождя",
+        "After rain"
+      ],
+      "asset": "studio/atelier/rain.webp"
+    },
+    {
+      "id": "bg-premium-emerald",
+      "kind": "background",
+      "cost": 300,
+      "name": [
+        "За горизонтом",
+        "Beyond the horizon"
+      ],
+      "asset": "studio/atelier/horizon.webp"
+    },
+    {
+      "id": "bn-premium-emerald",
+      "kind": "banner",
+      "cost": 220,
+      "name": [
+        "За горизонтом",
+        "Beyond the horizon"
+      ],
+      "asset": "studio/atelier/horizon.webp"
+    },
+    {
+      "id": "bg-premium-synthwave",
+      "kind": "background",
+      "cost": 300,
+      "name": [
+        "Город дождя",
+        "Rain city"
+      ],
+      "asset": "studio/atelier/raincity.webp"
+    },
+    {
+      "id": "bn-premium-synthwave",
+      "kind": "banner",
+      "cost": 220,
+      "name": [
+        "Город дождя",
+        "Rain city"
+      ],
+      "asset": "studio/atelier/raincity.webp"
+    },
+    {
+      "id": "bg-premium-eclipse",
+      "kind": "background",
+      "cost": 300,
+      "name": [
+        "Хранительница снов",
+        "Dream keeper"
+      ],
+      "asset": "studio/atelier/dream.webp"
+    },
+    {
+      "id": "bn-premium-eclipse",
+      "kind": "banner",
+      "cost": 220,
+      "name": [
+        "Хранительница снов",
+        "Dream keeper"
+      ],
+      "asset": "studio/atelier/dream.webp"
+    },
+    {
+      "id": "bg-premium-matrix",
+      "kind": "background",
+      "cost": 300,
+      "name": [
+        "Совет чародеек",
+        "Witch council"
+      ],
+      "asset": "studio/atelier/council.webp"
+    },
+    {
+      "id": "bn-premium-matrix",
+      "kind": "banner",
+      "cost": 220,
+      "name": [
+        "Совет чародеек",
+        "Witch council"
+      ],
+      "asset": "studio/atelier/council.webp"
+    },
+    {
+      "id": "bg-premium-celestial",
+      "kind": "background",
+      "cost": 300,
+      "name": [
+        "Рынок чудес",
+        "Market of wonders"
+      ],
+      "asset": "studio/atelier/market.webp"
+    },
+    {
+      "id": "bn-premium-celestial",
+      "kind": "banner",
+      "cost": 220,
+      "name": [
+        "Рынок чудес",
+        "Market of wonders"
+      ],
+      "asset": "studio/atelier/market.webp"
+    },
+    {
+      "id": "bg-cinema-station",
+      "kind": "background",
+      "cost": 260,
+      "name": [
+        "Храм тишины",
+        "Temple of silence"
+      ],
+      "asset": "studio/atelier/temple.webp"
+    },
+    {
+      "id": "bn-cinema-station",
+      "kind": "banner",
+      "cost": 180,
+      "name": [
+        "Храм тишины",
+        "Temple of silence"
+      ],
+      "asset": "studio/atelier/temple.webp"
+    },
+    {
+      "id": "bg-cinema-sakura",
+      "kind": "background",
+      "cost": 260,
+      "name": [
+        "Забытое сокровище",
+        "Forgotten treasure"
+      ],
+      "asset": "studio/atelier/treasure.webp"
+    },
+    {
+      "id": "bn-cinema-sakura",
+      "kind": "banner",
+      "cost": 180,
+      "name": [
+        "Забытое сокровище",
+        "Forgotten treasure"
+      ],
+      "asset": "studio/atelier/treasure.webp"
+    },
+    {
+      "id": "bg-cinema-rooftop",
+      "kind": "background",
+      "cost": 260,
+      "name": [
+        "Дом на краю леса",
+        "Forest cottage"
+      ],
+      "asset": "studio/atelier/cottage.webp"
+    },
+    {
+      "id": "bn-cinema-rooftop",
+      "kind": "banner",
+      "cost": 180,
+      "name": [
+        "Дом на краю леса",
+        "Forest cottage"
+      ],
+      "asset": "studio/atelier/cottage.webp"
+    },
+    {
+      "id": "bg-cinema-torii",
+      "kind": "background",
+      "cost": 260,
+      "name": [
+        "Древо фей",
+        "Fairy tree"
+      ],
+      "asset": "studio/atelier/fairytree.webp"
+    },
+    {
+      "id": "bn-cinema-torii",
+      "kind": "banner",
+      "cost": 180,
+      "name": [
+        "Древо фей",
+        "Fairy tree"
+      ],
+      "asset": "studio/atelier/fairytree.webp"
+    },
+    {
+      "id": "bg-cinema-crossing",
+      "kind": "background",
+      "cost": 260,
+      "name": [
+        "Осенний полёт",
+        "Autumn flight"
+      ],
+      "asset": "studio/atelier/autumn.webp"
+    },
+    {
+      "id": "bn-cinema-crossing",
+      "kind": "banner",
+      "cost": 180,
+      "name": [
+        "Осенний полёт",
+        "Autumn flight"
+      ],
+      "asset": "studio/atelier/autumn.webp"
+    },
+    {
+      "id": "bg-cinema-clouds",
+      "kind": "background",
+      "cost": 260,
+      "name": [
+        "Утро в волшебном мире",
+        "Magic morning"
+      ],
+      "asset": "studio/atelier/sunrise.webp"
+    },
+    {
+      "id": "bn-cinema-clouds",
+      "kind": "banner",
+      "cost": 180,
+      "name": [
+        "Утро в волшебном мире",
+        "Magic morning"
+      ],
+      "asset": "studio/atelier/sunrise.webp"
+    },
+    {
+      "id": "bg-cinema-snowlamp",
+      "kind": "background",
+      "cost": 260,
+      "name": [
+        "Дерево единства",
+        "Unity tree"
+      ],
+      "asset": "studio/atelier/unity.webp"
+    },
+    {
+      "id": "bn-cinema-snowlamp",
+      "kind": "banner",
+      "cost": 180,
+      "name": [
+        "Дерево единства",
+        "Unity tree"
+      ],
+      "asset": "studio/atelier/unity.webp"
+    },
+    {
+      "id": "bg-cinema-stairs",
+      "kind": "background",
+      "cost": 260,
+      "name": [
+        "Над облаками",
+        "Above the clouds"
+      ],
+      "asset": "studio/atelier/storm.webp"
+    },
+    {
+      "id": "bn-cinema-stairs",
+      "kind": "banner",
+      "cost": 180,
+      "name": [
+        "Над облаками",
+        "Above the clouds"
+      ],
+      "asset": "studio/atelier/storm.webp"
+    },
+    {
+      "id": "bg-cinema-gazebo",
+      "kind": "background",
+      "cost": 260,
+      "name": [
+        "Секреты чародеек",
+        "Witch secrets"
+      ],
+      "asset": "studio/atelier/moon.webp"
+    },
+    {
+      "id": "bn-cinema-gazebo",
+      "kind": "banner",
+      "cost": 180,
+      "name": [
+        "Секреты чародеек",
+        "Witch secrets"
+      ],
+      "asset": "studio/atelier/moon.webp"
+    },
+    {
+      "id": "bg-cinema-city",
+      "kind": "background",
+      "cost": 260,
+      "name": [
+        "Лесная тропа",
+        "Forest path"
+      ],
+      "asset": "studio/atelier/forest.webp"
+    },
+    {
+      "id": "bn-cinema-city",
+      "kind": "banner",
+      "cost": 180,
+      "name": [
+        "Лесная тропа",
+        "Forest path"
+      ],
+      "asset": "studio/atelier/forest.webp"
+    },
+    {
+      "id": "bg-cinema-sea",
+      "kind": "background",
+      "cost": 260,
+      "name": [
+        "Закат над Комоной",
+        "Komona sunset"
+      ],
+      "asset": "studio/atelier/komona.webp"
+    },
+    {
+      "id": "bn-cinema-sea",
+      "kind": "banner",
+      "cost": 180,
+      "name": [
+        "Закат над Комоной",
+        "Komona sunset"
+      ],
+      "asset": "studio/atelier/komona.webp"
+    },
+    {
+      "id": "bg-cinema-konbini",
+      "kind": "background",
+      "cost": 260,
+      "name": [
+        "Встреча на закате",
+        "Sunset rendezvous"
+      ],
+      "asset": "studio/atelier/meeting.webp"
+    },
+    {
+      "id": "bn-cinema-konbini",
+      "kind": "banner",
+      "cost": 180,
+      "name": [
+        "Встреча на закате",
+        "Sunset rendezvous"
+      ],
+      "asset": "studio/atelier/meeting.webp"
+    },
+    {
+      "id": "bg-cinema-bridge",
+      "kind": "background",
+      "cost": 260,
+      "name": [
+        "Карманная вселенная",
+        "Pocket universe"
+      ],
+      "asset": "studio/atelier/micro.webp"
+    },
+    {
+      "id": "bn-cinema-bridge",
+      "kind": "banner",
+      "cost": 180,
+      "name": [
+        "Карманная вселенная",
+        "Pocket universe"
+      ],
+      "asset": "studio/atelier/micro.webp"
+    },
+    {
+      "id": "bg-cinema-temple",
+      "kind": "background",
+      "cost": 260,
+      "name": [
+        "Сила волшебницы",
+        "Witch power"
+      ],
+      "asset": "studio/atelier/pepper.webp"
+    },
+    {
+      "id": "bn-cinema-temple",
+      "kind": "banner",
+      "cost": 180,
+      "name": [
+        "Сила волшебницы",
+        "Witch power"
+      ],
+      "asset": "studio/atelier/pepper.webp"
+    },
+    {
+      "id": "bg-cinema-lake",
+      "kind": "background",
+      "cost": 260,
+      "name": [
+        "Снежные ангелы",
+        "Snow angels"
+      ],
+      "asset": "studio/atelier/snow.webp"
+    },
+    {
+      "id": "bn-cinema-lake",
+      "kind": "banner",
+      "cost": 180,
+      "name": [
+        "Снежные ангелы",
+        "Snow angels"
+      ],
+      "asset": "studio/atelier/snow.webp"
+    },
+    {
+      "id": "bg-cinema-cafe",
+      "kind": "background",
+      "cost": 260,
+      "name": [
+        "Пеппер и Кэррот",
+        "Pepper and Carrot"
+      ],
+      "asset": "studio/atelier/shichimi.webp"
+    },
+    {
+      "id": "bn-cinema-cafe",
+      "kind": "banner",
+      "cost": 180,
+      "name": [
+        "Пеппер и Кэррот",
+        "Pepper and Carrot"
+      ],
+      "asset": "studio/atelier/shichimi.webp"
+    },
+    {
+      "id": "bg-cinema-paddy",
+      "kind": "background",
+      "cost": 260,
+      "name": [
+        "Земли целителя · 2",
+        "Healer lands · 2"
+      ],
+      "asset": "studio/atelier/healer.webp"
+    },
+    {
+      "id": "bn-cinema-paddy",
+      "kind": "banner",
+      "cost": 180,
+      "name": [
+        "Земли целителя · 2",
+        "Healer lands · 2"
+      ],
+      "asset": "studio/atelier/healer.webp"
+    },
+    {
+      "id": "bg-cinema-alley",
+      "kind": "background",
+      "cost": 260,
+      "name": [
+        "Дуэль волшебниц · 2",
+        "Witch duel · 2"
+      ],
+      "asset": "studio/atelier/savepoint.webp"
+    },
+    {
+      "id": "bn-cinema-alley",
+      "kind": "banner",
+      "cost": 180,
+      "name": [
+        "Дуэль волшебниц · 2",
+        "Witch duel · 2"
+      ],
+      "asset": "studio/atelier/savepoint.webp"
+    },
+    {
+      "id": "bg-cinema-spring",
+      "kind": "background",
+      "cost": 260,
+      "name": [
+        "После дождя · 2",
+        "After rain · 2"
+      ],
+      "asset": "studio/atelier/rain.webp"
+    },
+    {
+      "id": "bn-cinema-spring",
+      "kind": "banner",
+      "cost": 180,
+      "name": [
+        "После дождя · 2",
+        "After rain · 2"
+      ],
+      "asset": "studio/atelier/rain.webp"
+    },
+    {
+      "id": "bg-cinema-beach",
+      "kind": "background",
+      "cost": 260,
+      "name": [
+        "За горизонтом · 2",
+        "Beyond the horizon · 2"
+      ],
+      "asset": "studio/atelier/horizon.webp"
+    },
+    {
+      "id": "bn-cinema-beach",
+      "kind": "banner",
+      "cost": 180,
+      "name": [
+        "За горизонтом · 2",
+        "Beyond the horizon · 2"
+      ],
+      "asset": "studio/atelier/horizon.webp"
+    },
+    {
+      "id": "bg-cinema-shrine",
+      "kind": "background",
+      "cost": 260,
+      "name": [
+        "Город дождя · 2",
+        "Rain city · 2"
+      ],
+      "asset": "studio/atelier/raincity.webp"
+    },
+    {
+      "id": "bn-cinema-shrine",
+      "kind": "banner",
+      "cost": 180,
+      "name": [
+        "Город дождя · 2",
+        "Rain city · 2"
+      ],
+      "asset": "studio/atelier/raincity.webp"
+    },
+    {
+      "id": "bg-cinema-balcony",
+      "kind": "background",
+      "cost": 260,
+      "name": [
+        "Хранительница снов · 2",
+        "Dream keeper · 2"
+      ],
+      "asset": "studio/atelier/dream.webp"
+    },
+    {
+      "id": "bn-cinema-balcony",
+      "kind": "banner",
+      "cost": 180,
+      "name": [
+        "Хранительница снов · 2",
+        "Dream keeper · 2"
+      ],
+      "asset": "studio/atelier/dream.webp"
+    },
+    {
+      "id": "bg-cinema-railway",
+      "kind": "background",
+      "cost": 260,
+      "name": [
+        "Совет чародеек · 2",
+        "Witch council · 2"
+      ],
+      "asset": "studio/atelier/council.webp"
+    },
+    {
+      "id": "bn-cinema-railway",
+      "kind": "banner",
+      "cost": 180,
+      "name": [
+        "Совет чародеек · 2",
+        "Witch council · 2"
+      ],
+      "asset": "studio/atelier/council.webp"
+    },
+    {
+      "id": "bg-cinema-bamboo",
+      "kind": "background",
+      "cost": 260,
+      "name": [
+        "Рынок чудес · 2",
+        "Market of wonders · 2"
+      ],
+      "asset": "studio/atelier/market.webp"
+    },
+    {
+      "id": "bn-cinema-bamboo",
+      "kind": "banner",
+      "cost": 180,
+      "name": [
+        "Рынок чудес · 2",
+        "Market of wonders · 2"
+      ],
+      "asset": "studio/atelier/market.webp"
+    },
+    {
+      "id": "bn-neon-heart",
+      "kind": "banner",
+      "cost": 180,
+      "name": [
+        "Храм тишины · 2",
+        "Temple of silence · 2"
+      ],
+      "asset": "studio/atelier/temple.webp"
+    },
+    {
+      "id": "bn-moon-witch",
+      "kind": "banner",
+      "cost": 200,
+      "name": [
+        "Забытое сокровище · 2",
+        "Forgotten treasure · 2"
+      ],
+      "asset": "studio/atelier/treasure.webp"
+    },
+    {
+      "id": "bn-sakura-muse",
+      "kind": "banner",
+      "cost": 180,
+      "name": [
+        "Дом на краю леса · 2",
+        "Forest cottage · 2"
+      ],
+      "asset": "studio/atelier/cottage.webp"
+    },
+    {
+      "id": "bn-red-ronin",
+      "kind": "banner",
+      "cost": 220,
+      "name": [
+        "Древо фей · 2",
+        "Fairy tree · 2"
+      ],
+      "asset": "studio/atelier/fairytree.webp"
+    },
+    {
+      "id": "bn-star-promise",
+      "kind": "banner",
+      "cost": 180,
+      "name": [
+        "Осенний полёт · 2",
+        "Autumn flight · 2"
+      ],
+      "asset": "studio/atelier/autumn.webp"
+    },
+    {
+      "id": "bn-sky-dragon",
+      "kind": "banner",
+      "cost": 200,
+      "name": [
+        "Утро в волшебном мире · 2",
+        "Magic morning · 2"
+      ],
+      "asset": "studio/atelier/sunrise.webp"
+    },
+    {
+      "id": "bn-ocean-singer",
+      "kind": "banner",
+      "cost": 180,
+      "name": [
+        "Дерево единства · 2",
+        "Unity tree · 2"
+      ],
+      "asset": "studio/atelier/unity.webp"
+    },
+    {
+      "id": "bn-ember-knight",
+      "kind": "banner",
+      "cost": 220,
+      "name": [
+        "Над облаками · 2",
+        "Above the clouds · 2"
+      ],
+      "asset": "studio/atelier/storm.webp"
+    },
+    {
+      "id": "bn-cosmic-pilot",
+      "kind": "banner",
+      "cost": 200,
+      "name": [
+        "Секреты чародеек · 2",
+        "Witch secrets · 2"
+      ],
+      "asset": "studio/atelier/moon.webp"
+    },
+    {
+      "id": "bn-autumn-letter",
+      "kind": "banner",
+      "cost": 160,
+      "name": [
+        "Лесная тропа · 2",
+        "Forest path · 2"
+      ],
+      "asset": "studio/atelier/forest.webp"
+    },
+    {
+      "id": "bn-lantern-road",
+      "kind": "banner",
+      "cost": 160,
+      "name": [
+        "Закат над Комоной · 2",
+        "Komona sunset · 2"
+      ],
+      "asset": "studio/atelier/komona.webp"
+    },
+    {
+      "id": "bn-rainy-window",
+      "kind": "banner",
+      "cost": 160,
+      "name": [
+        "Встреча на закате · 2",
+        "Sunset rendezvous · 2"
+      ],
+      "asset": "studio/atelier/meeting.webp"
+    },
+    {
+      "id": "bn-dusk-duo",
+      "kind": "banner",
+      "cost": 0,
+      "name": [
+        "Карманная вселенная · 2",
+        "Pocket universe · 2"
+      ],
+      "asset": "studio/atelier/micro.webp"
+    },
+    {
+      "id": "bn-immortal-promise",
+      "kind": "banner",
+      "cost": 0,
+      "name": [
+        "Сила волшебницы · 2",
+        "Witch power · 2"
+      ],
+      "asset": "studio/atelier/pepper.webp"
+    },
+    {
+      "id": "bg-void",
+      "kind": "background",
+      "cost": 0,
+      "name": [
+        "Храм тишины · 2",
+        "Temple of silence · 2"
+      ],
+      "asset": "studio/atelier/temple.webp"
+    },
+    {
+      "id": "bn-void",
+      "kind": "banner",
+      "cost": 0,
+      "name": [
+        "Земли целителя · 2",
+        "Healer lands · 2"
+      ],
+      "asset": "studio/atelier/healer.webp"
+    },
+    {
+      "id": "bg-city",
+      "kind": "background",
+      "cost": 260,
+      "name": [
+        "Забытое сокровище · 2",
+        "Forgotten treasure · 2"
+      ],
+      "asset": "studio/atelier/treasure.webp"
+    },
+    {
+      "id": "bn-city",
+      "kind": "banner",
+      "cost": 160,
+      "name": [
+        "Пеппер и Кэррот · 2",
+        "Pepper and Carrot · 2"
+      ],
+      "asset": "studio/atelier/shichimi.webp"
+    },
+    {
+      "id": "bg-sakura",
+      "kind": "background",
+      "cost": 260,
+      "name": [
+        "Дом на краю леса · 2",
+        "Forest cottage · 2"
+      ],
+      "asset": "studio/atelier/cottage.webp"
+    },
+    {
+      "id": "bn-sakura",
+      "kind": "banner",
+      "cost": 160,
+      "name": [
+        "Земли целителя · 3",
+        "Healer lands · 3"
+      ],
+      "asset": "studio/atelier/healer.webp"
+    },
+    {
+      "id": "bg-orbit",
+      "kind": "background",
+      "cost": 260,
+      "name": [
+        "Древо фей · 2",
+        "Fairy tree · 2"
+      ],
+      "asset": "studio/atelier/fairytree.webp"
+    },
+    {
+      "id": "bn-orbit",
+      "kind": "banner",
+      "cost": 160,
+      "name": [
+        "Дуэль волшебниц · 3",
+        "Witch duel · 3"
+      ],
+      "asset": "studio/atelier/savepoint.webp"
+    },
+    {
+      "id": "bg-shrine",
+      "kind": "background",
+      "cost": 260,
+      "name": [
+        "Осенний полёт · 2",
+        "Autumn flight · 2"
+      ],
+      "asset": "studio/atelier/autumn.webp"
+    },
+    {
+      "id": "bn-shrine",
+      "kind": "banner",
+      "cost": 160,
+      "name": [
+        "После дождя · 3",
+        "After rain · 3"
+      ],
+      "asset": "studio/atelier/rain.webp"
+    },
+    {
+      "id": "bg-forest",
+      "kind": "background",
+      "cost": 260,
+      "name": [
+        "Утро в волшебном мире · 2",
+        "Magic morning · 2"
+      ],
+      "asset": "studio/atelier/sunrise.webp"
+    },
+    {
+      "id": "bn-forest",
+      "kind": "banner",
+      "cost": 160,
+      "name": [
+        "За горизонтом · 3",
+        "Beyond the horizon · 3"
+      ],
+      "asset": "studio/atelier/horizon.webp"
+    },
+    {
+      "id": "bg-ocean",
+      "kind": "background",
+      "cost": 260,
+      "name": [
+        "Дерево единства · 2",
+        "Unity tree · 2"
+      ],
+      "asset": "studio/atelier/unity.webp"
+    },
+    {
+      "id": "bn-ocean",
+      "kind": "banner",
+      "cost": 160,
+      "name": [
+        "Город дождя · 3",
+        "Rain city · 3"
+      ],
+      "asset": "studio/atelier/raincity.webp"
+    },
+    {
+      "id": "bg-aurora",
+      "kind": "background",
+      "cost": 260,
+      "name": [
+        "Над облаками · 2",
+        "Above the clouds · 2"
+      ],
+      "asset": "studio/atelier/storm.webp"
+    },
+    {
+      "id": "bn-aurora",
+      "kind": "banner",
+      "cost": 160,
+      "name": [
+        "Хранительница снов · 3",
+        "Dream keeper · 3"
+      ],
+      "asset": "studio/atelier/dream.webp"
+    },
+    {
+      "id": "bg-library",
+      "kind": "background",
+      "cost": 260,
+      "name": [
+        "Секреты чародеек · 2",
+        "Witch secrets · 2"
+      ],
+      "asset": "studio/atelier/moon.webp"
+    },
+    {
+      "id": "bn-library",
+      "kind": "banner",
+      "cost": 160,
+      "name": [
+        "Совет чародеек · 3",
+        "Witch council · 3"
+      ],
+      "asset": "studio/atelier/council.webp"
+    },
+    {
+      "id": "v20-banner-public-samurai-sakura",
+      "kind": "banner",
+      "cost": 600,
+      "name": [
+        "Ронин цветущей сакуры",
+        "Ронин цветущей сакуры"
+      ],
+      "asset": "studio/v23/public-samurai-sakura.webp"
+    },
+    {
+      "id": "v20-background-public-samurai-sakura",
+      "kind": "background",
+      "cost": 700,
+      "name": [
+        "Ронин цветущей сакуры",
+        "Ронин цветущей сакуры"
+      ],
+      "asset": "studio/v23/public-samurai-sakura.webp"
+    },
+    {
+      "id": "v20-banner-public-samurai-storm",
+      "kind": "banner",
+      "cost": 600,
+      "name": [
+        "Клинок грозы",
+        "Клинок грозы"
+      ],
+      "asset": "studio/v23/public-samurai-storm.webp"
+    },
+    {
+      "id": "v20-background-public-samurai-storm",
+      "kind": "background",
+      "cost": 700,
+      "name": [
+        "Клинок грозы",
+        "Клинок грозы"
+      ],
+      "asset": "studio/v23/public-samurai-storm.webp"
+    },
+    {
+      "id": "v20-banner-public-swords-shrine",
+      "kind": "banner",
+      "cost": 600,
+      "name": [
+        "Святилище двух мечей",
+        "Святилище двух мечей"
+      ],
+      "asset": "studio/v23/public-swords-shrine.webp"
+    },
+    {
+      "id": "v20-background-public-swords-shrine",
+      "kind": "background",
+      "cost": 700,
+      "name": [
+        "Святилище двух мечей",
+        "Святилище двух мечей"
+      ],
+      "asset": "studio/v23/public-swords-shrine.webp"
+    }
+  ]
+}

@@ -1,1 +1,923 @@
-{"version": "21", "arts": [{"id": "v20-banner-beach1", "kind": "banner", "name": ["Лазурный берег · 1", "Лазурный берег · 1"], "cost": 460, "rub": 0, "collection": "v20", "v20": true, "accent": "#e8a6d4", "asset": "studio/v21/beach1.webp", "author": "The Outlander", "license": "CC0 · AI-assisted", "itemId": "v20-banner-beach1", "thumb": "studio/v21/beach1.webp", "homeId": "station", "focalY": 42}, {"id": "v20-banner-beach2", "kind": "banner", "name": ["Лазурный берег · 2", "Лазурный берег · 2"], "cost": 460, "rub": 0, "collection": "v20", "v20": true, "accent": "#e8a6d4", "asset": "studio/v21/beach2.webp", "author": "The Outlander", "license": "CC0 · AI-assisted", "itemId": "v20-banner-beach2", "thumb": "studio/v21/beach2.webp", "homeId": "station", "focalY": 42}, {"id": "v20-banner-beach3", "kind": "banner", "name": ["Лазурный берег · 3", "Лазурный берег · 3"], "cost": 460, "rub": 0, "collection": "v20", "v20": true, "accent": "#e8a6d4", "asset": "studio/v21/beach3.webp", "author": "The Outlander", "license": "CC0 · AI-assisted", "itemId": "v20-banner-beach3", "thumb": "studio/v21/beach3.webp", "homeId": "station", "focalY": 42}, {"id": "v20-banner-beach4", "kind": "banner", "name": ["Лазурный берег · 4", "Лазурный берег · 4"], "cost": 460, "rub": 0, "collection": "v20", "v20": true, "accent": "#e8a6d4", "asset": "studio/v21/beach4.webp", "author": "The Outlander", "license": "CC0 · AI-assisted", "itemId": "v20-banner-beach4", "thumb": "studio/v21/beach4.webp", "homeId": "station", "focalY": 42}, {"id": "v20-banner-forest1", "kind": "banner", "name": ["Лесная сказка · 1", "Лесная сказка · 1"], "cost": 460, "rub": 0, "collection": "v20", "v20": true, "accent": "#e8a6d4", "asset": "studio/v21/forest1.webp", "author": "The Outlander", "license": "CC0 · AI-assisted", "itemId": "v20-banner-forest1", "thumb": "studio/v21/forest1.webp", "homeId": "station", "focalY": 42}, {"id": "v20-banner-forest2", "kind": "banner", "name": ["Лесная сказка · 2", "Лесная сказка · 2"], "cost": 460, "rub": 0, "collection": "v20", "v20": true, "accent": "#e8a6d4", "asset": "studio/v21/forest2.webp", "author": "The Outlander", "license": "CC0 · AI-assisted", "itemId": "v20-banner-forest2", "thumb": "studio/v21/forest2.webp", "homeId": "station", "focalY": 42}, {"id": "v20-banner-forest3", "kind": "banner", "name": ["Лесная сказка · 3", "Лесная сказка · 3"], "cost": 460, "rub": 0, "collection": "v20", "v20": true, "accent": "#e8a6d4", "asset": "studio/v21/forest3.webp", "author": "The Outlander", "license": "CC0 · AI-assisted", "itemId": "v20-banner-forest3", "thumb": "studio/v21/forest3.webp", "homeId": "station", "focalY": 42}, {"id": "v20-banner-forest4", "kind": "banner", "name": ["Лесная сказка · 4", "Лесная сказка · 4"], "cost": 460, "rub": 0, "collection": "v20", "v20": true, "accent": "#e8a6d4", "asset": "studio/v21/forest4.webp", "author": "The Outlander", "license": "CC0 · AI-assisted", "itemId": "v20-banner-forest4", "thumb": "studio/v21/forest4.webp", "homeId": "station", "focalY": 42}, {"id": "v20-banner-uneon", "kind": "banner", "name": ["Неоновый сон", "Неоновый сон"], "cost": 640, "rub": 0, "collection": "v20", "v20": true, "accent": "#e8a6d4", "asset": "studio/v21/uneon.webp", "motionAsset": "studio/v21/uneon.mp4", "author": "Tella", "license": "CC0", "itemId": "v20-banner-uneon", "thumb": "studio/v21/uneon.webp", "homeId": "station", "focalY": 42}, {"id": "v20-banner-love-triangle", "kind": "banner", "name": ["Лиловый пульс", "Лиловый пульс"], "cost": 640, "rub": 0, "collection": "v20", "v20": true, "accent": "#e8a6d4", "asset": "studio/v21/love-triangle.webp", "motionAsset": "studio/v21/love-triangle.mp4", "author": "Tella", "license": "CC0", "itemId": "v20-banner-love-triangle", "thumb": "studio/v21/love-triangle.webp", "homeId": "station", "focalY": 42}, {"id": "v20-banner-spring", "kind": "banner", "name": ["Дыхание весны", "Дыхание весны"], "cost": 640, "rub": 0, "collection": "v20", "v20": true, "accent": "#e8a6d4", "asset": "studio/v21/spring.webp", "motionAsset": "studio/v21/spring.mp4", "author": "Tella", "license": "CC0", "itemId": "v20-banner-spring", "thumb": "studio/v21/spring.webp", "homeId": "station", "focalY": 42}, {"id": "v20-banner-crimson", "kind": "banner", "name": ["Алый горизонт автора", "Алый горизонт автора"], "cost": 0, "rub": 0, "collection": "v20", "v20": true, "accent": "#a3b4ff", "asset": "studio/v20/starry-night.webp", "motionAsset": "studio/v20/starry-night.mp4", "ownerOnly": true, "author": "Tella · цветовая обработка CSS", "license": "CC0", "founderTint": true, "founderHue": 110, "itemId": "v20-banner-crimson", "thumb": "studio/v20/starry-night.webp", "homeId": "station", "focalY": 42}, {"id": "v20-banner-eden", "kind": "banner", "name": ["Сад создателя", "Сад создателя"], "cost": 0, "rub": 0, "collection": "v20", "v20": true, "accent": "#a3b4ff", "asset": "studio/v20/great-forest-spirit.webp", "motionAsset": "studio/v20/great-forest-spirit.mp4", "ownerOnly": true, "author": "Tella · цветовая обработка CSS", "license": "CC0", "founderTint": true, "founderHue": 235, "itemId": "v20-banner-eden", "thumb": "studio/v20/great-forest-spirit.webp", "homeId": "sakura", "focalY": 42}, {"id": "v20-banner-japan1", "kind": "banner", "name": ["Сакура у реки", "Сакура у реки"], "cost": 0, "rub": 0, "collection": "v20", "v20": true, "accent": "#a3b4ff", "asset": "studio/v20/japan1.webp", "author": "The Outlander", "license": "CC0 · AI-assisted", "itemId": "v20-banner-japan1", "thumb": "studio/v20/japan1.webp", "homeId": "rooftop", "focalY": 42}, {"id": "v20-banner-japan2", "kind": "banner", "name": ["Тихий Киото", "Тихий Киото"], "cost": 480, "rub": 0, "collection": "v20", "v20": true, "accent": "#a3b4ff", "asset": "studio/v20/japan2.webp", "author": "The Outlander", "license": "CC0 · AI-assisted", "itemId": "v20-banner-japan2", "thumb": "studio/v20/japan2.webp", "homeId": "torii", "focalY": 42}, {"id": "v20-banner-japan3", "kind": "banner", "name": ["Дом за клёнами", "Дом за клёнами"], "cost": 480, "rub": 0, "collection": "v20", "v20": true, "accent": "#a3b4ff", "asset": "studio/v20/japan3.webp", "author": "The Outlander", "license": "CC0 · AI-assisted", "itemId": "v20-banner-japan3", "thumb": "studio/v20/japan3.webp", "homeId": "station", "focalY": 42}, {"id": "v20-banner-japan4", "kind": "banner", "name": ["Лунная тропа", "Лунная тропа"], "cost": 480, "rub": 0, "collection": "v20", "v20": true, "accent": "#a3b4ff", "asset": "studio/v20/japan4.webp", "author": "The Outlander", "license": "CC0 · AI-assisted", "itemId": "v20-banner-japan4", "thumb": "studio/v20/japan4.webp", "homeId": "sakura", "focalY": 42}, {"id": "v20-banner-the-void", "kind": "banner", "name": ["Синяя сингулярность", "Синяя сингулярность"], "cost": 650, "rub": 0, "collection": "v20", "v20": true, "accent": "#a3b4ff", "asset": "studio/v20/the-void.webp", "motionAsset": "studio/v20/the-void.mp4", "author": "Tella", "license": "CC0", "itemId": "v20-banner-the-void", "thumb": "studio/v20/the-void.webp", "homeId": "rooftop", "focalY": 42}, {"id": "v20-banner-interstella", "kind": "banner", "name": ["Между звёздами", "Между звёздами"], "cost": 650, "rub": 0, "collection": "v20", "v20": true, "accent": "#a3b4ff", "asset": "studio/v20/interstella.webp", "motionAsset": "studio/v20/interstella.mp4", "author": "Tella", "license": "CC0", "itemId": "v20-banner-interstella", "thumb": "studio/v20/interstella.webp", "homeId": "torii", "focalY": 42}, {"id": "v20-banner-great-forest-spirit", "kind": "banner", "name": ["Лесной дух", "Лесной дух"], "cost": 650, "rub": 0, "collection": "v20", "v20": true, "accent": "#a3b4ff", "asset": "studio/v20/great-forest-spirit.webp", "motionAsset": "studio/v20/great-forest-spirit.mp4", "author": "Tella", "license": "CC0", "itemId": "v20-banner-great-forest-spirit", "thumb": "studio/v20/great-forest-spirit.webp", "homeId": "station", "focalY": 42}, {"id": "v20-banner-starry-night", "kind": "banner", "name": ["Звёздный поток", "Звёздный поток"], "cost": 650, "rub": 0, "collection": "v20", "v20": true, "accent": "#a3b4ff", "asset": "studio/v20/starry-night.webp", "motionAsset": "studio/v20/starry-night.mp4", "author": "Tella", "license": "CC0", "itemId": "v20-banner-starry-night", "thumb": "studio/v20/starry-night.webp", "homeId": "sakura", "focalY": 42}, {"id": "v20-banner-founder", "kind": "banner", "name": ["Обитель основателя", "Обитель основателя"], "cost": 0, "rub": 0, "collection": "v20", "v20": true, "accent": "#a3b4ff", "asset": "studio/v20/interstella.webp", "motionAsset": "studio/v20/interstella.mp4", "ownerOnly": true, "author": "Tella · цветовая обработка CSS", "license": "CC0", "founderTint": true, "itemId": "v20-banner-founder", "thumb": "studio/v20/interstella.webp", "homeId": "rooftop", "focalY": 42}], "banners": [{"id": "v20-banner-beach1", "kind": "banner", "name": ["Лазурный берег · 1", "Лазурный берег · 1"], "cost": 460, "rub": 0, "collection": "v20", "v20": true, "accent": "#e8a6d4", "asset": "studio/v21/beach1.webp", "author": "The Outlander", "license": "CC0 · AI-assisted", "itemId": "v20-banner-beach1", "thumb": "studio/v21/beach1.webp", "homeId": "station", "focalY": 42}, {"id": "v20-banner-beach2", "kind": "banner", "name": ["Лазурный берег · 2", "Лазурный берег · 2"], "cost": 460, "rub": 0, "collection": "v20", "v20": true, "accent": "#e8a6d4", "asset": "studio/v21/beach2.webp", "author": "The Outlander", "license": "CC0 · AI-assisted", "itemId": "v20-banner-beach2", "thumb": "studio/v21/beach2.webp", "homeId": "station", "focalY": 42}, {"id": "v20-banner-beach3", "kind": "banner", "name": ["Лазурный берег · 3", "Лазурный берег · 3"], "cost": 460, "rub": 0, "collection": "v20", "v20": true, "accent": "#e8a6d4", "asset": "studio/v21/beach3.webp", "author": "The Outlander", "license": "CC0 · AI-assisted", "itemId": "v20-banner-beach3", "thumb": "studio/v21/beach3.webp", "homeId": "station", "focalY": 42}, {"id": "v20-banner-beach4", "kind": "banner", "name": ["Лазурный берег · 4", "Лазурный берег · 4"], "cost": 460, "rub": 0, "collection": "v20", "v20": true, "accent": "#e8a6d4", "asset": "studio/v21/beach4.webp", "author": "The Outlander", "license": "CC0 · AI-assisted", "itemId": "v20-banner-beach4", "thumb": "studio/v21/beach4.webp", "homeId": "station", "focalY": 42}, {"id": "v20-banner-forest1", "kind": "banner", "name": ["Лесная сказка · 1", "Лесная сказка · 1"], "cost": 460, "rub": 0, "collection": "v20", "v20": true, "accent": "#e8a6d4", "asset": "studio/v21/forest1.webp", "author": "The Outlander", "license": "CC0 · AI-assisted", "itemId": "v20-banner-forest1", "thumb": "studio/v21/forest1.webp", "homeId": "station", "focalY": 42}, {"id": "v20-banner-forest2", "kind": "banner", "name": ["Лесная сказка · 2", "Лесная сказка · 2"], "cost": 460, "rub": 0, "collection": "v20", "v20": true, "accent": "#e8a6d4", "asset": "studio/v21/forest2.webp", "author": "The Outlander", "license": "CC0 · AI-assisted", "itemId": "v20-banner-forest2", "thumb": "studio/v21/forest2.webp", "homeId": "station", "focalY": 42}, {"id": "v20-banner-forest3", "kind": "banner", "name": ["Лесная сказка · 3", "Лесная сказка · 3"], "cost": 460, "rub": 0, "collection": "v20", "v20": true, "accent": "#e8a6d4", "asset": "studio/v21/forest3.webp", "author": "The Outlander", "license": "CC0 · AI-assisted", "itemId": "v20-banner-forest3", "thumb": "studio/v21/forest3.webp", "homeId": "station", "focalY": 42}, {"id": "v20-banner-forest4", "kind": "banner", "name": ["Лесная сказка · 4", "Лесная сказка · 4"], "cost": 460, "rub": 0, "collection": "v20", "v20": true, "accent": "#e8a6d4", "asset": "studio/v21/forest4.webp", "author": "The Outlander", "license": "CC0 · AI-assisted", "itemId": "v20-banner-forest4", "thumb": "studio/v21/forest4.webp", "homeId": "station", "focalY": 42}, {"id": "v20-banner-uneon", "kind": "banner", "name": ["Неоновый сон", "Неоновый сон"], "cost": 640, "rub": 0, "collection": "v20", "v20": true, "accent": "#e8a6d4", "asset": "studio/v21/uneon.webp", "motionAsset": "studio/v21/uneon.mp4", "author": "Tella", "license": "CC0", "itemId": "v20-banner-uneon", "thumb": "studio/v21/uneon.webp", "homeId": "station", "focalY": 42}, {"id": "v20-banner-love-triangle", "kind": "banner", "name": ["Лиловый пульс", "Лиловый пульс"], "cost": 640, "rub": 0, "collection": "v20", "v20": true, "accent": "#e8a6d4", "asset": "studio/v21/love-triangle.webp", "motionAsset": "studio/v21/love-triangle.mp4", "author": "Tella", "license": "CC0", "itemId": "v20-banner-love-triangle", "thumb": "studio/v21/love-triangle.webp", "homeId": "station", "focalY": 42}, {"id": "v20-banner-spring", "kind": "banner", "name": ["Дыхание весны", "Дыхание весны"], "cost": 640, "rub": 0, "collection": "v20", "v20": true, "accent": "#e8a6d4", "asset": "studio/v21/spring.webp", "motionAsset": "studio/v21/spring.mp4", "author": "Tella", "license": "CC0", "itemId": "v20-banner-spring", "thumb": "studio/v21/spring.webp", "homeId": "station", "focalY": 42}, {"id": "v20-banner-crimson", "kind": "banner", "name": ["Алый горизонт автора", "Алый горизонт автора"], "cost": 0, "rub": 0, "collection": "v20", "v20": true, "accent": "#a3b4ff", "asset": "studio/v20/starry-night.webp", "motionAsset": "studio/v20/starry-night.mp4", "ownerOnly": true, "author": "Tella · цветовая обработка CSS", "license": "CC0", "founderTint": true, "founderHue": 110, "itemId": "v20-banner-crimson", "thumb": "studio/v20/starry-night.webp", "homeId": "station", "focalY": 42}, {"id": "v20-banner-eden", "kind": "banner", "name": ["Сад создателя", "Сад создателя"], "cost": 0, "rub": 0, "collection": "v20", "v20": true, "accent": "#a3b4ff", "asset": "studio/v20/great-forest-spirit.webp", "motionAsset": "studio/v20/great-forest-spirit.mp4", "ownerOnly": true, "author": "Tella · цветовая обработка CSS", "license": "CC0", "founderTint": true, "founderHue": 235, "itemId": "v20-banner-eden", "thumb": "studio/v20/great-forest-spirit.webp", "homeId": "sakura", "focalY": 42}, {"id": "v20-banner-japan1", "kind": "banner", "name": ["Сакура у реки", "Сакура у реки"], "cost": 0, "rub": 0, "collection": "v20", "v20": true, "accent": "#a3b4ff", "asset": "studio/v20/japan1.webp", "author": "The Outlander", "license": "CC0 · AI-assisted", "itemId": "v20-banner-japan1", "thumb": "studio/v20/japan1.webp", "homeId": "rooftop", "focalY": 42}, {"id": "v20-banner-japan2", "kind": "banner", "name": ["Тихий Киото", "Тихий Киото"], "cost": 480, "rub": 0, "collection": "v20", "v20": true, "accent": "#a3b4ff", "asset": "studio/v20/japan2.webp", "author": "The Outlander", "license": "CC0 · AI-assisted", "itemId": "v20-banner-japan2", "thumb": "studio/v20/japan2.webp", "homeId": "torii", "focalY": 42}, {"id": "v20-banner-japan3", "kind": "banner", "name": ["Дом за клёнами", "Дом за клёнами"], "cost": 480, "rub": 0, "collection": "v20", "v20": true, "accent": "#a3b4ff", "asset": "studio/v20/japan3.webp", "author": "The Outlander", "license": "CC0 · AI-assisted", "itemId": "v20-banner-japan3", "thumb": "studio/v20/japan3.webp", "homeId": "station", "focalY": 42}, {"id": "v20-banner-japan4", "kind": "banner", "name": ["Лунная тропа", "Лунная тропа"], "cost": 480, "rub": 0, "collection": "v20", "v20": true, "accent": "#a3b4ff", "asset": "studio/v20/japan4.webp", "author": "The Outlander", "license": "CC0 · AI-assisted", "itemId": "v20-banner-japan4", "thumb": "studio/v20/japan4.webp", "homeId": "sakura", "focalY": 42}, {"id": "v20-banner-the-void", "kind": "banner", "name": ["Синяя сингулярность", "Синяя сингулярность"], "cost": 650, "rub": 0, "collection": "v20", "v20": true, "accent": "#a3b4ff", "asset": "studio/v20/the-void.webp", "motionAsset": "studio/v20/the-void.mp4", "author": "Tella", "license": "CC0", "itemId": "v20-banner-the-void", "thumb": "studio/v20/the-void.webp", "homeId": "rooftop", "focalY": 42}, {"id": "v20-banner-interstella", "kind": "banner", "name": ["Между звёздами", "Между звёздами"], "cost": 650, "rub": 0, "collection": "v20", "v20": true, "accent": "#a3b4ff", "asset": "studio/v20/interstella.webp", "motionAsset": "studio/v20/interstella.mp4", "author": "Tella", "license": "CC0", "itemId": "v20-banner-interstella", "thumb": "studio/v20/interstella.webp", "homeId": "torii", "focalY": 42}, {"id": "v20-banner-great-forest-spirit", "kind": "banner", "name": ["Лесной дух", "Лесной дух"], "cost": 650, "rub": 0, "collection": "v20", "v20": true, "accent": "#a3b4ff", "asset": "studio/v20/great-forest-spirit.webp", "motionAsset": "studio/v20/great-forest-spirit.mp4", "author": "Tella", "license": "CC0", "itemId": "v20-banner-great-forest-spirit", "thumb": "studio/v20/great-forest-spirit.webp", "homeId": "station", "focalY": 42}, {"id": "v20-banner-starry-night", "kind": "banner", "name": ["Звёздный поток", "Звёздный поток"], "cost": 650, "rub": 0, "collection": "v20", "v20": true, "accent": "#a3b4ff", "asset": "studio/v20/starry-night.webp", "motionAsset": "studio/v20/starry-night.mp4", "author": "Tella", "license": "CC0", "itemId": "v20-banner-starry-night", "thumb": "studio/v20/starry-night.webp", "homeId": "sakura", "focalY": 42}, {"id": "v20-banner-founder", "kind": "banner", "name": ["Обитель основателя", "Обитель основателя"], "cost": 0, "rub": 0, "collection": "v20", "v20": true, "accent": "#a3b4ff", "asset": "studio/v20/interstella.webp", "motionAsset": "studio/v20/interstella.mp4", "ownerOnly": true, "author": "Tella · цветовая обработка CSS", "license": "CC0", "founderTint": true, "itemId": "v20-banner-founder", "thumb": "studio/v20/interstella.webp", "homeId": "rooftop", "focalY": 42}]}
+{
+  "version": "21",
+  "arts": [
+    {
+      "id": "v20-banner-beach1",
+      "kind": "banner",
+      "name": [
+        "Лазурный берег · 1",
+        "Cote d'Azur · 1"
+      ],
+      "cost": 460,
+      "rub": 0,
+      "collection": "v20",
+      "v20": true,
+      "accent": "#e8a6d4",
+      "asset": "studio/v21/beach1.webp",
+      "author": "The Outlander",
+      "license": "CC0 · AI-assisted",
+      "itemId": "v20-banner-beach1",
+      "thumb": "studio/v21/beach1.webp",
+      "homeId": "station",
+      "focalY": 42
+    },
+    {
+      "id": "v20-banner-beach2",
+      "kind": "banner",
+      "name": [
+        "Лазурный берег · 2",
+        "Cote d'Azur · 2"
+      ],
+      "cost": 460,
+      "rub": 0,
+      "collection": "v20",
+      "v20": true,
+      "accent": "#e8a6d4",
+      "asset": "studio/v21/beach2.webp",
+      "author": "The Outlander",
+      "license": "CC0 · AI-assisted",
+      "itemId": "v20-banner-beach2",
+      "thumb": "studio/v21/beach2.webp",
+      "homeId": "station",
+      "focalY": 42
+    },
+    {
+      "id": "v20-banner-beach3",
+      "kind": "banner",
+      "name": [
+        "Лазурный берег · 3",
+        "Cote d'Azur · 3"
+      ],
+      "cost": 460,
+      "rub": 0,
+      "collection": "v20",
+      "v20": true,
+      "accent": "#e8a6d4",
+      "asset": "studio/v21/beach3.webp",
+      "author": "The Outlander",
+      "license": "CC0 · AI-assisted",
+      "itemId": "v20-banner-beach3",
+      "thumb": "studio/v21/beach3.webp",
+      "homeId": "station",
+      "focalY": 42
+    },
+    {
+      "id": "v20-banner-beach4",
+      "kind": "banner",
+      "name": [
+        "Лазурный берег · 4",
+        "Cote d'Azur · 4"
+      ],
+      "cost": 460,
+      "rub": 0,
+      "collection": "v20",
+      "v20": true,
+      "accent": "#e8a6d4",
+      "asset": "studio/v21/beach4.webp",
+      "author": "The Outlander",
+      "license": "CC0 · AI-assisted",
+      "itemId": "v20-banner-beach4",
+      "thumb": "studio/v21/beach4.webp",
+      "homeId": "station",
+      "focalY": 42
+    },
+    {
+      "id": "v20-banner-forest1",
+      "kind": "banner",
+      "name": [
+        "Лесная сказка · 1",
+        "Forest Tale · 1"
+      ],
+      "cost": 460,
+      "rub": 0,
+      "collection": "v20",
+      "v20": true,
+      "accent": "#e8a6d4",
+      "asset": "studio/v21/forest1.webp",
+      "author": "The Outlander",
+      "license": "CC0 · AI-assisted",
+      "itemId": "v20-banner-forest1",
+      "thumb": "studio/v21/forest1.webp",
+      "homeId": "station",
+      "focalY": 42
+    },
+    {
+      "id": "v20-banner-forest2",
+      "kind": "banner",
+      "name": [
+        "Лесная сказка · 2",
+        "Forest Tale · 2"
+      ],
+      "cost": 460,
+      "rub": 0,
+      "collection": "v20",
+      "v20": true,
+      "accent": "#e8a6d4",
+      "asset": "studio/v21/forest2.webp",
+      "author": "The Outlander",
+      "license": "CC0 · AI-assisted",
+      "itemId": "v20-banner-forest2",
+      "thumb": "studio/v21/forest2.webp",
+      "homeId": "station",
+      "focalY": 42
+    },
+    {
+      "id": "v20-banner-forest3",
+      "kind": "banner",
+      "name": [
+        "Лесная сказка · 3",
+        "Forest Tale · 3"
+      ],
+      "cost": 460,
+      "rub": 0,
+      "collection": "v20",
+      "v20": true,
+      "accent": "#e8a6d4",
+      "asset": "studio/v21/forest3.webp",
+      "author": "The Outlander",
+      "license": "CC0 · AI-assisted",
+      "itemId": "v20-banner-forest3",
+      "thumb": "studio/v21/forest3.webp",
+      "homeId": "station",
+      "focalY": 42
+    },
+    {
+      "id": "v20-banner-forest4",
+      "kind": "banner",
+      "name": [
+        "Лесная сказка · 4",
+        "Forest Tale · 4"
+      ],
+      "cost": 460,
+      "rub": 0,
+      "collection": "v20",
+      "v20": true,
+      "accent": "#e8a6d4",
+      "asset": "studio/v21/forest4.webp",
+      "author": "The Outlander",
+      "license": "CC0 · AI-assisted",
+      "itemId": "v20-banner-forest4",
+      "thumb": "studio/v21/forest4.webp",
+      "homeId": "station",
+      "focalY": 42
+    },
+    {
+      "id": "v20-banner-uneon",
+      "kind": "banner",
+      "name": [
+        "Неоновый сон",
+        "Neon Dream"
+      ],
+      "cost": 640,
+      "rub": 0,
+      "collection": "v20",
+      "v20": true,
+      "accent": "#e8a6d4",
+      "asset": "studio/v21/uneon.webp",
+      "motionAsset": "studio/v21/uneon.mp4",
+      "author": "Tella",
+      "license": "CC0",
+      "itemId": "v20-banner-uneon",
+      "thumb": "studio/v21/uneon.webp",
+      "homeId": "station",
+      "focalY": 42
+    },
+    {
+      "id": "v20-banner-love-triangle",
+      "kind": "banner",
+      "name": [
+        "Лиловый пульс",
+        "Purple Pulse"
+      ],
+      "cost": 640,
+      "rub": 0,
+      "collection": "v20",
+      "v20": true,
+      "accent": "#e8a6d4",
+      "asset": "studio/v21/love-triangle.webp",
+      "motionAsset": "studio/v21/love-triangle.mp4",
+      "author": "Tella",
+      "license": "CC0",
+      "itemId": "v20-banner-love-triangle",
+      "thumb": "studio/v21/love-triangle.webp",
+      "homeId": "station",
+      "focalY": 42
+    },
+    {
+      "id": "v20-banner-spring",
+      "kind": "banner",
+      "name": [
+        "Дыхание весны",
+        "Breath of Spring"
+      ],
+      "cost": 640,
+      "rub": 0,
+      "collection": "v20",
+      "v20": true,
+      "accent": "#e8a6d4",
+      "asset": "studio/v21/spring.webp",
+      "motionAsset": "studio/v21/spring.mp4",
+      "author": "Tella",
+      "license": "CC0",
+      "itemId": "v20-banner-spring",
+      "thumb": "studio/v21/spring.webp",
+      "homeId": "station",
+      "focalY": 42
+    },
+    {
+      "id": "v20-banner-crimson",
+      "kind": "banner",
+      "name": [
+        "Алый горизонт автора",
+        "Scarlet Horizon by the author"
+      ],
+      "cost": 0,
+      "rub": 0,
+      "collection": "v20",
+      "v20": true,
+      "accent": "#a3b4ff",
+      "asset": "studio/v20/starry-night.webp",
+      "motionAsset": "studio/v20/starry-night.mp4",
+      "ownerOnly": true,
+      "author": "Tella · цветовая обработка CSS",
+      "license": "CC0",
+      "founderTint": true,
+      "founderHue": 110,
+      "itemId": "v20-banner-crimson",
+      "thumb": "studio/v20/starry-night.webp",
+      "homeId": "station",
+      "focalY": 42
+    },
+    {
+      "id": "v20-banner-eden",
+      "kind": "banner",
+      "name": [
+        "Сад создателя",
+        "Creator's Garden"
+      ],
+      "cost": 0,
+      "rub": 0,
+      "collection": "v20",
+      "v20": true,
+      "accent": "#a3b4ff",
+      "asset": "studio/v20/great-forest-spirit.webp",
+      "motionAsset": "studio/v20/great-forest-spirit.mp4",
+      "ownerOnly": true,
+      "author": "Tella · цветовая обработка CSS",
+      "license": "CC0",
+      "founderTint": true,
+      "founderHue": 235,
+      "itemId": "v20-banner-eden",
+      "thumb": "studio/v20/great-forest-spirit.webp",
+      "homeId": "sakura",
+      "focalY": 42
+    },
+    {
+      "id": "v20-banner-japan1",
+      "kind": "banner",
+      "name": [
+        "Сакура у реки",
+        "Sakura by the river"
+      ],
+      "cost": 0,
+      "rub": 0,
+      "collection": "v20",
+      "v20": true,
+      "accent": "#a3b4ff",
+      "asset": "studio/v20/japan1.webp",
+      "author": "The Outlander",
+      "license": "CC0 · AI-assisted",
+      "itemId": "v20-banner-japan1",
+      "thumb": "studio/v20/japan1.webp",
+      "homeId": "rooftop",
+      "focalY": 42
+    },
+    {
+      "id": "v20-banner-japan2",
+      "kind": "banner",
+      "name": [
+        "Тихий Киото",
+        "Quiet Kyoto"
+      ],
+      "cost": 480,
+      "rub": 0,
+      "collection": "v20",
+      "v20": true,
+      "accent": "#a3b4ff",
+      "asset": "studio/v20/japan2.webp",
+      "author": "The Outlander",
+      "license": "CC0 · AI-assisted",
+      "itemId": "v20-banner-japan2",
+      "thumb": "studio/v20/japan2.webp",
+      "homeId": "torii",
+      "focalY": 42
+    },
+    {
+      "id": "v20-banner-japan3",
+      "kind": "banner",
+      "name": [
+        "Дом за клёнами",
+        "House behind the maples"
+      ],
+      "cost": 480,
+      "rub": 0,
+      "collection": "v20",
+      "v20": true,
+      "accent": "#a3b4ff",
+      "asset": "studio/v20/japan3.webp",
+      "author": "The Outlander",
+      "license": "CC0 · AI-assisted",
+      "itemId": "v20-banner-japan3",
+      "thumb": "studio/v20/japan3.webp",
+      "homeId": "station",
+      "focalY": 42
+    },
+    {
+      "id": "v20-banner-japan4",
+      "kind": "banner",
+      "name": [
+        "Лунная тропа",
+        "Moon Trail"
+      ],
+      "cost": 480,
+      "rub": 0,
+      "collection": "v20",
+      "v20": true,
+      "accent": "#a3b4ff",
+      "asset": "studio/v20/japan4.webp",
+      "author": "The Outlander",
+      "license": "CC0 · AI-assisted",
+      "itemId": "v20-banner-japan4",
+      "thumb": "studio/v20/japan4.webp",
+      "homeId": "sakura",
+      "focalY": 42
+    },
+    {
+      "id": "v20-banner-the-void",
+      "kind": "banner",
+      "name": [
+        "Синяя сингулярность",
+        "Blue Singularity"
+      ],
+      "cost": 650,
+      "rub": 0,
+      "collection": "v20",
+      "v20": true,
+      "accent": "#a3b4ff",
+      "asset": "studio/v20/the-void.webp",
+      "motionAsset": "studio/v20/the-void.mp4",
+      "author": "Tella",
+      "license": "CC0",
+      "itemId": "v20-banner-the-void",
+      "thumb": "studio/v20/the-void.webp",
+      "homeId": "rooftop",
+      "focalY": 42
+    },
+    {
+      "id": "v20-banner-interstella",
+      "kind": "banner",
+      "name": [
+        "Между звёздами",
+        "Between the stars"
+      ],
+      "cost": 650,
+      "rub": 0,
+      "collection": "v20",
+      "v20": true,
+      "accent": "#a3b4ff",
+      "asset": "studio/v20/interstella.webp",
+      "motionAsset": "studio/v20/interstella.mp4",
+      "author": "Tella",
+      "license": "CC0",
+      "itemId": "v20-banner-interstella",
+      "thumb": "studio/v20/interstella.webp",
+      "homeId": "torii",
+      "focalY": 42
+    },
+    {
+      "id": "v20-banner-great-forest-spirit",
+      "kind": "banner",
+      "name": [
+        "Лесной дух",
+        "Forest Spirit"
+      ],
+      "cost": 650,
+      "rub": 0,
+      "collection": "v20",
+      "v20": true,
+      "accent": "#a3b4ff",
+      "asset": "studio/v20/great-forest-spirit.webp",
+      "motionAsset": "studio/v20/great-forest-spirit.mp4",
+      "author": "Tella",
+      "license": "CC0",
+      "itemId": "v20-banner-great-forest-spirit",
+      "thumb": "studio/v20/great-forest-spirit.webp",
+      "homeId": "station",
+      "focalY": 42
+    },
+    {
+      "id": "v20-banner-starry-night",
+      "kind": "banner",
+      "name": [
+        "Звёздный поток",
+        "Star Stream"
+      ],
+      "cost": 650,
+      "rub": 0,
+      "collection": "v20",
+      "v20": true,
+      "accent": "#a3b4ff",
+      "asset": "studio/v20/starry-night.webp",
+      "motionAsset": "studio/v20/starry-night.mp4",
+      "author": "Tella",
+      "license": "CC0",
+      "itemId": "v20-banner-starry-night",
+      "thumb": "studio/v20/starry-night.webp",
+      "homeId": "sakura",
+      "focalY": 42
+    },
+    {
+      "id": "v20-banner-founder",
+      "kind": "banner",
+      "name": [
+        "Обитель основателя",
+        "Founder's Abode"
+      ],
+      "cost": 0,
+      "rub": 0,
+      "collection": "v20",
+      "v20": true,
+      "accent": "#a3b4ff",
+      "asset": "studio/v20/interstella.webp",
+      "motionAsset": "studio/v20/interstella.mp4",
+      "ownerOnly": true,
+      "author": "Tella · цветовая обработка CSS",
+      "license": "CC0",
+      "founderTint": true,
+      "itemId": "v20-banner-founder",
+      "thumb": "studio/v20/interstella.webp",
+      "homeId": "rooftop",
+      "focalY": 42
+    }
+  ],
+  "banners": [
+    {
+      "id": "v20-banner-beach1",
+      "kind": "banner",
+      "name": [
+        "Лазурный берег · 1",
+        "Cote d'Azur · 1"
+      ],
+      "cost": 460,
+      "rub": 0,
+      "collection": "v20",
+      "v20": true,
+      "accent": "#e8a6d4",
+      "asset": "studio/v21/beach1.webp",
+      "author": "The Outlander",
+      "license": "CC0 · AI-assisted",
+      "itemId": "v20-banner-beach1",
+      "thumb": "studio/v21/beach1.webp",
+      "homeId": "station",
+      "focalY": 42
+    },
+    {
+      "id": "v20-banner-beach2",
+      "kind": "banner",
+      "name": [
+        "Лазурный берег · 2",
+        "Cote d'Azur · 2"
+      ],
+      "cost": 460,
+      "rub": 0,
+      "collection": "v20",
+      "v20": true,
+      "accent": "#e8a6d4",
+      "asset": "studio/v21/beach2.webp",
+      "author": "The Outlander",
+      "license": "CC0 · AI-assisted",
+      "itemId": "v20-banner-beach2",
+      "thumb": "studio/v21/beach2.webp",
+      "homeId": "station",
+      "focalY": 42
+    },
+    {
+      "id": "v20-banner-beach3",
+      "kind": "banner",
+      "name": [
+        "Лазурный берег · 3",
+        "Cote d'Azur · 3"
+      ],
+      "cost": 460,
+      "rub": 0,
+      "collection": "v20",
+      "v20": true,
+      "accent": "#e8a6d4",
+      "asset": "studio/v21/beach3.webp",
+      "author": "The Outlander",
+      "license": "CC0 · AI-assisted",
+      "itemId": "v20-banner-beach3",
+      "thumb": "studio/v21/beach3.webp",
+      "homeId": "station",
+      "focalY": 42
+    },
+    {
+      "id": "v20-banner-beach4",
+      "kind": "banner",
+      "name": [
+        "Лазурный берег · 4",
+        "Cote d'Azur · 4"
+      ],
+      "cost": 460,
+      "rub": 0,
+      "collection": "v20",
+      "v20": true,
+      "accent": "#e8a6d4",
+      "asset": "studio/v21/beach4.webp",
+      "author": "The Outlander",
+      "license": "CC0 · AI-assisted",
+      "itemId": "v20-banner-beach4",
+      "thumb": "studio/v21/beach4.webp",
+      "homeId": "station",
+      "focalY": 42
+    },
+    {
+      "id": "v20-banner-forest1",
+      "kind": "banner",
+      "name": [
+        "Лесная сказка · 1",
+        "Forest Tale · 1"
+      ],
+      "cost": 460,
+      "rub": 0,
+      "collection": "v20",
+      "v20": true,
+      "accent": "#e8a6d4",
+      "asset": "studio/v21/forest1.webp",
+      "author": "The Outlander",
+      "license": "CC0 · AI-assisted",
+      "itemId": "v20-banner-forest1",
+      "thumb": "studio/v21/forest1.webp",
+      "homeId": "station",
+      "focalY": 42
+    },
+    {
+      "id": "v20-banner-forest2",
+      "kind": "banner",
+      "name": [
+        "Лесная сказка · 2",
+        "Forest Tale · 2"
+      ],
+      "cost": 460,
+      "rub": 0,
+      "collection": "v20",
+      "v20": true,
+      "accent": "#e8a6d4",
+      "asset": "studio/v21/forest2.webp",
+      "author": "The Outlander",
+      "license": "CC0 · AI-assisted",
+      "itemId": "v20-banner-forest2",
+      "thumb": "studio/v21/forest2.webp",
+      "homeId": "station",
+      "focalY": 42
+    },
+    {
+      "id": "v20-banner-forest3",
+      "kind": "banner",
+      "name": [
+        "Лесная сказка · 3",
+        "Forest Tale · 3"
+      ],
+      "cost": 460,
+      "rub": 0,
+      "collection": "v20",
+      "v20": true,
+      "accent": "#e8a6d4",
+      "asset": "studio/v21/forest3.webp",
+      "author": "The Outlander",
+      "license": "CC0 · AI-assisted",
+      "itemId": "v20-banner-forest3",
+      "thumb": "studio/v21/forest3.webp",
+      "homeId": "station",
+      "focalY": 42
+    },
+    {
+      "id": "v20-banner-forest4",
+      "kind": "banner",
+      "name": [
+        "Лесная сказка · 4",
+        "Forest Tale · 4"
+      ],
+      "cost": 460,
+      "rub": 0,
+      "collection": "v20",
+      "v20": true,
+      "accent": "#e8a6d4",
+      "asset": "studio/v21/forest4.webp",
+      "author": "The Outlander",
+      "license": "CC0 · AI-assisted",
+      "itemId": "v20-banner-forest4",
+      "thumb": "studio/v21/forest4.webp",
+      "homeId": "station",
+      "focalY": 42
+    },
+    {
+      "id": "v20-banner-uneon",
+      "kind": "banner",
+      "name": [
+        "Неоновый сон",
+        "Neon Dream"
+      ],
+      "cost": 640,
+      "rub": 0,
+      "collection": "v20",
+      "v20": true,
+      "accent": "#e8a6d4",
+      "asset": "studio/v21/uneon.webp",
+      "motionAsset": "studio/v21/uneon.mp4",
+      "author": "Tella",
+      "license": "CC0",
+      "itemId": "v20-banner-uneon",
+      "thumb": "studio/v21/uneon.webp",
+      "homeId": "station",
+      "focalY": 42
+    },
+    {
+      "id": "v20-banner-love-triangle",
+      "kind": "banner",
+      "name": [
+        "Лиловый пульс",
+        "Purple Pulse"
+      ],
+      "cost": 640,
+      "rub": 0,
+      "collection": "v20",
+      "v20": true,
+      "accent": "#e8a6d4",
+      "asset": "studio/v21/love-triangle.webp",
+      "motionAsset": "studio/v21/love-triangle.mp4",
+      "author": "Tella",
+      "license": "CC0",
+      "itemId": "v20-banner-love-triangle",
+      "thumb": "studio/v21/love-triangle.webp",
+      "homeId": "station",
+      "focalY": 42
+    },
+    {
+      "id": "v20-banner-spring",
+      "kind": "banner",
+      "name": [
+        "Дыхание весны",
+        "Breath of Spring"
+      ],
+      "cost": 640,
+      "rub": 0,
+      "collection": "v20",
+      "v20": true,
+      "accent": "#e8a6d4",
+      "asset": "studio/v21/spring.webp",
+      "motionAsset": "studio/v21/spring.mp4",
+      "author": "Tella",
+      "license": "CC0",
+      "itemId": "v20-banner-spring",
+      "thumb": "studio/v21/spring.webp",
+      "homeId": "station",
+      "focalY": 42
+    },
+    {
+      "id": "v20-banner-crimson",
+      "kind": "banner",
+      "name": [
+        "Алый горизонт автора",
+        "Scarlet Horizon by the author"
+      ],
+      "cost": 0,
+      "rub": 0,
+      "collection": "v20",
+      "v20": true,
+      "accent": "#a3b4ff",
+      "asset": "studio/v20/starry-night.webp",
+      "motionAsset": "studio/v20/starry-night.mp4",
+      "ownerOnly": true,
+      "author": "Tella · цветовая обработка CSS",
+      "license": "CC0",
+      "founderTint": true,
+      "founderHue": 110,
+      "itemId": "v20-banner-crimson",
+      "thumb": "studio/v20/starry-night.webp",
+      "homeId": "station",
+      "focalY": 42
+    },
+    {
+      "id": "v20-banner-eden",
+      "kind": "banner",
+      "name": [
+        "Сад создателя",
+        "Creator's Garden"
+      ],
+      "cost": 0,
+      "rub": 0,
+      "collection": "v20",
+      "v20": true,
+      "accent": "#a3b4ff",
+      "asset": "studio/v20/great-forest-spirit.webp",
+      "motionAsset": "studio/v20/great-forest-spirit.mp4",
+      "ownerOnly": true,
+      "author": "Tella · цветовая обработка CSS",
+      "license": "CC0",
+      "founderTint": true,
+      "founderHue": 235,
+      "itemId": "v20-banner-eden",
+      "thumb": "studio/v20/great-forest-spirit.webp",
+      "homeId": "sakura",
+      "focalY": 42
+    },
+    {
+      "id": "v20-banner-japan1",
+      "kind": "banner",
+      "name": [
+        "Сакура у реки",
+        "Sakura by the river"
+      ],
+      "cost": 0,
+      "rub": 0,
+      "collection": "v20",
+      "v20": true,
+      "accent": "#a3b4ff",
+      "asset": "studio/v20/japan1.webp",
+      "author": "The Outlander",
+      "license": "CC0 · AI-assisted",
+      "itemId": "v20-banner-japan1",
+      "thumb": "studio/v20/japan1.webp",
+      "homeId": "rooftop",
+      "focalY": 42
+    },
+    {
+      "id": "v20-banner-japan2",
+      "kind": "banner",
+      "name": [
+        "Тихий Киото",
+        "Quiet Kyoto"
+      ],
+      "cost": 480,
+      "rub": 0,
+      "collection": "v20",
+      "v20": true,
+      "accent": "#a3b4ff",
+      "asset": "studio/v20/japan2.webp",
+      "author": "The Outlander",
+      "license": "CC0 · AI-assisted",
+      "itemId": "v20-banner-japan2",
+      "thumb": "studio/v20/japan2.webp",
+      "homeId": "torii",
+      "focalY": 42
+    },
+    {
+      "id": "v20-banner-japan3",
+      "kind": "banner",
+      "name": [
+        "Дом за клёнами",
+        "House behind the maples"
+      ],
+      "cost": 480,
+      "rub": 0,
+      "collection": "v20",
+      "v20": true,
+      "accent": "#a3b4ff",
+      "asset": "studio/v20/japan3.webp",
+      "author": "The Outlander",
+      "license": "CC0 · AI-assisted",
+      "itemId": "v20-banner-japan3",
+      "thumb": "studio/v20/japan3.webp",
+      "homeId": "station",
+      "focalY": 42
+    },
+    {
+      "id": "v20-banner-japan4",
+      "kind": "banner",
+      "name": [
+        "Лунная тропа",
+        "Moon Trail"
+      ],
+      "cost": 480,
+      "rub": 0,
+      "collection": "v20",
+      "v20": true,
+      "accent": "#a3b4ff",
+      "asset": "studio/v20/japan4.webp",
+      "author": "The Outlander",
+      "license": "CC0 · AI-assisted",
+      "itemId": "v20-banner-japan4",
+      "thumb": "studio/v20/japan4.webp",
+      "homeId": "sakura",
+      "focalY": 42
+    },
+    {
+      "id": "v20-banner-the-void",
+      "kind": "banner",
+      "name": [
+        "Синяя сингулярность",
+        "Blue Singularity"
+      ],
+      "cost": 650,
+      "rub": 0,
+      "collection": "v20",
+      "v20": true,
+      "accent": "#a3b4ff",
+      "asset": "studio/v20/the-void.webp",
+      "motionAsset": "studio/v20/the-void.mp4",
+      "author": "Tella",
+      "license": "CC0",
+      "itemId": "v20-banner-the-void",
+      "thumb": "studio/v20/the-void.webp",
+      "homeId": "rooftop",
+      "focalY": 42
+    },
+    {
+      "id": "v20-banner-interstella",
+      "kind": "banner",
+      "name": [
+        "Между звёздами",
+        "Between the stars"
+      ],
+      "cost": 650,
+      "rub": 0,
+      "collection": "v20",
+      "v20": true,
+      "accent": "#a3b4ff",
+      "asset": "studio/v20/interstella.webp",
+      "motionAsset": "studio/v20/interstella.mp4",
+      "author": "Tella",
+      "license": "CC0",
+      "itemId": "v20-banner-interstella",
+      "thumb": "studio/v20/interstella.webp",
+      "homeId": "torii",
+      "focalY": 42
+    },
+    {
+      "id": "v20-banner-great-forest-spirit",
+      "kind": "banner",
+      "name": [
+        "Лесной дух",
+        "Forest Spirit"
+      ],
+      "cost": 650,
+      "rub": 0,
+      "collection": "v20",
+      "v20": true,
+      "accent": "#a3b4ff",
+      "asset": "studio/v20/great-forest-spirit.webp",
+      "motionAsset": "studio/v20/great-forest-spirit.mp4",
+      "author": "Tella",
+      "license": "CC0",
+      "itemId": "v20-banner-great-forest-spirit",
+      "thumb": "studio/v20/great-forest-spirit.webp",
+      "homeId": "station",
+      "focalY": 42
+    },
+    {
+      "id": "v20-banner-starry-night",
+      "kind": "banner",
+      "name": [
+        "Звёздный поток",
+        "Star Stream"
+      ],
+      "cost": 650,
+      "rub": 0,
+      "collection": "v20",
+      "v20": true,
+      "accent": "#a3b4ff",
+      "asset": "studio/v20/starry-night.webp",
+      "motionAsset": "studio/v20/starry-night.mp4",
+      "author": "Tella",
+      "license": "CC0",
+      "itemId": "v20-banner-starry-night",
+      "thumb": "studio/v20/starry-night.webp",
+      "homeId": "sakura",
+      "focalY": 42
+    },
+    {
+      "id": "v20-banner-founder",
+      "kind": "banner",
+      "name": [
+        "Обитель основателя",
+        "Founder's Abode"
+      ],
+      "cost": 0,
+      "rub": 0,
+      "collection": "v20",
+      "v20": true,
+      "accent": "#a3b4ff",
+      "asset": "studio/v20/interstella.webp",
+      "motionAsset": "studio/v20/interstella.mp4",
+      "ownerOnly": true,
+      "author": "Tella · цветовая обработка CSS",
+      "license": "CC0",
+      "founderTint": true,
+      "itemId": "v20-banner-founder",
+      "thumb": "studio/v20/interstella.webp",
+      "homeId": "rooftop",
+      "focalY": 42
+    }
+  ]
+}

@@ -1,1 +1,49 @@
-{"version": "20", "scenes": [{"id": "station", "name": ["Сакура у реки", "Сакура у реки"], "asset": "studio/v20/japan1.webp", "thumb": "studio/v20/japan1.webp", "author": "The Outlander", "license": "CC0 · AI-assisted"}, {"id": "sakura", "name": ["Тихий Киото", "Тихий Киото"], "asset": "studio/v20/japan2.webp", "thumb": "studio/v20/japan2.webp", "author": "The Outlander", "license": "CC0 · AI-assisted"}, {"id": "rooftop", "name": ["Дом за клёнами", "Дом за клёнами"], "asset": "studio/v20/japan3.webp", "thumb": "studio/v20/japan3.webp", "author": "The Outlander", "license": "CC0 · AI-assisted"}, {"id": "torii", "name": ["Лунная тропа", "Лунная тропа"], "asset": "studio/v20/japan4.webp", "thumb": "studio/v20/japan4.webp", "author": "The Outlander", "license": "CC0 · AI-assisted"}]}
+{
+  "version": "20",
+  "scenes": [
+    {
+      "id": "station",
+      "name": [
+        "Сакура у реки",
+        "Sakura by the river"
+      ],
+      "asset": "studio/v20/japan1.webp",
+      "thumb": "studio/v20/japan1.webp",
+      "author": "The Outlander",
+      "license": "CC0 · AI-assisted"
+    },
+    {
+      "id": "sakura",
+      "name": [
+        "Тихий Киото",
+        "Quiet Kyoto"
+      ],
+      "asset": "studio/v20/japan2.webp",
+      "thumb": "studio/v20/japan2.webp",
+      "author": "The Outlander",
+      "license": "CC0 · AI-assisted"
+    },
+    {
+      "id": "rooftop",
+      "name": [
+        "Дом за клёнами",
+        "House behind the maples"
+      ],
+      "asset": "studio/v20/japan3.webp",
+      "thumb": "studio/v20/japan3.webp",
+      "author": "The Outlander",
+      "license": "CC0 · AI-assisted"
+    },
+    {
+      "id": "torii",
+      "name": [
+        "Лунная тропа",
+        "Moon Trail"
+      ],
+      "asset": "studio/v20/japan4.webp",
+      "thumb": "studio/v20/japan4.webp",
+      "author": "The Outlander",
+      "license": "CC0 · AI-assisted"
+    }
+  ]
+}
