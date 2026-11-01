@@ -1,0 +1,1392 @@
+{
+  "scope": "27 public animated banners replaced with user approval. IDs/prices/access retained. Backgrounds and founder/privateVIP artwork untouched.",
+  "sourceResolution": [
+    1920,
+    1080
+  ],
+  "bannerResolution": [
+    1920,
+    640
+  ],
+  "noUpscale": true,
+  "productionChanged": false,
+  "items": [
+    {
+      "id": 10122,
+      "previousName": [
+        "Ризе · ветер",
+        "Rize · wind"
+      ],
+      "previousCost": 600,
+      "cost": 600,
+      "name": [
+        "Вайолет · ветер и письма",
+        "Violet · wind and letters"
+      ],
+      "motionAsset": "studio/v24/banner-motion-rize-wind-hd24.mp4",
+      "poster": "studio/v24/banner-motion-rize-wind-hd24.webp",
+      "thumbnail": "studio/v24/banner-motion-rize-wind-thumb-hd24.avif",
+      "basename": "VioletEvergarden-OP1-NCBD1080.webm",
+      "filename": "VioletEvergarden-OP1-NCBD1080",
+      "lyrics": false,
+      "nc": true,
+      "overlap": "None",
+      "path": "2018/Winter/VioletEvergarden-OP1-NCBD1080.webm",
+      "resolution": 1080,
+      "size": 41277013,
+      "source": "BD",
+      "subbed": false,
+      "uncen": false,
+      "tags": "NCBD1080",
+      "link": "https://v.animethemes.moe/VioletEvergarden-OP1-NCBD1080.webm",
+      "anime": "Violet Evergarden",
+      "slug": "violet_evergarden",
+      "theme": "OP1",
+      "sourcePage": "https://animethemes.moe/anime/violet_evergarden",
+      "index": 0,
+      "sourceSHA256": "a94306412d85088cb35ec40bafbe2ace0cf8b6cce82b2734e656bb67d8f15b01",
+      "sourceSize": [
+        1920,
+        1080
+      ],
+      "outputSize": [
+        1920,
+        640
+      ],
+      "start": 20.736,
+      "duration": 3.0,
+      "outputBytes": 745939,
+      "outputSHA256": "019d66d17422e02b92616a9bf78d41e1f552b1dcd386e0a31afa72bae52ec023",
+      "rights": "Third-party anime footage. Rights unverified; no license inferred from availability. User authorized replacement of low-resolution scenes.",
+      "noUpscale": true,
+      "audio": false,
+      "cropTop": 220
+    },
+    {
+      "id": 7160,
+      "previousName": [
+        "Ветер над стадионом",
+        "Stadium wind"
+      ],
+      "previousCost": 600,
+      "cost": 600,
+      "name": [
+        "Твоё имя · озеро на закате",
+        "Your Name · sunset lake"
+      ],
+      "motionAsset": "studio/v24/banner-motion-stadium-wind-hd24.mp4",
+      "poster": "studio/v24/banner-motion-stadium-wind-hd24.webp",
+      "thumbnail": "studio/v24/banner-motion-stadium-wind-thumb-hd24.webp",
+      "basename": "KimiNoNaWa-OP1.webm",
+      "filename": "KimiNoNaWa-OP1",
+      "lyrics": false,
+      "nc": true,
+      "overlap": "Transition",
+      "path": "2016/Summer/KimiNoNaWa-OP1.webm",
+      "resolution": 1080,
+      "size": 69306627,
+      "source": "BD",
+      "subbed": false,
+      "uncen": false,
+      "tags": "NCBD1080",
+      "link": "https://v.animethemes.moe/KimiNoNaWa-OP1.webm",
+      "anime": "Kimi no Na wa.",
+      "slug": "kimi_no_na_wa",
+      "theme": "OP1",
+      "sourcePage": "https://animethemes.moe/anime/kimi_no_na_wa",
+      "index": 1,
+      "sourceSHA256": "3c2cf527aff041379abc08eaee0e07f358c8b5d0178796919f40bb74cdef1a75",
+      "sourceSize": [
+        1920,
+        1080
+      ],
+      "outputSize": [
+        1920,
+        640
+      ],
+      "start": 67.453,
+      "duration": 2.593,
+      "outputBytes": 956724,
+      "outputSHA256": "7bd3119c683d2d7a40740dba1a43375aa10b41fe7fefb59b6cc2ced6206cbac5",
+      "rights": "Third-party anime footage. Rights unverified; no license inferred from availability. User authorized replacement of low-resolution scenes.",
+      "noUpscale": true,
+      "audio": false,
+      "cropTop": 220
+    },
+    {
+      "id": 5664,
+      "previousName": [
+        "Снег между нами",
+        "Snow between us"
+      ],
+      "previousCost": 600,
+      "cost": 600,
+      "name": [
+        "Токийский гуль · огни города",
+        "Tokyo Ghoul · city lights"
+      ],
+      "motionAsset": "studio/v24/banner-motion-snow-between-us-hd24.mp4",
+      "poster": "studio/v24/banner-motion-snow-between-us-hd24.webp",
+      "thumbnail": "studio/v24/banner-motion-snow-between-us-thumb-hd24.webp",
+      "basename": "TokyoGhoul-OP1.webm",
+      "filename": "TokyoGhoul-OP1",
+      "lyrics": false,
+      "nc": true,
+      "overlap": "None",
+      "path": "2014/Summer/TokyoGhoul-OP1.webm",
+      "resolution": 1080,
+      "size": 63419603,
+      "source": "BD",
+      "subbed": false,
+      "uncen": false,
+      "tags": "NCBD1080",
+      "link": "https://v.animethemes.moe/TokyoGhoul-OP1.webm",
+      "anime": "Tokyo Ghoul",
+      "slug": "tokyo_ghoul",
+      "theme": "OP1",
+      "sourcePage": "https://animethemes.moe/anime/tokyo_ghoul",
+      "index": 2,
+      "sourceSHA256": "365325741db827b818c4539358c3712257a01a0c19f870e09521ec5715bffc62",
+      "sourceSize": [
+        1920,
+        1080
+      ],
+      "outputSize": [
+        1920,
+        640
+      ],
+      "start": 42.4,
+      "duration": 2.2,
+      "outputBytes": 536415,
+      "outputSHA256": "facfc1f949cf1e6f6bea4fd92a5805c0d5fd95456729b50c36dfdca4efec14f2",
+      "rights": "Third-party anime footage. Rights unverified; no license inferred from availability. User authorized replacement of low-resolution scenes.",
+      "noUpscale": true,
+      "audio": false,
+      "cropTop": 70
+    },
+    {
+      "id": 14085,
+      "previousName": [
+        "Лепестки на ладони",
+        "Petals in a palm"
+      ],
+      "previousCost": 600,
+      "cost": 600,
+      "name": [
+        "Магическая битва · пузыри на закате",
+        "Jujutsu Kaisen · sunset bubbles"
+      ],
+      "motionAsset": "studio/v24/banner-motion-petals-in-palm-hd24.mp4",
+      "poster": "studio/v24/banner-motion-petals-in-palm-hd24.webp",
+      "thumbnail": "studio/v24/banner-motion-petals-in-palm-thumb-hd24.webp",
+      "basename": "JujutsuKaisen-OP2-NCBD1080.webm",
+      "filename": "JujutsuKaisen-OP2-NCBD1080",
+      "lyrics": false,
+      "nc": true,
+      "overlap": "None",
+      "path": "2020/Fall/JujutsuKaisen-OP2-NCBD1080.webm",
+      "resolution": 1080,
+      "size": 62559820,
+      "source": "BD",
+      "subbed": false,
+      "uncen": false,
+      "tags": "NCBD1080",
+      "link": "https://v.animethemes.moe/JujutsuKaisen-OP2-NCBD1080.webm",
+      "anime": "Jujutsu Kaisen",
+      "slug": "jujutsu_kaisen",
+      "theme": "OP2",
+      "sourcePage": "https://animethemes.moe/anime/jujutsu_kaisen",
+      "index": 3,
+      "sourceSHA256": "346e9dbfb0dd22d5794e1cbecf9db04c48b3a17d33f9c1263f075901fb2985d5",
+      "sourceSize": [
+        1920,
+        1080
+      ],
+      "outputSize": [
+        1920,
+        640
+      ],
+      "start": 11.4,
+      "duration": 2.2,
+      "outputBytes": 606279,
+      "outputSHA256": "a9c7ba49c4db49e6307f6b439cd4a7a2559e4330f44f98fac269c4520785b835",
+      "rights": "Third-party anime footage. Rights unverified; no license inferred from availability. User authorized replacement of low-resolution scenes.",
+      "noUpscale": true,
+      "audio": false,
+      "cropTop": 90
+    },
+    {
+      "id": 17364,
+      "previousName": [
+        "Кот среди алых роз",
+        "Cat among scarlet roses"
+      ],
+      "previousCost": 600,
+      "cost": 600,
+      "name": [
+        "Магическая битва · птицы в небе",
+        "Jujutsu Kaisen · birds in the sky"
+      ],
+      "motionAsset": "studio/v24/banner-motion-cat-and-scarlet-roses-hd24.mp4",
+      "poster": "studio/v24/banner-motion-cat-and-scarlet-roses-hd24.webp",
+      "thumbnail": "studio/v24/banner-motion-cat-and-scarlet-roses-thumb-hd24.webp",
+      "basename": "JujutsuKaisenS2-OP1-NCBD1080.webm",
+      "filename": "JujutsuKaisenS2-OP1-NCBD1080",
+      "lyrics": false,
+      "nc": true,
+      "overlap": "None",
+      "path": "2023/Summer/JujutsuKaisenS2-OP1-NCBD1080.webm",
+      "resolution": 1080,
+      "size": 55610322,
+      "source": "BD",
+      "subbed": false,
+      "uncen": false,
+      "tags": "NCBD1080",
+      "link": "https://v.animethemes.moe/JujutsuKaisenS2-OP1-NCBD1080.webm",
+      "anime": "Jujutsu Kaisen 2nd Season",
+      "slug": "jujutsu_kaisen_2nd_season",
+      "theme": "OP1",
+      "sourcePage": "https://animethemes.moe/anime/jujutsu_kaisen_2nd_season",
+      "index": 4,
+      "sourceSHA256": "fcbd1cb11a87cfb4517a52442150fb79ff95956656352bc911c3129561a9af97",
+      "sourceSize": [
+        1920,
+        1080
+      ],
+      "outputSize": [
+        1920,
+        640
+      ],
+      "start": 29.4,
+      "duration": 2.2,
+      "outputBytes": 361088,
+      "outputSHA256": "8954325a958f1ff73bc706e5111857e8c69ed843a03d4250eec962a23a056a0d",
+      "rights": "Third-party anime footage. Rights unverified; no license inferred from availability. User authorized replacement of low-resolution scenes.",
+      "noUpscale": true,
+      "audio": false,
+      "cropTop": 60
+    },
+    {
+      "id": 16581,
+      "previousName": [
+        "Кот на плече",
+        "Cat on the shoulder"
+      ],
+      "previousCost": 600,
+      "cost": 600,
+      "name": [
+        "Человек-бензопила · кинозал",
+        "Chainsaw Man · cinema"
+      ],
+      "motionAsset": "studio/v24/banner-motion-cat-on-shoulder-hd24.mp4",
+      "poster": "studio/v24/banner-motion-cat-on-shoulder-hd24.webp",
+      "thumbnail": "studio/v24/banner-motion-cat-on-shoulder-thumb-hd24.avif",
+      "basename": "ChainsawMan-OP1-NCBD1080.webm",
+      "filename": "ChainsawMan-OP1-NCBD1080",
+      "lyrics": false,
+      "nc": true,
+      "overlap": "None",
+      "path": "2022/Fall/ChainsawMan-OP1-NCBD1080.webm",
+      "resolution": 1080,
+      "size": 58677798,
+      "source": "BD",
+      "subbed": false,
+      "uncen": false,
+      "tags": "NCBD1080",
+      "link": "https://v.animethemes.moe/ChainsawMan-OP1-NCBD1080.webm",
+      "anime": "Chainsaw Man",
+      "slug": "chainsaw_man",
+      "theme": "OP1",
+      "sourcePage": "https://animethemes.moe/anime/chainsaw_man",
+      "index": 5,
+      "sourceSHA256": "a80361075b53415b19296e872e62e57de2e1d5d8080149fc9202b542ae804c6f",
+      "sourceSize": [
+        1920,
+        1080
+      ],
+      "outputSize": [
+        1920,
+        640
+      ],
+      "start": 20.19,
+      "duration": 3.0,
+      "outputBytes": 923565,
+      "outputSHA256": "89bb26fc6d46d6811c3382502ad9ef348150830da142dfde7d3a222838bdee75",
+      "rights": "Third-party anime footage. Rights unverified; no license inferred from availability. User authorized replacement of low-resolution scenes.",
+      "noUpscale": true,
+      "audio": false,
+      "cropTop": 220
+    },
+    {
+      "id": 2358,
+      "previousName": [
+        "Тихий взгляд",
+        "Quiet gaze"
+      ],
+      "previousCost": 600,
+      "cost": 600,
+      "name": [
+        "Нацумэ · встреча с Нянко",
+        "Natsume · meeting Nyanko"
+      ],
+      "motionAsset": "studio/v24/banner-motion-quiet-gaze-hd24.mp4",
+      "poster": "studio/v24/banner-motion-quiet-gaze-hd24.webp",
+      "thumbnail": "studio/v24/banner-motion-quiet-gaze-thumb-hd24.avif",
+      "basename": "NatsumeYuujinchou-OP1.webm",
+      "filename": "NatsumeYuujinchou-OP1",
+      "lyrics": false,
+      "nc": true,
+      "overlap": "None",
+      "path": "2008/Summer/NatsumeYuujinchou-OP1.webm",
+      "resolution": 1080,
+      "size": 42123217,
+      "source": "BD",
+      "subbed": false,
+      "uncen": false,
+      "tags": "NCBD1080",
+      "link": "https://v.animethemes.moe/NatsumeYuujinchou-OP1.webm",
+      "anime": "Natsume Yuujinchou",
+      "slug": "natsume_yuujinchou",
+      "theme": "OP1",
+      "sourcePage": "https://animethemes.moe/anime/natsume_yuujinchou",
+      "index": 6,
+      "sourceSHA256": "f3fa43c65179362a3bebbba66cafca9dd6db3bdab5c926aa01f0d208c7b296dd",
+      "sourceSize": [
+        1920,
+        1080
+      ],
+      "outputSize": [
+        1920,
+        640
+      ],
+      "start": 47.4,
+      "duration": 2.2,
+      "outputBytes": 785973,
+      "outputSHA256": "f727a1e990e38e2e1e77f5cbfbe3429998fa07fc2ec94035f4955e8265791859",
+      "rights": "Third-party anime footage. Rights unverified; no license inferred from availability. User authorized replacement of low-resolution scenes.",
+      "noUpscale": true,
+      "audio": false,
+      "cropTop": 220
+    },
+    {
+      "id": 5151,
+      "previousName": [
+        "Отражение в глазах",
+        "Eye reflection"
+      ],
+      "previousCost": 600,
+      "cost": 600,
+      "name": [
+        "Апрель · мелодия света",
+        "April · melody of light"
+      ],
+      "motionAsset": "studio/v24/banner-motion-eye-reflection-hd24.mp4",
+      "poster": "studio/v24/banner-motion-eye-reflection-hd24.webp",
+      "thumbnail": "studio/v24/banner-motion-eye-reflection-thumb-hd24.webp",
+      "basename": "KimiUso-OP2.webm",
+      "filename": "KimiUso-OP2",
+      "lyrics": false,
+      "nc": true,
+      "overlap": "None",
+      "path": "2014/Fall/KimiUso-OP2.webm",
+      "resolution": 1080,
+      "size": 44308454,
+      "source": "BD",
+      "subbed": false,
+      "uncen": false,
+      "tags": "NCBD1080",
+      "link": "https://v.animethemes.moe/KimiUso-OP2.webm",
+      "anime": "Shigatsu wa Kimi no Uso",
+      "slug": "shigatsu_wa_kimi_no_uso",
+      "theme": "OP2",
+      "sourcePage": "https://animethemes.moe/anime/shigatsu_wa_kimi_no_uso",
+      "index": 7,
+      "sourceSHA256": "12f35ba4ae9d01be53ed5b446fc4be77213cf30d5fb9dc9ca65f9796af4b966c",
+      "sourceSize": [
+        1920,
+        1080
+      ],
+      "outputSize": [
+        1920,
+        640
+      ],
+      "start": 59.4,
+      "duration": 2.2,
+      "outputBytes": 526159,
+      "outputSHA256": "f0ec03abdd87b5c0876d166a2bccdd1caa375d9d6e0cf409d6a12c874ec14490",
+      "rights": "Third-party anime footage. Rights unverified; no license inferred from availability. User authorized replacement of low-resolution scenes.",
+      "noUpscale": true,
+      "audio": false,
+      "cropTop": 70
+    },
+    {
+      "id": 4105,
+      "previousName": [
+        "Объятие под фейерверком",
+        "Fireworks embrace"
+      ],
+      "previousCost": 600,
+      "cost": 600,
+      "name": [
+        "Хёка · отражение в глазах",
+        "Hyouka · eye reflection"
+      ],
+      "motionAsset": "studio/v24/banner-motion-fireworks-embrace-hd24.mp4",
+      "poster": "studio/v24/banner-motion-fireworks-embrace-hd24.webp",
+      "thumbnail": "studio/v24/banner-motion-fireworks-embrace-thumb-hd24.avif",
+      "basename": "Hyouka-OP1.webm",
+      "filename": "Hyouka-OP1",
+      "lyrics": false,
+      "nc": true,
+      "overlap": "None",
+      "path": "2012/Spring/Hyouka-OP1.webm",
+      "resolution": 1080,
+      "size": 53195418,
+      "source": "BD",
+      "subbed": false,
+      "uncen": false,
+      "tags": "NCBD1080",
+      "link": "https://v.animethemes.moe/Hyouka-OP1.webm",
+      "anime": "Hyouka",
+      "slug": "hyouka",
+      "theme": "OP1",
+      "sourcePage": "https://animethemes.moe/anime/hyouka",
+      "index": 8,
+      "sourceSHA256": "079939b3323fdad2c6c47998704566e00de85dc6f80f4779d3e9f269496c200e",
+      "sourceSize": [
+        1920,
+        1080
+      ],
+      "outputSize": [
+        1920,
+        640
+      ],
+      "start": 65.4,
+      "duration": 2.2,
+      "outputBytes": 577345,
+      "outputSHA256": "020c06ef3781c8d97628b07a377f15024a56d0494664634e3b79a5ad7d83c830",
+      "rights": "Third-party anime footage. Rights unverified; no license inferred from availability. User authorized replacement of low-resolution scenes.",
+      "noUpscale": true,
+      "audio": false,
+      "cropTop": 220
+    },
+    {
+      "id": 1668,
+      "previousName": [
+        "Кот и светлячок",
+        "Cat and firefly"
+      ],
+      "previousCost": 600,
+      "cost": 600,
+      "name": [
+        "Кланнад · летний ветер",
+        "Clannad · summer wind"
+      ],
+      "motionAsset": "studio/v24/banner-motion-cat-and-firefly-hd24.mp4",
+      "poster": "studio/v24/banner-motion-cat-and-firefly-hd24.webp",
+      "thumbnail": "studio/v24/banner-motion-cat-and-firefly-thumb-hd24.webp",
+      "basename": "Clannad-OP1.webm",
+      "filename": "Clannad-OP1",
+      "lyrics": false,
+      "nc": true,
+      "overlap": "None",
+      "path": "2007/Fall/Clannad-OP1.webm",
+      "resolution": 1080,
+      "size": 53400310,
+      "source": "BD",
+      "subbed": false,
+      "uncen": false,
+      "tags": "NCBD1080",
+      "link": "https://v.animethemes.moe/Clannad-OP1.webm",
+      "anime": "Clannad",
+      "slug": "clannad",
+      "theme": "OP1",
+      "sourcePage": "https://animethemes.moe/anime/clannad",
+      "index": 9,
+      "sourceSHA256": "8ea3e02b8b385392ba72e3771c62a56d301070680841fdfe2ef123d39a526717",
+      "sourceSize": [
+        1920,
+        1080
+      ],
+      "outputSize": [
+        1920,
+        640
+      ],
+      "start": 41.4,
+      "duration": 2.2,
+      "outputBytes": 897786,
+      "outputSHA256": "8726eaaf82e772f7dfce79dc1d7fd68efb3a07a4eb821d9033cf3fa52d4d6a7c",
+      "rights": "Third-party anime footage. Rights unverified; no license inferred from availability. User authorized replacement of low-resolution scenes.",
+      "noUpscale": true,
+      "audio": false,
+      "cropTop": 100
+    },
+    {
+      "id": 2074,
+      "previousName": [
+        "Готические крылья",
+        "Gothic wings"
+      ],
+      "previousCost": 600,
+      "cost": 600,
+      "name": [
+        "After Story · закат",
+        "After Story · sunset"
+      ],
+      "motionAsset": "studio/v24/banner-motion-gothic-wings-hd24.mp4",
+      "poster": "studio/v24/banner-motion-gothic-wings-hd24.webp",
+      "thumbnail": "studio/v24/banner-motion-gothic-wings-thumb-hd24.webp",
+      "basename": "ClannadAfterStory-OP1.webm",
+      "filename": "ClannadAfterStory-OP1",
+      "lyrics": false,
+      "nc": true,
+      "overlap": "None",
+      "path": "2008/Fall/ClannadAfterStory-OP1.webm",
+      "resolution": 1080,
+      "size": 49954435,
+      "source": "BD",
+      "subbed": false,
+      "uncen": false,
+      "tags": "NCBD1080",
+      "link": "https://v.animethemes.moe/ClannadAfterStory-OP1.webm",
+      "anime": "Clannad: After Story",
+      "slug": "clannad_after_story",
+      "theme": "OP1",
+      "sourcePage": "https://animethemes.moe/anime/clannad_after_story",
+      "index": 10,
+      "sourceSHA256": "312c840078371f784ac638e1bdc1b007dfb0959628981a64160d705073043d32",
+      "sourceSize": [
+        1920,
+        1080
+      ],
+      "outputSize": [
+        1920,
+        640
+      ],
+      "start": 35.4,
+      "duration": 2.2,
+      "outputBytes": 527087,
+      "outputSHA256": "e44492334ea40e3792c66df3f2d624db6799674604de98b2e658930b0c712561",
+      "rights": "Third-party anime footage. Rights unverified; no license inferred from availability. User authorized replacement of low-resolution scenes.",
+      "noUpscale": true,
+      "audio": false,
+      "cropTop": 220
+    },
+    {
+      "id": 17573,
+      "previousName": [
+        "Чернила в тетради",
+        "Ink on a notebook"
+      ],
+      "previousCost": 600,
+      "cost": 600,
+      "name": [
+        "Фрирен · путь вместе",
+        "Frieren · the road together"
+      ],
+      "motionAsset": "studio/v24/banner-motion-ink-on-notebook-hd24.mp4",
+      "poster": "studio/v24/banner-motion-ink-on-notebook-hd24.webp",
+      "thumbnail": "studio/v24/banner-motion-ink-on-notebook-thumb-hd24.avif",
+      "basename": "SousouNoFrieren-OP1-NCBD1080.webm",
+      "filename": "SousouNoFrieren-OP1-NCBD1080",
+      "lyrics": false,
+      "nc": true,
+      "overlap": "None",
+      "path": "2023/Fall/SousouNoFrieren-OP1-NCBD1080.webm",
+      "resolution": 1080,
+      "size": 57620830,
+      "source": "BD",
+      "subbed": false,
+      "uncen": false,
+      "tags": "NCBD1080",
+      "link": "https://v.animethemes.moe/SousouNoFrieren-OP1-NCBD1080.webm",
+      "anime": "Sousou no Frieren",
+      "slug": "sousou_no_frieren",
+      "theme": "OP1",
+      "sourcePage": "https://animethemes.moe/anime/sousou_no_frieren",
+      "index": 11,
+      "sourceSHA256": "f7f76c861f1247750116b1ed36546fe66590bb6ac3fde2fa125730af4259d406",
+      "sourceSize": [
+        1920,
+        1080
+      ],
+      "outputSize": [
+        1920,
+        640
+      ],
+      "start": 77.4,
+      "duration": 2.2,
+      "outputBytes": 541817,
+      "outputSHA256": "49c697daff91acedc5f4bd453c1a9e67b6f6310665743aa01968cc10e4c23c71",
+      "rights": "Third-party anime footage. Rights unverified; no license inferred from availability. User authorized replacement of low-resolution scenes.",
+      "noUpscale": true,
+      "audio": false,
+      "cropTop": 70
+    },
+    {
+      "id": 10995,
+      "previousName": [
+        "Лисья маска лета",
+        "Summer fox mask"
+      ],
+      "previousCost": 600,
+      "cost": 600,
+      "name": [
+        "Сага о Винланде · северный взгляд",
+        "Vinland Saga · northern gaze"
+      ],
+      "motionAsset": "studio/v24/banner-motion-fox-mask-summer-hd24.mp4",
+      "poster": "studio/v24/banner-motion-fox-mask-summer-hd24.webp",
+      "thumbnail": "studio/v24/banner-motion-fox-mask-summer-thumb-hd24.avif",
+      "basename": "VinlandSaga-OP1-NCBD1080.webm",
+      "filename": "VinlandSaga-OP1-NCBD1080",
+      "lyrics": false,
+      "nc": true,
+      "overlap": "None",
+      "path": "2019/Summer/VinlandSaga-OP1-NCBD1080.webm",
+      "resolution": 1080,
+      "size": 64688742,
+      "source": "BD",
+      "subbed": false,
+      "uncen": false,
+      "tags": "NCBD1080",
+      "link": "https://v.animethemes.moe/VinlandSaga-OP1-NCBD1080.webm",
+      "anime": "Vinland Saga",
+      "slug": "vinland_saga",
+      "theme": "OP1",
+      "sourcePage": "https://animethemes.moe/anime/vinland_saga",
+      "index": 12,
+      "sourceSHA256": "2c6778f09ff162dcf647165293082672348f6cdc584d02f06131f748330e8cbf",
+      "sourceSize": [
+        1920,
+        1080
+      ],
+      "outputSize": [
+        1920,
+        640
+      ],
+      "start": 77.4,
+      "duration": 2.2,
+      "outputBytes": 1224402,
+      "outputSHA256": "0f3999906b025553c96322574db8f9566899acab37ee2b2b2f38a5720e7626ac",
+      "rights": "Third-party anime footage. Rights unverified; no license inferred from availability. User authorized replacement of low-resolution scenes.",
+      "noUpscale": true,
+      "audio": false,
+      "cropTop": 220
+    },
+    {
+      "id": 952,
+      "previousName": [
+        "Лунное прощание",
+        "Moonlit farewell"
+      ],
+      "previousCost": 600,
+      "cost": 600,
+      "name": [
+        "Самурай Чамплу · оранжевый штрих",
+        "Samurai Champloo · orange stroke"
+      ],
+      "motionAsset": "studio/v24/banner-motion-moonlit-farewell-hd24.mp4",
+      "poster": "studio/v24/banner-motion-moonlit-farewell-hd24.webp",
+      "thumbnail": "studio/v24/banner-motion-moonlit-farewell-thumb-hd24.avif",
+      "basename": "SamuraiChamploo-OP1-NCBD1080.webm",
+      "filename": "SamuraiChamploo-OP1-NCBD1080",
+      "lyrics": false,
+      "nc": true,
+      "overlap": "None",
+      "path": "2004/Spring/SamuraiChamploo-OP1-NCBD1080.webm",
+      "resolution": 1080,
+      "size": 46409471,
+      "source": "BD",
+      "subbed": false,
+      "uncen": false,
+      "tags": "NCBD1080",
+      "link": "https://v.animethemes.moe/SamuraiChamploo-OP1-NCBD1080.webm",
+      "anime": "Samurai Champloo",
+      "slug": "samurai_champloo",
+      "theme": "OP1",
+      "sourcePage": "https://animethemes.moe/anime/samurai_champloo",
+      "index": 13,
+      "sourceSHA256": "63d07807cb4e0bee33b5c080384f0848659e9efcc66d7ccc7c5b83774f3453a4",
+      "sourceSize": [
+        1920,
+        1080
+      ],
+      "outputSize": [
+        1920,
+        640
+      ],
+      "start": 53.4,
+      "duration": 2.2,
+      "outputBytes": 770686,
+      "outputSHA256": "13c5de7c594d46316281f21bac5da9f3890f441115072e69686f290b449e8cdd",
+      "rights": "Third-party anime footage. Rights unverified; no license inferred from availability. User authorized replacement of low-resolution scenes.",
+      "noUpscale": true,
+      "audio": false,
+      "cropTop": 100
+    },
+    {
+      "id": 6470,
+      "previousName": [
+        "Дождь без слов",
+        "Rain without words"
+      ],
+      "previousCost": 600,
+      "cost": 600,
+      "name": [
+        "Парад смерти · синий вечер",
+        "Death Parade · blue evening"
+      ],
+      "motionAsset": "studio/v24/banner-motion-rain-without-words-hd24.mp4",
+      "poster": "studio/v24/banner-motion-rain-without-words-hd24.webp",
+      "thumbnail": "studio/v24/banner-motion-rain-without-words-thumb-hd24.webp",
+      "basename": "DeathParade-OP1.webm",
+      "filename": "DeathParade-OP1",
+      "lyrics": false,
+      "nc": true,
+      "overlap": "None",
+      "path": "2015/Winter/DeathParade-OP1.webm",
+      "resolution": 1080,
+      "size": 54522137,
+      "source": "BD",
+      "subbed": false,
+      "uncen": false,
+      "tags": "NCBD1080",
+      "link": "https://v.animethemes.moe/DeathParade-OP1.webm",
+      "anime": "Death Parade",
+      "slug": "death_parade",
+      "theme": "OP1",
+      "sourcePage": "https://animethemes.moe/anime/death_parade",
+      "index": 14,
+      "sourceSHA256": "96c151e718cb8f34a50d555072d902c01653cbb7e1f8ce696b6ff5fb65e54e3c",
+      "sourceSize": [
+        1920,
+        1080
+      ],
+      "outputSize": [
+        1920,
+        640
+      ],
+      "start": 13.816,
+      "duration": 2.384,
+      "outputBytes": 354098,
+      "outputSHA256": "631dd938821ebc8d8daddf297369829ce9db85afafd7acf4d8d0c53c7faf8544",
+      "rights": "Third-party anime footage. Rights unverified; no license inferred from availability. User authorized replacement of low-resolution scenes.",
+      "noUpscale": true,
+      "audio": false,
+      "cropTop": 220
+    },
+    {
+      "id": 5747,
+      "previousName": [
+        "Изумрудный взгляд под дождём",
+        "Emerald gaze in the rain"
+      ],
+      "previousCost": 600,
+      "cost": 600,
+      "name": [
+        "Норагами · чёрное и белое",
+        "Noragami · black and white"
+      ],
+      "motionAsset": "studio/v24/banner-motion-emerald-rain-gaze-hd24.mp4",
+      "poster": "studio/v24/banner-motion-emerald-rain-gaze-hd24.webp",
+      "thumbnail": "studio/v24/banner-motion-emerald-rain-gaze-thumb-hd24.avif",
+      "basename": "Noragami-OP1.webm",
+      "filename": "Noragami-OP1",
+      "lyrics": false,
+      "nc": true,
+      "overlap": "None",
+      "path": "2014/Winter/Noragami-OP1.webm",
+      "resolution": 1080,
+      "size": 36423067,
+      "source": "BD",
+      "subbed": false,
+      "uncen": false,
+      "tags": "NCBD1080",
+      "link": "https://v.animethemes.moe/Noragami-OP1.webm",
+      "anime": "Noragami",
+      "slug": "noragami",
+      "theme": "OP1",
+      "sourcePage": "https://animethemes.moe/anime/noragami",
+      "index": 15,
+      "sourceSHA256": "b6efa1d6e37febb3720bac70408512f97a67bd4674c52bb93ef3e3d2a2364519",
+      "sourceSize": [
+        1920,
+        1080
+      ],
+      "outputSize": [
+        1920,
+        640
+      ],
+      "start": 42.4,
+      "duration": 2.2,
+      "outputBytes": 427411,
+      "outputSHA256": "7efc77e87366a7e6f1bd658fd9d15103ce2ab06b370adddd38d2c74274ed72fc",
+      "rights": "Third-party anime footage. Rights unverified; no license inferred from availability. User authorized replacement of low-resolution scenes.",
+      "noUpscale": true,
+      "audio": false,
+      "cropTop": 220
+    },
+    {
+      "id": 5966,
+      "previousName": [
+        "Самурай под ливнем",
+        "Samurai in a downpour"
+      ],
+      "previousCost": 600,
+      "cost": 600,
+      "name": [
+        "Норагами · волосы на ветру",
+        "Noragami · hair in the wind"
+      ],
+      "motionAsset": "studio/v24/banner-motion-samurai-downpour-hd24.mp4",
+      "poster": "studio/v24/banner-motion-samurai-downpour-hd24.webp",
+      "thumbnail": "studio/v24/banner-motion-samurai-downpour-thumb-hd24.webp",
+      "basename": "NoragamiAragoto-OP1v2.webm",
+      "filename": "NoragamiAragoto-OP1v2",
+      "lyrics": false,
+      "nc": true,
+      "overlap": "None",
+      "path": "2015/Fall/NoragamiAragoto-OP1v2.webm",
+      "resolution": 1080,
+      "size": 31816344,
+      "source": "BD",
+      "subbed": false,
+      "uncen": false,
+      "tags": "NCBD1080",
+      "link": "https://v.animethemes.moe/NoragamiAragoto-OP1v2.webm",
+      "anime": "Noragami Aragoto",
+      "slug": "noragami_aragoto",
+      "theme": "OP1",
+      "sourcePage": "https://animethemes.moe/anime/noragami_aragoto",
+      "index": 16,
+      "sourceSHA256": "c7d7118ee1923c11520e94df0e150ae01a7dd7c37dcd954355d7f34562802d24",
+      "sourceSize": [
+        1920,
+        1080
+      ],
+      "outputSize": [
+        1920,
+        640
+      ],
+      "start": 69,
+      "duration": 2.8,
+      "outputBytes": 369955,
+      "outputSHA256": "607d617b763de8baebb320c206abfac67c1b884753eae067eb9d3e4446a5afad",
+      "rights": "Third-party anime footage. Rights unverified; no license inferred from availability. User authorized replacement of low-resolution scenes.",
+      "noUpscale": true,
+      "audio": false,
+      "cropTop": 100
+    },
+    {
+      "id": 5674,
+      "previousName": [
+        "Дождь за окном",
+        "Rain at the window"
+      ],
+      "previousCost": 600,
+      "cost": 600,
+      "name": [
+        "Эхо террора · тихий взгляд",
+        "Terror in Resonance · quiet gaze"
+      ],
+      "motionAsset": "studio/v24/banner-motion-rain-at-the-window-hd24.mp4",
+      "poster": "studio/v24/banner-motion-rain-at-the-window-hd24.webp",
+      "thumbnail": "studio/v24/banner-motion-rain-at-the-window-thumb-hd24.webp",
+      "basename": "ZankyouNoTerror-OP1.webm",
+      "filename": "ZankyouNoTerror-OP1",
+      "lyrics": false,
+      "nc": true,
+      "overlap": "None",
+      "path": "2014/Summer/ZankyouNoTerror-OP1.webm",
+      "resolution": 1080,
+      "size": 40081792,
+      "source": "BD",
+      "subbed": false,
+      "uncen": false,
+      "tags": "NCBD1080",
+      "link": "https://v.animethemes.moe/ZankyouNoTerror-OP1.webm",
+      "anime": "Zankyou no Terror",
+      "slug": "zankyou_no_terror",
+      "theme": "OP1",
+      "sourcePage": "https://animethemes.moe/anime/zankyou_no_terror",
+      "index": 17,
+      "sourceSHA256": "93450a29cffdc92ef79178c35c0edcbd63217b9d5a27d689778f259567bf3482",
+      "sourceSize": [
+        1920,
+        1080
+      ],
+      "outputSize": [
+        1920,
+        640
+      ],
+      "start": 47.4,
+      "duration": 2.2,
+      "outputBytes": 771080,
+      "outputSHA256": "ea84a31309272374cc017e6cf610beb7b065a1918097be74e918e5039b76b100",
+      "rights": "Third-party anime footage. Rights unverified; no license inferred from availability. User authorized replacement of low-resolution scenes.",
+      "noUpscale": true,
+      "audio": false,
+      "cropTop": 220
+    },
+    {
+      "id": 15951,
+      "previousName": [
+        "Эльфийка после бури",
+        "Elf after the storm"
+      ],
+      "previousCost": 600,
+      "cost": 600,
+      "name": [
+        "Песнь ночных сов · алый ветер",
+        "Call of the Night · scarlet wind"
+      ],
+      "motionAsset": "studio/v24/banner-motion-elf-after-the-storm-hd24.mp4",
+      "poster": "studio/v24/banner-motion-elf-after-the-storm-hd24.webp",
+      "thumbnail": "studio/v24/banner-motion-elf-after-the-storm-thumb-hd24.avif",
+      "basename": "YofukashiNoUta-ED1-NCBD1080.webm",
+      "filename": "YofukashiNoUta-ED1-NCBD1080",
+      "lyrics": false,
+      "nc": true,
+      "overlap": "None",
+      "path": "2022/Summer/YofukashiNoUta-ED1-NCBD1080.webm",
+      "resolution": 1080,
+      "size": 47815947,
+      "source": "BD",
+      "subbed": false,
+      "uncen": false,
+      "tags": "NCBD1080",
+      "link": "https://v.animethemes.moe/YofukashiNoUta-ED1-NCBD1080.webm",
+      "anime": "Yofukashi no Uta",
+      "slug": "yofukashi_no_uta",
+      "theme": "ED1",
+      "sourcePage": "https://animethemes.moe/anime/yofukashi_no_uta",
+      "index": 18,
+      "sourceSHA256": "34ffdaa15192bd35c60ca5def2dee2008d4a67cd028fbdaa23c09176d6833e93",
+      "sourceSize": [
+        1920,
+        1080
+      ],
+      "outputSize": [
+        1920,
+        640
+      ],
+      "start": 70.456,
+      "duration": 3.0,
+      "outputBytes": 440716,
+      "outputSHA256": "4e67c13fac5df5236f25336e3f97a69c9c4f6e85879da17939fb9af7d5df66e8",
+      "rights": "Third-party anime footage. Rights unverified; no license inferred from availability. User authorized replacement of low-resolution scenes.",
+      "noUpscale": true,
+      "audio": false,
+      "cropTop": 40
+    },
+    {
+      "id": 16355,
+      "previousName": [
+        "Маленький зонтик",
+        "Little umbrella"
+      ],
+      "previousCost": 600,
+      "cost": 600,
+      "name": [
+        "Боччи · перед выходом",
+        "Bocchi · before the stage"
+      ],
+      "motionAsset": "studio/v24/banner-motion-little-umbrella-loop-hd24.mp4",
+      "poster": "studio/v24/banner-motion-little-umbrella-loop-hd24.webp",
+      "thumbnail": "studio/v24/banner-motion-little-umbrella-loop-thumb-hd24.avif",
+      "basename": "BocchiTheRock-OP1-NCBD1080.webm",
+      "filename": "BocchiTheRock-OP1-NCBD1080",
+      "lyrics": false,
+      "nc": true,
+      "overlap": "None",
+      "path": "2022/Fall/BocchiTheRock-OP1-NCBD1080.webm",
+      "resolution": 1080,
+      "size": 55992110,
+      "source": "BD",
+      "subbed": false,
+      "uncen": false,
+      "tags": "NCBD1080",
+      "link": "https://v.animethemes.moe/BocchiTheRock-OP1-NCBD1080.webm",
+      "anime": "Bocchi the Rock!",
+      "slug": "bocchi_the_rock",
+      "theme": "OP1",
+      "sourcePage": "https://animethemes.moe/anime/bocchi_the_rock",
+      "index": 19,
+      "sourceSHA256": "5ff58394ef9318f1a60e686df74ec21b75913adff027193d9c891d58bf9f86bd",
+      "sourceSize": [
+        1920,
+        1080
+      ],
+      "outputSize": [
+        1920,
+        640
+      ],
+      "start": 59.82,
+      "duration": 2.301,
+      "outputBytes": 649027,
+      "outputSHA256": "e5bfae655466bf386a8d3e3ee0b90a0c09d902c3fcbedb5d33c9506fedc2f365",
+      "rights": "Third-party anime footage. Rights unverified; no license inferred from availability. User authorized replacement of low-resolution scenes.",
+      "noUpscale": true,
+      "audio": false,
+      "cropTop": 220
+    },
+    {
+      "id": 2638,
+      "previousName": [
+        "Ночной взгляд на гавань",
+        "Harbor nightwatch"
+      ],
+      "previousCost": 600,
+      "cost": 600,
+      "name": [
+        "K-On · репетиция",
+        "K-On · rehearsal"
+      ],
+      "motionAsset": "studio/v24/banner-motion-harbor-nightwatch-hd24.mp4",
+      "poster": "studio/v24/banner-motion-harbor-nightwatch-hd24.webp",
+      "thumbnail": "studio/v24/banner-motion-harbor-nightwatch-thumb-hd24.webp",
+      "basename": "KOn-OP1.webm",
+      "filename": "KOn-OP1",
+      "lyrics": false,
+      "nc": true,
+      "overlap": "None",
+      "path": "2009/Spring/KOn-OP1.webm",
+      "resolution": 1080,
+      "size": 65874659,
+      "source": "BD",
+      "subbed": false,
+      "uncen": false,
+      "tags": "NCBD1080",
+      "link": "https://v.animethemes.moe/KOn-OP1.webm",
+      "anime": "K-On!",
+      "slug": "k_on",
+      "theme": "OP1",
+      "sourcePage": "https://animethemes.moe/anime/k_on",
+      "index": 20,
+      "sourceSHA256": "986d47be81651d52f099b01593d1df6f9090e0d04af47d07bd74e905ae9ab570",
+      "sourceSize": [
+        1920,
+        1080
+      ],
+      "outputSize": [
+        1920,
+        640
+      ],
+      "start": 8.269,
+      "duration": 2.593,
+      "outputBytes": 717977,
+      "outputSHA256": "ee0b6bdea5f8f468bd86b3d45a9b0ec17e2c87ef2bfec23ce6660902fa81f991",
+      "rights": "Third-party anime footage. Rights unverified; no license inferred from availability. User authorized replacement of low-resolution scenes.",
+      "noUpscale": true,
+      "audio": false,
+      "cropTop": 70
+    },
+    {
+      "id": 12145,
+      "previousName": [
+        "Мост после полуночи",
+        "Bridge after midnight"
+      ],
+      "previousCost": 600,
+      "cost": 600,
+      "name": [
+        "Хоримия · держась за руки",
+        "Horimiya · holding hands"
+      ],
+      "motionAsset": "studio/v24/banner-motion-bridge-after-midnight-hd24.mp4",
+      "poster": "studio/v24/banner-motion-bridge-after-midnight-hd24.webp",
+      "thumbnail": "studio/v24/banner-motion-bridge-after-midnight-thumb-hd24.webp",
+      "basename": "Horimiya-ED1-NCBD1080.webm",
+      "filename": "Horimiya-ED1-NCBD1080",
+      "lyrics": false,
+      "nc": true,
+      "overlap": "None",
+      "path": "2021/Winter/Horimiya-ED1-NCBD1080.webm",
+      "resolution": 1080,
+      "size": 33981361,
+      "source": "BD",
+      "subbed": false,
+      "uncen": false,
+      "tags": "NCBD1080",
+      "link": "https://v.animethemes.moe/Horimiya-ED1-NCBD1080.webm",
+      "anime": "Horimiya",
+      "slug": "horimiya",
+      "theme": "ED1",
+      "sourcePage": "https://animethemes.moe/anime/horimiya",
+      "index": 21,
+      "sourceSHA256": "c84ed3a0c2d0e662cd84e3c366c3bb758159aa542dd582d1d939f3b9ce7542ce",
+      "sourceSize": [
+        1920,
+        1080
+      ],
+      "outputSize": [
+        1920,
+        640
+      ],
+      "start": 61.5,
+      "duration": 3.0,
+      "outputBytes": 699445,
+      "outputSHA256": "54183d106dfa168b475d7dffe6e46ddca8ecee268c6bbcd632d38cf84195e9f5",
+      "rights": "Third-party anime footage. Rights unverified; no license inferred from availability. User authorized replacement of low-resolution scenes.",
+      "noUpscale": true,
+      "audio": false,
+      "cropTop": 220
+    },
+    {
+      "id": 18672,
+      "previousName": [
+        "Отражение в красном кресле",
+        "Red seat reflection"
+      ],
+      "previousCost": 600,
+      "cost": 600,
+      "name": [
+        "Голубая шкатулка · вечерний свет",
+        "Blue Box · evening light"
+      ],
+      "motionAsset": "studio/v24/banner-motion-red-seat-reflection-hd24.mp4",
+      "poster": "studio/v24/banner-motion-red-seat-reflection-hd24.webp",
+      "thumbnail": "studio/v24/banner-motion-red-seat-reflection-thumb-hd24.webp",
+      "basename": "AoNoHako-OP1-NCBD1080.webm",
+      "filename": "AoNoHako-OP1-NCBD1080",
+      "lyrics": false,
+      "nc": true,
+      "overlap": "None",
+      "path": "2024/Fall/AoNoHako-OP1-NCBD1080.webm",
+      "resolution": 1080,
+      "size": 53997074,
+      "source": "BD",
+      "subbed": false,
+      "uncen": false,
+      "tags": "NCBD1080",
+      "link": "https://v.animethemes.moe/AoNoHako-OP1-NCBD1080.webm",
+      "anime": "Ao no Hako",
+      "slug": "ao_no_hako",
+      "theme": "OP1",
+      "sourcePage": "https://animethemes.moe/anime/ao_no_hako",
+      "index": 22,
+      "sourceSHA256": "c595e7d46588d148ec84178664596e30897254eba894bf755b130bb9e19f6885",
+      "sourceSize": [
+        1920,
+        1080
+      ],
+      "outputSize": [
+        1920,
+        640
+      ],
+      "start": 77.4,
+      "duration": 2.2,
+      "outputBytes": 639476,
+      "outputSHA256": "94401199c93ca1276dfb2e5d28a08599f1434e39cc55c972eec8c6ffb0f21aaa",
+      "rights": "Third-party anime footage. Rights unverified; no license inferred from availability. User authorized replacement of low-resolution scenes.",
+      "noUpscale": true,
+      "audio": false,
+      "cropTop": 220
+    },
+    {
+      "id": 6212,
+      "previousName": [
+        "Клинок на ветру",
+        "Blade in the wind"
+      ],
+      "previousCost": 600,
+      "cost": 600,
+      "name": [
+        "Пластиковые воспоминания · закат",
+        "Plastic Memories · sunset"
+      ],
+      "motionAsset": "studio/v24/banner-motion-blade-in-the-wind-hd24.mp4",
+      "poster": "studio/v24/banner-motion-blade-in-the-wind-hd24.webp",
+      "thumbnail": "studio/v24/banner-motion-blade-in-the-wind-thumb-hd24.webp",
+      "basename": "PlasticMemories-OP1.webm",
+      "filename": "PlasticMemories-OP1",
+      "lyrics": false,
+      "nc": true,
+      "overlap": "None",
+      "path": "2015/Spring/PlasticMemories-OP1.webm",
+      "resolution": 1080,
+      "size": 54801236,
+      "source": "BD",
+      "subbed": false,
+      "uncen": false,
+      "tags": "NCBD1080",
+      "link": "https://v.animethemes.moe/PlasticMemories-OP1.webm",
+      "anime": "Plastic Memories",
+      "slug": "plastic_memories",
+      "theme": "OP1",
+      "sourcePage": "https://animethemes.moe/anime/plastic_memories",
+      "index": 23,
+      "sourceSHA256": "2096f2c77ff52144e3fa7adf92d4f240baca5548e8f6008356cbb4753fc17c04",
+      "sourceSize": [
+        1920,
+        1080
+      ],
+      "outputSize": [
+        1920,
+        640
+      ],
+      "start": 11.4,
+      "duration": 2.2,
+      "outputBytes": 670627,
+      "outputSHA256": "9d639fc4f3ef8471c30a0a72d744ab2c8cafea8b7afbe00c17a13736353731fb",
+      "rights": "Third-party anime footage. Rights unverified; no license inferred from availability. User authorized replacement of low-resolution scenes.",
+      "noUpscale": true,
+      "audio": false,
+      "cropTop": 220
+    },
+    {
+      "id": 14162,
+      "previousName": [
+        "Алые пряди на ветру",
+        "Scarlet hair in the breeze"
+      ],
+      "previousCost": 600,
+      "cost": 600,
+      "name": [
+        "86 · взгляд сквозь тишину",
+        "86 · a gaze through silence"
+      ],
+      "motionAsset": "studio/v24/banner-motion-scarlet-hair-breeze-hd24.mp4",
+      "poster": "studio/v24/banner-motion-scarlet-hair-breeze-hd24.webp",
+      "thumbnail": "studio/v24/banner-motion-scarlet-hair-breeze-thumb-hd24.webp",
+      "basename": "86-OP1-NCBD1080.webm",
+      "filename": "86-OP1-NCBD1080",
+      "lyrics": false,
+      "nc": true,
+      "overlap": "None",
+      "path": "2021/Spring/86-OP1-NCBD1080.webm",
+      "resolution": 1080,
+      "size": 67960234,
+      "source": "BD",
+      "subbed": false,
+      "uncen": false,
+      "tags": "NCBD1080",
+      "link": "https://v.animethemes.moe/86-OP1-NCBD1080.webm",
+      "anime": "86",
+      "slug": "86",
+      "theme": "OP1",
+      "sourcePage": "https://animethemes.moe/anime/86",
+      "index": 24,
+      "sourceSHA256": "6fd5047b02754033f314116c9d67426c8245abb998c7a961ffab906a44777141",
+      "sourceSize": [
+        1920,
+        1080
+      ],
+      "outputSize": [
+        1920,
+        640
+      ],
+      "start": 23.4,
+      "duration": 2.2,
+      "outputBytes": 836246,
+      "outputSHA256": "38791b9d74d72527f9709bad31c8efb314af83b0913caf30bc8e505e73dfed3b",
+      "rights": "Third-party anime footage. Rights unverified; no license inferred from availability. User authorized replacement of low-resolution scenes.",
+      "noUpscale": true,
+      "audio": false,
+      "cropTop": 70
+    },
+    {
+      "id": 6134,
+      "previousName": [
+        "Вайолет · летний ветер",
+        "Violet · summer wind"
+      ],
+      "previousCost": 600,
+      "cost": 600,
+      "name": [
+        "Фронт кровавой блокады · синие глаза",
+        "Blood Blockade Battlefront · blue eyes"
+      ],
+      "motionAsset": "studio/v24/banner-motion-violet-summer-wind-hd24.mp4",
+      "poster": "studio/v24/banner-motion-violet-summer-wind-hd24.webp",
+      "thumbnail": "studio/v24/banner-motion-violet-summer-wind-thumb-hd24.webp",
+      "basename": "KekkaiSensen-OP1.webm",
+      "filename": "KekkaiSensen-OP1",
+      "lyrics": false,
+      "nc": true,
+      "overlap": "None",
+      "path": "2015/Spring/KekkaiSensen-OP1.webm",
+      "resolution": 1080,
+      "size": 38418367,
+      "source": "BD",
+      "subbed": false,
+      "uncen": false,
+      "tags": "NCBD1080",
+      "link": "https://v.animethemes.moe/KekkaiSensen-OP1.webm",
+      "anime": "Kekkai Sensen",
+      "slug": "kekkai_sensen",
+      "theme": "OP1",
+      "sourcePage": "https://animethemes.moe/anime/kekkai_sensen",
+      "index": 25,
+      "sourceSHA256": "c3ae0132d0d5468c27fa5c967c636f091049b0d66eb53d6d8c35dbcc680ef484",
+      "sourceSize": [
+        1920,
+        1080
+      ],
+      "outputSize": [
+        1920,
+        640
+      ],
+      "start": 53.4,
+      "duration": 2.2,
+      "outputBytes": 670433,
+      "outputSHA256": "c046181dfb22bdeb59b8a62eaf0fda77cd9ab9b59de563d548708e73557521f8",
+      "rights": "Third-party anime footage. Rights unverified; no license inferred from availability. User authorized replacement of low-resolution scenes.",
+      "noUpscale": true,
+      "audio": false,
+      "cropTop": 220
+    },
+    {
+      "id": 1929,
+      "previousName": [
+        "Наушники в тишине",
+        "Headphones in silence"
+      ],
+      "previousCost": 600,
+      "cost": 600,
+      "name": [
+        "Мононокэ · алый рисунок",
+        "Mononoke · scarlet drawing"
+      ],
+      "motionAsset": "studio/v24/banner-motion-headphones-in-silence-hd24.mp4",
+      "poster": "studio/v24/banner-motion-headphones-in-silence-hd24.webp",
+      "thumbnail": "studio/v24/banner-motion-headphones-in-silence-thumb-hd24.webp",
+      "basename": "Mononoke-OP1.webm",
+      "filename": "Mononoke-OP1",
+      "lyrics": false,
+      "nc": true,
+      "overlap": "None",
+      "path": "2007/Summer/Mononoke-OP1.webm",
+      "resolution": 1080,
+      "size": 21338746,
+      "source": "BD",
+      "subbed": false,
+      "uncen": false,
+      "tags": "NCBD1080",
+      "link": "https://v.animethemes.moe/Mononoke-OP1.webm",
+      "anime": "Mononoke",
+      "slug": "mononoke",
+      "theme": "OP1",
+      "sourcePage": "https://animethemes.moe/anime/mononoke",
+      "index": 26,
+      "sourceSHA256": "25fd6a170dcde8845a260d79f3248fbd5f9aff49bddd46c47722a94c81cb301b",
+      "sourceSize": [
+        1920,
+        1080
+      ],
+      "outputSize": [
+        1920,
+        640
+      ],
+      "start": 35.89,
+      "duration": 3.0,
+      "outputBytes": 1601148,
+      "outputSHA256": "e6785884d6c35bb88de90b07ca37d1ccff3d60c39ffb7f3b69f1cc5c678479bb",
+      "rights": "Third-party anime footage. Rights unverified; no license inferred from availability. User authorized replacement of low-resolution scenes.",
+      "noUpscale": true,
+      "audio": false,
+      "cropTop": 220
+    }
+  ]
+}

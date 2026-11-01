@@ -1952,64 +1952,129 @@
     }
   },
   {
-    "file": "studio/v24/banner-motion-rize-wind.mp4",
-    "sha256": "3c6ce3a97caa021506e7c4b5c40a429d7eb31b0c24d7f06887d4e2167023a1e3",
-    "origin": "Silent animated scene; original moving frames, not CSS movement of a still",
-    "sourceURL": "https://v1.pinimg.com/videos/iht/720p/23/ad/69/23ad692cd032a2b2034ec0bd8f2d6ddb.mp4",
-    "reference": "https://pin.it/Jyu21np5H",
-    "rights": "Third-party material; license unverified. User requested use of these references. No affiliation or AI-original claim.",
-    "parentOriginalSHA256": "b4a4f02282fdc4ff3c682f245c0b03908b08d468e14d0c479b1e7aeb3c9789ef",
+    "file": "studio/v24/banner-motion-rize-wind-hd24.mp4",
+    "sha256": "019d66d17422e02b92616a9bf78d41e1f552b1dcd386e0a31afa72bae52ec023",
+    "origin": "Third-party anime footage; silent motion clip from Full-HD source. Not AI-original.",
+    "sourceURL": "https://v.animethemes.moe/VioletEvergarden-OP1-NCBD1080.webm",
+    "reference": "https://animethemes.moe/anime/violet_evergarden",
+    "rights": "Third-party anime footage. Rights unverified; no license inferred from availability. User authorized replacement of low-resolution scenes.",
+    "parentOriginalSHA256": "a94306412d85088cb35ec40bafbe2ace0cf8b6cce82b2734e656bb67d8f15b01",
     "notCountedAsArt": false,
-    "pairedSceneID": "v20-banner-motion-rize-wind"
+    "pairedSceneID": "v20-banner-motion-rize-wind",
+    "qualityRevision": "24.2",
+    "sourceSize": [
+      1920,
+      1080
+    ],
+    "outputSize": [
+      1920,
+      640
+    ],
+    "noUpscale": true,
+    "sourceClipStart": 20.736,
+    "sourceClipDuration": 3.0
   },
   {
-    "file": "studio/v24/banner-motion-rize-wind.webp",
-    "sha256": "a2ad3f741ddcb0348e36fe3a391af7e7bafa28177fa4721da27339e664a16d6b",
-    "origin": "Static fallback poster from animated scene; not a separate artwork",
-    "sourceURL": "https://v1.pinimg.com/videos/iht/720p/23/ad/69/23ad692cd032a2b2034ec0bd8f2d6ddb.mp4",
-    "reference": "https://pin.it/Jyu21np5H",
-    "rights": "Third-party material; license unverified. User requested use of these references. No affiliation or AI-original claim.",
-    "parentOriginalSHA256": "b4a4f02282fdc4ff3c682f245c0b03908b08d468e14d0c479b1e7aeb3c9789ef",
+    "file": "studio/v24/banner-motion-rize-wind-hd24.webp",
+    "sha256": "0386470f735b12add4e505b64fc1eb1f8216eb456fa82e65ba91160ba46627a4",
+    "origin": "Third-party anime footage; full-size matching poster from Full-HD source. Not AI-original.",
+    "sourceURL": "https://v.animethemes.moe/VioletEvergarden-OP1-NCBD1080.webm",
+    "reference": "https://animethemes.moe/anime/violet_evergarden",
+    "rights": "Third-party anime footage. Rights unverified; no license inferred from availability. User authorized replacement of low-resolution scenes.",
+    "parentOriginalSHA256": "a94306412d85088cb35ec40bafbe2ace0cf8b6cce82b2734e656bb67d8f15b01",
     "notCountedAsArt": true,
-    "pairedSceneID": "v20-banner-motion-rize-wind"
+    "pairedSceneID": "v20-banner-motion-rize-wind",
+    "qualityRevision": "24.2",
+    "sourceSize": [
+      1920,
+      1080
+    ],
+    "outputSize": [
+      1920,
+      640
+    ],
+    "noUpscale": true,
+    "sourceClipStart": 20.736,
+    "sourceClipDuration": 3.0
   },
   {
-    "file": "studio/v24/banner-motion-stadium-wind.mp4",
-    "sha256": "bb6f57524cb723d6478d25ba10cc60df0252b447c45abbfbadecf9e8acde02b0",
-    "origin": "Silent animated scene; original moving frames, not CSS movement of a still",
-    "sourceURL": "https://v1.pinimg.com/videos/iht/720p/d6/3c/1e/d63c1e6b98f828796b8bee70aee4e83f.mp4",
-    "reference": "https://pin.it/7g2vQRunJ",
-    "rights": "Third-party material; license unverified. User requested use of these references. No affiliation or AI-original claim.",
-    "parentOriginalSHA256": "444c33b0d1546904d06133ef99a0abfe76ddf45dad93784f34dd8b3618aa9d0b",
+    "file": "studio/v24/banner-motion-stadium-wind-hd24.mp4",
+    "sha256": "7bd3119c683d2d7a40740dba1a43375aa10b41fe7fefb59b6cc2ced6206cbac5",
+    "origin": "Third-party anime footage; silent motion clip from Full-HD source. Not AI-original.",
+    "sourceURL": "https://v.animethemes.moe/KimiNoNaWa-OP1.webm",
+    "reference": "https://animethemes.moe/anime/kimi_no_na_wa",
+    "rights": "Third-party anime footage. Rights unverified; no license inferred from availability. User authorized replacement of low-resolution scenes.",
+    "parentOriginalSHA256": "3c2cf527aff041379abc08eaee0e07f358c8b5d0178796919f40bb74cdef1a75",
     "notCountedAsArt": false,
-    "pairedSceneID": "v20-banner-motion-stadium-wind"
+    "pairedSceneID": "v20-banner-motion-stadium-wind",
+    "qualityRevision": "24.2",
+    "sourceSize": [
+      1920,
+      1080
+    ],
+    "outputSize": [
+      1920,
+      640
+    ],
+    "noUpscale": true,
+    "sourceClipStart": 67.453,
+    "sourceClipDuration": 2.593
   },
   {
-    "file": "studio/v24/banner-motion-stadium-wind.webp",
-    "sha256": "77116a39bc7970cd449f568db7025d584508bc763b87ebe2e92509e6c7699a21",
-    "origin": "Static fallback poster from animated scene; not a separate artwork",
-    "sourceURL": "https://v1.pinimg.com/videos/iht/720p/d6/3c/1e/d63c1e6b98f828796b8bee70aee4e83f.mp4",
-    "reference": "https://pin.it/7g2vQRunJ",
-    "rights": "Third-party material; license unverified. User requested use of these references. No affiliation or AI-original claim.",
-    "parentOriginalSHA256": "444c33b0d1546904d06133ef99a0abfe76ddf45dad93784f34dd8b3618aa9d0b",
+    "file": "studio/v24/banner-motion-stadium-wind-hd24.webp",
+    "sha256": "7de6ae9e90f1ded59f6c298ae9befab06b40f85a3951712dd0790e5d927f21cd",
+    "origin": "Third-party anime footage; full-size matching poster from Full-HD source. Not AI-original.",
+    "sourceURL": "https://v.animethemes.moe/KimiNoNaWa-OP1.webm",
+    "reference": "https://animethemes.moe/anime/kimi_no_na_wa",
+    "rights": "Third-party anime footage. Rights unverified; no license inferred from availability. User authorized replacement of low-resolution scenes.",
+    "parentOriginalSHA256": "3c2cf527aff041379abc08eaee0e07f358c8b5d0178796919f40bb74cdef1a75",
     "notCountedAsArt": true,
-    "pairedSceneID": "v20-banner-motion-stadium-wind"
+    "pairedSceneID": "v20-banner-motion-stadium-wind",
+    "qualityRevision": "24.2",
+    "sourceSize": [
+      1920,
+      1080
+    ],
+    "outputSize": [
+      1920,
+      640
+    ],
+    "noUpscale": true,
+    "sourceClipStart": 67.453,
+    "sourceClipDuration": 2.593
   },
   {
-    "file": "studio/v24/banner-motion-stadium-wind-thumb.webp",
-    "sha256": "5d594c7eab11b494a86e69dde8672126c75f5273834a69e3d9f9a280c6755057",
-    "origin": "Display-size thumbnail derived from studio/v24/banner-motion-stadium-wind.webp. Not a new artwork. Original source and rights unchanged.",
+    "file": "studio/v24/banner-motion-stadium-wind-thumb-hd24.webp",
+    "sha256": "a99197f895be588bdd9c0fb3b485067feba21ea855d3fc08c6e2f03c7328a1df",
+    "origin": "Third-party anime footage; shop thumbnail from Full-HD source. Not AI-original.",
     "parentAsset": "studio/v24/banner-motion-stadium-wind.webp",
-    "notCountedAsArt": true
+    "notCountedAsArt": true,
+    "sourceURL": "https://v.animethemes.moe/KimiNoNaWa-OP1.webm",
+    "reference": "https://animethemes.moe/anime/kimi_no_na_wa",
+    "rights": "Third-party anime footage. Rights unverified; no license inferred from availability. User authorized replacement of low-resolution scenes.",
+    "parentOriginalSHA256": "3c2cf527aff041379abc08eaee0e07f358c8b5d0178796919f40bb74cdef1a75",
+    "pairedSceneID": "v20-banner-motion-stadium-wind",
+    "qualityRevision": "24.2",
+    "sourceSize": [
+      1920,
+      1080
+    ],
+    "outputSize": [
+      512,
+      171
+    ],
+    "noUpscale": true,
+    "sourceClipStart": 67.453,
+    "sourceClipDuration": 2.593
   },
   {
-    "file": "studio/v24/banner-motion-snow-between-us.mp4",
-    "sha256": "fbc3175e596bffd4879cc9f062597d05b0b159f9c97cff4e0019415824bb3b43",
-    "origin": "Silent animated scene; actual original moving frames, not CSS movement of a still",
-    "sourceURL": "https://media.tenor.com/fLBiPk3VBhwAAAPo/black-and-white-cute.mp4",
-    "reference": "https://tenor.com/view/black-and-white-cute-couple-kimi-ni-todoke-scenery-gif-8984789276337440284",
-    "rights": "Third-party material; license unverified. User requested anime scene sources; no affiliation or AI-original claim.",
-    "parentOriginalSHA256": "5ceb775219bb84a0ce24b52feebdb39649857e1bc38d3a53c0f296c9e0e7ccb5",
+    "file": "studio/v24/banner-motion-snow-between-us-hd24.mp4",
+    "sha256": "facfc1f949cf1e6f6bea4fd92a5805c0d5fd95456729b50c36dfdca4efec14f2",
+    "origin": "Third-party anime footage; silent motion clip from Full-HD source. Not AI-original.",
+    "sourceURL": "https://v.animethemes.moe/TokyoGhoul-OP1.webm",
+    "reference": "https://animethemes.moe/anime/tokyo_ghoul",
+    "rights": "Third-party anime footage. Rights unverified; no license inferred from availability. User authorized replacement of low-resolution scenes.",
+    "parentOriginalSHA256": "365325741db827b818c4539358c3712257a01a0c19f870e09521ec5715bffc62",
     "notCountedAsArt": false,
     "pairedSceneID": "v20-banner-motion-snow-between-us",
     "sourceResolution": [
@@ -2017,16 +2082,28 @@
       256
     ],
     "sourceDistinctDecodedFrames": 7,
-    "noCropOrWatermarkRemoval": true
+    "noCropOrWatermarkRemoval": true,
+    "qualityRevision": "24.2",
+    "sourceSize": [
+      1920,
+      1080
+    ],
+    "outputSize": [
+      1920,
+      640
+    ],
+    "noUpscale": true,
+    "sourceClipStart": 42.4,
+    "sourceClipDuration": 2.2
   },
   {
-    "file": "studio/v24/banner-motion-snow-between-us.webp",
-    "sha256": "f5515e344eb222f86061ac86ebbe01d1ac5a1e16dff5c2981fca713a565648f9",
-    "origin": "Static fallback poster from animated scene; not an additional artwork",
-    "sourceURL": "https://media.tenor.com/fLBiPk3VBhwAAAPo/black-and-white-cute.mp4",
-    "reference": "https://tenor.com/view/black-and-white-cute-couple-kimi-ni-todoke-scenery-gif-8984789276337440284",
-    "rights": "Third-party material; license unverified. User requested anime scene sources; no affiliation or AI-original claim.",
-    "parentOriginalSHA256": "5ceb775219bb84a0ce24b52feebdb39649857e1bc38d3a53c0f296c9e0e7ccb5",
+    "file": "studio/v24/banner-motion-snow-between-us-hd24.webp",
+    "sha256": "38afb731f309df545d890d216b57002a0d36ff67755848857bb03faab4a1dfce",
+    "origin": "Third-party anime footage; full-size matching poster from Full-HD source. Not AI-original.",
+    "sourceURL": "https://v.animethemes.moe/TokyoGhoul-OP1.webm",
+    "reference": "https://animethemes.moe/anime/tokyo_ghoul",
+    "rights": "Third-party anime footage. Rights unverified; no license inferred from availability. User authorized replacement of low-resolution scenes.",
+    "parentOriginalSHA256": "365325741db827b818c4539358c3712257a01a0c19f870e09521ec5715bffc62",
     "notCountedAsArt": true,
     "pairedSceneID": "v20-banner-motion-snow-between-us",
     "sourceResolution": [
@@ -2034,16 +2111,28 @@
       256
     ],
     "sourceDistinctDecodedFrames": 7,
-    "noCropOrWatermarkRemoval": true
+    "noCropOrWatermarkRemoval": true,
+    "qualityRevision": "24.2",
+    "sourceSize": [
+      1920,
+      1080
+    ],
+    "outputSize": [
+      1920,
+      640
+    ],
+    "noUpscale": true,
+    "sourceClipStart": 42.4,
+    "sourceClipDuration": 2.2
   },
   {
-    "file": "studio/v24/banner-motion-petals-in-palm.mp4",
-    "sha256": "fa5cab1bfd8979fd9f1e1c258d706acc58acb613c0984f7e0ee7fd1925e6168d",
-    "origin": "Silent animated scene; actual original moving frames, not CSS movement of a still",
-    "sourceURL": "https://media.tenor.com/XDA2rrG_GHAAAAPo/rose-anime.mp4",
-    "reference": "https://tenor.com/view/rose-anime-red-silver-briauna-gif-17037356",
-    "rights": "Third-party material; license unverified. User requested anime scene sources; no affiliation or AI-original claim.",
-    "parentOriginalSHA256": "028eea13851318f36df57de277f54f49523e98471f4251a093d4d7ea9e3836f1",
+    "file": "studio/v24/banner-motion-petals-in-palm-hd24.mp4",
+    "sha256": "a9c7ba49c4db49e6307f6b439cd4a7a2559e4330f44f98fac269c4520785b835",
+    "origin": "Third-party anime footage; silent motion clip from Full-HD source. Not AI-original.",
+    "sourceURL": "https://v.animethemes.moe/JujutsuKaisen-OP2-NCBD1080.webm",
+    "reference": "https://animethemes.moe/anime/jujutsu_kaisen",
+    "rights": "Third-party anime footage. Rights unverified; no license inferred from availability. User authorized replacement of low-resolution scenes.",
+    "parentOriginalSHA256": "346e9dbfb0dd22d5794e1cbecf9db04c48b3a17d33f9c1263f075901fb2985d5",
     "notCountedAsArt": false,
     "pairedSceneID": "v20-banner-motion-petals-in-palm",
     "sourceResolution": [
@@ -2051,16 +2140,28 @@
       358
     ],
     "sourceDistinctDecodedFrames": 29,
-    "noCropOrWatermarkRemoval": true
+    "noCropOrWatermarkRemoval": true,
+    "qualityRevision": "24.2",
+    "sourceSize": [
+      1920,
+      1080
+    ],
+    "outputSize": [
+      1920,
+      640
+    ],
+    "noUpscale": true,
+    "sourceClipStart": 11.4,
+    "sourceClipDuration": 2.2
   },
   {
-    "file": "studio/v24/banner-motion-petals-in-palm.webp",
-    "sha256": "bb7b67b2c09b37012e6e3d167836e8d40acf922890e3cab48a7a8296f0b79917",
-    "origin": "Static fallback poster from animated scene; not an additional artwork",
-    "sourceURL": "https://media.tenor.com/XDA2rrG_GHAAAAPo/rose-anime.mp4",
-    "reference": "https://tenor.com/view/rose-anime-red-silver-briauna-gif-17037356",
-    "rights": "Third-party material; license unverified. User requested anime scene sources; no affiliation or AI-original claim.",
-    "parentOriginalSHA256": "028eea13851318f36df57de277f54f49523e98471f4251a093d4d7ea9e3836f1",
+    "file": "studio/v24/banner-motion-petals-in-palm-hd24.webp",
+    "sha256": "6603352332428aa3241e6c1f6e3f503b933d614c7ddd8c44397e03fe9bb48480",
+    "origin": "Third-party anime footage; full-size matching poster from Full-HD source. Not AI-original.",
+    "sourceURL": "https://v.animethemes.moe/JujutsuKaisen-OP2-NCBD1080.webm",
+    "reference": "https://animethemes.moe/anime/jujutsu_kaisen",
+    "rights": "Third-party anime footage. Rights unverified; no license inferred from availability. User authorized replacement of low-resolution scenes.",
+    "parentOriginalSHA256": "346e9dbfb0dd22d5794e1cbecf9db04c48b3a17d33f9c1263f075901fb2985d5",
     "notCountedAsArt": true,
     "pairedSceneID": "v20-banner-motion-petals-in-palm",
     "sourceResolution": [
@@ -2068,16 +2169,28 @@
       358
     ],
     "sourceDistinctDecodedFrames": 29,
-    "noCropOrWatermarkRemoval": true
+    "noCropOrWatermarkRemoval": true,
+    "qualityRevision": "24.2",
+    "sourceSize": [
+      1920,
+      1080
+    ],
+    "outputSize": [
+      1920,
+      640
+    ],
+    "noUpscale": true,
+    "sourceClipStart": 11.4,
+    "sourceClipDuration": 2.2
   },
   {
-    "file": "studio/v24/banner-motion-cat-and-scarlet-roses.mp4",
-    "sha256": "0f02cfc363b70d7aa7e3c377659e53bac1436cd54d941f43bf85eae0a5e80813",
-    "origin": "Silent animated scene; actual original moving frames, not CSS movement of a still",
-    "sourceURL": "https://media.tenor.com/Npd1vTDJclQAAAPo/flower-cat.mp4",
-    "reference": "https://tenor.com/view/flower-cat-background-anime-aesthetic-gif-3933742254959194708",
-    "rights": "Third-party material; license unverified. User requested anime scene sources; no affiliation or AI-original claim.",
-    "parentOriginalSHA256": "08674f6b4b290ba1ce86ea0666d888a72ff24ca6d55e3a0ac4bd851f8f4bb7d3",
+    "file": "studio/v24/banner-motion-cat-and-scarlet-roses-hd24.mp4",
+    "sha256": "8954325a958f1ff73bc706e5111857e8c69ed843a03d4250eec962a23a056a0d",
+    "origin": "Third-party anime footage; silent motion clip from Full-HD source. Not AI-original.",
+    "sourceURL": "https://v.animethemes.moe/JujutsuKaisenS2-OP1-NCBD1080.webm",
+    "reference": "https://animethemes.moe/anime/jujutsu_kaisen_2nd_season",
+    "rights": "Third-party anime footage. Rights unverified; no license inferred from availability. User authorized replacement of low-resolution scenes.",
+    "parentOriginalSHA256": "fcbd1cb11a87cfb4517a52442150fb79ff95956656352bc911c3129561a9af97",
     "notCountedAsArt": false,
     "pairedSceneID": "v20-banner-motion-cat-and-scarlet-roses",
     "sourceResolution": [
@@ -2085,16 +2198,28 @@
       224
     ],
     "sourceDistinctDecodedFrames": 25,
-    "noCropOrWatermarkRemoval": true
+    "noCropOrWatermarkRemoval": true,
+    "qualityRevision": "24.2",
+    "sourceSize": [
+      1920,
+      1080
+    ],
+    "outputSize": [
+      1920,
+      640
+    ],
+    "noUpscale": true,
+    "sourceClipStart": 29.4,
+    "sourceClipDuration": 2.2
   },
   {
-    "file": "studio/v24/banner-motion-cat-and-scarlet-roses.webp",
-    "sha256": "87c6cda9b96ea77eb4e35038bdb70b2d0f100ff6ac8e17d44f26b4a900505c6b",
-    "origin": "Static fallback poster from animated scene; not an additional artwork",
-    "sourceURL": "https://media.tenor.com/Npd1vTDJclQAAAPo/flower-cat.mp4",
-    "reference": "https://tenor.com/view/flower-cat-background-anime-aesthetic-gif-3933742254959194708",
-    "rights": "Third-party material; license unverified. User requested anime scene sources; no affiliation or AI-original claim.",
-    "parentOriginalSHA256": "08674f6b4b290ba1ce86ea0666d888a72ff24ca6d55e3a0ac4bd851f8f4bb7d3",
+    "file": "studio/v24/banner-motion-cat-and-scarlet-roses-hd24.webp",
+    "sha256": "de0a320572fae6a1ca342653c08370a86cf2e55942ca55c387f3fad2540c10fe",
+    "origin": "Third-party anime footage; full-size matching poster from Full-HD source. Not AI-original.",
+    "sourceURL": "https://v.animethemes.moe/JujutsuKaisenS2-OP1-NCBD1080.webm",
+    "reference": "https://animethemes.moe/anime/jujutsu_kaisen_2nd_season",
+    "rights": "Third-party anime footage. Rights unverified; no license inferred from availability. User authorized replacement of low-resolution scenes.",
+    "parentOriginalSHA256": "fcbd1cb11a87cfb4517a52442150fb79ff95956656352bc911c3129561a9af97",
     "notCountedAsArt": true,
     "pairedSceneID": "v20-banner-motion-cat-and-scarlet-roses",
     "sourceResolution": [
@@ -2102,16 +2227,28 @@
       224
     ],
     "sourceDistinctDecodedFrames": 25,
-    "noCropOrWatermarkRemoval": true
+    "noCropOrWatermarkRemoval": true,
+    "qualityRevision": "24.2",
+    "sourceSize": [
+      1920,
+      1080
+    ],
+    "outputSize": [
+      1920,
+      640
+    ],
+    "noUpscale": true,
+    "sourceClipStart": 29.4,
+    "sourceClipDuration": 2.2
   },
   {
-    "file": "studio/v24/banner-motion-cat-on-shoulder.mp4",
-    "sha256": "7497f5a5293a8cb0492196723fdbf181d3592ad762c63d3a28810b5ce929ea70",
-    "origin": "Silent animated scene; actual original moving frames, not CSS movement of a still",
-    "sourceURL": "https://media.tenor.com/mYPzn8eCp3MAAAPo/cat-anime.mp4",
-    "reference": "https://tenor.com/view/cat-anime-pink-black-gif-11061952977324648307",
-    "rights": "Third-party material; license unverified. User requested anime scene sources; no affiliation or AI-original claim.",
-    "parentOriginalSHA256": "ae2abae5c1bb4b731eaa55be073101ccd3dbc1c67273a5fd4e0c3239dd795945",
+    "file": "studio/v24/banner-motion-cat-on-shoulder-hd24.mp4",
+    "sha256": "89bb26fc6d46d6811c3382502ad9ef348150830da142dfde7d3a222838bdee75",
+    "origin": "Third-party anime footage; silent motion clip from Full-HD source. Not AI-original.",
+    "sourceURL": "https://v.animethemes.moe/ChainsawMan-OP1-NCBD1080.webm",
+    "reference": "https://animethemes.moe/anime/chainsaw_man",
+    "rights": "Third-party anime footage. Rights unverified; no license inferred from availability. User authorized replacement of low-resolution scenes.",
+    "parentOriginalSHA256": "a80361075b53415b19296e872e62e57de2e1d5d8080149fc9202b542ae804c6f",
     "notCountedAsArt": false,
     "pairedSceneID": "v20-banner-motion-cat-on-shoulder",
     "sourceResolution": [
@@ -2119,16 +2256,28 @@
       280
     ],
     "sourceDistinctDecodedFrames": 64,
-    "noCropOrWatermarkRemoval": true
+    "noCropOrWatermarkRemoval": true,
+    "qualityRevision": "24.2",
+    "sourceSize": [
+      1920,
+      1080
+    ],
+    "outputSize": [
+      1920,
+      640
+    ],
+    "noUpscale": true,
+    "sourceClipStart": 20.19,
+    "sourceClipDuration": 3.0
   },
   {
-    "file": "studio/v24/banner-motion-cat-on-shoulder.webp",
-    "sha256": "d1be274e49781d1ec60f3a7248b7fbc687e2cd3a417f4e1addff2e76d3420f58",
-    "origin": "Static fallback poster from animated scene; not an additional artwork",
-    "sourceURL": "https://media.tenor.com/mYPzn8eCp3MAAAPo/cat-anime.mp4",
-    "reference": "https://tenor.com/view/cat-anime-pink-black-gif-11061952977324648307",
-    "rights": "Third-party material; license unverified. User requested anime scene sources; no affiliation or AI-original claim.",
-    "parentOriginalSHA256": "ae2abae5c1bb4b731eaa55be073101ccd3dbc1c67273a5fd4e0c3239dd795945",
+    "file": "studio/v24/banner-motion-cat-on-shoulder-hd24.webp",
+    "sha256": "6e66bcc962c3cb9d1d1538dbd0f20071d2674049e84c3e983ba3b2c4559f64ca",
+    "origin": "Third-party anime footage; full-size matching poster from Full-HD source. Not AI-original.",
+    "sourceURL": "https://v.animethemes.moe/ChainsawMan-OP1-NCBD1080.webm",
+    "reference": "https://animethemes.moe/anime/chainsaw_man",
+    "rights": "Third-party anime footage. Rights unverified; no license inferred from availability. User authorized replacement of low-resolution scenes.",
+    "parentOriginalSHA256": "a80361075b53415b19296e872e62e57de2e1d5d8080149fc9202b542ae804c6f",
     "notCountedAsArt": true,
     "pairedSceneID": "v20-banner-motion-cat-on-shoulder",
     "sourceResolution": [
@@ -2136,16 +2285,28 @@
       280
     ],
     "sourceDistinctDecodedFrames": 64,
-    "noCropOrWatermarkRemoval": true
+    "noCropOrWatermarkRemoval": true,
+    "qualityRevision": "24.2",
+    "sourceSize": [
+      1920,
+      1080
+    ],
+    "outputSize": [
+      1920,
+      640
+    ],
+    "noUpscale": true,
+    "sourceClipStart": 20.19,
+    "sourceClipDuration": 3.0
   },
   {
-    "file": "studio/v24/banner-motion-quiet-gaze.mp4",
-    "sha256": "fdff0d9d87eaeb97856400973eb71e7fb66ef25a3532c0dac4f5b680904050a4",
-    "origin": "Silent animated scene; actual original moving frames, not CSS movement of a still",
-    "sourceURL": "https://media.tenor.com/trPGuTTqq0cAAAPo/anime-dispair-my-dress-up-darling-season-2.mp4",
-    "reference": "https://tenor.com/view/anime-dispair-my-dress-up-darling-season-2-sono-bisque-doll-wa-koi-wo-suru-season-2-shinju-inui-sad-anime-girl-gif-13165084634493135687",
-    "rights": "Third-party material; license unverified. User requested anime scene sources; no affiliation or AI-original claim.",
-    "parentOriginalSHA256": "98070808268b6da40ea9fabf460b35a3db52198f739f6f11b05aeda8d79a870f",
+    "file": "studio/v24/banner-motion-quiet-gaze-hd24.mp4",
+    "sha256": "f727a1e990e38e2e1e77f5cbfbe3429998fa07fc2ec94035f4955e8265791859",
+    "origin": "Third-party anime footage; silent motion clip from Full-HD source. Not AI-original.",
+    "sourceURL": "https://v.animethemes.moe/NatsumeYuujinchou-OP1.webm",
+    "reference": "https://animethemes.moe/anime/natsume_yuujinchou",
+    "rights": "Third-party anime footage. Rights unverified; no license inferred from availability. User authorized replacement of low-resolution scenes.",
+    "parentOriginalSHA256": "f3fa43c65179362a3bebbba66cafca9dd6db3bdab5c926aa01f0d208c7b296dd",
     "notCountedAsArt": false,
     "pairedSceneID": "v20-banner-motion-quiet-gaze",
     "sourceResolution": [
@@ -2153,16 +2314,28 @@
       282
     ],
     "sourceDistinctDecodedFrames": 81,
-    "noCropOrWatermarkRemoval": true
+    "noCropOrWatermarkRemoval": true,
+    "qualityRevision": "24.2",
+    "sourceSize": [
+      1920,
+      1080
+    ],
+    "outputSize": [
+      1920,
+      640
+    ],
+    "noUpscale": true,
+    "sourceClipStart": 47.4,
+    "sourceClipDuration": 2.2
   },
   {
-    "file": "studio/v24/banner-motion-quiet-gaze.webp",
-    "sha256": "020cf6ab2502b2abb1ace53155d602ca507c4f5c4a7a50d9780a455820a9097f",
-    "origin": "Static fallback poster from animated scene; not an additional artwork",
-    "sourceURL": "https://media.tenor.com/trPGuTTqq0cAAAPo/anime-dispair-my-dress-up-darling-season-2.mp4",
-    "reference": "https://tenor.com/view/anime-dispair-my-dress-up-darling-season-2-sono-bisque-doll-wa-koi-wo-suru-season-2-shinju-inui-sad-anime-girl-gif-13165084634493135687",
-    "rights": "Third-party material; license unverified. User requested anime scene sources; no affiliation or AI-original claim.",
-    "parentOriginalSHA256": "98070808268b6da40ea9fabf460b35a3db52198f739f6f11b05aeda8d79a870f",
+    "file": "studio/v24/banner-motion-quiet-gaze-hd24.webp",
+    "sha256": "0dd63fc404b406fa3fe2a2bfcb35523e164e32c4463e5a737cdd85c1814083b3",
+    "origin": "Third-party anime footage; full-size matching poster from Full-HD source. Not AI-original.",
+    "sourceURL": "https://v.animethemes.moe/NatsumeYuujinchou-OP1.webm",
+    "reference": "https://animethemes.moe/anime/natsume_yuujinchou",
+    "rights": "Third-party anime footage. Rights unverified; no license inferred from availability. User authorized replacement of low-resolution scenes.",
+    "parentOriginalSHA256": "f3fa43c65179362a3bebbba66cafca9dd6db3bdab5c926aa01f0d208c7b296dd",
     "notCountedAsArt": true,
     "pairedSceneID": "v20-banner-motion-quiet-gaze",
     "sourceResolution": [
@@ -2170,16 +2343,28 @@
       282
     ],
     "sourceDistinctDecodedFrames": 81,
-    "noCropOrWatermarkRemoval": true
+    "noCropOrWatermarkRemoval": true,
+    "qualityRevision": "24.2",
+    "sourceSize": [
+      1920,
+      1080
+    ],
+    "outputSize": [
+      1920,
+      640
+    ],
+    "noUpscale": true,
+    "sourceClipStart": 47.4,
+    "sourceClipDuration": 2.2
   },
   {
-    "file": "studio/v24/banner-motion-eye-reflection.mp4",
-    "sha256": "0ff32376a5321464c3b6b1aa4525f387977ddc1d148b5de8bfb6546124de7ba5",
-    "origin": "Silent animated scene; actual original moving frames, not CSS movement of a still",
-    "sourceURL": "https://media.tenor.com/O69C0gzF-rAAAAPo/black-anime.mp4",
-    "reference": "https://tenor.com/view/black-anime-gif-4300729639086979760",
-    "rights": "Third-party material; license unverified. User requested anime scene sources; no affiliation or AI-original claim.",
-    "parentOriginalSHA256": "f4839329f6d81bcf5c36af088956cc1e28059ee08ec330bb82d85805e26070c7",
+    "file": "studio/v24/banner-motion-eye-reflection-hd24.mp4",
+    "sha256": "f0ec03abdd87b5c0876d166a2bccdd1caa375d9d6e0cf409d6a12c874ec14490",
+    "origin": "Third-party anime footage; silent motion clip from Full-HD source. Not AI-original.",
+    "sourceURL": "https://v.animethemes.moe/KimiUso-OP2.webm",
+    "reference": "https://animethemes.moe/anime/shigatsu_wa_kimi_no_uso",
+    "rights": "Third-party anime footage. Rights unverified; no license inferred from availability. User authorized replacement of low-resolution scenes.",
+    "parentOriginalSHA256": "12f35ba4ae9d01be53ed5b446fc4be77213cf30d5fb9dc9ca65f9796af4b966c",
     "notCountedAsArt": false,
     "pairedSceneID": "v20-banner-motion-eye-reflection",
     "sourceResolution": [
@@ -2187,16 +2372,28 @@
       282
     ],
     "sourceDistinctDecodedFrames": 12,
-    "noCropOrWatermarkRemoval": true
+    "noCropOrWatermarkRemoval": true,
+    "qualityRevision": "24.2",
+    "sourceSize": [
+      1920,
+      1080
+    ],
+    "outputSize": [
+      1920,
+      640
+    ],
+    "noUpscale": true,
+    "sourceClipStart": 59.4,
+    "sourceClipDuration": 2.2
   },
   {
-    "file": "studio/v24/banner-motion-eye-reflection.webp",
-    "sha256": "89b3d7ddd2cb673f89e3315ccf29c4da6f5911e7b03675041bd9fb9e3197c34d",
-    "origin": "Static fallback poster from animated scene; not an additional artwork",
-    "sourceURL": "https://media.tenor.com/O69C0gzF-rAAAAPo/black-anime.mp4",
-    "reference": "https://tenor.com/view/black-anime-gif-4300729639086979760",
-    "rights": "Third-party material; license unverified. User requested anime scene sources; no affiliation or AI-original claim.",
-    "parentOriginalSHA256": "f4839329f6d81bcf5c36af088956cc1e28059ee08ec330bb82d85805e26070c7",
+    "file": "studio/v24/banner-motion-eye-reflection-hd24.webp",
+    "sha256": "99344c6dbb59a8e88ce49e1dc72bf87783a107caf4bdfaff0e004cae1b153ac9",
+    "origin": "Third-party anime footage; full-size matching poster from Full-HD source. Not AI-original.",
+    "sourceURL": "https://v.animethemes.moe/KimiUso-OP2.webm",
+    "reference": "https://animethemes.moe/anime/shigatsu_wa_kimi_no_uso",
+    "rights": "Third-party anime footage. Rights unverified; no license inferred from availability. User authorized replacement of low-resolution scenes.",
+    "parentOriginalSHA256": "12f35ba4ae9d01be53ed5b446fc4be77213cf30d5fb9dc9ca65f9796af4b966c",
     "notCountedAsArt": true,
     "pairedSceneID": "v20-banner-motion-eye-reflection",
     "sourceResolution": [
@@ -2204,44 +2401,124 @@
       282
     ],
     "sourceDistinctDecodedFrames": 12,
-    "noCropOrWatermarkRemoval": true
+    "noCropOrWatermarkRemoval": true,
+    "qualityRevision": "24.2",
+    "sourceSize": [
+      1920,
+      1080
+    ],
+    "outputSize": [
+      1920,
+      640
+    ],
+    "noUpscale": true,
+    "sourceClipStart": 59.4,
+    "sourceClipDuration": 2.2
   },
   {
-    "file": "studio/v24/banner-motion-snow-between-us-thumb.webp",
-    "sha256": "b57e805a543b4e90a52e07045588ee394ed590df9215468981f155268621b73f",
-    "origin": "Display-size thumbnail derived from studio/v24/banner-motion-snow-between-us.webp. Not a new artwork. Original source and rights unchanged.",
+    "file": "studio/v24/banner-motion-snow-between-us-thumb-hd24.webp",
+    "sha256": "8d314a2aeba5c39b4db311b60b79a23e714f601bc19da890733326f23e606c40",
+    "origin": "Third-party anime footage; shop thumbnail from Full-HD source. Not AI-original.",
     "parentAsset": "studio/v24/banner-motion-snow-between-us.webp",
-    "notCountedAsArt": true
+    "notCountedAsArt": true,
+    "sourceURL": "https://v.animethemes.moe/TokyoGhoul-OP1.webm",
+    "reference": "https://animethemes.moe/anime/tokyo_ghoul",
+    "rights": "Third-party anime footage. Rights unverified; no license inferred from availability. User authorized replacement of low-resolution scenes.",
+    "parentOriginalSHA256": "365325741db827b818c4539358c3712257a01a0c19f870e09521ec5715bffc62",
+    "pairedSceneID": "v20-banner-motion-snow-between-us",
+    "qualityRevision": "24.2",
+    "sourceSize": [
+      1920,
+      1080
+    ],
+    "outputSize": [
+      512,
+      171
+    ],
+    "noUpscale": true,
+    "sourceClipStart": 42.4,
+    "sourceClipDuration": 2.2
   },
   {
-    "file": "studio/v24/banner-motion-petals-in-palm-thumb.webp",
-    "sha256": "e50bd178ca1c1939a0c0acd9d165798ddfb1c510ec2ed5a5c1f7b3fa9ae6a406",
-    "origin": "Display-size thumbnail derived from studio/v24/banner-motion-petals-in-palm.webp. Not a new artwork. Original source and rights unchanged.",
+    "file": "studio/v24/banner-motion-petals-in-palm-thumb-hd24.webp",
+    "sha256": "ef409a6d8ee8e501c3adcfc451a6ca1f5ed5c19c5121b285c2123b2eec4615d5",
+    "origin": "Third-party anime footage; shop thumbnail from Full-HD source. Not AI-original.",
     "parentAsset": "studio/v24/banner-motion-petals-in-palm.webp",
-    "notCountedAsArt": true
+    "notCountedAsArt": true,
+    "sourceURL": "https://v.animethemes.moe/JujutsuKaisen-OP2-NCBD1080.webm",
+    "reference": "https://animethemes.moe/anime/jujutsu_kaisen",
+    "rights": "Third-party anime footage. Rights unverified; no license inferred from availability. User authorized replacement of low-resolution scenes.",
+    "parentOriginalSHA256": "346e9dbfb0dd22d5794e1cbecf9db04c48b3a17d33f9c1263f075901fb2985d5",
+    "pairedSceneID": "v20-banner-motion-petals-in-palm",
+    "qualityRevision": "24.2",
+    "sourceSize": [
+      1920,
+      1080
+    ],
+    "outputSize": [
+      512,
+      171
+    ],
+    "noUpscale": true,
+    "sourceClipStart": 11.4,
+    "sourceClipDuration": 2.2
   },
   {
-    "file": "studio/v24/banner-motion-cat-and-scarlet-roses-thumb.webp",
-    "sha256": "d5c4e7ebb5d4ff65ee8fd806a7edb7641340821acc1ba31809f5ecbc93fd55be",
-    "origin": "Display-size thumbnail derived from studio/v24/banner-motion-cat-and-scarlet-roses.webp. Not a new artwork. Original source and rights unchanged.",
+    "file": "studio/v24/banner-motion-cat-and-scarlet-roses-thumb-hd24.webp",
+    "sha256": "a84be3900911c0a9ba4e839efb6fc8f47a694ebd4173df9afc90749c0e9d975b",
+    "origin": "Third-party anime footage; shop thumbnail from Full-HD source. Not AI-original.",
     "parentAsset": "studio/v24/banner-motion-cat-and-scarlet-roses.webp",
-    "notCountedAsArt": true
+    "notCountedAsArt": true,
+    "sourceURL": "https://v.animethemes.moe/JujutsuKaisenS2-OP1-NCBD1080.webm",
+    "reference": "https://animethemes.moe/anime/jujutsu_kaisen_2nd_season",
+    "rights": "Third-party anime footage. Rights unverified; no license inferred from availability. User authorized replacement of low-resolution scenes.",
+    "parentOriginalSHA256": "fcbd1cb11a87cfb4517a52442150fb79ff95956656352bc911c3129561a9af97",
+    "pairedSceneID": "v20-banner-motion-cat-and-scarlet-roses",
+    "qualityRevision": "24.2",
+    "sourceSize": [
+      1920,
+      1080
+    ],
+    "outputSize": [
+      512,
+      171
+    ],
+    "noUpscale": true,
+    "sourceClipStart": 29.4,
+    "sourceClipDuration": 2.2
   },
   {
-    "file": "studio/v24/banner-motion-eye-reflection-thumb.webp",
-    "sha256": "958946f34c73291a32240513f02f0f071a1cdf5aa814cebff85da9b0cfff2850",
-    "origin": "Display-size thumbnail derived from studio/v24/banner-motion-eye-reflection.webp. Not a new artwork. Original source and rights unchanged.",
+    "file": "studio/v24/banner-motion-eye-reflection-thumb-hd24.webp",
+    "sha256": "043cb8c95a1f7844a808b21c14a53546324dedeee0a30ac4c19858ac48a30b62",
+    "origin": "Third-party anime footage; shop thumbnail from Full-HD source. Not AI-original.",
     "parentAsset": "studio/v24/banner-motion-eye-reflection.webp",
-    "notCountedAsArt": true
+    "notCountedAsArt": true,
+    "sourceURL": "https://v.animethemes.moe/KimiUso-OP2.webm",
+    "reference": "https://animethemes.moe/anime/shigatsu_wa_kimi_no_uso",
+    "rights": "Third-party anime footage. Rights unverified; no license inferred from availability. User authorized replacement of low-resolution scenes.",
+    "parentOriginalSHA256": "12f35ba4ae9d01be53ed5b446fc4be77213cf30d5fb9dc9ca65f9796af4b966c",
+    "pairedSceneID": "v20-banner-motion-eye-reflection",
+    "qualityRevision": "24.2",
+    "sourceSize": [
+      1920,
+      1080
+    ],
+    "outputSize": [
+      512,
+      171
+    ],
+    "noUpscale": true,
+    "sourceClipStart": 59.4,
+    "sourceClipDuration": 2.2
   },
   {
-    "file": "studio/v24/banner-motion-fireworks-embrace.mp4",
-    "sha256": "e83072e56277907eb7d4f11bd71f90c5107d3a970d6cfa42c10aee0ef9652420",
-    "origin": "Silent animated scene; actual original moving frames, not CSS movement of a still",
-    "sourceURL": "https://media.tenor.com/GYCgLvrLrMYAAAPo/black-and-white-cute.mp4",
-    "reference": "https://tenor.com/view/black-and-white-cute-couple-hug-gif-1837644771603754182",
-    "rights": "Third-party material; license unverified. User requested anime scene sources; no affiliation or AI-original claim.",
-    "parentOriginalSHA256": "7bab77ef9c67616621f5f7fd1c8cbadf585ae83d91114e7a221b88021782a5cb",
+    "file": "studio/v24/banner-motion-fireworks-embrace-hd24.mp4",
+    "sha256": "020c06ef3781c8d97628b07a377f15024a56d0494664634e3b79a5ad7d83c830",
+    "origin": "Third-party anime footage; silent motion clip from Full-HD source. Not AI-original.",
+    "sourceURL": "https://v.animethemes.moe/Hyouka-OP1.webm",
+    "reference": "https://animethemes.moe/anime/hyouka",
+    "rights": "Third-party anime footage. Rights unverified; no license inferred from availability. User authorized replacement of low-resolution scenes.",
+    "parentOriginalSHA256": "079939b3323fdad2c6c47998704566e00de85dc6f80f4779d3e9f269496c200e",
     "notCountedAsArt": false,
     "pairedSceneID": "v20-banner-motion-fireworks-embrace",
     "sourceResolution": [
@@ -2249,16 +2526,28 @@
       268
     ],
     "sourceDistinctDecodedFrames": 52,
-    "noCropOrWatermarkRemoval": true
+    "noCropOrWatermarkRemoval": true,
+    "qualityRevision": "24.2",
+    "sourceSize": [
+      1920,
+      1080
+    ],
+    "outputSize": [
+      1920,
+      640
+    ],
+    "noUpscale": true,
+    "sourceClipStart": 65.4,
+    "sourceClipDuration": 2.2
   },
   {
-    "file": "studio/v24/banner-motion-fireworks-embrace.webp",
-    "sha256": "adb3f4c7bb8369f5f31afaeb900d69f116defe0d72dabeb43eff9883f70dc0ec",
-    "origin": "Static fallback poster from animated scene; not an additional artwork",
-    "sourceURL": "https://media.tenor.com/GYCgLvrLrMYAAAPo/black-and-white-cute.mp4",
-    "reference": "https://tenor.com/view/black-and-white-cute-couple-hug-gif-1837644771603754182",
-    "rights": "Third-party material; license unverified. User requested anime scene sources; no affiliation or AI-original claim.",
-    "parentOriginalSHA256": "7bab77ef9c67616621f5f7fd1c8cbadf585ae83d91114e7a221b88021782a5cb",
+    "file": "studio/v24/banner-motion-fireworks-embrace-hd24.webp",
+    "sha256": "f9dc7879a68167a9c43c4310df7fd6be970af81ce13ed2a8c30cf5c265e6342a",
+    "origin": "Third-party anime footage; full-size matching poster from Full-HD source. Not AI-original.",
+    "sourceURL": "https://v.animethemes.moe/Hyouka-OP1.webm",
+    "reference": "https://animethemes.moe/anime/hyouka",
+    "rights": "Third-party anime footage. Rights unverified; no license inferred from availability. User authorized replacement of low-resolution scenes.",
+    "parentOriginalSHA256": "079939b3323fdad2c6c47998704566e00de85dc6f80f4779d3e9f269496c200e",
     "notCountedAsArt": true,
     "pairedSceneID": "v20-banner-motion-fireworks-embrace",
     "sourceResolution": [
@@ -2266,16 +2555,28 @@
       268
     ],
     "sourceDistinctDecodedFrames": 52,
-    "noCropOrWatermarkRemoval": true
+    "noCropOrWatermarkRemoval": true,
+    "qualityRevision": "24.2",
+    "sourceSize": [
+      1920,
+      1080
+    ],
+    "outputSize": [
+      1920,
+      640
+    ],
+    "noUpscale": true,
+    "sourceClipStart": 65.4,
+    "sourceClipDuration": 2.2
   },
   {
-    "file": "studio/v24/banner-motion-cat-and-firefly.mp4",
-    "sha256": "773772eee9de2af813e35eeff0b851337c4a01ec5af3e5a7ae36f3eabd08b0e7",
-    "origin": "Silent animated scene; actual original moving frames, not CSS movement of a still",
-    "sourceURL": "https://media.tenor.com/0fRwsNqIBHEAAAPo/adorable-cat.mp4",
-    "reference": "https://tenor.com/view/adorable-cat-playing-chat-noir-black-cat-gif-12373950",
-    "rights": "Third-party material; license unverified. User requested anime scene sources; no affiliation or AI-original claim.",
-    "parentOriginalSHA256": "140839af5754afc18944916be6e5c5e2f74dba7f58f1c84fc159db381d04f78c",
+    "file": "studio/v24/banner-motion-cat-and-firefly-hd24.mp4",
+    "sha256": "8726eaaf82e772f7dfce79dc1d7fd68efb3a07a4eb821d9033cf3fa52d4d6a7c",
+    "origin": "Third-party anime footage; silent motion clip from Full-HD source. Not AI-original.",
+    "sourceURL": "https://v.animethemes.moe/Clannad-OP1.webm",
+    "reference": "https://animethemes.moe/anime/clannad",
+    "rights": "Third-party anime footage. Rights unverified; no license inferred from availability. User authorized replacement of low-resolution scenes.",
+    "parentOriginalSHA256": "8ea3e02b8b385392ba72e3771c62a56d301070680841fdfe2ef123d39a526717",
     "notCountedAsArt": false,
     "pairedSceneID": "v20-banner-motion-cat-and-firefly",
     "sourceResolution": [
@@ -2283,16 +2584,28 @@
       226
     ],
     "sourceDistinctDecodedFrames": 34,
-    "noCropOrWatermarkRemoval": true
+    "noCropOrWatermarkRemoval": true,
+    "qualityRevision": "24.2",
+    "sourceSize": [
+      1920,
+      1080
+    ],
+    "outputSize": [
+      1920,
+      640
+    ],
+    "noUpscale": true,
+    "sourceClipStart": 41.4,
+    "sourceClipDuration": 2.2
   },
   {
-    "file": "studio/v24/banner-motion-cat-and-firefly.webp",
-    "sha256": "34b5f5fd4b86df2a00405120219ff6969957438cdd9d1ca1a550834d6f70f787",
-    "origin": "Static fallback poster from animated scene; not an additional artwork",
-    "sourceURL": "https://media.tenor.com/0fRwsNqIBHEAAAPo/adorable-cat.mp4",
-    "reference": "https://tenor.com/view/adorable-cat-playing-chat-noir-black-cat-gif-12373950",
-    "rights": "Third-party material; license unverified. User requested anime scene sources; no affiliation or AI-original claim.",
-    "parentOriginalSHA256": "140839af5754afc18944916be6e5c5e2f74dba7f58f1c84fc159db381d04f78c",
+    "file": "studio/v24/banner-motion-cat-and-firefly-hd24.webp",
+    "sha256": "5b6e51fe34b83e425c34ba2951689c32f7dc5412381e735bb0dbaf8f4d01c175",
+    "origin": "Third-party anime footage; full-size matching poster from Full-HD source. Not AI-original.",
+    "sourceURL": "https://v.animethemes.moe/Clannad-OP1.webm",
+    "reference": "https://animethemes.moe/anime/clannad",
+    "rights": "Third-party anime footage. Rights unverified; no license inferred from availability. User authorized replacement of low-resolution scenes.",
+    "parentOriginalSHA256": "8ea3e02b8b385392ba72e3771c62a56d301070680841fdfe2ef123d39a526717",
     "notCountedAsArt": true,
     "pairedSceneID": "v20-banner-motion-cat-and-firefly",
     "sourceResolution": [
@@ -2300,16 +2613,28 @@
       226
     ],
     "sourceDistinctDecodedFrames": 34,
-    "noCropOrWatermarkRemoval": true
+    "noCropOrWatermarkRemoval": true,
+    "qualityRevision": "24.2",
+    "sourceSize": [
+      1920,
+      1080
+    ],
+    "outputSize": [
+      1920,
+      640
+    ],
+    "noUpscale": true,
+    "sourceClipStart": 41.4,
+    "sourceClipDuration": 2.2
   },
   {
-    "file": "studio/v24/banner-motion-gothic-wings.mp4",
-    "sha256": "d46facf2b92f2fca62eb1a0665081a0af23af6c75b9305f583ddcafe53367aa7",
-    "origin": "Silent animated scene; actual original moving frames, not CSS movement of a still",
-    "sourceURL": "https://media.tenor.com/85r7Pk6D4DcAAAPo/rozen-maiden-black-angel.mp4",
-    "reference": "https://tenor.com/view/rozen-maiden-black-angel-wings-fly-anime-gif-5656980",
-    "rights": "Third-party material; license unverified. User requested anime scene sources; no affiliation or AI-original claim.",
-    "parentOriginalSHA256": "d5af661f0b0e2db8f8f1071aa661554e7512a31b0949db58d5f4e36700375a2e",
+    "file": "studio/v24/banner-motion-gothic-wings-hd24.mp4",
+    "sha256": "e44492334ea40e3792c66df3f2d624db6799674604de98b2e658930b0c712561",
+    "origin": "Third-party anime footage; silent motion clip from Full-HD source. Not AI-original.",
+    "sourceURL": "https://v.animethemes.moe/ClannadAfterStory-OP1.webm",
+    "reference": "https://animethemes.moe/anime/clannad_after_story",
+    "rights": "Third-party anime footage. Rights unverified; no license inferred from availability. User authorized replacement of low-resolution scenes.",
+    "parentOriginalSHA256": "312c840078371f784ac638e1bdc1b007dfb0959628981a64160d705073043d32",
     "notCountedAsArt": false,
     "pairedSceneID": "v20-banner-motion-gothic-wings",
     "sourceResolution": [
@@ -2317,16 +2642,28 @@
       280
     ],
     "sourceDistinctDecodedFrames": 22,
-    "noCropOrWatermarkRemoval": true
+    "noCropOrWatermarkRemoval": true,
+    "qualityRevision": "24.2",
+    "sourceSize": [
+      1920,
+      1080
+    ],
+    "outputSize": [
+      1920,
+      640
+    ],
+    "noUpscale": true,
+    "sourceClipStart": 35.4,
+    "sourceClipDuration": 2.2
   },
   {
-    "file": "studio/v24/banner-motion-gothic-wings.webp",
-    "sha256": "8781ad99cf260910f1ac866c0def48a71947038b295b44f06fc35b4301f57a96",
-    "origin": "Static fallback poster from animated scene; not an additional artwork",
-    "sourceURL": "https://media.tenor.com/85r7Pk6D4DcAAAPo/rozen-maiden-black-angel.mp4",
-    "reference": "https://tenor.com/view/rozen-maiden-black-angel-wings-fly-anime-gif-5656980",
-    "rights": "Third-party material; license unverified. User requested anime scene sources; no affiliation or AI-original claim.",
-    "parentOriginalSHA256": "d5af661f0b0e2db8f8f1071aa661554e7512a31b0949db58d5f4e36700375a2e",
+    "file": "studio/v24/banner-motion-gothic-wings-hd24.webp",
+    "sha256": "9e125bb10e6350091da85288d8b72fa7f268e74aee34d4b1e8f4980064d97760",
+    "origin": "Third-party anime footage; full-size matching poster from Full-HD source. Not AI-original.",
+    "sourceURL": "https://v.animethemes.moe/ClannadAfterStory-OP1.webm",
+    "reference": "https://animethemes.moe/anime/clannad_after_story",
+    "rights": "Third-party anime footage. Rights unverified; no license inferred from availability. User authorized replacement of low-resolution scenes.",
+    "parentOriginalSHA256": "312c840078371f784ac638e1bdc1b007dfb0959628981a64160d705073043d32",
     "notCountedAsArt": true,
     "pairedSceneID": "v20-banner-motion-gothic-wings",
     "sourceResolution": [
@@ -2334,16 +2671,28 @@
       280
     ],
     "sourceDistinctDecodedFrames": 22,
-    "noCropOrWatermarkRemoval": true
+    "noCropOrWatermarkRemoval": true,
+    "qualityRevision": "24.2",
+    "sourceSize": [
+      1920,
+      1080
+    ],
+    "outputSize": [
+      1920,
+      640
+    ],
+    "noUpscale": true,
+    "sourceClipStart": 35.4,
+    "sourceClipDuration": 2.2
   },
   {
-    "file": "studio/v24/banner-motion-ink-on-notebook.mp4",
-    "sha256": "632b3d957df54de14c3f5bff1cfcbc9d257f967c2936b7a09789087fe5976d02",
-    "origin": "Silent animated scene; actual original moving frames, not CSS movement of a still",
-    "sourceURL": "https://media.tenor.com/5OCSEoEs7iYAAAPo/venusxcv-notebook.mp4",
-    "reference": "https://tenor.com/view/venusxcv-notebook-black-and-white-vintage-anime-gif-18841073",
-    "rights": "Third-party material; license unverified. User requested anime scene sources; no affiliation or AI-original claim.",
-    "parentOriginalSHA256": "3f59c2aca883a23409f7fce50a656477f64c20e17689849897f41b5050ac28e1",
+    "file": "studio/v24/banner-motion-ink-on-notebook-hd24.mp4",
+    "sha256": "49c697daff91acedc5f4bd453c1a9e67b6f6310665743aa01968cc10e4c23c71",
+    "origin": "Third-party anime footage; silent motion clip from Full-HD source. Not AI-original.",
+    "sourceURL": "https://v.animethemes.moe/SousouNoFrieren-OP1-NCBD1080.webm",
+    "reference": "https://animethemes.moe/anime/sousou_no_frieren",
+    "rights": "Third-party anime footage. Rights unverified; no license inferred from availability. User authorized replacement of low-resolution scenes.",
+    "parentOriginalSHA256": "f7f76c861f1247750116b1ed36546fe66590bb6ac3fde2fa125730af4259d406",
     "notCountedAsArt": false,
     "pairedSceneID": "v20-banner-motion-ink-on-notebook",
     "sourceResolution": [
@@ -2351,16 +2700,28 @@
       412
     ],
     "sourceDistinctDecodedFrames": 15,
-    "noCropOrWatermarkRemoval": true
+    "noCropOrWatermarkRemoval": true,
+    "qualityRevision": "24.2",
+    "sourceSize": [
+      1920,
+      1080
+    ],
+    "outputSize": [
+      1920,
+      640
+    ],
+    "noUpscale": true,
+    "sourceClipStart": 77.4,
+    "sourceClipDuration": 2.2
   },
   {
-    "file": "studio/v24/banner-motion-ink-on-notebook.webp",
-    "sha256": "a5dfe35fa0e9291c3aebe260fca5a2f3b0ad95815b004f7ae29570760d4edb15",
-    "origin": "Static fallback poster from animated scene; not an additional artwork",
-    "sourceURL": "https://media.tenor.com/5OCSEoEs7iYAAAPo/venusxcv-notebook.mp4",
-    "reference": "https://tenor.com/view/venusxcv-notebook-black-and-white-vintage-anime-gif-18841073",
-    "rights": "Third-party material; license unverified. User requested anime scene sources; no affiliation or AI-original claim.",
-    "parentOriginalSHA256": "3f59c2aca883a23409f7fce50a656477f64c20e17689849897f41b5050ac28e1",
+    "file": "studio/v24/banner-motion-ink-on-notebook-hd24.webp",
+    "sha256": "68b80ba8136bf80620fa29e87750b5400c4e4cdb9ea21887ba471c563ac5ce05",
+    "origin": "Third-party anime footage; full-size matching poster from Full-HD source. Not AI-original.",
+    "sourceURL": "https://v.animethemes.moe/SousouNoFrieren-OP1-NCBD1080.webm",
+    "reference": "https://animethemes.moe/anime/sousou_no_frieren",
+    "rights": "Third-party anime footage. Rights unverified; no license inferred from availability. User authorized replacement of low-resolution scenes.",
+    "parentOriginalSHA256": "f7f76c861f1247750116b1ed36546fe66590bb6ac3fde2fa125730af4259d406",
     "notCountedAsArt": true,
     "pairedSceneID": "v20-banner-motion-ink-on-notebook",
     "sourceResolution": [
@@ -2368,16 +2729,28 @@
       412
     ],
     "sourceDistinctDecodedFrames": 15,
-    "noCropOrWatermarkRemoval": true
+    "noCropOrWatermarkRemoval": true,
+    "qualityRevision": "24.2",
+    "sourceSize": [
+      1920,
+      1080
+    ],
+    "outputSize": [
+      1920,
+      640
+    ],
+    "noUpscale": true,
+    "sourceClipStart": 77.4,
+    "sourceClipDuration": 2.2
   },
   {
-    "file": "studio/v24/banner-motion-fox-mask-summer.mp4",
-    "sha256": "142f5d86cbe24b6faa5dec079fff57b29220d2bcfb9a1070c1303e08260008fd",
-    "origin": "Silent animated scene; actual original moving frames, not CSS movement of a still",
-    "sourceURL": "https://media.tenor.com/CZYSGpjU6x8AAAPo/hotarubi-no-more-e-b%26w.mp4",
-    "reference": "https://tenor.com/view/hotarubi-no-more-e-b%26w-black-and-white-anime-gif-bw-gif-690759498290490143",
-    "rights": "Third-party material; license unverified. User requested anime scene sources; no affiliation or AI-original claim.",
-    "parentOriginalSHA256": "9462208cd14eac0352e8690a03fdb201386d573a33801c14da1c43dcc3e5b9ae",
+    "file": "studio/v24/banner-motion-fox-mask-summer-hd24.mp4",
+    "sha256": "0f3999906b025553c96322574db8f9566899acab37ee2b2b2f38a5720e7626ac",
+    "origin": "Third-party anime footage; silent motion clip from Full-HD source. Not AI-original.",
+    "sourceURL": "https://v.animethemes.moe/VinlandSaga-OP1-NCBD1080.webm",
+    "reference": "https://animethemes.moe/anime/vinland_saga",
+    "rights": "Third-party anime footage. Rights unverified; no license inferred from availability. User authorized replacement of low-resolution scenes.",
+    "parentOriginalSHA256": "2c6778f09ff162dcf647165293082672348f6cdc584d02f06131f748330e8cbf",
     "notCountedAsArt": false,
     "pairedSceneID": "v20-banner-motion-fox-mask-summer",
     "sourceResolution": [
@@ -2385,16 +2758,28 @@
       276
     ],
     "sourceDistinctDecodedFrames": 40,
-    "noCropOrWatermarkRemoval": true
+    "noCropOrWatermarkRemoval": true,
+    "qualityRevision": "24.2",
+    "sourceSize": [
+      1920,
+      1080
+    ],
+    "outputSize": [
+      1920,
+      640
+    ],
+    "noUpscale": true,
+    "sourceClipStart": 77.4,
+    "sourceClipDuration": 2.2
   },
   {
-    "file": "studio/v24/banner-motion-fox-mask-summer.webp",
-    "sha256": "0f33036bb5a862c721ac42a7d630c3e739bb456a3e9939e3ee5d8aca9da4f779",
-    "origin": "Static fallback poster from animated scene; not an additional artwork",
-    "sourceURL": "https://media.tenor.com/CZYSGpjU6x8AAAPo/hotarubi-no-more-e-b%26w.mp4",
-    "reference": "https://tenor.com/view/hotarubi-no-more-e-b%26w-black-and-white-anime-gif-bw-gif-690759498290490143",
-    "rights": "Third-party material; license unverified. User requested anime scene sources; no affiliation or AI-original claim.",
-    "parentOriginalSHA256": "9462208cd14eac0352e8690a03fdb201386d573a33801c14da1c43dcc3e5b9ae",
+    "file": "studio/v24/banner-motion-fox-mask-summer-hd24.webp",
+    "sha256": "8c08d4fafc15bb7eed5dc2db89747f4b359c653d5ee0dbec64cdad3141157f37",
+    "origin": "Third-party anime footage; full-size matching poster from Full-HD source. Not AI-original.",
+    "sourceURL": "https://v.animethemes.moe/VinlandSaga-OP1-NCBD1080.webm",
+    "reference": "https://animethemes.moe/anime/vinland_saga",
+    "rights": "Third-party anime footage. Rights unverified; no license inferred from availability. User authorized replacement of low-resolution scenes.",
+    "parentOriginalSHA256": "2c6778f09ff162dcf647165293082672348f6cdc584d02f06131f748330e8cbf",
     "notCountedAsArt": true,
     "pairedSceneID": "v20-banner-motion-fox-mask-summer",
     "sourceResolution": [
@@ -2402,16 +2787,28 @@
       276
     ],
     "sourceDistinctDecodedFrames": 40,
-    "noCropOrWatermarkRemoval": true
+    "noCropOrWatermarkRemoval": true,
+    "qualityRevision": "24.2",
+    "sourceSize": [
+      1920,
+      1080
+    ],
+    "outputSize": [
+      1920,
+      640
+    ],
+    "noUpscale": true,
+    "sourceClipStart": 77.4,
+    "sourceClipDuration": 2.2
   },
   {
-    "file": "studio/v24/banner-motion-moonlit-farewell.mp4",
-    "sha256": "58f1f0f3385abaee263731396796cceeb4e15450bd5173f52231ad7323b05c17",
-    "origin": "Silent animated scene; actual original moving frames, not CSS movement of a still",
-    "sourceURL": "https://media.tenor.com/W2ZVJifi1tsAAAPo/hotarubi-no-more-e-b%26w.mp4",
-    "reference": "https://tenor.com/view/hotarubi-no-more-e-b%26w-black-and-white-anime-gif-bw-couple-gif-6586045127442224859",
-    "rights": "Third-party material; license unverified. User requested anime scene sources; no affiliation or AI-original claim.",
-    "parentOriginalSHA256": "7c8279f5e75b680da782870db6fb26013b2c59f42dec71aebb48538db6883717",
+    "file": "studio/v24/banner-motion-moonlit-farewell-hd24.mp4",
+    "sha256": "13c5de7c594d46316281f21bac5da9f3890f441115072e69686f290b449e8cdd",
+    "origin": "Third-party anime footage; silent motion clip from Full-HD source. Not AI-original.",
+    "sourceURL": "https://v.animethemes.moe/SamuraiChamploo-OP1-NCBD1080.webm",
+    "reference": "https://animethemes.moe/anime/samurai_champloo",
+    "rights": "Third-party anime footage. Rights unverified; no license inferred from availability. User authorized replacement of low-resolution scenes.",
+    "parentOriginalSHA256": "63d07807cb4e0bee33b5c080384f0848659e9efcc66d7ccc7c5b83774f3453a4",
     "notCountedAsArt": false,
     "pairedSceneID": "v20-banner-motion-moonlit-farewell",
     "sourceResolution": [
@@ -2419,16 +2816,28 @@
       278
     ],
     "sourceDistinctDecodedFrames": 73,
-    "noCropOrWatermarkRemoval": true
+    "noCropOrWatermarkRemoval": true,
+    "qualityRevision": "24.2",
+    "sourceSize": [
+      1920,
+      1080
+    ],
+    "outputSize": [
+      1920,
+      640
+    ],
+    "noUpscale": true,
+    "sourceClipStart": 53.4,
+    "sourceClipDuration": 2.2
   },
   {
-    "file": "studio/v24/banner-motion-moonlit-farewell.webp",
-    "sha256": "ff34898181c198132231fda13c5247489c7c3d522240cb9ab016af3a334be402",
-    "origin": "Static fallback poster from animated scene; not an additional artwork",
-    "sourceURL": "https://media.tenor.com/W2ZVJifi1tsAAAPo/hotarubi-no-more-e-b%26w.mp4",
-    "reference": "https://tenor.com/view/hotarubi-no-more-e-b%26w-black-and-white-anime-gif-bw-couple-gif-6586045127442224859",
-    "rights": "Third-party material; license unverified. User requested anime scene sources; no affiliation or AI-original claim.",
-    "parentOriginalSHA256": "7c8279f5e75b680da782870db6fb26013b2c59f42dec71aebb48538db6883717",
+    "file": "studio/v24/banner-motion-moonlit-farewell-hd24.webp",
+    "sha256": "91e944761c9f0a0dbcb37e7547c57dc2b88c9f53af18a303ec8075666312e023",
+    "origin": "Third-party anime footage; full-size matching poster from Full-HD source. Not AI-original.",
+    "sourceURL": "https://v.animethemes.moe/SamuraiChamploo-OP1-NCBD1080.webm",
+    "reference": "https://animethemes.moe/anime/samurai_champloo",
+    "rights": "Third-party anime footage. Rights unverified; no license inferred from availability. User authorized replacement of low-resolution scenes.",
+    "parentOriginalSHA256": "63d07807cb4e0bee33b5c080384f0848659e9efcc66d7ccc7c5b83774f3453a4",
     "notCountedAsArt": true,
     "pairedSceneID": "v20-banner-motion-moonlit-farewell",
     "sourceResolution": [
@@ -2436,7 +2845,19 @@
       278
     ],
     "sourceDistinctDecodedFrames": 73,
-    "noCropOrWatermarkRemoval": true
+    "noCropOrWatermarkRemoval": true,
+    "qualityRevision": "24.2",
+    "sourceSize": [
+      1920,
+      1080
+    ],
+    "outputSize": [
+      1920,
+      640
+    ],
+    "noUpscale": true,
+    "sourceClipStart": 53.4,
+    "sourceClipDuration": 2.2
   },
   {
     "file": "studio/v24/background-motion-petals-under-lamppost.mp4",
@@ -2541,27 +2962,61 @@
     "noCropOrWatermarkRemoval": true
   },
   {
-    "file": "studio/v24/banner-motion-cat-and-firefly-thumb.webp",
-    "sha256": "5d245946a7a827e352edc7e3b5d866899f124ea1517a235dbb9699f4321b9bb5",
-    "origin": "Display-size thumbnail derived from studio/v24/banner-motion-cat-and-firefly.webp. Not a new artwork. Original source and rights unchanged.",
+    "file": "studio/v24/banner-motion-cat-and-firefly-thumb-hd24.webp",
+    "sha256": "341f5a7deb4ca6b4db6feceb6277ecb9b9316921d5c25244d4767e1107e80b75",
+    "origin": "Third-party anime footage; shop thumbnail from Full-HD source. Not AI-original.",
     "parentAsset": "studio/v24/banner-motion-cat-and-firefly.webp",
-    "notCountedAsArt": true
+    "notCountedAsArt": true,
+    "sourceURL": "https://v.animethemes.moe/Clannad-OP1.webm",
+    "reference": "https://animethemes.moe/anime/clannad",
+    "rights": "Third-party anime footage. Rights unverified; no license inferred from availability. User authorized replacement of low-resolution scenes.",
+    "parentOriginalSHA256": "8ea3e02b8b385392ba72e3771c62a56d301070680841fdfe2ef123d39a526717",
+    "pairedSceneID": "v20-banner-motion-cat-and-firefly",
+    "qualityRevision": "24.2",
+    "sourceSize": [
+      1920,
+      1080
+    ],
+    "outputSize": [
+      512,
+      171
+    ],
+    "noUpscale": true,
+    "sourceClipStart": 41.4,
+    "sourceClipDuration": 2.2
   },
   {
-    "file": "studio/v24/banner-motion-gothic-wings-thumb.webp",
-    "sha256": "fe5d328963a4b3d9a92108381ab5e51ee84226d7c0eaccd099f8aa43145cf548",
-    "origin": "Display-size thumbnail derived from studio/v24/banner-motion-gothic-wings.webp. Not a new artwork. Original source and rights unchanged.",
+    "file": "studio/v24/banner-motion-gothic-wings-thumb-hd24.webp",
+    "sha256": "a5c7ca0c7fe65b262c0b8290a3e9ec01b8666f409120bc4e4e9699d887cc07ad",
+    "origin": "Third-party anime footage; shop thumbnail from Full-HD source. Not AI-original.",
     "parentAsset": "studio/v24/banner-motion-gothic-wings.webp",
-    "notCountedAsArt": true
+    "notCountedAsArt": true,
+    "sourceURL": "https://v.animethemes.moe/ClannadAfterStory-OP1.webm",
+    "reference": "https://animethemes.moe/anime/clannad_after_story",
+    "rights": "Third-party anime footage. Rights unverified; no license inferred from availability. User authorized replacement of low-resolution scenes.",
+    "parentOriginalSHA256": "312c840078371f784ac638e1bdc1b007dfb0959628981a64160d705073043d32",
+    "pairedSceneID": "v20-banner-motion-gothic-wings",
+    "qualityRevision": "24.2",
+    "sourceSize": [
+      1920,
+      1080
+    ],
+    "outputSize": [
+      512,
+      171
+    ],
+    "noUpscale": true,
+    "sourceClipStart": 35.4,
+    "sourceClipDuration": 2.2
   },
   {
-    "file": "studio/v24/banner-motion-rain-without-words.mp4",
-    "sha256": "de4732a75373606d47c32ed7acf7c9bf39bfb345d6b13ab8d573ec0a5de0dd62",
-    "origin": "Silent animated scene; actual original moving frames, not CSS movement of a still",
-    "sourceURL": "https://media.tenor.com/K6cGtpjy2nEAAAPo/sad.mp4",
-    "reference": "https://tenor.com/view/sad-gif-3145490246061447793",
-    "rights": "Third-party material; license unverified. User requested anime scene sources; no affiliation or AI-original claim.",
-    "parentOriginalSHA256": "bae32252de4c7f9b31ecaf8b3b08ade85bb881e45cdd482e8d044c186086c2f7",
+    "file": "studio/v24/banner-motion-rain-without-words-hd24.mp4",
+    "sha256": "631dd938821ebc8d8daddf297369829ce9db85afafd7acf4d8d0c53c7faf8544",
+    "origin": "Third-party anime footage; silent motion clip from Full-HD source. Not AI-original.",
+    "sourceURL": "https://v.animethemes.moe/DeathParade-OP1.webm",
+    "reference": "https://animethemes.moe/anime/death_parade",
+    "rights": "Third-party anime footage. Rights unverified; no license inferred from availability. User authorized replacement of low-resolution scenes.",
+    "parentOriginalSHA256": "96c151e718cb8f34a50d555072d902c01653cbb7e1f8ce696b6ff5fb65e54e3c",
     "notCountedAsArt": false,
     "pairedSceneID": "v20-banner-motion-rain-without-words",
     "sourceResolution": [
@@ -2569,16 +3024,28 @@
       490
     ],
     "sourceDistinctDecodedFrames": 72,
-    "noCropOrWatermarkRemoval": true
+    "noCropOrWatermarkRemoval": true,
+    "qualityRevision": "24.2",
+    "sourceSize": [
+      1920,
+      1080
+    ],
+    "outputSize": [
+      1920,
+      640
+    ],
+    "noUpscale": true,
+    "sourceClipStart": 13.816,
+    "sourceClipDuration": 2.384
   },
   {
-    "file": "studio/v24/banner-motion-rain-without-words.webp",
-    "sha256": "b899bd5e88abdeeff415acb6b90dd07ce0e63e27ef0c08f896b3d158f8fe7da8",
-    "origin": "Static fallback poster from animated scene; not an additional artwork",
-    "sourceURL": "https://media.tenor.com/K6cGtpjy2nEAAAPo/sad.mp4",
-    "reference": "https://tenor.com/view/sad-gif-3145490246061447793",
-    "rights": "Third-party material; license unverified. User requested anime scene sources; no affiliation or AI-original claim.",
-    "parentOriginalSHA256": "bae32252de4c7f9b31ecaf8b3b08ade85bb881e45cdd482e8d044c186086c2f7",
+    "file": "studio/v24/banner-motion-rain-without-words-hd24.webp",
+    "sha256": "58c54d2f87417e50b5131d5707dad402d4e0ef0621df9947ba21e373593bda2b",
+    "origin": "Third-party anime footage; full-size matching poster from Full-HD source. Not AI-original.",
+    "sourceURL": "https://v.animethemes.moe/DeathParade-OP1.webm",
+    "reference": "https://animethemes.moe/anime/death_parade",
+    "rights": "Third-party anime footage. Rights unverified; no license inferred from availability. User authorized replacement of low-resolution scenes.",
+    "parentOriginalSHA256": "96c151e718cb8f34a50d555072d902c01653cbb7e1f8ce696b6ff5fb65e54e3c",
     "notCountedAsArt": true,
     "pairedSceneID": "v20-banner-motion-rain-without-words",
     "sourceResolution": [
@@ -2586,16 +3053,28 @@
       490
     ],
     "sourceDistinctDecodedFrames": 72,
-    "noCropOrWatermarkRemoval": true
+    "noCropOrWatermarkRemoval": true,
+    "qualityRevision": "24.2",
+    "sourceSize": [
+      1920,
+      1080
+    ],
+    "outputSize": [
+      1920,
+      640
+    ],
+    "noUpscale": true,
+    "sourceClipStart": 13.816,
+    "sourceClipDuration": 2.384
   },
   {
-    "file": "studio/v24/banner-motion-emerald-rain-gaze.mp4",
-    "sha256": "e719a60c7300939adec8fb15106c5b8c2fb481c5738a74a4726d540074c81e39",
-    "origin": "Silent animated scene; actual original moving frames, not CSS movement of a still",
-    "sourceURL": "https://media.tenor.com/9lg_BSdkA3IAAAPo/reze-chainsaw-man.mp4",
-    "reference": "https://tenor.com/view/reze-chainsaw-man-csm-stare-anime-rain-gif-17751007222649062258",
-    "rights": "Third-party material; license unverified. User requested anime scene sources; no affiliation or AI-original claim.",
-    "parentOriginalSHA256": "f71e4f286f39e7df4b69d517e668fc75e5b365c19ed0dae894f9311cb9c0a74b",
+    "file": "studio/v24/banner-motion-emerald-rain-gaze-hd24.mp4",
+    "sha256": "7efc77e87366a7e6f1bd658fd9d15103ce2ab06b370adddd38d2c74274ed72fc",
+    "origin": "Third-party anime footage; silent motion clip from Full-HD source. Not AI-original.",
+    "sourceURL": "https://v.animethemes.moe/Noragami-OP1.webm",
+    "reference": "https://animethemes.moe/anime/noragami",
+    "rights": "Third-party anime footage. Rights unverified; no license inferred from availability. User authorized replacement of low-resolution scenes.",
+    "parentOriginalSHA256": "b6efa1d6e37febb3720bac70408512f97a67bd4674c52bb93ef3e3d2a2364519",
     "notCountedAsArt": false,
     "pairedSceneID": "v20-banner-motion-emerald-rain-gaze",
     "sourceResolution": [
@@ -2603,16 +3082,28 @@
       404
     ],
     "sourceDistinctDecodedFrames": 42,
-    "noCropOrWatermarkRemoval": true
+    "noCropOrWatermarkRemoval": true,
+    "qualityRevision": "24.2",
+    "sourceSize": [
+      1920,
+      1080
+    ],
+    "outputSize": [
+      1920,
+      640
+    ],
+    "noUpscale": true,
+    "sourceClipStart": 42.4,
+    "sourceClipDuration": 2.2
   },
   {
-    "file": "studio/v24/banner-motion-emerald-rain-gaze.webp",
-    "sha256": "5f2b903c3b3a258557102c76c76545ce0657c001a6e7b5545ebd13335dcfc848",
-    "origin": "Static fallback poster from animated scene; not an additional artwork",
-    "sourceURL": "https://media.tenor.com/9lg_BSdkA3IAAAPo/reze-chainsaw-man.mp4",
-    "reference": "https://tenor.com/view/reze-chainsaw-man-csm-stare-anime-rain-gif-17751007222649062258",
-    "rights": "Third-party material; license unverified. User requested anime scene sources; no affiliation or AI-original claim.",
-    "parentOriginalSHA256": "f71e4f286f39e7df4b69d517e668fc75e5b365c19ed0dae894f9311cb9c0a74b",
+    "file": "studio/v24/banner-motion-emerald-rain-gaze-hd24.webp",
+    "sha256": "922bbbe90ec6ec63b9e667e0a0c217fa5041ae5d82a24b82a268044bf01e22c7",
+    "origin": "Third-party anime footage; full-size matching poster from Full-HD source. Not AI-original.",
+    "sourceURL": "https://v.animethemes.moe/Noragami-OP1.webm",
+    "reference": "https://animethemes.moe/anime/noragami",
+    "rights": "Third-party anime footage. Rights unverified; no license inferred from availability. User authorized replacement of low-resolution scenes.",
+    "parentOriginalSHA256": "b6efa1d6e37febb3720bac70408512f97a67bd4674c52bb93ef3e3d2a2364519",
     "notCountedAsArt": true,
     "pairedSceneID": "v20-banner-motion-emerald-rain-gaze",
     "sourceResolution": [
@@ -2620,16 +3111,28 @@
       404
     ],
     "sourceDistinctDecodedFrames": 42,
-    "noCropOrWatermarkRemoval": true
+    "noCropOrWatermarkRemoval": true,
+    "qualityRevision": "24.2",
+    "sourceSize": [
+      1920,
+      1080
+    ],
+    "outputSize": [
+      1920,
+      640
+    ],
+    "noUpscale": true,
+    "sourceClipStart": 42.4,
+    "sourceClipDuration": 2.2
   },
   {
-    "file": "studio/v24/banner-motion-samurai-downpour.mp4",
-    "sha256": "925d3a6a2bb239abfbf6575c183b8144bd093b40691c5a9931abd5dbfaa7e216",
-    "origin": "Silent animated scene; actual original moving frames, not CSS movement of a still",
-    "sourceURL": "https://media.tenor.com/ulgdkNfdZDAAAAPo/samurai-champloo-mugen.mp4",
-    "reference": "https://tenor.com/view/samurai-champloo-mugen-rain-raining-storm-gif-26879755",
-    "rights": "Third-party material; license unverified. User requested anime scene sources; no affiliation or AI-original claim.",
-    "parentOriginalSHA256": "5ac42263d76f0e06c7c7553f5da081579ceb94b3e3f83588ffe8ffbca7b43732",
+    "file": "studio/v24/banner-motion-samurai-downpour-hd24.mp4",
+    "sha256": "607d617b763de8baebb320c206abfac67c1b884753eae067eb9d3e4446a5afad",
+    "origin": "Third-party anime footage; silent motion clip from Full-HD source. Not AI-original.",
+    "sourceURL": "https://v.animethemes.moe/NoragamiAragoto-OP1v2.webm",
+    "reference": "https://animethemes.moe/anime/noragami_aragoto",
+    "rights": "Third-party anime footage. Rights unverified; no license inferred from availability. User authorized replacement of low-resolution scenes.",
+    "parentOriginalSHA256": "c7d7118ee1923c11520e94df0e150ae01a7dd7c37dcd954355d7f34562802d24",
     "notCountedAsArt": false,
     "pairedSceneID": "v20-banner-motion-samurai-downpour",
     "sourceResolution": [
@@ -2637,16 +3140,28 @@
       360
     ],
     "sourceDistinctDecodedFrames": 23,
-    "noCropOrWatermarkRemoval": true
+    "noCropOrWatermarkRemoval": true,
+    "qualityRevision": "24.2",
+    "sourceSize": [
+      1920,
+      1080
+    ],
+    "outputSize": [
+      1920,
+      640
+    ],
+    "noUpscale": true,
+    "sourceClipStart": 69,
+    "sourceClipDuration": 2.8
   },
   {
-    "file": "studio/v24/banner-motion-samurai-downpour.webp",
-    "sha256": "4298abc53e83af7419e377d528af8dc877a8d11cf0629d3384d2779d4fcbc051",
-    "origin": "Static fallback poster from animated scene; not an additional artwork",
-    "sourceURL": "https://media.tenor.com/ulgdkNfdZDAAAAPo/samurai-champloo-mugen.mp4",
-    "reference": "https://tenor.com/view/samurai-champloo-mugen-rain-raining-storm-gif-26879755",
-    "rights": "Third-party material; license unverified. User requested anime scene sources; no affiliation or AI-original claim.",
-    "parentOriginalSHA256": "5ac42263d76f0e06c7c7553f5da081579ceb94b3e3f83588ffe8ffbca7b43732",
+    "file": "studio/v24/banner-motion-samurai-downpour-hd24.webp",
+    "sha256": "2009c3fd6afdd5f9467bada4a637c472d5225013000e2b8eda485722cd7c9621",
+    "origin": "Third-party anime footage; full-size matching poster from Full-HD source. Not AI-original.",
+    "sourceURL": "https://v.animethemes.moe/NoragamiAragoto-OP1v2.webm",
+    "reference": "https://animethemes.moe/anime/noragami_aragoto",
+    "rights": "Third-party anime footage. Rights unverified; no license inferred from availability. User authorized replacement of low-resolution scenes.",
+    "parentOriginalSHA256": "c7d7118ee1923c11520e94df0e150ae01a7dd7c37dcd954355d7f34562802d24",
     "notCountedAsArt": true,
     "pairedSceneID": "v20-banner-motion-samurai-downpour",
     "sourceResolution": [
@@ -2654,16 +3169,28 @@
       360
     ],
     "sourceDistinctDecodedFrames": 23,
-    "noCropOrWatermarkRemoval": true
+    "noCropOrWatermarkRemoval": true,
+    "qualityRevision": "24.2",
+    "sourceSize": [
+      1920,
+      1080
+    ],
+    "outputSize": [
+      1920,
+      640
+    ],
+    "noUpscale": true,
+    "sourceClipStart": 69,
+    "sourceClipDuration": 2.8
   },
   {
-    "file": "studio/v24/banner-motion-rain-at-the-window.mp4",
-    "sha256": "a3b30be026d57ee6bc3e146597380bef13187a1bb7d3db00cb25f566f9af6a68",
-    "origin": "Silent animated scene; actual original moving frames, not CSS movement of a still",
-    "sourceURL": "https://media.tenor.com/xKREO3Qs-jsAAAPo/sad-rain.mp4",
-    "reference": "https://tenor.com/view/sad-rain-anime-gif-14169525349757286971",
-    "rights": "Third-party material; license unverified. User requested anime scene sources; no affiliation or AI-original claim.",
-    "parentOriginalSHA256": "296fac97fcbaa7233f636a9772c450f4e53311d6c99f9f3fb30d1e931c450a7f",
+    "file": "studio/v24/banner-motion-rain-at-the-window-hd24.mp4",
+    "sha256": "ea84a31309272374cc017e6cf610beb7b065a1918097be74e918e5039b76b100",
+    "origin": "Third-party anime footage; silent motion clip from Full-HD source. Not AI-original.",
+    "sourceURL": "https://v.animethemes.moe/ZankyouNoTerror-OP1.webm",
+    "reference": "https://animethemes.moe/anime/zankyou_no_terror",
+    "rights": "Third-party anime footage. Rights unverified; no license inferred from availability. User authorized replacement of low-resolution scenes.",
+    "parentOriginalSHA256": "93450a29cffdc92ef79178c35c0edcbd63217b9d5a27d689778f259567bf3482",
     "notCountedAsArt": false,
     "pairedSceneID": "v20-banner-motion-rain-at-the-window",
     "sourceResolution": [
@@ -2671,16 +3198,28 @@
       282
     ],
     "sourceDistinctDecodedFrames": 16,
-    "noCropOrWatermarkRemoval": true
+    "noCropOrWatermarkRemoval": true,
+    "qualityRevision": "24.2",
+    "sourceSize": [
+      1920,
+      1080
+    ],
+    "outputSize": [
+      1920,
+      640
+    ],
+    "noUpscale": true,
+    "sourceClipStart": 47.4,
+    "sourceClipDuration": 2.2
   },
   {
-    "file": "studio/v24/banner-motion-rain-at-the-window.webp",
-    "sha256": "13dbb38a3ae91e66a27a4cc01d2614a6a22c2ed9480e917023299dffc7b95516",
-    "origin": "Static fallback poster from animated scene; not an additional artwork",
-    "sourceURL": "https://media.tenor.com/xKREO3Qs-jsAAAPo/sad-rain.mp4",
-    "reference": "https://tenor.com/view/sad-rain-anime-gif-14169525349757286971",
-    "rights": "Third-party material; license unverified. User requested anime scene sources; no affiliation or AI-original claim.",
-    "parentOriginalSHA256": "296fac97fcbaa7233f636a9772c450f4e53311d6c99f9f3fb30d1e931c450a7f",
+    "file": "studio/v24/banner-motion-rain-at-the-window-hd24.webp",
+    "sha256": "e2edec16cc948489d5601e093a236fe5ff56ec3463aae29dbdb586c4221d04be",
+    "origin": "Third-party anime footage; full-size matching poster from Full-HD source. Not AI-original.",
+    "sourceURL": "https://v.animethemes.moe/ZankyouNoTerror-OP1.webm",
+    "reference": "https://animethemes.moe/anime/zankyou_no_terror",
+    "rights": "Third-party anime footage. Rights unverified; no license inferred from availability. User authorized replacement of low-resolution scenes.",
+    "parentOriginalSHA256": "93450a29cffdc92ef79178c35c0edcbd63217b9d5a27d689778f259567bf3482",
     "notCountedAsArt": true,
     "pairedSceneID": "v20-banner-motion-rain-at-the-window",
     "sourceResolution": [
@@ -2688,16 +3227,28 @@
       282
     ],
     "sourceDistinctDecodedFrames": 16,
-    "noCropOrWatermarkRemoval": true
+    "noCropOrWatermarkRemoval": true,
+    "qualityRevision": "24.2",
+    "sourceSize": [
+      1920,
+      1080
+    ],
+    "outputSize": [
+      1920,
+      640
+    ],
+    "noUpscale": true,
+    "sourceClipStart": 47.4,
+    "sourceClipDuration": 2.2
   },
   {
-    "file": "studio/v24/banner-motion-elf-after-the-storm.mp4",
-    "sha256": "83c7493e793bf3918f1e55cd88c28c4baccc5b50b2d0c8b7d4d642c912bc3848",
-    "origin": "Silent animated scene; actual original moving frames, not CSS movement of a still",
-    "sourceURL": "https://media.tenor.com/mrOTzHv7lO4AAAPo/anime-frieren.mp4",
-    "reference": "https://tenor.com/view/anime-frieren-rain-rainy-elf-gif-11147416009134806254",
-    "rights": "Third-party material; license unverified. User requested anime scene sources; no affiliation or AI-original claim.",
-    "parentOriginalSHA256": "874ddbc6e2669683912158685ce369e9136b2138546af7653000bb7a6588f357",
+    "file": "studio/v24/banner-motion-elf-after-the-storm-hd24.mp4",
+    "sha256": "4e67c13fac5df5236f25336e3f97a69c9c4f6e85879da17939fb9af7d5df66e8",
+    "origin": "Third-party anime footage; silent motion clip from Full-HD source. Not AI-original.",
+    "sourceURL": "https://v.animethemes.moe/YofukashiNoUta-ED1-NCBD1080.webm",
+    "reference": "https://animethemes.moe/anime/yofukashi_no_uta",
+    "rights": "Third-party anime footage. Rights unverified; no license inferred from availability. User authorized replacement of low-resolution scenes.",
+    "parentOriginalSHA256": "34ffdaa15192bd35c60ca5def2dee2008d4a67cd028fbdaa23c09176d6833e93",
     "notCountedAsArt": false,
     "pairedSceneID": "v20-banner-motion-elf-after-the-storm",
     "sourceResolution": [
@@ -2705,16 +3256,28 @@
       456
     ],
     "sourceDistinctDecodedFrames": 63,
-    "noCropOrWatermarkRemoval": true
+    "noCropOrWatermarkRemoval": true,
+    "qualityRevision": "24.2",
+    "sourceSize": [
+      1920,
+      1080
+    ],
+    "outputSize": [
+      1920,
+      640
+    ],
+    "noUpscale": true,
+    "sourceClipStart": 70.456,
+    "sourceClipDuration": 3.0
   },
   {
-    "file": "studio/v24/banner-motion-elf-after-the-storm.webp",
-    "sha256": "b12e96d806007498d14bb7960b9c6570285ae29b283b6312398161f321d0db13",
-    "origin": "Static fallback poster from animated scene; not an additional artwork",
-    "sourceURL": "https://media.tenor.com/mrOTzHv7lO4AAAPo/anime-frieren.mp4",
-    "reference": "https://tenor.com/view/anime-frieren-rain-rainy-elf-gif-11147416009134806254",
-    "rights": "Third-party material; license unverified. User requested anime scene sources; no affiliation or AI-original claim.",
-    "parentOriginalSHA256": "874ddbc6e2669683912158685ce369e9136b2138546af7653000bb7a6588f357",
+    "file": "studio/v24/banner-motion-elf-after-the-storm-hd24.webp",
+    "sha256": "67230126da8bbf2dbfe2d73a365ff0c3f92afcc80d3d9a8fb5e21226260d5dbd",
+    "origin": "Third-party anime footage; full-size matching poster from Full-HD source. Not AI-original.",
+    "sourceURL": "https://v.animethemes.moe/YofukashiNoUta-ED1-NCBD1080.webm",
+    "reference": "https://animethemes.moe/anime/yofukashi_no_uta",
+    "rights": "Third-party anime footage. Rights unverified; no license inferred from availability. User authorized replacement of low-resolution scenes.",
+    "parentOriginalSHA256": "34ffdaa15192bd35c60ca5def2dee2008d4a67cd028fbdaa23c09176d6833e93",
     "notCountedAsArt": true,
     "pairedSceneID": "v20-banner-motion-elf-after-the-storm",
     "sourceResolution": [
@@ -2722,16 +3285,28 @@
       456
     ],
     "sourceDistinctDecodedFrames": 63,
-    "noCropOrWatermarkRemoval": true
+    "noCropOrWatermarkRemoval": true,
+    "qualityRevision": "24.2",
+    "sourceSize": [
+      1920,
+      1080
+    ],
+    "outputSize": [
+      1920,
+      640
+    ],
+    "noUpscale": true,
+    "sourceClipStart": 70.456,
+    "sourceClipDuration": 3.0
   },
   {
-    "file": "studio/v24/banner-motion-little-umbrella-loop.mp4",
-    "sha256": "0275e53d1661706c3bf99a15c39b7db479e665733def5bbb730f120ba1e7151e",
-    "origin": "Silent animated scene; actual original moving frames, not CSS movement of a still",
-    "sourceURL": "https://media.tenor.com/AEnNUTVK_O0AAAPo/bocchi-loop-bocchi-the-rock.mp4",
-    "reference": "https://tenor.com/view/bocchi-loop-bocchi-the-rock-karakara-hitori-gotou-カラカラ-gif-20773421970029805",
-    "rights": "Third-party material; license unverified. User requested anime scene sources; no affiliation or AI-original claim.",
-    "parentOriginalSHA256": "cc08d6767baecc7012bb44b706af86583d58774e0472a1bd62df7f04593bc4c4",
+    "file": "studio/v24/banner-motion-little-umbrella-loop-hd24.mp4",
+    "sha256": "e5bfae655466bf386a8d3e3ee0b90a0c09d902c3fcbedb5d33c9506fedc2f365",
+    "origin": "Third-party anime footage; silent motion clip from Full-HD source. Not AI-original.",
+    "sourceURL": "https://v.animethemes.moe/BocchiTheRock-OP1-NCBD1080.webm",
+    "reference": "https://animethemes.moe/anime/bocchi_the_rock",
+    "rights": "Third-party anime footage. Rights unverified; no license inferred from availability. User authorized replacement of low-resolution scenes.",
+    "parentOriginalSHA256": "5ff58394ef9318f1a60e686df74ec21b75913adff027193d9c891d58bf9f86bd",
     "notCountedAsArt": false,
     "pairedSceneID": "v20-banner-motion-little-umbrella-loop",
     "sourceResolution": [
@@ -2739,16 +3314,28 @@
       282
     ],
     "sourceDistinctDecodedFrames": 109,
-    "noCropOrWatermarkRemoval": true
+    "noCropOrWatermarkRemoval": true,
+    "qualityRevision": "24.2",
+    "sourceSize": [
+      1920,
+      1080
+    ],
+    "outputSize": [
+      1920,
+      640
+    ],
+    "noUpscale": true,
+    "sourceClipStart": 59.82,
+    "sourceClipDuration": 2.301
   },
   {
-    "file": "studio/v24/banner-motion-little-umbrella-loop.webp",
-    "sha256": "09a1aec1227cf5021c6036ab0ac2fe9e2e53b39c38bb6b87a4194143946868ca",
-    "origin": "Static fallback poster from animated scene; not an additional artwork",
-    "sourceURL": "https://media.tenor.com/AEnNUTVK_O0AAAPo/bocchi-loop-bocchi-the-rock.mp4",
-    "reference": "https://tenor.com/view/bocchi-loop-bocchi-the-rock-karakara-hitori-gotou-カラカラ-gif-20773421970029805",
-    "rights": "Third-party material; license unverified. User requested anime scene sources; no affiliation or AI-original claim.",
-    "parentOriginalSHA256": "cc08d6767baecc7012bb44b706af86583d58774e0472a1bd62df7f04593bc4c4",
+    "file": "studio/v24/banner-motion-little-umbrella-loop-hd24.webp",
+    "sha256": "e99c66fa464b389da874b3c7a140658770694b8406d9f825e64572b76ea29ce0",
+    "origin": "Third-party anime footage; full-size matching poster from Full-HD source. Not AI-original.",
+    "sourceURL": "https://v.animethemes.moe/BocchiTheRock-OP1-NCBD1080.webm",
+    "reference": "https://animethemes.moe/anime/bocchi_the_rock",
+    "rights": "Third-party anime footage. Rights unverified; no license inferred from availability. User authorized replacement of low-resolution scenes.",
+    "parentOriginalSHA256": "5ff58394ef9318f1a60e686df74ec21b75913adff027193d9c891d58bf9f86bd",
     "notCountedAsArt": true,
     "pairedSceneID": "v20-banner-motion-little-umbrella-loop",
     "sourceResolution": [
@@ -2756,7 +3343,19 @@
       282
     ],
     "sourceDistinctDecodedFrames": 109,
-    "noCropOrWatermarkRemoval": true
+    "noCropOrWatermarkRemoval": true,
+    "qualityRevision": "24.2",
+    "sourceSize": [
+      1920,
+      1080
+    ],
+    "outputSize": [
+      1920,
+      640
+    ],
+    "noUpscale": true,
+    "sourceClipStart": 59.82,
+    "sourceClipDuration": 2.301
   },
   {
     "file": "studio/v24/background-motion-forest-rainfall.mp4",
@@ -2861,25 +3460,76 @@
     "noCropOrWatermarkRemoval": true
   },
   {
-    "file": "studio/v24/banner-motion-rain-without-words-thumb.webp",
-    "sha256": "fdc2119fc3462d3e0525067333a3a4724cefd28029354503b6eb44c7a18b927b",
-    "origin": "Display-size thumbnail derived from studio/v24/banner-motion-rain-without-words.webp. Not a new artwork. Original source and rights unchanged.",
+    "file": "studio/v24/banner-motion-rain-without-words-thumb-hd24.webp",
+    "sha256": "17137738daefa0e2f3f617f7e0e2725c4b389de727de8ec046315283a97bf763",
+    "origin": "Third-party anime footage; shop thumbnail from Full-HD source. Not AI-original.",
     "parentAsset": "studio/v24/banner-motion-rain-without-words.webp",
-    "notCountedAsArt": true
+    "notCountedAsArt": true,
+    "sourceURL": "https://v.animethemes.moe/DeathParade-OP1.webm",
+    "reference": "https://animethemes.moe/anime/death_parade",
+    "rights": "Third-party anime footage. Rights unverified; no license inferred from availability. User authorized replacement of low-resolution scenes.",
+    "parentOriginalSHA256": "96c151e718cb8f34a50d555072d902c01653cbb7e1f8ce696b6ff5fb65e54e3c",
+    "pairedSceneID": "v20-banner-motion-rain-without-words",
+    "qualityRevision": "24.2",
+    "sourceSize": [
+      1920,
+      1080
+    ],
+    "outputSize": [
+      512,
+      171
+    ],
+    "noUpscale": true,
+    "sourceClipStart": 13.816,
+    "sourceClipDuration": 2.384
   },
   {
-    "file": "studio/v24/banner-motion-samurai-downpour-thumb.webp",
-    "sha256": "023c4fceffa36a78395d9b2ecb8f0d54197917a60787f5f16b6b05f6c2eef39b",
-    "origin": "Display-size thumbnail derived from studio/v24/banner-motion-samurai-downpour.webp. Not a new artwork. Original source and rights unchanged.",
+    "file": "studio/v24/banner-motion-samurai-downpour-thumb-hd24.webp",
+    "sha256": "0421afb09e15f4d7c388c95f6c2a53648bcc3d90756a405a216f019477a586d9",
+    "origin": "Third-party anime footage; shop thumbnail from Full-HD source. Not AI-original.",
     "parentAsset": "studio/v24/banner-motion-samurai-downpour.webp",
-    "notCountedAsArt": true
+    "notCountedAsArt": true,
+    "sourceURL": "https://v.animethemes.moe/NoragamiAragoto-OP1v2.webm",
+    "reference": "https://animethemes.moe/anime/noragami_aragoto",
+    "rights": "Third-party anime footage. Rights unverified; no license inferred from availability. User authorized replacement of low-resolution scenes.",
+    "parentOriginalSHA256": "c7d7118ee1923c11520e94df0e150ae01a7dd7c37dcd954355d7f34562802d24",
+    "pairedSceneID": "v20-banner-motion-samurai-downpour",
+    "qualityRevision": "24.2",
+    "sourceSize": [
+      1920,
+      1080
+    ],
+    "outputSize": [
+      512,
+      171
+    ],
+    "noUpscale": true,
+    "sourceClipStart": 69,
+    "sourceClipDuration": 2.8
   },
   {
-    "file": "studio/v24/banner-motion-rain-at-the-window-thumb.webp",
-    "sha256": "ea08a3eda15ac7a910a59b2c7bcceb3f38fbb63d16beaf636cd4cc3d46d5970c",
-    "origin": "Display-size thumbnail derived from studio/v24/banner-motion-rain-at-the-window.webp. Not a new artwork. Original source and rights unchanged.",
+    "file": "studio/v24/banner-motion-rain-at-the-window-thumb-hd24.webp",
+    "sha256": "cb77d804c9df1d899410733e6e6736a1e8fd502c44b5dc26535821424065e267",
+    "origin": "Third-party anime footage; shop thumbnail from Full-HD source. Not AI-original.",
     "parentAsset": "studio/v24/banner-motion-rain-at-the-window.webp",
-    "notCountedAsArt": true
+    "notCountedAsArt": true,
+    "sourceURL": "https://v.animethemes.moe/ZankyouNoTerror-OP1.webm",
+    "reference": "https://animethemes.moe/anime/zankyou_no_terror",
+    "rights": "Third-party anime footage. Rights unverified; no license inferred from availability. User authorized replacement of low-resolution scenes.",
+    "parentOriginalSHA256": "93450a29cffdc92ef79178c35c0edcbd63217b9d5a27d689778f259567bf3482",
+    "pairedSceneID": "v20-banner-motion-rain-at-the-window",
+    "qualityRevision": "24.2",
+    "sourceSize": [
+      1920,
+      1080
+    ],
+    "outputSize": [
+      512,
+      171
+    ],
+    "noUpscale": true,
+    "sourceClipStart": 47.4,
+    "sourceClipDuration": 2.2
   },
   {
     "file": "studio/v23/vip-astral-thumb.avif",
@@ -4091,9 +4741,9 @@
     }
   },
   {
-    "file": "studio/v24/banner-motion-rize-wind-thumb.avif",
-    "sha256": "3e09388237676a1a5825d8013f4a7aa060c621cb9b7abe32657962460e31e027",
-    "origin": "Display-size thumbnail derived from studio/v24/banner-motion-rize-wind.webp. Not a new artwork. Original source and rights unchanged.",
+    "file": "studio/v24/banner-motion-rize-wind-thumb-hd24.avif",
+    "sha256": "06d58aae5909102a559250575193438658c660e3d30585e21d69b1a440c0edbf",
+    "origin": "Third-party anime footage; shop thumbnail from Full-HD source. Not AI-original.",
     "parentAsset": "studio/v24/banner-motion-rize-wind.webp",
     "notCountedAsArt": true,
     "thumbnailEncoding24": {
@@ -4106,12 +4756,29 @@
       "RGBPSNRvsPreviousThumb": 38.91,
       "lossy": true,
       "fullSizeArtworkOrVideoChanged": false
-    }
+    },
+    "sourceURL": "https://v.animethemes.moe/VioletEvergarden-OP1-NCBD1080.webm",
+    "reference": "https://animethemes.moe/anime/violet_evergarden",
+    "rights": "Third-party anime footage. Rights unverified; no license inferred from availability. User authorized replacement of low-resolution scenes.",
+    "parentOriginalSHA256": "a94306412d85088cb35ec40bafbe2ace0cf8b6cce82b2734e656bb67d8f15b01",
+    "pairedSceneID": "v20-banner-motion-rize-wind",
+    "qualityRevision": "24.2",
+    "sourceSize": [
+      1920,
+      1080
+    ],
+    "outputSize": [
+      512,
+      171
+    ],
+    "noUpscale": true,
+    "sourceClipStart": 20.736,
+    "sourceClipDuration": 3.0
   },
   {
-    "file": "studio/v24/banner-motion-cat-on-shoulder-thumb.avif",
-    "sha256": "c8396adb1d63369aa152c5b672b4d435a6daf561bc47665a2f1ebc3acb7d215e",
-    "origin": "Display-size thumbnail derived from studio/v24/banner-motion-cat-on-shoulder.webp. Not a new artwork. Original source and rights unchanged.",
+    "file": "studio/v24/banner-motion-cat-on-shoulder-thumb-hd24.avif",
+    "sha256": "e095c875f0a8f1162e77f91cdadd684cd269a839576298fb7b0548aa86de4d4c",
+    "origin": "Third-party anime footage; shop thumbnail from Full-HD source. Not AI-original.",
     "parentAsset": "studio/v24/banner-motion-cat-on-shoulder.webp",
     "notCountedAsArt": true,
     "thumbnailEncoding24": {
@@ -4124,12 +4791,29 @@
       "RGBPSNRvsPreviousThumb": 38.04,
       "lossy": true,
       "fullSizeArtworkOrVideoChanged": false
-    }
+    },
+    "sourceURL": "https://v.animethemes.moe/ChainsawMan-OP1-NCBD1080.webm",
+    "reference": "https://animethemes.moe/anime/chainsaw_man",
+    "rights": "Third-party anime footage. Rights unverified; no license inferred from availability. User authorized replacement of low-resolution scenes.",
+    "parentOriginalSHA256": "a80361075b53415b19296e872e62e57de2e1d5d8080149fc9202b542ae804c6f",
+    "pairedSceneID": "v20-banner-motion-cat-on-shoulder",
+    "qualityRevision": "24.2",
+    "sourceSize": [
+      1920,
+      1080
+    ],
+    "outputSize": [
+      512,
+      171
+    ],
+    "noUpscale": true,
+    "sourceClipStart": 20.19,
+    "sourceClipDuration": 3.0
   },
   {
-    "file": "studio/v24/banner-motion-quiet-gaze-thumb.avif",
-    "sha256": "4504ab5898b746d3dab9b2b5e93f65406f1f2d9bfc9eca5595f30d252ec59bb8",
-    "origin": "Display-size thumbnail derived from studio/v24/banner-motion-quiet-gaze.webp. Not a new artwork. Original source and rights unchanged.",
+    "file": "studio/v24/banner-motion-quiet-gaze-thumb-hd24.avif",
+    "sha256": "9e6f9320167eabcd2ed554af41f37ba88073ccc8776e0b4aac76470ba4524e8e",
+    "origin": "Third-party anime footage; shop thumbnail from Full-HD source. Not AI-original.",
     "parentAsset": "studio/v24/banner-motion-quiet-gaze.webp",
     "notCountedAsArt": true,
     "thumbnailEncoding24": {
@@ -4142,12 +4826,29 @@
       "RGBPSNRvsPreviousThumb": 34.13,
       "lossy": true,
       "fullSizeArtworkOrVideoChanged": false
-    }
+    },
+    "sourceURL": "https://v.animethemes.moe/NatsumeYuujinchou-OP1.webm",
+    "reference": "https://animethemes.moe/anime/natsume_yuujinchou",
+    "rights": "Third-party anime footage. Rights unverified; no license inferred from availability. User authorized replacement of low-resolution scenes.",
+    "parentOriginalSHA256": "f3fa43c65179362a3bebbba66cafca9dd6db3bdab5c926aa01f0d208c7b296dd",
+    "pairedSceneID": "v20-banner-motion-quiet-gaze",
+    "qualityRevision": "24.2",
+    "sourceSize": [
+      1920,
+      1080
+    ],
+    "outputSize": [
+      512,
+      171
+    ],
+    "noUpscale": true,
+    "sourceClipStart": 47.4,
+    "sourceClipDuration": 2.2
   },
   {
-    "file": "studio/v24/banner-motion-fireworks-embrace-thumb.avif",
-    "sha256": "deb03d99778ceb490f14cbfb267854e96eec0b7d7ab8aebb00900bfa07086878",
-    "origin": "Display-size thumbnail derived from studio/v24/banner-motion-fireworks-embrace.webp. Not a new artwork. Original source and rights unchanged.",
+    "file": "studio/v24/banner-motion-fireworks-embrace-thumb-hd24.avif",
+    "sha256": "25bf830d2ad9c9016f64fea2eb3a475bdbe9317b7d28f2e2761ced7edd178235",
+    "origin": "Third-party anime footage; shop thumbnail from Full-HD source. Not AI-original.",
     "parentAsset": "studio/v24/banner-motion-fireworks-embrace.webp",
     "notCountedAsArt": true,
     "thumbnailEncoding24": {
@@ -4160,12 +4861,29 @@
       "RGBPSNRvsPreviousThumb": 36.72,
       "lossy": true,
       "fullSizeArtworkOrVideoChanged": false
-    }
+    },
+    "sourceURL": "https://v.animethemes.moe/Hyouka-OP1.webm",
+    "reference": "https://animethemes.moe/anime/hyouka",
+    "rights": "Third-party anime footage. Rights unverified; no license inferred from availability. User authorized replacement of low-resolution scenes.",
+    "parentOriginalSHA256": "079939b3323fdad2c6c47998704566e00de85dc6f80f4779d3e9f269496c200e",
+    "pairedSceneID": "v20-banner-motion-fireworks-embrace",
+    "qualityRevision": "24.2",
+    "sourceSize": [
+      1920,
+      1080
+    ],
+    "outputSize": [
+      512,
+      171
+    ],
+    "noUpscale": true,
+    "sourceClipStart": 65.4,
+    "sourceClipDuration": 2.2
   },
   {
-    "file": "studio/v24/banner-motion-ink-on-notebook-thumb.avif",
-    "sha256": "64bd564f7e0dc910df70996b42185f1b7f529c684991eaeba371dde5d984f795",
-    "origin": "Display-size thumbnail derived from studio/v24/banner-motion-ink-on-notebook.webp. Not a new artwork. Original source and rights unchanged.",
+    "file": "studio/v24/banner-motion-ink-on-notebook-thumb-hd24.avif",
+    "sha256": "4f82d9a932a15f57f0b97158c9e6a8f6cdbe5aad59636315ec98e832b4c00123",
+    "origin": "Third-party anime footage; shop thumbnail from Full-HD source. Not AI-original.",
     "parentAsset": "studio/v24/banner-motion-ink-on-notebook.webp",
     "notCountedAsArt": true,
     "thumbnailEncoding24": {
@@ -4178,12 +4896,29 @@
       "RGBPSNRvsPreviousThumb": 43.67,
       "lossy": true,
       "fullSizeArtworkOrVideoChanged": false
-    }
+    },
+    "sourceURL": "https://v.animethemes.moe/SousouNoFrieren-OP1-NCBD1080.webm",
+    "reference": "https://animethemes.moe/anime/sousou_no_frieren",
+    "rights": "Third-party anime footage. Rights unverified; no license inferred from availability. User authorized replacement of low-resolution scenes.",
+    "parentOriginalSHA256": "f7f76c861f1247750116b1ed36546fe66590bb6ac3fde2fa125730af4259d406",
+    "pairedSceneID": "v20-banner-motion-ink-on-notebook",
+    "qualityRevision": "24.2",
+    "sourceSize": [
+      1920,
+      1080
+    ],
+    "outputSize": [
+      512,
+      171
+    ],
+    "noUpscale": true,
+    "sourceClipStart": 77.4,
+    "sourceClipDuration": 2.2
   },
   {
-    "file": "studio/v24/banner-motion-fox-mask-summer-thumb.avif",
-    "sha256": "ae280c08f737c8ece187fdacf0e5d01f1aecbf63433dffe716705f2bff015b6f",
-    "origin": "Display-size thumbnail derived from studio/v24/banner-motion-fox-mask-summer.webp. Not a new artwork. Original source and rights unchanged.",
+    "file": "studio/v24/banner-motion-fox-mask-summer-thumb-hd24.avif",
+    "sha256": "430897b669a5950c39b9318ef6453463fc69487f6f058e43e92ea7316d4b84bd",
+    "origin": "Third-party anime footage; shop thumbnail from Full-HD source. Not AI-original.",
     "parentAsset": "studio/v24/banner-motion-fox-mask-summer.webp",
     "notCountedAsArt": true,
     "thumbnailEncoding24": {
@@ -4196,12 +4931,29 @@
       "RGBPSNRvsPreviousThumb": 35.43,
       "lossy": true,
       "fullSizeArtworkOrVideoChanged": false
-    }
+    },
+    "sourceURL": "https://v.animethemes.moe/VinlandSaga-OP1-NCBD1080.webm",
+    "reference": "https://animethemes.moe/anime/vinland_saga",
+    "rights": "Third-party anime footage. Rights unverified; no license inferred from availability. User authorized replacement of low-resolution scenes.",
+    "parentOriginalSHA256": "2c6778f09ff162dcf647165293082672348f6cdc584d02f06131f748330e8cbf",
+    "pairedSceneID": "v20-banner-motion-fox-mask-summer",
+    "qualityRevision": "24.2",
+    "sourceSize": [
+      1920,
+      1080
+    ],
+    "outputSize": [
+      512,
+      171
+    ],
+    "noUpscale": true,
+    "sourceClipStart": 77.4,
+    "sourceClipDuration": 2.2
   },
   {
-    "file": "studio/v24/banner-motion-moonlit-farewell-thumb.avif",
-    "sha256": "ab0d09c7ebeca7a2bda941844ac9297385f5b62465457b4f159ec3dbf0467cfd",
-    "origin": "Display-size thumbnail derived from studio/v24/banner-motion-moonlit-farewell.webp. Not a new artwork. Original source and rights unchanged.",
+    "file": "studio/v24/banner-motion-moonlit-farewell-thumb-hd24.avif",
+    "sha256": "ac52ea43c1eb3ea2ba4cd72269805b801f3d08f5b4e640fad125542247fceb28",
+    "origin": "Third-party anime footage; shop thumbnail from Full-HD source. Not AI-original.",
     "parentAsset": "studio/v24/banner-motion-moonlit-farewell.webp",
     "notCountedAsArt": true,
     "thumbnailEncoding24": {
@@ -4214,7 +4966,24 @@
       "RGBPSNRvsPreviousThumb": 38.16,
       "lossy": true,
       "fullSizeArtworkOrVideoChanged": false
-    }
+    },
+    "sourceURL": "https://v.animethemes.moe/SamuraiChamploo-OP1-NCBD1080.webm",
+    "reference": "https://animethemes.moe/anime/samurai_champloo",
+    "rights": "Third-party anime footage. Rights unverified; no license inferred from availability. User authorized replacement of low-resolution scenes.",
+    "parentOriginalSHA256": "63d07807cb4e0bee33b5c080384f0848659e9efcc66d7ccc7c5b83774f3453a4",
+    "pairedSceneID": "v20-banner-motion-moonlit-farewell",
+    "qualityRevision": "24.2",
+    "sourceSize": [
+      1920,
+      1080
+    ],
+    "outputSize": [
+      512,
+      171
+    ],
+    "noUpscale": true,
+    "sourceClipStart": 53.4,
+    "sourceClipDuration": 2.2
   },
   {
     "file": "studio/v24/background-motion-petals-under-lamppost-thumb.avif",
@@ -4271,9 +5040,9 @@
     }
   },
   {
-    "file": "studio/v24/banner-motion-emerald-rain-gaze-thumb.avif",
-    "sha256": "3489d68e4203129e1dcac5bd27bd08a4b08470a8bddae0c0e35104c369c0403f",
-    "origin": "Display-size thumbnail derived from studio/v24/banner-motion-emerald-rain-gaze.webp. Not a new artwork. Original source and rights unchanged.",
+    "file": "studio/v24/banner-motion-emerald-rain-gaze-thumb-hd24.avif",
+    "sha256": "32cc5e23e20792a2c894a38124eeba81dee55a730b670d4c4f28c3d88559f9d7",
+    "origin": "Third-party anime footage; shop thumbnail from Full-HD source. Not AI-original.",
     "parentAsset": "studio/v24/banner-motion-emerald-rain-gaze.webp",
     "notCountedAsArt": true,
     "thumbnailEncoding24": {
@@ -4286,12 +5055,29 @@
       "RGBPSNRvsPreviousThumb": 36.42,
       "lossy": true,
       "fullSizeArtworkOrVideoChanged": false
-    }
+    },
+    "sourceURL": "https://v.animethemes.moe/Noragami-OP1.webm",
+    "reference": "https://animethemes.moe/anime/noragami",
+    "rights": "Third-party anime footage. Rights unverified; no license inferred from availability. User authorized replacement of low-resolution scenes.",
+    "parentOriginalSHA256": "b6efa1d6e37febb3720bac70408512f97a67bd4674c52bb93ef3e3d2a2364519",
+    "pairedSceneID": "v20-banner-motion-emerald-rain-gaze",
+    "qualityRevision": "24.2",
+    "sourceSize": [
+      1920,
+      1080
+    ],
+    "outputSize": [
+      512,
+      171
+    ],
+    "noUpscale": true,
+    "sourceClipStart": 42.4,
+    "sourceClipDuration": 2.2
   },
   {
-    "file": "studio/v24/banner-motion-elf-after-the-storm-thumb.avif",
-    "sha256": "ae3f49d21e5041ad737f0e45dd3140ae4d8e1037272b5401393ff84aa766bae5",
-    "origin": "Display-size thumbnail derived from studio/v24/banner-motion-elf-after-the-storm.webp. Not a new artwork. Original source and rights unchanged.",
+    "file": "studio/v24/banner-motion-elf-after-the-storm-thumb-hd24.avif",
+    "sha256": "f6590a1f03eda2c050769c1e5630ec077c6cdfaa001c1605a1482860797126d1",
+    "origin": "Third-party anime footage; shop thumbnail from Full-HD source. Not AI-original.",
     "parentAsset": "studio/v24/banner-motion-elf-after-the-storm.webp",
     "notCountedAsArt": true,
     "thumbnailEncoding24": {
@@ -4304,12 +5090,29 @@
       "RGBPSNRvsPreviousThumb": 36.98,
       "lossy": true,
       "fullSizeArtworkOrVideoChanged": false
-    }
+    },
+    "sourceURL": "https://v.animethemes.moe/YofukashiNoUta-ED1-NCBD1080.webm",
+    "reference": "https://animethemes.moe/anime/yofukashi_no_uta",
+    "rights": "Third-party anime footage. Rights unverified; no license inferred from availability. User authorized replacement of low-resolution scenes.",
+    "parentOriginalSHA256": "34ffdaa15192bd35c60ca5def2dee2008d4a67cd028fbdaa23c09176d6833e93",
+    "pairedSceneID": "v20-banner-motion-elf-after-the-storm",
+    "qualityRevision": "24.2",
+    "sourceSize": [
+      1920,
+      1080
+    ],
+    "outputSize": [
+      512,
+      171
+    ],
+    "noUpscale": true,
+    "sourceClipStart": 70.456,
+    "sourceClipDuration": 3.0
   },
   {
-    "file": "studio/v24/banner-motion-little-umbrella-loop-thumb.avif",
-    "sha256": "6496a022d0ef43119b713688aca3529bcfe5556abacac9193ffd33ce4ca7822f",
-    "origin": "Display-size thumbnail derived from studio/v24/banner-motion-little-umbrella-loop.webp. Not a new artwork. Original source and rights unchanged.",
+    "file": "studio/v24/banner-motion-little-umbrella-loop-thumb-hd24.avif",
+    "sha256": "fbe00a3fa75858a2b7a0f5a955a3ce99509aa9cfe9d69dfb7aa3dc0b14cfe17b",
+    "origin": "Third-party anime footage; shop thumbnail from Full-HD source. Not AI-original.",
     "parentAsset": "studio/v24/banner-motion-little-umbrella-loop.webp",
     "notCountedAsArt": true,
     "thumbnailEncoding24": {
@@ -4322,7 +5125,24 @@
       "RGBPSNRvsPreviousThumb": 40.22,
       "lossy": true,
       "fullSizeArtworkOrVideoChanged": false
-    }
+    },
+    "sourceURL": "https://v.animethemes.moe/BocchiTheRock-OP1-NCBD1080.webm",
+    "reference": "https://animethemes.moe/anime/bocchi_the_rock",
+    "rights": "Third-party anime footage. Rights unverified; no license inferred from availability. User authorized replacement of low-resolution scenes.",
+    "parentOriginalSHA256": "5ff58394ef9318f1a60e686df74ec21b75913adff027193d9c891d58bf9f86bd",
+    "pairedSceneID": "v20-banner-motion-little-umbrella-loop",
+    "qualityRevision": "24.2",
+    "sourceSize": [
+      1920,
+      1080
+    ],
+    "outputSize": [
+      512,
+      171
+    ],
+    "noUpscale": true,
+    "sourceClipStart": 59.82,
+    "sourceClipDuration": 2.301
   },
   {
     "file": "studio/v24/background-motion-forest-rainfall-thumb.avif",
@@ -4379,13 +5199,13 @@
     }
   },
   {
-    "file": "studio/v24/banner-motion-harbor-nightwatch.mp4",
-    "sha256": "f4b92f628b84a0320bce8ba53307e959ac9fe88ba0ffde0c242f62b959ea5d23",
-    "origin": "Silent animated scene; actual original moving frames, not CSS movement of a still",
-    "sourceURL": "https://media.tenor.com/2Z1easSfgDYAAAPo/ashita-no-joe-joe-yabuki.mp4",
-    "reference": "https://tenor.com/view/ashita-no-joe-joe-yabuki-night-look-anime-gif-15680793290232266806",
-    "rights": "Third-party material; license unverified. User requested anime scene sources; no affiliation or AI-original claim.",
-    "parentOriginalSHA256": "a36d99d4603f7187b05ee4317bd22c33129a18d3822b140d10e53353eb235e44",
+    "file": "studio/v24/banner-motion-harbor-nightwatch-hd24.mp4",
+    "sha256": "ee0b6bdea5f8f468bd86b3d45a9b0ec17e2c87ef2bfec23ce6660902fa81f991",
+    "origin": "Third-party anime footage; silent motion clip from Full-HD source. Not AI-original.",
+    "sourceURL": "https://v.animethemes.moe/KOn-OP1.webm",
+    "reference": "https://animethemes.moe/anime/k_on",
+    "rights": "Third-party anime footage. Rights unverified; no license inferred from availability. User authorized replacement of low-resolution scenes.",
+    "parentOriginalSHA256": "986d47be81651d52f099b01593d1df6f9090e0d04af47d07bd74e905ae9ab570",
     "notCountedAsArt": false,
     "pairedSceneID": "v20-banner-motion-harbor-nightwatch",
     "sourceResolution": [
@@ -4393,16 +5213,28 @@
       360
     ],
     "sourceDistinctDecodedFrames": 37,
-    "noCropOrWatermarkRemoval": true
+    "noCropOrWatermarkRemoval": true,
+    "qualityRevision": "24.2",
+    "sourceSize": [
+      1920,
+      1080
+    ],
+    "outputSize": [
+      1920,
+      640
+    ],
+    "noUpscale": true,
+    "sourceClipStart": 8.269,
+    "sourceClipDuration": 2.593
   },
   {
-    "file": "studio/v24/banner-motion-harbor-nightwatch.webp",
-    "sha256": "0e903f8fd54bf3e322f9c0db0f83c93be2cd4e16920efdba99caae1b5617a526",
-    "origin": "Static fallback poster from animated scene; not an additional artwork",
-    "sourceURL": "https://media.tenor.com/2Z1easSfgDYAAAPo/ashita-no-joe-joe-yabuki.mp4",
-    "reference": "https://tenor.com/view/ashita-no-joe-joe-yabuki-night-look-anime-gif-15680793290232266806",
-    "rights": "Third-party material; license unverified. User requested anime scene sources; no affiliation or AI-original claim.",
-    "parentOriginalSHA256": "a36d99d4603f7187b05ee4317bd22c33129a18d3822b140d10e53353eb235e44",
+    "file": "studio/v24/banner-motion-harbor-nightwatch-hd24.webp",
+    "sha256": "3cf00b9b9816c3d8a5e3f39371bf8288526908e12984f52f5116b2c04132ff19",
+    "origin": "Third-party anime footage; full-size matching poster from Full-HD source. Not AI-original.",
+    "sourceURL": "https://v.animethemes.moe/KOn-OP1.webm",
+    "reference": "https://animethemes.moe/anime/k_on",
+    "rights": "Third-party anime footage. Rights unverified; no license inferred from availability. User authorized replacement of low-resolution scenes.",
+    "parentOriginalSHA256": "986d47be81651d52f099b01593d1df6f9090e0d04af47d07bd74e905ae9ab570",
     "notCountedAsArt": true,
     "pairedSceneID": "v20-banner-motion-harbor-nightwatch",
     "sourceResolution": [
@@ -4410,16 +5242,28 @@
       360
     ],
     "sourceDistinctDecodedFrames": 37,
-    "noCropOrWatermarkRemoval": true
+    "noCropOrWatermarkRemoval": true,
+    "qualityRevision": "24.2",
+    "sourceSize": [
+      1920,
+      1080
+    ],
+    "outputSize": [
+      1920,
+      640
+    ],
+    "noUpscale": true,
+    "sourceClipStart": 8.269,
+    "sourceClipDuration": 2.593
   },
   {
-    "file": "studio/v24/banner-motion-bridge-after-midnight.mp4",
-    "sha256": "a9a1217fbe5807683b1c0e97a1543ed97771615f1ea8a61e207bf2a035823d7a",
-    "origin": "Silent animated scene; actual original moving frames, not CSS movement of a still",
-    "sourceURL": "https://media.tenor.com/K_TBEp6U9HYAAAPo/walking-anime.mp4",
-    "reference": "https://tenor.com/view/walking-anime-car-walking-together-gif-17601932",
-    "rights": "Third-party material; license unverified. User requested anime scene sources; no affiliation or AI-original claim.",
-    "parentOriginalSHA256": "db5988f27eb75a06faa433cd878896886b757196082fbf04fa2529362b7c8873",
+    "file": "studio/v24/banner-motion-bridge-after-midnight-hd24.mp4",
+    "sha256": "54183d106dfa168b475d7dffe6e46ddca8ecee268c6bbcd632d38cf84195e9f5",
+    "origin": "Third-party anime footage; silent motion clip from Full-HD source. Not AI-original.",
+    "sourceURL": "https://v.animethemes.moe/Horimiya-ED1-NCBD1080.webm",
+    "reference": "https://animethemes.moe/anime/horimiya",
+    "rights": "Third-party anime footage. Rights unverified; no license inferred from availability. User authorized replacement of low-resolution scenes.",
+    "parentOriginalSHA256": "c84ed3a0c2d0e662cd84e3c366c3bb758159aa542dd582d1d939f3b9ce7542ce",
     "notCountedAsArt": false,
     "pairedSceneID": "v20-banner-motion-bridge-after-midnight",
     "sourceResolution": [
@@ -4427,16 +5271,28 @@
       344
     ],
     "sourceDistinctDecodedFrames": 62,
-    "noCropOrWatermarkRemoval": true
+    "noCropOrWatermarkRemoval": true,
+    "qualityRevision": "24.2",
+    "sourceSize": [
+      1920,
+      1080
+    ],
+    "outputSize": [
+      1920,
+      640
+    ],
+    "noUpscale": true,
+    "sourceClipStart": 61.5,
+    "sourceClipDuration": 3.0
   },
   {
-    "file": "studio/v24/banner-motion-bridge-after-midnight.webp",
-    "sha256": "091c50655c03c2633a7276438af43cf1909a6a67afb19e0e53bd033ba9f427a6",
-    "origin": "Static fallback poster from animated scene; not an additional artwork",
-    "sourceURL": "https://media.tenor.com/K_TBEp6U9HYAAAPo/walking-anime.mp4",
-    "reference": "https://tenor.com/view/walking-anime-car-walking-together-gif-17601932",
-    "rights": "Third-party material; license unverified. User requested anime scene sources; no affiliation or AI-original claim.",
-    "parentOriginalSHA256": "db5988f27eb75a06faa433cd878896886b757196082fbf04fa2529362b7c8873",
+    "file": "studio/v24/banner-motion-bridge-after-midnight-hd24.webp",
+    "sha256": "636f2be04cde2bf028c53ac0aa560f04adf96f5b97736a128b9fee31d71c9aa6",
+    "origin": "Third-party anime footage; full-size matching poster from Full-HD source. Not AI-original.",
+    "sourceURL": "https://v.animethemes.moe/Horimiya-ED1-NCBD1080.webm",
+    "reference": "https://animethemes.moe/anime/horimiya",
+    "rights": "Third-party anime footage. Rights unverified; no license inferred from availability. User authorized replacement of low-resolution scenes.",
+    "parentOriginalSHA256": "c84ed3a0c2d0e662cd84e3c366c3bb758159aa542dd582d1d939f3b9ce7542ce",
     "notCountedAsArt": true,
     "pairedSceneID": "v20-banner-motion-bridge-after-midnight",
     "sourceResolution": [
@@ -4444,16 +5300,28 @@
       344
     ],
     "sourceDistinctDecodedFrames": 62,
-    "noCropOrWatermarkRemoval": true
+    "noCropOrWatermarkRemoval": true,
+    "qualityRevision": "24.2",
+    "sourceSize": [
+      1920,
+      1080
+    ],
+    "outputSize": [
+      1920,
+      640
+    ],
+    "noUpscale": true,
+    "sourceClipStart": 61.5,
+    "sourceClipDuration": 3.0
   },
   {
-    "file": "studio/v24/banner-motion-red-seat-reflection.mp4",
-    "sha256": "07fcedee9d584143bfa4102294293674210605842254e154d6d6c7fc4a7272db",
-    "origin": "Silent animated scene; actual original moving frames, not CSS movement of a still",
-    "sourceURL": "https://media.tenor.com/yR3RM_0HMFEAAAPo/aestetic-anime.mp4",
-    "reference": "https://tenor.com/view/aestetic-anime-car-town-night-gif-23175168",
-    "rights": "Third-party material; license unverified. User requested anime scene sources; no affiliation or AI-original claim.",
-    "parentOriginalSHA256": "72394f251595d56bbc94712b7d3c303e8c03e8c28f30ba563179b7401901e258",
+    "file": "studio/v24/banner-motion-red-seat-reflection-hd24.mp4",
+    "sha256": "94401199c93ca1276dfb2e5d28a08599f1434e39cc55c972eec8c6ffb0f21aaa",
+    "origin": "Third-party anime footage; silent motion clip from Full-HD source. Not AI-original.",
+    "sourceURL": "https://v.animethemes.moe/AoNoHako-OP1-NCBD1080.webm",
+    "reference": "https://animethemes.moe/anime/ao_no_hako",
+    "rights": "Third-party anime footage. Rights unverified; no license inferred from availability. User authorized replacement of low-resolution scenes.",
+    "parentOriginalSHA256": "c595e7d46588d148ec84178664596e30897254eba894bf755b130bb9e19f6885",
     "notCountedAsArt": false,
     "pairedSceneID": "v20-banner-motion-red-seat-reflection",
     "sourceResolution": [
@@ -4461,16 +5329,28 @@
       480
     ],
     "sourceDistinctDecodedFrames": 23,
-    "noCropOrWatermarkRemoval": true
+    "noCropOrWatermarkRemoval": true,
+    "qualityRevision": "24.2",
+    "sourceSize": [
+      1920,
+      1080
+    ],
+    "outputSize": [
+      1920,
+      640
+    ],
+    "noUpscale": true,
+    "sourceClipStart": 77.4,
+    "sourceClipDuration": 2.2
   },
   {
-    "file": "studio/v24/banner-motion-red-seat-reflection.webp",
-    "sha256": "db7988ba5c77b6c485c1c874588567709fc29cbcefc9c3c0101de69610b90802",
-    "origin": "Static fallback poster from animated scene; not an additional artwork",
-    "sourceURL": "https://media.tenor.com/yR3RM_0HMFEAAAPo/aestetic-anime.mp4",
-    "reference": "https://tenor.com/view/aestetic-anime-car-town-night-gif-23175168",
-    "rights": "Third-party material; license unverified. User requested anime scene sources; no affiliation or AI-original claim.",
-    "parentOriginalSHA256": "72394f251595d56bbc94712b7d3c303e8c03e8c28f30ba563179b7401901e258",
+    "file": "studio/v24/banner-motion-red-seat-reflection-hd24.webp",
+    "sha256": "1aaf43a0931d778da6622e096c731de848a320f34b4862b89e3dd982525ff2e1",
+    "origin": "Third-party anime footage; full-size matching poster from Full-HD source. Not AI-original.",
+    "sourceURL": "https://v.animethemes.moe/AoNoHako-OP1-NCBD1080.webm",
+    "reference": "https://animethemes.moe/anime/ao_no_hako",
+    "rights": "Third-party anime footage. Rights unverified; no license inferred from availability. User authorized replacement of low-resolution scenes.",
+    "parentOriginalSHA256": "c595e7d46588d148ec84178664596e30897254eba894bf755b130bb9e19f6885",
     "notCountedAsArt": true,
     "pairedSceneID": "v20-banner-motion-red-seat-reflection",
     "sourceResolution": [
@@ -4478,7 +5358,19 @@
       480
     ],
     "sourceDistinctDecodedFrames": 23,
-    "noCropOrWatermarkRemoval": true
+    "noCropOrWatermarkRemoval": true,
+    "qualityRevision": "24.2",
+    "sourceSize": [
+      1920,
+      1080
+    ],
+    "outputSize": [
+      1920,
+      640
+    ],
+    "noUpscale": true,
+    "sourceClipStart": 77.4,
+    "sourceClipDuration": 2.2
   },
   {
     "file": "studio/v24/background-motion-midnight-highway.mp4",
@@ -4651,25 +5543,76 @@
     "noCropOrWatermarkRemoval": true
   },
   {
-    "file": "studio/v24/banner-motion-harbor-nightwatch-thumb.webp",
-    "sha256": "1f2c0ffaf666865093a79e8939e5289fb7712f30de2fe5100dd668addcade394",
-    "origin": "Display-size thumbnail derived from studio/v24/banner-motion-harbor-nightwatch.webp. Not a new artwork. Original source and rights unchanged.",
+    "file": "studio/v24/banner-motion-harbor-nightwatch-thumb-hd24.webp",
+    "sha256": "3721f96a8a1d31612e37591011f8ca1be24633adc50a6327e787985458f5ec6d",
+    "origin": "Third-party anime footage; shop thumbnail from Full-HD source. Not AI-original.",
     "parentAsset": "studio/v24/banner-motion-harbor-nightwatch.webp",
-    "notCountedAsArt": true
+    "notCountedAsArt": true,
+    "sourceURL": "https://v.animethemes.moe/KOn-OP1.webm",
+    "reference": "https://animethemes.moe/anime/k_on",
+    "rights": "Third-party anime footage. Rights unverified; no license inferred from availability. User authorized replacement of low-resolution scenes.",
+    "parentOriginalSHA256": "986d47be81651d52f099b01593d1df6f9090e0d04af47d07bd74e905ae9ab570",
+    "pairedSceneID": "v20-banner-motion-harbor-nightwatch",
+    "qualityRevision": "24.2",
+    "sourceSize": [
+      1920,
+      1080
+    ],
+    "outputSize": [
+      512,
+      171
+    ],
+    "noUpscale": true,
+    "sourceClipStart": 8.269,
+    "sourceClipDuration": 2.593
   },
   {
-    "file": "studio/v24/banner-motion-bridge-after-midnight-thumb.webp",
-    "sha256": "d8c36f74dd3a3627ad85a2c426d2174ff7fe7d7dd05f3495f5109a229a7bef4c",
-    "origin": "Display-size thumbnail derived from studio/v24/banner-motion-bridge-after-midnight.webp. Not a new artwork. Original source and rights unchanged.",
+    "file": "studio/v24/banner-motion-bridge-after-midnight-thumb-hd24.webp",
+    "sha256": "82439ddd8dfcd89cba18f2296344ff4b94733b6247e0f46f6b36d371ec81e7a5",
+    "origin": "Third-party anime footage; shop thumbnail from Full-HD source. Not AI-original.",
     "parentAsset": "studio/v24/banner-motion-bridge-after-midnight.webp",
-    "notCountedAsArt": true
+    "notCountedAsArt": true,
+    "sourceURL": "https://v.animethemes.moe/Horimiya-ED1-NCBD1080.webm",
+    "reference": "https://animethemes.moe/anime/horimiya",
+    "rights": "Third-party anime footage. Rights unverified; no license inferred from availability. User authorized replacement of low-resolution scenes.",
+    "parentOriginalSHA256": "c84ed3a0c2d0e662cd84e3c366c3bb758159aa542dd582d1d939f3b9ce7542ce",
+    "pairedSceneID": "v20-banner-motion-bridge-after-midnight",
+    "qualityRevision": "24.2",
+    "sourceSize": [
+      1920,
+      1080
+    ],
+    "outputSize": [
+      512,
+      171
+    ],
+    "noUpscale": true,
+    "sourceClipStart": 61.5,
+    "sourceClipDuration": 3.0
   },
   {
-    "file": "studio/v24/banner-motion-red-seat-reflection-thumb.webp",
-    "sha256": "a05d090c19236665a1b9522be81f237ec87b472e3775ce36c76c6ca71f48708f",
-    "origin": "Display-size thumbnail derived from studio/v24/banner-motion-red-seat-reflection.webp. Not a new artwork. Original source and rights unchanged.",
+    "file": "studio/v24/banner-motion-red-seat-reflection-thumb-hd24.webp",
+    "sha256": "96a84271abcf345101215ad964e7d98e20cf3bab2b51d4834d83030a3b08c2ef",
+    "origin": "Third-party anime footage; shop thumbnail from Full-HD source. Not AI-original.",
     "parentAsset": "studio/v24/banner-motion-red-seat-reflection.webp",
-    "notCountedAsArt": true
+    "notCountedAsArt": true,
+    "sourceURL": "https://v.animethemes.moe/AoNoHako-OP1-NCBD1080.webm",
+    "reference": "https://animethemes.moe/anime/ao_no_hako",
+    "rights": "Third-party anime footage. Rights unverified; no license inferred from availability. User authorized replacement of low-resolution scenes.",
+    "parentOriginalSHA256": "c595e7d46588d148ec84178664596e30897254eba894bf755b130bb9e19f6885",
+    "pairedSceneID": "v20-banner-motion-red-seat-reflection",
+    "qualityRevision": "24.2",
+    "sourceSize": [
+      1920,
+      1080
+    ],
+    "outputSize": [
+      512,
+      171
+    ],
+    "noUpscale": true,
+    "sourceClipStart": 77.4,
+    "sourceClipDuration": 2.2
   },
   {
     "file": "studio/v24/background-motion-midnight-highway-thumb.webp",
@@ -4707,13 +5650,13 @@
     "notCountedAsArt": true
   },
   {
-    "file": "studio/v24/banner-motion-blade-in-the-wind.mp4",
-    "sha256": "e3a6db5d3dbf03b3f90ddfdef5d3232c4844e3bf611b2de040bdd62768ee0023",
-    "origin": "Silent animated scene; actual original moving frames, not CSS movement of a still",
-    "sourceURL": "https://media.tenor.com/BGiLlSuS6sAAAAPo/bishamonten-anime.mp4",
-    "reference": "https://tenor.com/view/bishamonten-anime-wind-sword-gif-15831167",
-    "rights": "Third-party material; license unverified. User requested anime scene sources; no affiliation or AI-original claim.",
-    "parentOriginalSHA256": "95a5857743054b74f2e2ee4fdd4bb0c0a15d88f93daab4af820fa6479dd9ba1b",
+    "file": "studio/v24/banner-motion-blade-in-the-wind-hd24.mp4",
+    "sha256": "9d639fc4f3ef8471c30a0a72d744ab2c8cafea8b7afbe00c17a13736353731fb",
+    "origin": "Third-party anime footage; silent motion clip from Full-HD source. Not AI-original.",
+    "sourceURL": "https://v.animethemes.moe/PlasticMemories-OP1.webm",
+    "reference": "https://animethemes.moe/anime/plastic_memories",
+    "rights": "Third-party anime footage. Rights unverified; no license inferred from availability. User authorized replacement of low-resolution scenes.",
+    "parentOriginalSHA256": "2096f2c77ff52144e3fa7adf92d4f240baca5548e8f6008356cbb4753fc17c04",
     "notCountedAsArt": false,
     "pairedSceneID": "v20-banner-motion-blade-in-the-wind",
     "sourceResolution": [
@@ -4721,16 +5664,28 @@
       418
     ],
     "sourceDistinctDecodedFrames": 52,
-    "noCropOrWatermarkRemoval": true
+    "noCropOrWatermarkRemoval": true,
+    "qualityRevision": "24.2",
+    "sourceSize": [
+      1920,
+      1080
+    ],
+    "outputSize": [
+      1920,
+      640
+    ],
+    "noUpscale": true,
+    "sourceClipStart": 11.4,
+    "sourceClipDuration": 2.2
   },
   {
-    "file": "studio/v24/banner-motion-blade-in-the-wind.webp",
-    "sha256": "50818ee38e220d9d75069c306dcfe594203c1d644830a0142e5bc269ae512f91",
-    "origin": "Static fallback poster from animated scene; not an additional artwork",
-    "sourceURL": "https://media.tenor.com/BGiLlSuS6sAAAAPo/bishamonten-anime.mp4",
-    "reference": "https://tenor.com/view/bishamonten-anime-wind-sword-gif-15831167",
-    "rights": "Third-party material; license unverified. User requested anime scene sources; no affiliation or AI-original claim.",
-    "parentOriginalSHA256": "95a5857743054b74f2e2ee4fdd4bb0c0a15d88f93daab4af820fa6479dd9ba1b",
+    "file": "studio/v24/banner-motion-blade-in-the-wind-hd24.webp",
+    "sha256": "a26b4114957b4d8aef755c1bd2cb535d4e7c44d99a8e2efed8d3283976637d91",
+    "origin": "Third-party anime footage; full-size matching poster from Full-HD source. Not AI-original.",
+    "sourceURL": "https://v.animethemes.moe/PlasticMemories-OP1.webm",
+    "reference": "https://animethemes.moe/anime/plastic_memories",
+    "rights": "Third-party anime footage. Rights unverified; no license inferred from availability. User authorized replacement of low-resolution scenes.",
+    "parentOriginalSHA256": "2096f2c77ff52144e3fa7adf92d4f240baca5548e8f6008356cbb4753fc17c04",
     "notCountedAsArt": true,
     "pairedSceneID": "v20-banner-motion-blade-in-the-wind",
     "sourceResolution": [
@@ -4738,16 +5693,28 @@
       418
     ],
     "sourceDistinctDecodedFrames": 52,
-    "noCropOrWatermarkRemoval": true
+    "noCropOrWatermarkRemoval": true,
+    "qualityRevision": "24.2",
+    "sourceSize": [
+      1920,
+      1080
+    ],
+    "outputSize": [
+      1920,
+      640
+    ],
+    "noUpscale": true,
+    "sourceClipStart": 11.4,
+    "sourceClipDuration": 2.2
   },
   {
-    "file": "studio/v24/banner-motion-scarlet-hair-breeze.mp4",
-    "sha256": "8e8169245cb77b26eeb735d91861e344b3b90e7ed9e20fb88bab6fa35098983d",
-    "origin": "Silent animated scene; actual original moving frames, not CSS movement of a still",
-    "sourceURL": "https://media.tenor.com/5gegEvZR3e8AAAPo/rin-matsuoka-windy.mp4",
-    "reference": "https://tenor.com/view/rin-matsuoka-windy-free-anime-red-hair-gif-16133978",
-    "rights": "Third-party material; license unverified. User requested anime scene sources; no affiliation or AI-original claim.",
-    "parentOriginalSHA256": "8e40c73b9459ddca2307b36863644a4a4901110936f339864090f150e78280d3",
+    "file": "studio/v24/banner-motion-scarlet-hair-breeze-hd24.mp4",
+    "sha256": "38791b9d74d72527f9709bad31c8efb314af83b0913caf30bc8e505e73dfed3b",
+    "origin": "Third-party anime footage; silent motion clip from Full-HD source. Not AI-original.",
+    "sourceURL": "https://v.animethemes.moe/86-OP1-NCBD1080.webm",
+    "reference": "https://animethemes.moe/anime/86",
+    "rights": "Third-party anime footage. Rights unverified; no license inferred from availability. User authorized replacement of low-resolution scenes.",
+    "parentOriginalSHA256": "6fd5047b02754033f314116c9d67426c8245abb998c7a961ffab906a44777141",
     "notCountedAsArt": false,
     "pairedSceneID": "v20-banner-motion-scarlet-hair-breeze",
     "sourceResolution": [
@@ -4755,16 +5722,28 @@
       360
     ],
     "sourceDistinctDecodedFrames": 31,
-    "noCropOrWatermarkRemoval": true
+    "noCropOrWatermarkRemoval": true,
+    "qualityRevision": "24.2",
+    "sourceSize": [
+      1920,
+      1080
+    ],
+    "outputSize": [
+      1920,
+      640
+    ],
+    "noUpscale": true,
+    "sourceClipStart": 23.4,
+    "sourceClipDuration": 2.2
   },
   {
-    "file": "studio/v24/banner-motion-scarlet-hair-breeze.webp",
-    "sha256": "7080347ae033f85310f61c40b01ae35034dc9a0585444ed818a73ec04d3b8ee1",
-    "origin": "Static fallback poster from animated scene; not an additional artwork",
-    "sourceURL": "https://media.tenor.com/5gegEvZR3e8AAAPo/rin-matsuoka-windy.mp4",
-    "reference": "https://tenor.com/view/rin-matsuoka-windy-free-anime-red-hair-gif-16133978",
-    "rights": "Third-party material; license unverified. User requested anime scene sources; no affiliation or AI-original claim.",
-    "parentOriginalSHA256": "8e40c73b9459ddca2307b36863644a4a4901110936f339864090f150e78280d3",
+    "file": "studio/v24/banner-motion-scarlet-hair-breeze-hd24.webp",
+    "sha256": "4191f172d7b20cafb1066aba40272cc7e302bb88d585b8ce49a272e5a96c83de",
+    "origin": "Third-party anime footage; full-size matching poster from Full-HD source. Not AI-original.",
+    "sourceURL": "https://v.animethemes.moe/86-OP1-NCBD1080.webm",
+    "reference": "https://animethemes.moe/anime/86",
+    "rights": "Third-party anime footage. Rights unverified; no license inferred from availability. User authorized replacement of low-resolution scenes.",
+    "parentOriginalSHA256": "6fd5047b02754033f314116c9d67426c8245abb998c7a961ffab906a44777141",
     "notCountedAsArt": true,
     "pairedSceneID": "v20-banner-motion-scarlet-hair-breeze",
     "sourceResolution": [
@@ -4772,16 +5751,28 @@
       360
     ],
     "sourceDistinctDecodedFrames": 31,
-    "noCropOrWatermarkRemoval": true
+    "noCropOrWatermarkRemoval": true,
+    "qualityRevision": "24.2",
+    "sourceSize": [
+      1920,
+      1080
+    ],
+    "outputSize": [
+      1920,
+      640
+    ],
+    "noUpscale": true,
+    "sourceClipStart": 23.4,
+    "sourceClipDuration": 2.2
   },
   {
-    "file": "studio/v24/banner-motion-violet-summer-wind.mp4",
-    "sha256": "8c05ef93ac11963268eed9ea521dffd7e685f297e9ebc8034e3b1f6416c37977",
-    "origin": "Silent animated scene; actual original moving frames, not CSS movement of a still",
-    "sourceURL": "https://media.tenor.com/e6uo-7KEw6YAAAPo/violet-evergarden-violet.mp4",
-    "reference": "https://tenor.com/view/violet-evergarden-violet-hair-flowing-hair-wind-gif-26789408",
-    "rights": "Third-party material; license unverified. User requested anime scene sources; no affiliation or AI-original claim.",
-    "parentOriginalSHA256": "3934235e7e0838f58f7fba8160a232b5e16f54353d84ac44c59fdc192f40e1c2",
+    "file": "studio/v24/banner-motion-violet-summer-wind-hd24.mp4",
+    "sha256": "c046181dfb22bdeb59b8a62eaf0fda77cd9ab9b59de563d548708e73557521f8",
+    "origin": "Third-party anime footage; silent motion clip from Full-HD source. Not AI-original.",
+    "sourceURL": "https://v.animethemes.moe/KekkaiSensen-OP1.webm",
+    "reference": "https://animethemes.moe/anime/kekkai_sensen",
+    "rights": "Third-party anime footage. Rights unverified; no license inferred from availability. User authorized replacement of low-resolution scenes.",
+    "parentOriginalSHA256": "c3ae0132d0d5468c27fa5c967c636f091049b0d66eb53d6d8c35dbcc680ef484",
     "notCountedAsArt": false,
     "pairedSceneID": "v20-banner-motion-violet-summer-wind",
     "sourceResolution": [
@@ -4789,16 +5780,28 @@
       352
     ],
     "sourceDistinctDecodedFrames": 26,
-    "noCropOrWatermarkRemoval": true
+    "noCropOrWatermarkRemoval": true,
+    "qualityRevision": "24.2",
+    "sourceSize": [
+      1920,
+      1080
+    ],
+    "outputSize": [
+      1920,
+      640
+    ],
+    "noUpscale": true,
+    "sourceClipStart": 53.4,
+    "sourceClipDuration": 2.2
   },
   {
-    "file": "studio/v24/banner-motion-violet-summer-wind.webp",
-    "sha256": "2d21bd1f3b5834650863e69b44bf4a5139703e811d718d2284fb31115315c8a2",
-    "origin": "Static fallback poster from animated scene; not an additional artwork",
-    "sourceURL": "https://media.tenor.com/e6uo-7KEw6YAAAPo/violet-evergarden-violet.mp4",
-    "reference": "https://tenor.com/view/violet-evergarden-violet-hair-flowing-hair-wind-gif-26789408",
-    "rights": "Third-party material; license unverified. User requested anime scene sources; no affiliation or AI-original claim.",
-    "parentOriginalSHA256": "3934235e7e0838f58f7fba8160a232b5e16f54353d84ac44c59fdc192f40e1c2",
+    "file": "studio/v24/banner-motion-violet-summer-wind-hd24.webp",
+    "sha256": "5598f3be0305b4ea77ef02edc50ae2c65cbb4092946b9da01eb0b2c862d3e141",
+    "origin": "Third-party anime footage; full-size matching poster from Full-HD source. Not AI-original.",
+    "sourceURL": "https://v.animethemes.moe/KekkaiSensen-OP1.webm",
+    "reference": "https://animethemes.moe/anime/kekkai_sensen",
+    "rights": "Third-party anime footage. Rights unverified; no license inferred from availability. User authorized replacement of low-resolution scenes.",
+    "parentOriginalSHA256": "c3ae0132d0d5468c27fa5c967c636f091049b0d66eb53d6d8c35dbcc680ef484",
     "notCountedAsArt": true,
     "pairedSceneID": "v20-banner-motion-violet-summer-wind",
     "sourceResolution": [
@@ -4806,7 +5809,19 @@
       352
     ],
     "sourceDistinctDecodedFrames": 26,
-    "noCropOrWatermarkRemoval": true
+    "noCropOrWatermarkRemoval": true,
+    "qualityRevision": "24.2",
+    "sourceSize": [
+      1920,
+      1080
+    ],
+    "outputSize": [
+      1920,
+      640
+    ],
+    "noUpscale": true,
+    "sourceClipStart": 53.4,
+    "sourceClipDuration": 2.2
   },
   {
     "file": "studio/v24/background-motion-summer-glass-chime.mp4",
@@ -4843,25 +5858,76 @@
     "noCropOrWatermarkRemoval": true
   },
   {
-    "file": "studio/v24/banner-motion-blade-in-the-wind-thumb.webp",
-    "sha256": "a0eff6442b9b9bea0d2ee80f1d395122605cec4f78be4cdf7cf0d38d32a40fca",
-    "origin": "Display-size thumbnail derived from studio/v24/banner-motion-blade-in-the-wind.webp. Not a new artwork. Original source and rights unchanged.",
+    "file": "studio/v24/banner-motion-blade-in-the-wind-thumb-hd24.webp",
+    "sha256": "462a73cfe803c094fc12e86519cfd99a771141521c0a3244a15cce6f88cdb637",
+    "origin": "Third-party anime footage; shop thumbnail from Full-HD source. Not AI-original.",
     "parentAsset": "studio/v24/banner-motion-blade-in-the-wind.webp",
-    "notCountedAsArt": true
+    "notCountedAsArt": true,
+    "sourceURL": "https://v.animethemes.moe/PlasticMemories-OP1.webm",
+    "reference": "https://animethemes.moe/anime/plastic_memories",
+    "rights": "Third-party anime footage. Rights unverified; no license inferred from availability. User authorized replacement of low-resolution scenes.",
+    "parentOriginalSHA256": "2096f2c77ff52144e3fa7adf92d4f240baca5548e8f6008356cbb4753fc17c04",
+    "pairedSceneID": "v20-banner-motion-blade-in-the-wind",
+    "qualityRevision": "24.2",
+    "sourceSize": [
+      1920,
+      1080
+    ],
+    "outputSize": [
+      512,
+      171
+    ],
+    "noUpscale": true,
+    "sourceClipStart": 11.4,
+    "sourceClipDuration": 2.2
   },
   {
-    "file": "studio/v24/banner-motion-scarlet-hair-breeze-thumb.webp",
-    "sha256": "e1d0bdb369f521b2c1c9bb0b52aa3f37facc1e3523a9c616d415dc954dfa7fdd",
-    "origin": "Display-size thumbnail derived from studio/v24/banner-motion-scarlet-hair-breeze.webp. Not a new artwork. Original source and rights unchanged.",
+    "file": "studio/v24/banner-motion-scarlet-hair-breeze-thumb-hd24.webp",
+    "sha256": "b2bb98555fd7185c5c304f4b44249ac56e487937994ee7d316ce604a23067b02",
+    "origin": "Third-party anime footage; shop thumbnail from Full-HD source. Not AI-original.",
     "parentAsset": "studio/v24/banner-motion-scarlet-hair-breeze.webp",
-    "notCountedAsArt": true
+    "notCountedAsArt": true,
+    "sourceURL": "https://v.animethemes.moe/86-OP1-NCBD1080.webm",
+    "reference": "https://animethemes.moe/anime/86",
+    "rights": "Third-party anime footage. Rights unverified; no license inferred from availability. User authorized replacement of low-resolution scenes.",
+    "parentOriginalSHA256": "6fd5047b02754033f314116c9d67426c8245abb998c7a961ffab906a44777141",
+    "pairedSceneID": "v20-banner-motion-scarlet-hair-breeze",
+    "qualityRevision": "24.2",
+    "sourceSize": [
+      1920,
+      1080
+    ],
+    "outputSize": [
+      512,
+      171
+    ],
+    "noUpscale": true,
+    "sourceClipStart": 23.4,
+    "sourceClipDuration": 2.2
   },
   {
-    "file": "studio/v24/banner-motion-violet-summer-wind-thumb.webp",
-    "sha256": "d91dc1bb2e34f84981eb65700ef8c5c8c48c460fa9c360f0b32e23c8a963bedb",
-    "origin": "Display-size thumbnail derived from studio/v24/banner-motion-violet-summer-wind.webp. Not a new artwork. Original source and rights unchanged.",
+    "file": "studio/v24/banner-motion-violet-summer-wind-thumb-hd24.webp",
+    "sha256": "56c94b64f7082d643d82c0363bea97fcf2d3424ea2bc19b67036ff720bb5d022",
+    "origin": "Third-party anime footage; shop thumbnail from Full-HD source. Not AI-original.",
     "parentAsset": "studio/v24/banner-motion-violet-summer-wind.webp",
-    "notCountedAsArt": true
+    "notCountedAsArt": true,
+    "sourceURL": "https://v.animethemes.moe/KekkaiSensen-OP1.webm",
+    "reference": "https://animethemes.moe/anime/kekkai_sensen",
+    "rights": "Third-party anime footage. Rights unverified; no license inferred from availability. User authorized replacement of low-resolution scenes.",
+    "parentOriginalSHA256": "c3ae0132d0d5468c27fa5c967c636f091049b0d66eb53d6d8c35dbcc680ef484",
+    "pairedSceneID": "v20-banner-motion-violet-summer-wind",
+    "qualityRevision": "24.2",
+    "sourceSize": [
+      1920,
+      1080
+    ],
+    "outputSize": [
+      512,
+      171
+    ],
+    "noUpscale": true,
+    "sourceClipStart": 53.4,
+    "sourceClipDuration": 2.2
   },
   {
     "file": "studio/v24/background-motion-summer-glass-chime-thumb.webp",
@@ -4871,13 +5937,13 @@
     "notCountedAsArt": true
   },
   {
-    "file": "studio/v24/banner-motion-headphones-in-silence.mp4",
-    "sha256": "24d58009de1e0514ce3d664622cb106f7e1d071a89e4b53b69296cf50f48957b",
-    "origin": "Silent animated scene; actual original moving frames, not CSS movement of a still",
-    "sourceURL": "https://media.tenor.com/cNkvnLJNI5EAAAPo/white-black-anime.mp4",
-    "reference": "https://tenor.com/view/white-black-anime-gif-8131582952246944657",
-    "rights": "Third-party material; license unverified. User requested anime scene sources; no affiliation or AI-original claim.",
-    "parentOriginalSHA256": "db4922db15bc0e96fd852b0982ddac694bb03ddcc4179e8ac0d791b485ee60bf",
+    "file": "studio/v24/banner-motion-headphones-in-silence-hd24.mp4",
+    "sha256": "e6785884d6c35bb88de90b07ca37d1ccff3d60c39ffb7f3b69f1cc5c678479bb",
+    "origin": "Third-party anime footage; silent motion clip from Full-HD source. Not AI-original.",
+    "sourceURL": "https://v.animethemes.moe/Mononoke-OP1.webm",
+    "reference": "https://animethemes.moe/anime/mononoke",
+    "rights": "Third-party anime footage. Rights unverified; no license inferred from availability. User authorized replacement of low-resolution scenes.",
+    "parentOriginalSHA256": "25fd6a170dcde8845a260d79f3248fbd5f9aff49bddd46c47722a94c81cb301b",
     "notCountedAsArt": false,
     "pairedSceneID": "v20-banner-motion-headphones-in-silence",
     "sourceResolution": [
@@ -4885,16 +5951,28 @@
       444
     ],
     "sourceDistinctDecodedFrames": 40,
-    "noCropOrWatermarkRemoval": true
+    "noCropOrWatermarkRemoval": true,
+    "qualityRevision": "24.2",
+    "sourceSize": [
+      1920,
+      1080
+    ],
+    "outputSize": [
+      1920,
+      640
+    ],
+    "noUpscale": true,
+    "sourceClipStart": 35.89,
+    "sourceClipDuration": 3.0
   },
   {
-    "file": "studio/v24/banner-motion-headphones-in-silence.webp",
-    "sha256": "912c60242c39d56d1c0cb51bedf4ff9d2fd2827603c82049ad0cd7c364f8a3f6",
-    "origin": "Static fallback poster from animated scene; not an additional artwork",
-    "sourceURL": "https://media.tenor.com/cNkvnLJNI5EAAAPo/white-black-anime.mp4",
-    "reference": "https://tenor.com/view/white-black-anime-gif-8131582952246944657",
-    "rights": "Third-party material; license unverified. User requested anime scene sources; no affiliation or AI-original claim.",
-    "parentOriginalSHA256": "db4922db15bc0e96fd852b0982ddac694bb03ddcc4179e8ac0d791b485ee60bf",
+    "file": "studio/v24/banner-motion-headphones-in-silence-hd24.webp",
+    "sha256": "0db9907fa181572da685ecf6e39f407b9bd7d6653aff246a3f5c732e54e1133c",
+    "origin": "Third-party anime footage; full-size matching poster from Full-HD source. Not AI-original.",
+    "sourceURL": "https://v.animethemes.moe/Mononoke-OP1.webm",
+    "reference": "https://animethemes.moe/anime/mononoke",
+    "rights": "Third-party anime footage. Rights unverified; no license inferred from availability. User authorized replacement of low-resolution scenes.",
+    "parentOriginalSHA256": "25fd6a170dcde8845a260d79f3248fbd5f9aff49bddd46c47722a94c81cb301b",
     "notCountedAsArt": true,
     "pairedSceneID": "v20-banner-motion-headphones-in-silence",
     "sourceResolution": [
@@ -4902,7 +5980,19 @@
       444
     ],
     "sourceDistinctDecodedFrames": 40,
-    "noCropOrWatermarkRemoval": true
+    "noCropOrWatermarkRemoval": true,
+    "qualityRevision": "24.2",
+    "sourceSize": [
+      1920,
+      1080
+    ],
+    "outputSize": [
+      1920,
+      640
+    ],
+    "noUpscale": true,
+    "sourceClipStart": 35.89,
+    "sourceClipDuration": 3.0
   },
   {
     "file": "studio/v24/background-motion-wind-rises-meadow.mp4",
@@ -4939,11 +6029,28 @@
     "noCropOrWatermarkRemoval": true
   },
   {
-    "file": "studio/v24/banner-motion-headphones-in-silence-thumb.webp",
-    "sha256": "61dfa423c007181c2c7b0adbda4ba91d9cb7eaf9a73a3fd7fbdb8616593289aa",
-    "origin": "Display-size thumbnail derived from studio/v24/banner-motion-headphones-in-silence.webp. Not a new artwork. Original source and rights unchanged.",
+    "file": "studio/v24/banner-motion-headphones-in-silence-thumb-hd24.webp",
+    "sha256": "624520642770323eff00a22cffb90b032e31415021436feef56f4db0d28399dc",
+    "origin": "Third-party anime footage; shop thumbnail from Full-HD source. Not AI-original.",
     "parentAsset": "studio/v24/banner-motion-headphones-in-silence.webp",
-    "notCountedAsArt": true
+    "notCountedAsArt": true,
+    "sourceURL": "https://v.animethemes.moe/Mononoke-OP1.webm",
+    "reference": "https://animethemes.moe/anime/mononoke",
+    "rights": "Third-party anime footage. Rights unverified; no license inferred from availability. User authorized replacement of low-resolution scenes.",
+    "parentOriginalSHA256": "25fd6a170dcde8845a260d79f3248fbd5f9aff49bddd46c47722a94c81cb301b",
+    "pairedSceneID": "v20-banner-motion-headphones-in-silence",
+    "qualityRevision": "24.2",
+    "sourceSize": [
+      1920,
+      1080
+    ],
+    "outputSize": [
+      512,
+      171
+    ],
+    "noUpscale": true,
+    "sourceClipStart": 35.89,
+    "sourceClipDuration": 3.0
   },
   {
     "file": "studio/v24/background-motion-wind-rises-meadow-thumb.webp",

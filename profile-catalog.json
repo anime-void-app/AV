@@ -8441,18 +8441,25 @@
       "v20": true,
       "cost": 600,
       "name": [
-        "Ризе · ветер",
-        "Rize · wind"
+        "Вайолет · ветер и письма",
+        "Violet · wind and letters"
       ],
-      "asset": "studio/v24/banner-motion-rize-wind.webp",
-      "motionAsset": "studio/v24/banner-motion-rize-wind.mp4",
-      "author": "Third-party anime scene · Pinterest source",
+      "asset": "studio/v24/banner-motion-rize-wind-hd24.webp",
+      "motionAsset": "studio/v24/banner-motion-rize-wind-hd24.mp4",
+      "author": "Third-party anime footage · Full-HD source",
       "license": "Third-party rights unverified; original source recorded in studio/v24/SOURCES.json. Not AI-original.",
-      "focalY": 45,
+      "focalY": 50,
       "collection24": "animated-anime-scenes",
-      "artType": "actual animated video scene; silent looping MP4 with separate static poster",
-      "sourceReference": "https://pin.it/Jyu21np5H",
-      "previewAsset": "studio/v24/banner-motion-rize-wind-thumb.avif"
+      "artType": "Real anime video frames from a1920x1080 source; native1920px-wide banner crop. No upscaling. Silent H264/24fps.",
+      "sourceReference": "https://animethemes.moe/anime/violet_evergarden",
+      "previewAsset": "studio/v24/banner-motion-rize-wind-thumb-hd24.avif",
+      "motionWidth": 1920,
+      "motionHeight": 640,
+      "qualityRevision": "24.2",
+      "sourceResolution": [
+        1920,
+        1080
+      ]
     },
     {
       "id": "v20-banner-motion-stadium-wind",
@@ -8460,18 +8467,25 @@
       "v20": true,
       "cost": 600,
       "name": [
-        "Ветер над стадионом",
-        "Stadium wind"
+        "Твоё имя · озеро на закате",
+        "Your Name · sunset lake"
       ],
-      "asset": "studio/v24/banner-motion-stadium-wind.webp",
-      "motionAsset": "studio/v24/banner-motion-stadium-wind.mp4",
-      "author": "Third-party anime scene · Pinterest source",
+      "asset": "studio/v24/banner-motion-stadium-wind-hd24.webp",
+      "motionAsset": "studio/v24/banner-motion-stadium-wind-hd24.mp4",
+      "author": "Third-party anime footage · Full-HD source",
       "license": "Third-party rights unverified; original source recorded in studio/v24/SOURCES.json. Not AI-original.",
-      "focalY": 45,
+      "focalY": 50,
       "collection24": "animated-anime-scenes",
-      "artType": "actual animated video scene; silent looping MP4 with separate static poster",
-      "sourceReference": "https://pin.it/7g2vQRunJ",
-      "previewAsset": "studio/v24/banner-motion-stadium-wind-thumb.webp"
+      "artType": "Real anime video frames from a1920x1080 source; native1920px-wide banner crop. No upscaling. Silent H264/24fps.",
+      "sourceReference": "https://animethemes.moe/anime/kimi_no_na_wa",
+      "previewAsset": "studio/v24/banner-motion-stadium-wind-thumb-hd24.webp",
+      "motionWidth": 1920,
+      "motionHeight": 640,
+      "qualityRevision": "24.2",
+      "sourceResolution": [
+        1920,
+        1080
+      ]
     },
     {
       "id": "v20-banner-motion-snow-between-us",
@@ -8479,22 +8493,29 @@
       "v20": true,
       "cost": 600,
       "name": [
-        "Снег между нами",
-        "Snow between us"
+        "Токийский гуль · огни города",
+        "Tokyo Ghoul · city lights"
       ],
-      "asset": "studio/v24/banner-motion-snow-between-us.webp",
-      "motionAsset": "studio/v24/banner-motion-snow-between-us.mp4",
-      "author": "Third-party anime scene · Tenor source",
+      "asset": "studio/v24/banner-motion-snow-between-us-hd24.webp",
+      "motionAsset": "studio/v24/banner-motion-snow-between-us-hd24.mp4",
+      "author": "Third-party anime footage · Full-HD source",
       "license": "Third-party rights unverified; source recorded in studio/v24/SOURCES.json. Not AI-original.",
-      "focalY": 45,
+      "focalY": 50,
       "collection24": "animated-anime-scenes",
-      "artType": "actual animated video scene; silent looping MP4 with separate static poster",
-      "sourceReference": "https://tenor.com/view/black-and-white-cute-couple-kimi-ni-todoke-scenery-gif-8984789276337440284",
+      "artType": "Real anime video frames from a1920x1080 source; native1920px-wide banner crop. No upscaling. Silent H264/24fps.",
+      "sourceReference": "https://animethemes.moe/anime/tokyo_ghoul",
       "nativeSourceSize": [
         498,
         256
       ],
-      "previewAsset": "studio/v24/banner-motion-snow-between-us-thumb.webp"
+      "previewAsset": "studio/v24/banner-motion-snow-between-us-thumb-hd24.webp",
+      "motionWidth": 1920,
+      "motionHeight": 640,
+      "qualityRevision": "24.2",
+      "sourceResolution": [
+        1920,
+        1080
+      ]
     },
     {
       "id": "v20-banner-motion-petals-in-palm",
@@ -8502,22 +8523,29 @@
       "v20": true,
       "cost": 600,
       "name": [
-        "Лепестки на ладони",
-        "Petals in a palm"
+        "Магическая битва · пузыри на закате",
+        "Jujutsu Kaisen · sunset bubbles"
       ],
-      "asset": "studio/v24/banner-motion-petals-in-palm.webp",
-      "motionAsset": "studio/v24/banner-motion-petals-in-palm.mp4",
-      "author": "Third-party anime scene · Tenor source",
+      "asset": "studio/v24/banner-motion-petals-in-palm-hd24.webp",
+      "motionAsset": "studio/v24/banner-motion-petals-in-palm-hd24.mp4",
+      "author": "Third-party anime footage · Full-HD source",
       "license": "Third-party rights unverified; source recorded in studio/v24/SOURCES.json. Not AI-original.",
-      "focalY": 45,
+      "focalY": 50,
       "collection24": "animated-anime-scenes",
-      "artType": "actual animated video scene; silent looping MP4 with separate static poster",
-      "sourceReference": "https://tenor.com/view/rose-anime-red-silver-briauna-gif-17037356",
+      "artType": "Real anime video frames from a1920x1080 source; native1920px-wide banner crop. No upscaling. Silent H264/24fps.",
+      "sourceReference": "https://animethemes.moe/anime/jujutsu_kaisen",
       "nativeSourceSize": [
         640,
         358
       ],
-      "previewAsset": "studio/v24/banner-motion-petals-in-palm-thumb.webp"
+      "previewAsset": "studio/v24/banner-motion-petals-in-palm-thumb-hd24.webp",
+      "motionWidth": 1920,
+      "motionHeight": 640,
+      "qualityRevision": "24.2",
+      "sourceResolution": [
+        1920,
+        1080
+      ]
     },
     {
       "id": "v20-banner-motion-cat-and-scarlet-roses",
@@ -8525,22 +8553,29 @@
       "v20": true,
       "cost": 600,
       "name": [
-        "Кот среди алых роз",
-        "Cat among scarlet roses"
+        "Магическая битва · птицы в небе",
+        "Jujutsu Kaisen · birds in the sky"
       ],
-      "asset": "studio/v24/banner-motion-cat-and-scarlet-roses.webp",
-      "motionAsset": "studio/v24/banner-motion-cat-and-scarlet-roses.mp4",
-      "author": "Third-party anime scene · Tenor source",
+      "asset": "studio/v24/banner-motion-cat-and-scarlet-roses-hd24.webp",
+      "motionAsset": "studio/v24/banner-motion-cat-and-scarlet-roses-hd24.mp4",
+      "author": "Third-party anime footage · Full-HD source",
       "license": "Third-party rights unverified; source recorded in studio/v24/SOURCES.json. Not AI-original.",
-      "focalY": 45,
+      "focalY": 50,
       "collection24": "animated-anime-scenes",
-      "artType": "actual animated video scene; silent looping MP4 with separate static poster",
-      "sourceReference": "https://tenor.com/view/flower-cat-background-anime-aesthetic-gif-3933742254959194708",
+      "artType": "Real anime video frames from a1920x1080 source; native1920px-wide banner crop. No upscaling. Silent H264/24fps.",
+      "sourceReference": "https://animethemes.moe/anime/jujutsu_kaisen_2nd_season",
       "nativeSourceSize": [
         400,
         224
       ],
-      "previewAsset": "studio/v24/banner-motion-cat-and-scarlet-roses-thumb.webp"
+      "previewAsset": "studio/v24/banner-motion-cat-and-scarlet-roses-thumb-hd24.webp",
+      "motionWidth": 1920,
+      "motionHeight": 640,
+      "qualityRevision": "24.2",
+      "sourceResolution": [
+        1920,
+        1080
+      ]
     },
     {
       "id": "v20-banner-motion-cat-on-shoulder",
@@ -8548,22 +8583,29 @@
       "v20": true,
       "cost": 600,
       "name": [
-        "Кот на плече",
-        "Cat on the shoulder"
+        "Человек-бензопила · кинозал",
+        "Chainsaw Man · cinema"
       ],
-      "asset": "studio/v24/banner-motion-cat-on-shoulder.webp",
-      "motionAsset": "studio/v24/banner-motion-cat-on-shoulder.mp4",
-      "author": "Third-party anime scene · Tenor source",
+      "asset": "studio/v24/banner-motion-cat-on-shoulder-hd24.webp",
+      "motionAsset": "studio/v24/banner-motion-cat-on-shoulder-hd24.mp4",
+      "author": "Third-party anime footage · Full-HD source",
       "license": "Third-party rights unverified; source recorded in studio/v24/SOURCES.json. Not AI-original.",
-      "focalY": 45,
+      "focalY": 50,
       "collection24": "animated-anime-scenes",
-      "artType": "actual animated video scene; silent looping MP4 with separate static poster",
-      "sourceReference": "https://tenor.com/view/cat-anime-pink-black-gif-11061952977324648307",
+      "artType": "Real anime video frames from a1920x1080 source; native1920px-wide banner crop. No upscaling. Silent H264/24fps.",
+      "sourceReference": "https://animethemes.moe/anime/chainsaw_man",
       "nativeSourceSize": [
         498,
         280
       ],
-      "previewAsset": "studio/v24/banner-motion-cat-on-shoulder-thumb.avif"
+      "previewAsset": "studio/v24/banner-motion-cat-on-shoulder-thumb-hd24.avif",
+      "motionWidth": 1920,
+      "motionHeight": 640,
+      "qualityRevision": "24.2",
+      "sourceResolution": [
+        1920,
+        1080
+      ]
     },
     {
       "id": "v20-banner-motion-quiet-gaze",
@@ -8571,22 +8613,29 @@
       "v20": true,
       "cost": 600,
       "name": [
-        "Тихий взгляд",
-        "Quiet gaze"
+        "Нацумэ · встреча с Нянко",
+        "Natsume · meeting Nyanko"
       ],
-      "asset": "studio/v24/banner-motion-quiet-gaze.webp",
-      "motionAsset": "studio/v24/banner-motion-quiet-gaze.mp4",
-      "author": "Third-party anime scene · Tenor source",
+      "asset": "studio/v24/banner-motion-quiet-gaze-hd24.webp",
+      "motionAsset": "studio/v24/banner-motion-quiet-gaze-hd24.mp4",
+      "author": "Third-party anime footage · Full-HD source",
       "license": "Third-party rights unverified; source recorded in studio/v24/SOURCES.json. Not AI-original.",
-      "focalY": 45,
+      "focalY": 50,
       "collection24": "animated-anime-scenes",
-      "artType": "actual animated video scene; silent looping MP4 with separate static poster",
-      "sourceReference": "https://tenor.com/view/anime-dispair-my-dress-up-darling-season-2-sono-bisque-doll-wa-koi-wo-suru-season-2-shinju-inui-sad-anime-girl-gif-13165084634493135687",
+      "artType": "Real anime video frames from a1920x1080 source; native1920px-wide banner crop. No upscaling. Silent H264/24fps.",
+      "sourceReference": "https://animethemes.moe/anime/natsume_yuujinchou",
       "nativeSourceSize": [
         498,
         282
       ],
-      "previewAsset": "studio/v24/banner-motion-quiet-gaze-thumb.avif"
+      "previewAsset": "studio/v24/banner-motion-quiet-gaze-thumb-hd24.avif",
+      "motionWidth": 1920,
+      "motionHeight": 640,
+      "qualityRevision": "24.2",
+      "sourceResolution": [
+        1920,
+        1080
+      ]
     },
     {
       "id": "v20-banner-motion-eye-reflection",
@@ -8594,22 +8643,29 @@
       "v20": true,
       "cost": 600,
       "name": [
-        "Отражение в глазах",
-        "Eye reflection"
+        "Апрель · мелодия света",
+        "April · melody of light"
       ],
-      "asset": "studio/v24/banner-motion-eye-reflection.webp",
-      "motionAsset": "studio/v24/banner-motion-eye-reflection.mp4",
-      "author": "Third-party anime scene · Tenor source",
+      "asset": "studio/v24/banner-motion-eye-reflection-hd24.webp",
+      "motionAsset": "studio/v24/banner-motion-eye-reflection-hd24.mp4",
+      "author": "Third-party anime footage · Full-HD source",
       "license": "Third-party rights unverified; source recorded in studio/v24/SOURCES.json. Not AI-original.",
-      "focalY": 45,
+      "focalY": 50,
       "collection24": "animated-anime-scenes",
-      "artType": "actual animated video scene; silent looping MP4 with separate static poster",
-      "sourceReference": "https://tenor.com/view/black-anime-gif-4300729639086979760",
+      "artType": "Real anime video frames from a1920x1080 source; native1920px-wide banner crop. No upscaling. Silent H264/24fps.",
+      "sourceReference": "https://animethemes.moe/anime/shigatsu_wa_kimi_no_uso",
       "nativeSourceSize": [
         498,
         282
       ],
-      "previewAsset": "studio/v24/banner-motion-eye-reflection-thumb.webp"
+      "previewAsset": "studio/v24/banner-motion-eye-reflection-thumb-hd24.webp",
+      "motionWidth": 1920,
+      "motionHeight": 640,
+      "qualityRevision": "24.2",
+      "sourceResolution": [
+        1920,
+        1080
+      ]
     },
     {
       "id": "v20-banner-motion-fireworks-embrace",
@@ -8617,22 +8673,29 @@
       "v20": true,
       "cost": 600,
       "name": [
-        "Объятие под фейерверком",
-        "Fireworks embrace"
+        "Хёка · отражение в глазах",
+        "Hyouka · eye reflection"
       ],
-      "asset": "studio/v24/banner-motion-fireworks-embrace.webp",
-      "motionAsset": "studio/v24/banner-motion-fireworks-embrace.mp4",
-      "author": "Third-party anime scene · Tenor source",
+      "asset": "studio/v24/banner-motion-fireworks-embrace-hd24.webp",
+      "motionAsset": "studio/v24/banner-motion-fireworks-embrace-hd24.mp4",
+      "author": "Third-party anime footage · Full-HD source",
       "license": "Third-party rights unverified; source recorded in studio/v24/SOURCES.json. Not AI-original.",
-      "focalY": 45,
+      "focalY": 50,
       "collection24": "animated-anime-scenes",
-      "artType": "actual animated video scene; silent looping MP4 with separate static poster",
-      "sourceReference": "https://tenor.com/view/black-and-white-cute-couple-hug-gif-1837644771603754182",
+      "artType": "Real anime video frames from a1920x1080 source; native1920px-wide banner crop. No upscaling. Silent H264/24fps.",
+      "sourceReference": "https://animethemes.moe/anime/hyouka",
       "nativeSourceSize": [
         498,
         268
       ],
-      "previewAsset": "studio/v24/banner-motion-fireworks-embrace-thumb.avif"
+      "previewAsset": "studio/v24/banner-motion-fireworks-embrace-thumb-hd24.avif",
+      "motionWidth": 1920,
+      "motionHeight": 640,
+      "qualityRevision": "24.2",
+      "sourceResolution": [
+        1920,
+        1080
+      ]
     },
     {
       "id": "v20-banner-motion-cat-and-firefly",
@@ -8640,22 +8703,29 @@
       "v20": true,
       "cost": 600,
       "name": [
-        "Кот и светлячок",
-        "Cat and firefly"
+        "Кланнад · летний ветер",
+        "Clannad · summer wind"
       ],
-      "asset": "studio/v24/banner-motion-cat-and-firefly.webp",
-      "motionAsset": "studio/v24/banner-motion-cat-and-firefly.mp4",
-      "author": "Third-party anime scene · Tenor source",
+      "asset": "studio/v24/banner-motion-cat-and-firefly-hd24.webp",
+      "motionAsset": "studio/v24/banner-motion-cat-and-firefly-hd24.mp4",
+      "author": "Third-party anime footage · Full-HD source",
       "license": "Third-party rights unverified; source recorded in studio/v24/SOURCES.json. Not AI-original.",
-      "focalY": 45,
+      "focalY": 50,
       "collection24": "animated-anime-scenes",
-      "artType": "actual animated video scene; silent looping MP4 with separate static poster",
-      "sourceReference": "https://tenor.com/view/adorable-cat-playing-chat-noir-black-cat-gif-12373950",
+      "artType": "Real anime video frames from a1920x1080 source; native1920px-wide banner crop. No upscaling. Silent H264/24fps.",
+      "sourceReference": "https://animethemes.moe/anime/clannad",
       "nativeSourceSize": [
         500,
         226
       ],
-      "previewAsset": "studio/v24/banner-motion-cat-and-firefly-thumb.webp"
+      "previewAsset": "studio/v24/banner-motion-cat-and-firefly-thumb-hd24.webp",
+      "motionWidth": 1920,
+      "motionHeight": 640,
+      "qualityRevision": "24.2",
+      "sourceResolution": [
+        1920,
+        1080
+      ]
     },
     {
       "id": "v20-banner-motion-gothic-wings",
@@ -8663,22 +8733,29 @@
       "v20": true,
       "cost": 600,
       "name": [
-        "Готические крылья",
-        "Gothic wings"
+        "After Story · закат",
+        "After Story · sunset"
       ],
-      "asset": "studio/v24/banner-motion-gothic-wings.webp",
-      "motionAsset": "studio/v24/banner-motion-gothic-wings.mp4",
-      "author": "Third-party anime scene · Tenor source",
+      "asset": "studio/v24/banner-motion-gothic-wings-hd24.webp",
+      "motionAsset": "studio/v24/banner-motion-gothic-wings-hd24.mp4",
+      "author": "Third-party anime footage · Full-HD source",
       "license": "Third-party rights unverified; source recorded in studio/v24/SOURCES.json. Not AI-original.",
-      "focalY": 45,
+      "focalY": 50,
       "collection24": "animated-anime-scenes",
-      "artType": "actual animated video scene; silent looping MP4 with separate static poster",
-      "sourceReference": "https://tenor.com/view/rozen-maiden-black-angel-wings-fly-anime-gif-5656980",
+      "artType": "Real anime video frames from a1920x1080 source; native1920px-wide banner crop. No upscaling. Silent H264/24fps.",
+      "sourceReference": "https://animethemes.moe/anime/clannad_after_story",
       "nativeSourceSize": [
         500,
         280
       ],
-      "previewAsset": "studio/v24/banner-motion-gothic-wings-thumb.webp"
+      "previewAsset": "studio/v24/banner-motion-gothic-wings-thumb-hd24.webp",
+      "motionWidth": 1920,
+      "motionHeight": 640,
+      "qualityRevision": "24.2",
+      "sourceResolution": [
+        1920,
+        1080
+      ]
     },
     {
       "id": "v20-banner-motion-ink-on-notebook",
@@ -8686,22 +8763,29 @@
       "v20": true,
       "cost": 600,
       "name": [
-        "Чернила в тетради",
-        "Ink on a notebook"
+        "Фрирен · путь вместе",
+        "Frieren · the road together"
       ],
-      "asset": "studio/v24/banner-motion-ink-on-notebook.webp",
-      "motionAsset": "studio/v24/banner-motion-ink-on-notebook.mp4",
-      "author": "Third-party anime scene · Tenor source",
+      "asset": "studio/v24/banner-motion-ink-on-notebook-hd24.webp",
+      "motionAsset": "studio/v24/banner-motion-ink-on-notebook-hd24.mp4",
+      "author": "Third-party anime footage · Full-HD source",
       "license": "Third-party rights unverified; source recorded in studio/v24/SOURCES.json. Not AI-original.",
-      "focalY": 45,
+      "focalY": 50,
       "collection24": "animated-anime-scenes",
-      "artType": "actual animated video scene; silent looping MP4 with separate static poster",
-      "sourceReference": "https://tenor.com/view/venusxcv-notebook-black-and-white-vintage-anime-gif-18841073",
+      "artType": "Real anime video frames from a1920x1080 source; native1920px-wide banner crop. No upscaling. Silent H264/24fps.",
+      "sourceReference": "https://animethemes.moe/anime/sousou_no_frieren",
       "nativeSourceSize": [
         640,
         412
       ],
-      "previewAsset": "studio/v24/banner-motion-ink-on-notebook-thumb.avif"
+      "previewAsset": "studio/v24/banner-motion-ink-on-notebook-thumb-hd24.avif",
+      "motionWidth": 1920,
+      "motionHeight": 640,
+      "qualityRevision": "24.2",
+      "sourceResolution": [
+        1920,
+        1080
+      ]
     },
     {
       "id": "v20-banner-motion-fox-mask-summer",
@@ -8709,22 +8793,29 @@
       "v20": true,
       "cost": 600,
       "name": [
-        "Лисья маска лета",
-        "Summer fox mask"
+        "Сага о Винланде · северный взгляд",
+        "Vinland Saga · northern gaze"
       ],
-      "asset": "studio/v24/banner-motion-fox-mask-summer.webp",
-      "motionAsset": "studio/v24/banner-motion-fox-mask-summer.mp4",
-      "author": "Third-party anime scene · Tenor source",
+      "asset": "studio/v24/banner-motion-fox-mask-summer-hd24.webp",
+      "motionAsset": "studio/v24/banner-motion-fox-mask-summer-hd24.mp4",
+      "author": "Third-party anime footage · Full-HD source",
       "license": "Third-party rights unverified; source recorded in studio/v24/SOURCES.json. Not AI-original.",
-      "focalY": 45,
+      "focalY": 50,
       "collection24": "animated-anime-scenes",
-      "artType": "actual animated video scene; silent looping MP4 with separate static poster",
-      "sourceReference": "https://tenor.com/view/hotarubi-no-more-e-b%26w-black-and-white-anime-gif-bw-gif-690759498290490143",
+      "artType": "Real anime video frames from a1920x1080 source; native1920px-wide banner crop. No upscaling. Silent H264/24fps.",
+      "sourceReference": "https://animethemes.moe/anime/vinland_saga",
       "nativeSourceSize": [
         498,
         276
       ],
-      "previewAsset": "studio/v24/banner-motion-fox-mask-summer-thumb.avif"
+      "previewAsset": "studio/v24/banner-motion-fox-mask-summer-thumb-hd24.avif",
+      "motionWidth": 1920,
+      "motionHeight": 640,
+      "qualityRevision": "24.2",
+      "sourceResolution": [
+        1920,
+        1080
+      ]
     },
     {
       "id": "v20-banner-motion-moonlit-farewell",
@@ -8732,22 +8823,29 @@
       "v20": true,
       "cost": 600,
       "name": [
-        "Лунное прощание",
-        "Moonlit farewell"
+        "Самурай Чамплу · оранжевый штрих",
+        "Samurai Champloo · orange stroke"
       ],
-      "asset": "studio/v24/banner-motion-moonlit-farewell.webp",
-      "motionAsset": "studio/v24/banner-motion-moonlit-farewell.mp4",
-      "author": "Third-party anime scene · Tenor source",
+      "asset": "studio/v24/banner-motion-moonlit-farewell-hd24.webp",
+      "motionAsset": "studio/v24/banner-motion-moonlit-farewell-hd24.mp4",
+      "author": "Third-party anime footage · Full-HD source",
       "license": "Third-party rights unverified; source recorded in studio/v24/SOURCES.json. Not AI-original.",
-      "focalY": 45,
+      "focalY": 50,
       "collection24": "animated-anime-scenes",
-      "artType": "actual animated video scene; silent looping MP4 with separate static poster",
-      "sourceReference": "https://tenor.com/view/hotarubi-no-more-e-b%26w-black-and-white-anime-gif-bw-couple-gif-6586045127442224859",
+      "artType": "Real anime video frames from a1920x1080 source; native1920px-wide banner crop. No upscaling. Silent H264/24fps.",
+      "sourceReference": "https://animethemes.moe/anime/samurai_champloo",
       "nativeSourceSize": [
         498,
         278
       ],
-      "previewAsset": "studio/v24/banner-motion-moonlit-farewell-thumb.avif"
+      "previewAsset": "studio/v24/banner-motion-moonlit-farewell-thumb-hd24.avif",
+      "motionWidth": 1920,
+      "motionHeight": 640,
+      "qualityRevision": "24.2",
+      "sourceResolution": [
+        1920,
+        1080
+      ]
     },
     {
       "id": "v20-background-motion-petals-under-lamppost",
@@ -8824,22 +8922,29 @@
       "v20": true,
       "cost": 600,
       "name": [
-        "Дождь без слов",
-        "Rain without words"
+        "Парад смерти · синий вечер",
+        "Death Parade · blue evening"
       ],
-      "asset": "studio/v24/banner-motion-rain-without-words.webp",
-      "motionAsset": "studio/v24/banner-motion-rain-without-words.mp4",
-      "author": "Third-party anime scene · Tenor source",
+      "asset": "studio/v24/banner-motion-rain-without-words-hd24.webp",
+      "motionAsset": "studio/v24/banner-motion-rain-without-words-hd24.mp4",
+      "author": "Third-party anime footage · Full-HD source",
       "license": "Third-party rights unverified; source recorded in studio/v24/SOURCES.json. Not AI-original.",
-      "focalY": 45,
+      "focalY": 50,
       "collection24": "animated-anime-scenes",
-      "artType": "actual animated video scene; silent looping MP4 with separate static poster",
-      "sourceReference": "https://tenor.com/view/sad-gif-3145490246061447793",
+      "artType": "Real anime video frames from a1920x1080 source; native1920px-wide banner crop. No upscaling. Silent H264/24fps.",
+      "sourceReference": "https://animethemes.moe/anime/death_parade",
       "nativeSourceSize": [
         498,
         490
       ],
-      "previewAsset": "studio/v24/banner-motion-rain-without-words-thumb.webp"
+      "previewAsset": "studio/v24/banner-motion-rain-without-words-thumb-hd24.webp",
+      "motionWidth": 1920,
+      "motionHeight": 640,
+      "qualityRevision": "24.2",
+      "sourceResolution": [
+        1920,
+        1080
+      ]
     },
     {
       "id": "v20-banner-motion-emerald-rain-gaze",
@@ -8847,22 +8952,29 @@
       "v20": true,
       "cost": 600,
       "name": [
-        "Изумрудный взгляд под дождём",
-        "Emerald gaze in the rain"
+        "Норагами · чёрное и белое",
+        "Noragami · black and white"
       ],
-      "asset": "studio/v24/banner-motion-emerald-rain-gaze.webp",
-      "motionAsset": "studio/v24/banner-motion-emerald-rain-gaze.mp4",
-      "author": "Third-party anime scene · Tenor source",
+      "asset": "studio/v24/banner-motion-emerald-rain-gaze-hd24.webp",
+      "motionAsset": "studio/v24/banner-motion-emerald-rain-gaze-hd24.mp4",
+      "author": "Third-party anime footage · Full-HD source",
       "license": "Third-party rights unverified; source recorded in studio/v24/SOURCES.json. Not AI-original.",
-      "focalY": 45,
+      "focalY": 50,
       "collection24": "animated-anime-scenes",
-      "artType": "actual animated video scene; silent looping MP4 with separate static poster",
-      "sourceReference": "https://tenor.com/view/reze-chainsaw-man-csm-stare-anime-rain-gif-17751007222649062258",
+      "artType": "Real anime video frames from a1920x1080 source; native1920px-wide banner crop. No upscaling. Silent H264/24fps.",
+      "sourceReference": "https://animethemes.moe/anime/noragami",
       "nativeSourceSize": [
         498,
         404
       ],
-      "previewAsset": "studio/v24/banner-motion-emerald-rain-gaze-thumb.avif"
+      "previewAsset": "studio/v24/banner-motion-emerald-rain-gaze-thumb-hd24.avif",
+      "motionWidth": 1920,
+      "motionHeight": 640,
+      "qualityRevision": "24.2",
+      "sourceResolution": [
+        1920,
+        1080
+      ]
     },
     {
       "id": "v20-banner-motion-samurai-downpour",
@@ -8870,22 +8982,29 @@
       "v20": true,
       "cost": 600,
       "name": [
-        "Самурай под ливнем",
-        "Samurai in a downpour"
+        "Норагами · волосы на ветру",
+        "Noragami · hair in the wind"
       ],
-      "asset": "studio/v24/banner-motion-samurai-downpour.webp",
-      "motionAsset": "studio/v24/banner-motion-samurai-downpour.mp4",
-      "author": "Third-party anime scene · Tenor source",
+      "asset": "studio/v24/banner-motion-samurai-downpour-hd24.webp",
+      "motionAsset": "studio/v24/banner-motion-samurai-downpour-hd24.mp4",
+      "author": "Third-party anime footage · Full-HD source",
       "license": "Third-party rights unverified; source recorded in studio/v24/SOURCES.json. Not AI-original.",
-      "focalY": 45,
+      "focalY": 50,
       "collection24": "animated-anime-scenes",
-      "artType": "actual animated video scene; silent looping MP4 with separate static poster",
-      "sourceReference": "https://tenor.com/view/samurai-champloo-mugen-rain-raining-storm-gif-26879755",
+      "artType": "Real anime video frames from a1920x1080 source; native1920px-wide banner crop. No upscaling. Silent H264/24fps.",
+      "sourceReference": "https://animethemes.moe/anime/noragami_aragoto",
       "nativeSourceSize": [
         640,
         360
       ],
-      "previewAsset": "studio/v24/banner-motion-samurai-downpour-thumb.webp"
+      "previewAsset": "studio/v24/banner-motion-samurai-downpour-thumb-hd24.webp",
+      "motionWidth": 1920,
+      "motionHeight": 640,
+      "qualityRevision": "24.2",
+      "sourceResolution": [
+        1920,
+        1080
+      ]
     },
     {
       "id": "v20-banner-motion-rain-at-the-window",
@@ -8893,22 +9012,29 @@
       "v20": true,
       "cost": 600,
       "name": [
-        "Дождь за окном",
-        "Rain at the window"
+        "Эхо террора · тихий взгляд",
+        "Terror in Resonance · quiet gaze"
       ],
-      "asset": "studio/v24/banner-motion-rain-at-the-window.webp",
-      "motionAsset": "studio/v24/banner-motion-rain-at-the-window.mp4",
-      "author": "Third-party anime scene · Tenor source",
+      "asset": "studio/v24/banner-motion-rain-at-the-window-hd24.webp",
+      "motionAsset": "studio/v24/banner-motion-rain-at-the-window-hd24.mp4",
+      "author": "Third-party anime footage · Full-HD source",
       "license": "Third-party rights unverified; source recorded in studio/v24/SOURCES.json. Not AI-original.",
-      "focalY": 45,
+      "focalY": 50,
       "collection24": "animated-anime-scenes",
-      "artType": "actual animated video scene; silent looping MP4 with separate static poster",
-      "sourceReference": "https://tenor.com/view/sad-rain-anime-gif-14169525349757286971",
+      "artType": "Real anime video frames from a1920x1080 source; native1920px-wide banner crop. No upscaling. Silent H264/24fps.",
+      "sourceReference": "https://animethemes.moe/anime/zankyou_no_terror",
       "nativeSourceSize": [
         498,
         282
       ],
-      "previewAsset": "studio/v24/banner-motion-rain-at-the-window-thumb.webp"
+      "previewAsset": "studio/v24/banner-motion-rain-at-the-window-thumb-hd24.webp",
+      "motionWidth": 1920,
+      "motionHeight": 640,
+      "qualityRevision": "24.2",
+      "sourceResolution": [
+        1920,
+        1080
+      ]
     },
     {
       "id": "v20-banner-motion-elf-after-the-storm",
@@ -8916,22 +9042,29 @@
       "v20": true,
       "cost": 600,
       "name": [
-        "Эльфийка после бури",
-        "Elf after the storm"
+        "Песнь ночных сов · алый ветер",
+        "Call of the Night · scarlet wind"
       ],
-      "asset": "studio/v24/banner-motion-elf-after-the-storm.webp",
-      "motionAsset": "studio/v24/banner-motion-elf-after-the-storm.mp4",
-      "author": "Third-party anime scene · Tenor source",
+      "asset": "studio/v24/banner-motion-elf-after-the-storm-hd24.webp",
+      "motionAsset": "studio/v24/banner-motion-elf-after-the-storm-hd24.mp4",
+      "author": "Third-party anime footage · Full-HD source",
       "license": "Third-party rights unverified; source recorded in studio/v24/SOURCES.json. Not AI-original.",
-      "focalY": 45,
+      "focalY": 50,
       "collection24": "animated-anime-scenes",
-      "artType": "actual animated video scene; silent looping MP4 with separate static poster",
-      "sourceReference": "https://tenor.com/view/anime-frieren-rain-rainy-elf-gif-11147416009134806254",
+      "artType": "Real anime video frames from a1920x1080 source; native1920px-wide banner crop. No upscaling. Silent H264/24fps.",
+      "sourceReference": "https://animethemes.moe/anime/yofukashi_no_uta",
       "nativeSourceSize": [
         498,
         456
       ],
-      "previewAsset": "studio/v24/banner-motion-elf-after-the-storm-thumb.avif"
+      "previewAsset": "studio/v24/banner-motion-elf-after-the-storm-thumb-hd24.avif",
+      "motionWidth": 1920,
+      "motionHeight": 640,
+      "qualityRevision": "24.2",
+      "sourceResolution": [
+        1920,
+        1080
+      ]
     },
     {
       "id": "v20-banner-motion-little-umbrella-loop",
@@ -8939,22 +9072,29 @@
       "v20": true,
       "cost": 600,
       "name": [
-        "Маленький зонтик",
-        "Little umbrella"
+        "Боччи · перед выходом",
+        "Bocchi · before the stage"
       ],
-      "asset": "studio/v24/banner-motion-little-umbrella-loop.webp",
-      "motionAsset": "studio/v24/banner-motion-little-umbrella-loop.mp4",
-      "author": "Third-party anime scene · Tenor source",
+      "asset": "studio/v24/banner-motion-little-umbrella-loop-hd24.webp",
+      "motionAsset": "studio/v24/banner-motion-little-umbrella-loop-hd24.mp4",
+      "author": "Third-party anime footage · Full-HD source",
       "license": "Third-party rights unverified; source recorded in studio/v24/SOURCES.json. Not AI-original.",
-      "focalY": 45,
+      "focalY": 50,
       "collection24": "animated-anime-scenes",
-      "artType": "actual animated video scene; silent looping MP4 with separate static poster",
-      "sourceReference": "https://tenor.com/view/bocchi-loop-bocchi-the-rock-karakara-hitori-gotou-カラカラ-gif-20773421970029805",
+      "artType": "Real anime video frames from a1920x1080 source; native1920px-wide banner crop. No upscaling. Silent H264/24fps.",
+      "sourceReference": "https://animethemes.moe/anime/bocchi_the_rock",
       "nativeSourceSize": [
         498,
         282
       ],
-      "previewAsset": "studio/v24/banner-motion-little-umbrella-loop-thumb.avif"
+      "previewAsset": "studio/v24/banner-motion-little-umbrella-loop-thumb-hd24.avif",
+      "motionWidth": 1920,
+      "motionHeight": 640,
+      "qualityRevision": "24.2",
+      "sourceResolution": [
+        1920,
+        1080
+      ]
     },
     {
       "id": "v20-background-motion-forest-rainfall",
@@ -9031,22 +9171,29 @@
       "v20": true,
       "cost": 600,
       "name": [
-        "Ночной взгляд на гавань",
-        "Harbor nightwatch"
+        "K-On · репетиция",
+        "K-On · rehearsal"
       ],
-      "asset": "studio/v24/banner-motion-harbor-nightwatch.webp",
-      "motionAsset": "studio/v24/banner-motion-harbor-nightwatch.mp4",
-      "author": "Third-party anime scene · Tenor source",
+      "asset": "studio/v24/banner-motion-harbor-nightwatch-hd24.webp",
+      "motionAsset": "studio/v24/banner-motion-harbor-nightwatch-hd24.mp4",
+      "author": "Third-party anime footage · Full-HD source",
       "license": "Third-party rights unverified; source recorded in studio/v24/SOURCES.json. Not AI-original.",
-      "focalY": 45,
+      "focalY": 50,
       "collection24": "animated-anime-scenes",
-      "artType": "actual animated video scene; silent looping MP4 with separate static poster",
-      "sourceReference": "https://tenor.com/view/ashita-no-joe-joe-yabuki-night-look-anime-gif-15680793290232266806",
+      "artType": "Real anime video frames from a1920x1080 source; native1920px-wide banner crop. No upscaling. Silent H264/24fps.",
+      "sourceReference": "https://animethemes.moe/anime/k_on",
       "nativeSourceSize": [
         480,
         360
       ],
-      "previewAsset": "studio/v24/banner-motion-harbor-nightwatch-thumb.webp"
+      "previewAsset": "studio/v24/banner-motion-harbor-nightwatch-thumb-hd24.webp",
+      "motionWidth": 1920,
+      "motionHeight": 640,
+      "qualityRevision": "24.2",
+      "sourceResolution": [
+        1920,
+        1080
+      ]
     },
     {
       "id": "v20-banner-motion-bridge-after-midnight",
@@ -9054,22 +9201,29 @@
       "v20": true,
       "cost": 600,
       "name": [
-        "Мост после полуночи",
-        "Bridge after midnight"
+        "Хоримия · держась за руки",
+        "Horimiya · holding hands"
       ],
-      "asset": "studio/v24/banner-motion-bridge-after-midnight.webp",
-      "motionAsset": "studio/v24/banner-motion-bridge-after-midnight.mp4",
-      "author": "Third-party anime scene · Tenor source",
+      "asset": "studio/v24/banner-motion-bridge-after-midnight-hd24.webp",
+      "motionAsset": "studio/v24/banner-motion-bridge-after-midnight-hd24.mp4",
+      "author": "Third-party anime footage · Full-HD source",
       "license": "Third-party rights unverified; source recorded in studio/v24/SOURCES.json. Not AI-original.",
-      "focalY": 45,
+      "focalY": 50,
       "collection24": "animated-anime-scenes",
-      "artType": "actual animated video scene; silent looping MP4 with separate static poster",
-      "sourceReference": "https://tenor.com/view/walking-anime-car-walking-together-gif-17601932",
+      "artType": "Real anime video frames from a1920x1080 source; native1920px-wide banner crop. No upscaling. Silent H264/24fps.",
+      "sourceReference": "https://animethemes.moe/anime/horimiya",
       "nativeSourceSize": [
         640,
         344
       ],
-      "previewAsset": "studio/v24/banner-motion-bridge-after-midnight-thumb.webp"
+      "previewAsset": "studio/v24/banner-motion-bridge-after-midnight-thumb-hd24.webp",
+      "motionWidth": 1920,
+      "motionHeight": 640,
+      "qualityRevision": "24.2",
+      "sourceResolution": [
+        1920,
+        1080
+      ]
     },
     {
       "id": "v20-banner-motion-red-seat-reflection",
@@ -9077,22 +9231,29 @@
       "v20": true,
       "cost": 600,
       "name": [
-        "Отражение в красном кресле",
-        "Red seat reflection"
+        "Голубая шкатулка · вечерний свет",
+        "Blue Box · evening light"
       ],
-      "asset": "studio/v24/banner-motion-red-seat-reflection.webp",
-      "motionAsset": "studio/v24/banner-motion-red-seat-reflection.mp4",
-      "author": "Third-party anime scene · Tenor source",
+      "asset": "studio/v24/banner-motion-red-seat-reflection-hd24.webp",
+      "motionAsset": "studio/v24/banner-motion-red-seat-reflection-hd24.mp4",
+      "author": "Third-party anime footage · Full-HD source",
       "license": "Third-party rights unverified; source recorded in studio/v24/SOURCES.json. Not AI-original.",
-      "focalY": 45,
+      "focalY": 50,
       "collection24": "animated-anime-scenes",
-      "artType": "actual animated video scene; silent looping MP4 with separate static poster",
-      "sourceReference": "https://tenor.com/view/aestetic-anime-car-town-night-gif-23175168",
+      "artType": "Real anime video frames from a1920x1080 source; native1920px-wide banner crop. No upscaling. Silent H264/24fps.",
+      "sourceReference": "https://animethemes.moe/anime/ao_no_hako",
       "nativeSourceSize": [
         640,
         480
       ],
-      "previewAsset": "studio/v24/banner-motion-red-seat-reflection-thumb.webp"
+      "previewAsset": "studio/v24/banner-motion-red-seat-reflection-thumb-hd24.webp",
+      "motionWidth": 1920,
+      "motionHeight": 640,
+      "qualityRevision": "24.2",
+      "sourceResolution": [
+        1920,
+        1080
+      ]
     },
     {
       "id": "v20-background-motion-midnight-highway",
@@ -9215,22 +9376,29 @@
       "v20": true,
       "cost": 600,
       "name": [
-        "Клинок на ветру",
-        "Blade in the wind"
+        "Пластиковые воспоминания · закат",
+        "Plastic Memories · sunset"
       ],
-      "asset": "studio/v24/banner-motion-blade-in-the-wind.webp",
-      "motionAsset": "studio/v24/banner-motion-blade-in-the-wind.mp4",
-      "author": "Third-party anime scene · Tenor source",
+      "asset": "studio/v24/banner-motion-blade-in-the-wind-hd24.webp",
+      "motionAsset": "studio/v24/banner-motion-blade-in-the-wind-hd24.mp4",
+      "author": "Third-party anime footage · Full-HD source",
       "license": "Third-party rights unverified; source recorded in studio/v24/SOURCES.json. Not AI-original.",
-      "focalY": 45,
+      "focalY": 50,
       "collection24": "animated-anime-scenes",
-      "artType": "actual animated video scene; silent looping MP4 with separate static poster",
-      "sourceReference": "https://tenor.com/view/bishamonten-anime-wind-sword-gif-15831167",
+      "artType": "Real anime video frames from a1920x1080 source; native1920px-wide banner crop. No upscaling. Silent H264/24fps.",
+      "sourceReference": "https://animethemes.moe/anime/plastic_memories",
       "nativeSourceSize": [
         640,
         418
       ],
-      "previewAsset": "studio/v24/banner-motion-blade-in-the-wind-thumb.webp"
+      "previewAsset": "studio/v24/banner-motion-blade-in-the-wind-thumb-hd24.webp",
+      "motionWidth": 1920,
+      "motionHeight": 640,
+      "qualityRevision": "24.2",
+      "sourceResolution": [
+        1920,
+        1080
+      ]
     },
     {
       "id": "v20-banner-motion-scarlet-hair-breeze",
@@ -9238,22 +9406,29 @@
       "v20": true,
       "cost": 600,
       "name": [
-        "Алые пряди на ветру",
-        "Scarlet hair in the breeze"
+        "86 · взгляд сквозь тишину",
+        "86 · a gaze through silence"
       ],
-      "asset": "studio/v24/banner-motion-scarlet-hair-breeze.webp",
-      "motionAsset": "studio/v24/banner-motion-scarlet-hair-breeze.mp4",
-      "author": "Third-party anime scene · Tenor source",
+      "asset": "studio/v24/banner-motion-scarlet-hair-breeze-hd24.webp",
+      "motionAsset": "studio/v24/banner-motion-scarlet-hair-breeze-hd24.mp4",
+      "author": "Third-party anime footage · Full-HD source",
       "license": "Third-party rights unverified; source recorded in studio/v24/SOURCES.json. Not AI-original.",
-      "focalY": 45,
+      "focalY": 50,
       "collection24": "animated-anime-scenes",
-      "artType": "actual animated video scene; silent looping MP4 with separate static poster",
-      "sourceReference": "https://tenor.com/view/rin-matsuoka-windy-free-anime-red-hair-gif-16133978",
+      "artType": "Real anime video frames from a1920x1080 source; native1920px-wide banner crop. No upscaling. Silent H264/24fps.",
+      "sourceReference": "https://animethemes.moe/anime/86",
       "nativeSourceSize": [
         640,
         360
       ],
-      "previewAsset": "studio/v24/banner-motion-scarlet-hair-breeze-thumb.webp"
+      "previewAsset": "studio/v24/banner-motion-scarlet-hair-breeze-thumb-hd24.webp",
+      "motionWidth": 1920,
+      "motionHeight": 640,
+      "qualityRevision": "24.2",
+      "sourceResolution": [
+        1920,
+        1080
+      ]
     },
     {
       "id": "v20-banner-motion-violet-summer-wind",
@@ -9261,22 +9436,29 @@
       "v20": true,
       "cost": 600,
       "name": [
-        "Вайолет · летний ветер",
-        "Violet · summer wind"
+        "Фронт кровавой блокады · синие глаза",
+        "Blood Blockade Battlefront · blue eyes"
       ],
-      "asset": "studio/v24/banner-motion-violet-summer-wind.webp",
-      "motionAsset": "studio/v24/banner-motion-violet-summer-wind.mp4",
-      "author": "Third-party anime scene · Tenor source",
+      "asset": "studio/v24/banner-motion-violet-summer-wind-hd24.webp",
+      "motionAsset": "studio/v24/banner-motion-violet-summer-wind-hd24.mp4",
+      "author": "Third-party anime footage · Full-HD source",
       "license": "Third-party rights unverified; source recorded in studio/v24/SOURCES.json. Not AI-original.",
-      "focalY": 45,
+      "focalY": 50,
       "collection24": "animated-anime-scenes",
-      "artType": "actual animated video scene; silent looping MP4 with separate static poster",
-      "sourceReference": "https://tenor.com/view/violet-evergarden-violet-hair-flowing-hair-wind-gif-26789408",
+      "artType": "Real anime video frames from a1920x1080 source; native1920px-wide banner crop. No upscaling. Silent H264/24fps.",
+      "sourceReference": "https://animethemes.moe/anime/kekkai_sensen",
       "nativeSourceSize": [
         640,
         352
       ],
-      "previewAsset": "studio/v24/banner-motion-violet-summer-wind-thumb.webp"
+      "previewAsset": "studio/v24/banner-motion-violet-summer-wind-thumb-hd24.webp",
+      "motionWidth": 1920,
+      "motionHeight": 640,
+      "qualityRevision": "24.2",
+      "sourceResolution": [
+        1920,
+        1080
+      ]
     },
     {
       "id": "v20-background-motion-summer-glass-chime",
@@ -9307,22 +9489,29 @@
       "v20": true,
       "cost": 600,
       "name": [
-        "Наушники в тишине",
-        "Headphones in silence"
+        "Мононокэ · алый рисунок",
+        "Mononoke · scarlet drawing"
       ],
-      "asset": "studio/v24/banner-motion-headphones-in-silence.webp",
-      "motionAsset": "studio/v24/banner-motion-headphones-in-silence.mp4",
-      "author": "Third-party anime scene · Tenor source",
+      "asset": "studio/v24/banner-motion-headphones-in-silence-hd24.webp",
+      "motionAsset": "studio/v24/banner-motion-headphones-in-silence-hd24.mp4",
+      "author": "Third-party anime footage · Full-HD source",
       "license": "Third-party rights unverified; source recorded in studio/v24/SOURCES.json. Not AI-original.",
-      "focalY": 45,
+      "focalY": 50,
       "collection24": "animated-anime-scenes",
-      "artType": "actual animated video scene; silent looping MP4 with separate static poster",
-      "sourceReference": "https://tenor.com/view/white-black-anime-gif-8131582952246944657",
+      "artType": "Real anime video frames from a1920x1080 source; native1920px-wide banner crop. No upscaling. Silent H264/24fps.",
+      "sourceReference": "https://animethemes.moe/anime/mononoke",
       "nativeSourceSize": [
         498,
         444
       ],
-      "previewAsset": "studio/v24/banner-motion-headphones-in-silence-thumb.webp"
+      "previewAsset": "studio/v24/banner-motion-headphones-in-silence-thumb-hd24.webp",
+      "motionWidth": 1920,
+      "motionHeight": 640,
+      "qualityRevision": "24.2",
+      "sourceResolution": [
+        1920,
+        1080
+      ]
     },
     {
       "id": "v20-background-motion-wind-rises-meadow",
