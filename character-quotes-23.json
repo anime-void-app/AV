@@ -1,0 +1,767 @@
+{
+  "version": 1,
+  "checkedOn": "2026-11-01",
+  "notice": "Короткие реплики, а не пересказы. Русский текст — редакционный перевод английского фрагмента. Источники вторичные, не гарантия официальной локализации.",
+  "characters": [
+    {
+      "id": "ayanokoji",
+      "name": "Киётака Аянокоджи",
+      "english": "Kiyotaka Ayanokoji",
+      "work": "Добро пожаловать в класс превосходства",
+      "tagline": "Холодный расчёт",
+      "color": "#ff956f",
+      "theme": "Стратегия",
+      "portrait": "studio/v23/ayanokoji.webp",
+      "portraitSource": "https://anilist.co/character/123212",
+      "hero": "studio/v23/ayanokoji-hero.webp",
+      "artNote": "Стилизованный AI-фан-арт, не кадр аниме",
+      "quotes": [
+        {
+          "id": "ayanokoji-1",
+          "text": "Все люди — лишь инструменты.",
+          "original": "All people are nothing but tools.",
+          "source": "https://you-zitsu.fandom.com/wiki/Episode_12/Screenplay",
+          "context": "Сезон 1, эпизод 12, сцена 20",
+          "spoiler": true,
+          "verification": "Найдено в указанном вторичном источнике; не сверено с видеодорожкой",
+          "translation": "Редакционный перевод для ANIME VOID; не официальный дубляж"
+        },
+        {
+          "id": "ayanokoji-2",
+          "text": "В этом мире победа — всё.",
+          "original": "In this world, winning is everything.",
+          "source": "https://you-zitsu.fandom.com/wiki/Episode_12/Screenplay",
+          "context": "Сезон 1, эпизод 12, сцена 20",
+          "spoiler": true,
+          "verification": "Найдено в указанном вторичном источнике; не сверено с видеодорожкой",
+          "translation": "Редакционный перевод для ANIME VOID; не официальный дубляж"
+        },
+        {
+          "id": "ayanokoji-3",
+          "text": "Пока в итоге я побеждаю — только это и важно.",
+          "original": "As long as I win in the end... That's all that matters.",
+          "source": "https://you-zitsu.fandom.com/wiki/Episode_12/Screenplay",
+          "context": "Сезон 1, эпизод 12, сцена 20",
+          "spoiler": true,
+          "verification": "Сверено с указанным вторичным источником, не с видео",
+          "translation": "Редакционный перевод; не официальный дубляж"
+        }
+      ]
+    },
+    {
+      "id": "naruto",
+      "name": "Наруто Узумаки",
+      "english": "Naruto Uzumaki",
+      "work": "Наруто",
+      "tagline": "Воля огня",
+      "color": "#ffbb66",
+      "theme": "Решимость",
+      "portrait": "studio/v23/naruto.webp",
+      "portraitSource": "https://anilist.co/character/17",
+      "hero": "studio/v23/naruto.webp",
+      "artNote": "Справочный портрет AniList; права на изображение сохранены",
+      "quotes": [
+        {
+          "id": "naruto-1",
+          "text": "Я не сдаюсь и не отказываюсь от своих слов. Это мой путь ниндзя!",
+          "original": "I never give up. I never go back on my word. That's my ninja way!",
+          "source": "https://en.wikiquote.org/wiki/Naruto#Recurring_Quotes",
+          "context": "Повторяющаяся реплика в английской версии",
+          "spoiler": false,
+          "verification": "Найдено в указанном вторичном источнике; не сверено с видеодорожкой",
+          "translation": "Редакционный перевод для ANIME VOID; не официальный дубляж"
+        },
+        {
+          "id": "naruto-2",
+          "text": "Поверь в это!",
+          "original": "Believe it!",
+          "source": "https://en.wikiquote.org/wiki/Naruto",
+          "context": "Повторяющаяся реплика английского дубляжа",
+          "spoiler": false,
+          "verification": "Сверено с указанным вторичным источником, не с видео",
+          "translation": "Редакционный перевод; не официальный дубляж"
+        }
+      ]
+    },
+    {
+      "id": "kakashi",
+      "name": "Какаши Хатаке",
+      "english": "Kakashi Hatake",
+      "work": "Наруто",
+      "tagline": "За тех, кто рядом",
+      "color": "#9cd5dd",
+      "theme": "Дружба",
+      "portrait": "studio/v23/kakashi.webp",
+      "portraitSource": "https://anilist.co/character/85",
+      "hero": "studio/v23/kakashi.webp",
+      "artNote": "Справочный портрет AniList; права на изображение сохранены",
+      "quotes": [
+        {
+          "id": "kakashi-1",
+          "text": "Но те, кто бросает друзей, хуже отбросов!",
+          "original": "But those who abandon their friends are worse than scum!",
+          "source": "https://en.wikiquote.org/wiki/Naruto",
+          "context": "Сезон 1, эпизод 5; короткий фрагмент реплики",
+          "spoiler": false,
+          "verification": "Найдено в указанном вторичном источнике; не сверено с видеодорожкой",
+          "translation": "Редакционный перевод для ANIME VOID; не официальный дубляж"
+        }
+      ]
+    },
+    {
+      "id": "l",
+      "name": "L Лоулайт",
+      "english": "L Lawliet",
+      "work": "Тетрадь смерти",
+      "tagline": "Тишина перед разгадкой",
+      "color": "#83bcff",
+      "theme": "Справедливость",
+      "portrait": "studio/v23/l.webp",
+      "portraitSource": "https://anilist.co/character/71",
+      "hero": "studio/v23/l-hero.webp",
+      "artNote": "Стилизованный AI-фан-арт, не кадр аниме",
+      "quotes": [
+        {
+          "id": "l-1",
+          "text": "Справедливость непременно восторжествует.",
+          "original": "Justice will, without fail, prevail.",
+          "source": "https://en.wikiquote.org/wiki/Death_Note",
+          "context": "Раздел L, манга, глава 2 в источнике",
+          "spoiler": false,
+          "verification": "Найдено в указанном вторичном источнике; не сверено с видеодорожкой",
+          "translation": "Редакционный перевод для ANIME VOID; не официальный дубляж"
+        },
+        {
+          "id": "l-2",
+          "text": "Давайте ценить наши жизни.",
+          "original": "Let's value our lives.",
+          "source": "https://en.wikiquote.org/wiki/Death_Note",
+          "context": "Раздел L; эпизод 11 в источнике",
+          "spoiler": false,
+          "verification": "Сверено с указанным вторичным источником, не с видео",
+          "translation": "Редакционный перевод; не официальный дубляж"
+        }
+      ]
+    },
+    {
+      "id": "light",
+      "name": "Лайт Ягами",
+      "english": "Light Yagami",
+      "work": "Тетрадь смерти",
+      "tagline": "Грань правосудия",
+      "color": "#e58b9c",
+      "theme": "Справедливость",
+      "portrait": "studio/v23/light.webp",
+      "portraitSource": "https://anilist.co/character/80",
+      "hero": "studio/v23/light.webp",
+      "artNote": "Справочный портрет AniList; права на изображение сохранены",
+      "quotes": [
+        {
+          "id": "light-1",
+          "text": "Я — справедливость!",
+          "original": "I am Justice!",
+          "source": "https://en.wikiquote.org/wiki/Death_Note",
+          "context": "Эпизод 2; короткий фрагмент",
+          "spoiler": false,
+          "verification": "Найдено в указанном вторичном источнике; не сверено с видеодорожкой",
+          "translation": "Редакционный перевод для ANIME VOID; не официальный дубляж"
+        },
+        {
+          "id": "light-2",
+          "text": "В этом мире очень немногие действительно доверяют друг другу.",
+          "original": "In this world, there are very few people who actually trust each other.",
+          "source": "https://en.wikiquote.org/wiki/Death_Note",
+          "context": "Эпизод 3 в источнике",
+          "spoiler": false,
+          "verification": "Сверено с указанным вторичным источником, не с видео",
+          "translation": "Редакционный перевод; не официальный дубляж"
+        }
+      ]
+    },
+    {
+      "id": "levi",
+      "name": "Леви Аккерман",
+      "english": "Levi Ackerman",
+      "work": "Атака титанов",
+      "tagline": "Сталь и тишина",
+      "color": "#8de0cc",
+      "theme": "Выбор",
+      "portrait": "studio/v23/levi.webp",
+      "portraitSource": "https://anilist.co/character/45627",
+      "hero": "studio/v23/levi-hero.webp",
+      "artNote": "Стилизованный AI-фан-арт, не кадр аниме",
+      "quotes": [
+        {
+          "id": "levi-1",
+          "text": "Откажись от своей мечты и умри.",
+          "original": "Give up on your dreams and die!",
+          "source": "https://en.wikiquote.org/wiki/Attack_on_Titan#Return_to_Shiganshina_(chapters_71-90,_episodes_50-59)",
+          "context": "Арка возвращения в Сигансину; реплика Эрвину",
+          "spoiler": true,
+          "verification": "Найдено в указанном вторичном источнике; не сверено с видеодорожкой",
+          "translation": "Редакционный перевод для ANIME VOID; не официальный дубляж"
+        },
+        {
+          "id": "levi-2",
+          "text": "Подожди... Я дал ему обещание...",
+          "original": "Wait...I made a promise to him...",
+          "source": "https://en.wikiquote.org/wiki/Attack_on_Titan",
+          "context": "Арка возвращения в Сигансину; фрагмент",
+          "spoiler": true,
+          "verification": "Сверено с указанным вторичным источником, не с видео",
+          "translation": "Редакционный перевод; не официальный дубляж"
+        }
+      ]
+    },
+    {
+      "id": "erwin",
+      "name": "Эрвин Смит",
+      "english": "Erwin Smith",
+      "work": "Атака титанов",
+      "tagline": "Цена решения",
+      "color": "#dfca98",
+      "theme": "Решимость",
+      "portrait": "studio/v23/erwin.webp",
+      "portraitSource": "https://anilist.co/character/46496",
+      "hero": "studio/v23/erwin.webp",
+      "artNote": "Справочный портрет AniList; права на изображение сохранены",
+      "quotes": [
+        {
+          "id": "erwin-1",
+          "text": "Кто здесь настоящий враг?",
+          "original": "Who’s the real enemy here?",
+          "source": "https://en.wikiquote.org/wiki/Attack_on_Titan#Female_Titan_(chapters_19-34,_episodes_14-25)",
+          "context": "Арка Женской особи; точный эпизод здесь не подтверждён",
+          "spoiler": false,
+          "verification": "Найдено в указанном вторичном источнике; не сверено с видеодорожкой",
+          "translation": "Редакционный перевод для ANIME VOID; не официальный дубляж"
+        },
+        {
+          "id": "erwin-2",
+          "text": "Мои солдаты идут вперёд!",
+          "original": "My soldiers push forward!",
+          "source": "https://en.wikiquote.org/wiki/Attack_on_Titan",
+          "context": "Арка возвращения в Сигансину; фрагмент речи",
+          "spoiler": true,
+          "verification": "Сверено с указанным вторичным источником, не с видео",
+          "translation": "Редакционный перевод; не официальный дубляж"
+        }
+      ]
+    },
+    {
+      "id": "armin",
+      "name": "Армин Арлерт",
+      "english": "Armin Arlert",
+      "work": "Атака титанов",
+      "tagline": "За горизонт",
+      "color": "#9dd6ff",
+      "theme": "Выбор",
+      "portrait": "studio/v23/armin.webp",
+      "portraitSource": "https://anilist.co/character/46494",
+      "hero": "studio/v23/armin.webp",
+      "artNote": "Справочный портрет AniList; права на изображение сохранены",
+      "quotes": [
+        {
+          "id": "armin-1",
+          "text": "Тот, кто ничем не может пожертвовать, ничего не сможет изменить.",
+          "original": "Someone who can't sacrifice anything, can't ever change anything.",
+          "source": "https://en.wikiquote.org/wiki/Attack_on_Titan#Quotes_to_be_Organized",
+          "context": "Подборка реплик; эпизод в источнике не указан",
+          "spoiler": false,
+          "verification": "Найдено в указанном вторичном источнике; не сверено с видеодорожкой",
+          "translation": "Редакционный перевод для ANIME VOID; не официальный дубляж"
+        }
+      ]
+    },
+    {
+      "id": "edward",
+      "name": "Эдвард Элрик",
+      "english": "Edward Elric",
+      "work": "Стальной алхимик: Братство",
+      "tagline": "Цена познания",
+      "color": "#efb56e",
+      "theme": "Познание",
+      "portrait": "studio/v23/edward.webp",
+      "portraitSource": "https://anilist.co/character/11",
+      "hero": "studio/v23/edward.webp",
+      "artNote": "Справочный портрет AniList; права на изображение сохранены",
+      "quotes": [
+        {
+          "id": "edward-1",
+          "text": "Безболезненных уроков не бывает.",
+          "original": "There’s no such thing as a painless lesson.",
+          "source": "https://en.wikiquote.org/wiki/Fullmetal_Alchemist:_Brotherhood_(anime)#Journey's_End_[1.64]",
+          "context": "Эпизод 64; фрагмент финальной реплики",
+          "spoiler": true,
+          "verification": "Найдено в указанном вторичном источнике; не сверено с видеодорожкой",
+          "translation": "Редакционный перевод для ANIME VOID; не официальный дубляж"
+        },
+        {
+          "id": "edward-2",
+          "text": "Нельзя ничего получить, не потеряв что-то взамен.",
+          "original": "You can’t gain anything without losing something first",
+          "source": "https://en.wikiquote.org/wiki/Fullmetal_Alchemist:_Brotherhood_(anime)",
+          "context": "Эпизод 64; фрагмент",
+          "spoiler": true,
+          "verification": "Сверено с указанным вторичным источником, не с видео",
+          "translation": "Редакционный перевод; не официальный дубляж"
+        }
+      ]
+    },
+    {
+      "id": "lelouch",
+      "name": "Лелуш Ламперуж",
+      "english": "Lelouch Lamperouge",
+      "work": "Код Гиас",
+      "tagline": "Ход короля",
+      "color": "#c5a0ff",
+      "theme": "Ответственность",
+      "portrait": "studio/v23/lelouch.webp",
+      "portraitSource": "https://anilist.co/character/417",
+      "hero": "studio/v23/lelouch.webp",
+      "artNote": "Справочный портрет AniList; права на изображение сохранены",
+      "quotes": [
+        {
+          "id": "lelouch-1",
+          "text": "Убивать вправе лишь те, кто готов быть убитым.",
+          "original": "The only ones who should kill are those prepared to be killed.",
+          "source": "https://en.wikiquote.org/wiki/Code_Geass",
+          "context": "Раздел Re; реплика Лелуша",
+          "spoiler": true,
+          "verification": "Найдено в указанном вторичном источнике; не сверено с видеодорожкой",
+          "translation": "Редакционный перевод для ANIME VOID; не официальный дубляж"
+        }
+      ]
+    },
+    {
+      "id": "spike",
+      "name": "Спайк Шпигель",
+      "english": "Spike Spiegel",
+      "work": "Ковбой Бибоп",
+      "tagline": "Джаз за пределом",
+      "color": "#9cafda",
+      "theme": "Свобода",
+      "portrait": "studio/v23/spike.webp",
+      "portraitSource": "https://anilist.co/character/1",
+      "hero": "studio/v23/spike.webp",
+      "artNote": "Справочный портрет AniList; права на изображение сохранены",
+      "quotes": [
+        {
+          "id": "spike-1",
+          "text": "Я всего лишь старомодный ковбой.",
+          "original": "I’m just an old-fashioned cowboy.",
+          "source": "https://en.wikiquote.org/wiki/Cowboy_Bebop#Asteroid_Blues_[1.01]",
+          "context": "Эпизод 1, Asteroid Blues",
+          "spoiler": false,
+          "verification": "Найдено в указанном вторичном источнике; не сверено с видеодорожкой",
+          "translation": "Редакционный перевод для ANIME VOID; не официальный дубляж"
+        },
+        {
+          "id": "spike-2",
+          "text": "Моя бабушка умерла до моего рождения.",
+          "original": "My grandmother died before I was born.",
+          "source": "https://en.wikiquote.org/wiki/Cowboy_Bebop",
+          "context": "Эпизод 2, Stray Dog Strut",
+          "spoiler": false,
+          "verification": "Сверено с указанным вторичным источником, не с видео",
+          "translation": "Редакционный перевод; не официальный дубляж"
+        },
+        {
+          "id": "spike-3",
+          "text": "Здесь нет говядины.",
+          "original": "There's no beef in here.",
+          "source": "https://en.wikiquote.org/wiki/Cowboy_Bebop",
+          "context": "Эпизод 1, Asteroid Blues",
+          "spoiler": false,
+          "verification": "Сверено с указанным вторичным источником, не с видео",
+          "translation": "Редакционный перевод; не официальный дубляж"
+        }
+      ]
+    },
+    {
+      "id": "itachi",
+      "name": "Итачи Учиха",
+      "english": "Itachi Uchiha",
+      "work": "Наруто",
+      "tagline": "Тихое обещание",
+      "color": "#d78f9f",
+      "theme": "Дружба",
+      "portrait": "studio/v23/itachi.webp",
+      "portraitSource": "https://anilist.co/character/14",
+      "hero": "studio/v23/itachi.webp",
+      "artNote": "Справочный портрет AniList; права на изображение сохранены",
+      "quotes": [
+        {
+          "id": "itachi-1",
+          "text": "Прости, Саске. Может, в следующий раз.",
+          "original": "Sorry Sasuke, maybe next time.",
+          "source": "https://en.wikiquote.org/wiki/Naruto",
+          "context": "Повторяющаяся реплика",
+          "spoiler": false,
+          "verification": "Найдено во вторичном источнике; не сверено с видеодорожкой",
+          "translation": "Редакционный перевод; не официальный дубляж"
+        }
+      ]
+    },
+    {
+      "id": "shikamaru",
+      "name": "Шикамару Нара",
+      "english": "Shikamaru Nara",
+      "work": "Наруто",
+      "tagline": "На несколько ходов вперёд",
+      "color": "#a7c798",
+      "theme": "Стратегия",
+      "portrait": "studio/v23/shikamaru.webp",
+      "portraitSource": "https://anilist.co/character/2007",
+      "hero": "studio/v23/shikamaru.webp",
+      "artNote": "Справочный портрет AniList; права на изображение сохранены",
+      "quotes": [
+        {
+          "id": "shikamaru-1",
+          "text": "Вот морока.",
+          "original": "What a drag.",
+          "source": "https://en.wikiquote.org/wiki/Naruto",
+          "context": "Повторяющаяся реплика",
+          "spoiler": false,
+          "verification": "Найдено во вторичном источнике; не сверено с видеодорожкой",
+          "translation": "Редакционный перевод; не официальный дубляж"
+        }
+      ]
+    },
+    {
+      "id": "sasuke",
+      "name": "Саске Учиха",
+      "english": "Sasuke Uchiha",
+      "work": "Наруто",
+      "tagline": "Путь возрождения",
+      "color": "#aaa5ee",
+      "theme": "Решимость",
+      "portrait": "studio/v23/sasuke.webp",
+      "portraitSource": "https://anilist.co/character/13",
+      "hero": "studio/v23/sasuke.webp",
+      "artNote": "Справочный портрет AniList; права на изображение сохранены",
+      "quotes": [
+        {
+          "id": "sasuke-1",
+          "text": "То, что у меня есть, — не мечта.",
+          "original": "What I have is not a dream",
+          "source": "https://en.wikiquote.org/wiki/Naruto",
+          "context": "Сезон 1, эпизод 4; короткий фрагмент реплики",
+          "spoiler": false,
+          "verification": "Найдено во вторичном источнике; не сверено с видеодорожкой",
+          "translation": "Редакционный перевод; не официальный дубляж"
+        }
+      ]
+    },
+    {
+      "id": "roy",
+      "name": "Рой Мустанг",
+      "english": "Roy Mustang",
+      "work": "Стальной алхимик: Братство",
+      "tagline": "Дождь внутри",
+      "color": "#c29bdb",
+      "theme": "Выбор",
+      "portrait": "studio/v23/roy.webp",
+      "portraitSource": "https://anilist.co/character/68",
+      "hero": "studio/v23/roy.webp",
+      "artNote": "Справочный портрет AniList; права на изображение сохранены",
+      "quotes": [
+        {
+          "id": "roy-1",
+          "text": "Ужасный день для дождя.",
+          "original": "It’s a terrible day for rain.",
+          "source": "https://en.wikiquote.org/wiki/Fullmetal_Alchemist:_Brotherhood_(anime)",
+          "context": "Эпизод 10, Separate Destinations; фрагмент",
+          "spoiler": true,
+          "verification": "Найдено во вторичном источнике; не сверено с видеодорожкой",
+          "translation": "Редакционный перевод; не официальный дубляж"
+        }
+      ]
+    },
+    {
+      "id": "faye",
+      "name": "Фэй Валентайн",
+      "english": "Faye Valentine",
+      "work": "Ковбой Бибоп",
+      "tagline": "Ставка на свободу",
+      "color": "#e5adce",
+      "theme": "Свобода",
+      "portrait": "studio/v23/faye.webp",
+      "portraitSource": "https://anilist.co/character/2",
+      "hero": "studio/v23/faye.webp",
+      "artNote": "Справочный портрет AniList; права на изображение сохранены",
+      "quotes": [
+        {
+          "id": "faye-1",
+          "text": "Стреляй в них раньше, чем они выстрелят в тебя.",
+          "original": "Shoot them before they shoot you.",
+          "source": "https://en.wikiquote.org/wiki/Cowboy_Bebop",
+          "context": "Эпизод 3; фрагмент реплики о первом правиле боя",
+          "spoiler": false,
+          "verification": "Найдено во вторичном источнике; не сверено с видеодорожкой",
+          "translation": "Редакционный перевод; не официальный дубляж"
+        },
+        {
+          "id": "faye-2",
+          "text": "Шесть миллионов? И это всё, что они предлагают?",
+          "original": "Six million? Is that all they're offering?",
+          "source": "https://en.wikiquote.org/wiki/Cowboy_Bebop",
+          "context": "Эпизод 3, Honky Tonk Women",
+          "spoiler": false,
+          "verification": "Сверено с указанным вторичным источником, не с видео",
+          "translation": "Редакционный перевод; не официальный дубляж"
+        }
+      ]
+    },
+    {
+      "id": "jet",
+      "name": "Джет Блэк",
+      "english": "Jet Black",
+      "work": "Ковбой Бибоп",
+      "tagline": "Опора среди звёзд",
+      "color": "#b1cbdc",
+      "theme": "Ответственность",
+      "portrait": "studio/v23/jet.webp",
+      "portraitSource": "https://anilist.co/character/3",
+      "hero": "studio/v23/jet.webp",
+      "artNote": "Справочный портрет AniList; права на изображение сохранены",
+      "quotes": [
+        {
+          "id": "jet-1",
+          "text": "Только руки могут мыть руки.",
+          "original": "Only hands can wash hands.",
+          "source": "https://en.wikiquote.org/wiki/Cowboy_Bebop",
+          "context": "Эпизод 3; Джет пересказывает собственный сон",
+          "spoiler": false,
+          "verification": "Найдено во вторичном источнике; не сверено с видеодорожкой",
+          "translation": "Редакционный перевод; не официальный дубляж"
+        }
+      ]
+    },
+    {
+      "id": "eren",
+      "name": "Эрен Йегер",
+      "english": "Eren Yeager",
+      "work": "Атака титанов",
+      "tagline": "Рождённый в этом мире",
+      "color": "#93c7b9",
+      "theme": "Свобода",
+      "portrait": "studio/v23/eren.webp",
+      "portraitSource": "https://anilist.co/character/40882",
+      "hero": "studio/v23/eren.webp",
+      "artNote": "Справочный портрет AniList; права на изображение сохранены",
+      "quotes": [
+        {
+          "id": "eren-1",
+          "text": "Потому что я родился в этом мире!",
+          "original": "Because I was born into this world!",
+          "source": "https://en.wikiquote.org/wiki/Attack_on_Titan",
+          "context": "Раздел несистематизированных реплик; эпизод здесь не указан",
+          "spoiler": false,
+          "verification": "Найдено во вторичном источнике; не сверено с видеодорожкой",
+          "translation": "Редакционный перевод; не официальный дубляж"
+        }
+      ]
+    },
+    {
+      "id": "rei",
+      "name": "Рей Аянами",
+      "english": "Rei Ayanami",
+      "work": "Евангелион",
+      "tagline": "Тихая защита",
+      "color": "#94d7ef",
+      "theme": "Дружба",
+      "portrait": "studio/v23/rei.webp",
+      "portraitSource": "https://anilist.co/character/86",
+      "hero": "studio/v23/rei.webp",
+      "artNote": "Справочный портрет AniList; права на изображение сохранены",
+      "quotes": [
+        {
+          "id": "rei-1",
+          "text": "Ты не умрёшь. Я буду тебя защищать.",
+          "original": "You won’t die. I’ll be protecting you.",
+          "source": "https://en.wikiquote.org/wiki/Neon_Genesis_Evangelion",
+          "context": "Эпизод 6, Rei II",
+          "spoiler": false,
+          "verification": "Найдено во вторичном источнике; не сверено с видеодорожкой",
+          "translation": "Редакционный перевод; не официальный дубляж"
+        }
+      ]
+    },
+    {
+      "id": "shinji",
+      "name": "Синдзи Икари",
+      "english": "Shinji Ikari",
+      "work": "Евангелион",
+      "tagline": "Шаг навстречу себе",
+      "color": "#b5b8e4",
+      "theme": "Решимость",
+      "portrait": "studio/v23/shinji.webp",
+      "portraitSource": "https://anilist.co/character/89",
+      "hero": "studio/v23/shinji.webp",
+      "artNote": "Справочный портрет AniList; права на изображение сохранены",
+      "quotes": [
+        {
+          "id": "shinji-1",
+          "text": "Я не должен убегать.",
+          "original": "I mustn't run away.",
+          "source": "https://en.wikiquote.org/wiki/Neon_Genesis_Evangelion",
+          "context": "Повторяющаяся реплика; также эпизод 1",
+          "spoiler": false,
+          "verification": "Найдено во вторичном источнике; не сверено с видеодорожкой",
+          "translation": "Редакционный перевод; не официальный дубляж"
+        }
+      ]
+    },
+    {
+      "id": "luffy",
+      "name": "Монки Д. Луффи",
+      "english": "Monkey D. Luffy",
+      "work": "Ван-Пис",
+      "tagline": "Навстречу горизонту",
+      "color": "#eeae83",
+      "theme": "Свобода",
+      "portrait": "studio/v23/luffy.webp",
+      "portraitSource": "https://anilist.co/character/40",
+      "hero": "studio/v23/luffy.webp",
+      "artNote": "Справочный портрет AniList; права на изображение сохранены",
+      "quotes": [
+        {
+          "id": "luffy-1",
+          "text": "Я стану королём пиратов!",
+          "original": "I'm gonna be King of the Pirates!",
+          "source": "https://en.wikiquote.org/wiki/One_Piece",
+          "context": "Эпизод 53; формулировка источника",
+          "spoiler": false,
+          "verification": "Найдено во вторичном источнике; не сверено с видеодорожкой",
+          "translation": "Редакционный перевод; не официальный дубляж"
+        }
+      ]
+    },
+    {
+      "id": "zoro",
+      "name": "Ророноа Зоро",
+      "english": "Roronoa Zoro",
+      "work": "Ван-Пис",
+      "tagline": "Острие обещания",
+      "color": "#94c8a6",
+      "theme": "Решимость",
+      "portrait": "studio/v23/zoro.webp",
+      "portraitSource": "https://anilist.co/character/62",
+      "hero": "studio/v23/zoro.webp",
+      "artNote": "Справочный портрет AniList; права на изображение сохранены",
+      "quotes": [
+        {
+          "id": "zoro-1",
+          "text": "Лучший мечник в мире.",
+          "original": "The world's best swordsman.",
+          "source": "https://en.wikiquote.org/wiki/One_Piece",
+          "context": "Эпизод 53; ответ о цели путешествия",
+          "spoiler": false,
+          "verification": "Найдено во вторичном источнике; не сверено с видеодорожкой",
+          "translation": "Редакционный перевод; не официальный дубляж"
+        }
+      ]
+    },
+    {
+      "id": "nami",
+      "name": "Нами",
+      "english": "Nami",
+      "work": "Ван-Пис",
+      "tagline": "Карта мечты",
+      "color": "#f0bf80",
+      "theme": "Познание",
+      "portrait": "studio/v23/nami.webp",
+      "portraitSource": "https://anilist.co/character/723",
+      "hero": "studio/v23/nami.webp",
+      "artNote": "Справочный портрет AniList; права на изображение сохранены",
+      "quotes": [
+        {
+          "id": "nami-1",
+          "text": "Я отправляюсь, чтобы нарисовать карту всего мира.",
+          "original": "I'm going so I can draw a map of the entire world.",
+          "source": "https://en.wikiquote.org/wiki/One_Piece",
+          "context": "Эпизод 53",
+          "spoiler": false,
+          "verification": "Найдено во вторичном источнике; не сверено с видеодорожкой",
+          "translation": "Редакционный перевод; не официальный дубляж"
+        }
+      ]
+    },
+    {
+      "id": "sanji",
+      "name": "Санджи",
+      "english": "Sanji",
+      "work": "Ван-Пис",
+      "tagline": "За мечтой об All Blue",
+      "color": "#ded293",
+      "theme": "Свобода",
+      "portrait": "studio/v23/sanji.webp",
+      "portraitSource": "https://anilist.co/character/305",
+      "hero": "studio/v23/sanji.webp",
+      "artNote": "Справочный портрет AniList; права на изображение сохранены",
+      "quotes": [
+        {
+          "id": "sanji-1",
+          "text": "Я отправляюсь на Гранд Лайн, чтобы найти All Blue!",
+          "original": "I'm going to the Grand Line to find the All Blue!",
+          "source": "https://en.wikiquote.org/wiki/One_Piece",
+          "context": "Эпизод 53",
+          "spoiler": false,
+          "verification": "Найдено во вторичном источнике; не сверено с видеодорожкой",
+          "translation": "Редакционный перевод; не официальный дубляж"
+        }
+      ]
+    },
+    {
+      "id": "sakura",
+      "name": "Сакура Харуно",
+      "english": "Sakura Haruno",
+      "work": "Наруто",
+      "tagline": "Внутренний голос",
+      "color": "#ee9cc0",
+      "theme": "Решимость",
+      "portrait": "studio/v23/sakura.webp",
+      "hero": "studio/v23/sakura.webp",
+      "portraitSource": "https://anilist.co/character/145",
+      "artNote": "Справочный портрет AniList; права сохранены",
+      "quotes": [
+        {
+          "id": "sakura-1",
+          "text": "Ча!",
+          "original": "Cha!",
+          "source": "https://en.wikiquote.org/wiki/Naruto",
+          "context": "Повторяющаяся реплика английского дубляжа",
+          "spoiler": false,
+          "verification": "Вторичный источник, не сверено с видеодорожкой",
+          "translation": "Редакционный перевод; не официальный дубляж"
+        }
+      ]
+    },
+    {
+      "id": "misa",
+      "name": "Миса Аманэ",
+      "english": "Misa Amane",
+      "work": "Тетрадь смерти",
+      "tagline": "Сила чувств",
+      "color": "#dca4d6",
+      "theme": "Решимость",
+      "portrait": "studio/v23/misa.webp",
+      "hero": "studio/v23/misa.webp",
+      "portraitSource": "https://anilist.co/character/835",
+      "artNote": "Справочный портрет AniList; права сохранены",
+      "quotes": [
+        {
+          "id": "misa-1",
+          "text": "Не могу представить мир без Лайта!",
+          "original": "I can't imagine a world without Light!",
+          "source": "https://en.wikiquote.org/wiki/Death_Note",
+          "context": "Эпизод 37 в источнике",
+          "spoiler": true,
+          "verification": "Вторичный источник, не сверено с видеодорожкой",
+          "translation": "Редакционный перевод; не официальный дубляж"
+        }
+      ]
+    }
+  ]
+}

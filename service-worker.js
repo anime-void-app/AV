@@ -1,19 +1,19 @@
 /* ANIME VOID — service worker: установка как приложение + офлайн-режим */
 
-const CORE_CACHE = "av-AV-core-v19-profile";
+const CORE_CACHE = "av-AV-core-v23-unified";
 const IMAGE_CACHE = "av-AV-images-v3";
 const IMAGE_CACHE_LIMIT = 80;
 const AUDIO_CACHE = "av-AV-audio-v1";
-const LICENSED_AUDIO = {"audio/japan-rain-v18.mp3": "e8adbedb517c7c30837ac4046dd9d1df3bfc6f98b53e6730af3b07d45b6e9220", "audio/night-forest-v18.mp3": "97a6b3e8973636796c9dd5821b827c94ddcdf6bf33f997ad639e2f6fad3d674b", "audio/train-v18.mp3": "c9dd82787d3846c17cde46b2f8d7b0dba4055d12c35557d26a830f88e483bfe1", "audio/hokkaido-v18.mp3": "8e1678c2f3b594303658e9d60e208cd8be90a5256f948ed1b205457ac53a04ea", "audio/rain-wind-v18.mp3": "f8250ba7c86da6a1acdda757b099beb01e37e1ec64b68f2fa33fc17e8f1028fb", "audio/stream-v18.mp3": "ecbf0faa79d994eb2e975a65684e346d5b428b94e0a91f8735bacf93cf521e68", "audio/forest-water-v18.mp3": "d46547199952e9d64c32a42db23a49511f8d45b3cffad2a6165b2395e31bd8f7"};
+const LICENSED_AUDIO = {"audio/japan-rain-v18.mp3": "e8adbedb517c7c30837ac4046dd9d1df3bfc6f98b53e6730af3b07d45b6e9220", "audio/night-forest-v18.mp3": "97a6b3e8973636796c9dd5821b827c94ddcdf6bf33f997ad639e2f6fad3d674b", "audio/train-v18.mp3": "c9dd82787d3846c17cde46b2f8d7b0dba4055d12c35557d26a830f88e483bfe1", "audio/hokkaido-v18.mp3": "8e1678c2f3b594303658e9d60e208cd8be90a5256f948ed1b205457ac53a04ea", "audio/rain-wind-v18.mp3": "f8250ba7c86da6a1acdda757b099beb01e37e1ec64b68f2fa33fc17e8f1028fb", "audio/stream-v18.mp3": "ecbf0faa79d994eb2e975a65684e346d5b428b94e0a91f8735bacf93cf521e68", "audio/forest-water-v18.mp3": "d46547199952e9d64c32a42db23a49511f8d45b3cffad2a6165b2395e31bd8f7", "audio/river-v21.mp3": "67d7d1552ba3221d1e63d58f57f502ac912db40e4ddf2ed126b10d53d4a68e19", "audio/window-v21.mp3": "8b7a8e3b680e45c8a166f04892ec72cebcbe096fcdd61b906896d5a30d961e86", "audio/distant-train-v21.mp3": "c7834558523fd5b1fcbe867b2c3495d8c269ca106fa33529086b76e43d039844", "audio/rail-rain-v21.mp3": "0de84d6f79ebe042e6a2e7004f9f25221b056d959a068f35bc3d8c6054296f62", "audio/carefree-v21.mp3": "76adb4b946dac28afe5df1b2d21b743bc4bb4ce5ed1c77daf4aba4b8f9f63948", "audio/guitar-sun-v21.mp3": "c5977e14b4b829915c12ef05638debc3298ba06a64ee5b6c9cbe5a7febbef2c1", "audio/easy-lemon-v21.mp3": "6ff9bece34d27492e63b5f9bd7a0ad272e8f63e51ff2deb547ba415288115b80", "audio/guitar-night-v21.mp3": "fbb509100709795ad6c6e920b791f67bfb876e710bc9e0e5bb7857530412b519"};
 
 
-const NEW_CORE = ["./void-legacy-layout.css?v=18.1","./void-title-layout.css?v=18.1","./void-watch-layout.css?v=18.1","./void-community-layout.css?v=18.1","./void-profile-layout.css?v=18.1","./void-display-charts.js?v=18.1","./void-display-charts.css?v=18.1","./eras.html","./void-eras.js?v=18.1","./void-eras.css?v=18.1","./collections.html","./void-collections.js?v=18.1","./void-collections.css?v=18.1","./void-evolution.js?v=18.1","./void-evolution.css?v=18.1","./taste.html","./void-taste.js?v=18.1","./void-taste.css?v=18.1","./explore.html","./void-explore.js?v=18.1","./void-explore.css?v=18.1","./secrets.html","./void-secrets.js?v=18.1","./void-secrets.css?v=18.1","./festivals.html","./void-festivals.js?v=18.1","./void-festivals.css?v=18.1","./studios.html","./void-studios.js?v=18.1","./void-studios-data.js?v=18.1","./void-studios.css?v=18.1","./music.html","./void-music.js?v=18.1","./void-music.css?v=18.1","./story-dna.html","./void-story-dna.js?v=18.1","./void-story-dna.css?v=18.1","./anime-a-silent-voice.html","./anime-attack-on-titan.html","./anime-bakemonogatari.html","./anime-death-note.html","./anime-demon-slayer.html","./anime-hunter-x-hunter.html","./anime-jujutsu-kaisen.html","./anime-my-hero-academia.html","./anime-one-piece.html","./anime-one-punch-man.html","./void-catalog-view.js?v=18.1","./void-daily-card.js?v=18.1","./void-daily-card.css?v=18.1","./void-title-scene.js?v=18.1","./void-title-scene.css?v=18.1","./void-title-accent.js?v=18.1","./void-title-accent.css?v=18.1","./void-tv.js?v=18.1","./void-tv.css?v=18.1","./av-atmosphere.js?v=19","./av-atmosphere.css?v=16.6","./audio-sources.html","./field-recordings-v18.json","./void-reading-stats.js?v=18.1","./void-reading-stats.css?v=18.1","./av-progress.js?v=18.1","./av-progress.css?v=18.1","./void-reader-bookmarks.js?v=18.1","./void-lexicon.js?v=18.1","./quotes.html","./void-quotes.js?v=18.1","./void-quotes.css?v=18.1","./av-rewards.js?v=18.1","./profile-studio.js?v=19","./av-state.js?v=18.1","./void-social.js?v=19","./void-social.css?v=18.1","./void-dashboard.js?v=18.1","./void-dashboard.css?v=18.1","./journal.html","./void-journal.js?v=18.1","./void-journal.css?v=18.1","./reading.html","./reading.css","./reading.js","./vendor/fflate.js","./void-interface.js?v=18.1","./void-interface.css?v=18.1","./av-safety.js?v=19"];
-const CORE_FILES = [
-"./av-shell.js?v=19","./void-profile-next.js?v=19","./void-profile-next.css?v=19","./void-messages.js?v=19","./void-messages.css?v=19","./messages.html","./studio/v19/neon-rain.webp","./studio/v19/neon-rain-thumb.webp","./studio/v19/moon-sanctuary.webp","./studio/v19/moon-sanctuary-thumb.webp","./studio/v19/void-orbit.webp","./studio/v19/void-orbit-thumb.webp",
+const NEW_CORE = ["./void-legacy-layout.css?v=18.1","./void-title-layout.css?v=18.1","./void-watch-layout.css?v=18.1","./void-community-layout.css?v=18.1","./void-profile-layout.css?v=18.1","./void-display-charts.js?v=18.1","./void-display-charts.css?v=18.1","./eras.html","./void-eras.js?v=18.1","./void-eras.css?v=18.1","./collections.html","./void-collections.js?v=18.1","./void-collections.css?v=18.1","./void-evolution.js?v=18.1","./void-evolution.css?v=18.1","./taste.html","./void-taste.js?v=18.1","./void-taste.css?v=18.1","./explore.html","./void-explore.js?v=18.1","./void-explore.css?v=18.1","./secrets.html","./void-secrets.js?v=18.1","./void-secrets.css?v=18.1","./festivals.html","./void-festivals.js?v=18.1","./void-festivals.css?v=18.1","./studios.html","./void-studios.js?v=18.1","./void-studios-data.js?v=18.1","./void-studios.css?v=18.1","./music.html","./void-music.js?v=18.1","./void-music.css?v=18.1","./story-dna.html","./void-story-dna.js?v=18.1","./void-story-dna.css?v=18.1","./anime-a-silent-voice.html","./anime-attack-on-titan.html","./anime-bakemonogatari.html","./anime-death-note.html","./anime-demon-slayer.html","./anime-hunter-x-hunter.html","./anime-jujutsu-kaisen.html","./anime-my-hero-academia.html","./anime-one-piece.html","./anime-one-punch-man.html","./void-catalog-view.js?v=18.1","./void-daily-card.js?v=18.1","./void-daily-card.css?v=18.1","./void-title-scene.js?v=18.1","./void-title-scene.css?v=18.1","./void-title-accent.js?v=18.1","./void-title-accent.css?v=18.1","./void-tv.js?v=18.1","./void-tv.css?v=18.1","./av-atmosphere.js?v=21","./av-atmosphere.css?v=16.6","./audio-sources.html","./field-recordings-v18.json","./void-reading-stats.js?v=18.1","./void-reading-stats.css?v=18.1","./av-progress.js?v=18.1","./av-progress.css?v=18.1","./void-reader-bookmarks.js?v=18.1","./void-lexicon.js?v=18.1","./quotes.html","./void-quotes.js?v=18.1","./void-quotes.css?v=18.1","./av-rewards.js?v=22","./profile-studio.js?v=23","./av-state.js?v=18.1","./void-social.js?v=23","./void-social.css?v=18.1","./void-dashboard.js?v=18.1","./void-dashboard.css?v=18.1","./journal.html","./void-journal.js?v=18.1","./void-journal.css?v=18.1","./reading.html","./reading.css?v=23","./reading.js?v=23","./vendor/fflate.js","./void-interface.js?v=23","./void-interface.css?v=18.1","./av-safety.js?v=23"];
+const CORE_FILES = [...new Set(["./void-vip-23.js?v=23", "./void-vip-23.css?v=23", "./studio/v23/vip-snow-shrine.webp", "./studio/v23/vip-b.webp", "./studio/v23/public-samurai-storm.webp", "./studio/v23/shikamaru.webp", "./studio/v23/vip-samurai-emperor.webp", "./studio/v23/levi-hero.webp", "./studio/v23/sanji.webp", "./studio/v23/l.webp", "./studio/v23/nami.webp", "./studio/v23/vip-a.webp", "./studio/v23/sasuke.webp", "./studio/v23/roy.webp", "./studio/v23/zoro.webp", "./studio/v23/spike.webp", "./studio/v23/naruto.webp", "./studio/v23/vip-anime-spirit.webp", "./studio/v23/public-swords-shrine.webp", "./studio/v23/vip-crimson.webp", "./studio/v23/armin.webp", "./studio/v23/vip-samurai-snowblade.webp", "./studio/v23/misa.webp", "./studio/v23/lelouch.webp", "./studio/v23/public-samurai-sakura.webp", "./studio/v23/levi.webp", "./studio/v23/kakashi.webp", "./studio/v23/vip-astral.webp", "./studio/v23/sakura.webp", "./studio/v23/vip-prism.webp", "./studio/v23/vip-anime-dream.webp", "./studio/v23/shinji.webp", "./studio/v23/faye.webp", "./studio/v23/eren.webp", "./studio/v23/jet.webp", "./studio/v23/ayanokoji-hero.webp", "./studio/v23/light.webp", "./studio/v23/rei.webp", "./studio/v23/erwin.webp", "./studio/v23/luffy.webp", "./studio/v23/l-hero.webp", "./studio/v23/itachi.webp", "./studio/v23/edward.webp", "./studio/v23/ayanokoji.webp", "./studio/v23/vip-snow-palace.webp","./manga.html", "./void-library-23.css?v=23", "./void-quotes-23.js?v=23", "./void-manga-23.js?v=23", "./void-reader-23.js?v=23", "./character-quotes-23.json?v=23", "./manga-catalog-23.json?v=23", "./studio/v23/pepper-1-1.jpg", "./studio/v23/shikamaru.webp", "./studio/v23/pepper-1-2.jpg", "./studio/v23/levi-hero.webp", "./studio/v23/pepper-1-3.jpg", "./studio/v23/sanji.webp", "./studio/v23/l.webp", "./studio/v23/nami.webp", "./studio/v23/pepper-2-1.jpg", "./studio/v23/sasuke.webp", "./studio/v23/roy.webp", "./studio/v23/zoro.webp", "./studio/v23/spike.webp", "./studio/v23/naruto.webp", "./studio/v23/pepper-2-0.jpg", "./studio/v23/armin.webp", "./studio/v23/misa.webp", "./studio/v23/lelouch.webp", "./studio/v23/pepper-2-6.jpg", "./studio/v23/levi.webp", "./studio/v23/kakashi.webp", "./studio/v23/sakura.webp", "./studio/v23/shinji.webp", "./studio/v23/faye.webp", "./studio/v23/eren.webp", "./studio/v23/jet.webp", "./studio/v23/ayanokoji-hero.webp", "./studio/v23/light.webp", "./studio/v23/rei.webp", "./studio/v23/erwin.webp", "./studio/v23/pepper-2-3.jpg", "./studio/v23/pepper-2-5.jpg", "./studio/v23/pepper-1-4.jpg", "./studio/v23/pepper-2-4.jpg", "./studio/v23/luffy.webp", "./studio/v23/pepper-2-2.jpg", "./studio/v23/l-hero.webp", "./studio/v23/itachi.webp", "./studio/v23/edward.webp", "./studio/v23/pepper-1-0.jpg", "./studio/v23/ayanokoji.webp", "./studio/v23/SOURCES.json","./void-achievements-22.js?v=22","./void-achievements-22.css?v=22","./profile-catalog.json?v=23","./void-messenger-21.css?v=21","./void-people-21.js?v=23","./studio/v21/forest4.webp","./studio/v21/beach2.webp","./studio/v21/forest1.webp","./studio/v21/forest2.webp","./studio/v21/avatar12.webp","./studio/v21/avatar23.webp","./studio/v21/love-triangle.webp","./studio/v21/avatar18.webp","./studio/v21/avatar17.webp","./studio/v21/beach4.webp","./studio/v21/avatar20.webp","./studio/v21/avatar15.webp","./studio/v21/uneon.webp","./studio/v21/beach3.webp","./studio/v21/spring.webp","./studio/v21/avatar19.webp","./studio/v21/avatar11.webp","./studio/v21/avatar14.webp","./studio/v21/forest3.webp","./studio/v21/avatar24.webp","./studio/v21/avatar22.webp","./studio/v21/avatar21.webp","./studio/v21/avatar16.webp","./studio/v21/beach1.webp","./studio/v21/avatar13.webp","./void-profile-20.js?v=23","./void-profile-20.css?v=20","./studio/v20/avatar7.webp","./studio/v20/avatar2.webp","./studio/v20/the-void.webp","./studio/v20/avatar4.webp","./studio/v20/avatar10.webp","./studio/v20/japan2.webp","./studio/v20/japan4.webp","./studio/v20/japan3.webp","./studio/v20/great-forest-spirit.webp","./studio/v20/starry-night.webp","./studio/v20/japan1.webp","./studio/v20/avatar5.webp","./studio/v20/avatar1.webp","./studio/v20/avatar9.webp","./studio/v20/interstella.webp","./studio/v20/avatar8.webp","./studio/v20/avatar3.webp","./studio/v20/avatar6.webp",
+"./av-shell.js?v=21","./void-profile-next.js?v=23","./void-profile-next.css?v=19","./void-messages.js?v=21","./void-messages.css?v=19","./messages.html","./studio/v19/neon-rain.webp","./studio/v19/neon-rain-thumb.webp","./studio/v19/moon-sanctuary.webp","./studio/v19/moon-sanctuary-thumb.webp","./studio/v19/void-orbit.webp","./studio/v19/void-orbit-thumb.webp",
   ...NEW_CORE,
-  "./visual-studio.js?v=19",
+  "./visual-studio.js?v=20",
   "./visual-studio.css?v=17.4",
-  "./visual-gallery.json?v=19",
+  "./visual-gallery.json?v=20",
   "./visual-avatars.json",
   "./studio/avatars/dusk-her.webp",
   "./studio/avatars/cosmic-pilot.svg",
@@ -33,13 +33,13 @@ const CORE_FILES = [
   "./watch.html",
   "./profile.html",
   "./profile-studio.css?v=17.2",
-  "./profile-studio.js?v=19",
-  "./profile-catalog.json?v=19",
+  "./profile-studio.js?v=23",
+  "./profile-catalog.json?v=23",
   "./studio-config.js?v=17.0",
-  "./av-safety.js?v=19",
+  "./av-safety.js?v=23",
   "./av-titles.js?v=20261030-2",
   "./av-state.js?v=18.1",
-  "./av-atmosphere.js?v=19",
+  "./av-atmosphere.js?v=21",
   "./av-atmosphere.css?v=16.6",
   "./av-design.css?v=17.0",
   "./av-design.js?v=17.0",
@@ -55,9 +55,9 @@ const CORE_FILES = [
   "./manifest.json",
   "./icon-192.png",
   "./icon-512.png",
-  "./banner-atelier.js?v=19",
+  "./banner-atelier.js?v=21",
   "./banner-atelier.css?v=17.3",
-  "./atelier-catalog.json?v=19",
+  "./atelier-catalog.json?v=21",
   "./art-credits.html",
   "./supabase-client.js?v=2.49.8",
   "./studio/atelier/healer.webp",
@@ -110,10 +110,10 @@ const CORE_FILES = [
   "./studio/atelier/shichimi-thumb.webp",
   "./community.html",
   "./void-custom.js?v=17.4.1",
-  "./void-social.js?v=19",
+  "./void-social.js?v=23",
   "./void-social.css?v=18.1",
   "./community-rules.html"
-];
+])];
 
 self.addEventListener("install", (event) => {
   event.waitUntil(
@@ -151,7 +151,7 @@ self.addEventListener("fetch", (event) => {
   }
 
   // Animated banners are optional streamed media; never cache partial Range responses.
-  if (url.origin === self.location.origin && url.pathname.includes('/studio/v19/') && url.pathname.endsWith('.mp4')) return;
+  if (url.origin === self.location.origin && url.pathname.includes('/studio/') && /\.(mp4|mp3)$/.test(url.pathname)) return;
 
   // Bundled decorative art is immutable within this cache version: avoid dozens of
   // redundant network requests and interrupted in-flight images when going offline.

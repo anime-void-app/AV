@@ -1,0 +1,16 @@
+# Replace this hostname with your real API domain and point its DNS to the server.
+api.your-domain.ru {
+    request_body {
+        max_size 3MB
+    }
+    header {
+        X-Content-Type-Options nosniff
+        Strict-Transport-Security "max-age=31536000"
+        Referrer-Policy no-referrer
+        -Server
+    }
+    reverse_proxy 127.0.0.1:8128 {
+        header_up X-Forwarded-Proto https
+        header_up X-Forwarded-For {remote_host}
+    }
+}

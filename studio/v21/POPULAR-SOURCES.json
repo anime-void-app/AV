@@ -1,0 +1,27 @@
+{
+  "checkedOn": "2026-11-01",
+  "mode": "External visible player only; explicit click; no media download or rehosting",
+  "notCharts": true,
+  "songs": [
+    {
+      "title": "YOASOBI — Idol",
+      "url": "https://www.youtube.com/watch?v=ZRtdQ81jPUQ"
+    },
+    {
+      "title": "Ado — Show",
+      "url": "https://www.youtube.com/watch?v=pgXpM4l_MwI"
+    },
+    {
+      "title": "KORDHELL — Murder In My Mind",
+      "url": "https://www.youtube.com/watch?v=w-sQRS-Lc9k"
+    },
+    {
+      "title": "JVKE — golden hour",
+      "url": "https://www.youtube.com/watch?v=PEM0Vs8jf1w"
+    },
+    {
+      "title": "Laufey — From The Start",
+      "url": "https://www.youtube.com/watch?v=lSD_L-xic9o"
+    }
+  ]
+}

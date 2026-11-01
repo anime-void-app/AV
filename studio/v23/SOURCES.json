@@ -1,0 +1,540 @@
+{
+  "checkedOn": "2026-11-01",
+  "characterPortraits": {
+    "ayanokoji": {
+      "id": 123212,
+      "name": {
+        "full": "Kiyotaka Ayanokouji"
+      },
+      "image": {
+        "large": "https://s4.anilist.co/file/anilistcdn/character/large/b123212-ewZgUQr9vvEM.png"
+      },
+      "siteUrl": "https://anilist.co/character/123212",
+      "asset": "studio/v23/ayanokoji.webp",
+      "imageSource": "https://s4.anilist.co/file/anilistcdn/character/large/b123212-ewZgUQr9vvEM.png",
+      "sha256": "62afaca5f613cb42854b74eae5d6c523592da261016be383e546da7353349447",
+      "rights": "Character portrait from AniList, underlying artwork copyright retained; illustrative character reference, not CC0 or original site art.",
+      "originalSha256": "5d01eea0e95cf5034fdfdff485336551a33059a27a0ff0b532ee22c52afd12e0",
+      "changes": "Downscaled to at most 240×360 and encoded WebP; no generative edits."
+    },
+    "naruto": {
+      "id": 17,
+      "name": {
+        "full": "Naruto Uzumaki"
+      },
+      "image": {
+        "large": "https://s4.anilist.co/file/anilistcdn/character/large/b17-phjcWCkRuIhu.png"
+      },
+      "siteUrl": "https://anilist.co/character/17",
+      "asset": "studio/v23/naruto.webp",
+      "imageSource": "https://s4.anilist.co/file/anilistcdn/character/large/b17-phjcWCkRuIhu.png",
+      "sha256": "92671364423ebe9f84198dfb2f9548a9a41ef04b5f5de9aa93d805f182f3aa51",
+      "rights": "Character portrait from AniList, underlying artwork copyright retained; illustrative character reference, not CC0 or original site art.",
+      "originalSha256": "619cb2110126fb07e5aa9d8e3c5c7c0d6578e23a9f6eadc53975b89eb923a793",
+      "changes": "Downscaled to at most 240×360 and encoded WebP; no generative edits."
+    },
+    "kakashi": {
+      "id": 85,
+      "name": {
+        "full": "Kakashi Hatake"
+      },
+      "image": {
+        "large": "https://s4.anilist.co/file/anilistcdn/character/large/b85-mkVBh2yjxjmx.png"
+      },
+      "siteUrl": "https://anilist.co/character/85",
+      "asset": "studio/v23/kakashi.webp",
+      "imageSource": "https://s4.anilist.co/file/anilistcdn/character/large/b85-mkVBh2yjxjmx.png",
+      "sha256": "3b6115e9d1218184ef5cb00e9c8280b34a39a0f73ac24c19b05a88dd261e3af2",
+      "rights": "Character portrait from AniList, underlying artwork copyright retained; illustrative character reference, not CC0 or original site art.",
+      "originalSha256": "e86f0ddd76194c8d99affd31f711b56799b995b80440e66df82198869fbe70f2",
+      "changes": "Downscaled to at most 240×360 and encoded WebP; no generative edits."
+    },
+    "l": {
+      "id": 71,
+      "name": {
+        "full": "L Lawliet"
+      },
+      "image": {
+        "large": "https://s4.anilist.co/file/anilistcdn/character/large/b71-1W4panC53vfs.png"
+      },
+      "siteUrl": "https://anilist.co/character/71",
+      "asset": "studio/v23/l.webp",
+      "imageSource": "https://s4.anilist.co/file/anilistcdn/character/large/b71-1W4panC53vfs.png",
+      "sha256": "aff1160caaf2fefe14bf906aa498313f3cef43e5ab444b72212f3b72cb9d88a2",
+      "rights": "Character portrait from AniList, underlying artwork copyright retained; illustrative character reference, not CC0 or original site art.",
+      "originalSha256": "44ae0ad2554c33467c61231ea680108bc4a6e7d96a07b5b387c2f7b058442b96",
+      "changes": "Downscaled to at most 240×360 and encoded WebP; no generative edits."
+    },
+    "light": {
+      "id": 80,
+      "name": {
+        "full": "Light Yagami"
+      },
+      "image": {
+        "large": "https://s4.anilist.co/file/anilistcdn/character/large/b80-26EhwSsSqQ50.png"
+      },
+      "siteUrl": "https://anilist.co/character/80",
+      "asset": "studio/v23/light.webp",
+      "imageSource": "https://s4.anilist.co/file/anilistcdn/character/large/b80-26EhwSsSqQ50.png",
+      "sha256": "7f0d806b5f46adb74165b4c5bbab5b645644e797cd79847ed3bfe0d26c499fcf",
+      "rights": "Character portrait from AniList, underlying artwork copyright retained; illustrative character reference, not CC0 or original site art.",
+      "originalSha256": "caa593d6edc70eb6ebaac1cceff79f2c3db3d31006118d8f484da2242d2a8c3e",
+      "changes": "Downscaled to at most 240×360 and encoded WebP; no generative edits."
+    },
+    "levi": {
+      "id": 45627,
+      "name": {
+        "full": "Levi"
+      },
+      "image": {
+        "large": "https://s4.anilist.co/file/anilistcdn/character/large/b45627-CR68RyZmddGG.png"
+      },
+      "siteUrl": "https://anilist.co/character/45627",
+      "asset": "studio/v23/levi.webp",
+      "imageSource": "https://s4.anilist.co/file/anilistcdn/character/large/b45627-CR68RyZmddGG.png",
+      "sha256": "2850c8d56e64e95e569ac74c568b71183200088b46e3d2b7a1f4a855d25efbe3",
+      "rights": "Character portrait from AniList, underlying artwork copyright retained; illustrative character reference, not CC0 or original site art.",
+      "originalSha256": "d8ee6604c5c51dc53a394156a74d9cd1f0263c1b14455dadc999a96ce4eaab52",
+      "changes": "Downscaled to at most 240×360 and encoded WebP; no generative edits."
+    },
+    "erwin": {
+      "id": 46496,
+      "name": {
+        "full": "Erwin Smith"
+      },
+      "image": {
+        "large": "https://s4.anilist.co/file/anilistcdn/character/large/b46496-Mu86MENd5wNB.png"
+      },
+      "siteUrl": "https://anilist.co/character/46496",
+      "asset": "studio/v23/erwin.webp",
+      "imageSource": "https://s4.anilist.co/file/anilistcdn/character/large/b46496-Mu86MENd5wNB.png",
+      "sha256": "8380044c6fba3596539071cebe62136f04162445f5978eff9572af5e761d470c",
+      "rights": "Character portrait from AniList, underlying artwork copyright retained; illustrative character reference, not CC0 or original site art.",
+      "originalSha256": "57a32c7378845dfeb2f50a231f40b15c6e8efc1b65d6b34deb8670be06661947",
+      "changes": "Downscaled to at most 240×360 and encoded WebP; no generative edits."
+    },
+    "armin": {
+      "id": 46494,
+      "name": {
+        "full": "Armin Arlert"
+      },
+      "image": {
+        "large": "https://s4.anilist.co/file/anilistcdn/character/large/b46494-g7xYYuBtYPnO.png"
+      },
+      "siteUrl": "https://anilist.co/character/46494",
+      "asset": "studio/v23/armin.webp",
+      "imageSource": "https://s4.anilist.co/file/anilistcdn/character/large/b46494-g7xYYuBtYPnO.png",
+      "sha256": "9aa04e402f7ad9d1c72d46cd4d06210a74d7aab0a7591592346177d705984842",
+      "rights": "Character portrait from AniList, underlying artwork copyright retained; illustrative character reference, not CC0 or original site art.",
+      "originalSha256": "0fd857a4082ddd9d12e5bda604350f95de90743f586d6c2e7d33b74f0b641a8c",
+      "changes": "Downscaled to at most 240×360 and encoded WebP; no generative edits."
+    },
+    "edward": {
+      "id": 11,
+      "name": {
+        "full": "Edward Elric"
+      },
+      "image": {
+        "large": "https://s4.anilist.co/file/anilistcdn/character/large/b11-TA5Nuk7EDUZG.jpg"
+      },
+      "siteUrl": "https://anilist.co/character/11",
+      "asset": "studio/v23/edward.webp",
+      "imageSource": "https://s4.anilist.co/file/anilistcdn/character/large/b11-TA5Nuk7EDUZG.jpg",
+      "sha256": "35e2cba048d920d6c554117a0b74dd3dbbbc5e67e159e42be31c360eedc4ab85",
+      "rights": "Character portrait from AniList, underlying artwork copyright retained; illustrative character reference, not CC0 or original site art.",
+      "originalSha256": "27470233cf975bd88f6dddf6140c10e602c45d1b769e255e339846b1253216a5",
+      "changes": "Downscaled to at most 240×360 and encoded WebP; no generative edits."
+    },
+    "lelouch": {
+      "id": 417,
+      "name": {
+        "full": "Lelouch Lamperouge"
+      },
+      "image": {
+        "large": "https://s4.anilist.co/file/anilistcdn/character/large/b417-gVLmIJu9phcK.png"
+      },
+      "siteUrl": "https://anilist.co/character/417",
+      "asset": "studio/v23/lelouch.webp",
+      "imageSource": "https://s4.anilist.co/file/anilistcdn/character/large/b417-gVLmIJu9phcK.png",
+      "sha256": "2a7c2ce4abafd17def473ef337ad61afb324ce7763bba6e5cfcc77d831c08160",
+      "rights": "Character portrait from AniList, underlying artwork copyright retained; illustrative character reference, not CC0 or original site art.",
+      "originalSha256": "45b42c53bc0aa17c3d937038ac8a409c433762c11fcdd1cd0e0dea0c21190ccd",
+      "changes": "Downscaled to at most 240×360 and encoded WebP; no generative edits."
+    },
+    "spike": {
+      "id": 1,
+      "name": {
+        "full": "Spike Spiegel"
+      },
+      "image": {
+        "large": "https://s4.anilist.co/file/anilistcdn/character/large/b1-ChxaldmieFlQ.png"
+      },
+      "siteUrl": "https://anilist.co/character/1",
+      "asset": "studio/v23/spike.webp",
+      "imageSource": "https://s4.anilist.co/file/anilistcdn/character/large/b1-ChxaldmieFlQ.png",
+      "sha256": "75ea5f09048d1d207e782c8080e06311b08db4a889d15cd4089568a835389179",
+      "rights": "Character portrait from AniList, underlying artwork copyright retained; illustrative character reference, not CC0 or original site art.",
+      "originalSha256": "6e4a11fc022d7d63970dfc37d39c0d9cb2829faededb8c0ae7829ac7f6ef54cb",
+      "changes": "Downscaled to at most 240×360 and encoded WebP; no generative edits."
+    },
+    "itachi": {
+      "asset": "studio/v23/itachi.webp",
+      "siteUrl": "https://anilist.co/character/14",
+      "name": "Itachi Uchiha",
+      "imageSource": "https://s4.anilist.co/file/anilistcdn/character/large/b14-9Kb1E5oel1ke.png",
+      "sha256": "590e125650e337201dad78df9810b382f5c30b7fc9f7e64a9c3ad5df920a6938",
+      "originalSha256": "85f0aa837eef41bd19af2fee6d04aa7de52797d393af718f97ff5c159e65456f",
+      "changes": "Downscaled and WebP encoded; no generative edits",
+      "rights": "Illustrative AniList character portrait, underlying copyright retained; not CC0."
+    },
+    "shikamaru": {
+      "asset": "studio/v23/shikamaru.webp",
+      "siteUrl": "https://anilist.co/character/2007",
+      "name": "Shikamaru Nara",
+      "imageSource": "https://s4.anilist.co/file/anilistcdn/character/large/b2007-QaesJlIZDifj.jpg",
+      "sha256": "31001965d8ac6438963c646358510d48e6fe59ca6e07d2592634031bb8def822",
+      "originalSha256": "685933f7f87845f8a3fd9b7b49bac282dfd644a1d635390216b11f09065aa9dc",
+      "changes": "Downscaled and WebP encoded; no generative edits",
+      "rights": "Illustrative AniList character portrait, underlying copyright retained; not CC0."
+    },
+    "sasuke": {
+      "asset": "studio/v23/sasuke.webp",
+      "siteUrl": "https://anilist.co/character/13",
+      "name": "Sasuke Uchiha",
+      "imageSource": "https://s4.anilist.co/file/anilistcdn/character/large/b13-SISLEw1oAD7a.png",
+      "sha256": "348715dbb404a6bc3277b9b922f1b5dd57e4023b6312abebffc8bd92d649a613",
+      "originalSha256": "daa8536c430c44b7bd16253a3cc5185a052ed7c070168f2bc30b5e5d3a670a5f",
+      "changes": "Downscaled and WebP encoded; no generative edits",
+      "rights": "Illustrative AniList character portrait, underlying copyright retained; not CC0."
+    },
+    "roy": {
+      "asset": "studio/v23/roy.webp",
+      "siteUrl": "https://anilist.co/character/68",
+      "name": "Roy Mustang",
+      "imageSource": "https://s4.anilist.co/file/anilistcdn/character/large/b68-moBLY2WO2am3.png",
+      "sha256": "4f3a40f48f27a5fa0f1eb02664cc5b78e77d427b69f8b3cb67dba583c35c00cf",
+      "originalSha256": "0cc2cef755df5ecab5ac1058224ef492fcef13f017bd2750a074142c82fe7eba",
+      "changes": "Downscaled and WebP encoded; no generative edits",
+      "rights": "Illustrative AniList character portrait, underlying copyright retained; not CC0."
+    },
+    "faye": {
+      "asset": "studio/v23/faye.webp",
+      "siteUrl": "https://anilist.co/character/2",
+      "name": "Faye Valentine",
+      "imageSource": "https://s4.anilist.co/file/anilistcdn/character/large/b2-0Iszg6Izgt4p.png",
+      "sha256": "ccf50737202ee724f6d95297d5dcb9186b0372712654a10fa494937c39b6073e",
+      "originalSha256": "061278f0dc69db985fe3efb75287d1187bdae2bf8eb0b7b7969bd6a6a9e68539",
+      "changes": "Downscaled and WebP encoded; no generative edits",
+      "rights": "Illustrative AniList character portrait, underlying copyright retained; not CC0."
+    },
+    "jet": {
+      "asset": "studio/v23/jet.webp",
+      "siteUrl": "https://anilist.co/character/3",
+      "name": "Jet Black",
+      "imageSource": "https://s4.anilist.co/file/anilistcdn/character/large/b3-JjH9Si9UM1NZ.png",
+      "sha256": "f8eaf0bd73c1a7604abac0bd81f97ebc24dd0ead5c821aa76256fed54a6dedb3",
+      "originalSha256": "d823fc737e6c6017e6d9458819ebc913bc041e307076af1d2e8d6c4875812c1b",
+      "changes": "Downscaled and WebP encoded; no generative edits",
+      "rights": "Illustrative AniList character portrait, underlying copyright retained; not CC0."
+    },
+    "eren": {
+      "asset": "studio/v23/eren.webp",
+      "siteUrl": "https://anilist.co/character/40882",
+      "name": "Eren Yeager",
+      "imageSource": "https://s4.anilist.co/file/anilistcdn/character/large/b40882-dsj7IP943WFF.jpg",
+      "sha256": "d12873c7550a057b64364a3013cfaba9f3e9686f8fd7b64debcbda2b8f321a13",
+      "originalSha256": "4c4da1731c536503a5223439a7fcdd074d9557ec0041bd29130cdc3071963e71",
+      "changes": "Downscaled and WebP encoded; no generative edits",
+      "rights": "Illustrative AniList character portrait, underlying copyright retained; not CC0."
+    },
+    "rei": {
+      "asset": "studio/v23/rei.webp",
+      "siteUrl": "https://anilist.co/character/86",
+      "name": "Rei Ayanami",
+      "imageSource": "https://s4.anilist.co/file/anilistcdn/character/large/86-cA1zL7fyls8E.jpg",
+      "sha256": "4afc9c85239aa3399f353e33412ef8882d627a0af2234730c0788f94e98fe6fe",
+      "originalSha256": "ffdbcf4b1b200a2d042937e21ebbcb6ec6b94cef1a4e561e49377c0aeb4e0e99",
+      "changes": "Downscaled and WebP encoded; no generative edits",
+      "rights": "Illustrative AniList character portrait, underlying copyright retained; not CC0."
+    },
+    "shinji": {
+      "asset": "studio/v23/shinji.webp",
+      "siteUrl": "https://anilist.co/character/89",
+      "name": "Shinji Ikari",
+      "imageSource": "https://s4.anilist.co/file/anilistcdn/character/large/b89-ZtZhXkh1rITn.png",
+      "sha256": "b8724f15ac98ca9ccc04f62bc1573e0498849221ab5086744188e863738bcecc",
+      "originalSha256": "b7330665153f5c0b190de35d92edd9e24e528e299a8945fd490da14a82e786ce",
+      "changes": "Downscaled and WebP encoded; no generative edits",
+      "rights": "Illustrative AniList character portrait, underlying copyright retained; not CC0."
+    },
+    "luffy": {
+      "asset": "studio/v23/luffy.webp",
+      "siteUrl": "https://anilist.co/character/40",
+      "name": "Luffy Monkey",
+      "imageSource": "https://s4.anilist.co/file/anilistcdn/character/large/b40-MNypXsxSRb1R.png",
+      "sha256": "8c042f58540772b5399fb502bee9a4e50dfe0390730dfc26c3f75380f33bab74",
+      "originalSha256": "5396c441a8a64ff1620712282d82d4f272c5da90f7a9a2eb9ee0b95c3eb92d84",
+      "changes": "Downscaled and WebP encoded; no generative edits",
+      "rights": "Illustrative AniList character portrait, underlying copyright retained; not CC0."
+    },
+    "zoro": {
+      "asset": "studio/v23/zoro.webp",
+      "siteUrl": "https://anilist.co/character/62",
+      "name": "Zoro Roronoa",
+      "imageSource": "https://s4.anilist.co/file/anilistcdn/character/large/b62-S7oAeA9WInjV.png",
+      "sha256": "89ed1471cf49b3bfda0ec6652e8e0cd5bf872c49ee9a3e42c958b746eee7dc1f",
+      "originalSha256": "b681cfc932f46b311a283c70097ae2bd66211d25ad17f208182175ff7d2f362c",
+      "changes": "Downscaled and WebP encoded; no generative edits",
+      "rights": "Illustrative AniList character portrait, underlying copyright retained; not CC0."
+    },
+    "nami": {
+      "asset": "studio/v23/nami.webp",
+      "siteUrl": "https://anilist.co/character/723",
+      "name": "Nami",
+      "imageSource": "https://s4.anilist.co/file/anilistcdn/character/large/b723-vp5hPptgnNEC.png",
+      "sha256": "5d59dd1f3f8fff03db5bbbec807f30c1103d89c7d99f9d22224286585f5fafe1",
+      "originalSha256": "b9800c0082039c9741e361a9289626f6801fb8ff4192caae62570e8daeea8cf6",
+      "changes": "Downscaled and WebP encoded; no generative edits",
+      "rights": "Illustrative AniList character portrait, underlying copyright retained; not CC0."
+    },
+    "sanji": {
+      "asset": "studio/v23/sanji.webp",
+      "siteUrl": "https://anilist.co/character/305",
+      "name": "Sanji",
+      "imageSource": "https://s4.anilist.co/file/anilistcdn/character/large/b305-6lisPmHtCnLT.png",
+      "sha256": "d723274224084dc08345ebf90ec9b4477dd851c6926f91431ba367dcf5d1b9f4",
+      "originalSha256": "18b29e672b9c184fc0923b2200e8c8f321f9ffddf24380ec8f110f1e02a43c0f",
+      "changes": "Downscaled and WebP encoded; no generative edits",
+      "rights": "Illustrative AniList character portrait, underlying copyright retained; not CC0."
+    },
+    "sakura": {
+      "asset": "studio/v23/sakura.webp",
+      "siteUrl": "https://anilist.co/character/145",
+      "imageSource": "https://s4.anilist.co/file/anilistcdn/character/large/b145-IorfpI8arxeX.png",
+      "rights": "Illustrative AniList portrait; underlying copyright retained",
+      "sha256": "5828765686b8bddb021fe2087e26826165f32ea8a3499e77c73f5617ae17cf64"
+    },
+    "misa": {
+      "asset": "studio/v23/misa.webp",
+      "siteUrl": "https://anilist.co/character/835",
+      "imageSource": "https://s4.anilist.co/file/anilistcdn/character/large/b835-CiZa8y2z2gCz.png",
+      "rights": "Illustrative AniList portrait; underlying copyright retained",
+      "sha256": "6f6b84c55846407bd893200de1a3649b60c62953213bc9d88a8222e9d4a76cbe"
+    }
+  },
+  "comics": {
+    "author": "David Revoy",
+    "license": "CC BY 4.0",
+    "licenseURL": "https://creativecommons.org/licenses/by/4.0/",
+    "statement": "https://www.peppercarrot.com/en/about/index.html#credits",
+    "translation1": "Andrew \"Akari\" Alexeyew; contributions GunChleoc, Hồ Nhựt Châu, Denis Prisukhin",
+    "translation2": "Denis Prisukhin; contribution Hồ Nhựt Châu",
+    "changes": "No image changes, originals republished byte-for-byte; no generative AI processing or derivatives.",
+    "assets": [
+      {
+        "asset": "studio/v23/pepper-1-0.jpg",
+        "source": "https://www.peppercarrot.com/0_sources/ep01_Potion-of-Flight/low-res/ru_Pepper-and-Carrot_by-David-Revoy_E01P00.jpg",
+        "bytes": 46115,
+        "sha256": "968a46be4e92904e89988c970a7d4036520113109f4b65dff5a9aad89adb1898",
+        "modified": false
+      },
+      {
+        "asset": "studio/v23/pepper-1-1.jpg",
+        "source": "https://www.peppercarrot.com/0_sources/ep01_Potion-of-Flight/low-res/ru_Pepper-and-Carrot_by-David-Revoy_E01P01.jpg",
+        "bytes": 440876,
+        "sha256": "cf88159206d37a39700f7ba56d46453a477ee72739db00522928376e18d9d130",
+        "modified": false
+      },
+      {
+        "asset": "studio/v23/pepper-1-2.jpg",
+        "source": "https://www.peppercarrot.com/0_sources/ep01_Potion-of-Flight/low-res/ru_Pepper-and-Carrot_by-David-Revoy_E01P02.jpg",
+        "bytes": 445423,
+        "sha256": "0e031bbd12c5edac8356bc1958cb6b634e0309b46f2f67392c906c0421089410",
+        "modified": false
+      },
+      {
+        "asset": "studio/v23/pepper-1-3.jpg",
+        "source": "https://www.peppercarrot.com/0_sources/ep01_Potion-of-Flight/low-res/ru_Pepper-and-Carrot_by-David-Revoy_E01P03.jpg",
+        "bytes": 301748,
+        "sha256": "f5460846add23378e29c69781feb1ac75ae0d10b72501fbef770fdcda1d8a596",
+        "modified": false
+      },
+      {
+        "asset": "studio/v23/pepper-1-4.jpg",
+        "source": "https://www.peppercarrot.com/0_sources/ep01_Potion-of-Flight/low-res/ru_Pepper-and-Carrot_by-David-Revoy_E01P04.jpg",
+        "bytes": 1258,
+        "sha256": "d58f4d23964283a2a47cd463dd577a8b191c2cd48e4ad8e93f9806bb7f60c441",
+        "modified": false
+      },
+      {
+        "asset": "studio/v23/pepper-2-0.jpg",
+        "source": "https://www.peppercarrot.com/0_sources/ep02_Rainbow-potions/low-res/ru_Pepper-and-Carrot_by-David-Revoy_E02P00.jpg",
+        "bytes": 52645,
+        "sha256": "dfc765d9ee0edfb55371f2e4be400cdec098731ea58ea6a54ce84d98c29272d3",
+        "modified": false
+      },
+      {
+        "asset": "studio/v23/pepper-2-1.jpg",
+        "source": "https://www.peppercarrot.com/0_sources/ep02_Rainbow-potions/low-res/ru_Pepper-and-Carrot_by-David-Revoy_E02P01.jpg",
+        "bytes": 660644,
+        "sha256": "ea2b227c219e59ece696abc4061c511c1a559d10f05367128ee66350389500a2",
+        "modified": false
+      },
+      {
+        "asset": "studio/v23/pepper-2-2.jpg",
+        "source": "https://www.peppercarrot.com/0_sources/ep02_Rainbow-potions/low-res/ru_Pepper-and-Carrot_by-David-Revoy_E02P02.jpg",
+        "bytes": 536657,
+        "sha256": "7a472cc00b899fac5c21c1199378d0e529152710a9cfd3de99f7dd2738c5ff0f",
+        "modified": false
+      },
+      {
+        "asset": "studio/v23/pepper-2-3.jpg",
+        "source": "https://www.peppercarrot.com/0_sources/ep02_Rainbow-potions/low-res/ru_Pepper-and-Carrot_by-David-Revoy_E02P03.jpg",
+        "bytes": 519563,
+        "sha256": "b422d5d04a5262b6289cff81a5dbf581b111afa53dcfdd8192ebfc368e80b207",
+        "modified": false
+      },
+      {
+        "asset": "studio/v23/pepper-2-4.jpg",
+        "source": "https://www.peppercarrot.com/0_sources/ep02_Rainbow-potions/low-res/ru_Pepper-and-Carrot_by-David-Revoy_E02P04.jpg",
+        "bytes": 512667,
+        "sha256": "a9634acf9c1f68e6436df8948c9ee1eaeba189ff7e78c8e5dcc43fcef9e98717",
+        "modified": false
+      },
+      {
+        "asset": "studio/v23/pepper-2-5.jpg",
+        "source": "https://www.peppercarrot.com/0_sources/ep02_Rainbow-potions/low-res/ru_Pepper-and-Carrot_by-David-Revoy_E02P05.jpg",
+        "bytes": 436382,
+        "sha256": "56da665357d233a9dd5c2beff553db32098dcf6d45d29c5007f3d841bee413f8",
+        "modified": false
+      },
+      {
+        "asset": "studio/v23/pepper-2-6.jpg",
+        "source": "https://www.peppercarrot.com/0_sources/ep02_Rainbow-potions/low-res/ru_Pepper-and-Carrot_by-David-Revoy_E02P06.jpg",
+        "bytes": 159888,
+        "sha256": "e02539539eb1cdd1600f6aff0d5ca209b97d76dad8cd1fcfc88dfd12a61441ce",
+        "modified": false
+      }
+    ]
+  },
+  "generatedFanArt": [
+    {
+      "asset": "studio/v23/ayanokoji-hero.webp",
+      "type": "AI-generated stylized anime fan art; not an official frame",
+      "character": "ayanokoji",
+      "sha256": "bec8647281b5ddd2936c7cca7282acf56e792c97adfdbfe535e720917ae08238"
+    },
+    {
+      "asset": "studio/v23/levi-hero.webp",
+      "type": "AI-generated stylized anime fan art; not an official frame",
+      "character": "levi",
+      "sha256": "d0a7f4e4dcac2ba2edf530d366d7d17f449fbd31b5740c79b6d57d035836927c"
+    },
+    {
+      "asset": "studio/v23/l-hero.webp",
+      "type": "AI-generated stylized anime fan art; not an official frame",
+      "character": "l",
+      "sha256": "3ed947ac77b5ea82b7fa21cefd475a42841ee67b0934bf8d45f4201cbb05c12c"
+    }
+  ],
+  "generatedVIPAndPublicScenes": [
+    {
+      "asset": "studio/v23/vip-astral.webp",
+      "title": "Астральный престол",
+      "type": "AI-generated original anime fantasy illustration, not a frame from an existing show",
+      "privateEquip": true,
+      "sha256": "a589b6098b30e9ef5a42ffa86a66575f3d41a2ff641a9a23aa4ebcb432b4dabc"
+    },
+    {
+      "asset": "studio/v23/vip-crimson.webp",
+      "title": "Багровый император",
+      "type": "AI-generated original anime fantasy illustration, not a frame from an existing show",
+      "privateEquip": true,
+      "sha256": "e29a2c8e2946c1d8e0ce350de930e501370f3d9fc8b17f804f5de07511fab212"
+    },
+    {
+      "asset": "studio/v23/vip-prism.webp",
+      "title": "Призматические врата",
+      "type": "AI-generated original anime fantasy illustration, not a frame from an existing show",
+      "privateEquip": true,
+      "sha256": "f616d927bab8b9807e4dc500fca0a07745df5d2c4fd322cf72b4903dbbe4b4de"
+    },
+    {
+      "asset": "studio/v23/vip-anime-dream.webp",
+      "title": "Облачная сказка",
+      "type": "AI-generated original anime fantasy illustration, not a frame from an existing show",
+      "privateEquip": true,
+      "sha256": "865321a244d05e40b387df08f8494dec099fc079de2e5bfc0798a9fec2de154d"
+    },
+    {
+      "asset": "studio/v23/vip-anime-spirit.webp",
+      "title": "Поезд духов",
+      "type": "AI-generated original anime fantasy illustration, not a frame from an existing show",
+      "privateEquip": true,
+      "sha256": "9afa5d7916e342947174f1ea3ecfc75a57cb8d4581d7e5e9ee0ec9ceb776829e"
+    },
+    {
+      "asset": "studio/v23/vip-snow-palace.webp",
+      "title": "Снежный дворец",
+      "type": "AI-generated original anime fantasy illustration, not a frame from an existing show",
+      "privateEquip": true,
+      "sha256": "e7b6b33d5a3becedbc54ab588eb1131b7b11acbec93f17e1e0b421053e1bb9da"
+    },
+    {
+      "asset": "studio/v23/vip-snow-shrine.webp",
+      "title": "Зимнее святилище",
+      "type": "AI-generated original anime fantasy illustration, not a frame from an existing show",
+      "privateEquip": true,
+      "sha256": "5d10ba421f7f4dfe72fcfa6dc262fd9f144e329384bf3d684dfcca1c63145d16"
+    },
+    {
+      "asset": "studio/v23/vip-samurai-emperor.webp",
+      "title": "Император клинка",
+      "type": "AI-generated original anime fantasy illustration, not a frame from an existing show",
+      "privateEquip": true,
+      "sha256": "c3976b676949fd54450a4ade6b3de3b43ccb44524ef3b246dea706d39f6a3fab"
+    },
+    {
+      "asset": "studio/v23/vip-samurai-snowblade.webp",
+      "title": "Мечник ледяной ауры",
+      "type": "AI-generated original anime fantasy illustration, not a frame from an existing show",
+      "privateEquip": true,
+      "sha256": "7718e0f64b9f76e35798785b7e0e904f25f0a73884891a84a5d637c6df0d8223"
+    },
+    {
+      "asset": "studio/v23/public-samurai-sakura.webp",
+      "title": "Ронин цветущей сакуры",
+      "type": "AI-generated original anime fantasy illustration, not a frame from an existing show",
+      "privateEquip": false,
+      "sha256": "f5fa2b4bc9b5fd671021ddb7eb8c312bf767599a36d8d92ee3f764a879bd7ffb"
+    },
+    {
+      "asset": "studio/v23/public-samurai-storm.webp",
+      "title": "Клинок грозы",
+      "type": "AI-generated original anime fantasy illustration, not a frame from an existing show",
+      "privateEquip": false,
+      "sha256": "de9b2024ddccadb771519557fbb4b9c27ee4a590e3c07a179e7cb3856eb0fb45"
+    },
+    {
+      "asset": "studio/v23/public-swords-shrine.webp",
+      "title": "Святилище двух мечей",
+      "type": "AI-generated original anime fantasy illustration, not a frame from an existing show",
+      "privateEquip": false,
+      "sha256": "ebf67b11557e5cde5ca3ceea5c3f14b96a54eb4bd25e0a60ca65fdebea1e8717"
+    }
+  ],
+  "generatedVIPAvatars": [
+    {
+      "asset": "studio/v23/vip-a.webp",
+      "source": "vip-samurai-emperor",
+      "transform": "cropped/resized from our AI-generated original; no third-party artwork used",
+      "sha256": "d1da39c15498eaa33aa22015269d016329db4ab06843e862de9b40e7fc4f7be1"
+    },
+    {
+      "asset": "studio/v23/vip-b.webp",
+      "source": "vip-samurai-snowblade",
+      "transform": "cropped/resized from our AI-generated original; no third-party artwork used",
+      "sha256": "3e665edc65d7c176b71f38a467ed11976bafcc61d93ca1daf34aa3732205df27"
+    }
+  ]
+}

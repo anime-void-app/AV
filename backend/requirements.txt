@@ -1,0 +1,2 @@
+# Production HTTP server. Application/payment/SQLite logic uses Python's standard library.
+gunicorn>=23.0,<30

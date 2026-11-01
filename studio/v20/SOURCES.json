@@ -1,0 +1,44 @@
+{
+  "checkedOn": "2026-11-01",
+  "licensingBasis": "Publisher declarations; not an independent rights warranty",
+  "sources": [
+    {
+      "publisher": "The Outlander",
+      "url": "https://the-outlander.itch.io/free-japanese-backgrounds",
+      "license": "CC0",
+      "disclosure": "AI-assisted"
+    },
+    {
+      "publisher": "Tella",
+      "url": "https://www.tella.com/animated-background",
+      "license": "CC0"
+    },
+    {
+      "publisher": "FreeGameSprites",
+      "url": "https://freegamesprites.com/en/packs/anime-portraits",
+      "license": "CC0",
+      "disclosure": "AI-generated static sources; crop and CSS motion added"
+    },
+    {
+      "publisher": "Kevin MacLeod",
+      "url": "https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1500027",
+      "title": "Dreams Become Real",
+      "license": "CC BY 4.0",
+      "changes": "90-second excerpt; fades; MP3 96kbps"
+    },
+    {
+      "publisher": "Kevin MacLeod",
+      "url": "https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1300046",
+      "title": "Dream Culture",
+      "license": "CC BY 4.0",
+      "changes": "90-second excerpt; fades; MP3 96kbps"
+    },
+    {
+      "publisher": "Kevin MacLeod",
+      "url": "https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1100236",
+      "title": "Evening Fall (Harp)",
+      "license": "CC BY 4.0",
+      "changes": "90-second excerpt; fades; MP3 96kbps"
+    }
+  ]
+}

@@ -1,0 +1,132 @@
+{
+  "checkedOn": "2026-11-01",
+  "sources": [
+    {
+      "publisher": "The Outlander",
+      "url": "https://the-outlander.itch.io/free-cc0-beach-backgrounds-pack-28-05-24-10-30-04",
+      "license": "CC0",
+      "changes": "WebP; crop; dimming",
+      "disclosure": "AI assisted"
+    },
+    {
+      "publisher": "The Outlander",
+      "url": "https://the-outlander.itch.io/free-cc0-forest-backgrounds-pack-23-05-24-10-30-06",
+      "license": "CC0",
+      "changes": "WebP; crop; dimming",
+      "disclosure": "AI assisted"
+    },
+    {
+      "publisher": "Tella",
+      "url": "https://www.tella.com/animated-background",
+      "license": "CC0",
+      "works": [
+        "Uneon",
+        "Love Triangle",
+        "Spring"
+      ]
+    },
+    {
+      "publisher": "FreeGameSprites",
+      "url": "https://freegamesprites.com/en/packs/anime-portraits",
+      "license": "CC0",
+      "disclosure": "AI-generated static images; CSS motion added",
+      "files": [
+        "bard-drum-storyteller-anime.png",
+        "bard-flute-whimsy-anime.png",
+        "bard-harp-songstress-anime.png",
+        "bard-lute-wanderer-anime.png",
+        "healer-cleric-devout-anime.png",
+        "healer-monk-meditative-anime.png",
+        "healer-priestess-serene-anime.png",
+        "healer-shaman-tribal-anime.png",
+        "mage-archwizard-scholar-anime.png",
+        "monk-drunken-master-anime.png",
+        "monk-iron-body-anime.png",
+        "monk-martial-fist-anime.png",
+        "monk-spiritual-staff-anime.png",
+        "necromancer-bone-king-anime.png"
+      ]
+    },
+    {
+      "mix": "window",
+      "title": "Дождь за окном",
+      "inputs": [
+        "japan-rain",
+        "stream"
+      ],
+      "license": "CC0/public-domain inputs; attribution/source links retained",
+      "changes": "34s audio edit; layered or lowpass; 1s loop crossfade; MP3 96kbps. Our mix/edit contribution is dedicated under CC0; original PD/CC0 sources retained."
+    },
+    {
+      "mix": "rail-rain",
+      "title": "Дождливое путешествие",
+      "inputs": [
+        "train",
+        "japan-rain"
+      ],
+      "license": "CC0/public-domain inputs; attribution/source links retained",
+      "changes": "34s audio edit; layered or lowpass; 1s loop crossfade; MP3 96kbps. Our mix/edit contribution is dedicated under CC0; original PD/CC0 sources retained."
+    },
+    {
+      "mix": "river",
+      "title": "Большая вода",
+      "inputs": [
+        "stream",
+        "forest-water"
+      ],
+      "license": "CC0/public-domain inputs; attribution/source links retained",
+      "changes": "34s audio edit; layered or lowpass; 1s loop crossfade; MP3 96kbps. Our mix/edit contribution is dedicated under CC0; original PD/CC0 sources retained."
+    },
+    {
+      "mix": "distant-train",
+      "title": "Дальний поезд",
+      "inputs": [
+        "hokkaido"
+      ],
+      "license": "CC0/public-domain inputs; attribution/source links retained",
+      "changes": "34s audio edit; layered or lowpass; 1s loop crossfade; MP3 96kbps. Our mix/edit contribution is dedicated under CC0; original PD/CC0 sources retained."
+    }
+  ],
+  "music": [
+    {
+      "id": "guitar-night",
+      "title": "Midnight Tale",
+      "isrc": "USUAN1900004",
+      "path": "audio/guitar-night-v21.mp3",
+      "source": "https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1900004",
+      "author": "Kevin MacLeod (incompetech.com)",
+      "license": "CC BY 4.0",
+      "changes": "First 60s; fades; MP3 96kbps"
+    },
+    {
+      "id": "guitar-sun",
+      "title": "Somewhere Sunny (ver 2)",
+      "isrc": "USUAN1100567",
+      "path": "audio/guitar-sun-v21.mp3",
+      "source": "https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1100567",
+      "author": "Kevin MacLeod (incompetech.com)",
+      "license": "CC BY 4.0",
+      "changes": "First 60s; fades; MP3 96kbps"
+    },
+    {
+      "id": "carefree",
+      "title": "Carefree",
+      "isrc": "USUAN1400037",
+      "path": "audio/carefree-v21.mp3",
+      "source": "https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1400037",
+      "author": "Kevin MacLeod (incompetech.com)",
+      "license": "CC BY 4.0",
+      "changes": "First 60s; fades; MP3 96kbps"
+    },
+    {
+      "id": "easy-lemon",
+      "title": "Easy Lemon (60 second)",
+      "isrc": "USUAN1200077",
+      "path": "audio/easy-lemon-v21.mp3",
+      "source": "https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1200077",
+      "author": "Kevin MacLeod (incompetech.com)",
+      "license": "CC BY 4.0",
+      "changes": "First 60s; fades; MP3 96kbps"
+    }
+  ]
+}
