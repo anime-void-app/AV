@@ -249,7 +249,7 @@
 <script defer="" src="av-atmosphere.js?v=21"></script>
 <link href="void-interface.css?v=24.29" rel="stylesheet"/><script src="void-interface.js?v=24.29"></script>
 <script src="void-journal.js?v=18.1"></script>
-<link href="void-tv.css?v=18.1" rel="stylesheet"/><script defer="" src="void-tv.js?v=18.1"></script><link href="void-watch-layout.css?v=18.1" rel="stylesheet"/><link href="void-profile-next.css?v=19" rel="stylesheet"/><script defer="" src="av-shell.js?v=21"></script><script defer="" src="void-profile-next.js?v=24"></script><script src="void-vip-23.js?v=24.29"></script><link href="void-vip-23.css?v=23" rel="stylesheet"/><link href="void-refresh-24.css?v=24.29" rel="stylesheet"/><script src="player-sources.js?v=24.33"></script><link href="av-player.css?v=24.33" rel="stylesheet"/><script defer="" src="vendor/hls.light-1.6.15.min.js?v=24.31"></script><script defer src="av-source-loader.js?v=24.33"></script></head>
+<link href="void-tv.css?v=18.1" rel="stylesheet"/><script defer="" src="void-tv.js?v=18.1"></script><link href="void-watch-layout.css?v=18.1" rel="stylesheet"/><link href="void-profile-next.css?v=19" rel="stylesheet"/><script defer="" src="av-shell.js?v=21"></script><script defer="" src="void-profile-next.js?v=24"></script><script src="void-vip-23.js?v=24.29"></script><link href="void-vip-23.css?v=23" rel="stylesheet"/><link href="void-refresh-24.css?v=24.29" rel="stylesheet"/><script src="player-sources.js?v=24.36"></script><link href="av-player.css?v=24.36" rel="stylesheet"/><link href="av-kodik-player.css?v=24.36" rel="stylesheet"/><script defer="" src="vendor/hls.light-1.6.15.min.js?v=24.31"></script><script defer src="av-kodik-test.js?v=24.36"></script></head>
 <body class="av-shell av-watch-page">
 <header>
 <a class="logo" href="index.html">ANIME<span>VOID</span></a>
@@ -358,37 +358,40 @@
       } catch (error) {}
     }
 
-    document.getElementById("markWatchedBtn").addEventListener("click", async () => {
-      const button=document.getElementById('markWatchedBtn');if(!episodeAllowed()||button.disabled)return;button.disabled=true;
-      try{const change=async()=>{if(window.AVRewards)try{await AVRewards.sync();}catch{}
-        const key=`watched_${animeId}`,raw=localStorage.getItem(key);if(raw!==null)AVSafe.validateBackup({app:'ANIME VOID',version:1,data:{[key]:raw}});
-        const watched=getWatchedEpisodes(),index=watched.indexOf(currentEpisode);if(index===-1){watched.push(currentEpisode);watched.sort((a,b)=>a-b);}else watched.splice(index,1);
-        localStorage.setItem(key,JSON.stringify(watched));if(index===-1)logActivity('eps');renderEpisodes();updateMarkWatchedButton();
-        if(window.AVRewards)try{await AVRewards.sync();}catch{}dispatchEvent(new Event('av:progress'));
-      };if(navigator.locks?.request)await navigator.locks.request('av-watch:'+animeId,change);else await change();}
-      catch(e){const note=document.getElementById('avEpisodeNotice');if(note){note.hidden=false;I24.text(note,()=>((currentLanguage==='ru'?(I24.t("Отметка не изменена. Проверь свободное место и бэкап: ")+I24.t(e.message)):('Mark not changed. Check storage and backup: '+I24.t(e.message)))));}}
-      finally{button.disabled=!episodeAllowed();}
-    });
+    const watchIdentity='anilist-'+String(animeId||'').replace(/^anilist-/,'');
+    async function commitWatch(number,mode,duration){
+      if(!episodeAllowed(number))return false;
+      if(mode==='auto'&&!navigator.locks?.request)throw Error('Безопасная блокировка хранилища недоступна / Safe storage lock unavailable');
+      const change=()=>{
+        const keys=['watched_'+watchIdentity,'watched_'+watchIdentity.slice(8)],existing=keys.filter(k=>localStorage.getItem(k)!==null);
+        const all=new Set();for(const k of existing){const raw=localStorage.getItem(k);const clean=AVSafe.validateBackup({app:'ANIME VOID',version:1,data:{[k]:raw}});for(const n of JSON.parse(clean[k]))all.add(n);}
+        const present=all.has(number);if(mode==='auto'&&present)return true;
+        if(mode==='auto'||!present)all.add(number);else all.delete(number);
+        const list=[...all].sort((a,b)=>a-b),writes={};for(const k of existing.length?existing:[keys[0]])writes[k]=JSON.stringify(list);
+        if(Number.isFinite(duration)&&duration>0&&duration<=43200){for(const k of existing.length?existing:[keys[0]])writes['duration_'+k.slice(8)+'_'+number]=JSON.stringify(duration);}
+        const snapshotsRaw=localStorage.getItem('animeVoidListItems'),snapshots=snapshotsRaw===null?{}:JSON.parse(AVSafe.validateBackup({app:'ANIME VOID',version:1,data:{animeVoidListItems:snapshotsRaw}}).animeVoidListItems);
+        snapshots[watchIdentity]={...item,id:watchIdentity,episodes:episodeCount};writes.animeVoidListItems=JSON.stringify(snapshots);
+        if(list.filter(n=>n>=1&&n<=episodeCount).length===episodeCount){const raw=localStorage.getItem('animeVoidStatuses'),map=raw===null?{}:JSON.parse(AVSafe.validateBackup({app:'ANIME VOID',version:1,data:{animeVoidStatuses:raw}}).animeVoidStatuses);map[watchIdentity]='completed';writes.animeVoidStatuses=JSON.stringify(map);}
+        const clean=AVSafe.validateBackup({app:'ANIME VOID',version:1,data:writes}),original=Object.fromEntries(Object.keys(clean).map(k=>[k,localStorage.getItem(k)])),changed=[];
+        try{for(const[k,v]of Object.entries(clean)){localStorage.setItem(k,v);changed.push(k);}}catch(error){for(const k of changed.reverse())try{if(original[k]===null)localStorage.removeItem(k);else localStorage.setItem(k,original[k]);}catch{}throw error;}
+        if(!present)logActivity('eps');return true;
+      };
+      const result=navigator.locks?.request?await navigator.locks.request('av-watch:'+watchIdentity,change):change();
+      renderEpisodes();updateMarkWatchedButton();dispatchEvent(new Event('av:progress'));if(window.AVRewards)try{await AVRewards.sync();}catch{}return result;
+    }
+    window.AVWatchAutoComplete=(number,duration)=>commitWatch(number,'auto',duration);
+    window.AVWatchMarks=()=>getWatchedEpisodes();
+    document.getElementById('markWatchedBtn').addEventListener('click',async()=>{const button=document.getElementById('markWatchedBtn');if(!episodeAllowed()||button.disabled)return;button.disabled=true;try{await commitWatch(currentEpisode,'toggle');}catch(e){const note=document.getElementById('avEpisodeNotice');note.hidden=false;note.textContent=(currentLanguage==='ru'?'Отметка не сохранена: ':'Mark not saved: ')+String(e.message).slice(0,150);}finally{button.disabled=!episodeAllowed();}});
+    addEventListener('av:progress',()=>{renderEpisodes();updateMarkWatchedButton();});
+    addEventListener('storage',e=>{if(e.key?.startsWith('watched_')){renderEpisodes();updateMarkWatchedButton();}});
 
     document.getElementById("prevBtn").disabled = currentEpisode <= 1;
     document.getElementById("nextBtn").disabled = currentEpisode >= episodeCount;
 
     function getWatchedEpisodes() {
-      try {
-        const saved = AVSafe.read(`watched_${animeId}`, []);
-        return Array.isArray(saved) ? [...new Set(saved.map(Number).filter(n => Number.isSafeInteger(n) && n >= 1 && (!item?.episodes || n <= (isMovie ? 1 : Number(item.episodes)))))] : [];
-      } catch {
-        return [];
-      }
-    }
-
-    function markEpisodeWatched(number) {
-      if (!episodeAllowed(Number(number))) return;
-      const watched = getWatchedEpisodes();
-      if (!watched.includes(Number(number))) {
-        watched.push(Number(number));
-        localStorage.setItem(`watched_${animeId}`, JSON.stringify(watched));
-      }
+      const id='anilist-'+String(animeId||'').replace(/^anilist-/,''),result=new Set();
+      for(const key of ['watched_'+id,'watched_'+id.slice(8)]){const raw=localStorage.getItem(key);if(raw===null)continue;try{const a=JSON.parse(AVSafe.validateBackup({app:'ANIME VOID',version:1,data:{[key]:raw}})[key]);for(const n of a)if(n<=episodeCount)result.add(n);}catch{}}
+      return [...result].sort((a,b)=>a-b);
     }
 
     function updateMarkWatchedButton() {
@@ -470,6 +473,7 @@
     }
 
     function openEpisode(number) {
+      if(window.AVPlayer?.selectEpisode){window.AVPlayer.selectEpisode(number);return;}
       window.location.href =
         `watch.html?id=${encodeURIComponent(animeId)}&episode=${number}`;
     }

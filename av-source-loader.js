@@ -1,2 +1,2 @@
-/* No remote catalogue API, YouTube or AniLiberty dependency. */
-(()=>{'use strict';const id='anilist-'+String(new URLSearchParams(location.search).get('id')||'').replace(/^anilist-/,''),source=window.AVVideoSources?.sources?.find(s=>s.animeId===id),script=document.createElement('script');script.src=source?.type==='rutube'?'av-rutube-player.js?v=24.33':'av-player.js?v=24.33';script.onerror=()=>{const root=document.getElementById('avPlayer');if(root)root.textContent=document.documentElement.lang==='en'?'Could not load the player.':'Не удалось загрузить плеер.';};document.head.append(script);})();
+/* Retired adapter compatibility stub. Contains no RUTUBE player or remote URL. */
+(()=>{'use strict';const script=document.createElement('script');script.src='av-kodik-test.js?v=24.36';document.head.append(script);})();
