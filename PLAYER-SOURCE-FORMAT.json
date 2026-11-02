@@ -1,0 +1,19 @@
+{
+  "note": "Documentation only. NOT an active source. Replace null with a permitted working HTTPS MP4/HLS URL before registering.",
+  "example": {
+    "id": "owner-stream",
+    "animeId": "anilist-113415",
+    "titleRu": "Магическая битва",
+    "titleEn": "JUJUTSU KAISEN",
+    "season": 1,
+    "type": "hls",
+    "language": "RU",
+    "episodes": [
+      {
+        "number": 1,
+        "key": "jjk-s1-e1-owner-v1",
+        "url": null
+      }
+    ]
+  }
+}
