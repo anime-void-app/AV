@@ -249,7 +249,7 @@
 <script defer="" src="av-atmosphere.js?v=21"></script>
 <link href="void-interface.css?v=24.29" rel="stylesheet"/><script src="void-interface.js?v=24.29"></script>
 <script src="void-journal.js?v=18.1"></script>
-<link href="void-tv.css?v=18.1" rel="stylesheet"/><script defer="" src="void-tv.js?v=18.1"></script><link href="void-watch-layout.css?v=18.1" rel="stylesheet"/><link href="void-profile-next.css?v=19" rel="stylesheet"/><script defer="" src="av-shell.js?v=21"></script><script defer="" src="void-profile-next.js?v=24"></script><script src="void-vip-23.js?v=24.29"></script><link href="void-vip-23.css?v=23" rel="stylesheet"/><link href="void-refresh-24.css?v=24.29" rel="stylesheet"/><script src="player-sources.js?v=24.31"></script><link href="av-player.css?v=24.31" rel="stylesheet"/><script defer="" src="vendor/hls.light-1.6.15.min.js?v=24.31"></script><script defer="" src="av-player.js?v=24.31"></script></head>
+<link href="void-tv.css?v=18.1" rel="stylesheet"/><script defer="" src="void-tv.js?v=18.1"></script><link href="void-watch-layout.css?v=18.1" rel="stylesheet"/><link href="void-profile-next.css?v=19" rel="stylesheet"/><script defer="" src="av-shell.js?v=21"></script><script defer="" src="void-profile-next.js?v=24"></script><script src="void-vip-23.js?v=24.29"></script><link href="void-vip-23.css?v=23" rel="stylesheet"/><link href="void-refresh-24.css?v=24.29" rel="stylesheet"/><script src="player-sources.js?v=24.32"></script><link href="av-player.css?v=24.32" rel="stylesheet"/><script defer="" src="vendor/hls.light-1.6.15.min.js?v=24.31"></script><script defer src="av-source-loader.js?v=24.32"></script></head>
 <body class="av-shell av-watch-page">
 <header>
 <a class="logo" href="index.html">ANIME<span>VOID</span></a>
@@ -281,7 +281,7 @@
     const LANGUAGE_KEY = "animeVoidLanguage";
     const params = new URLSearchParams(window.location.search);
     const animeId = params.get("id");
-    const currentEpisode = params.has('episode') ? Number(params.get('episode')) : 1;
+    let currentEpisode = params.has('episode') ? Number(params.get('episode')) : 1;
     const episodeSyntaxValid = Number.isSafeInteger(currentEpisode) && currentEpisode >= 1;
     function episodeAllowed(number = currentEpisode) {
       const knownCount = isMovie ? 1 : Number(item?.episodes);
@@ -310,7 +310,7 @@
     const catalog = AVSafe.read("animeVoidCatalog", []);
     let item = catalog.find(anime => String(anime.id) === String(animeId));
     // Existing catalogue identity/count only; no catalogue additions or availability inference.
-    const officialSource = window.AVVideoSources?.sources?.find(s=>s.animeId==='anilist-'+String(animeId||'').replace(/^anilist-/,''));
+    const officialSource = [...(window.AVVideoSources?.sources||[]),...(window.AVVideoSources?.providers||[])].find(s=>s.animeId==='anilist-'+String(animeId||'').replace(/^anilist-/,''));
     if(!item && officialSource)item={id:officialSource.animeId,title:officialSource.titleRu,titleRomaji:officialSource.titleEn,titleEnglish:officialSource.titleEn,episodes:officialSource.canonicalEpisodes,format:'TV'};
     let isMovie = String(item?.format || "").toUpperCase() === "MOVIE";
     let episodeCount = isMovie ? 1 : Math.max(1, Number(item?.episodes) || 1);
@@ -443,6 +443,8 @@
       saveLastWatch();
       window.AVPlayer?.refreshLanguage();
     }
+
+    window.AVWatchEpisodeChanged = number => {if(Number.isSafeInteger(number)&&number>=1){currentEpisode=number;applyLanguage();}};
 
     function applyThemeFromStorage() {
       let theme = "dark";
