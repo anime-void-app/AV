@@ -9,9 +9,9 @@
 <link href="manifest.json" rel="manifest"/>
 <meta content="#a855f7" name="theme-color"/>
 <link href="icon-192.png" rel="apple-touch-icon"/>
-<meta content="ANIME VOID — где посмотреть аниме и как отметить просмотренные серии." name="description"/>
+<meta content="Серии аниме прямо на ANIME VOID, когда подключён официальный источник." name="description"/>
 <meta content="ANIME VOID — Просмотр" property="og:title"/>
-<meta content="Ссылки на площадки и список просмотренных серий." property="og:description"/>
+<meta content="Встроенный плеер, выбор серий и сохранение позиции." property="og:description"/>
 <meta content="https://anime-void-app.github.io/AV/icon-512.png" property="og:image"/>
 <meta content="website" property="og:type"/>
 <meta content="https://anime-void-app.github.io/AV/watch.html" property="og:url"/>
@@ -240,7 +240,7 @@
   </style>
 <link href="av-enhancements.css?v=1" rel="stylesheet"/>
 <script defer="" src="av-enhancements.js?v=1"></script>
-<script src="av-safety.js?v=24.29"></script><script src="av-state.js?v=18.1"></script><script src="void-achievements-22.js?v=22"></script><script src="av-rewards.js?v=22"></script>
+<script src="av-safety.js?v=24.30"></script><script src="av-state.js?v=18.1"></script><script src="void-achievements-22.js?v=22"></script><script src="av-rewards.js?v=22"></script>
 <script src="av-titles.js?v=20261030-2"></script>
 <script>window.AVTitles=window.AVTitles||{russian:()=>'',display:(x,l)=>(l==='en'?x?.titleEnglish:'')||x?.title||'',normalize:v=>String(v||'').toLowerCase().trim(),plan:q=>({variants:[String(q||'').toLowerCase()],ids:[],terms:[],correction:''}),match:(x,q)=>[x.title,x.titleEnglish,x.titleRomaji,x.titleNative].some(v=>String(v||'').toLowerCase().includes(String(q||'').toLowerCase())),score:()=>0,count:0};</script>
 <link href="av-design.css?v=17.0" rel="stylesheet"/>
@@ -249,7 +249,7 @@
 <script defer="" src="av-atmosphere.js?v=21"></script>
 <link href="void-interface.css?v=24.29" rel="stylesheet"/><script src="void-interface.js?v=24.29"></script>
 <script src="void-journal.js?v=18.1"></script>
-<link href="void-tv.css?v=18.1" rel="stylesheet"/><script defer="" src="void-tv.js?v=18.1"></script><link href="void-watch-layout.css?v=18.1" rel="stylesheet"/><link href="void-profile-next.css?v=19" rel="stylesheet"/><script defer="" src="av-shell.js?v=21"></script><script defer="" src="void-profile-next.js?v=24"></script><script src="void-vip-23.js?v=24.29"></script><link href="void-vip-23.css?v=23" rel="stylesheet"/><link href="void-refresh-24.css?v=24.29" rel="stylesheet"/></head>
+<link href="void-tv.css?v=18.1" rel="stylesheet"/><script defer="" src="void-tv.js?v=18.1"></script><link href="void-watch-layout.css?v=18.1" rel="stylesheet"/><link href="void-profile-next.css?v=19" rel="stylesheet"/><script defer="" src="av-shell.js?v=21"></script><script defer="" src="void-profile-next.js?v=24"></script><script src="void-vip-23.js?v=24.29"></script><link href="void-vip-23.css?v=23" rel="stylesheet"/><link href="void-refresh-24.css?v=24.29" rel="stylesheet"/><script src="player-sources.js?v=24.30"></script><link href="av-player.css?v=24.30" rel="stylesheet"/><script defer="" src="av-player.js?v=24.30"></script></head>
 <body class="av-shell av-watch-page">
 <header>
 <a class="logo" href="index.html">ANIME<span>VOID</span></a>
@@ -266,7 +266,7 @@
 <h1 id="animeTitle"><span data-static24="Загрузка...">Загрузка...</span></h1>
 <p id="episodeTitle"></p>
 </div>
-<section aria-labelledby="whereTitle" class="where-box">
+<section aria-label="Video player" id="avPlayer"></section><details class="av-watch-platforms"><summary class="ve-copy" data-en="Other platforms" data-ru="Другие площадки">Другие площадки</summary><section aria-labelledby="whereTitle" class="where-box">
 <div class="where-kicker" id="whereKicker"><span data-static24="Ссылки на площадки">Ссылки на площадки</span></div>
 <h2 id="whereTitle"><span data-static24="Где посмотреть">Где посмотреть</span></h2>
 <p id="whereIntro"><span data-static24="Ищем площадки для этого аниме. Видео на ANIME VOID не размещено.">Ищем площадки для этого аниме. Видео на ANIME VOID не размещено.</span></p>
@@ -277,16 +277,16 @@
 <div aria-live="polite" class="where-links" id="whereLinks"></div>
 <p id="whereStatus" role="status"><span data-static24="Ищем ссылки…">Ищем ссылки…</span></p>
 <p class="where-note" id="whereNote"><span data-static24="Данные AniList могут устареть. Наличие, язык, цена и доступность зависят от площадки и страны. Ссылки ведут на страницу аниме, а не обязательно выбранной серии.">Данные AniList могут устареть. Наличие, язык, цена и доступность зависят от площадки и страны. Ссылки ведут на страницу аниме, а не обязательно выбранной серии.</span></p>
-</section>
-<div class="controls">
+</section></details>
+<details class="avp2-tracker"><summary class="ve-copy" data-en="My watch tracker" data-ru="Мои отметки просмотра">Мои отметки просмотра</summary><div class="controls">
 <button class="control-btn" id="prevBtn" type="button"><span data-static24="← Предыдущая серия">← Предыдущая серия</span></button>
 <button class="control-btn" id="markWatchedBtn" type="button"><span data-static24="✓ Отметить просмотренной">✓ Отметить просмотренной</span></button>
 <button class="control-btn" id="nextBtn" type="button"><span data-static24="Следующая серия →">Следующая серия →</span></button>
-</div>
-<section class="episodes">
+</div><section class="episodes">
 <h2 id="episodesHeading"><span data-static24="Все серии">Все серии</span></h2>
 <div class="episode-grid" id="episodeGrid"></div>
-</section>
+</section></details>
+
 </main>
 <script>var I24=window.AVSiteI18n24;
 
@@ -300,6 +300,7 @@
       return Boolean(item) && /^(?:anilist-)?[1-9]\d*$/.test(String(animeId || '')) && Number.isSafeInteger(number) && number >= 1 && Number.isSafeInteger(knownCount) && knownCount > 0 && number <= knownCount;
     }
     function saveLastWatch() {
+      if(params.has("source")||window.AVPlayer?.state().source)return;
       if (episodeAllowed()) localStorage.setItem('animeVoidLastWatch', JSON.stringify({animeId, episode:currentEpisode}));
     }
     function updateEpisodeValidation() {
@@ -322,6 +323,9 @@
     }
     const catalog = AVSafe.read("animeVoidCatalog", []);
     let item = catalog.find(anime => String(anime.id) === String(animeId));
+    // Existing catalogue identity/count only; no catalogue additions or availability inference.
+    const officialSource = window.AVVideoSources?.sources?.find(s=>s.animeId==='anilist-'+String(animeId||'').replace(/^anilist-/,''));
+    if(!item && officialSource)item={id:officialSource.animeId,title:officialSource.titleRu,titleRomaji:officialSource.titleEn,titleEnglish:officialSource.titleEn,episodes:officialSource.canonicalEpisodes,format:'TV'};
     let isMovie = String(item?.format || "").toUpperCase() === "MOVIE";
     let episodeCount = isMovie ? 1 : Math.max(1, Number(item?.episodes) || 1);
     let currentLanguage = localStorage.getItem(LANGUAGE_KEY) === "en" ? "en" : "ru";
@@ -565,6 +569,7 @@
       renderEpisodes();
       updateEpisodeValidation();
       saveLastWatch();
+      window.AVPlayer?.refreshLanguage();
     }
 
     function applyThemeFromStorage() {
