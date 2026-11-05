@@ -517,7 +517,7 @@
 <link href="profile-studio.css?v=17.2" rel="stylesheet"/><script defer="" src="studio-config.js?v=17.0"></script><script defer="" src="supabase-client.js?v=2.49.8"></script><script defer="" src="av-account.js?v=24.29"></script><script defer="" src="profile-studio.js?v=24.29"></script><link href="visual-studio.css?v=17.4" rel="stylesheet"/><script defer="" src="visual-studio.js?v=24.40"></script><link href="banner-atelier.css?v=17.3" rel="stylesheet"/><script defer="" src="banner-atelier.js?v=21"></script><link href="void-social.css?v=18.1" rel="stylesheet"/><script defer="" src="void-custom.js?v=17.4.1"></script><script defer="" src="void-social.js?v=24.29"></script><meta content="18.1-unified" name="av-release"/><link href="void-interface.css?v=24.29" rel="stylesheet"/><script src="void-interface.js?v=24.29"></script>
 <script src="void-journal.js?v=18.1"></script>
 <link href="void-reading-stats.css?v=18.1" rel="stylesheet"/><script defer="" src="void-reading-stats.js?v=18.1"></script><link href="void-tv.css?v=18.1" rel="stylesheet"/><script defer="" src="void-tv.js?v=18.1"></script><link href="void-evolution.css?v=18.1" rel="stylesheet"/><script defer="" src="void-evolution.js?v=18.1"></script><link href="void-profile-layout.css?v=18.1" rel="stylesheet"/><link href="void-profile-next.css?v=19" rel="stylesheet"/><script defer="" src="av-shell.js?v=21"></script><script defer="" src="void-profile-next.js?v=24"></script><link href="void-achievements-22.css?v=22" rel="stylesheet"/>
-<script src="void-vip-23.js?v=24.29"></script><link href="void-vip-23.css?v=23" rel="stylesheet"/><link href="void-refresh-24.css?v=24.29" rel="stylesheet"/><style>#profileAccountButton{display:inline-flex;align-items:center;margin-top:10px;min-height:42px;padding:9px 20px;border:1px solid #bb5574;border-radius:10px;text-decoration:none}#profileExtraActions{margin-top:14px;font-size:13px}#profileExtraActions summary{cursor:pointer;min-height:34px;display:list-item}#profileExtraActions .share-row{margin-top:8px}#avpAccount,#avpLogout,#avpCloudInfo,#avpSavingTitle{display:none!important}</style><link rel="stylesheet" href="site-polish.css?v=24.40"><script defer src="av-watch-ledger.js?v=24.40"></script><script defer src="av-watch-tracker.js?v=24.40"></script></head>
+<script src="void-vip-23.js?v=24.29"></script><link href="void-vip-23.css?v=23" rel="stylesheet"/><link href="void-refresh-24.css?v=24.29" rel="stylesheet"/><style>#profileAccountButton{display:inline-flex;align-items:center;margin-top:10px;min-height:42px;padding:9px 20px;border:1px solid #bb5574;border-radius:10px;text-decoration:none}#profileExtraActions{margin-top:14px;font-size:13px}#profileExtraActions summary{cursor:pointer;min-height:34px;display:list-item}#profileExtraActions .share-row{margin-top:8px}#avpAccount,#avpLogout,#avpCloudInfo,#avpSavingTitle{display:none!important}</style><link rel="stylesheet" href="site-polish.css?v=25.4"><script defer src="av-watch-ledger.js?v=24.40"></script><script defer src="av-watch-tracker.js?v=24.40"></script></head>
 <body class="av-shell av-profile-page">
 <header>
 <a class="logo" href="index.html">ANIME<span>VOID</span></a>
@@ -537,7 +537,8 @@
 </div>
 </header>
 <main>
-<section class="profile-hero">
+<nav class="av-profile-nav" aria-label="Разделы профиля"><span class="av-profile-nav-title">РАЗДЕЛЫ</span><a href="#profileOverview">👤 Обзор</a><a href="#profileStats">📊 Статистика</a><a href="#watchingSection">▶️ Смотрю</a><a href="#favoritesSection">❤️ Избранное</a><a href="#profileAchievements">🏆 Достижения</a><a href="#profileActivity">🔥 Активность</a><a href="#profileCharts">📈 Графики</a></nav>
+<section class="profile-hero av-profile-nav-target" id="profileOverview">
 <div class="profile-top" style="display:flex;align-items:center;gap:26px;flex-wrap:wrap">
 <button class="avatar-btn ym-hide-content" data-static-attrs24='{"title":"Сменить аватар"}' id="avatarButton" title="Сменить аватар" type="button">🐉</button>
 <div class="profile-info">
@@ -568,7 +569,7 @@
 
 <div class="avatar-picker" hidden="" id="avatarPicker"></div>
 </section>
-<section class="stats-section">
+<section class="stats-section av-profile-nav-target" id="profileStats">
 <div class="stats-row">
 <div class="stat-card c-episodes"><span class="stat-icon">📺</span><strong id="statEpisodes">0</strong><span id="statEpisodesLabel"><span data-static24="отмеченных серий">отмеченных серий</span></span></div>
 <div class="stat-card c-hours"><span class="stat-icon">⏱️</span><strong id="statHours">0</strong><span id="statHoursLabel"><span data-static24="расчёт по отметкам">расчёт по отметкам</span></span></div>
@@ -579,7 +580,7 @@
 <div class="quests-card" id="dailyQuests"></div>
 </section>
 <section aria-label="Личная статистика чтения" class="vrs-panel ym-hide-content" data-reading-stats="" data-static-attrs24='{"aria-label":"Личная статистика чтения"}' id="readingStats"></section>
-<section class="activity-section" id="activitySection">
+<section class="activity-section av-profile-nav-target" id="profileActivity">
 <div class="section-heading">
 <div>
 <h2 id="activityTitle"><span data-static24="🔥 Твоя активность">🔥 Твоя активность</span></h2>
@@ -588,7 +589,7 @@
 </div>
 <div class="activity-box" id="activityBox"></div>
 </section>
-<section class="charts-section" id="chartsSection">
+<section class="charts-section av-profile-nav-target" id="profileCharts">
 <div class="section-heading">
 <div>
 <h2 id="chartsSectionTitle"><span data-static24="Твои графики">Твои графики</span></h2>
@@ -608,7 +609,7 @@
 </div>
 </div>
 </section>
-<section class="list-section" id="watchingSection">
+<section class="list-section av-profile-nav-target" id="watchingSection">
 <div class="section-heading">
 <div>
 <h2 id="watchingTitle"><span data-static24="▶️ Смотрю сейчас">▶️ Смотрю сейчас</span></h2>
@@ -617,7 +618,7 @@
 </div>
 <div class="mini-grid" id="watchingGrid"></div>
 </section>
-<section class="list-section" id="favoritesSection">
+<section class="list-section av-profile-nav-target" id="favoritesSection">
 <div class="section-heading">
 <div>
 <h2 id="favoritesTitle"><span data-static24="❤️ Избранное">❤️ Избранное</span></h2>
@@ -626,7 +627,7 @@
 </div>
 <div class="mini-grid" id="favoritesGrid"></div>
 </section>
-<section class="achievements-section">
+<section class="achievements-section av-profile-nav-target" id="profileAchievements">
 <div class="section-heading">
 <div>
 <h2 id="achievementsTitle"><span data-static24="Достижения">Достижения</span></h2>
