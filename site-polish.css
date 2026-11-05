@@ -89,3 +89,41 @@ table{max-width:100%}
 @media(prefers-reduced-motion:reduce){
  html:focus-within{scroll-behavior:auto}
 }
+
+
+/* ANIME VOID 25.2 foundation: keep existing profile, workshop and cloud data intact. */
+body.av-profile-page .profile-hero,body.av-profile-page .profile-top,body.av-profile-page .profile-info,body.av-profile-page .name-row,body.av-profile-page .rank-row{min-width:0;max-width:100%;box-sizing:border-box}
+body.av-profile-page #profileName{max-width:100%;overflow-wrap:anywhere;word-break:normal;hyphens:auto}
+body.av-profile-page .name-row{display:flex;align-items:center;flex-wrap:wrap;gap:10px}
+body.av-profile-page .rank-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+body.av-profile-page #editNameBtn{flex:0 0 auto;min-width:44px;min-height:44px}
+body.av-profile-page .profile-hero>.level-box{max-width:100%;box-sizing:border-box}
+body.av-profile-page .share-row,body.av-profile-page .avp-toolbar,body.av-profile-page .pn-command{min-width:0;max-width:100%;box-sizing:border-box;flex-wrap:wrap}
+body.av-profile-page .share-row a,body.av-profile-page .avp-toolbar button,body.av-profile-page .pn-command a,body.av-profile-page .pn-command button{min-height:44px;max-width:100%;white-space:normal}
+body.av-profile-page .avp-dialog,body.av-profile-page .at-dialog,body.av-profile-page .at-full{max-width:calc(100vw - 20px);max-height:calc(100dvh - 20px);overscroll-behavior:contain}
+body.av-profile-page .avp-dialog *,body.av-profile-page .at-dialog *,body.av-profile-page .at-full *{min-width:0}
+body.av-profile-page .avp-dialog input,body.av-profile-page .at-dialog input,body.av-profile-page .avp-dialog select,body.av-profile-page .at-dialog select{max-width:100%;font-size:16px}
+body.av-profile-page .at-scene{max-width:100%;background-position:center 42%}
+@media(max-width:760px){
+ body.av-profile-page .profile-hero{border-radius:16px!important}
+ body.av-profile-page.vi-ready #avpBanner{height:clamp(170px,48vw,260px)}
+ body.av-profile-page.vi-ready .profile-top{padding:0 16px 16px!important;gap:12px!important;margin-top:-38px!important;align-items:flex-start!important}
+ body.av-profile-page.vi-ready #avatarButton{width:90px!important;height:90px!important;flex:0 0 90px;border-radius:18px!important}
+ body.av-profile-page.vi-ready .profile-top .profile-info{flex:1 1 175px;padding-top:44px!important}
+ body.av-profile-page.vi-ready #profileName{font-size:clamp(21px,5.5vw,32px);line-height:1.2}
+ body.av-profile-page.vi-ready .profile-hero>.level-box{margin:0 16px 16px;width:calc(100% - 32px)}
+ body.av-profile-page.vi-ready .profile-hero>.share-row{padding:0 16px 16px}
+ body.av-profile-page .avp-toolbar,body.av-profile-page .pn-command{padding:14px 16px;gap:8px}
+ body.av-profile-page .at-header{padding:16px;gap:10px}
+ body.av-profile-page .at-body{padding:14px;gap:14px}
+ body.av-profile-page .at-scene{height:clamp(175px,50vw,280px)}
+}
+@media(max-width:390px){
+ body.av-profile-page.vi-ready .profile-top{gap:8px!important}
+ body.av-profile-page.vi-ready #avatarButton{width:76px!important;height:76px!important;flex-basis:76px}
+ body.av-profile-page.vi-ready .profile-top .profile-info{flex-basis:155px;padding-top:38px!important}
+ body.av-profile-page.vi-ready #profileName{font-size:21px}
+}
+@media(prefers-reduced-motion:reduce){
+ body.av-profile-page .pn-button,body.av-profile-page .at-button,body.av-profile-page .at-scene{animation:none!important;transition:none!important}
+}
