@@ -15,10 +15,10 @@ view.id='avKodikInlineView';view.style.cssText='width:100%;aspect-ratio:16/9;bac
 note.textContent='Сезон и серию выбирай внутри плеера. Для запуска видео нажми ▶. Доступность определяет Kodik.';note.hidden=true;
 link.href='kodik.html';link.textContent='Поиск в каталоге Kodik';link.style.color='#cda5f4';link.hidden=true;
 box.append(heading,status,label,view,note,link);root.before(box);
-let disposed=false;const control=new AbortController(),timer=setTimeout(()=>control.abort(),15000);
-function play(data){const v=data.variants.find(x=>x.id===select.value),url=C.safeEmbed(v?.embedUrl);if(!url)return;
+let measured=null;let disposed=false;const control=new AbortController(),timer=setTimeout(()=>control.abort(),15000);
+function play(data){measured?.dispose();measured=null;const v=data.variants.find(x=>x.id===select.value),url=C.safeEmbed(v?.embedUrl);if(!url)return;
 try{window.AVSoundShell?.stopForMedia();}catch{}
-const frame=document.createElement('iframe');frame.src=url;frame.title=(data.titleRu||data.titleOriginal||'Аниме')+' — '+C.clean(v.translationTitle,120);frame.allow='autoplay; fullscreen; picture-in-picture; encrypted-media';frame.allowFullscreen=true;frame.referrerPolicy='strict-origin-when-cross-origin';frame.style.cssText='display:block;width:100%;height:100%;border:0';view.replaceChildren(frame);
+const frame=document.createElement('iframe');const embed=new URL(url);if(data.type==='anime-serial'&&v.lastSeasonReported===1){const requested=Number(new URLSearchParams(location.search).get('episode')||1);if(Number.isSafeInteger(requested)&&requested>=1&&requested<=Math.max(1,v.episodesReported)){embed.searchParams.set('season','1');embed.searchParams.set('episode',String(requested));}}frame.src=embed.href;frame.title=(data.titleRu||data.titleOriginal||'Аниме')+' — '+C.clean(v.translationTitle,120);frame.allow='autoplay; fullscreen; picture-in-picture; encrypted-media';frame.allowFullscreen=true;frame.referrerPolicy='strict-origin-when-cross-origin';frame.style.cssText='display:block;width:100%;height:100%;border:0';view.replaceChildren(frame);if(window.AVMeasured)measured=AVMeasured.attach(frame,{titleId:data.id,title:data.titleRu||data.titleOriginal,kind:data.type==='anime'?'movie':'series',onIdentity(state){if(data.type==='anime'||v.lastSeasonReported===1&&state.season===1&&state.episode<=data.episodesReported){const ep=data.type==='anime'?1:state.episode;window.AVWatchEpisodeChanged?.(ep);const u=new URL(location.href);u.searchParams.set('episode',ep);history.replaceState(null,'',u);}},onComplete(state){if(data.type==='anime'||v.lastSeasonReported===1&&state.season===1&&state.episode<=data.episodesReported)return window.AVWatchAutoComplete?.(data.type==='anime'?1:state.episode,state.duration);}},box);
 }
 function fallback(message){if(disposed)return;status.textContent=message;link.hidden=false;root.style.removeProperty('display');}
 Promise.all([C.load(),fetch('https://graphql.anilist.co',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({query:'query($id:Int){Media(id:$id,type:ANIME){idMal}}',variables:{id:Number(id)}}),signal:control.signal}).then(r=>{if(!r.ok)throw Error('metadata');return r.json();})])
@@ -32,5 +32,5 @@ status.textContent='';status.hidden=true;label.hidden=false;view.hidden=false;no
 // Separate mount survives late legacy-player rendering, with no mutation loops.
 root.style.setProperty('display','none','important');select.addEventListener('change',()=>play(data));play(data);
 }).catch(()=>fallback('Не удалось загрузить плеер. Обнови страницу или проверь публикацию папки kodik-data.')).finally(()=>clearTimeout(timer));
-window.addEventListener('pagehide',(event)=>{if(event.persisted)return;disposed=true;control.abort();clearTimeout(timer);view.replaceChildren();},{once:true});
+window.addEventListener('pagehide',(event)=>{if(event.persisted)return;disposed=true;control.abort();clearTimeout(timer);measured?.dispose();view.replaceChildren();},{once:true});
 })();

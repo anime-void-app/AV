@@ -240,7 +240,7 @@
   </style>
 <link href="av-enhancements.css?v=1" rel="stylesheet"/>
 <script defer="" src="av-enhancements.js?v=1"></script>
-<script src="av-safety.js?v=24.31"></script><script src="av-state.js?v=18.1"></script><script src="void-achievements-22.js?v=22"></script><script src="av-rewards.js?v=22"></script>
+<script src="av-safety.js?v=24.40"></script><script src="av-state.js?v=24.40"></script><script src="void-achievements-22.js?v=22"></script><script src="av-rewards.js?v=22"></script>
 <script src="av-titles.js?v=20261030-2"></script>
 <script>window.AVTitles=window.AVTitles||{russian:()=>'',display:(x,l)=>(l==='en'?x?.titleEnglish:'')||x?.title||'',normalize:v=>String(v||'').toLowerCase().trim(),plan:q=>({variants:[String(q||'').toLowerCase()],ids:[],terms:[],correction:''}),match:(x,q)=>[x.title,x.titleEnglish,x.titleRomaji,x.titleNative].some(v=>String(v||'').toLowerCase().includes(String(q||'').toLowerCase())),score:()=>0,count:0};</script>
 <link href="av-design.css?v=17.0" rel="stylesheet"/>
@@ -249,7 +249,7 @@
 <script defer="" src="av-atmosphere.js?v=21"></script>
 <link href="void-interface.css?v=24.29" rel="stylesheet"/><script src="void-interface.js?v=24.29"></script>
 <script src="void-journal.js?v=18.1"></script>
-<link href="void-tv.css?v=18.1" rel="stylesheet"/><script defer="" src="void-tv.js?v=18.1"></script><link href="void-watch-layout.css?v=18.1" rel="stylesheet"/><link href="void-profile-next.css?v=19" rel="stylesheet"/><script defer="" src="av-shell.js?v=21"></script><script defer="" src="void-profile-next.js?v=24"></script><script src="void-vip-23.js?v=24.29"></script><link href="void-vip-23.css?v=23" rel="stylesheet"/><link href="void-refresh-24.css?v=24.29" rel="stylesheet"/><script src="player-sources.js?v=24.36"></script><link href="av-player.css?v=24.36" rel="stylesheet"/><link href="av-kodik-player.css?v=24.36" rel="stylesheet"/><script defer="" src="vendor/hls.light-1.6.15.min.js?v=24.31"></script><script defer src="av-kodik-test.js?v=24.36"></script></head>
+<link href="void-tv.css?v=18.1" rel="stylesheet"/><script defer="" src="void-tv.js?v=18.1"></script><link href="void-watch-layout.css?v=18.1" rel="stylesheet"/><link href="void-profile-next.css?v=19" rel="stylesheet"/><script defer="" src="av-shell.js?v=21"></script><script defer="" src="void-profile-next.js?v=24"></script><script src="void-vip-23.js?v=24.29"></script><link href="void-vip-23.css?v=23" rel="stylesheet"/><link href="void-refresh-24.css?v=24.29" rel="stylesheet"/><script src="player-sources.js?v=24.36"></script><link href="av-player.css?v=24.36" rel="stylesheet"/><link href="av-kodik-player.css?v=24.36" rel="stylesheet"/><script defer="" src="vendor/hls.light-1.6.15.min.js?v=24.31"></script><link rel="stylesheet" href="site-polish.css?v=24.40"><script defer src="av-watch-ledger.js?v=24.40"></script><script defer src="av-watch-tracker.js?v=24.40"></script><script defer src="av-kodik-test.js?v=24.40"></script></head>
 <body class="av-shell av-watch-page">
 <header>
 <a class="logo" href="index.html">ANIME<span>VOID</span></a>
@@ -322,7 +322,7 @@
     async function loadAnimeMetadata(){
       const m=/^(?:anilist-)?([1-9]\d*)$/.exec(animeId||'');if(!m)return;
       const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),12000);
-      try{const response=await fetch('https://graphql.anilist.co',{method:'POST',headers:{'Content-Type':'application/json'},signal:controller.signal,body:JSON.stringify({query:'query($id:Int){Media(id:$id,type:ANIME){id title{romaji english} episodes format}}',variables:{id:Number(m[1])}})});if(!response.ok)throw Error('Metadata unavailable');const media=(await response.json())?.data?.Media;if(!media)return;item={...item,id:animeId,title:item?.title||media.title?.english||media.title?.romaji||'ANIME VOID',episodes:media.episodes??item?.episodes,format:media.format||item?.format};isMovie=String(item.format||'').toUpperCase()==='MOVIE';episodeCount=isMovie?1:Math.max(1,Number(item.episodes)||1);document.getElementById('backAnime').href='anime.html?id='+encodeURIComponent(animeId);document.querySelector('.controls').style.display=isMovie?'none':'';document.querySelector('.episodes').style.display=isMovie?'none':'';
+      try{const response=await fetch('https://graphql.anilist.co',{method:'POST',headers:{'Content-Type':'application/json'},signal:controller.signal,body:JSON.stringify({query:'query($id:Int){Media(id:$id,type:ANIME){id title{romaji english} episodes duration format}}',variables:{id:Number(m[1])}})});if(!response.ok)throw Error('Metadata unavailable');const media=(await response.json())?.data?.Media;if(!media||media.id!==Number(m[1]))throw Error('Metadata identity mismatch');item={...item,id:animeId,title:item?.title||media.title?.english||media.title?.romaji||'ANIME VOID',episodes:media.episodes??item?.episodes,duration:media.duration??item?.duration,format:media.format||item?.format};isMovie=String(item.format||'').toUpperCase()==='MOVIE';episodeCount=isMovie?1:Math.max(1,Number(item.episodes)||1);document.getElementById('backAnime').href='anime.html?id='+encodeURIComponent(animeId);document.querySelector('.controls').style.display=isMovie?'none':'';document.querySelector('.episodes').style.display=isMovie?'none':'';
       metadataState='ready';}catch{metadataState='error';}finally{clearTimeout(timer);applyLanguage();}
     }
 
@@ -365,7 +365,7 @@
       const change=()=>{
         const keys=['watched_'+watchIdentity,'watched_'+watchIdentity.slice(8)],existing=keys.filter(k=>localStorage.getItem(k)!==null);
         const all=new Set();for(const k of existing){const raw=localStorage.getItem(k);const clean=AVSafe.validateBackup({app:'ANIME VOID',version:1,data:{[k]:raw}});for(const n of JSON.parse(clean[k]))all.add(n);}
-        const present=all.has(number);if(mode==='auto'&&present)return true;
+        const present=all.has(number); // Existing marks stay; a verified runtime can still be refreshed.
         if(mode==='auto'||!present)all.add(number);else all.delete(number);
         const list=[...all].sort((a,b)=>a-b),writes={};for(const k of existing.length?existing:[keys[0]])writes[k]=JSON.stringify(list);
         if(Number.isFinite(duration)&&duration>0&&duration<=43200){for(const k of existing.length?existing:[keys[0]])writes['duration_'+k.slice(8)+'_'+number]=JSON.stringify(duration);}
@@ -492,5 +492,5 @@
   </script>
 <!-- Cloudflare Web Analytics -->
 <script data-cf-beacon='{"token": "c9a10757745f4f5f9f2496ed6966c59f"}' defer="" src="https://static.cloudflareinsights.com/beacon.min.js"></script>
-<link href="void-profile-20.css?v=20" rel="stylesheet"/><script defer="" src="void-profile-20.js?v=24.29"></script><link href="void-messenger-21.css?v=21" rel="stylesheet"/><script defer="" src="void-people-21.js?v=24.29"></script><script src="kodik-data-client.js?v=24.13" defer></script><script src="kodik-bridge.js?v=24.14" defer></script><link rel="stylesheet" href="anime-comments.css?v=24.15"><script defer src="supabase-client.js?v=2.49.8"></script><script defer src="anime-comments.js?v=24.15"></script></body>
+<link href="void-profile-20.css?v=20" rel="stylesheet"/><script defer="" src="void-profile-20.js?v=24.29"></script><link href="void-messenger-21.css?v=21" rel="stylesheet"/><script defer="" src="void-people-21.js?v=24.29"></script><script src="kodik-data-client.js?v=24.13" defer></script><script src="kodik-bridge.js?v=24.40" defer></script><link rel="stylesheet" href="anime-comments.css?v=24.15"><script defer src="supabase-client.js?v=2.49.8"></script><script defer src="anime-comments.js?v=24.15"></script></body>
 </html>
