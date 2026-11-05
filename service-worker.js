@@ -1,6 +1,6 @@
 /* ANIME VOID — service worker: установка как приложение + офлайн-режим */
 
-const CORE_CACHE = "av-AV-core-v24.36";
+const CORE_CACHE = "av-AV-core-v24.37";
 const IMAGE_CACHE = "av-AV-images-v3";
 const IMAGE_CACHE_LIMIT = 80;
 const AUDIO_CACHE = "av-AV-audio-v1";
@@ -8,6 +8,7 @@ const LICENSED_AUDIO = {"audio/japan-rain-v18.mp3": "e8adbedb517c7c30837ac4046dd
 
 
 const NEW_CORE = [
+ "kodik.html", "kodik-catalog.css?v=24.13", "kodik-data-client.js?v=24.13", "kodik-catalog.js?v=24.13", "kodik-home.js?v=24.13", "kodik-bridge.js?v=24.13",
  'av-kodik-player.css?v=24.36',
  'av-kodik-test.js?v=24.36',
  'av-kodik-player.js?v=24.36',
@@ -147,6 +148,9 @@ self.addEventListener("fetch", (event) => {
   if (request.method !== "GET") return;
 
   const url = new URL(request.url);
+
+  // Versioned public catalogue data uses its own browser cache; never cache manifests in the shared core cache.
+  if (url.origin === self.location.origin && url.pathname.includes("/kodik-data/")) return;
 
   // Account, inventory and payment responses must NEVER enter a shared service-worker cache.
   if (url.pathname.includes("/api/") || url.pathname.includes("/auth/v1/") || url.pathname.includes("/rest/v1/") || url.pathname.includes("/storage/v1/")) return;

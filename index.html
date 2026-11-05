@@ -1413,6 +1413,7 @@
 <nav>
 <a href="#"><span data-static24="Главная">Главная</span></a>
 <a href="#catalog"><span data-static24="Каталог">Каталог</span></a>
+<a href="kodik.html" id="avKodikCatalogLink">Смотреть · Kodik</a>
 <a href="#favorites"><span data-static24="Избранное">Избранное</span></a>
 <a href="profile.html" id="navProfile"><span data-static24="👤 Профиль">👤 Профиль</span></a>
 </nav>
@@ -5321,5 +5322,5 @@ setLanguage(
 <nav aria-label="Страницы аниме" class="av-directory" data-static-attrs24='{"aria-label":"Страницы аниме"}'><h2><span data-static24="Популярные аниме">Популярные аниме</span></h2><ul><li><a href="anime-death-note.html"><span data-static24="Тетрадь смерти">Тетрадь смерти</span></a></li><li><a href="anime-bakemonogatari.html"><span data-static24="Истории монстров">Истории монстров</span></a></li><li><a href="anime-attack-on-titan.html"><span data-static24="Атака титанов">Атака титанов</span></a></li><li><a href="anime-demon-slayer.html"><span data-static24="Клинок, рассекающий демонов">Клинок, рассекающий демонов</span></a></li><li><a href="anime-jujutsu-kaisen.html"><span data-static24="Магическая битва">Магическая битва</span></a></li><li><a href="anime-one-piece.html"><span data-static24="Ван-Пис">Ван-Пис</span></a></li><li><a href="anime-hunter-x-hunter.html"><span data-static24="Охотник x Охотник">Охотник x Охотник</span></a></li><li><a href="anime-one-punch-man.html"><span data-static24="Ванпанчмен">Ванпанчмен</span></a></li><li><a href="anime-a-silent-voice.html"><span data-static24="Форма голоса">Форма голоса</span></a></li><li><a href="anime-my-hero-academia.html"><span data-static24="Моя геройская академия">Моя геройская академия</span></a></li></ul></nav>
 <script>window.avRefreshView=()=>{favorites=AVSafe.read('animeVoidFavorites',[]);const stored=AVSafe.read('animeVoidCatalog',[]);const map=new Map(anime.map(x=>[String(x.id),x]));for(const item of stored){if(map.has(item.id))Object.assign(map.get(item.id),item);else anime.push(item);}const lang=localStorage.getItem('animeVoidLanguage')==='en'?'en':'ru';setLanguage(lang);showContinueWatching();};document.addEventListener('av:theme',()=>renderStatsCharts());document.addEventListener('av:charts-visible',()=>renderStatsCharts());</script>
 <script>addEventListener('av:rewards',()=>renderAchievementsSection());</script>
-<link href="void-profile-20.css?v=20" rel="stylesheet"/><script defer="" src="void-profile-20.js?v=24.29"></script><link href="void-messenger-21.css?v=21" rel="stylesheet"/><script defer="" src="void-people-21.js?v=24.29"></script></body>
+<link href="void-profile-20.css?v=20" rel="stylesheet"/><script defer="" src="void-profile-20.js?v=24.29"></script><link href="void-messenger-21.css?v=21" rel="stylesheet"/><script defer="" src="void-people-21.js?v=24.29"></script><script src="kodik-home.js?v=24.13" defer></script></body>
 </html>
