@@ -58,3 +58,34 @@ body.av-home .top-card,body.av-home .airing-card{transition:transform .18s ease,
 @media(prefers-reduced-motion:reduce){
  body.av-home .top-card,body.av-home .airing-card{transition:none!important;transform:none!important}
 }
+
+
+/* ANIME VOID 25.1.1 — defensive responsive text layout.
+   Scoped to common UI surfaces to avoid changing player, profile data, or state. */
+html{overflow-wrap:normal}
+body{min-width:0}
+main,main>section,article,.profile-hero,.anime-page,.av-insights,.av-watch-summary{min-width:0;max-width:100%;box-sizing:border-box}
+h1,h2,h3,h4,p,summary,.profile-name,.anime-page .description,.av-card-copy h3,.top-name,.airing-name{overflow-wrap:break-word;hyphens:auto}
+button,a,label,summary{overflow-wrap:break-word}
+input,textarea,select{box-sizing:border-box;max-width:100%}
+textarea{resize:vertical}
+img,video,canvas,svg{max-width:100%}
+img,video{height:auto}
+dialog{box-sizing:border-box;max-width:min(96vw,720px);max-height:calc(100dvh - 24px);overflow:auto;overscroll-behavior:contain}
+pre,code{overflow-wrap:anywhere}
+pre{max-width:100%;overflow-x:auto}
+table{max-width:100%}
+.av-watch-tabs,.list-tabs{scrollbar-width:thin}
+@media(max-width:760px){
+ body{max-width:100%}
+ main{min-width:0}
+ h1{font-size:clamp(24px,6.5vw,38px)}
+ h2{font-size:clamp(20px,5vw,30px)}
+ .av-home header .logo{min-width:0;overflow-wrap:anywhere}
+ .av-home .card,.av-home .top-card,.av-home .airing-card{min-width:0}
+ .av-watch-tabs a,.list-tab{flex-shrink:0}
+ dialog{width:calc(100vw - 20px);margin:auto;padding:clamp(12px,4vw,24px)}
+}
+@media(prefers-reduced-motion:reduce){
+ html:focus-within{scroll-behavior:auto}
+}
