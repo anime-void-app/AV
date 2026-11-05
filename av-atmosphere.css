@@ -37,4 +37,22 @@
  body.av-home>header>.m21-audio-quick{grid-column:2 / 4;grid-row:3;justify-self:end;margin:0;min-height:40px}
 }
 
-/* Original soundscapes: responsive polish pending. */
+
+/* 24.41: prevent the sound controls from consuming an extra row on small phones. */
+.av-ambience-panel{width:min(520px,calc(100vw - 20px));max-height:calc(100dvh - 20px);padding:clamp(14px,4vw,24px)}
+.av-ambience-panel button:focus-visible,.av-ambience-panel select:focus-visible{outline:3px solid var(--av-accent,#bb8eea);outline-offset:2px}
+.av-ambience-panel .m21-audio-tabs{display:flex;gap:6px;flex-wrap:wrap}
+.av-ambience-panel .m21-audio-tabs button{min-height:44px;flex:1 1 95px;white-space:normal}
+.av-ambience-panel #m21AudioLibrary{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.av-ambience-panel .m21-audio-card{min-width:0;min-height:64px;white-space:normal;overflow-wrap:anywhere;text-align:left}
+.av-ambience-panel .m21-audio-card strong{display:block;line-height:1.35}
+.av-ambience-panel .m21-audio-card small{display:block;line-height:1.4}
+@media(max-width:760px){
+ body.av-home>header>.m21-audio-quick{display:none!important}
+ body.av-home>header>#avAmbienceToggle{font-size:13px!important}
+ .av-ambience-panel .m21-audio-tabs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+ .av-ambience-panel .m21-audio-tabs button{min-width:0}
+ .av-ambience-panel .av-ambience-actions button{min-width:0}
+}
+@media(max-width:360px){.av-ambience-panel #m21AudioLibrary{grid-template-columns:1fr}}
+
