@@ -12,14 +12,28 @@ for(const k of ['window','rail-rain','river','distant-train','guitar-night','gui
 const originalModes=[['original-rain','🌧️','Дождик за окном','Rain at the window'],['original-train','🚆','Ночной поезд','Night train'],['original-rail','🚉','Поезд под дождём','Rainy train'],['original-forest','🌲','Лесной ветер','Forest breeze']];
 modes.unshift(...originalModes);
 function originalBuffer(ctx,id){
- const n=Math.floor(ctx.sampleRate*5),buffer=ctx.createBuffer(2,n,ctx.sampleRate);
- for(let c=0;c<2;c++){let out=buffer.getChannelData(c),seed=15793+c*29,low=0;
- for(let i=0;i<n;i++){seed=(Math.imul(seed,1664525)+1013904223)>>>0;let w=seed/2147483648-1,t=i/ctx.sampleRate;low=low*.981+w*.019;
- let beat=Math.exp(-((t+c*.08)%.66)*20),rain=w*.18+low*.8,train=low*1.6+beat*.22+Math.sin(t*340)*.04;
- let signal=id==='original-rain'?rain:id==='original-train'?train:id==='original-rail'?rain*.6+train*.55:low*1.3+w*.03;
- let fade=Math.max(0,Math.min(1,i/(ctx.sampleRate*.08),(n-i-1)/(ctx.sampleRate*.08)));
- out[i]=Math.max(-.75,Math.min(.75,signal*2))*fade;
- }}
+ // Distinct, deterministic eight-second stereo soundscapes. No downloads or copyrighted audio.
+ const rate=ctx.sampleRate,n=Math.floor(rate*8),buffer=ctx.createBuffer(2,n,rate);
+ const rain=id==='original-rain',train=id==='original-train',rail=id==='original-rail';
+ for(let c=0;c<2;c++){
+  const out=buffer.getChannelData(c);let seed=(0x4b1d3+c*9176)>>>0,low=0,wind=0,rumble=0,drop=0;
+  for(let i=0;i<n;i++){
+   seed=(Math.imul(seed,1664525)+1013904223)>>>0;
+   const w=seed/2147483648-1,t=i/rate,phase=t+(c*.012);
+   low=low*.985+w*.015;wind=wind*.9995+w*.0005;rumble=rumble*.998+w*.002;
+   const wheel=Math.pow(Math.max(0,Math.cos(phase*2*Math.PI*1.72)),16);
+   const carriage=Math.sin(phase*2*Math.PI*46)*.055+Math.sin(phase*2*Math.PI*73)*.025;
+   const shower=(w*.27+low*1.8)*(0.72+.15*Math.sin(t*.48));
+   if((seed&16383)===0)drop=.65;
+   drop*=.994;
+   const raindrop=drop*Math.sin(phase*2*Math.PI*620);
+   const locomotive=rumble*2.7+wheel*.26+carriage;
+   const forest=wind*9+.05*w+.14*Math.sin(phase*.43)+.07*Math.sin(phase*1.1);
+   const signal=rain?shower+raindrop*.16:train?locomotive:rail?shower*.52+locomotive*.7:forest;
+   const fade=Math.min(1,i/(rate*.16),(n-i-1)/(rate*.16));
+   out[i]=Math.max(-.8,Math.min(.8,signal*1.35))*Math.max(0,fade);
+  }
+ }
  return buffer;
 }
 
@@ -102,7 +116,7 @@ function buildLibrary(){
 function paintLibrary(){
  if(!panel)return;const library=panel.querySelector('#m21AudioLibrary');if(!library)return;panel.querySelectorAll('[data-audio-tab]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.audioTab===audioTab)));library.replaceChildren();const hidden=audioTab==='popular';panel.querySelector('#avAmbienceSelect').hidden=hidden;panel.querySelector('#avAmbienceSelectLabel').hidden=hidden;panel.querySelector('.av-ambience-volume-heading').hidden=hidden;panel.querySelector('#avAmbienceVolume').hidden=hidden;panel.querySelector('#avAmbiencePlay').hidden=hidden;panel.querySelector('.m21-sleep-label').hidden=hidden;
  if(hidden){const note=document.createElement('p');note.className='m21-official-note';I24.text(note,()=>(I24.t("Узнаваемые треки, не текущий чарт. Официальный YouTube-плеер загрузится только по нажатию: площадка получит сетевой запрос, возможны реклама, возрастные и региональные ограничения. Музыка не скачивается; скрытого фонового режима нет.")));library.append(note);for(const[group,title,id]of popular){const card=document.createElement('article');card.className='m21-audio-card';const name=document.createElement('strong');name.textContent=title;const tag=document.createElement('small');I24.text(tag,()=>((group==='anime'?'ANIME / J-POP':(group==='edits'?'PHONK / EDITS':I24.t("РОМАНТИКА")))));const play=document.createElement('button');play.type='button';I24.text(play,()=>(I24.t("Загрузить официальный плеер")));play.onclick=()=>{manualStop();const host=panel.querySelector('#m21Official');host.replaceChildren();const frame=document.createElement('iframe');frame.src='https://www.youtube-nocookie.com/embed/'+id+'?autoplay=0&playsinline=1';frame.title=(title+I24.t(" — официальный YouTube-плеер"));frame.allow='encrypted-media; fullscreen; picture-in-picture';frame.allowFullscreen=true;frame.referrerPolicy='strict-origin-when-cross-origin';host.append(frame);host.scrollIntoView({block:'nearest',behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});};const link=document.createElement('a');link.href='https://www.youtube.com/watch?v='+id;link.target='_blank';link.rel='noopener noreferrer';I24.text(link,()=>(I24.t("Открыть на YouTube ↗")));card.append(tag,name,play,link);library.append(card);}return;}
- for(const m of originalModes){const b=document.createElement('button');b.className='m21-audio-card';b.type='button';b.setAttribute('aria-pressed',String(prefs.sound===m[0]));const title=document.createElement('strong');title.textContent=m[1]+' '+(ru()?m[2]:m[3]);const small=document.createElement('small');I24.text(small,()=>((audioTab==='nature'?(m[0].includes('window')||['rail-rain','river','distant-train'].includes(m[0])?I24.t("ОБРАБОТКА / МИКС ЗАПИСЕЙ"):I24.t("ПОЛЕВАЯ ЗАПИСЬ")):'KEVIN MACLEOD · CC BY 4.0')));b.append(title,small);b.onclick=()=>{prefs.sound=m[0];save();if(playing||busy)start();else paint();};library.append(b);}
+ for(const m of originalModes){const b=document.createElement('button');b.className='m21-audio-card';b.type='button';b.setAttribute('aria-pressed',String(prefs.sound===m[0]));const title=document.createElement('strong');title.textContent=m[1]+' '+(ru()?m[2]:m[3]);const small=document.createElement('small');I24.text(small,()=>((audioTab==='nature'?(m[0].includes('window')||['rail-rain','river','distant-train'].includes(m[0])?I24.t("ОРИГИНАЛЬНЫЙ МИКС"):I24.t("ОРИГИНАЛЬНЫЙ ЗВУК")) : 'ORIGINAL · ANIME VOID')));b.append(title,small);b.onclick=()=>{prefs.sound=m[0];save();if(playing||busy)start();else {message=ru()?'Выбран новый звук. Нажми «Включить».':'Sound selected. Press Play.';paint();}};library.append(b);}
 }
 
 function open(){
@@ -110,7 +124,7 @@ function open(){
  document.querySelector('.decor-menu')?.remove();invoker=button;panel=document.createElement('dialog');panel.className='av-ambience-panel';panel.id='avAmbiencePanel';panel.setAttribute('aria-labelledby','avAmbienceTitle');
  panel.innerHTML='<h2 id="avAmbienceTitle"></h2><p class="av-ambience-intro"></p><label id="avAmbienceSelectLabel" for="avAmbienceSelect"></label><select id="avAmbienceSelect"></select><div class="av-ambience-volume-heading"><label id="avAmbienceVolumeLabel" for="avAmbienceVolume"></label><output for="avAmbienceVolume"></output></div><input id="avAmbienceVolume" type="range" min="0" max="100" step="1"><p class="av-ambience-status" role="status" aria-live="polite"></p><div class="av-ambience-actions"><button type="button" class="primary" id="avAmbiencePlay"></button><button type="button" class="secondary" id="avAmbienceClose"></button></div><p class="av-ambience-note"></p><a class="av-audio-credits" href="audio-sources.html"></a>';
  for(const m of modes){const option=document.createElement('option');option.value=m[0];panel.querySelector('select').append(option);}
- panel.querySelector('#avAmbienceSelect').onchange=e=>{prefs.sound=e.target.value;save();if(playing||busy)start();else paint();};
+ panel.querySelector('#avAmbienceSelect').onchange=e=>{prefs.sound=e.target.value;save();if(playing||busy)start();else {message=ru()?'Выбран новый звук. Нажми «Включить».':'Sound selected. Press Play.';paint();}};
  panel.querySelector('#avAmbienceVolume').oninput=e=>{prefs.volume=Number(e.target.value)/100;save();if(master&&context)master.gain.setTargetAtTime(prefs.volume,context.currentTime,.04);paint();};
  panel.querySelector('#avAmbiencePlay').onclick=()=>(playing||busy)?manualStop():start();
  panel.querySelector('#avAmbienceClose').onclick=()=>panel.close();
