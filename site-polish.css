@@ -5,3 +5,56 @@
 @view-transition{navigation:none}
 /* Override later-injected sound-shell sizing as well as page-local rules. */
 html body #avAmbienceToggle.av-ambience-toggle,html body #ruBtn,html body #enBtn,html body #editNameBtn{min-width:44px!important;min-height:44px!important;height:auto!important;max-height:none!important}
+
+
+/* ANIME VOID 25.1 — home artwork and touch-friendly card polish.
+   Pure CSS: no account, watch history, rewards, or message state changes. */
+body.av-home{--av-card-radius:18px}
+body.av-home main,body.av-home main>section{min-width:0}
+body.av-home .hero{box-sizing:border-box;min-width:0;min-height:clamp(300px,34vw,430px);padding:clamp(24px,4.5vw,58px);isolation:isolate}
+body.av-home .hero-content{width:100%;min-width:0;max-width:min(590px,100%)}
+body.av-home .hero h1{font-size:clamp(30px,5vw,60px);line-height:1.12;overflow-wrap:break-word}
+body.av-home .hero p{max-width:55ch}
+body.av-home .grid,body.av-home .top-grid{min-width:0;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(10px,1.5vw,18px)}
+body.av-home .card,body.av-home .top-card,body.av-home .airing-card{min-width:0;max-width:100%;box-sizing:border-box;overflow:hidden}
+body.av-home .card{border-radius:var(--av-card-radius)}
+body.av-home .card .poster{position:relative;width:100%;height:auto!important;aspect-ratio:2/3;overflow:hidden;background:var(--av-raised,#17121f)}
+body.av-home .card .poster img{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;display:block;object-fit:cover!important;object-position:center 22%;border-radius:0}
+body.av-home .top-card img,body.av-home .airing-card img{display:block;width:100%;height:auto;aspect-ratio:2/3;object-fit:cover;object-position:center 22%;background:var(--av-raised,#17121f)}
+body.av-home .top-card{border-radius:var(--av-card-radius);padding:9px}
+body.av-home .top-name,body.av-home .airing-name,body.av-home .av-card-copy h3{overflow-wrap:anywhere}
+body.av-home .card-actions{display:flex;flex-wrap:wrap;align-items:center;gap:6px}
+body.av-home .card-actions button,body.av-home .card-actions a{min-height:44px;max-width:100%}
+body.av-home .card:focus-within,body.av-home .top-card:focus-visible,body.av-home .airing-card:focus-visible{outline:2px solid var(--av-accent,#bb8eea);outline-offset:2px}
+body.av-home .top-card,body.av-home .airing-card{transition:transform .18s ease,border-color .18s ease}
+@media(hover:hover) and (pointer:fine){
+ body.av-home .top-card:hover,body.av-home .airing-card:hover{transform:translateY(-3px)}
+}
+@media(min-width:761px) and (max-width:1100px){
+ body.av-home .grid,body.av-home .top-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+@media(max-width:760px){
+ body.av-home main{padding-inline:clamp(12px,4vw,22px)}
+ body.av-home .hero{padding:clamp(20px,5vw,30px);min-height:285px;border-radius:18px}
+ body.av-home .hero::after{font-size:clamp(90px,27vw,160px);right:-12px;bottom:-24px;letter-spacing:-.07em}
+ body.av-home .hero h1{font-size:clamp(29px,7.5vw,44px)}
+ body.av-home .hero p{font-size:14px;line-height:1.6}
+ body.av-home .grid,body.av-home .top-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+ body.av-home .card .poster,body.av-home .top-card img,body.av-home .airing-card img{aspect-ratio:2/3}
+ body.av-home .top-card{padding:7px;border-radius:14px}
+ body.av-home .av-card-copy{padding:11px 10px 0}
+ body.av-home .av-card-copy h3{font-size:13px;line-height:1.35}
+ body.av-home .top-name,body.av-home .airing-name{font-size:12px;line-height:1.35}
+ body.av-home .card-actions{padding-inline:8px}
+ body.av-home .card-actions button{white-space:normal}
+ body.av-home .airing-row{scroll-padding-inline:12px;overscroll-behavior-inline:contain}
+ body.av-home .airing-card{flex:0 0 clamp(148px,43vw,184px)}
+}
+@media(max-width:360px){
+ body.av-home .grid,body.av-home .top-grid{gap:8px}
+ body.av-home .hero{padding:18px}
+ body.av-home .card-actions{gap:4px}
+}
+@media(prefers-reduced-motion:reduce){
+ body.av-home .top-card,body.av-home .airing-card{transition:none!important;transform:none!important}
+}
