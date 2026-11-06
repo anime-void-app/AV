@@ -366,3 +366,18 @@ body:not(.av-profile-page) #modal .modal-box>.modal-close-btn{box-sizing:border-
 .av-profile-page :is(#profileStats,#profileAchievements) :is(h2,p){overflow-wrap:anywhere}
 @media(max-width:700px){.av-profile-page main>#profileOverview{margin-top:8px;margin-bottom:12px}.av-profile-page main>#profileWorkshop{margin-bottom:16px}.av-profile-page #profileOverview .profile-top{gap:12px}.av-profile-page #profileOverview .rank-row{gap:6px}.av-profile-page #profileOverview .av-reborn-extras .share-row{gap:8px}.av-profile-page main>:is(#profileStats,#profileAchievements,#profileActivity,#profileCharts,#watchingSection,#favoritesSection){scroll-margin-top:66px}}
 @media(max-width:390px){.av-profile-page #profileOverview .av-reborn-extras .share-row>*{width:100%;flex-basis:100%}}
+
+/* ANIME VOID 31.0 — consistent Profile Reborn hero and achievement gallery. */
+.av-profile-page #profileOverview{border-radius:22px}
+.av-profile-page #profileOverview .name-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.av-profile-page #profileOverview .name-row #editNameBtn{flex:0 0 44px;display:grid;place-items:center;min-width:44px;min-height:44px}
+.av-profile-page #profileOverview #avatarButton{flex-shrink:0;aspect-ratio:1;object-fit:cover}
+.av-profile-page #profileOverview .rank-row>*{max-width:100%;overflow-wrap:anywhere}
+.av-profile-page #profileAchievements{box-sizing:border-box;min-width:0;max-width:100%;overflow:hidden}
+.av-profile-page #profileAchievements .av-reborn-achievements-intro{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.av-profile-page #profileAchievements .av-reborn-achievements-intro>div{min-width:0;flex:1 1 220px}
+.av-profile-page #profileAchievements .av-reborn-achievements-jump{display:inline-flex;align-items:center;justify-content:center;box-sizing:border-box;min-height:44px;max-width:100%;padding:10px 14px;border:1px solid #795d91;border-radius:12px;background:#30203e;color:#f1dfff;text-decoration:none;font:650 12px/1.4 system-ui;overflow-wrap:anywhere}
+.av-profile-page #profileAchievements .av-reborn-achievements-jump:focus-visible{outline:3px solid #e3b8ff;outline-offset:3px}
+.av-profile-page #profileAchievements :is(#otakuPath,#achievementsGrid){min-width:0;max-width:100%;box-sizing:border-box}
+.av-profile-page #profileAchievements #achievementsGrid>*{box-sizing:border-box;min-width:0;max-width:100%;overflow-wrap:anywhere}
+@media(max-width:650px){.av-profile-page #profileOverview{border-radius:16px}.av-profile-page #profileAchievements .av-reborn-achievements-jump{width:100%}.av-profile-page #profileAchievements #achievementsGrid{gap:10px}}
