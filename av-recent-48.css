@@ -1,0 +1,38 @@
+/* ANIME VOID 48.0 — local recent-history switch and visual progress. */
+body:is(.av-home,.av-profile-page) .av-48-recent-switch{
+  display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px;align-items:center;
+}
+body:is(.av-home,.av-profile-page) .av-48-recent-switch button{
+  appearance:none;min-height:42px;padding:9px 15px;border-radius:11px;
+  border:1px solid rgba(204,164,245,.25);background:rgba(37,24,52,.78);
+  color:#d9c7e8;font:600 12px/1.3 inherit;cursor:pointer;
+  transition:background .16s,border-color .16s;
+}
+body:is(.av-home,.av-profile-page) .av-48-recent-switch button[aria-pressed=true]{
+  background:rgba(146,79,207,.35);border-color:#c790ef;color:#fff;
+}
+body:is(.av-home,.av-profile-page) .av-48-recent-switch button:hover{
+  border-color:#c790ef;
+}
+body:is(.av-home,.av-profile-page) .av-48-recent-switch button:focus-visible{
+  outline:3px solid #edc5ff;outline-offset:3px;
+}
+body:is(.av-home,.av-profile-page) .av-48-recent-meter{
+  display:block;width:100%;height:5px;overflow:hidden;border-radius:100px;
+  background:rgba(196,158,225,.15);margin-top:4px;
+}
+body:is(.av-home,.av-profile-page) .av-48-recent-meter-fill{
+  display:block;height:100%;max-width:100%;border-radius:100px;
+  background:linear-gradient(90deg,#a46ced,#dfb1ff);
+}
+@media(max-width:540px){
+  body:is(.av-home,.av-profile-page) .av-48-recent-switch{
+    display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;
+  }
+  body:is(.av-home,.av-profile-page) .av-48-recent-switch button{
+    min-width:0;min-height:44px;padding:10px 8px;
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  body:is(.av-home,.av-profile-page) .av-48-recent-switch button{transition:none}
+}
