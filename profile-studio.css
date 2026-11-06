@@ -53,3 +53,14 @@
 .avp-dialog .avp-preview{overflow-wrap:anywhere}
 @media(max-width:760px){.avp-dialog{scrollbar-gutter:auto}.avp-dialog .avp-dialog-head{gap:8px}.avp-dialog .avp-balance{min-width:0;overflow-wrap:anywhere}.avp-dialog .avp-tabs{max-width:100%;overflow-x:auto;overscroll-behavior-x:contain}.avp-dialog .avp-tabs button{min-height:44px;flex-shrink:0}.avp-dialog .avp-cards{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.avp-dialog .avp-item{padding:10px}}
 @media(max-width:390px){.avp-dialog .avp-cards{grid-template-columns:minmax(0,1fr)}.avp-dialog .avp-close{flex-basis:44px}}
+
+/* ANIME VOID 31.0 — shop item previews and equipment selection clarity. */
+.avp-dialog .avp-preview{box-sizing:border-box;max-width:100%;isolation:isolate}
+.avp-dialog .avp-preview-banner{background-position:center;background-repeat:no-repeat}
+.avp-dialog .avp-preview-avatar{box-sizing:border-box;overflow:hidden}
+.avp-dialog .avp-preview-info{box-sizing:border-box;max-width:100%;overflow-wrap:anywhere}
+.avp-dialog .avp-item{display:flex;flex-direction:column}
+.avp-dialog .avp-item .avp-item-copy{box-sizing:border-box;flex:1 1 auto;min-width:0;overflow-wrap:anywhere}
+.avp-dialog .avp-item.avp-selected{outline:2px solid var(--av-accent,#b585ff);outline-offset:-2px}
+.avp-dialog .avp-item :is(button,a):focus-visible{outline:3px solid #e3b8ff;outline-offset:2px}
+@media(max-width:760px){.avp-dialog .avp-preview{height:clamp(170px,28dvh,215px)}.avp-dialog .avp-item .avp-item-copy{padding:10px}.avp-dialog .avp-item .avp-art-button{height:clamp(90px,18dvh,128px)}}
