@@ -878,3 +878,73 @@ body.av-home :is(#catalog #animeGrid,#favorites #favoritesGrid) .card .av-card-c
   body.av-home #favorites #favoritesGrid .card,
   body.av-home>header .search-suggestion{transition:none}
 }
+
+/* ANIME VOID 43.0 — saved-title placeholders and responsive collection cards.
+   Display-only: no changes to favorite/status records or commerce data. */
+body.av-home #favorites #favoritesGrid .av-saved-unknown{
+  box-sizing:border-box;
+  min-width:0;
+  max-width:100%;
+  min-height:220px;
+  overflow:hidden;
+  border:1px dashed var(--av-line,#785e96);
+  border-radius:16px;
+  background:var(--av-surface,#20172b);
+}
+body.av-home #favorites #favoritesGrid .av-saved-unknown>a{
+  box-sizing:border-box;
+  display:flex;
+  flex-direction:column;
+  width:100%;
+  height:100%;
+  min-width:0;
+  color:var(--av-text,#f3eaff);
+  text-decoration:none;
+  overflow-wrap:anywhere;
+}
+body.av-home #favorites #favoritesGrid .av-saved-unknown img{
+  display:block;
+  width:100%;
+  height:auto;
+  aspect-ratio:2/3;
+  object-fit:cover;
+  background:var(--av-raised,#191024);
+}
+body.av-home #favorites #favoritesGrid .av-saved-unknown span{
+  box-sizing:border-box;
+  display:flex;
+  flex-direction:column;
+  gap:7px;
+  padding:12px;
+  min-width:0;
+}
+body.av-home #favorites #favoritesGrid .av-saved-unknown strong{
+  font:700 14px/1.4 system-ui;
+  overflow-wrap:anywhere;
+}
+body.av-home #favorites #favoritesGrid .av-saved-unknown small{
+  color:var(--av-muted,#c3b1d1);
+  font:400 12px/1.5 system-ui;
+}
+body.av-home #favorites #favoritesGrid .av-saved-unknown a:focus-visible{
+  outline:3px solid #ce9eff;outline-offset:-3px;
+}
+body.av-profile-page :is(#favoritesGrid,#watchingGrid) .mini-card.av-missing-title{
+  box-sizing:border-box;
+  border:1px dashed var(--av-line,#765d94);
+  max-width:100%;
+}
+body.av-profile-page :is(#favoritesGrid,#watchingGrid) .mini-card.av-missing-title .av-missing-note{
+  box-sizing:border-box;
+  display:block;
+  max-width:100%;
+  padding:0 8px 10px;
+  color:var(--av-muted,#c5b6d5);
+  font:400 11px/1.45 system-ui;
+  overflow-wrap:anywhere;
+}
+@media(max-width:390px){
+  body.av-home #favorites #favoritesGrid .av-saved-unknown strong{font-size:12px}
+  body.av-home #favorites #favoritesGrid .av-saved-unknown span{padding:10px;gap:5px}
+  body.av-home #favorites #favoritesGrid .av-saved-unknown small{font-size:11px}
+}
