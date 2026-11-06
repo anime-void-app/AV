@@ -631,7 +631,7 @@ body.av-profile-page #profileSectionNav a[aria-current=location]{
 body:is(.av-home,.av-profile-page) :is(.vs-dialog,.at-dialog,.at-full,.avp-dialog,.avp-confirm){
   box-sizing:border-box;
   min-width:0;
-  max-width:min(100% - 24px, calc(100vw - 24px));
+  max-width:calc(100vw - 24px);
   max-height:calc(100dvh - 24px);
   overflow-x:hidden;
   overflow-y:auto;
