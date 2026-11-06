@@ -21,3 +21,15 @@ html[data-av-compact=true] .vs-profile-intro{padding-bottom:14px}html[data-av-co
 .vs-dialog .vs-tabs button{box-sizing:border-box;min-height:44px;white-space:normal;overflow-wrap:anywhere}
 .vs-dialog :is(button,a){touch-action:manipulation}
 @media(max-width:760px){.vs-dialog{width:calc(100vw - 12px);max-width:calc(100vw - 12px);max-height:calc(100dvh - 12px);border-radius:14px}.vs-dialog .vs-tabs{gap:6px;padding:12px}.vs-dialog .vs-tabs button{min-width:0;flex:1 1 120px;font-size:12px}.vs-dialog .vs-settings-body{padding:14px}.vs-dialog :is(input,select,textarea){font-size:max(16px,1em)}}
+
+/* ANIME VOID 28.0 — unified Workshop: avatar and visual effects. */
+.vs-dialog{overscroll-behavior:contain;scrollbar-gutter:stable}
+.vs-dialog :is(.vs-dialog-head,.vs-settings-body,.vs-tabs,.vs-avatar-grid,.vs-scene-gallery,.vs-scene-grid,.vs-preview){box-sizing:border-box;min-width:0;max-width:100%}
+.vs-dialog .vs-dialog-head{gap:12px;align-items:center}
+.vs-dialog .vs-close{display:grid;place-items:center;flex:0 0 44px;width:44px;height:44px;min-width:44px;min-height:44px;padding:0;line-height:1}
+.vs-dialog :is(.vs-avatar-grid,.vs-scene-grid)>*{box-sizing:border-box;min-width:0;max-width:100%;overflow-wrap:anywhere}
+.vs-dialog .vs-settings-body :is(button,a){box-sizing:border-box;min-height:44px;max-width:100%;white-space:normal;overflow-wrap:anywhere}
+.vs-dialog .vs-preview{overflow-wrap:anywhere}
+.vs-dialog :is(.vs-close,.vs-tabs button,input,select,textarea):focus-visible{outline:3px solid #e0b8ff;outline-offset:2px}
+@media(max-width:760px){.vs-dialog{scrollbar-gutter:auto}.vs-dialog .vs-dialog-head{padding:16px;gap:8px}.vs-dialog .vs-tabs{max-width:100%;overflow-x:auto;overscroll-behavior-x:contain}.vs-dialog .vs-tabs button{flex:1 1 120px}.vs-dialog .vs-settings-body{padding:14px}.vs-dialog .vs-avatar-grid,.vs-dialog .vs-scene-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}}
+@media(max-width:390px){.vs-dialog .vs-avatar-grid,.vs-dialog .vs-scene-grid{grid-template-columns:minmax(0,1fr)}}
