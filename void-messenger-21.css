@@ -20,3 +20,13 @@ body.v21-messages .dm-login :is(button,input,textarea){box-sizing:border-box;max
 body.v21-messages :is(.dm-mobile-nav button,.dm-toolbar button){min-height:44px;touch-action:manipulation}
 @media(max-width:760px){body.v21-messages .dm-layout{grid-template-columns:minmax(0,1fr);gap:12px}body.v21-messages .dm-sidebar,body.v21-messages .dm-conversation{padding:12px}body.v21-messages .dm-inbox{grid-template-columns:minmax(0,1fr);max-height:36dvh}body.v21-messages .dm-feed{height:45dvh;min-height:220px}body.v21-messages .dm-message{max-width:94%;margin-right:6%}body.v21-messages .dm-message[data-own=true]{margin-left:6%;margin-right:0}body.v21-messages .dm-login{width:calc(100vw - 12px);max-width:calc(100vw - 12px);max-height:calc(100dvh - 12px);padding:16px;border-radius:14px}}
 @media(max-width:380px){body.v21-messages .dm-toolbar{align-items:stretch}body.v21-messages .dm-toolbar button{max-width:100%;white-space:normal}body.v21-messages .dm-login{padding:12px}}
+
+/* ANIME VOID 33.0 — messages touch, composer and focus consistency. */
+body.v21-messages{max-width:100%;overflow-x:clip}
+body.v21-messages :is(#dmInbox,#dmFeed,#dmCompose,#dmPersonCard){box-sizing:border-box;min-width:0;max-width:100%}
+body.v21-messages :is(#dmText,#dmSearchMessages,#dmFilter){box-sizing:border-box;min-width:0;max-width:100%;font-size:16px}
+body.v21-messages :is(#dmSend,#dmClear,#dmRefresh,#dmShowInbox,#dmShowConversation,#dmNew,#dmOlder){box-sizing:border-box;min-height:44px;max-width:100%;white-space:normal;overflow-wrap:anywhere}
+body.v21-messages :is(button,a,input,select,textarea):focus-visible{outline:3px solid #dfb8ff;outline-offset:2px}
+body.v21-messages #dmFeed{overflow-wrap:anywhere;overscroll-behavior:contain}
+body.v21-messages #dmCompose{gap:8px}
+@media(max-width:650px){body.v21-messages #dmCompose{min-width:0}body.v21-messages #dmText{width:100%}}
