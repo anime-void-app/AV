@@ -1665,6 +1665,9 @@
     });
     addEventListener("pageshow", scheduleProfileRefresh);
     addEventListener("focus", scheduleProfileRefresh);
+    document.addEventListener("visibilitychange", () => {
+      if (document.visibilityState === "visible") scheduleProfileRefresh();
+    });
     addEventListener("av:cloud-restored", scheduleProfileRefresh);
 
     /* ===== Эффекты: сакура, снег, блёстки, сердечки ===== */
