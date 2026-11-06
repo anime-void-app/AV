@@ -381,3 +381,19 @@ body:not(.av-profile-page) #modal .modal-box>.modal-close-btn{box-sizing:border-
 .av-profile-page #profileAchievements :is(#otakuPath,#achievementsGrid){min-width:0;max-width:100%;box-sizing:border-box}
 .av-profile-page #profileAchievements #achievementsGrid>*{box-sizing:border-box;min-width:0;max-width:100%;overflow-wrap:anywhere}
 @media(max-width:650px){.av-profile-page #profileOverview{border-radius:16px}.av-profile-page #profileAchievements .av-reborn-achievements-jump{width:100%}.av-profile-page #profileAchievements #achievementsGrid{gap:10px}}
+
+/* ANIME VOID 32.0 — shared UI contract: modal bounds, focus, touch targets. */
+/* Scope to known page shells to avoid altering third-party widgets. */
+:is(body.av-profile-page,body:not(.av-profile-page)) :is(.avp-dialog,.at-dialog,.at-full,.vs-dialog){box-sizing:border-box;max-width:calc(100vw - 16px);max-height:calc(100dvh - 16px);overscroll-behavior:contain}
+.av-profile-page :is(.avp-dialog,.at-dialog,.at-full,.vs-dialog) :is(button,a,input,select,textarea):focus-visible{outline:3px solid #e6bdff;outline-offset:2px}
+.av-profile-page :is(.avp-dialog,.at-dialog,.at-full,.vs-dialog) :is(.avp-close,.at-close,.vs-close){box-sizing:border-box;display:grid;place-items:center;flex:0 0 44px;min-width:44px;min-height:44px;width:44px;height:44px;line-height:1}
+.av-profile-page :is(.avp-dialog,.at-dialog,.at-full,.vs-dialog) :is(input,select,textarea){box-sizing:border-box;min-width:0;max-width:100%}
+.av-profile-page :is(.avp-dialog,.at-dialog,.at-full,.vs-dialog) :is(h1,h2,h3,p,small,strong){overflow-wrap:anywhere}
+body:not(.av-profile-page) #modal .modal-box{box-sizing:border-box;max-width:calc(100vw - 16px);max-height:calc(100dvh - 16px);overscroll-behavior:contain}
+body:not(.av-profile-page) #modal .modal-box>.close{box-sizing:border-box;display:grid;place-items:center;width:44px;height:44px;min-width:44px;min-height:44px;line-height:1}
+body:not(.av-profile-page) #modal .modal-box :is(button,a,input,select,textarea):focus-visible{outline:3px solid #e6bdff;outline-offset:2px}
+body:not(.av-profile-page) #modal .modal-box :is(input,select,textarea){box-sizing:border-box;min-width:0;max-width:100%}
+body:not(.av-profile-page) #modal #modalContent{min-width:0;max-width:100%;overflow-wrap:anywhere}
+.av-profile-page :is(.av-profile-nav,.av-profile-reborn-toolbar,.av-reborn-workshop,.stats-section,.achievements-section){box-sizing:border-box;min-width:0;max-width:100%}
+@media(max-width:650px){.av-profile-page :is(.avp-dialog,.at-dialog,.at-full,.vs-dialog){max-width:calc(100vw - 8px);max-height:calc(100dvh - 8px)}body:not(.av-profile-page) #modal .modal-box{max-width:calc(100vw - 8px);max-height:calc(100dvh - 8px)}}
+@media(prefers-reduced-motion:reduce){.av-profile-page :is(.avp-dialog,.at-dialog,.at-full,.vs-dialog){scroll-behavior:auto}}
