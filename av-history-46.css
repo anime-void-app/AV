@@ -104,3 +104,42 @@ body.av-history-page main{max-width:1170px;margin:0 auto;padding:0 20px 65px}
 .av-46-more:focus-visible{outline:3px solid #ebbdff;outline-offset:3px}
 @media(max-width:540px){.av-46-more{width:100%;margin:12px auto 22px}}
 @media(prefers-reduced-motion:reduce){.av-46-more{transition:none}}
+
+
+/* ANIME VOID 47.0 — reachable watch controls at 320–540px and clear focus. */
+.av-46-record-actions a{
+  display:inline-flex;
+  justify-content:center;
+  align-items:center;
+  min-height:44px;
+  min-width:118px;
+  padding:9px 12px;
+  text-align:center;
+  box-sizing:border-box;
+  touch-action:manipulation;
+}
+.av-46-record-actions a:focus-visible{
+  outline:3px solid #e8bdff;
+  outline-offset:2px;
+}
+@media(max-width:540px){
+  .av-46-record-actions{display:flex;width:100%}
+  .av-46-record-actions a{
+    flex:1 1 auto;
+    max-width:100%;
+    min-width:0;
+  }
+  .av-46-record{align-items:flex-start}
+  .av-46-record-main{gap:6px}
+  .av-46-metrics article{overflow-wrap:anywhere}
+  .av-46-result-count{line-height:1.5}
+}
+@media(max-width:360px){
+  .av-46-top-nav{gap:3px}
+  .av-46-top-nav a{font-size:11px;padding-inline:9px}
+  .av-46-metrics article{padding:11px}
+  .av-46-metrics article strong{font-size:20px}
+  .av-46-record-poster{width:56px;flex-basis:56px;height:84px}
+  .av-46-record{gap:9px}
+  .av-46-record-meta{font-size:11px}
+}
