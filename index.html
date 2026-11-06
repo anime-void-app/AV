@@ -3889,10 +3889,23 @@ if (!donghuaMode) {
 
     /* ANIME VOID 43.0 — refresh saved lists after cross-tab edits.
        Never touch user data or replace the active search/filter selection. */
-    const HOME_SAVED_KEYS = ["animeVoidFavorites","animeVoidStatuses","animeVoidListItems","animeVoidRatings"];
+    /* ANIME VOID 44.0 — include watched episodes and durations in the
+       read-only signature. Other tabs cannot silently stale the UI. */
+    const HOME_SAVED_KEYS = [
+      "animeVoidFavorites","animeVoidStatuses","animeVoidListItems",
+      "animeVoidRatings","animeVoidLastWatch","animeVoidActivityLog"
+    ];
+    const HOME_PROGRESS_KEY = /^(?:watched_(?:anilist-)?[1-9]\d{0,9}|duration_(?:anilist-)?[1-9]\d{0,9}_[1-9]\d{0,4})$/;
     const homeSavedSignature = () => {
-      try { return HOME_SAVED_KEYS.map(key => localStorage.getItem(key) ?? "").join("\u001f"); }
-      catch (_) { return null; }
+      try {
+        const values = HOME_SAVED_KEYS.map(key => [key, localStorage.getItem(key) ?? ""]);
+        for (let i=0; i<localStorage.length; i++) {
+          const key = localStorage.key(i);
+          if (key && HOME_PROGRESS_KEY.test(key)) values.push([key,localStorage.getItem(key) ?? ""]);
+        }
+        values.sort((a,b)=>a[0].localeCompare(b[0]));
+        return values.map(([key,value])=>key+"="+value).join("\u001f");
+      } catch (_) { return null; }
     };
     let homeSeenSignature = homeSavedSignature();
     let homeRefreshPending = false;
@@ -3908,6 +3921,8 @@ if (!donghuaMode) {
         render();
         renderHistorySection();
         renderStatsCharts();
+        renderDailyQuests();
+        showContinueWatching();
       } catch (error) {
         console.warn("ANIME VOID: saved-list refresh failed", error);
       }
@@ -3918,7 +3933,7 @@ if (!donghuaMode) {
       setTimeout(refreshHomeSavedState, 80);
     }
     addEventListener("storage", event => {
-      if (event.storageArea === localStorage && (event.key === null || HOME_SAVED_KEYS.includes(event.key))) {
+      if (event.storageArea === localStorage && (event.key === null || HOME_SAVED_KEYS.includes(event.key) || HOME_PROGRESS_KEY.test(event.key))) {
         queueHomeSavedRefresh();
       }
     });
