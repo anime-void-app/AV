@@ -39,3 +39,17 @@
 @media(max-width:700px){.avp-dialog{width:calc(100vw - 12px);max-width:calc(100vw - 12px);max-height:calc(100dvh - 12px);border-radius:14px}.avp-dialog .avp-dialog-head{padding:12px;gap:8px}.avp-dialog .avp-dialog-head h2{font-size:clamp(17px,4.5vw,21px)}.avp-dialog .avp-balance{font-size:13px;max-width:34%}.avp-dialog .avp-studio-body{grid-template-columns:minmax(0,1fr);gap:16px;padding:12px}.avp-dialog .avp-sidebar{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px;align-items:start}.avp-dialog .avp-sidebar>.avp-preview{grid-column:1/-1;height:165px;margin-bottom:2px}.avp-dialog .avp-sidebar>button{margin:0}.avp-dialog .avp-tabs{gap:6px;padding-bottom:10px}.avp-dialog .avp-tabs button{font-size:12px;padding:9px}.avp-dialog .avp-filters{margin:12px 0}.avp-dialog .avp-cards{gap:9px}.avp-dialog .avp-item .avp-art-button{height:110px}}
 @media(max-width:370px){.avp-dialog .avp-cards{grid-template-columns:minmax(0,1fr)}.avp-dialog .avp-sidebar{grid-template-columns:minmax(0,1fr)}.avp-dialog .avp-sidebar>.avp-preview{grid-column:1}.avp-dialog .avp-dialog-head{flex-wrap:wrap}.avp-dialog .avp-balance{margin-left:0;max-width:calc(100% - 56px)}.avp-dialog .avp-close{margin-left:auto}}
 @media(prefers-reduced-motion:reduce){.avp-dialog .avp-item{transition:none}.avp-dialog .avp-item:hover{transform:none}}
+
+/* ANIME VOID 28.0 — unified Workshop: shop, inventory and equip view. */
+.avp-dialog{overscroll-behavior:contain;scrollbar-gutter:stable;min-width:0}
+.avp-dialog :is(.avp-dialog-head,.avp-studio-body,.avp-sidebar,.avp-preview,.avp-cards,.avp-filters){box-sizing:border-box;min-width:0;max-width:100%}
+.avp-dialog .avp-dialog-head{gap:12px;align-items:center}
+.avp-dialog .avp-close{display:grid;place-items:center;flex:0 0 44px;width:44px;height:44px;min-width:44px;min-height:44px;padding:0;line-height:1}
+.avp-dialog .avp-close:focus-visible,.avp-dialog :is(button,a,input,select):focus-visible{outline:3px solid #e0b8ff;outline-offset:2px}
+.avp-dialog .avp-cards{grid-auto-rows:auto}
+.avp-dialog .avp-item{box-sizing:border-box;min-width:0;max-width:100%;overflow:hidden;overflow-wrap:anywhere}
+.avp-dialog .avp-item :is(button,a){max-width:100%;white-space:normal;overflow-wrap:anywhere;touch-action:manipulation}
+.avp-dialog .avp-filters :is(button,input,select){box-sizing:border-box;max-width:100%;min-height:44px}
+.avp-dialog .avp-preview{overflow-wrap:anywhere}
+@media(max-width:760px){.avp-dialog{scrollbar-gutter:auto}.avp-dialog .avp-dialog-head{gap:8px}.avp-dialog .avp-balance{min-width:0;overflow-wrap:anywhere}.avp-dialog .avp-tabs{max-width:100%;overflow-x:auto;overscroll-behavior-x:contain}.avp-dialog .avp-tabs button{min-height:44px;flex-shrink:0}.avp-dialog .avp-cards{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.avp-dialog .avp-item{padding:10px}}
+@media(max-width:390px){.avp-dialog .avp-cards{grid-template-columns:minmax(0,1fr)}.avp-dialog .avp-close{flex-basis:44px}}
