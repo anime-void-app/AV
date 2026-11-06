@@ -40,7 +40,7 @@
     head.append(intro,link);
     const grid=el('div','av49-gallery-grid');
     for(const [id,a,b,slug] of scenes){
-      const button=el('button','av49-gallery-card');button.type='button';
+      const button=el('button','av49-gallery-card');button.type='button';button.dataset.bannerId=id;
       button.setAttribute('aria-label',tr('Примерить: ','Preview: ')+tr(a,b));
       const img=el('img');img.src='studio/v49/'+slug+'.svg';
       img.alt='';img.loading='lazy';img.decoding='async';
@@ -77,7 +77,7 @@
   function language(){
     for(const {node,a,b} of labels)node.textContent=tr(a,b);
     for(const [id,a,b] of scenes){
-      const button=document.querySelector('.av49-gallery-card[aria-label*="'+id+'"]');
+      const button=document.querySelector('.av49-gallery-card[data-banner-id="'+id+'"]');
       if(button)button.setAttribute('aria-label',tr('Примерить: ','Preview: ')+tr(a,b));
     }
   }
