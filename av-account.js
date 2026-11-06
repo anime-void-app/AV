@@ -76,7 +76,13 @@ async function logout(){if(busy||restoring||['saving','checking','reloading'].in
 async function init(){try{needSecure();const url=new URL(location.href);if(url.pathname.endsWith('/account.html')){const failure=url.searchParams.get('error'),errorText=url.searchParams.get('error_description')||failure,code=url.searchParams.get('code');if(failure||code){for(const key of ['error','error_description','error_code','code','state'])url.searchParams.delete(key);history.replaceState(history.state,'',url.pathname+url.search+url.hash);}if(failure)throw Error(errorText||'OAuth failed');if(code){const result=await getClient().auth.exchangeCodeForSession(code);if(result.error)throw result.error;}}await restore();}catch(err){status('error',explain(err));}timer=setInterval(tick,3000);}
 window.AVAccount=Object.freeze({client:getClient,state,restore,choose,save,exportRecovery,login,register,google,recover,password,logout,t,open:()=>location.assign(new URL('account.html',location.href))});
 addEventListener('storage',ev=>{if(ev.key===OWNER&&identity&&ev.newValue!==identity.id){active=false;++epoch;status('checking',t('Аккаунт изменён в другой вкладке.','Account changed in another tab.'));setTimeout(()=>restore(),0);}});
-let editTimer;for(const event of ['input','change','click'])document.addEventListener(event,()=>{if(!active)return;clearTimeout(editTimer);editTimer=setTimeout(save,200);},true);
+let editTimer;
+function queueAutosave(){if(!active||restoring)return;clearTimeout(editTimer);editTimer=setTimeout(save,200);}
+for(const event of ['input','change','click'])document.addEventListener(event,queueAutosave,true);
+// The measured player ledger is written programmatically, not through DOM input events.
+addEventListener('av:measured',queueAutosave);
+const ACCOUNT_OWNED_KEY=/^(?:animeVoid[A-Za-z0-9_-]*|watched_(?:anilist-)?\\d+|duration_[\\w-]+|progress_[\\w-]+)$/;
+addEventListener('storage',ev=>{if(ev.key&&ACCOUNT_OWNED_KEY.test(ev.key))queueAutosave();});
 addEventListener('online',()=>restore());document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden')save();});
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
 })();
