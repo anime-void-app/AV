@@ -47,22 +47,21 @@
     try{
       const raw=localStorage.getItem(ledger.KEY);
       if(raw){
-        const archive=ledger.validate(JSON.parse(raw)),seen=new Map();
-        metrics=ledger.metrics(archive);
-        for(const record of Object.values(archive.entries)){
+        const archive=ledger.validate(JSON.parse(raw));
+        // Match the profile totals: merge equivalent runtime records for a
+        // single episode instead of counting the same viewing twice.
+        const report=ledger.presentation(archive);
+        metrics=report;
+        measured=report.entries.map(record=>{
           const bins=ledger.count(record.coverage);
-          if(!bins)continue;
-          const key=[record.titleId,record.season,record.episode].join(':');
-          const old=seen.get(key),best=!old||bins>old.bins||(bins===old.bins&&record.updatedAt>old.timestamp);
-          if(best)seen.set(key,{
-            key,titleId:record.titleId,title:record.title,
-            kind:record.kind,season:record.season,episode:record.episode,
-            bins,percent:Math.min(100,bins/10),timestamp:record.updatedAt,
+          return {
+            key:[record.titleId,record.season,record.episode].join(':'),
+            titleId:record.titleId,title:record.title,kind:record.kind,
+            season:record.season,episode:record.episode,bins,
+            percent:Math.min(100,bins/10),timestamp:record.updatedAt,
             position:record.position,duration:record.duration
-          });
-          else if(old&&record.updatedAt>old.timestamp)old.timestamp=record.updatedAt;
-        }
-        measured=[...seen.values()].sort((a,b)=>b.timestamp-a.timestamp);
+          };
+        });
       }
     }catch(error){console.warn('ANIME VOID: measured history unavailable',error);}
     let marked=[];
@@ -136,12 +135,16 @@
     const episode=movie?tr('Фильм','Movie'):tr('Сезон '+record.season+' · серия '+record.episode,'Season '+record.season+' · episode '+record.episode);
     const date=new Date(record.timestamp);
     const when=Number.isFinite(date.getTime())?date.toLocaleString(isRu()?'ru-RU':'en-US',{day:'numeric',month:'short',year:'numeric'}):'';
-    const dest=id?'anime.html?id='+encodeURIComponent(id):'kodik.html';
+    const dest=id
+      ? 'watch.html?id='+encodeURIComponent(id)+'&episode='+(movie?1:record.episode)
+      : 'kodik.html';
     return recordCard({
       poster:item?.image,title:record.title||nameFor(item),
       description:episode,sub:tr('Подтверждено '+record.percent.toFixed(1)+'% видео','Verified '+record.percent.toFixed(1)+'% of video'),
       pill:tr('Замер плеера','Player measured'),pillType:'measured',
-      percent:record.percent,when,href:dest,goText:tr('Открыть тайтл','Open title')
+      percent:record.percent,when,href:dest,
+      goText:id?tr(movie?'Открыть фильм':'Продолжить серию',movie?'Open movie':'Resume episode')
+        :tr('Открыть каталог Kodik','Open Kodik catalog')
     });
   }
   function markedCard(record){
@@ -161,12 +164,18 @@
   function updateContinue(){
     const section=$('av46Continue'),label=$('av46ContinueLabel'),link=$('av46ContinueLink');
     if(!section||!label||!link)return;
-    const last=safeRead('animeVoidLastWatch',null),id=canonical(last?.animeId);
+    const last=safeRead('animeVoidLastWatch',null);
+    const markedId=canonical(last?.animeId);
+    const recentMeasured=records.measured.find(record=>canonical(record.titleId));
+    const id=markedId||canonical(recentMeasured?.titleId);
     if(!id){section.hidden=true;return;}
-    const episode=Number(last.episode);
-    const ep=Number.isSafeInteger(episode)&&episode>0&&episode<=10000?episode:1;
-    const title=nameFor(records.meta.get(id)||records.marked.find(x=>x.id===id)?.item||{title:tr('Аниме №'+id.slice(8),'Anime #'+id.slice(8))});
-    label.textContent=title+' · '+tr('серия ','episode ')+ep;
+    const requestedEpisode=Number(markedId?last.episode:recentMeasured.episode);
+    const ep=Number.isSafeInteger(requestedEpisode)&&requestedEpisode>0&&requestedEpisode<=10000?requestedEpisode:1;
+    const title=nameFor(records.meta.get(id)||records.marked.find(x=>x.id===id)?.item
+      ||{title:recentMeasured?.title||tr('Аниме №'+id.slice(8),'Anime #'+id.slice(8))});
+    const isMovie=!markedId&&recentMeasured?.kind==='movie';
+    label.textContent=(markedId?'':tr('Из плеера · ','From player · '))+title+' · '
+      +(isMovie?tr('фильм','movie'):tr('серия '+ep,'episode '+ep));
     link.href='watch.html?id='+encodeURIComponent(id)+'&episode='+ep;
     section.hidden=false;
   }
