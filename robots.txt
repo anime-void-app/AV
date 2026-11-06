@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://anime-void-app.github.io/AV/sitemap.xml
+Sitemap: https://animevoid.ru/sitemap.xml
