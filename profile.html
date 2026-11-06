@@ -590,6 +590,22 @@
 <div class="quests-card" id="dailyQuests"></div>
 </section>
 <section aria-label="Личная статистика чтения" class="vrs-panel ym-hide-content" data-reading-stats="" data-static-attrs24='{"aria-label":"Личная статистика чтения"}' id="readingStats"></section>
+<section class="av-measured-section" id="measuredWatchStats" aria-labelledby="measuredTitle" hidden>
+  <div class="section-heading">
+    <div>
+      <h2 id="measuredTitle">⏱ Фактический просмотр</h2>
+      <div class="subtitle" id="measuredSubtitle"></div>
+    </div>
+  </div>
+  <div class="av-measured-grid">
+    <article class="av-measured-card"><strong id="measuredTime">—</strong><span id="measuredTimeLabel"></span></article>
+    <article class="av-measured-card"><strong id="measuredUnits">—</strong><span id="measuredUnitsLabel"></span></article>
+    <article class="av-measured-card"><strong id="measuredTitles">—</strong><span id="measuredTitlesLabel"></span></article>
+    <article class="av-measured-card"><strong id="measuredCompleted">—</strong><span id="measuredCompletedLabel"></span></article>
+  </div>
+  <p class="av-measured-last" id="measuredLast"></p>
+  <p class="av-measured-note" id="measuredNote"></p>
+</section>
 <section class="activity-section av-profile-nav-target" id="profileActivity">
 <div class="section-heading">
 <div>
@@ -1617,6 +1633,60 @@
       }
     }
 
+    /* Only verified player coverage contributes here; manual episode marks stay separate. */
+    function renderMeasuredWatchStats() {
+      const box = document.getElementById("measuredWatchStats");
+      if (!box) return;
+      const ru = isRussianNow();
+      const L = window.AVWatchLedger;
+      const set = (id, value) => {
+        const node = document.getElementById(id);
+        if (node) node.textContent = String(value);
+      };
+      if (!L) { box.hidden = true; return; }
+      try {
+        const raw = localStorage.getItem(L.KEY);
+        if (!raw) { box.hidden = true; return; }
+        const archive = L.validate(JSON.parse(raw));
+        const observed = Object.entries(archive.entries).filter(([, entry]) => L.count(entry.coverage) > 0);
+        if (!observed.length) { box.hidden = true; return; }
+        const measuredArchive = { version: 1, entries: Object.fromEntries(observed) };
+        const metrics = L.metrics(measuredArchive);
+        const last = observed.map(([, entry]) => entry).sort((a, b) => b.updatedAt - a.updatedAt)[0];
+        const minutes = Math.max(0, Math.round(metrics.seconds / 60));
+        const hours = Math.floor(minutes / 60);
+        const rest = minutes % 60;
+        const format = new Intl.NumberFormat(ru ? "ru-RU" : "en-US");
+        const time = hours ? (ru ? hours + " ч " + rest + " мин" : hours + " h " + rest + " min")
+          : (ru ? minutes + " мин" : minutes + " min");
+        const unit = last.kind === "movie" ? (ru ? "Фильм" : "Movie")
+          : (ru ? "Сезон " + last.season + " · серия " + last.episode : "Season " + last.season + " · episode " + last.episode);
+        const percent = (L.count(last.coverage) / 10).toFixed(1) + "%";
+        const date = new Date(last.updatedAt);
+        const dateText = Number.isNaN(date.getTime()) ? "" : date.toLocaleDateString(ru ? "ru-RU" : "en-US", { day: "numeric", month: "short" });
+        box.hidden = false;
+        set("measuredTitle", ru ? "⏱ Фактический просмотр" : "⏱ Measured watch progress");
+        set("measuredSubtitle", ru
+          ? "Подтверждённые участки видео из плеера — отдельно от ручных отметок серий"
+          : "Verified video segments from the player — separate from manual episode marks");
+        set("measuredTime", time);
+        set("measuredTimeLabel", ru ? "уникального просмотренного контента" : "unique content observed");
+        set("measuredUnits", format.format(metrics.units));
+        set("measuredUnitsLabel", ru ? "серий и фильмов" : "episodes and movies");
+        set("measuredTitles", format.format(metrics.titles));
+        set("measuredTitlesLabel", ru ? "тайтлов с просмотром" : "titles with measured viewing");
+        set("measuredCompleted", format.format(metrics.completed));
+        set("measuredCompletedLabel", ru ? "завершено по покрытию" : "completed by coverage");
+        set("measuredLast", (ru ? "Последний просмотр: " : "Last viewed: ") + last.title + " · " + unit + " · " + percent + (dateText ? " · " + dateText : ""));
+        set("measuredNote", ru
+          ? "Учитываются только реально пройденные участки. Перемотка, открытие страницы и время простоя не засчитываются. Это статистика, не награда."
+          : "Only actually traversed segments count. Seeking, opening the page and idle time do not count. This is a statistic, not a reward.");
+      } catch (error) {
+        box.hidden = true;
+        console.warn("ANIME VOID: measured watch stats unavailable", error);
+      }
+    }
+
     /* ===== Запуск ===== */
     function renderAll() {
       applyLanguage();
@@ -1624,6 +1694,7 @@
       renderStatsAndAchievements();
       renderStatsCharts();
       renderLists();
+      renderMeasuredWatchStats();
     }
 
     /* ANIME VOID 43.0 — reflect cross-tab user data without overwriting it.
@@ -1635,7 +1706,7 @@
       "animeVoidCatalog","animeVoidRatings","animeVoidNickname",
       "animeVoidAvatar","animeVoidAvatarImageV1","animeVoidAvatarBuiltinV1",
       "animeVoidLanguage","animeVoidTheme","animeVoidActivityLog",
-      "animeVoidFeaturedAchievements"
+      "animeVoidFeaturedAchievements", "animeVoidMeasuredV1"
     ];
     const PROFILE_PROGRESS_KEY = /^(?:watched_(?:anilist-)?[1-9]\d{0,9}|duration_(?:anilist-)?[1-9]\d{0,9}_[1-9]\d{0,4})$/;
     const profileSignature = () => {
@@ -1679,6 +1750,8 @@
       if (document.visibilityState === "visible") scheduleProfileRefresh();
     });
     addEventListener("av:cloud-restored", scheduleProfileRefresh);
+    addEventListener("av:measured", renderMeasuredWatchStats);
+    addEventListener("DOMContentLoaded", renderMeasuredWatchStats, { once: true });
 
     /* ===== Эффекты: сакура, снег, блёстки, сердечки ===== */
     const DECOR_MODES = [
