@@ -11,3 +11,13 @@ html[data-av-compact=true] .vs-profile-intro{padding-bottom:14px}html[data-av-co
 @media(max-width:760px){.av-home header .search-wrap{grid-column:1/4!important}.av-home header #vsOpenSettings{grid-row:2;grid-column:4}.avp-active header #vsOpenSettings{position:absolute;right:16px;bottom:8px}.avp-active header nav{padding-right:54px;box-sizing:border-box}.vs-profile .profile-info{padding-top:0}}
 
 .vs-upload-status{padding:12px;border-radius:10px;background:#3c2255;color:#fff;overflow-wrap:anywhere}.vs-upload-status:empty{display:none}.vs-drop{padding:20px;border:2px dashed #9671bb;border-radius:12px;text-align:center;cursor:pointer;color:var(--av-text)}.vs-drop[data-over=true]{background:#7041a6}.vs-dialog input[type=file]{cursor:pointer}
+
+/* ANIME VOID 26.6 — Visual Studio controls and responsive editor. */
+.vs-dialog{box-sizing:border-box;max-width:calc(100vw - 20px);max-height:calc(100dvh - 20px);overflow:auto;overscroll-behavior:contain}
+.vs-dialog .vs-close{box-sizing:border-box;display:inline-grid;place-items:center;width:44px;height:44px;min-width:44px;min-height:44px;flex:0 0 44px;padding:0;line-height:1}
+.vs-dialog :is(.vs-settings-body,.vs-tabs,.vs-scene-grid,.vs-preview){box-sizing:border-box;min-width:0;max-width:100%}
+.vs-dialog :is(h2,h3,p,small){overflow-wrap:anywhere}
+.vs-dialog :is(input,select,textarea){box-sizing:border-box;min-width:0;max-width:100%}
+.vs-dialog .vs-tabs button{box-sizing:border-box;min-height:44px;white-space:normal;overflow-wrap:anywhere}
+.vs-dialog :is(button,a){touch-action:manipulation}
+@media(max-width:760px){.vs-dialog{width:calc(100vw - 12px);max-width:calc(100vw - 12px);max-height:calc(100dvh - 12px);border-radius:14px}.vs-dialog .vs-tabs{gap:6px;padding:12px}.vs-dialog .vs-tabs button{min-width:0;flex:1 1 120px;font-size:12px}.vs-dialog .vs-settings-body{padding:14px}.vs-dialog :is(input,select,textarea){font-size:max(16px,1em)}}
