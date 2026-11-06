@@ -81,7 +81,7 @@ function queueAutosave(){if(!active||restoring)return;clearTimeout(editTimer);ed
 for(const event of ['input','change','click'])document.addEventListener(event,queueAutosave,true);
 // The measured player ledger is written programmatically, not through DOM input events.
 addEventListener('av:measured',queueAutosave);
-const ACCOUNT_OWNED_KEY=/^(?:animeVoid[A-Za-z0-9_-]*|watched_(?:anilist-)?\\d+|duration_[\\w-]+|progress_[\\w-]+)$/;
+const ACCOUNT_OWNED_KEY=/^(?:animeVoid[A-Za-z0-9_-]*|watched_(?:anilist-)?\d+|duration_[\w-]+|progress_[\w-]+)$/;
 addEventListener('storage',ev=>{if(ev.key&&ACCOUNT_OWNED_KEY.test(ev.key))queueAutosave();});
 addEventListener('online',()=>restore());document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden')save();});
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
