@@ -423,3 +423,24 @@ body.av-title-page header :is(.back,.profile-btn){white-space:normal;text-align:
 body.av-watch-page header :is(.back,.profile-btn){white-space:normal;text-align:center}
 @media(max-width:760px){body:is(.av-title-page,.av-watch-page,.av-profile-page) header{gap:8px;padding-left:max(12px,env(safe-area-inset-left));padding-right:max(12px,env(safe-area-inset-right))}body:is(.av-title-page,.av-watch-page,.av-profile-page) header .logo{flex:1 1 auto;min-width:100px}body.av-profile-page header nav{order:3;flex:1 0 100%;width:100%;overflow-x:auto;flex-wrap:nowrap;justify-content:flex-start;overscroll-behavior-x:contain}body.av-profile-page header nav a{flex:0 0 auto;white-space:nowrap}body.av-title-page header .back,body.av-watch-page header .back{flex:1 1 140px}body.av-title-page header .profile-btn,body.av-watch-page header .profile-btn{flex:0 1 auto}}
 @media(max-width:390px){body.av-title-page header .back,body.av-watch-page header .back{order:4;flex:1 0 100%}body.av-watch-page header .header-actions{width:100%;justify-content:space-between}body.av-watch-page header .header-actions .back{order:4}body.av-profile-page header .header-actions{justify-content:flex-start}}
+
+/* ANIME VOID 35.0 — responsive catalog layout and readable cards. */
+body:not(.av-profile-page) #catalog{box-sizing:border-box;min-width:0;max-width:100%;scroll-margin-top:80px}
+body:not(.av-profile-page) #catalog .section-heading{display:flex;flex-wrap:wrap;align-items:flex-end;gap:12px;min-width:0;max-width:100%}
+body:not(.av-profile-page) #catalog .filters{box-sizing:border-box;display:flex;flex-wrap:nowrap;align-items:center;gap:8px;min-width:0;max-width:100%;overflow-x:auto;overscroll-behavior-x:contain;scrollbar-width:thin;padding-bottom:8px}
+body:not(.av-profile-page) #catalog .filters .filter{box-sizing:border-box;flex:0 0 auto;min-height:44px;white-space:nowrap;padding:9px 14px}
+body:not(.av-profile-page) #catalog .advanced-filters{box-sizing:border-box;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));align-items:stretch;gap:10px;min-width:0;max-width:100%}
+body:not(.av-profile-page) #catalog .advanced-filters>*{box-sizing:border-box;min-width:0;max-width:100%;width:100%;min-height:44px}
+body:not(.av-profile-page) #catalog #animeGrid{box-sizing:border-box;min-width:0;max-width:100%;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:clamp(10px,1.6vw,20px)}
+body:not(.av-profile-page) #catalog #animeGrid>*{box-sizing:border-box;min-width:0;max-width:100%;overflow-wrap:anywhere}
+body:not(.av-profile-page) #catalog #animeGrid img{max-width:100%;height:auto}
+body:not(.av-profile-page) #catalog #animeGrid :is(button,a):focus-visible{outline:3px solid #e2baff;outline-offset:2px}
+body:not(.av-profile-page) #catalog .av-catalog-more{display:flex;align-items:center;justify-content:center;box-sizing:border-box;margin:26px 0 32px;min-width:0}
+body:not(.av-profile-page) #catalog .av-catalog-load-more{box-sizing:border-box;min-height:48px;min-width:min(260px,100%);max-width:100%;padding:12px 22px;border:1px solid #b17ce7;border-radius:13px;background:linear-gradient(125deg,#8535c8,#5b2c97);color:white;font:700 14px/1.4 system-ui;cursor:pointer;white-space:normal}
+body:not(.av-profile-page) #catalog .av-catalog-load-more:hover{filter:brightness(1.1)}
+body:not(.av-profile-page) #catalog .av-catalog-load-more:focus-visible{outline:3px solid #e2baff;outline-offset:3px}
+body:not(.av-profile-page) #catalog .av-catalog-load-more:disabled{opacity:.55;cursor:default}
+@media(max-width:1200px){body:not(.av-profile-page) #catalog #animeGrid{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media(max-width:900px){body:not(.av-profile-page) #catalog #animeGrid{grid-template-columns:repeat(3,minmax(0,1fr))}body:not(.av-profile-page) #catalog .advanced-filters{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:650px){body:not(.av-profile-page) #catalog{scroll-margin-top:60px}body:not(.av-profile-page) #catalog #animeGrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}body:not(.av-profile-page) #catalog .advanced-filters{gap:8px}body:not(.av-profile-page) #catalog .av-catalog-load-more{width:100%}}
+@media(max-width:360px){body:not(.av-profile-page) #catalog #animeGrid{gap:7px}body:not(.av-profile-page) #catalog .advanced-filters{grid-template-columns:minmax(0,1fr)}}
