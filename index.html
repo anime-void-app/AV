@@ -2314,9 +2314,10 @@ if (!donghuaMode) {
         [item.id, ...(Array.isArray(item.franchiseSeasonIds) ? item.franchiseSeasonIds : [])]
           .map(normalizeId).filter(Boolean)
       ));
+      const statusSnapshot = readStatusMap();
       const desired = activeListTab === "favorites"
         ? favorites
-        : Object.keys(readStatusMap()).filter(id => readStatusMap()[id] === activeListTab);
+        : Object.keys(statusSnapshot).filter(id => statusSnapshot[id] === activeListTab);
       const missing = [...new Set(desired.map(normalizeId).filter(id => id && !represented.has(id)))];
       const unresolvedCards = missing.map(id => {
         const number = id.slice("anilist-".length);
