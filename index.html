@@ -1772,7 +1772,9 @@ function persistHomeCatalog() {
     const merged = new Map(saved.map(item => [String(item.id), item]));
     for (const item of anime) if (String(item.id).startsWith("anilist-")) merged.set(String(item.id), item);
     const validated = AVSafe.catalog([...merged.values()], true);
-    localStorage.setItem("animeVoidCatalog", JSON.stringify(validated));
+    const serialized = JSON.stringify(validated);
+    // Avoid redundant localStorage writes on UI-only redraws.
+    if (raw !== serialized) localStorage.setItem("animeVoidCatalog", serialized);
     return true;
   } catch (error) {
     console.warn("Каталог не перезаписан; исходная запись сохранена / Catalogue not overwritten; original record preserved.", error);
@@ -3865,6 +3867,45 @@ if (!donghuaMode) {
       translateCatalogTitles(visibleItems.concat(savedCards));
     }
 
+    /* ANIME VOID 43.0 — refresh saved lists after cross-tab edits.
+       Never touch user data or replace the active search/filter selection. */
+    const HOME_SAVED_KEYS = ["animeVoidFavorites","animeVoidStatuses","animeVoidListItems","animeVoidRatings"];
+    const homeSavedSignature = () => {
+      try { return HOME_SAVED_KEYS.map(key => localStorage.getItem(key) ?? "").join("\u001f"); }
+      catch (_) { return null; }
+    };
+    let homeSeenSignature = homeSavedSignature();
+    let homeRefreshPending = false;
+    function refreshHomeSavedState() {
+      homeRefreshPending = false;
+      const signature = homeSavedSignature();
+      if (signature === null || signature === homeSeenSignature) return;
+      homeSeenSignature = signature;
+      try {
+        const fresh = AVSafe.read("animeVoidFavorites", []);
+        if (!Array.isArray(fresh)) return;
+        favorites = fresh;
+        render();
+        renderHistorySection();
+        renderStatsCharts();
+      } catch (error) {
+        console.warn("ANIME VOID: saved-list refresh failed", error);
+      }
+    }
+    function queueHomeSavedRefresh() {
+      if (homeRefreshPending) return;
+      homeRefreshPending = true;
+      setTimeout(refreshHomeSavedState, 80);
+    }
+    addEventListener("storage", event => {
+      if (event.storageArea === localStorage && (event.key === null || HOME_SAVED_KEYS.includes(event.key))) {
+        queueHomeSavedRefresh();
+      }
+    });
+    addEventListener("pageshow", queueHomeSavedRefresh);
+    addEventListener("focus", queueHomeSavedRefresh);
+    addEventListener("av:cloud-restored", queueHomeSavedRefresh);
+
     const searchQueryAliases = {
       "противостояние святого": "Xian Ni",
       "благословение небожителя": "Heaven Official's Blessing",
@@ -4500,6 +4541,7 @@ function toggleFavorite(id) {
         "animeVoidFavorites",
         JSON.stringify(favorites)
     );
+    homeSeenSignature = homeSavedSignature();
 
     if (!exists && typeof logActivity === "function") {
         logActivity("favs");
