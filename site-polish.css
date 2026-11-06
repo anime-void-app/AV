@@ -347,3 +347,22 @@ body:not(.av-profile-page) #modal .modal-box>.modal-close-btn{box-sizing:border-
 @media(max-width:950px){.av-profile-page .av-reborn-workshop-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.av-profile-page .av-reborn-workshop-card:last-child{grid-column:1/-1}}
 @media(max-width:650px){.av-profile-page .av-reborn-workshop{padding:14px;border-radius:16px;margin:10px 0 18px}.av-profile-page .av-reborn-workshop-grid{grid-template-columns:minmax(0,1fr);gap:9px}.av-profile-page .av-reborn-workshop-card,.av-profile-page .av-reborn-workshop-card:last-child{grid-column:auto;min-height:108px;padding:13px}.av-profile-page .av-reborn-workshop-symbol{width:42px;height:42px;flex-basis:42px}.av-profile-page .av-reborn-workshop-back{width:100%;box-sizing:border-box}}
 @media(prefers-reduced-motion:reduce){.av-profile-page .av-reborn-workshop-card{transition:none}.av-profile-page .av-reborn-workshop-card:hover{transform:none}}
+
+/* ANIME VOID 30.0 — Profile Reborn: hero-first layout and consistent section rhythm. */
+.av-profile-page main>#profileOverview{margin-top:10px;margin-bottom:18px}
+.av-profile-page main>#profileWorkshop{margin-top:0;margin-bottom:20px}
+.av-profile-page main>:is(#profileStats,#profileAchievements,#profileActivity,#profileCharts,#watchingSection,#favoritesSection){box-sizing:border-box;min-width:0;max-width:100%;scroll-margin-top:84px}
+.av-profile-page #profileOverview .profile-top{box-sizing:border-box;max-width:100%;min-width:0}
+.av-profile-page #profileOverview .profile-info,.av-profile-page #profileOverview .name-row,.av-profile-page #profileOverview .rank-row{min-width:0;max-width:100%}
+.av-profile-page #profileOverview #profileName{min-width:0;max-width:100%;overflow-wrap:anywhere}
+.av-profile-page #profileOverview .rank-row{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.av-profile-page #profileOverview .level-box{box-sizing:border-box;min-width:0;max-width:100%}
+.av-profile-page #profileOverview .level-bar{box-sizing:border-box;max-width:100%;overflow:hidden}
+.av-profile-page #profileOverview .av-reborn-extras{box-sizing:border-box;min-width:0;max-width:100%}
+.av-profile-page #profileOverview .av-reborn-extras summary{min-height:44px;display:flex;align-items:center;cursor:pointer}
+.av-profile-page #profileOverview .av-reborn-extras .share-row{min-width:0;max-width:100%;box-sizing:border-box}
+.av-profile-page #profileOverview .av-reborn-extras .share-row>*{box-sizing:border-box;min-height:44px;max-width:100%;white-space:normal;overflow-wrap:anywhere}
+.av-profile-page :is(#profileStats,#profileAchievements) .av-reborn-section-heading{box-sizing:border-box;min-width:0;max-width:100%;gap:12px}
+.av-profile-page :is(#profileStats,#profileAchievements) :is(h2,p){overflow-wrap:anywhere}
+@media(max-width:700px){.av-profile-page main>#profileOverview{margin-top:8px;margin-bottom:12px}.av-profile-page main>#profileWorkshop{margin-bottom:16px}.av-profile-page #profileOverview .profile-top{gap:12px}.av-profile-page #profileOverview .rank-row{gap:6px}.av-profile-page #profileOverview .av-reborn-extras .share-row{gap:8px}.av-profile-page main>:is(#profileStats,#profileAchievements,#profileActivity,#profileCharts,#watchingSection,#favoritesSection){scroll-margin-top:66px}}
+@media(max-width:390px){.av-profile-page #profileOverview .av-reborn-extras .share-row>*{width:100%;flex-basis:100%}}
