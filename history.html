@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#100c1c">
+<meta name="robots" content="noindex,follow">
+<meta name="description" content="Личная история просмотра аниме — измеренные просмотры, отмеченные серии и продолжение просмотра в ANIME VOID.">
+<title>История просмотра — ANIME VOID</title>
+<link rel="icon" type="image/png" href="icon-192.png">
+<link rel="stylesheet" href="av-history-46.css?v=46.0">
+<script src="void-i18n-24.js?v=24.29"></script>
+<script defer src="av-safety.js?v=24.45"></script>
+<script defer src="av-state.js?v=24.40"></script>
+<script defer src="av-watch-ledger.js?v=24.40"></script>
+<script defer src="supabase-client.js?v=2.69.1"></script>
+<script defer src="av-account.js?v=45.0"></script>
+<script defer src="av-history-46.js?v=46.0"></script>
+</head>
+<body class="av-history-page">
+<a class="av-46-skip" href="#historyMain" data-ru="К содержимому" data-en="Skip to content">К содержимому</a>
+<header class="av-46-top">
+  <a class="av-46-logo" href="index.html" aria-label="ANIME VOID — главная">ANIME <span>VOID</span></a>
+  <nav class="av-46-top-nav" aria-label="Главная навигация">
+    <a href="index.html" data-ru="Главная" data-en="Home">Главная</a>
+    <a href="index.html#catalog" data-ru="Каталог" data-en="Catalog">Каталог</a>
+    <a href="profile.html" data-ru="Профиль" data-en="Profile">Профиль</a>
+    <a href="account.html" data-ru="Аккаунт" data-en="Account">Аккаунт</a>
+  </nav>
+</header>
+<main id="historyMain">
+  <section class="av-46-intro" aria-labelledby="historyHeading">
+    <div class="av-46-kicker">MY ANIME / WATCH JOURNAL</div>
+    <h1 id="historyHeading" data-ru="Моя история просмотра" data-en="My watch history">Моя история просмотра</h1>
+    <p data-ru="Всё в одном месте: подтверждённые просмотры из плеера, отмеченные серии и продолжение просмотра. Это разные показатели — мы их не смешиваем." data-en="One place for player-measured viewing, manually marked episodes and resuming. These are different records and are never mixed.">Всё в одном месте: подтверждённые просмотры из плеера, отмеченные серии и продолжение просмотра. Это разные показатели — мы их не смешиваем.</p>
+    <div class="av-46-intro-links">
+      <a class="av-46-primary" href="index.html#catalog" data-ru="Найти аниме" data-en="Find anime">Найти аниме</a>
+      <a class="av-46-outline" href="profile.html#profileStats" data-ru="Статистика профиля" data-en="Profile statistics">Статистика профиля</a>
+    </div>
+  </section>
+  <section class="av-46-metrics" aria-label="Сводка просмотра">
+    <article><span data-ru="Фактический просмотр" data-en="Measured viewing">Фактический просмотр</span><strong id="av46MeasuredTime">—</strong><small data-ru="Только подтверждённые участки видео" data-en="Only verified video segments">Только подтверждённые участки видео</small></article>
+    <article><span data-ru="Серий и фильмов в плеере" data-en="Episodes and movies played">Серий и фильмов в плеере</span><strong id="av46MeasuredUnits">—</strong><small data-ru="Записи измеренного просмотра" data-en="Measured viewing entries">Записи измеренного просмотра</small></article>
+    <article><span data-ru="Серий отмечено вручную" data-en="Manually marked episodes">Серий отмечено вручную</span><strong id="av46MarkedEpisodes">—</strong><small data-ru="Не считаются просмотренными минутами" data-en="Not counted as measured minutes">Не считаются просмотренными минутами</small></article>
+    <article><span data-ru="Тайтлов в истории" data-en="Titles in your history">Тайтлов в истории</span><strong id="av46Titles">—</strong><small data-ru="Из обеих категорий, без повторов" data-en="Across both categories, deduplicated">Из обеих категорий, без повторов</small></article>
+  </section>
+  <section id="av46Continue" class="av-46-continue" hidden aria-labelledby="av46ContinueHeading">
+    <div><span class="av-46-kicker">CONTINUE</span><h2 id="av46ContinueHeading" data-ru="Продолжить просмотр" data-en="Continue watching">Продолжить просмотр</h2><p id="av46ContinueLabel"></p></div>
+    <a id="av46ContinueLink" class="av-46-primary" href="index.html#catalog" data-ru="Продолжить" data-en="Continue">Продолжить</a>
+  </section>
+  <section class="av-46-journal" aria-labelledby="av46JournalHeading">
+    <div class="av-46-journal-heading">
+      <div><span class="av-46-kicker">JOURNAL</span><h2 id="av46JournalHeading" data-ru="Записи просмотра" data-en="Viewing records">Записи просмотра</h2><p data-ru="Записи из плеера отсортированы по дате. У ручных отметок нет надёжной даты — они показаны отдельно." data-en="Player records are sorted by date. Manual marks have no reliable timestamps, so they appear separately.">Записи из плеера отсортированы по дате. У ручных отметок нет надёжной даты — они показаны отдельно.</p></div>
+    </div>
+    <div class="av-46-filters">
+      <div class="av-46-tabs" role="group" aria-label="Тип истории">
+        <button type="button" data-av-history-tab="all" aria-pressed="true" data-ru="Все записи" data-en="All records">Все записи</button>
+        <button type="button" data-av-history-tab="measured" aria-pressed="false" data-ru="Из плеера" data-en="From player">Из плеера</button>
+        <button type="button" data-av-history-tab="marked" aria-pressed="false" data-ru="Мои отметки" data-en="My marks">Мои отметки</button>
+      </div>
+      <label class="av-46-search-label"><span class="av-46-sr-only" data-ru="Поиск в истории" data-en="Search history">Поиск в истории</span><input id="av46HistorySearch" type="search" maxlength="120" autocomplete="off" placeholder="Поиск по названию..." aria-label="Поиск в истории"></label>
+    </div>
+    <p class="av-46-result-count" id="av46ResultCount" role="status" aria-live="polite"></p>
+    <div id="av46MeasuredSection" class="av-46-record-section">
+      <h3 data-ru="Подтверждённые просмотры" data-en="Verified viewing">Подтверждённые просмотры</h3>
+      <div id="av46MeasuredList" class="av-46-record-list"></div>
+    </div>
+    <div id="av46MarkedSection" class="av-46-record-section">
+      <h3 data-ru="Отмеченные серии" data-en="Marked episodes">Отмеченные серии</h3>
+      <div id="av46MarkedList" class="av-46-record-list"></div>
+    </div>
+    <div id="av46Empty" class="av-46-empty" hidden><strong id="av46EmptyTitle"></strong><p id="av46EmptyDetail"></p><a href="index.html#catalog" data-ru="Открыть каталог" data-en="Open catalog">Открыть каталог</a></div>
+  </section>
+</main>
+<footer class="av-46-footer"><span>ANIME VOID</span><p data-ru="История и статистика доступны только в твоём браузере и аккаунте. Данные просмотра не публикуются." data-en="Viewing history stays in your browser and account. Your viewing records are not publicly shared.">История и статистика доступны только в твоём браузере и аккаунте. Данные просмотра не публикуются.</p><a href="index.html" data-ru="На главную" data-en="Back home">На главную</a></footer>
+</body>
+</html>
