@@ -317,3 +317,13 @@ body.av-home .av-shortcuts,body.av-profile-page .av-profile-nav{max-width:100%;b
 .av-profile-page .av-profile-reborn-toolbar .av-profile-reborn-actions>*{box-sizing:border-box;min-width:0}
 @media(max-width:700px){.av-profile-page #profileSectionNav{gap:7px;margin:0 -4px 10px;padding:8px 4px 12px}.av-profile-page #profileSectionNav a{font-size:12px;padding:10px 12px}.av-profile-page .av-profile-nav-target{scroll-margin-top:66px}.av-profile-page .av-profile-nav-target:target{outline-offset:1px}}
 @media(prefers-reduced-motion:reduce){.av-profile-page #profileSectionNav{scroll-behavior:auto}.av-profile-page #profileSectionNav a{transition:none}}
+
+/* ANIME VOID 26.9 — home dialog close alignment and narrow-screen bounds. */
+body:not(.av-profile-page) #modal .modal-box{box-sizing:border-box;width:min(920px,calc(100vw - 24px));max-width:calc(100vw - 24px);max-height:calc(100dvh - 24px);overflow:auto;overscroll-behavior:contain;min-width:0;padding-top:clamp(54px,7vw,68px)}
+body:not(.av-profile-page) #modal .modal-box>.close{box-sizing:border-box;position:absolute;top:12px;right:12px;display:grid;place-items:center;width:44px;height:44px;min-width:44px;min-height:44px;margin:0;padding:0;border-radius:50%;font:500 26px/1 system-ui;z-index:3;touch-action:manipulation}
+body:not(.av-profile-page) #modal .modal-box>.close:focus-visible{outline:3px solid #e3b8ff;outline-offset:3px}
+body:not(.av-profile-page) #modal .modal-box>#modalContent{box-sizing:border-box;max-width:100%;min-width:0;overflow-wrap:anywhere}
+body:not(.av-profile-page) #modal .modal-box>#modalContent :is(img,video,iframe){max-width:100%}
+body:not(.av-profile-page) #modal .modal-box>.modal-close-btn{box-sizing:border-box;min-height:44px;max-width:100%;white-space:normal;overflow-wrap:anywhere;touch-action:manipulation}
+@media(max-width:600px){body:not(.av-profile-page) #modal .modal-box{width:calc(100vw - 12px);max-width:calc(100vw - 12px);max-height:calc(100dvh - 12px);padding-top:58px;border-radius:15px}body:not(.av-profile-page) #modal .modal-box>.close{top:8px;right:8px}body:not(.av-profile-page) #modal .modal-box>.modal-close-btn{width:100%}}
+@media(prefers-reduced-motion:reduce){body:not(.av-profile-page) #modal .modal-box{animation:none}body:not(.av-profile-page) #modal .modal-box>.close:hover{transform:none}}
