@@ -81,3 +81,26 @@ body.av-history-page main{max-width:1170px;margin:0 auto;padding:0 20px 65px}
 @media(max-width:850px){.av-46-top{flex-wrap:wrap;gap:7px;justify-content:center;padding:12px 14px}.av-46-top-nav{justify-content:center}.av-46-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.av-46-record-list{grid-template-columns:1fr}.av-46-metrics article{min-height:130px}}
 @media(max-width:540px){.av-46-top{align-items:stretch}.av-46-logo{text-align:center}.av-46-top-nav{flex-wrap:nowrap;justify-content:flex-start;overflow-x:auto;white-space:nowrap;scrollbar-width:thin;max-width:100%}.av-46-top-nav a{flex:0 0 auto;font-size:12px;padding:8px 10px}body.av-history-page main{padding:0 14px 40px}.av-46-intro{padding-top:30px}.av-46-intro-links>*{flex:1 1 auto}.av-46-metrics{gap:8px}.av-46-metrics article{padding:13px;min-height:122px;border-radius:13px}.av-46-metrics article strong{font-size:24px}.av-46-metrics article span{font-size:11px}.av-46-metrics article small{font-size:10px}.av-46-continue{padding:17px;flex-direction:column;align-items:stretch}.av-46-continue>.av-46-primary{width:100%}.av-46-journal{padding-top:32px}.av-46-tabs{width:100%;flex-wrap:nowrap;overflow-x:auto;padding-bottom:5px;scrollbar-width:thin}.av-46-tabs button{flex:0 0 auto;font-size:12px;padding:9px 11px}.av-46-search-label{max-width:100%;flex:1 1 100%}.av-46-record{gap:11px;padding:10px}.av-46-record-poster{width:64px;height:94px;flex-basis:64px}.av-46-record-main strong{font-size:13px}.av-46-footer{padding:23px 17px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.av-46-record,.av-46-primary,.av-46-outline,.av-46-top-nav a,.av-46-tabs button{transition:none}}
+
+
+/* Incremental history rendering keeps long lists usable on small screens. */
+.av-46-more{
+  display:block;
+  box-sizing:border-box;
+  min-height:46px;
+  max-width:100%;
+  margin:9px auto 24px;
+  padding:10px 24px;
+  background:#2e2042;
+  color:#f4e9ff;
+  border:1px solid rgba(207,158,251,.4);
+  border-radius:12px;
+  font-size:13px;
+  font-weight:750;
+  cursor:pointer;
+  transition:background .18s,border-color .18s;
+}
+.av-46-more:hover{background:#493066;border-color:#d1a6fb}
+.av-46-more:focus-visible{outline:3px solid #ebbdff;outline-offset:3px}
+@media(max-width:540px){.av-46-more{width:100%;margin:12px auto 22px}}
+@media(prefers-reduced-motion:reduce){.av-46-more{transition:none}}
