@@ -37,11 +37,18 @@
       el.textContent=isRussian()?el.dataset.ru:el.dataset.en;
     }
     const n=snapshot(),titles=n.titles;
-    setText('av46HomeHistoryCount',titles?tr(titles+' тайтлов в истории',titles+' titles in history'):tr('Просмотры и отметки','Views and marks'));
-    setText('av46HomeFavoritesCount',n.favorites?tr(n.favorites+' в избранном',n.favorites+' favorites'):tr('Избранное и статусы','Favorites and statuses'));
-    setText('av46ProfileHistoryCount',titles?tr(titles+' тайтлов · '+n.measured+' замеров',titles+' titles · '+n.measured+' measurements'):tr('Фактический просмотр и отметки','Player records and marks'));
-    setText('av46ProfileWatchingCount',n.watching?tr(n.watching+' тайтлов со статусом «Смотрю»',n.watching+' titles marked watching'):tr('Тайтлы со статусом «Смотрю»','Titles marked as watching'));
-    setText('av46ProfileFavoriteCount',n.favorites?tr(n.favorites+' любимых тайтлов',n.favorites+' favorite titles'):tr('Любимые тайтлы','Favorite titles'));
+    const ruPlural=(number,one,few,many)=>{
+      const last=number%10,lastTwo=number%100;
+      return number+' '+((lastTwo>=11&&lastTwo<=14)?many:last===1?one:last>=2&&last<=4?few:many);
+    };
+    const enPlural=(number,one,many)=>number+' '+(number===1?one:many);
+    const ruTitles=count=>ruPlural(count,'тайтл','тайтла','тайтлов');
+    const enTitles=count=>enPlural(count,'title','titles');
+    setText('av46HomeHistoryCount',titles?tr(ruTitles(titles)+' в истории',enTitles(titles)+' in history'):tr('Просмотры и отметки','Views and marks'));
+    setText('av46HomeFavoritesCount',n.favorites?tr(ruPlural(n.favorites,'любимый тайтл','любимых тайтла','любимых тайтлов'),enPlural(n.favorites,'favorite','favorites')):tr('Избранное и статусы','Favorites and statuses'));
+    setText('av46ProfileHistoryCount',titles?tr(ruTitles(titles)+' · '+ruPlural(n.measured,'замер','замера','замеров'),enTitles(titles)+' · '+enPlural(n.measured,'measurement','measurements')):tr('Фактический просмотр и отметки','Player records and marks'));
+    setText('av46ProfileWatchingCount',n.watching?tr(ruTitles(n.watching)+' со статусом «Смотрю»',enTitles(n.watching)+' marked watching'):tr('Тайтлы со статусом «Смотрю»','Titles marked as watching'));
+    setText('av46ProfileFavoriteCount',n.favorites?tr(ruPlural(n.favorites,'любимый тайтл','любимых тайтла','любимых тайтлов'),enPlural(n.favorites,'favorite title','favorite titles')):tr('Любимые тайтлы','Favorite titles'));
   }
   let pending=false;
   function schedule(){
