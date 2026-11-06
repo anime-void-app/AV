@@ -201,3 +201,19 @@ body.av-home .av-shortcuts,body.av-profile-page .av-profile-nav{max-width:100%;b
  body.av-home main :is(button,a),body.av-profile-page main :is(button,a){touch-action:manipulation}
  body.av-home main :is(input,select,textarea),body.av-profile-page main :is(input,select,textarea){font-size:max(16px,1em)}
 }
+
+/* ANIME VOID 26.0 / Profile Reborn: distinct, responsive controls above profile content. */
+.av-profile-page .av-profile-reborn-toolbar{box-sizing:border-box;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;max-width:100%;min-width:0;padding:18px clamp(16px,2.4vw,28px);margin:0 0 12px;border:1px solid var(--pn-line,#614a78);border-radius:18px;background:linear-gradient(115deg,#342144,#1a1428 65%);color:#f7f0ff}
+.av-profile-page .av-profile-reborn-label{display:flex;flex-direction:column;gap:5px;min-width:0}
+.av-profile-page .av-profile-reborn-label strong{font:800 clamp(15px,1.6vw,20px)/1.2 system-ui;letter-spacing:.09em}
+.av-profile-page .av-profile-reborn-label span{color:#cdbbdb;font:400 12px/1.4 system-ui;overflow-wrap:anywhere}
+.av-profile-page .av-profile-reborn-actions{display:flex;align-items:center;justify-content:flex-end;gap:9px;flex-wrap:wrap;min-width:0}
+.av-profile-page .av-profile-reborn-link{box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:10px 14px;border:1px solid #795b91;border-radius:12px;background:#2b203a;color:#f6edff;text-decoration:none;white-space:nowrap;font:650 13px/1.3 system-ui}
+.av-profile-page .av-profile-reborn-link:hover{background:#49305d;border-color:#c49be5}
+.av-profile-page .av-profile-reborn-link:focus-visible{outline:3px solid #e0b9ff;outline-offset:2px}
+.av-profile-page .av-profile-reborn-toolbar .av-workshop-hub{position:relative;flex:0 0 auto}
+.av-profile-page .av-profile-reborn-toolbar .av-workshop-hub-menu{position:absolute;top:calc(100% + 8px);left:auto;right:0;z-index:40;width:min(280px,calc(100vw - 36px));max-height:min(340px,65dvh);overflow-y:auto}
+.av-profile-page .av-profile-reborn-toolbar .av-workshop-hub-menu button{white-space:normal}
+.av-profile-page .av-profile-nav{margin-top:0}
+@media(max-width:760px){.av-profile-page .av-profile-reborn-toolbar{padding:15px;gap:12px;border-radius:15px}.av-profile-page .av-profile-reborn-label{width:100%}.av-profile-page .av-profile-reborn-actions{width:100%;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px}.av-profile-page .av-profile-reborn-actions>.av-workshop-hub{grid-column:1/-1;width:100%}.av-profile-page .av-profile-reborn-actions>.av-workshop-hub>summary{width:100%;box-sizing:border-box}.av-profile-page .av-profile-reborn-link{min-width:0;width:100%;padding:10px 8px;font-size:12px}.av-profile-page .av-profile-reborn-toolbar .av-workshop-hub-menu{left:0;right:auto;width:100%;box-sizing:border-box}}
+@media(max-width:360px){.av-profile-page .av-profile-reborn-actions{grid-template-columns:minmax(0,1fr)}.av-profile-page .av-profile-reborn-actions>.av-workshop-hub{grid-column:1}.av-profile-page .av-profile-reborn-link{font-size:13px}}
