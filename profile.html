@@ -517,7 +517,7 @@
 <link href="profile-studio.css?v=31.0" rel="stylesheet"/><script defer="" src="studio-config.js?v=17.0"></script><script defer="" src="supabase-client.js?v=2.69.1"></script><script defer="" src="av-account.js?v=45.0"></script><script defer="" src="profile-studio.js?v=41.0"></script><link href="visual-studio.css?v=28.0" rel="stylesheet"/><script defer="" src="visual-studio.js?v=24.40"></script><link href="banner-atelier.css?v=28.0" rel="stylesheet"/><script defer="" src="banner-atelier.js?v=21"></script><link href="void-social.css?v=18.1" rel="stylesheet"/><script defer="" src="void-custom.js?v=17.4.1"></script><script defer="" src="void-social.js?v=24.29"></script><meta content="18.1-unified" name="av-release"/><link href="void-interface.css?v=24.29" rel="stylesheet"/><script src="void-interface.js?v=24.29"></script>
 <script src="void-journal.js?v=18.1"></script>
 <link href="void-reading-stats.css?v=18.1" rel="stylesheet"/><script defer="" src="void-reading-stats.js?v=18.1"></script><link href="void-tv.css?v=18.1" rel="stylesheet"/><script defer="" src="void-tv.js?v=18.1"></script><link href="void-evolution.css?v=18.1" rel="stylesheet"/><script defer="" src="void-evolution.js?v=18.1"></script><link href="void-profile-layout.css?v=18.1" rel="stylesheet"/><link href="void-profile-next.css?v=19" rel="stylesheet"/><script defer="" src="av-shell.js?v=21"></script><script defer="" src="void-profile-next.js?v=24"></script><link href="void-achievements-22.css?v=31.0" rel="stylesheet"/>
-<script src="void-vip-23.js?v=24.29"></script><link href="void-vip-23.css?v=23" rel="stylesheet"/><link href="void-refresh-24.css?v=24.29" rel="stylesheet"/><style>#profileAccountButton{display:inline-flex;align-items:center;margin-top:10px;min-height:42px;padding:9px 20px;border:1px solid #bb5574;border-radius:10px;text-decoration:none}#profileExtraActions{margin-top:14px;font-size:13px}#profileExtraActions summary{cursor:pointer;min-height:34px;display:list-item}#profileExtraActions .share-row{margin-top:8px}#avpAccount,#avpLogout,#avpCloudInfo,#avpSavingTitle{display:none!important}</style><script defer src="av-watch-ledger.js?v=24.40"></script><script defer src="av-watch-tracker.js?v=24.40"></script><script defer src="av-dashboard-46.js?v=46.0"></script></head>
+<script src="void-vip-23.js?v=24.29"></script><link href="void-vip-23.css?v=23" rel="stylesheet"/><link href="void-refresh-24.css?v=24.29" rel="stylesheet"/><style>#profileAccountButton{display:inline-flex;align-items:center;margin-top:10px;min-height:42px;padding:9px 20px;border:1px solid #bb5574;border-radius:10px;text-decoration:none}#profileExtraActions{margin-top:14px;font-size:13px}#profileExtraActions summary{cursor:pointer;min-height:34px;display:list-item}#profileExtraActions .share-row{margin-top:8px}#avpAccount,#avpLogout,#avpCloudInfo,#avpSavingTitle{display:none!important}</style><script defer src="av-watch-ledger.js?v=47.0"></script><script defer src="av-watch-tracker.js?v=24.40"></script><script defer src="av-dashboard-46.js?v=46.0"></script></head>
 <body class="av-shell av-profile-page">
 <header>
 <a class="logo" href="index.html">ANIME<span>VOID</span></a>
@@ -607,6 +607,7 @@
       <h2 id="measuredTitle">⏱ Фактический просмотр</h2>
       <div class="subtitle" id="measuredSubtitle"></div>
     </div>
+    <a class="av-47-measured-link" href="history.html" data-ru="История просмотра →" data-en="Watch history →">История просмотра →</a>
   </div>
   <div class="av-measured-grid">
     <article class="av-measured-card"><strong id="measuredTime">—</strong><span id="measuredTimeLabel"></span></article>
@@ -1658,12 +1659,12 @@
       try {
         const raw = localStorage.getItem(L.KEY);
         if (!raw) { box.hidden = true; return; }
-        const archive = L.validate(JSON.parse(raw));
-        const observed = Object.entries(archive.entries).filter(([, entry]) => L.count(entry.coverage) > 0);
+        // Match the dedicated viewing journal and avoid double counting
+        // multiple runtime variants for one episode. Data remains read-only.
+        const metrics = L.presentation(JSON.parse(raw));
+        const observed = metrics.entries;
         if (!observed.length) { box.hidden = true; return; }
-        const measuredArchive = { version: 1, entries: Object.fromEntries(observed) };
-        const metrics = L.metrics(measuredArchive);
-        const last = observed.map(([, entry]) => entry).sort((a, b) => b.updatedAt - a.updatedAt)[0];
+        const last = observed[0];
         const minutes = Math.max(0, Math.round(metrics.seconds / 60));
         const hours = Math.floor(minutes / 60);
         const rest = minutes % 60;
@@ -2310,5 +2311,5 @@
 <script>window.avRefreshView=()=>{renderAll();};document.addEventListener('av:theme',()=>renderStatsCharts());document.addEventListener('av:charts-visible',()=>renderStatsCharts());</script>
 <script>addEventListener('av:rewards',()=>renderStatsAndAchievements());</script>
 <link href="void-profile-20.css?v=20" rel="stylesheet"/><script defer="" src="void-profile-20.js?v=24.29"></script><link href="void-messenger-21.css?v=21" rel="stylesheet"/>
-<link rel="stylesheet" href="site-polish.css?v=46.0"><script defer="" src="void-people-21.js?v=24.29"></script><script defer src="av-profile-nav-40.js?v=40.0"></script></body>
+<link rel="stylesheet" href="site-polish.css?v=47.0"><script defer="" src="void-people-21.js?v=24.29"></script><script defer src="av-profile-nav-40.js?v=40.0"></script></body>
 </html>
