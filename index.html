@@ -3826,6 +3826,18 @@ if (!donghuaMode) {
                   <div class="skel-line skel-short"></div>
                 </div>`).join(""):("<p class=\"empty\">"+String((currentLanguage === "ru"?I24.t("Ничего не найдено. Попробуй другой запрос."):"Nothing found. Try another search."))+"</p>")));
 
+      // Keep favorite controls accessible after every filter, pagination or language render.
+      grid.querySelectorAll(".card-info .favorite").forEach(button => {
+        const selected = button.classList.contains("saved");
+        const label = currentLanguage === "ru"
+          ? (selected ? "Убрать из избранного" : "Добавить в избранное")
+          : (selected ? "Remove from favorites" : "Add to favorites");
+        button.setAttribute("aria-pressed", selected ? "true" : "false");
+        button.setAttribute("aria-label", label);
+        button.setAttribute("title", label);
+        button.setAttribute("type", "button");
+      });
+
       const savedItems = anime.filter(item => favorites.some(id => String(id) === String(item.id)));
       const savedCards = collapseSeasonCards(savedItems, seasonRoots);
       renderListsSection(savedCards);
