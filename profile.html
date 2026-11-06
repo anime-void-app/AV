@@ -1628,16 +1628,26 @@
 
     /* ANIME VOID 43.0 — reflect cross-tab user data without overwriting it.
        The snapshot guard prevents unnecessary rerenders on focus or bfcache restore. */
+    /* ANIME VOID 44.0 — include viewed episodes, runtime durations and
+       stored status history. Signature is read-only, no migrations. */
     const PROFILE_SYNC_KEYS = [
-      "animeVoidFavorites", "animeVoidStatuses", "animeVoidListItems",
-      "animeVoidCatalog", "animeVoidRatings", "animeVoidNickname",
-      "animeVoidAvatar", "animeVoidAvatarImageV1", "animeVoidAvatarBuiltinV1",
-      "animeVoidLanguage", "animeVoidTheme", "animeVoidActivityLog",
+      "animeVoidFavorites","animeVoidStatuses","animeVoidListItems",
+      "animeVoidCatalog","animeVoidRatings","animeVoidNickname",
+      "animeVoidAvatar","animeVoidAvatarImageV1","animeVoidAvatarBuiltinV1",
+      "animeVoidLanguage","animeVoidTheme","animeVoidActivityLog",
       "animeVoidFeaturedAchievements"
     ];
+    const PROFILE_PROGRESS_KEY = /^(?:watched_(?:anilist-)?[1-9]\d{0,9}|duration_(?:anilist-)?[1-9]\d{0,9}_[1-9]\d{0,4})$/;
     const profileSignature = () => {
-      try { return PROFILE_SYNC_KEYS.map(key => localStorage.getItem(key) ?? "").join("\\u001f"); }
-      catch (_) { return null; }
+      try {
+        const values = PROFILE_SYNC_KEYS.map(key => [key,localStorage.getItem(key) ?? ""]);
+        for (let i=0; i<localStorage.length; i++) {
+          const key = localStorage.key(i);
+          if (key && PROFILE_PROGRESS_KEY.test(key)) values.push([key,localStorage.getItem(key) ?? ""]);
+        }
+        values.sort((a,b)=>a[0].localeCompare(b[0]));
+        return values.map(([key,value])=>key+"="+value).join("\u001f");
+      } catch (_) { return null; }
     };
     let lastProfileSignature = profileSignature();
     let profileRefreshPending = false;
@@ -1659,7 +1669,7 @@
       setTimeout(refreshProfileFromStorage, 100);
     }
     addEventListener("storage", event => {
-      if (event.storageArea === localStorage && (event.key === null || PROFILE_SYNC_KEYS.includes(event.key))) {
+      if (event.storageArea === localStorage && (event.key === null || PROFILE_SYNC_KEYS.includes(event.key) || PROFILE_PROGRESS_KEY.test(event.key))) {
         scheduleProfileRefresh();
       }
     });
