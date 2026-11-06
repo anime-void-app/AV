@@ -538,14 +538,8 @@
 </header>
 <main>
 <div class="av-profile-reborn-toolbar" aria-label="Управление профилем"><div class="av-profile-reborn-label"><strong>МОЙ ПРОФИЛЬ</strong><span>Оформление, коллекция и достижения</span></div><div class="av-profile-reborn-actions"><a class="av-profile-reborn-link av-workshop-shortcut" href="#profileWorkshop">🎨 Мастерская</a><a class="av-profile-reborn-link" href="account.html">⚙️ Аккаунт</a><a class="av-profile-reborn-link" href="collections.html">📚 Коллекции</a></div></div>
-<nav class="av-profile-nav" aria-label="Разделы профиля" id="profileSectionNav"><span class="av-profile-nav-title">РАЗДЕЛЫ</span><a href="#profileOverview">👤 Обзор</a><a href="#profileStats">📊 Статистика</a><a href="#watchingSection">▶️ Смотрю</a><a href="#favoritesSection">❤️ Избранное</a><a href="#profileAchievements">🏆 Достижения</a><a href="#profileActivity">🔥 Активность</a><a href="#profileCharts">📈 Графики</a></nav>
-<section class="av-reborn-workshop av-profile-nav-target" id="profileWorkshop" aria-labelledby="profileWorkshopTitle">
-<div class="av-reborn-workshop-head"><div><span class="av-reborn-workshop-eyebrow">PROFILE REBORN / 29.0</span><h2 id="profileWorkshopTitle">Мастерская профиля</h2><p>Выбирай оформление, управляй предметами и смотри изменения в редакторах перед применением.</p></div><a href="#profileOverview" class="av-reborn-workshop-back">К профилю ↑</a></div>
-<div class="av-reborn-workshop-grid">
-<button type="button" class="av-reborn-workshop-card" onclick="window.AVProfileStudio?.open()" aria-label="Открыть магазин и инвентарь"><span class="av-reborn-workshop-symbol" aria-hidden="true">🛍️</span><span class="av-reborn-workshop-card-copy"><strong>Магазин и инвентарь</strong><small>Предметы, экипировка, награды и история</small><span class="av-reborn-workshop-cta">Открыть студию →</span></span></button>
-<button type="button" class="av-reborn-workshop-card" onclick="window.AVArtAtelier?.open()" aria-label="Открыть редактор баннеров и фонов"><span class="av-reborn-workshop-symbol" aria-hidden="true">🖼️</span><span class="av-reborn-workshop-card-copy"><strong>Баннеры и фоны</strong><small>Сцены, галерея и предпросмотр оформления</small><span class="av-reborn-workshop-cta">Открыть редактор →</span></span></button>
-<button type="button" class="av-reborn-workshop-card" onclick="window.AVVisual?.open()" aria-label="Открыть редактор аватара и эффектов"><span class="av-reborn-workshop-symbol" aria-hidden="true">✨</span><span class="av-reborn-workshop-card-copy"><strong>Аватар и эффекты</strong><small>Внешний вид, визуальные настройки и эффекты</small><span class="av-reborn-workshop-cta">Открыть редактор →</span></span></button>
-</div></section>
+<nav class="av-profile-nav" aria-label="Разделы профиля" id="profileSectionNav"><span class="av-profile-nav-title">РАЗДЕЛЫ</span><a href="#profileOverview">👤 Обзор</a><a href="#profileWorkshop">🎨 Мастерская</a><a href="#profileStats">📊 Статистика</a><a href="#watchingSection">▶️ Смотрю</a><a href="#favoritesSection">❤️ Избранное</a><a href="#profileAchievements">🏆 Достижения</a><a href="#profileActivity">🔥 Активность</a><a href="#profileCharts">📈 Графики</a></nav>
+
 <section class="profile-hero av-profile-nav-target" id="profileOverview">
 <div class="profile-top">
 <button class="avatar-btn ym-hide-content" data-static-attrs24='{"title":"Сменить аватар"}' id="avatarButton" title="Сменить аватар" type="button">🐉</button>
@@ -577,6 +571,13 @@
 
 <div class="avatar-picker" hidden="" id="avatarPicker"></div>
 </section>
+<section class="av-reborn-workshop av-profile-nav-target" id="profileWorkshop" aria-labelledby="profileWorkshopTitle">
+<div class="av-reborn-workshop-head"><div><span class="av-reborn-workshop-eyebrow">PROFILE REBORN / 29.0</span><h2 id="profileWorkshopTitle">Мастерская профиля</h2><p>Выбирай оформление, управляй предметами и смотри изменения в редакторах перед применением.</p></div><a href="#profileOverview" class="av-reborn-workshop-back">К профилю ↑</a></div>
+<div class="av-reborn-workshop-grid">
+<button type="button" class="av-reborn-workshop-card" onclick="window.AVProfileStudio?.open()" aria-label="Открыть магазин и инвентарь"><span class="av-reborn-workshop-symbol" aria-hidden="true">🛍️</span><span class="av-reborn-workshop-card-copy"><strong>Магазин и инвентарь</strong><small>Предметы, экипировка, награды и история</small><span class="av-reborn-workshop-cta">Открыть студию →</span></span></button>
+<button type="button" class="av-reborn-workshop-card" onclick="window.AVArtAtelier?.open()" aria-label="Открыть редактор баннеров и фонов"><span class="av-reborn-workshop-symbol" aria-hidden="true">🖼️</span><span class="av-reborn-workshop-card-copy"><strong>Баннеры и фоны</strong><small>Сцены, галерея и предпросмотр оформления</small><span class="av-reborn-workshop-cta">Открыть редактор →</span></span></button>
+<button type="button" class="av-reborn-workshop-card" onclick="window.AVVisual?.open()" aria-label="Открыть редактор аватара и эффектов"><span class="av-reborn-workshop-symbol" aria-hidden="true">✨</span><span class="av-reborn-workshop-card-copy"><strong>Аватар и эффекты</strong><small>Внешний вид, визуальные настройки и эффекты</small><span class="av-reborn-workshop-cta">Открыть редактор →</span></span></button>
+</div></section>
 <section class="stats-section av-profile-nav-target" id="profileStats">
 <div class="av-reborn-section-heading"><div><span class="av-reborn-eyebrow">ТВОЯ ИСТОРИЯ</span><h2>Статистика просмотра</h2><p>Избранное, оценки и отмеченные истории — в одном месте.</p></div><a href="collections.html" class="av-reborn-section-link">Мои коллекции</a></div>
 <div class="stats-row">
@@ -2160,5 +2161,5 @@
 <script>window.avRefreshView=()=>{renderAll();};document.addEventListener('av:theme',()=>renderStatsCharts());document.addEventListener('av:charts-visible',()=>renderStatsCharts());</script>
 <script>addEventListener('av:rewards',()=>renderStatsAndAchievements());</script>
 <link href="void-profile-20.css?v=20" rel="stylesheet"/><script defer="" src="void-profile-20.js?v=24.29"></script><link href="void-messenger-21.css?v=21" rel="stylesheet"/>
-<link rel="stylesheet" href="site-polish.css?v=29.0"><script defer="" src="void-people-21.js?v=24.29"></script></body>
+<link rel="stylesheet" href="site-polish.css?v=30.0"><script defer="" src="void-people-21.js?v=24.29"></script></body>
 </html>
