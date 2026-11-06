@@ -304,3 +304,16 @@ body.av-home .av-shortcuts,body.av-profile-page .av-profile-nav{max-width:100%;b
 .av-profile-page .av-profile-reborn-toolbar .av-workshop-hub-menu button strong{font:700 13px/1.3 system-ui;overflow-wrap:anywhere}
 .av-profile-page .av-profile-reborn-toolbar .av-workshop-hub-menu button small{font:400 11px/1.4 system-ui;color:#c6b5d5;overflow-wrap:anywhere}
 @media(max-width:760px){.av-profile-page .av-profile-reborn-toolbar .av-workshop-hub-menu{width:100%!important;left:0!important;right:auto!important;max-height:min(420px,62dvh)}}
+
+/* ANIME VOID 26.7 — scoped profile navigation and section geometry. */
+.av-profile-page main{min-width:0}
+.av-profile-page main>.av-profile-reborn-toolbar,.av-profile-page main>#profileSectionNav,.av-profile-page main>.av-profile-nav-target{box-sizing:border-box;max-width:100%;min-width:0}
+.av-profile-page #profileSectionNav{display:flex;align-items:center;gap:8px;overflow-x:auto;overflow-y:hidden;scrollbar-width:thin;overscroll-behavior-x:contain;scroll-padding-inline:12px;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch;padding:10px 4px 14px;margin:0 0 12px}
+.av-profile-page #profileSectionNav a{display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;box-sizing:border-box;min-height:44px;padding:10px 14px;white-space:nowrap;scroll-snap-align:start;border-radius:12px}
+.av-profile-page #profileSectionNav a:focus-visible{outline:3px solid #e2b8ff;outline-offset:-3px}
+.av-profile-page .av-profile-nav-target{scroll-margin-top:84px}
+.av-profile-page .av-profile-nav-target:target{outline:2px solid #b887e5;outline-offset:4px;border-radius:14px}
+.av-profile-page .av-profile-reborn-toolbar .av-profile-reborn-actions{min-width:0;max-width:100%}
+.av-profile-page .av-profile-reborn-toolbar .av-profile-reborn-actions>*{box-sizing:border-box;min-width:0}
+@media(max-width:700px){.av-profile-page #profileSectionNav{gap:7px;margin:0 -4px 10px;padding:8px 4px 12px}.av-profile-page #profileSectionNav a{font-size:12px;padding:10px 12px}.av-profile-page .av-profile-nav-target{scroll-margin-top:66px}.av-profile-page .av-profile-nav-target:target{outline-offset:1px}}
+@media(prefers-reduced-motion:reduce){.av-profile-page #profileSectionNav{scroll-behavior:auto}.av-profile-page #profileSectionNav a{transition:none}}
