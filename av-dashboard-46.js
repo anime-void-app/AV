@@ -12,16 +12,18 @@
     const view=window.AVState?.savedView?.();
     const metrics=window.AVState?.metrics?.();
     const titleIds=new Set(Array.isArray(metrics?.titles)?metrics.titles.map(x=>canonical(x.item?.id)).filter(Boolean):[]);
-    let measured=0;
+    const measurementIds=new Set();
     try {
       const data=window.AVSafe?.read?.('animeVoidMeasuredV1',null);
       for(const entry of Object.values(data?.entries||{})){
         if(typeof entry?.coverage!=='string'||!/[1-9a-f]/i.test(entry.coverage))continue;
-        measured++;
+        const episodeKey=[entry.titleId,entry.season,entry.episode].join(':');
+        measurementIds.add(episodeKey);
         const id=canonical(entry.titleId)||entry.titleId;
         if(typeof id==='string'&&id)titleIds.add(id);
       }
     }catch{}
+    const measured=measurementIds.size;
     return {
       titles:titleIds.size,
       measured,
@@ -32,7 +34,6 @@
   function setText(id,value){const el=$(id);if(el)el.textContent=value;}
   function update(){
     if(!home?.isConnected&&!profile?.isConnected)return;
-    const root=home||profile;
     for(const el of document.querySelectorAll('#av46HomeLinks [data-ru][data-en],.av-46-profile-journey [data-ru][data-en]')){
       el.textContent=isRussian()?el.dataset.ru:el.dataset.en;
     }
