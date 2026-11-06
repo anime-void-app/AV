@@ -408,3 +408,18 @@ body.av-watch-page #episodeGrid{overflow-wrap:anywhere}
 body.av-watch-page :is(#prevBtn,#markWatchedBtn,#nextBtn){box-sizing:border-box;min-height:44px;max-width:100%;white-space:normal;overflow-wrap:anywhere}
 body.av-title-page :is(#backCatalog,#langBtn,#profileLink,#themeToggle),body.av-watch-page :is(#backAnime,#langBtn,#profileLink,#themeToggle){box-sizing:border-box;min-height:44px;max-width:100%;overflow-wrap:anywhere}
 @media(max-width:650px){body.av-title-page :is(main,#content),body.av-watch-page :is(main,#episodeGrid){min-width:0;max-width:100%}body.av-watch-page #avPlayer{border-radius:10px}body.av-watch-page :is(#prevBtn,#markWatchedBtn,#nextBtn){min-width:0}}
+
+/* ANIME VOID 34.0 — shared header/navigation alignment across core pages. */
+body:is(.av-title-page,.av-watch-page,.av-profile-page) header{box-sizing:border-box;max-width:100%;min-width:0}
+body:is(.av-title-page,.av-watch-page,.av-profile-page) header :is(.logo,.header-actions,nav,.language-switch){box-sizing:border-box;min-width:0;max-width:100%}
+body:is(.av-title-page,.av-watch-page,.av-profile-page) header :is(a,button){box-sizing:border-box;min-height:44px;max-width:100%;display:inline-flex;align-items:center;justify-content:center;overflow-wrap:anywhere}
+body:is(.av-title-page,.av-watch-page,.av-profile-page) header .logo{justify-content:flex-start;white-space:nowrap}
+body:is(.av-title-page,.av-watch-page,.av-profile-page) header :is(.theme-toggle,.lang-btn){flex:0 0 44px;min-width:44px}
+body:is(.av-title-page,.av-watch-page,.av-profile-page) header :is(a,button):focus-visible{outline:3px solid #dfb8ff;outline-offset:2px}
+body.av-profile-page header nav{display:flex;align-items:center;flex-wrap:wrap;gap:6px}
+body.av-profile-page header .header-actions,body.av-watch-page header .header-actions{display:flex;align-items:center;justify-content:flex-end;flex-wrap:wrap;gap:8px}
+body.av-title-page header{display:flex;align-items:center;flex-wrap:wrap;gap:10px}
+body.av-title-page header :is(.back,.profile-btn){white-space:normal;text-align:center}
+body.av-watch-page header :is(.back,.profile-btn){white-space:normal;text-align:center}
+@media(max-width:760px){body:is(.av-title-page,.av-watch-page,.av-profile-page) header{gap:8px;padding-left:max(12px,env(safe-area-inset-left));padding-right:max(12px,env(safe-area-inset-right))}body:is(.av-title-page,.av-watch-page,.av-profile-page) header .logo{flex:1 1 auto;min-width:100px}body.av-profile-page header nav{order:3;flex:1 0 100%;width:100%;overflow-x:auto;flex-wrap:nowrap;justify-content:flex-start;overscroll-behavior-x:contain}body.av-profile-page header nav a{flex:0 0 auto;white-space:nowrap}body.av-title-page header .back,body.av-watch-page header .back{flex:1 1 140px}body.av-title-page header .profile-btn,body.av-watch-page header .profile-btn{flex:0 1 auto}}
+@media(max-width:390px){body.av-title-page header .back,body.av-watch-page header .back{order:4;flex:1 0 100%}body.av-watch-page header .header-actions{width:100%;justify-content:space-between}body.av-watch-page header .header-actions .back{order:4}body.av-profile-page header .header-actions{justify-content:flex-start}}
