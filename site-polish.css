@@ -150,3 +150,14 @@ body.av-profile-page .at-scene{max-width:100%;background-position:center 42%}
 .av-home .av-home-more-actions>*{min-height:44px;max-width:100%;box-sizing:border-box}
 .av-home .hero-content #openCatalogBtn,.av-home .hero-content #randomBtn{min-height:44px}
 @media(max-width:640px){.av-home .av-home-more{display:block;width:max-content;margin:10px 0 0}.av-home .av-home-more-actions{width:min(330px,calc(100vw - 40px))}.av-home .av-home-more-actions>*{width:100%;justify-content:center}.av-home .hero-content #heroText{font-size:clamp(14px,3.8vw,16px)}}
+
+/* ANIME VOID 25.6: one discoverable entry point for existing cosmetic tools. */
+.av-profile-page .av-workshop-hub{position:relative;flex:0 0 auto;align-self:center}
+.av-profile-page .av-workshop-hub>summary{list-style:none;display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:10px 16px;border:1px solid #a87bcf;border-radius:12px;background:linear-gradient(120deg,#59336f,#302040);color:#fff;white-space:nowrap;font:700 13px/1.3 system-ui;cursor:pointer}
+.av-profile-page .av-workshop-hub>summary::-webkit-details-marker{display:none}
+.av-profile-page .av-workshop-hub>summary:focus-visible,.av-profile-page .av-workshop-hub-menu button:focus-visible{outline:3px solid #e3bdff;outline-offset:2px}
+.av-profile-page .av-workshop-hub[open]>summary{border-color:#e4b6ff;background:#654187}
+.av-profile-page .av-workshop-hub-menu{position:absolute;top:calc(100% + 8px);left:0;z-index:30;width:min(280px,calc(100vw - 40px));padding:9px;display:grid;gap:6px;border:1px solid #8b69a7;border-radius:14px;background:#1b1427;box-shadow:0 15px 35px #0009}
+.av-profile-page .av-workshop-hub-menu button{display:block;width:100%;min-height:44px;text-align:left;white-space:normal;overflow-wrap:anywhere;padding:11px 13px;border:1px solid transparent;border-radius:9px;background:#2a2038;color:#f9f0ff;font:600 13px/1.3 system-ui;cursor:pointer}
+.av-profile-page .av-workshop-hub-menu button:hover{border-color:#b990d8;background:#47315b}
+@media(max-width:760px){.av-profile-page .av-workshop-hub>summary{font-size:12px;padding:10px 12px}}
