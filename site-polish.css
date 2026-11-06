@@ -397,3 +397,14 @@ body:not(.av-profile-page) #modal #modalContent{min-width:0;max-width:100%;overf
 .av-profile-page :is(.av-profile-nav,.av-profile-reborn-toolbar,.av-reborn-workshop,.stats-section,.achievements-section){box-sizing:border-box;min-width:0;max-width:100%}
 @media(max-width:650px){.av-profile-page :is(.avp-dialog,.at-dialog,.at-full,.vs-dialog){max-width:calc(100vw - 8px);max-height:calc(100dvh - 8px)}body:not(.av-profile-page) #modal .modal-box{max-width:calc(100vw - 8px);max-height:calc(100dvh - 8px)}}
 @media(prefers-reduced-motion:reduce){.av-profile-page :is(.avp-dialog,.at-dialog,.at-full,.vs-dialog){scroll-behavior:auto}}
+
+/* ANIME VOID 33.0 — title and watch page responsive UI contract. */
+body.av-title-page,body.av-watch-page{max-width:100%;overflow-x:clip}
+body.av-title-page :is(main,#content),body.av-watch-page :is(main,#avPlayer,#episodeGrid){box-sizing:border-box;min-width:0;max-width:100%}
+body.av-title-page :is(button,a,input,select,textarea):focus-visible,body.av-watch-page :is(button,a,input,select,textarea):focus-visible{outline:3px solid #dfb8ff;outline-offset:2px}
+body.av-watch-page #avPlayer{overflow:hidden;border-radius:14px}
+body.av-watch-page #avPlayer :is(iframe,video){display:block;max-width:100%;width:100%}
+body.av-watch-page #episodeGrid{overflow-wrap:anywhere}
+body.av-watch-page :is(#prevBtn,#markWatchedBtn,#nextBtn){box-sizing:border-box;min-height:44px;max-width:100%;white-space:normal;overflow-wrap:anywhere}
+body.av-title-page :is(#backCatalog,#langBtn,#profileLink,#themeToggle),body.av-watch-page :is(#backAnime,#langBtn,#profileLink,#themeToggle){box-sizing:border-box;min-height:44px;max-width:100%;overflow-wrap:anywhere}
+@media(max-width:650px){body.av-title-page :is(main,#content),body.av-watch-page :is(main,#episodeGrid){min-width:0;max-width:100%}body.av-watch-page #avPlayer{border-radius:10px}body.av-watch-page :is(#prevBtn,#markWatchedBtn,#nextBtn){min-width:0}}
