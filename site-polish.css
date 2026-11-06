@@ -164,3 +164,24 @@ body.av-profile-page .at-scene{max-width:100%;background-position:center 42%}
 
 /* Keep the workshop popover visible outside the horizontally scrolling navigation. */
 .av-profile-page .av-workshop-hub-menu{position:fixed;top:clamp(96px,18vh,190px);left:clamp(12px,4vw,64px);max-height:min(340px,65dvh);overflow-y:auto}
+
+/* ANIME VOID 25.7 — viewport-safe homepage hero at mobile and desktop sizes. */
+.av-home main,.av-home main>*{min-width:0}
+.av-home main .hero{box-sizing:border-box;width:100%;min-width:0;max-width:100%;overflow:hidden}
+.av-home main .hero .hero-content{box-sizing:border-box;width:100%;min-width:0;max-width:720px}
+.av-home main .hero #heroTitle{font-size:clamp(30px,4.5vw,58px);line-height:1.12;letter-spacing:-.035em;overflow-wrap:normal;text-wrap:balance;max-width:100%;margin:16px 0 14px}
+.av-home main .hero #heroText{font-size:clamp(14px,1.5vw,17px);line-height:1.55;max-width:48ch;margin:0 0 18px;overflow-wrap:break-word;hyphens:none}
+.av-home main .hero .av-hero-actions{display:flex;align-items:center;align-content:flex-start;gap:10px;flex-wrap:wrap;max-width:100%;min-width:0}
+.av-home main .hero .av-hero-actions>#openCatalogBtn,.av-home main .hero .av-hero-actions>#randomBtn{box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;min-height:46px;max-width:100%;margin:0;padding:12px 18px;text-align:center;font-size:clamp(13px,1.25vw,15px);line-height:1.35;white-space:normal;overflow-wrap:anywhere}
+.av-home main .hero .av-hero-actions>.av-home-more{display:block;position:relative;box-sizing:border-box;flex:0 0 auto;margin:0;max-width:100%}
+.av-home main .hero .av-hero-actions>.av-home-more>summary{box-sizing:border-box;min-height:46px;margin:0;padding:12px 16px}
+.av-home main .hero .av-home-more-actions{box-sizing:border-box;position:absolute;top:calc(100% + 6px);left:0;z-index:20;margin:0;width:min(320px,calc(100vw - 48px));max-width:calc(100vw - 48px)}
+.av-home main .hero .av-home-more-actions>.secondary{box-sizing:border-box;display:flex;align-items:center;justify-content:center;min-height:44px;margin:0;padding:10px 12px;white-space:normal;text-align:center}
+@media(min-width:761px){.av-home main .hero{padding:clamp(28px,4vw,56px)}.av-home main .hero .av-hero-actions{gap:12px}.av-home main .hero .av-home-more-actions{left:auto;right:0}}
+@media(max-width:760px){.av-home main .hero{min-height:0;padding:clamp(18px,5vw,28px);border-radius:18px}.av-home main .hero #heroTitle{font-size:clamp(28px,7.6vw,42px);line-height:1.13;letter-spacing:-.035em;margin:12px 0}.av-home main .hero #heroText{font-size:clamp(13px,3.6vw,16px);line-height:1.5;margin:0 0 18px}.av-home main .hero .av-hero-actions{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:9px;width:100%}.av-home main .hero .av-hero-actions>#openCatalogBtn{grid-column:1/-1;width:100%}.av-home main .hero .av-hero-actions>#randomBtn{grid-column:1;min-width:0;width:100%;padding:11px 8px}.av-home main .hero .av-hero-actions>.av-home-more{grid-column:2;width:100%}.av-home main .hero .av-hero-actions>.av-home-more>summary{width:100%;justify-content:center;padding:11px 8px}.av-home main .hero .av-home-more-actions{left:auto;right:0;width:min(320px,calc(100vw - 56px))}}
+@media(max-width:350px){.av-home main .hero{padding:16px}.av-home main .hero #heroTitle{font-size:clamp(25px,8vw,30px)}.av-home main .hero .av-hero-actions{grid-template-columns:minmax(0,1fr)}.av-home main .hero .av-hero-actions>#openCatalogBtn,.av-home main .hero .av-hero-actions>#randomBtn,.av-home main .hero .av-hero-actions>.av-home-more{grid-column:1;width:100%}}
+
+/* Expanded actions participate in hero height; never clip inside overflow-hidden hero. */
+.av-home main .hero .av-hero-actions>.av-home-more[open]{flex-basis:100%}
+.av-home main .hero .av-hero-actions>.av-home-more[open] .av-home-more-actions{position:static;display:flex;flex-wrap:wrap;margin-top:8px;width:min(100%,400px);max-width:100%}
+@media(max-width:760px){.av-home main .hero .av-hero-actions>.av-home-more[open]{grid-column:1/-1}.av-home main .hero .av-hero-actions>.av-home-more[open] .av-home-more-actions{width:100%}}
