@@ -1,0 +1,227 @@
+/* ANIME VOID 52.0 — profile commands, searchable banner browser, tidy achievement cards.
+   Pure presentation; original dialogs, accounts and ownership decisions remain authoritative. */
+body.av-profile-page .av52-quick{
+  --av52-stroke:rgba(192,145,252,.25);
+  margin:18px 0 22px;
+  padding:17px clamp(14px,2.3vw,24px) 19px;
+  border:1px solid var(--av52-stroke);
+  border-radius:19px;
+  background:linear-gradient(135deg,rgba(38,25,62,.92),rgba(17,13,34,.95));
+  color:#f7f0ff;
+  box-shadow:0 16px 45px #08041430;
+}
+body.av-profile-page .av52-quick-head{
+  display:flex;flex-wrap:wrap;align-items:baseline;gap:10px 20px;margin-bottom:15px;
+}
+body.av-profile-page #av52QuickTitle{
+  margin:0;font-size:clamp(18px,2vw,23px);font-weight:850;line-height:1.2;letter-spacing:-.035em;
+}
+body.av-profile-page .av52-quick-intro{
+  margin:0;font-size:12px;line-height:1.5;color:#c7b5da;
+}
+body.av-profile-page .av52-quick-grid{
+  display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;
+}
+body.av-profile-page .av52-quick-item{
+  appearance:none;min-width:0;min-height:76px;
+  display:flex;gap:11px;align-items:center;text-align:left;
+  padding:13px;border:1px solid rgba(178,125,229,.23);
+  border-radius:14px;
+  color:#f6eeff;background:linear-gradient(130deg,#342146,#20152e);
+  cursor:pointer;transition:background .16s,border-color .16s,transform .16s;
+}
+body.av-profile-page .av52-quick-item:hover{
+  border-color:#c699ef;background:linear-gradient(130deg,#442858,#281a3b);
+  transform:translateY(-2px)
+}
+body.av-profile-page .av52-quick-item:focus-visible,
+body.av-profile-page .av52-banner-card:focus-visible,
+body.av-profile-page .av52-gallery :is(button,input):focus-visible{
+  outline:3px solid #edc2ff;outline-offset:3px;
+}
+body.av-profile-page .av52-quick-icon{
+  display:grid;place-items:center;flex:0 0 42px;
+  width:42px;height:42px;border-radius:12px;
+  background:#9a5cc333;color:#ecd0ff;font:24px/1 Georgia,serif;
+}
+body.av-profile-page .av52-quick-copy{min-width:0;display:flex;flex-direction:column;gap:3px}
+body.av-profile-page .av52-quick-copy strong{
+  font-size:13px;line-height:1.28;overflow-wrap:anywhere
+}
+body.av-profile-page .av52-quick-copy small{
+  color:#bba7d0;font-size:11px;line-height:1.3;overflow-wrap:anywhere
+}
+body.av-profile-page .av52-gallery{
+  --av52-stroke:rgba(194,151,244,.25);
+  margin:24px 0;padding:clamp(14px,2.6vw,26px);
+  border-radius:20px;border:1px solid var(--av52-stroke);
+  background:radial-gradient(ellipse at 100% 0%,#6c368f22,transparent 55%),
+    linear-gradient(145deg,#231733,#120e24);
+  color:#f9f2ff;
+}
+body.av-profile-page .av52-gallery-head{
+  display:flex;justify-content:space-between;align-items:center;gap:12px 24px;flex-wrap:wrap;
+}
+body.av-profile-page .av52-gallery-title{min-width:0;flex:1 1 300px}
+body.av-profile-page .av52-gallery-eyebrow{
+  color:#bd91e8;font-size:10px;font-weight:850;letter-spacing:.18em;text-transform:uppercase
+}
+body.av-profile-page #av49GalleryHeading{
+  color:#f7ecff;font-size:clamp(22px,2.8vw,32px);font-weight:850;
+  letter-spacing:-.035em;line-height:1.17;margin:7px 0 7px;
+}
+body.av-profile-page .av52-gallery-description{
+  color:#c6b2d8;font-size:12px;line-height:1.65;margin:0;max-width:75ch;
+}
+body.av-profile-page .av52-gallery-launch,
+body.av-profile-page .av52-gallery-more{
+  display:inline-flex;justify-content:center;align-items:center;
+  min-height:44px;padding:10px 16px;
+  color:#faefff;background:#44215c;
+  border:1px solid #b57ad8;border-radius:11px;
+  font:750 12px/1.4 system-ui,sans-serif;
+  cursor:pointer;text-align:center;
+}
+body.av-profile-page .av52-gallery-launch:hover,
+body.av-profile-page .av52-gallery-more:hover{
+  background:#5d317d;
+}
+body.av-profile-page .av52-gallery-controls{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:12px;flex-wrap:wrap;margin:21px 0 9px;
+}
+body.av-profile-page .av52-gallery-tabs{
+  min-width:0;display:flex;gap:6px;flex-wrap:wrap;
+  align-items:center;padding:5px;border:1px solid rgba(184,132,240,.21);
+  background:#151021;border-radius:12px;
+}
+body.av-profile-page .av52-gallery-tabs button{
+  appearance:none;min-height:42px;padding:9px 16px;
+  border:1px solid transparent;border-radius:9px;
+  background:transparent;color:#cdbddf;
+  font:750 12px/1.3 system-ui,sans-serif;cursor:pointer;
+}
+body.av-profile-page .av52-gallery-tabs button[aria-pressed=true]{
+  color:#fff;border-color:#bb81fa9c;background:#6b3999;
+}
+body.av-profile-page .av52-gallery-search{
+  flex:1 1 220px;max-width:340px;min-width:0
+}
+body.av-profile-page .av52-gallery-search input{
+  box-sizing:border-box;min-height:46px;width:100%;min-width:0;
+  padding:11px 14px;border-radius:11px;
+  font:500 14px/1.4 system-ui,sans-serif;
+  color:#f7edff;border:1px solid #7b6197;background:#1c1529;
+}
+body.av-profile-page .av52-gallery-search input::placeholder{color:#b8a5c8}
+body.av-profile-page .av52-sr-only{
+  position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
+  clip:rect(0,0,0,0);white-space:nowrap;border:0
+}
+body.av-profile-page .av52-gallery-status{min-height:20px;color:#beabce;font-size:12px;margin:8px 0 13px}
+body.av-profile-page .av52-gallery-grid{
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;
+}
+body.av-profile-page .av52-banner-card{
+  display:flex;flex-direction:column;
+  appearance:none;min-width:0;min-height:0;padding:0;
+  border:1px solid rgba(176,129,218,.27);border-radius:14px;overflow:hidden;
+  background:#180f27;color:#f4e9ff;text-align:left;cursor:pointer;
+  transition:transform .17s,border-color .17s;
+}
+body.av-profile-page .av52-banner-card:hover{
+  transform:translateY(-2px);border-color:#d49dfa
+}
+body.av-profile-page .av52-banner-card.is-equipped{
+  border-color:#d4a9ff;box-shadow:inset 0 0 0 1px #d4a9ff55
+}
+body.av-profile-page .av52-banner-card img{
+  display:block;width:100%;height:auto;aspect-ratio:16/5;
+  min-height:96px;max-height:180px;
+  object-fit:cover;object-position:center 42%;
+  background:linear-gradient(130deg,#382047,#241637)
+}
+body.av-profile-page .av52-banner-caption{
+  display:flex;justify-content:space-between;align-items:center;
+  gap:10px;padding:12px 13px;min-height:58px;min-width:0;
+}
+body.av-profile-page .av52-banner-caption strong{
+  font-weight:750;font-size:12px;line-height:1.35;overflow-wrap:anywhere
+}
+body.av-profile-page .av52-banner-caption small{
+  flex:0 0 auto;max-width:44%;text-align:right;
+  color:#d9adef;font-size:10px;line-height:1.35;overflow-wrap:anywhere
+}
+body.av-profile-page .av52-banner-card.is-equipped small{color:#d8ffc6}
+body.av-profile-page .av52-gallery-more{
+  display:flex;min-width:170px;margin:19px auto 0;
+}
+body.av-profile-page .av52-gallery-more[hidden]{display:none!important}
+body.av-profile-page .av52-no-results{
+  grid-column:1/-1;margin:4px 0;padding:26px;
+  text-align:center;color:#cbb8df;font-size:13px;
+}
+body.av-profile-page .av52-workshop .av-reborn-workshop-grid{gap:13px}
+body.av-profile-page .av52-workshop .av-reborn-workshop-card{
+  min-height:142px;align-items:flex-start!important;
+}
+body.av-profile-page .av52-workshop .av-reborn-workshop-card:focus-visible{
+  outline:3px solid #eac5ff;outline-offset:3px
+}
+body.av-profile-page .av52-achievements .a22-hero{
+  border-radius:18px;padding:clamp(17px,2.6vw,26px)
+}
+body.av-profile-page .av52-achievements .a22-controls{
+  grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;
+}
+body.av-profile-page .av52-achievements .a22-controls :is(select,input){
+  min-height:45px;max-width:100%;font-size:14px;
+}
+body.av-profile-page .av52-achievements .a22-grid{
+  grid-template-columns:repeat(3,minmax(0,1fr));gap:13px;
+}
+body.av-profile-page .av52-achievements .a22-card{
+  min-height:275px;border-radius:16px;
+}
+body.av-profile-page .av52-achievements .a22-actions button{min-height:44px}
+@media(max-width:1100px){
+  body.av-profile-page .av52-quick-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  body.av-profile-page .av52-gallery-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:760px){
+  body.av-profile-page .av52-quick{padding:14px 12px;margin:12px 0 17px;border-radius:16px}
+  body.av-profile-page .av52-quick-head{display:block}
+  body.av-profile-page .av52-quick-intro{margin:5px 0 0}
+  body.av-profile-page .av52-quick-grid{gap:8px}
+  body.av-profile-page .av52-quick-item{min-height:71px;padding:10px;gap:8px;border-radius:11px}
+  body.av-profile-page .av52-quick-icon{width:36px;height:36px;flex-basis:36px;font-size:21px}
+  body.av-profile-page .av52-quick-copy strong{font-size:11px}
+  body.av-profile-page .av52-quick-copy small{font-size:10px}
+  body.av-profile-page .av52-gallery{padding:15px 12px;border-radius:16px;margin:18px 0}
+  body.av-profile-page .av52-gallery-head{align-items:flex-start}
+  body.av-profile-page .av52-gallery-controls{margin-top:14px}
+  body.av-profile-page .av52-gallery-search{max-width:none;flex:1 1 100%}
+  body.av-profile-page .av52-gallery-tabs{width:100%;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:3px;padding:4px}
+  body.av-profile-page .av52-gallery-tabs button{min-width:0;padding:9px 5px;font-size:11px}
+  body.av-profile-page .av52-gallery-grid{gap:9px}
+  body.av-profile-page .av52-banner-card img{min-height:70px;aspect-ratio:16/7}
+  body.av-profile-page .av52-banner-caption{min-height:57px;padding:10px;gap:5px;flex-direction:column;align-items:flex-start}
+  body.av-profile-page .av52-banner-caption small{max-width:100%;text-align:left}
+  body.av-profile-page .av52-achievements .a22-controls{grid-template-columns:repeat(2,minmax(0,1fr))}
+  body.av-profile-page .av52-achievements .a22-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+  body.av-profile-page .av52-achievements .a22-card{min-height:250px;padding:13px 8px}
+}
+@media(max-width:380px){
+  body.av-profile-page .av52-quick-grid{grid-template-columns:minmax(0,1fr)}
+  body.av-profile-page .av52-quick-item{min-height:60px}
+  body.av-profile-page .av52-gallery-tabs{grid-template-columns:repeat(3,minmax(0,1fr))}
+  body.av-profile-page .av52-gallery-grid{grid-template-columns:minmax(0,1fr)}
+  body.av-profile-page .av52-banner-caption{flex-direction:row;align-items:center}
+  body.av-profile-page .av52-banner-card img{aspect-ratio:16/5}
+  body.av-profile-page .av52-achievements .a22-controls{grid-template-columns:minmax(0,1fr)}
+}
+@media(prefers-reduced-motion:reduce){
+  body.av-profile-page .av52-quick-item,body.av-profile-page .av52-banner-card{
+    transition:none!important;transform:none!important;
+  }
+}
