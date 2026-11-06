@@ -19,3 +19,13 @@
 .av-collections .ma-dialog .vi-actions button{min-height:44px;white-space:normal;overflow-wrap:anywhere}
 @media(max-width:600px){.av-collections .ma-collection-grid{grid-template-columns:minmax(0,1fr);gap:12px}.av-collections .ma-collection{padding:14px}.av-collections .ma-section-head #collectionsNew{width:100%}.av-collections .ma-dialog{width:calc(100vw - 12px);max-width:calc(100vw - 12px);max-height:calc(100dvh - 12px);padding:14px;border-radius:14px}.av-collections .ma-dialog .ma-chooser{grid-template-columns:minmax(0,1fr);padding:8px}.av-collections .ma-dialog :is(input,select,textarea){font-size:max(16px,1em)}}
 @media(max-width:360px){.av-collections .ma-dialog .ma-order li{grid-template-columns:minmax(0,1fr) 40px 40px;gap:4px}.av-collections .ma-dialog .ma-order button{min-width:40px;min-height:44px;padding:4px}}
+
+/* ANIME VOID 33.0 — collections touch and dialog consistency. */
+body.av-collections{max-width:100%;overflow-x:clip}
+body.av-collections :is(#dnaMain,#collectionsCollectionList,#collectionsNetwork){box-sizing:border-box;min-width:0;max-width:100%}
+body.av-collections :is(#collectionsNew,#collectionsLanguage){box-sizing:border-box;min-height:44px;max-width:100%;white-space:normal;overflow-wrap:anywhere}
+body.av-collections :is(button,a,input,select,textarea):focus-visible{outline:3px solid #dfb8ff;outline-offset:2px}
+body.av-collections .ma-dialog{box-sizing:border-box;max-width:calc(100vw - 16px);max-height:calc(100dvh - 16px);overscroll-behavior:contain}
+body.av-collections .ma-dialog :is(input,select,textarea){box-sizing:border-box;min-width:0;max-width:100%}
+body.av-collections .ma-dialog :is(button,a){min-height:44px;max-width:100%;white-space:normal;overflow-wrap:anywhere}
+@media(max-width:650px){body.av-collections .ma-dialog{max-width:calc(100vw - 8px);max-height:calc(100dvh - 8px)}}
