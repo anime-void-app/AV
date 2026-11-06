@@ -1026,3 +1026,229 @@ body.av-profile-page .av-measured-note{
   body.av-profile-page .av-measured-card strong{font-size:18px}
   body.av-profile-page .av-measured-card span{font-size:10px}
 }
+
+
+/* ANIME VOID 46.0 — one-tap home navigation and a useful profile journey.
+   Keep these responsive elements independent of legacy header/catalog CSS. */
+body.av-home .av-46-home-links{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  align-items:stretch;
+  gap:11px;
+  max-width:1180px;
+  margin:clamp(13px,2vw,23px) auto 0;
+  padding:0 max(14px,2%);
+}
+body.av-home .av-46-home-links .av-46-home-link{
+  box-sizing:border-box;
+  display:flex;
+  align-items:center;
+  min-width:0;
+  min-height:96px;
+  gap:11px;
+  padding:15px;
+  border:1px solid rgba(196,158,230,.2);
+  border-radius:16px;
+  text-decoration:none;
+  background:linear-gradient(150deg,rgba(37,27,53,.94),rgba(21,18,32,.94));
+  color:var(--text,#f4edff);
+  transition:transform .18s,border-color .18s,background .18s;
+  touch-action:manipulation;
+}
+body.av-home .av-46-home-links .av-46-home-link:hover{
+  border-color:rgba(203,151,248,.55);
+  background:linear-gradient(150deg,rgba(56,34,78,.95),rgba(27,20,42,.95));
+  transform:translateY(-2px);
+}
+body.av-home .av-46-home-links .av-46-home-link:focus-visible,
+body.av-profile-page .av-46-profile-journey :is(a,button):focus-visible{
+  outline:3px solid #e9bafc;
+  outline-offset:3px;
+}
+body.av-home .av-46-home-symbol{
+  box-sizing:border-box;
+  flex:0 0 39px;
+  display:grid;
+  place-items:center;
+  width:39px;
+  height:39px;
+  border-radius:11px;
+  background:rgba(170,103,222,.17);
+  color:#e3baff;
+  font:800 29px/1 system-ui,sans-serif;
+}
+body.av-home .av-46-home-link-text{
+  display:flex;
+  flex:1 1 auto;
+  flex-direction:column;
+  gap:5px;
+  min-width:0;
+}
+body.av-home .av-46-home-link-text strong{
+  font-size:14px;
+  line-height:1.35;
+  overflow-wrap:anywhere;
+}
+body.av-home .av-46-home-link-text small{
+  font-size:11px;
+  line-height:1.4;
+  color:#bcaecb;
+  overflow-wrap:anywhere;
+}
+body.av-home .av-46-home-chevron{
+  align-self:center;
+  flex:0 0 auto;
+  color:#c69ae7;
+  font-size:17px;
+}
+body.av-home .av-46-home-subnav{
+  box-sizing:border-box;
+  display:flex;
+  align-items:center;
+  justify-content:flex-start;
+  flex-wrap:wrap;
+  gap:8px 18px;
+  max-width:1180px;
+  margin:9px auto 18px;
+  padding:0 max(15px,2%);
+}
+body.av-home .av-46-home-subnav a{
+  display:inline-flex;
+  align-items:center;
+  min-height:40px;
+  color:#c8b3da;
+  font-size:12px;
+  font-weight:600;
+  text-decoration:none;
+}
+body.av-home .av-46-home-subnav a:hover{color:#f1d5ff;text-decoration:underline}
+body.av-home .av-46-home-subnav a:focus-visible{outline:2px solid #dcb5ff;outline-offset:2px}
+body.av-profile-page .av-46-profile-journey{
+  box-sizing:border-box;
+  max-width:100%;
+  min-width:0;
+  padding:clamp(16px,2.5vw,24px);
+  margin:18px 0 28px;
+  border:1px solid rgba(196,158,230,.22);
+  border-radius:20px;
+  background:linear-gradient(145deg,rgba(36,27,54,.8),rgba(20,16,32,.9));
+}
+body.av-profile-page .av-46-profile-journey-heading{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px 20px;
+  flex-wrap:wrap;
+  margin-bottom:17px;
+}
+body.av-profile-page .av-46-profile-journey-heading>div{min-width:0;flex:1 1 220px}
+body.av-profile-page .av-46-profile-journey-heading h2{
+  font-size:clamp(20px,2.5vw,26px);
+  line-height:1.2;
+  margin:4px 0 6px;
+}
+body.av-profile-page .av-46-profile-journey-heading p{
+  font-size:13px;
+  line-height:1.5;
+  margin:0;
+  color:var(--muted,#b4a7c4);
+}
+body.av-profile-page .av-46-profile-all{
+  flex:0 0 auto;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:44px;
+  padding:10px 13px;
+  border-radius:11px;
+  border:1px solid rgba(210,163,246,.28);
+  color:#f0cfff;
+  background:rgba(178,121,226,.09);
+  text-decoration:none;
+  font-size:12px;
+  font-weight:700;
+}
+body.av-profile-page .av-46-profile-journey-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:10px;
+}
+body.av-profile-page .av-46-profile-journey-link{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  min-width:0;
+  min-height:88px;
+  padding:13px;
+  border:1px solid rgba(202,164,239,.17);
+  border-radius:14px;
+  background:rgba(11,9,20,.37);
+  text-decoration:none;
+  color:var(--text,#f3ebff);
+  touch-action:manipulation;
+}
+body.av-profile-page .av-46-profile-journey-link:hover{
+  border-color:rgba(215,161,254,.5);
+  background:rgba(83,51,108,.24);
+}
+body.av-profile-page .av-46-journey-icon{
+  display:grid;
+  flex:0 0 34px;
+  place-items:center;
+  width:34px;
+  height:34px;
+  border-radius:10px;
+  background:rgba(168,101,227,.16);
+  color:#e5bdff;
+  font-size:23px;
+  line-height:1;
+}
+body.av-profile-page .av-46-profile-journey-link>span:nth-child(2){
+  display:flex;
+  flex:1;
+  flex-direction:column;
+  gap:5px;
+  min-width:0;
+}
+body.av-profile-page .av-46-profile-journey-link strong{
+  font-size:13px;
+  line-height:1.3;
+  overflow-wrap:anywhere;
+}
+body.av-profile-page .av-46-profile-journey-link small{
+  font-size:11px;
+  color:#bbadcb;
+  line-height:1.35;
+  overflow-wrap:anywhere;
+}
+body.av-profile-page .av-46-journey-arrow{
+  color:#c89df1;
+  flex:0 0 auto;
+}
+@media(max-width:1050px){
+  body.av-home .av-46-home-links{grid-template-columns:repeat(2,minmax(0,1fr))}
+  body.av-profile-page .av-46-profile-journey-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  body.av-profile-page .av-46-profile-journey-grid>a:first-child{grid-column:1/-1}
+}
+@media(max-width:760px){
+  body.av-home .av-46-home-links{gap:8px;padding:0 12px}
+  body.av-home .av-46-home-links .av-46-home-link{min-height:86px;gap:7px;padding:11px;border-radius:13px}
+  body.av-home .av-46-home-symbol{flex-basis:31px;width:31px;height:31px;font-size:23px}
+  body.av-home .av-46-home-link-text strong{font-size:12px}
+  body.av-home .av-46-home-link-text small{font-size:10px}
+  body.av-home .av-46-home-chevron{font-size:12px}
+  body.av-home .av-46-home-subnav{padding:0 15px;gap:6px 15px;margin-bottom:12px}
+  body.av-profile-page .av-46-profile-journey{padding:14px;border-radius:16px}
+  body.av-profile-page .av-46-profile-journey-grid{gap:8px}
+  body.av-profile-page .av-46-profile-journey-link{min-height:83px;padding:11px;gap:8px}
+}
+@media(max-width:390px){
+  body.av-home .av-46-home-links .av-46-home-link{gap:5px;padding:9px}
+  body.av-home .av-46-home-link-text strong{font-size:11px}
+  body.av-home .av-46-home-link-text small{font-size:9.5px}
+  body.av-profile-page .av-46-profile-journey-grid{grid-template-columns:minmax(0,1fr)}
+  body.av-profile-page .av-46-profile-journey-grid>a:first-child{grid-column:auto}
+}
+@media(prefers-reduced-motion:reduce){
+  body.av-home .av-46-home-link{transition:none!important;transform:none!important}
+}
