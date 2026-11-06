@@ -1252,3 +1252,59 @@ body.av-profile-page .av-46-journey-arrow{
 @media(prefers-reduced-motion:reduce){
   body.av-home .av-46-home-link{transition:none!important;transform:none!important}
 }
+
+
+/* ANIME VOID 47.0 — measured history action, safe tap targets and compact phones. */
+body.av-profile-page #measuredWatchStats .section-heading{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  flex-wrap:wrap;
+  min-width:0;
+}
+body.av-profile-page #measuredWatchStats .section-heading>div{
+  flex:1 1 220px;
+  min-width:0;
+}
+body.av-profile-page #measuredWatchStats .av-47-measured-link{
+  box-sizing:border-box;
+  display:inline-flex;
+  flex:0 0 auto;
+  justify-content:center;
+  align-items:center;
+  min-height:44px;
+  max-width:100%;
+  padding:10px 13px;
+  background:rgba(172,110,226,.12);
+  border:1px solid rgba(205,151,244,.38);
+  border-radius:11px;
+  color:#ecd0fb;
+  font-weight:700;
+  font-size:12px;
+  line-height:1.35;
+  text-decoration:none;
+  white-space:normal;
+  text-align:center;
+  touch-action:manipulation;
+}
+body.av-profile-page #measuredWatchStats .av-47-measured-link:hover{
+  background:rgba(175,113,230,.22);
+  border-color:rgba(224,184,252,.7);
+}
+body.av-profile-page #measuredWatchStats .av-47-measured-link:focus-visible{
+  outline:3px solid #f1cbff;
+  outline-offset:3px;
+}
+@media(max-width:540px){
+  body.av-profile-page #measuredWatchStats .section-heading{
+    align-items:stretch;
+  }
+  body.av-profile-page #measuredWatchStats .av-47-measured-link{
+    width:100%;
+    flex-basis:100%;
+  }
+  body.av-home .av-46-home-links{
+    max-width:100%;
+  }
+}
