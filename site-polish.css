@@ -542,7 +542,7 @@ body.av-profile-page .av-profile-reborn-actions>.av-profile-reborn-link{
 body.av-profile-page #profileSectionNav a[aria-current=location]{
   border-color:#bc90ed;background:#3e2952;color:#fff;
 }
-@media(max-width:1080px){
+@media(max-width:1360px){
   body.av-home>header{height:auto;min-height:68px;display:flex;flex-wrap:wrap;align-items:center}
   body.av-home>header nav{
     order:5;display:flex;flex:1 0 100%;width:100%;min-width:0;max-width:100%;
