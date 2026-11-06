@@ -191,7 +191,10 @@
     const marked=records.marked.filter(item=>searchable(nameFor(item.item)));
     const measuredEnabled=state.tab!=='marked',markedEnabled=state.tab!=='measured';
     const total=(measuredEnabled?measured.length:0)+(markedEnabled?marked.length:0);
-    const visibleMeasured=measuredEnabled?measured.slice(0,state.limit):[];
+    // When both types exist, initially give each an equal share of the screen.
+    const both=measuredEnabled&&markedEnabled&&measured.length>0&&marked.length>0;
+    const firstLimit=both?Math.ceil(state.limit/2):state.limit;
+    const visibleMeasured=measuredEnabled?measured.slice(0,firstLimit):[];
     const visibleMarked=markedEnabled?marked.slice(0,Math.max(0,state.limit-visibleMeasured.length)):[];
     const measuredSection=$('av46MeasuredSection'),markedSection=$('av46MarkedSection');
     measuredSection.hidden=!measuredEnabled||!measured.length;
@@ -205,9 +208,14 @@
     }
     const empty=$('av46Empty');empty.hidden=total>0;
     if(!total){
-      $('av46EmptyTitle').textContent=query?tr('Ничего не найдено','No results found'):tr('История пока пуста','No viewing records yet');
+      $('av46EmptyTitle').textContent=query?tr('Ничего не найдено','No results found')
+        :state.tab==='measured'?tr('Замеров плеера пока нет','No measured playback yet')
+        :state.tab==='marked'?tr('Пока нет отметок серий','No marked episodes yet')
+        :tr('История пока пуста','No viewing records yet');
       $('av46EmptyDetail').textContent=query
         ?tr('Попробуй другое название или переключи тип записей.','Try another title or change the record type.')
+        :state.tab==='measured'?tr('Серия появится здесь после подтверждённого просмотра в плеере.','An entry appears after verified viewing in the player.')
+        :state.tab==='marked'?tr('Отметь просмотренную серию на странице аниме.','Mark an episode as watched on an anime page.')
         :tr('Когда ты отметишь серию или плеер подтвердит просмотр, запись появится здесь.','Mark an episode or watch a video in the player to see an entry here.');
     }
     const more=$('av46ShowMore');
