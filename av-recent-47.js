@@ -34,17 +34,14 @@
     return String(name);
   };
   function records(meta){
-    const result=[],seen=new Set();
+    const result=[];
     try {
       const raw=localStorage.getItem(ledger?.KEY||'animeVoidMeasuredV1');
       if(raw&&ledger){
         const archive=ledger.validate(JSON.parse(raw));
-        const entries=Object.values(archive.entries).sort((a,b)=>b.updatedAt-a.updatedAt);
+        const entries=ledger.presentation(archive).entries;
         for(const x of entries){
           if(ledger.count(x.coverage)<=0)continue;
-          const k=[x.titleId,x.season,x.episode].join(':');
-          if(seen.has(k))continue;
-          seen.add(k);
           const id=idOf(x.titleId);
           const match=id?meta.get(id):null;
           const label=x.kind==='movie'?t('Фильм','Movie'):t('Сезон ','Season ')+x.season+' · '+t('серия ','episode ')+x.episode;
