@@ -512,3 +512,116 @@ body.av-home #catalog .advanced-filters :is(input,select,button){
 @media(prefers-reduced-motion:reduce){
   body.av-home #catalog #animeGrid :is(.card-season-button,.card-actions>.secondary){transition:none}
 }
+
+
+/* ANIME VOID 40.0 — one predictable mobile header and profile navigation.
+   Only header/section layout; no auth, player or saved user data changes. */
+body:is(.av-home,.av-profile-page)>header{
+  box-sizing:border-box;min-width:0;max-width:100%;column-gap:10px;row-gap:8px;
+}
+body:is(.av-home,.av-profile-page)>header .logo{min-width:0;max-width:100%;overflow-wrap:normal}
+body:is(.av-home,.av-profile-page)>header .language-switch{
+  box-sizing:border-box;display:flex;align-items:center;gap:4px;flex:0 0 auto;
+}
+body:is(.av-home,.av-profile-page)>header :is(.language-switch button,.theme-toggle){
+  box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;
+  min-width:44px;min-height:44px;flex:0 0 auto;
+}
+body:is(.av-home,.av-profile-page)>header nav a[aria-current=page]{
+  color:var(--av-accent,#e0bbff);font-weight:750;
+}
+body:is(.av-home,.av-profile-page)>header nav a:focus-visible,
+body.av-profile-page #profileSectionNav a:focus-visible,
+body.av-profile-page .av-profile-reborn-actions a:focus-visible{
+  outline:2px solid #e2baff;outline-offset:2px;
+}
+body.av-profile-page .av-profile-reborn-actions>.av-profile-reborn-link{
+  box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;
+  min-height:44px;text-align:center;
+}
+body.av-profile-page #profileSectionNav a[aria-current=location]{
+  border-color:#bc90ed;background:#3e2952;color:#fff;
+}
+@media(max-width:1080px){
+  body.av-home>header{height:auto;min-height:68px;display:flex;flex-wrap:wrap;align-items:center}
+  body.av-home>header nav{
+    order:5;display:flex;flex:1 0 100%;width:100%;min-width:0;max-width:100%;
+    gap:6px;flex-wrap:nowrap;justify-content:flex-start;align-items:center;
+    overflow-x:auto;overflow-y:hidden;scrollbar-width:thin;
+    -webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;scroll-padding-inline:4px;
+    padding:3px 0 7px;
+  }
+  body.av-home>header nav a{
+    box-sizing:border-box;display:inline-flex;flex:0 0 auto;align-items:center;
+    justify-content:center;min-width:0;min-height:44px;max-width:none;
+    padding:8px 11px;border-radius:10px;white-space:nowrap;line-height:1.3;
+  }
+}
+@media(max-width:760px){
+  body:is(.av-home,.av-profile-page)>header{
+    padding-left:max(12px,env(safe-area-inset-left));
+    padding-right:max(12px,env(safe-area-inset-right));
+  }
+  body.av-home>header .logo,body.av-profile-page>header .logo{
+    order:0;flex:1 1 125px;white-space:nowrap;
+  }
+  body.av-home>header .language-switch,
+  body.av-home>header>.theme-toggle,
+  body.av-profile-page>header .header-actions{order:1}
+  body.av-home>header .search-wrap{
+    order:4;box-sizing:border-box;flex:1 0 100%;width:100%;min-width:0;max-width:100%;
+  }
+  body.av-home>header .search-wrap .search{
+    box-sizing:border-box;width:100%;min-width:0;max-width:100%;min-height:44px;font-size:16px;
+  }
+  body.av-profile-page>header{
+    height:auto;min-height:68px;display:flex;flex-wrap:wrap;align-items:center;
+  }
+  body.av-profile-page>header nav{
+    order:5;display:flex;flex:1 0 100%;width:100%;max-width:100%;min-width:0;
+    flex-wrap:nowrap;justify-content:flex-start;gap:6px;
+    overflow-x:auto;overflow-y:hidden;scrollbar-width:thin;
+    -webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;
+    padding:3px 0 7px;
+  }
+  body.av-profile-page>header nav a{
+    box-sizing:border-box;flex:0 0 auto;min-height:44px;white-space:nowrap;
+    padding:8px 12px;border-radius:10px;
+  }
+  body.av-profile-page .av-profile-reborn-actions{
+    display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:8px;width:100%;max-width:100%;
+  }
+  body.av-profile-page .av-profile-reborn-actions>.av-workshop-shortcut{
+    grid-column:1/-1;
+  }
+  body.av-profile-page .av-profile-reborn-actions>.av-profile-reborn-link{
+    width:100%;min-width:0;max-width:100%;padding:10px 9px;
+  }
+  body.av-profile-page #profileSectionNav{
+    display:flex;flex-wrap:nowrap;justify-content:flex-start;
+    max-width:100%;overflow-x:auto;overflow-y:hidden;scrollbar-width:thin;
+    -webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;
+    scroll-padding-inline:8px;padding-bottom:12px;
+  }
+  body.av-profile-page #profileSectionNav a{
+    box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;
+    flex:0 0 auto;min-height:44px;max-width:none;white-space:nowrap;
+    scroll-snap-align:start;
+  }
+  body.av-profile-page .av-profile-nav-target{scroll-margin-top:24px}
+}
+@media(max-width:360px){
+  body:is(.av-home,.av-profile-page)>header{gap:6px}
+  body.av-home>header nav a,body.av-profile-page>header nav a{padding-inline:9px}
+  body.av-profile-page .av-profile-reborn-actions{
+    grid-template-columns:minmax(0,1fr);
+  }
+  body.av-profile-page .av-profile-reborn-actions>.av-workshop-shortcut{
+    grid-column:1;
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  body:is(.av-home,.av-profile-page)>header nav,
+  body.av-profile-page #profileSectionNav{scroll-behavior:auto}
+}
