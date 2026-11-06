@@ -1,5 +1,5 @@
 {
-  "version": "21",
+  "version": "49.0",
   "currency": [
     "Осколки",
     "Shards"
@@ -13,6 +13,96 @@
     "effect": "v20-effect-none"
   },
   "items": [
+    {
+      "id": "v49-banner-sakura-moon",
+      "kind": "banner",
+      "name": [
+        "Луна цветущего Киото",
+        "Moonlit Sakura"
+      ],
+      "cost": 0,
+      "rub": 0,
+      "collection": "v49",
+      "accent": "#d7a1f6",
+      "asset": "studio/v49/sakura-moon.svg",
+      "author": "ANIME VOID Studio",
+      "license": "Original vector artwork"
+    },
+    {
+      "id": "v49-banner-crimson-ronin",
+      "kind": "banner",
+      "name": [
+        "Алый путь ронина",
+        "Crimson Ronin"
+      ],
+      "cost": 0,
+      "rub": 0,
+      "collection": "v49",
+      "accent": "#ff918c",
+      "asset": "studio/v49/crimson-ronin.svg",
+      "author": "ANIME VOID Studio",
+      "license": "Original vector artwork"
+    },
+    {
+      "id": "v49-banner-azure-storm",
+      "kind": "banner",
+      "name": [
+        "Дворец небесной бури",
+        "Azure Tempest"
+      ],
+      "cost": 0,
+      "rub": 0,
+      "collection": "v49",
+      "accent": "#7cd4fb",
+      "asset": "studio/v49/azure-storm.svg",
+      "author": "ANIME VOID Studio",
+      "license": "Original vector artwork"
+    },
+    {
+      "id": "v49-banner-golden-torii",
+      "kind": "banner",
+      "name": [
+        "Врата золотого заката",
+        "Golden Torii"
+      ],
+      "cost": 0,
+      "rub": 0,
+      "collection": "v49",
+      "accent": "#ffda9c",
+      "asset": "studio/v49/golden-torii.svg",
+      "author": "ANIME VOID Studio",
+      "license": "Original vector artwork"
+    },
+    {
+      "id": "v49-banner-emerald-spirit",
+      "kind": "banner",
+      "name": [
+        "Шёпот духовного леса",
+        "Spirit Forest"
+      ],
+      "cost": 0,
+      "rub": 0,
+      "collection": "v49",
+      "accent": "#86e9bd",
+      "asset": "studio/v49/emerald-spirit.svg",
+      "author": "ANIME VOID Studio",
+      "license": "Original vector artwork"
+    },
+    {
+      "id": "v49-banner-frozen-shrine",
+      "kind": "banner",
+      "name": [
+        "Храм зимнего созвездия",
+        "Frozen Shrine"
+      ],
+      "cost": 0,
+      "rub": 0,
+      "collection": "v49",
+      "accent": "#b9d6fe",
+      "asset": "studio/v49/frozen-shrine.svg",
+      "author": "ANIME VOID Studio",
+      "license": "Original vector artwork"
+    },
     {
       "id": "v20-banner-beach1",
       "kind": "banner",
