@@ -625,3 +625,140 @@ body.av-profile-page #profileSectionNav a[aria-current=location]{
   body:is(.av-home,.av-profile-page)>header nav,
   body.av-profile-page #profileSectionNav{scroll-behavior:auto}
 }
+
+/* ANIME VOID 41.0 — consistent modal/editor geometry and close-button alignment.
+   Scoped to existing dialogs. No purchase, authentication or stored data logic. */
+body:is(.av-home,.av-profile-page) :is(.vs-dialog,.at-dialog,.at-full,.avp-dialog,.avp-confirm){
+  box-sizing:border-box;
+  min-width:0;
+  max-width:min(100% - 24px, calc(100vw - 24px));
+  max-height:calc(100dvh - 24px);
+  overflow-x:hidden;
+  overflow-y:auto;
+  overscroll-behavior:contain;
+}
+body:is(.av-home,.av-profile-page) :is(.vs-dialog,.at-dialog,.at-full,.avp-dialog,.avp-confirm) :is(h2,h3,p,small,strong){
+  min-width:0;
+  max-width:100%;
+  overflow-wrap:anywhere;
+}
+body:is(.av-home,.av-profile-page) :is(.vs-dialog,.at-dialog,.avp-dialog) :is(.vs-dialog-head,.at-header,.avp-dialog-head){
+  box-sizing:border-box;
+  position:sticky;
+  top:0;
+  z-index:10;
+  width:100%;
+  min-width:0;
+  max-width:100%;
+}
+body:is(.av-home,.av-profile-page) :is(.vs-dialog,.at-dialog,.avp-dialog) :is(.vs-close,.at-close,.avp-close){
+  box-sizing:border-box;
+  display:grid;
+  place-items:center;
+  flex:0 0 44px;
+  align-self:start;
+  width:44px;
+  height:44px;
+  min-width:44px;
+  min-height:44px;
+  max-width:44px;
+  max-height:44px;
+  margin:0;
+  padding:0;
+  line-height:1;
+  font-size:25px;
+  border-radius:12px;
+  touch-action:manipulation;
+}
+body:is(.av-home,.av-profile-page) .at-full>button:first-child{
+  position:sticky;
+  top:8px;
+  z-index:3;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:44px;
+  max-width:100%;
+  margin:10px;
+  white-space:normal;
+}
+body:is(.av-home,.av-profile-page) :is(.vs-dialog,.at-dialog,.at-full,.avp-dialog,.avp-confirm) :is(button,a,input,select,textarea):focus-visible{
+  outline:3px solid #e7c6ff;
+  outline-offset:2px;
+}
+body:is(.av-home,.av-profile-page) :is(.vs-dialog,.at-dialog,.avp-dialog) :is(.vs-settings-body,.at-body,.avp-studio-body){
+  min-width:0;
+  max-width:100%;
+}
+@media(max-width:760px){
+  body:is(.av-home,.av-profile-page) :is(.vs-dialog,.at-dialog,.at-full,.avp-dialog,.avp-confirm){
+    width:calc(100vw - 16px);
+    max-width:calc(100vw - 16px);
+    max-height:calc(100dvh - 16px);
+    border-radius:14px;
+    scrollbar-gutter:auto;
+  }
+  body:is(.av-home,.av-profile-page) :is(.vs-dialog,.at-dialog,.avp-dialog) :is(.vs-dialog-head,.at-header,.avp-dialog-head){
+    padding:12px 14px;
+    gap:8px;
+  }
+  body:is(.av-home,.av-profile-page) :is(.vs-dialog,.at-dialog,.avp-dialog) :is(.vs-dialog-head h2,.at-header h2,.avp-dialog-head h2){
+    font-size:clamp(17px,4.6vw,24px);
+    line-height:1.24;
+    margin:0;
+  }
+  body.av-profile-page .avp-dialog .avp-dialog-head{
+    display:grid;
+    grid-template-columns:minmax(0,1fr) 44px;
+    grid-template-rows:auto auto;
+    align-items:center;
+    column-gap:10px;
+  }
+  body.av-profile-page .avp-dialog .avp-dialog-head h2{
+    grid-column:1;
+    grid-row:1;
+  }
+  body.av-profile-page .avp-dialog .avp-dialog-head .avp-balance{
+    grid-column:1;
+    grid-row:2;
+    margin:0;
+    font-size:13px;
+    line-height:1.4;
+    white-space:normal;
+    overflow-wrap:anywhere;
+  }
+  body.av-profile-page .avp-dialog .avp-dialog-head .avp-close{
+    grid-column:2;
+    grid-row:1 / 3;
+    justify-self:end;
+  }
+  body:is(.av-home,.av-profile-page) .at-dialog .at-header>div{
+    flex:1 1 auto;
+    min-width:0;
+  }
+  body:is(.av-home,.av-profile-page) .at-dialog .at-header .at-eyebrow{
+    letter-spacing:.08em;
+  }
+  body:is(.av-home,.av-profile-page) .vs-dialog .vs-dialog-head h2{
+    flex:1 1 auto;
+  }
+  body:is(.av-home,.av-profile-page) .vs-dialog :is(.vs-tabs,.vs-settings-body),
+  body:is(.av-home,.av-profile-page) .at-dialog :is(.at-body,.at-filterbar),
+  body.av-profile-page .avp-dialog :is(.avp-studio-body,.avp-filters){
+    box-sizing:border-box;
+    min-width:0;
+    max-width:100%;
+  }
+  body:is(.av-home,.av-profile-page) :is(.vs-dialog,.at-dialog,.avp-dialog) :is(input,select,textarea){
+    font-size:16px;
+  }
+}
+@media(max-width:390px){
+  body:is(.av-home,.av-profile-page) :is(.vs-dialog,.at-dialog,.avp-dialog) :is(.vs-dialog-head,.at-header,.avp-dialog-head){
+    padding:10px 12px;
+  }
+  body.av-profile-page .avp-dialog .avp-dialog-head .avp-balance{font-size:12px}
+}
+@media(prefers-reduced-motion:reduce){
+  body:is(.av-home,.av-profile-page) :is(.vs-dialog,.at-dialog,.avp-dialog) :is(button,a){transition:none}
+}
