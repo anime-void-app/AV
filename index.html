@@ -2308,8 +2308,27 @@ if (!donghuaMode) {
           .map(id => anime.find(entry => String(entry.id) === String(id)) || snapshots[id])
           .filter(Boolean);
       }
-      favoritesGrid.innerHTML = listCards.length
-        ? listCards.map(cardHTML).join("")
+      // A saved ID must not disappear just because this tab has no title metadata yet.
+      const normalizeId = id => window.AVState?.canonicalId?.(id) || null;
+      const represented = new Set(listCards.flatMap(item =>
+        [item.id, ...(Array.isArray(item.franchiseSeasonIds) ? item.franchiseSeasonIds : [])]
+          .map(normalizeId).filter(Boolean)
+      ));
+      const desired = activeListTab === "favorites"
+        ? favorites
+        : Object.keys(readStatusMap()).filter(id => readStatusMap()[id] === activeListTab);
+      const missing = [...new Set(desired.map(normalizeId).filter(id => id && !represented.has(id)))];
+      const unresolvedCards = missing.map(id => {
+        const number = id.slice("anilist-".length);
+        const title = isRussian ? "Аниме №" + number : "Anime #" + number;
+        const note = isRussian ? "Сохранено · данные ещё не загружены" : "Saved · details not loaded";
+        return `<article class="av-saved-unknown"><a href="anime.html?id=${encodeURIComponent(id)}">
+          <img src="poster-unavailable.svg" alt="" loading="lazy">
+          <span><strong>${AVSafe.escape(title)}</strong><small>${AVSafe.escape(note)}</small></span>
+        </a></article>`;
+      }).join("");
+      favoritesGrid.innerHTML = listCards.length || missing.length
+        ? listCards.map(cardHTML).join("") + unresolvedCards
         : `<p class="empty">${listEmptyTexts[activeListTab][isRussian ? 0 : 1]}</p>`;
       syncFavoriteButtons(favoritesGrid,isRussian);
 
