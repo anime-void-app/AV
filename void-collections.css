@@ -3,3 +3,19 @@
 .av-collections .ma-choice[hidden]{display:none}.av-collections .ma-chooser{max-height:330px;overflow:auto}.av-collections fieldset>input[type=search]{width:100%;margin-bottom:12px}.av-collections .ma-dialog .vi-actions{margin-bottom:14px}.av-collections .ma-order span{overflow-wrap:anywhere}
 
 .av-collections .dna-method{padding:24px;margin-top:38px}.av-collections .ma-section-head{display:flex;justify-content:space-between;align-items:center;gap:18px;margin-bottom:20px}.av-collections .ma-section-head h2{margin:0}@media(max-width:600px){.av-collections .ma-section-head{align-items:stretch;flex-direction:column}.av-collections .dna-method{padding:20px}}
+
+/* ANIME VOID 27.1 — collections responsive cards and editor dialog. */
+.av-collections{max-width:100%;overflow-x:clip}
+.av-collections #dnaMain,.av-collections .ma-collections,.av-collections .ma-collection-grid,.av-collections .ma-collection{box-sizing:border-box;min-width:0;max-width:100%}
+.av-collections .ma-section-head{min-width:0;flex-wrap:wrap}
+.av-collections .ma-section-head #collectionsNew{box-sizing:border-box;min-height:44px;max-width:100%;white-space:normal;overflow-wrap:anywhere}
+.av-collections .ma-collection-actions button{box-sizing:border-box;min-height:44px;max-width:100%;white-space:normal;overflow-wrap:anywhere}
+.av-collections .ma-dialog{box-sizing:border-box;width:min(820px,calc(100vw - 20px));max-width:calc(100vw - 20px);max-height:calc(100dvh - 20px);overflow:auto;overscroll-behavior:contain}
+.av-collections .ma-dialog form,.av-collections .ma-dialog fieldset,.av-collections .ma-dialog .ma-preview{min-width:0;max-width:100%}
+.av-collections .ma-dialog :is(input,select,textarea){box-sizing:border-box;max-width:100%;min-width:0}
+.av-collections .ma-dialog :is(h2,h3,p,legend){overflow-wrap:anywhere}
+.av-collections .ma-dialog :is(button,a){touch-action:manipulation}
+.av-collections .ma-dialog .vi-actions{display:flex;flex-wrap:wrap;gap:8px}
+.av-collections .ma-dialog .vi-actions button{min-height:44px;white-space:normal;overflow-wrap:anywhere}
+@media(max-width:600px){.av-collections .ma-collection-grid{grid-template-columns:minmax(0,1fr);gap:12px}.av-collections .ma-collection{padding:14px}.av-collections .ma-section-head #collectionsNew{width:100%}.av-collections .ma-dialog{width:calc(100vw - 12px);max-width:calc(100vw - 12px);max-height:calc(100dvh - 12px);padding:14px;border-radius:14px}.av-collections .ma-dialog .ma-chooser{grid-template-columns:minmax(0,1fr);padding:8px}.av-collections .ma-dialog :is(input,select,textarea){font-size:max(16px,1em)}}
+@media(max-width:360px){.av-collections .ma-dialog .ma-order li{grid-template-columns:minmax(0,1fr) 40px 40px;gap:4px}.av-collections .ma-dialog .ma-order button{min-width:40px;min-height:44px;padding:4px}}
