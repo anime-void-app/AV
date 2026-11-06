@@ -7,6 +7,38 @@ function union(a,b){let r='';for(let i=0;i<250;i++)r+=(parseInt(a[i],16)|parseIn
 function count(h){let n=0;for(const c of h)n+=[0,1,1,2,1,2,2,3,1,2,2,3,2,3,3,4][parseInt(c,16)];return n;}
 function merge(archive,entry){const out=validate(archive),candidate=validate({version:1,entries:{[unitKey(entry)]:entry}}).entries[unitKey(entry)];let key=Object.keys(out.entries).find(k=>{const v=out.entries[k];return v.titleId===candidate.titleId&&v.season===candidate.season&&v.episode===candidate.episode&&Math.abs(v.duration-candidate.duration)<=3;})||unitKey(candidate);const old=out.entries[key];if(old){out.entries[key]={...(candidate.updatedAt>=old.updatedAt?candidate:old),duration:old.duration,coverage:union(old.coverage,candidate.coverage),position:Math.min(old.duration,candidate.updatedAt>=old.updatedAt?candidate.position:old.position)};}else{if(Object.keys(out.entries).length>=2000)throw Error('Measured history limit reached; export before cleanup');out.entries[key]=candidate;}return out;}
 function metrics(x){const data=validate(x);let seconds=0,completed=0;const titles=new Set();for(const v of Object.values(data.entries)){const bins=count(v.coverage);seconds+=v.duration*bins/1000;if(bins>=900&&v.position>=v.duration*.95)completed++;if(bins)titles.add(v.titleId);}return{seconds,completed,titles:titles.size,units:Object.keys(data.entries).length,basis:'unique-observed-content',measured:true};}
+/* Read-only presentation summary. Deduplicate the same episode recorded with
+   slightly different runtime metadata; never alter stored coverage or rewards. */
+function presentation(archive){
+  const data=validate(archive),seen=new Map();
+  for(const entry of Object.values(data.entries)){
+    const bins=count(entry.coverage);
+    if(bins===0)continue;
+    const key=entry.titleId+':'+entry.season+':'+entry.episode;
+    const old=seen.get(key);
+    if(!old){seen.set(key,{...entry});continue;}
+    if(Math.abs(old.duration-entry.duration)<=3){
+      const recent=entry.updatedAt>=old.updatedAt?entry:old;
+      seen.set(key,{...recent,duration:old.duration,
+        coverage:union(old.coverage,entry.coverage),
+        position:Math.min(old.duration,Math.max(old.position,entry.position)),
+        updatedAt:Math.max(old.updatedAt,entry.updatedAt)});
+    }else{
+      const oldAmount=old.duration*count(old.coverage),newAmount=entry.duration*bins;
+      const best=newAmount>oldAmount?entry:old;
+      seen.set(key,{...best,updatedAt:Math.max(old.updatedAt,entry.updatedAt)});
+    }
+  }
+  const entries=[...seen.values()].sort((a,b)=>b.updatedAt-a.updatedAt||a.titleId.localeCompare(b.titleId)||a.season-b.season||a.episode-b.episode);
+  const titles=new Set();let seconds=0,completed=0;
+  for(const entry of entries){
+    const bins=count(entry.coverage);
+    seconds+=entry.duration*bins/1000;
+    titles.add(entry.titleId);
+    if(bins>=900&&entry.position>=entry.duration*.95)completed++;
+  }
+  return {entries,seconds,units:entries.length,titles:titles.size,completed,basis:'unique-observed-content',measured:true};
+}
 function session(meta){if(!ID.test(meta.titleId)||typeof meta.title!=='string')throw Error('Invalid media identity');let season=meta.kind==='movie'?0:meta.season||null,episode=meta.kind==='movie'?1:meta.episode||null,duration=0,position=0,started=false,playing=false,ad=false,previous=null,ranges=[],bits=EMPTY,speed=1;
 function snapshot(){if(!duration||episode===null||season===null||!started)return null;return{titleId:meta.titleId,title:meta.title.slice(0,200),kind:meta.kind==='movie'?'movie':'series',season,episode,duration,position:Math.min(position,duration),coverage:bits,updatedAt:Date.now()};}
 function reset(){duration=0;position=0;started=false;playing=false;previous=null;ranges=[];bits=EMPTY;}
@@ -23,4 +55,4 @@ case'kodik_player_time_update':case'kodik_player_time':if(!started||!duration||e
 case'kodik_player_video_ended':playing=false;previous=null;break;}
 return{previousEntry,current:snapshot()};}
 return{event,snapshot,resetClock:()=>{previous=null;},state:()=>({started,playing,duration,position,season,episode,coverage:bits})};}
-return Object.freeze({KEY,EMPTY,validate,unitKey,merge,metrics,count,union,session});});
+return Object.freeze({KEY,EMPTY,validate,unitKey,merge,metrics,presentation,count,union,session});});
