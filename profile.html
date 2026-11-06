@@ -1581,10 +1581,13 @@
 
     /* ===== Списки тайтлов ===== */
     function miniCardHTML(item) {
-      return "<a class=\"mini-card\" href=\"anime.html?id=" + encodeURIComponent(item.id) + "\">" +
+      const missing = item.avMissingCatalog === true;
+      const title = AVTitles.display(item, isRussianNow() ? "ru" : "en") || item.title;
+      return "<a class=\"mini-card" + (missing ? " av-missing-title" : "") + "\" href=\"anime.html?id=" + encodeURIComponent(item.id) + "\">" +
         "<img src=\"" + escapeHtml(item.image || "poster-unavailable.svg") + "\" alt=\"\" loading=\"lazy\" " +
         "onerror=\"this.onerror=null;this.src='poster-unavailable.svg';\">" +
-        "<span class=\"mini-title\">" + escapeHtml(AVTitles.display(item,isRussianNow()?"ru":"en")) + "</span>" +
+        "<span class=\"mini-title\">" + escapeHtml(title) + "</span>" +
+        (missing ? "<small class=\"av-missing-note\">" + (isRussianNow() ? "Данные каталога не загружены" : "Catalog details not loaded") + "</small>" : "") +
         "</a>";
     }
 
@@ -1592,16 +1595,24 @@
       const isRussian = isRussianNow();
       const saved = AVState.savedView();
       const byId = saved.items;
+      // Keep recorded IDs visible even when cached title metadata is missing.
+      // Placeholder cards are display-only and never rewrite saved favorites or statuses.
+      const resolveSavedItem = id => byId.get(id) || {
+        id,
+        title: (isRussian ? "Аниме №" : "Anime #") + String(id).replace(/^anilist-/, ""),
+        image: "poster-unavailable.svg",
+        avMissingCatalog: true
+      };
       const watchingIds = [...saved.statuses].filter(([,status]) => status === "watching").map(([id]) => id);
       const watchingGrid = document.getElementById("watchingGrid");
       if (watchingGrid) {
-        const items = watchingIds.map(id => byId.get(id)).filter(Boolean);
+        const items = watchingIds.map(resolveSavedItem);
         watchingGrid.innerHTML=(items.length?items.map(miniCardHTML).join(""):(((("<div class=\"empty-note\">"+(isRussian?I24.t("Пока ничего. Поставь тайтлу статус «Смотрю» на его странице — он появится здесь."):"Nothing yet. Set a title's status to “Watching” on its page — it will show up here."))+" <a href=\"index.html#catalog\">")+(isRussian?I24.t("Открыть каталог →"):"Open catalog →"))+"</a></div>"));
       }
 
       const favoritesGrid = document.getElementById("favoritesGrid");
       if (favoritesGrid) {
-        const items = [...saved.favorites].map(id => byId.get(id)).filter(Boolean);
+        const items = [...saved.favorites].map(resolveSavedItem);
         favoritesGrid.innerHTML=(items.length?items.map(miniCardHTML).join(""):(((("<div class=\"empty-note\">"+(isRussian?I24.t("Пока пусто. Добавляй аниме в избранное ❤️ — они будут собираться здесь."):"Nothing here yet. Add anime to favorites ❤️ — they will gather here."))+" <a href=\"index.html#catalog\">")+(isRussian?I24.t("Открыть каталог →"):"Open catalog →"))+"</a></div>"));
       }
     }
@@ -1614,6 +1625,47 @@
       renderStatsCharts();
       renderLists();
     }
+
+    /* ANIME VOID 43.0 — reflect cross-tab user data without overwriting it.
+       The snapshot guard prevents unnecessary rerenders on focus or bfcache restore. */
+    const PROFILE_SYNC_KEYS = [
+      "animeVoidFavorites", "animeVoidStatuses", "animeVoidListItems",
+      "animeVoidCatalog", "animeVoidRatings", "animeVoidNickname",
+      "animeVoidAvatar", "animeVoidAvatarImageV1", "animeVoidAvatarBuiltinV1",
+      "animeVoidLanguage", "animeVoidTheme", "animeVoidActivityLog",
+      "animeVoidFeaturedAchievements"
+    ];
+    const profileSignature = () => {
+      try { return PROFILE_SYNC_KEYS.map(key => localStorage.getItem(key) ?? "").join("\\u001f"); }
+      catch (_) { return null; }
+    };
+    let lastProfileSignature = profileSignature();
+    let profileRefreshPending = false;
+    function refreshProfileFromStorage() {
+      profileRefreshPending = false;
+      const next = profileSignature();
+      if (next === null || next === lastProfileSignature) return;
+      lastProfileSignature = next;
+      try {
+        applyThemeFromStorage();
+        renderAll();
+      } catch (error) {
+        console.warn("ANIME VOID: profile refresh failed", error);
+      }
+    }
+    function scheduleProfileRefresh() {
+      if (profileRefreshPending) return;
+      profileRefreshPending = true;
+      setTimeout(refreshProfileFromStorage, 100);
+    }
+    addEventListener("storage", event => {
+      if (event.storageArea === localStorage && (event.key === null || PROFILE_SYNC_KEYS.includes(event.key))) {
+        scheduleProfileRefresh();
+      }
+    });
+    addEventListener("pageshow", scheduleProfileRefresh);
+    addEventListener("focus", scheduleProfileRefresh);
+    addEventListener("av:cloud-restored", scheduleProfileRefresh);
 
     /* ===== Эффекты: сакура, снег, блёстки, сердечки ===== */
     const DECOR_MODES = [
