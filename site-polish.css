@@ -464,3 +464,12 @@ body:not(.av-profile-page) #catalog #animeGrid .card-actions .card-season-button
 body:not(.av-profile-page) #catalog #animeGrid>.card :is(button,a):focus-visible{outline:3px solid #e2baff;outline-offset:-3px}
 @media(max-width:650px){body:not(.av-profile-page) #catalog #animeGrid>.card{border-radius:12px}body:not(.av-profile-page) #catalog #animeGrid .av-card-copy{padding:9px 9px 5px}body:not(.av-profile-page) #catalog #animeGrid .av-card-copy h3{font-size:13px}body:not(.av-profile-page) #catalog #animeGrid .card-info{padding:3px 8px}body:not(.av-profile-page) #catalog #animeGrid .card-actions{padding:6px 8px 9px;gap:6px}body:not(.av-profile-page) #catalog #animeGrid .av-card-copy :is(.year,.anime-meta){font-size:11px}}
 @media(prefers-reduced-motion:reduce){body:not(.av-profile-page) #catalog #animeGrid .poster>img{transition:none}body:not(.av-profile-page) #catalog #animeGrid>.card:hover .poster>img{transform:none}}
+
+/* ANIME VOID 37.0 — catalog loading, results and empty-state clarity. */
+body:not(.av-profile-page) #catalog .av-catalog-status{box-sizing:border-box;min-height:22px;margin:14px 0 12px;color:#d8c7e8;font:600 12px/1.6 system-ui;letter-spacing:.015em}
+body:not(.av-profile-page) #catalog .av-catalog-more:has(>button[hidden]){display:none}
+body:not(.av-profile-page) #catalog .av-catalog-load-more[hidden]{display:none!important}
+body:not(.av-profile-page) #catalog .av-catalog-load-more[aria-busy=true]{cursor:progress;opacity:.7}
+body:not(.av-profile-page) #catalog #animeGrid[aria-busy=true]{min-height:160px}
+body:not(.av-profile-page) #catalog #animeGrid>.empty{box-sizing:border-box;grid-column:1/-1;max-width:100%;margin:12px 0;padding:24px 16px;border:1px dashed #765c90;border-radius:14px;background:#20172c;color:#e9dbf2;text-align:center;line-height:1.6;overflow-wrap:anywhere}
+@media(max-width:650px){body:not(.av-profile-page) #catalog .av-catalog-status{margin:10px 0}body:not(.av-profile-page) #catalog #animeGrid>.empty{padding:18px 12px}}
