@@ -185,3 +185,19 @@ body.av-profile-page .at-scene{max-width:100%;background-position:center 42%}
 .av-home main .hero .av-hero-actions>.av-home-more[open]{flex-basis:100%}
 .av-home main .hero .av-hero-actions>.av-home-more[open] .av-home-more-actions{position:static;display:flex;flex-wrap:wrap;margin-top:8px;width:min(100%,400px);max-width:100%}
 @media(max-width:760px){.av-home main .hero .av-hero-actions>.av-home-more[open]{grid-column:1/-1}.av-home main .hero .av-hero-actions>.av-home-more[open] .av-home-more-actions{width:100%}}
+
+/* ANIME VOID 25.8: shared responsive layout safety, without hiding interactive content. */
+body.av-home,body.av-profile-page{max-width:100%;overflow-x:clip}
+body.av-home main,body.av-profile-page main{box-sizing:border-box;min-width:0;max-width:100%}
+body.av-home main :is(section,article,aside,nav,form,fieldset),body.av-profile-page main :is(section,article,aside,nav,form,fieldset){min-width:0}
+body.av-home main :is(img,video,canvas,svg),body.av-profile-page main :is(img,video,canvas,svg){max-width:100%}
+body.av-home main :is(input,select,textarea),body.av-profile-page main :is(input,select,textarea){box-sizing:border-box;max-width:100%}
+body.av-home main :is(h1,h2,h3,p),body.av-profile-page main :is(h1,h2,h3,p){overflow-wrap:break-word}
+body.av-home :is(.av-about-dialog,.av-ambience-panel,.vs-dialog,.at-dialog,.avp-dialog),body.av-profile-page :is(.av-about-dialog,.av-ambience-panel,.vs-dialog,.at-dialog,.avp-dialog){box-sizing:border-box;max-width:calc(100vw - 24px);max-height:calc(100dvh - 24px)}
+body.av-home .av-shortcuts,body.av-profile-page .av-profile-nav{max-width:100%;box-sizing:border-box}
+@media(max-width:600px){
+ body.av-home main,body.av-profile-page main{padding-inline:max(12px,env(safe-area-inset-left)) max(12px,env(safe-area-inset-right))}
+ body.av-home main :is(.hero,.support-panel),body.av-profile-page main :is(.profile-hero,.stats-section,.activity-section,.charts-section,.list-section,.achievements-section){box-sizing:border-box;max-width:100%}
+ body.av-home main :is(button,a),body.av-profile-page main :is(button,a){touch-action:manipulation}
+ body.av-home main :is(input,select,textarea),body.av-profile-page main :is(input,select,textarea){font-size:max(16px,1em)}
+}
