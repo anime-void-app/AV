@@ -3924,6 +3924,9 @@ if (!donghuaMode) {
     });
     addEventListener("pageshow", queueHomeSavedRefresh);
     addEventListener("focus", queueHomeSavedRefresh);
+    document.addEventListener("visibilitychange", () => {
+      if (document.visibilityState === "visible") queueHomeSavedRefresh();
+    });
     addEventListener("av:cloud-restored", queueHomeSavedRefresh);
 
     const searchQueryAliases = {
