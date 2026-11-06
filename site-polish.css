@@ -444,3 +444,23 @@ body:not(.av-profile-page) #catalog .av-catalog-load-more:disabled{opacity:.55;c
 @media(max-width:900px){body:not(.av-profile-page) #catalog #animeGrid{grid-template-columns:repeat(3,minmax(0,1fr))}body:not(.av-profile-page) #catalog .advanced-filters{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:650px){body:not(.av-profile-page) #catalog{scroll-margin-top:60px}body:not(.av-profile-page) #catalog #animeGrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}body:not(.av-profile-page) #catalog .advanced-filters{gap:8px}body:not(.av-profile-page) #catalog .av-catalog-load-more{width:100%}}
 @media(max-width:360px){body:not(.av-profile-page) #catalog #animeGrid{gap:7px}body:not(.av-profile-page) #catalog .advanced-filters{grid-template-columns:minmax(0,1fr)}}
+
+/* ANIME VOID 36.0 — catalog card system; scope prevents changes to profile cards. */
+body:not(.av-profile-page) #catalog #animeGrid>.card{display:flex;flex-direction:column;min-width:0;max-width:100%;height:100%;box-sizing:border-box;overflow:hidden;border-radius:16px;isolation:isolate}
+body:not(.av-profile-page) #catalog #animeGrid>.card>.av-card-entry{display:block;flex:1 1 auto;min-width:0;max-width:100%;text-decoration:none;color:inherit}
+body:not(.av-profile-page) #catalog #animeGrid .poster{position:relative;display:block;width:100%;aspect-ratio:2/3;overflow:hidden;box-sizing:border-box;background-color:#1d1529}
+body:not(.av-profile-page) #catalog #animeGrid .poster>img{display:block;width:100%!important;height:100%!important;object-fit:cover;object-position:center;transition:transform .24s ease}
+body:not(.av-profile-page) #catalog #animeGrid>.card:hover .poster>img{transform:scale(1.035)}
+body:not(.av-profile-page) #catalog #animeGrid .poster :is(small,.season-count){max-width:calc(100% - 12px);box-sizing:border-box;overflow-wrap:anywhere}
+body:not(.av-profile-page) #catalog #animeGrid .av-card-copy{box-sizing:border-box;min-width:0;max-width:100%;padding:12px 12px 8px;overflow-wrap:anywhere}
+body:not(.av-profile-page) #catalog #animeGrid .av-card-copy h3{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:2.8em;max-height:2.8em;line-height:1.4;margin:0 0 7px;font-size:clamp(13px,1.15vw,16px);font-weight:750}
+body:not(.av-profile-page) #catalog #animeGrid .av-card-copy :is(.year,.anime-meta){font-size:12px;line-height:1.5;overflow-wrap:anywhere}
+body:not(.av-profile-page) #catalog #animeGrid .card-info{box-sizing:border-box;display:flex;align-items:center;justify-content:space-between;gap:8px;min-width:0;max-width:100%;padding:4px 12px}
+body:not(.av-profile-page) #catalog #animeGrid .card-info .genre{min-width:0;overflow-wrap:anywhere}
+body:not(.av-profile-page) #catalog #animeGrid .card-info .favorite{display:grid;place-items:center;flex:0 0 44px;width:44px;height:44px;min-width:44px;min-height:44px;padding:0;line-height:1}
+body:not(.av-profile-page) #catalog #animeGrid .card-actions{box-sizing:border-box;display:flex;flex-direction:column;gap:8px;min-width:0;max-width:100%;padding:8px 12px 12px;margin-top:auto}
+body:not(.av-profile-page) #catalog #animeGrid .card-actions :is(button,a){box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;min-height:44px;max-width:100%;white-space:normal;text-align:center;overflow-wrap:anywhere}
+body:not(.av-profile-page) #catalog #animeGrid .card-actions .card-season-button{min-width:0}
+body:not(.av-profile-page) #catalog #animeGrid>.card :is(button,a):focus-visible{outline:3px solid #e2baff;outline-offset:-3px}
+@media(max-width:650px){body:not(.av-profile-page) #catalog #animeGrid>.card{border-radius:12px}body:not(.av-profile-page) #catalog #animeGrid .av-card-copy{padding:9px 9px 5px}body:not(.av-profile-page) #catalog #animeGrid .av-card-copy h3{font-size:13px}body:not(.av-profile-page) #catalog #animeGrid .card-info{padding:3px 8px}body:not(.av-profile-page) #catalog #animeGrid .card-actions{padding:6px 8px 9px;gap:6px}body:not(.av-profile-page) #catalog #animeGrid .av-card-copy :is(.year,.anime-meta){font-size:11px}}
+@media(prefers-reduced-motion:reduce){body:not(.av-profile-page) #catalog #animeGrid .poster>img{transition:none}body:not(.av-profile-page) #catalog #animeGrid>.card:hover .poster>img{transform:none}}
