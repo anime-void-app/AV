@@ -327,3 +327,23 @@ body:not(.av-profile-page) #modal .modal-box>#modalContent :is(img,video,iframe)
 body:not(.av-profile-page) #modal .modal-box>.modal-close-btn{box-sizing:border-box;min-height:44px;max-width:100%;white-space:normal;overflow-wrap:anywhere;touch-action:manipulation}
 @media(max-width:600px){body:not(.av-profile-page) #modal .modal-box{width:calc(100vw - 12px);max-width:calc(100vw - 12px);max-height:calc(100dvh - 12px);padding-top:58px;border-radius:15px}body:not(.av-profile-page) #modal .modal-box>.close{top:8px;right:8px}body:not(.av-profile-page) #modal .modal-box>.modal-close-btn{width:100%}}
 @media(prefers-reduced-motion:reduce){body:not(.av-profile-page) #modal .modal-box{animation:none}body:not(.av-profile-page) #modal .modal-box>.close:hover{transform:none}}
+
+/* ANIME VOID 29.0 — Profile Reborn workshop dashboard, shared across all three editors. */
+.av-profile-page .av-reborn-workshop{box-sizing:border-box;max-width:100%;min-width:0;margin:12px 0 24px;padding:clamp(16px,2.5vw,28px);border:1px solid #76598f88;border-radius:22px;background:radial-gradient(ellipse at 92% 0%,#6e3b8d3b,transparent 46%),linear-gradient(145deg,#21182f,#120f1c);color:#f6efff;overflow:visible}
+.av-profile-page .av-reborn-workshop-head{display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:12px 20px;margin-bottom:18px}
+.av-profile-page .av-reborn-workshop-eyebrow{display:block;font:700 10px/1.5 system-ui;letter-spacing:.15em;color:#c7a7eb;margin-bottom:6px}
+.av-profile-page .av-reborn-workshop-head h2{font:750 clamp(21px,2.6vw,30px)/1.2 system-ui;margin:0 0 7px;color:#fff}
+.av-profile-page .av-reborn-workshop-head p{max-width:62ch;font:400 13px/1.6 system-ui;margin:0;color:#c9b9d6;overflow-wrap:anywhere}
+.av-profile-page .av-reborn-workshop-back{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:8px 13px;border:1px solid #755b8d;border-radius:11px;text-decoration:none;color:#e6d2ff;font:650 12px/1.3 system-ui}
+.av-profile-page .av-reborn-workshop-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.av-profile-page .av-reborn-workshop-card{appearance:none;display:flex;align-items:flex-start;gap:12px;box-sizing:border-box;width:100%;min-width:0;min-height:146px;padding:17px;text-align:left;border:1px solid #75578e;border-radius:17px;background:linear-gradient(155deg,#332343,#1b1527);color:#f8f0ff;cursor:pointer;transition:background .16s,border-color .16s,transform .16s}
+.av-profile-page .av-reborn-workshop-card:hover{background:linear-gradient(155deg,#48305e,#261b37);border-color:#c29ae8;transform:translateY(-2px)}
+.av-profile-page .av-reborn-workshop-symbol{display:grid;place-items:center;flex:0 0 46px;width:46px;height:46px;border-radius:13px;background:#6d468b4a;font-size:24px}
+.av-profile-page .av-reborn-workshop-card-copy{display:flex;flex-direction:column;align-items:flex-start;gap:7px;min-width:0}
+.av-profile-page .av-reborn-workshop-card-copy strong{font:750 15px/1.3 system-ui;overflow-wrap:anywhere}
+.av-profile-page .av-reborn-workshop-card-copy small{font:400 12px/1.55 system-ui;color:#cbbbd8;overflow-wrap:anywhere}
+.av-profile-page .av-reborn-workshop-cta{margin-top:auto;font:700 11px/1.4 system-ui;color:#e4baff}
+.av-profile-page :is(.av-reborn-workshop-card,.av-reborn-workshop-back,.av-workshop-shortcut):focus-visible{outline:3px solid #e3b8ff;outline-offset:3px}
+@media(max-width:950px){.av-profile-page .av-reborn-workshop-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.av-profile-page .av-reborn-workshop-card:last-child{grid-column:1/-1}}
+@media(max-width:650px){.av-profile-page .av-reborn-workshop{padding:14px;border-radius:16px;margin:10px 0 18px}.av-profile-page .av-reborn-workshop-grid{grid-template-columns:minmax(0,1fr);gap:9px}.av-profile-page .av-reborn-workshop-card,.av-profile-page .av-reborn-workshop-card:last-child{grid-column:auto;min-height:108px;padding:13px}.av-profile-page .av-reborn-workshop-symbol{width:42px;height:42px;flex-basis:42px}.av-profile-page .av-reborn-workshop-back{width:100%;box-sizing:border-box}}
+@media(prefers-reduced-motion:reduce){.av-profile-page .av-reborn-workshop-card{transition:none}.av-profile-page .av-reborn-workshop-card:hover{transform:none}}
