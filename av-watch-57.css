@@ -492,3 +492,52 @@ body.theme-light.av-watch-page .av-watch57-link{
     transform:none!important;
   }
 }
+/* ANIME VOID 66.0 — selected episode and return navigation on small screens. */
+body.av-watch-page .av-watch66-current{
+  display:inline-flex;
+  align-items:center;
+  max-width:100%;
+  min-height:28px;
+  margin-top:9px;
+  padding:5px 10px;
+  border:1px solid var(--av57-line);
+  border-radius:999px;
+  background:rgba(159,103,215,.14);
+  color:var(--av57-text);
+  font-size:12px;
+  font-weight:750;
+  line-height:1.4;
+  overflow-wrap:anywhere;
+}
+body.av-watch-page .av-watch66-current[hidden]{display:none!important}
+body.av-watch-page .av-watch57-toolbar-links a{
+  min-height:44px;
+  max-width:100%;
+  text-align:center;
+  touch-action:manipulation;
+}
+@media(max-width:600px){
+  body.av-watch-page .av-watch57-toolbar-links{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:8px;
+  }
+  body.av-watch-page .av-watch57-toolbar-links a{
+    box-sizing:border-box;
+    justify-content:center;
+    min-width:0;
+    padding:10px 9px;
+    white-space:normal;
+    overflow-wrap:anywhere;
+  }
+  body.av-watch-page .av-watch57-toolbar-links a:last-child:nth-child(odd){
+    grid-column:1/-1;
+  }
+}
+@media(max-width:380px){
+  body.av-watch-page .av-watch57-toolbar-links{
+    grid-template-columns:minmax(0,1fr);
+  }
+  body.av-watch-page .av-watch57-toolbar-links a:last-child:nth-child(odd){
+    grid-column:auto;
+  }
+}

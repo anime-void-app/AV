@@ -249,7 +249,7 @@
 <script defer="" src="av-atmosphere.js?v=25.3"></script>
 <link href="void-interface.css?v=24.29" rel="stylesheet"/><script src="void-interface.js?v=24.29"></script>
 <script src="void-journal.js?v=18.1"></script>
-<link href="void-tv.css?v=18.1" rel="stylesheet"/><script defer="" src="void-tv.js?v=18.1"></script><link href="void-watch-layout.css?v=18.1" rel="stylesheet"/><link href="void-profile-next.css?v=19" rel="stylesheet"/><script defer="" src="av-shell.js?v=21"></script><script defer="" src="void-profile-next.js?v=24"></script><script src="void-vip-23.js?v=24.29"></script><link href="void-vip-23.css?v=23" rel="stylesheet"/><link href="void-refresh-24.css?v=24.29" rel="stylesheet"/><script src="player-sources.js?v=24.36"></script><link href="av-player.css?v=24.36" rel="stylesheet"/><link href="av-kodik-player.css?v=24.36" rel="stylesheet"/><script defer="" src="vendor/hls.light-1.6.15.min.js?v=24.31"></script><script defer src="av-watch-ledger.js?v=47.0"></script><script defer src="av-watch-tracker.js?v=24.40"></script><script defer src="av-kodik-test.js?v=24.40"></script><link rel="stylesheet" href="site-polish.css?v=34.0"><link rel="stylesheet" href="av-watch-57.css?v=57.0"><script defer src="av-watch-57.js?v=57.0"></script>
+<link href="void-tv.css?v=18.1" rel="stylesheet"/><script defer="" src="void-tv.js?v=18.1"></script><link href="void-watch-layout.css?v=18.1" rel="stylesheet"/><link href="void-profile-next.css?v=19" rel="stylesheet"/><script defer="" src="av-shell.js?v=21"></script><script defer="" src="void-profile-next.js?v=24"></script><script src="void-vip-23.js?v=24.29"></script><link href="void-vip-23.css?v=23" rel="stylesheet"/><link href="void-refresh-24.css?v=24.29" rel="stylesheet"/><script src="player-sources.js?v=24.36"></script><link href="av-player.css?v=24.36" rel="stylesheet"/><link href="av-kodik-player.css?v=24.36" rel="stylesheet"/><script defer="" src="vendor/hls.light-1.6.15.min.js?v=24.31"></script><script defer src="av-watch-ledger.js?v=47.0"></script><script defer src="av-watch-tracker.js?v=24.40"></script><script defer src="av-kodik-test.js?v=24.40"></script><link rel="stylesheet" href="site-polish.css?v=34.0"><link rel="stylesheet" href="av-watch-57.css?v=66.0"><script defer src="av-watch-57.js?v=66.0"></script>
 </head>
 <body class="av-shell av-watch-page">
 <header>
@@ -283,17 +283,30 @@
     const params = new URLSearchParams(window.location.search);
     const animeId = params.get("id");
     let currentEpisode = params.has('episode') ? Number(params.get('episode')) : 1;
-    const episodeSyntaxValid = Number.isSafeInteger(currentEpisode) && currentEpisode >= 1;
+    // The episode can change without a page reload when an official player switches it.
+    // Validate the CURRENT selection, not the number from the initial URL.
+    function episodeSyntaxValid(number = currentEpisode) {
+      return Number.isSafeInteger(number) && number >= 1 && number <= 10000;
+    }
     function episodeAllowed(number = currentEpisode) {
       const knownCount = isMovie ? 1 : Number(item?.episodes);
       return Boolean(item) && /^(?:anilist-)?[1-9]\d*$/.test(String(animeId || '')) && Number.isSafeInteger(number) && number >= 1 && Number.isSafeInteger(knownCount) && knownCount > 0 && number <= knownCount;
     }
     function saveLastWatch() {
-      if(params.has("source")||window.AVPlayer?.state().source)return;
-      if (episodeAllowed()) localStorage.setItem('animeVoidLastWatch', JSON.stringify({animeId, episode:currentEpisode}));
+      // This key means "last opened episode", not verified media playback.
+      // The official/native players should not suppress the user's last opened
+      // episode just because an audio/source provider was selected.
+      if (!episodeAllowed()) return;
+      try {
+        localStorage.setItem('animeVoidLastWatch', JSON.stringify({animeId, episode:currentEpisode}));
+      } catch (error) {
+        // A blocked/quota-limited browser store must not break player navigation.
+        console.warn('ANIME VOID: last opened episode not saved',error);
+      }
     }
     function updateEpisodeValidation() {
       const valid = episodeAllowed();
+      const validSyntax = episodeSyntaxValid();
       document.getElementById('markWatchedBtn').disabled = !valid;
       document.getElementById('prevBtn').disabled = !valid || currentEpisode <= 1;
       document.getElementById('nextBtn').disabled = !valid || currentEpisode >= episodeCount;
@@ -301,10 +314,10 @@
       if (!notice) {notice=document.createElement('p');notice.id='avEpisodeNotice';notice.setAttribute('role','status');document.getElementById('episodeTitle').after(notice);}
       const ru = currentLanguage === 'ru';
       notice.replaceChildren();notice.hidden=valid;
-      if (!episodeSyntaxValid) I24.text(document.getElementById('episodeTitle'),()=>((ru?I24.t("Неверный номер серии"):'Invalid episode number')));
+      if (!validSyntax) I24.text(document.getElementById('episodeTitle'),()=>((ru?I24.t("Неверный номер серии"):'Invalid episode number')));
       if (!valid) {
-        I24.text(notice,()=>((!episodeSyntaxValid || (item && Number(item.episodes)>0 && currentEpisode>episodeCount) || (isMovie && currentEpisode!==1)?(ru?I24.t("Неверный номер серии. Отметки не изменены. "):'Invalid episode number. Progress unchanged. '):(ru?I24.t("Для отметки просмотра дождитесь загрузки числа серий. "):'Wait for episode information before marking progress. '))));
-        if (item && episodeSyntaxValid === false || item && !valid && Number(item.episodes)>0) {const link=document.createElement('a');link.href='watch.html?id='+encodeURIComponent(animeId)+'&episode=1';I24.text(link,()=>((ru?I24.t("Открыть первую серию"):'Open episode one')));notice.append(link);}
+        I24.text(notice,()=>((!validSyntax || (item && Number(item.episodes)>0 && currentEpisode>episodeCount) || (isMovie && currentEpisode!==1)?(ru?I24.t("Неверный номер серии. Отметки не изменены. "):'Invalid episode number. Progress unchanged. '):(ru?I24.t("Для отметки просмотра дождитесь загрузки числа серий. "):'Wait for episode information before marking progress. '))));
+        if (item && (!validSyntax || (!valid && Number(item.episodes)>0))) {const link=document.createElement('a');link.href='watch.html?id='+encodeURIComponent(animeId)+'&episode=1';I24.text(link,()=>((ru?I24.t("Открыть первую серию"):'Open episode one')));notice.append(link);}
       }
 
     }

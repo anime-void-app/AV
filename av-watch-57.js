@@ -1,4 +1,4 @@
-/* ANIME VOID 57.0 — player-page navigation enhancement.
+/* ANIME VOID 66.0 — player-page navigation enhancement.
    Does not alter player providers, media streams, watch-history writes,
    rewards, account sessions, or episode-validation logic. */
 (() => {
@@ -10,6 +10,7 @@
   const episodes=details?.querySelector('.episodes');
   const controls=details?.querySelector('.controls');
   const title=document.getElementById('animeTitle');
+  const episodeTitle=document.getElementById('episodeTitle');
   if(!player||!details||!grid||!episodes||!controls)return;
   if(document.getElementById('avWatch57Nav'))return;
 
@@ -28,15 +29,20 @@
   const heading=make('div','av-watch57-toolbar-title');
   const kicker=make('span','av-watch57-kicker');
   const help=make('p','av-watch57-hint');
-  heading.append(kicker,help);
+  const current=make('span','av-watch66-current');
+  current.setAttribute('role','status');
+  current.setAttribute('aria-live','polite');
+  heading.append(kicker,help,current);
   const links=make('div','av-watch57-toolbar-links');
   const back=make('a','av-watch57-link');
   back.href='index.html#catalog';
+  const journal=make('a','av-watch57-link');
+  journal.href='history.html';
   const information=make('a','av-watch57-link');
   const id=new URLSearchParams(location.search).get('id');
   const validId=/^(?:anilist-)?[1-9]\d*$/.test(String(id||''));
   information.href=validId?'anime.html?id='+encodeURIComponent(id):'index.html';
-  links.append(back,information);
+  links.append(back,journal,information);
   toolbar.append(heading,controls,links);
   player.insertAdjacentElement('afterend',toolbar);
   controls.classList.add('av-watch57-controls');
@@ -131,12 +137,22 @@
   sourcesNote.setAttribute('role','note');
   const top=document.querySelector('.watch-top');
   top?.insertAdjacentElement('afterend',sourcesNote);
+  function updateCurrent(){
+    if(!episodeTitle){current.hidden=true;return;}
+    const name=episodeTitle.textContent.trim();
+    current.hidden=!name;
+    current.textContent=name?T('Сейчас открыто: ','Currently open: ')+name:'';
+  }
+  // The validated page handler owns title and episode selection; this is
+  // read-only presentation for keyboard and mobile users.
+  if(episodeTitle)new MutationObserver(updateCurrent).observe(episodeTitle,{childList:true,characterData:true,subtree:true});
   const localized=()=>{
     toolbar.setAttribute('aria-label',T('Управление просмотром','Watch navigation'));
     kicker.textContent=T('АНИМЕ / ПРОСМОТР','ANIME / WATCH');
     help.textContent=T('Переключай серии, не раскрывая настройки. Отметки не равны фактическому времени просмотра.',
       'Switch episodes without opening settings. Episode marks are not measured watch time.');
     back.textContent=T('← В каталог','← Catalog');
+    journal.textContent=T('История просмотра','Watch history');
     information.textContent=T('Описание и обсуждение','Details & discussion');
     previous.textContent=T('← Раньше','← Earlier');
     next.textContent=T('Позже →','Later →');
@@ -151,6 +167,7 @@
     }
     sourcesNote.textContent=T('Видео доступно только при подключённом источнике. Кнопка отметки меняет список серий; подтверждённый просмотр учитывается отдельно, если плеер его поддерживает.',
       'Video requires a connected source. Episode marks update your list; verified playback is tracked separately when supported.');
+    updateCurrent();
     applyPage();
   };
   // Intro must not be mistaken for verified playback.
