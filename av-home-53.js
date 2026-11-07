@@ -52,7 +52,7 @@
       searchAction.addEventListener('click',()=>{
         search.focus({preventScroll:true});
         const header=document.querySelector('body > header');
-        header?.scrollIntoView({block:'start',behavior:'instant'});
+        header?.scrollIntoView({block:'start',behavior:'auto'});
       });
       tools.append(searchAction);
     }
@@ -73,6 +73,7 @@
         getComputedStyle(continueSection).display!=='none' &&
         Boolean(card?.querySelector('h3'));
       continueAction.hidden=!visible;
+      tools.classList.toggle('av53-no-continue',!visible);
     };
     syncContinue();
     const observer=new MutationObserver(syncContinue);
