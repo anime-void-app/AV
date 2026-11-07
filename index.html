@@ -2122,7 +2122,7 @@ if (!donghuaMode) {
               const label = isRussian ? `Сезон ${index + 1}` : `Season ${index + 1}`;
               return `<button type="button" class="card-season-button ${active ? "active" : ""}" data-season-index="${index + 1}" onclick="event.stopPropagation(); openAnimePage('${AVSafe.escape(encodeURIComponent(season.id))}')">${label}</button>`;
             }).join("")}
-            ${hiddenSeasonCount > 0 ? `<button type="button" class="card-season-button card-more-button" title="${moreSeasonsTitle}" onclick="event.stopPropagation(); openAnimePage('${AVSafe.escape(encodeURIComponent(item.id))}')">+${hiddenSeasonCount}</button>` : ""}
+            ${hiddenSeasonCount > 0 ? `<button type="button" class="card-season-button card-more-button" title="${moreSeasonsTitle}" aria-label="${moreSeasonsTitle}" onclick="event.stopPropagation(); openAnimeSeasons('${AVSafe.escape(encodeURIComponent(item.id))}')">+${hiddenSeasonCount}</button>` : ""}
           </div>`
         : "";
       const watchButtonHTML = hasSeasonButtons
@@ -4561,6 +4561,11 @@ function openAnimePage(id) {
   window.location.href = `watch.html?id=${encodeURIComponent(id)}&episode=1`;
 }
 
+function openAnimeSeasons(id) {
+  // The extra-seasons button must show the full season switcher, not start playback.
+  window.location.href = `anime.html?id=${encodeURIComponent(id)}`;
+}
+
 function openAnimeDetails(id) {
   // "Details" remains a separate, explicit action for users who want metadata/comments.
   window.location.href = (window.avAnimeUrl ? window.avAnimeUrl(id) : `anime.html?id=${encodeURIComponent(id)}`);
@@ -5334,7 +5339,7 @@ if (resetFiltersBtn) {
       if (
         button
           .getAttribute("onclick")
-          ?.includes("anime.html?id=")
+          ?.includes("openAnimeDetails(")
       ) {
         button.textContent =
           detailsText;
