@@ -16,7 +16,24 @@ if(!['animevoid.ru','localhost','127.0.0.1'].includes(location.hostname.toLowerC
  note.append(label,link);
  $('googleLogin').insertAdjacentElement('afterend',note);
 }
-async function run(fn){if(pending)return;pending=true;document.querySelectorAll('button').forEach(b=>b.disabled=true);feedback('');try{await fn();}catch(e){feedback(String(e.message||e));}finally{pending=false;document.querySelectorAll('button').forEach(b=>b.disabled=false);render();}}
+async function run(fn){
+ if(pending)return;
+ pending=true;
+ // Preserve controls disabled by permissions or unavailable cloud data.
+ const buttons=[...document.querySelectorAll('button')];
+ const originallyDisabled=new Map(buttons.map(button=>[button,button.disabled]));
+ buttons.forEach(button=>{button.disabled=true;});
+ feedback('');
+ return (async()=>{
+  try{await fn();}
+  catch(e){feedback(String(e?.message||e));}
+  finally{
+   pending=false;
+   buttons.forEach(button=>{if(button.isConnected)button.disabled=originallyDisabled.get(button);});
+   render();
+  }
+ })();
+}
 function tab(value){mode=value;for(const m of ['login','register','recover'])$(m+'Tab').setAttribute('aria-selected',String(m===mode));$('passwordLabel').hidden=mode==='recover';$('accountPassword').required=mode!=='recover';$('accountPassword').autocomplete=mode==='register'?'new-password':'current-password';$('accountPassword').minLength=mode==='register'?12:1;$('consentLabel').hidden=mode!=='register';$('accountConsent').required=mode==='register';$('emailSubmit').textContent=mode==='register'?t('Создать аккаунт','Create account'):mode==='recover'?t('Отправить письмо','Send recovery email'):t('Войти','Sign in');}
 function render(){const s=A.state();$('accountStatus').dataset.phase=s.phase;$('accountStatus').textContent=s.message||({checking:t('Проверяем аккаунт…','Checking account…'),guest:t('Войдите — данные будут сохраняться автоматически.','Sign in — your data will save automatically.'),choose:t('Выберите данные для подключения.','Choose which data to connect.'),conflict:t('Есть конфликт версий. Выберите нужную копию.','Version conflict. Choose a copy.')}[s.phase]||s.phase);$('authSection').hidden=!!s.user;$('signedSection').hidden=!s.user;$('accountEmail').textContent=s.user?.email||'';$('loadCloud').disabled=pending||!s.remoteRevision;$('saveDevice').disabled=pending||s.phase==='checking';$('recoveryForm').hidden=sessionStorage.getItem('avAccountRecovery')!=='1';$('logoutAccount').hidden=!s.user;if(sessionStorage.getItem('avAccountRecovery')==='1')showPanel('security');}
 for(const node of document.querySelectorAll('[data-ru]')){const text=node.dataset[document.documentElement.lang==='en'?'en':'ru'];if(node.tagName==='H1'){node.replaceChildren(...text.split('<br>').flatMap((v,i)=>i?[document.createElement('br'),document.createTextNode(v)]:[document.createTextNode(v)]));}else node.textContent=text;}
