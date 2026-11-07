@@ -143,3 +143,21 @@ body.av-history-page main{max-width:1170px;margin:0 auto;padding:0 20px 65px}
   .av-46-record{gap:9px}
   .av-46-record-meta{font-size:11px}
 }
+
+/* V61 — two clear actions per manually marked title, comfortable on small screens. */
+.av-46-record-actions{margin-top:4px}
+.av-46-record-actions .av-46-record-details{
+  background:transparent;
+  border-color:rgba(202,155,240,.42);
+  color:#dccbe9!important;
+}
+.av-46-record-actions .av-46-record-details:hover{
+  background:rgba(202,155,240,.12);
+  color:#fff!important;
+}
+@media(max-width:540px){
+  html{scroll-padding-top:128px}
+  .av-46-record-actions a{flex:1 1 100%;min-height:44px;white-space:normal}
+  .av-46-top{padding-left:max(12px,env(safe-area-inset-left));padding-right:max(12px,env(safe-area-inset-right))}
+  .av-46-record-main{min-width:0}
+}

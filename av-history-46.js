@@ -1,4 +1,4 @@
-/* ANIME VOID 46.0 — read-only viewing journal.
+/* ANIME VOID 61.0 — read-only viewing journal.
    Verified player records and manual episode marks remain separate.
    Do not write to localStorage or infer playback from an open page. */
 (()=>{'use strict';
@@ -94,7 +94,7 @@
     a.href=url;
     return a;
   }
-  function recordCard({poster,title,description,sub,pill,pillType,percent,when,href,goText}){
+  function recordCard({poster,title,description,sub,pill,pillType,percent,when,href,goText,detailsHref}){
     const card=elem('article','av-46-record');
     const image=elem('img','av-46-record-poster');
     image.src=safePoster(poster);
@@ -125,6 +125,11 @@
     if(href){
       const actions=elem('div','av-46-record-actions');
       actions.append(makeLink(href,goText));
+      if(detailsHref){
+        const details=makeLink(detailsHref,tr('Описание и обсуждение','Details & discussion'));
+        details.className='av-46-record-details';
+        actions.append(details);
+      }
       body.append(actions);
     }
     card.append(body);return card;
@@ -154,11 +159,12 @@
       :tr(record.episodes.length+' серий · общее число неизвестно',record.episodes.length+' episodes · total unknown');
     return recordCard({
       poster:record.item?.image,title:nameFor(record.item),description:episodeText,
-      sub:tr('Последняя отметка: серия ','Last marked episode: ')+record.episodes.at(-1),
+      sub:tr('Наибольший отмеченный номер: серия ','Highest marked episode: ')+record.episodes.at(-1),
       pill:tr('Отмечено вручную','Manually marked'),pillType:'marked',
       percent:record.percent,when:null,
-      href:'anime.html?id='+encodeURIComponent(record.id),
-      goText:tr('Открыть серии','Open episodes')
+      href:'watch.html?id='+encodeURIComponent(record.id)+'&episode=1',
+      goText:tr('Открыть плеер · серия 1','Open player · episode 1'),
+      detailsHref:'anime.html?id='+encodeURIComponent(record.id)
     });
   }
   function updateContinue(){
@@ -174,8 +180,13 @@
     const title=nameFor(records.meta.get(id)||records.marked.find(x=>x.id===id)?.item
       ||{title:recentMeasured?.title||tr('Аниме №'+id.slice(8),'Anime #'+id.slice(8))});
     const isMovie=!markedId&&recentMeasured?.kind==='movie';
-    label.textContent=(markedId?'':tr('Из плеера · ','From player · '))+title+' · '
+    const heading=$('av46ContinueHeading');
+    if(heading)heading.textContent=markedId
+      ?tr('Последняя открытая серия','Last opened episode')
+      :tr('Продолжить в плеере','Resume in player');
+    label.textContent=(markedId?tr('Открыто ранее · ','Previously opened · '):tr('Из плеера · ','From player · '))+title+' · '
       +(isMovie?tr('фильм','movie'):tr('серия '+ep,'episode '+ep));
+    link.textContent=tr('Открыть плеер','Open player');
     link.href='watch.html?id='+encodeURIComponent(id)+'&episode='+ep;
     section.hidden=false;
   }
