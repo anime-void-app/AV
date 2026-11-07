@@ -63,6 +63,8 @@
       }
     }catch(error){console.warn('ANIME VOID: recent measured history unavailable',error);}
     // Manual marks have no reliable timestamps; do not label them as recent plays.
+    // Manual-mark previews open episode 1 in the player, not the discussion page.
+    // They never infer playback position or create an automatic watched mark.
     try{
       const entries=state?.metrics?.()?.titles||[];
       for(const entry of entries.slice().sort((a,b)=>(b.episodes?.length||0)-(a.episodes?.length||0))){
@@ -73,7 +75,7 @@
         manual.push({
           name:title(item,id),
           label:tr('Отмечено вручную: ','Manually marked: ')+entry.episodes.length+tr(' сер.',' ep.'),
-          poster:safePoster(item?.image),href:'anime.html?id='+encodeURIComponent(id)
+          poster:safePoster(item?.image),href:'watch.html?id='+encodeURIComponent(id)+'&episode=1'
         });
         if(manual.length===3)break;
       }

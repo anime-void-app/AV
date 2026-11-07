@@ -61,7 +61,7 @@
         const id=idOf(x.item?.id);
         if(!id)continue;
         const item=meta.get(id)||x.item;
-        result.push({name:title(item,id),label:t('Отмечено вручную: ','Manually marked: ')+x.episodes.length+t(' сер.',' ep.'),poster:poster(item?.image),href:'anime.html?id='+encodeURIComponent(id),kind:'manual'});
+        result.push({name:title(item,id),label:t('Отмечено вручную: ','Manually marked: ')+x.episodes.length+t(' сер.',' ep.'),poster:poster(item?.image),href:'watch.html?id='+encodeURIComponent(id)+'&episode=1',kind:'manual'});
         if(result.length>=3)break;
       }
     }catch(error){console.warn('ANIME VOID: recent manual marks unavailable',error)}
