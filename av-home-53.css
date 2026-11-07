@@ -317,7 +317,8 @@ body.av-home.av53-large-cards #favorites #favoritesGrid{
   body.av-home .av53-links-tools :is(a,button){
     width:100%;min-height:44px;
   }
-  body.av-home .av53-links-tools :only-child{
+  body.av-home .av53-links-tools:has(.av53-continue-action[hidden]) .av53-search-action,
+  body.av-home .av53-links-tools.av53-no-continue .av53-search-action{
     grid-column:1/-1;
   }
   body.av-home .av53-home-links > .av-46-home-link{
