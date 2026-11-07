@@ -1,4 +1,4 @@
-/* ANIME VOID 63.0 — compact home/profile navigation.
+/* ANIME VOID 67.0 — compact home/profile navigation.
    Data is read-only; values are never written, awarded or used as entitlements. */
 (()=>{'use strict';
   const home=document.getElementById('av46HomeLinks');
@@ -68,6 +68,8 @@
     if(event.key===null||/^(?:animeVoid(?:MeasuredV1|Favorites|Statuses|Catalog|Language|LastWatch)|watched_)/.test(event.key))schedule();
   });
   addEventListener('av:measured',schedule);
+  addEventListener('av:progress',schedule);
+  addEventListener('av:playback',schedule);
   addEventListener('av:cloud-restored',schedule);
   addEventListener('pageshow',schedule);
   addEventListener('focus',schedule);

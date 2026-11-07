@@ -1,4 +1,4 @@
-/* ANIME VOID 61.0 — read-only viewing journal.
+/* ANIME VOID 67.0 — read-only viewing journal.
    Verified player records and manual episode marks remain separate.
    Do not write to localStorage or infer playback from an open page. */
 (()=>{'use strict';
@@ -267,6 +267,8 @@
   }
   addEventListener('av:cloud-restored',refresh);
   addEventListener('av:measured',refresh);
+  addEventListener('av:progress',refresh);
+  addEventListener('av:playback',refresh);
   addEventListener('pageshow',refresh);
   addEventListener('focus',refresh);
   document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')refresh();});

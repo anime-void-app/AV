@@ -249,8 +249,8 @@
 <script defer="" src="av-atmosphere.js?v=25.3"></script>
 <link href="void-interface.css?v=24.29" rel="stylesheet"/><script src="void-interface.js?v=24.29"></script>
 <script src="void-journal.js?v=18.1"></script>
-<link href="void-tv.css?v=18.1" rel="stylesheet"/><script defer="" src="void-tv.js?v=18.1"></script><link href="void-watch-layout.css?v=18.1" rel="stylesheet"/><link href="void-profile-next.css?v=19" rel="stylesheet"/><script defer="" src="av-shell.js?v=21"></script><script defer="" src="void-profile-next.js?v=24"></script><script src="void-vip-23.js?v=24.29"></script><link href="void-vip-23.css?v=23" rel="stylesheet"/><link href="void-refresh-24.css?v=24.29" rel="stylesheet"/><script src="player-sources.js?v=24.36"></script><link href="av-player.css?v=24.36" rel="stylesheet"/><link href="av-kodik-player.css?v=24.36" rel="stylesheet"/><script defer="" src="vendor/hls.light-1.6.15.min.js?v=24.31"></script><script defer src="av-watch-ledger.js?v=47.0"></script><script defer src="av-watch-tracker.js?v=24.40"></script><script defer src="av-kodik-test.js?v=24.40"></script><link rel="stylesheet" href="site-polish.css?v=34.0"><link rel="stylesheet" href="av-watch-57.css?v=66.0"><script defer src="av-watch-57.js?v=66.0"></script>
-</head>
+<link href="void-tv.css?v=18.1" rel="stylesheet"/><script defer="" src="void-tv.js?v=18.1"></script><link href="void-watch-layout.css?v=18.1" rel="stylesheet"/><link href="void-profile-next.css?v=19" rel="stylesheet"/><script defer="" src="av-shell.js?v=21"></script><script defer="" src="void-profile-next.js?v=24"></script><script src="void-vip-23.js?v=24.29"></script><link href="void-vip-23.css?v=23" rel="stylesheet"/><link href="void-refresh-24.css?v=24.29" rel="stylesheet"/><script src="player-sources.js?v=24.36"></script><link href="av-player.css?v=24.36" rel="stylesheet"/><link href="av-kodik-player.css?v=24.36" rel="stylesheet"/><script defer="" src="vendor/hls.light-1.6.15.min.js?v=24.31"></script><script defer src="av-watch-ledger.js?v=47.0"></script><script defer src="av-watch-tracker.js?v=24.40"></script><script defer src="av-kodik-test.js?v=67.0"></script><link rel="stylesheet" href="site-polish.css?v=34.0"><link rel="stylesheet" href="av-watch-57.css?v=66.0"><script defer src="av-watch-57.js?v=66.0"></script>
+<link rel="stylesheet" href="av-global-67.css?v=67.0"></head>
 <body class="av-shell av-watch-page">
 <header>
 <a class="logo" href="index.html">ANIME<span>VOID</span></a>
@@ -461,7 +461,7 @@
       window.AVPlayer?.refreshLanguage();
     }
 
-    window.AVWatchEpisodeChanged = number => {if(Number.isSafeInteger(number)&&number>=1){currentEpisode=number;applyLanguage();}};
+    window.AVWatchEpisodeChanged = number => {if(episodeSyntaxValid(number)){currentEpisode=number;applyLanguage();}};
 
     function applyThemeFromStorage() {
       let theme = "dark";
@@ -487,7 +487,9 @@
     }
 
     function openEpisode(number) {
-      if(window.AVPlayer?.selectEpisode){window.AVPlayer.selectEpisode(number);return;}
+      if(!episodeAllowed(number))return;
+      const selected=window.AVPlayer?.selectEpisode?.(number);
+      if(selected===true||selected?.then)return;
       window.location.href =
         `watch.html?id=${encodeURIComponent(animeId)}&episode=${number}`;
     }

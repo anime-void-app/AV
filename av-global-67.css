@@ -1,0 +1,81 @@
+/* ANIME VOID 67.0 — cross-page content-first mobile polish.
+   No changes to progress, rewards, accounts or video provider permissions. */
+body:is(.av-home,.av-profile-page,.av-watch-page,.av-account-page,.av-history-page){
+ text-rendering:optimizeLegibility;
+ -webkit-text-size-adjust:100%;
+}
+body:is(.av-home,.av-profile-page,.av-watch-page,.av-account-page,.av-history-page)
+ :is(button,a,input,select,textarea,summary):focus-visible{
+ outline:3px solid #d7a4fa;
+ outline-offset:2px;
+}
+body:is(.av-home,.av-profile-page,.av-watch-page,.av-account-page,.av-history-page)
+ :is(button,a,summary){touch-action:manipulation}
+body.av-home :is(#animeGrid,#favoritesGrid,.av53-home-links,.av-47-recent-list)>*,
+body.av-profile-page :is(.av52-quick-grid,.av52-gallery-grid,.av-47-recent-list)>*{
+ min-width:0;
+ max-width:100%;
+}
+body.av-home :is(.card,.av-46-home-link,.av-47-recent-item),
+body.av-profile-page :is(.av52-quick-item,.av52-banner-card,.av-47-recent-item){
+ overflow-wrap:anywhere;
+}
+body.av-watch-page .av-watch57-toolbar-links,
+body.av-watch-page .av-watch57-controls,
+body.av-watch-page #avPlayer,
+body.av-history-page .av-46-record-actions{
+ min-width:0;
+ max-width:100%;
+}
+body.av-account-page :is(form,input,button,.actions),
+body.av-history-page :is(.av-46-record,.av-46-continue,.av-46-filters){
+ box-sizing:border-box;
+ min-width:0;
+}
+@media(max-width:760px){
+ body.av-home :is(#search,.search,#searchSuggestions),
+ body.av-account-page :is(input,textarea,select),
+ body.av-history-page input,
+ body.av-profile-page :is(input,select),
+ body.av-watch-page :is(input,select){font-size:16px}
+ body.av-watch-page .av-watch57-toolbar-links a,
+ body.av-history-page .av-46-record-actions a,
+ body.av-account-page :is(button,.back){
+  min-height:44px;
+  max-width:100%;
+  white-space:normal;
+  overflow-wrap:anywhere;
+ }
+ body.av-home .continue-card{
+  box-sizing:border-box;
+  max-width:100%;
+  min-width:0;
+ }
+ body.av-home .continue-card .continue-info,
+ body.av-home .continue-card .continue-stats{
+  min-width:0;
+  overflow-wrap:anywhere;
+ }
+ body.av-profile-page .av52-quick-grid,
+ body.av-profile-page .av52-gallery-grid{min-width:0}
+ body.av-account-page header{
+  flex-wrap:wrap;
+  gap:10px;
+  padding-inline:max(14px,env(safe-area-inset-left)) max(14px,env(safe-area-inset-right));
+ }
+ body.av-account-page header .actions{
+  flex-wrap:wrap;
+  gap:8px;
+ }
+}
+@media(max-width:380px){
+ body.av-profile-page .av52-quick-grid{grid-template-columns:minmax(0,1fr)}
+ body.av-home #catalog #animeGrid,
+ body.av-home #favorites #favoritesGrid{min-width:0}
+ body.av-watch-page .av-watch57-toolbar{padding:10px}
+}
+@media(prefers-reduced-motion:reduce){
+ body:is(.av-home,.av-profile-page,.av-watch-page,.av-account-page,.av-history-page) *{
+  scroll-behavior:auto!important;
+ }
+}

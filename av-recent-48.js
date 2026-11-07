@@ -1,4 +1,4 @@
-/* ANIME VOID 63.0 — read-only recent viewing preview.
+/* ANIME VOID 67.0 — read-only recent viewing preview.
    Player-confirmed episodes and manually marked episodes have separate views.
    This UI never writes or infers viewing history, rewards or account state. */
 (() => {
@@ -167,6 +167,8 @@
     if(event.key===null||/^(?:animeVoid(?:MeasuredV1|Catalog|Language|LastWatch)|watched_)/.test(event.key))refresh();
   });
   addEventListener('av:measured',refresh);
+  addEventListener('av:progress',refresh);
+  addEventListener('av:playback',refresh);
   addEventListener('av:cloud-restored',refresh);
   addEventListener('pageshow',refresh);
   addEventListener('focus',refresh);
