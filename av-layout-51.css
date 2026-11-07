@@ -251,3 +251,15 @@ body.av-profile-page .av49-gallery-card img{
   body.av-home main>.hero :is(button,a,summary),
   body.av-profile-page .av49-gallery-card{transition:none!important;transform:none!important;}
 }
+/* V62 — stable mobile hit targets and narrow-layout header. */
+body.av-home>header .av-menu-toggle,
+body.av-profile-page>header .av51-profile-menu-toggle{box-sizing:border-box;font-family:system-ui,sans-serif;font-variant-numeric:tabular-nums;line-height:1;text-align:center;touch-action:manipulation}
+@media(max-width:760px){
+ body.av-profile-page>header>nav{overscroll-behavior:contain;scrollbar-width:thin}
+ body.av-profile-page>header>nav a{min-height:46px;overflow-wrap:anywhere;touch-action:manipulation}
+ body.av-profile-page>header>.header-actions{box-sizing:border-box;max-width:100%;flex-wrap:wrap}
+ body.av-profile-page>header>.header-actions .language-switch{min-width:0;flex:0 1 auto}
+ body.av-profile-page>header>.header-actions :is(button,a):focus-visible,
+ body.av-profile-page>header>nav a:focus-visible{outline:3px solid var(--av-accent,#d4a2fa);outline-offset:2px}
+}
+@media(max-width:370px){body.av-profile-page>header.av51-profile-menu-open>nav{grid-template-columns:minmax(0,1fr)!important}}

@@ -1,4 +1,4 @@
-/* ANIME VOID 51.0 — existing navigation enhancement.
+/* ANIME VOID 62.0 — existing navigation enhancement.
    Only DOM presentation; never touches authentication, cosmetics, purchases or viewing history. */
 (() => {
   'use strict';
@@ -25,7 +25,7 @@
     link.href=href;
     return link;
   }
-  let menuButton=null,profileNav=null;
+  let menuButton=null,profileNav=null,syncHomeMenu=()=>{};
   function setProfileOpen(open,focus=false){
     if(!menuButton)return;
     const expanded=Boolean(open);
@@ -39,6 +39,7 @@
     profileNav=header.querySelector(':scope > nav');
     if(profileNav){
       if(!profileNav.id)profileNav.id='av51ProfileHeaderNav';
+      profileNav.setAttribute('aria-label',tr('Навигация по сайту','Site navigation'));
       menuButton=make('button','av51-profile-menu-toggle');
       menuButton.id='av51ProfileMenuToggle';
       menuButton.type='button';
@@ -82,44 +83,47 @@
     // The original homepage menu exists in av-design.js. Do not create another.
     const panel=header.querySelector('#avHeaderPanel');
     const homeToggle=header.querySelector('.av-menu-toggle');
+    // av-design owns the actual open/close action. Reflect its class state
+    // so an outside click, focus on search or a resize never leaves a stale ×.
+    syncHomeMenu=()=>{
+      if(!homeToggle)return;
+      const open=header.classList.contains('av-tools-open');
+      homeToggle.textContent=open?'×':'☰';
+      homeToggle.setAttribute('aria-expanded',String(open));
+      homeToggle.setAttribute('aria-label',open?tr('Закрыть меню','Close menu'):tr('Открыть меню','Open menu'));
+      homeToggle.setAttribute('title',open?tr('Закрыть меню','Close menu'):tr('Открыть меню','Open menu'));
+    };
+    const closeHomeMenu=(focus=false)=>{
+      if(!header.classList.contains('av-tools-open'))return;
+      header.classList.remove('av-tools-open');
+      syncHomeMenu();
+      if(focus)homeToggle?.focus();
+    };
     if(panel&&!panel.querySelector('.av51-home-shortcuts')){
       const shortcuts=make('div','av51-home-shortcuts');
       shortcuts.setAttribute('role','group');
-      const history=makeLink('history.html','◷ История','◷ History');
-      const account=makeLink('account.html','⚙ Аккаунт','⚙ Account');
-      const collections=makeLink('collections.html','♡ Коллекции','♡ Collections');
-      shortcuts.append(history,account,collections);
+      shortcuts.append(
+        makeLink('history.html','◷ История','◷ History'),
+        makeLink('account.html','⚙ Аккаунт','⚙ Account'),
+        makeLink('collections.html','♡ Коллекции','♡ Collections')
+      );
       panel.append(shortcuts);
-      shortcuts.querySelectorAll('a').forEach(link=>link.addEventListener('click',()=>{
-        header.classList.remove('av-tools-open');
-        homeToggle?.setAttribute('aria-expanded','false');
-      }));
+      shortcuts.querySelectorAll('a').forEach(link=>link.addEventListener('click',()=>closeHomeMenu()));
     }
-    const search=document.getElementById('search');
-    search?.addEventListener('focus',()=>{
-      if(header.classList.contains('av-tools-open')){
-        header.classList.remove('av-tools-open');
-        homeToggle?.setAttribute('aria-expanded','false');
-      }
-    });
-    homeToggle?.addEventListener('click',()=>{
-      homeToggle.textContent=header.classList.contains('av-tools-open')?'×':'☰';
-    });
+    document.getElementById('search')?.addEventListener('focus',()=>closeHomeMenu());
+    homeToggle?.addEventListener('click',syncHomeMenu);
+    new MutationObserver(syncHomeMenu).observe(header,{attributes:true,attributeFilter:['class']});
     document.addEventListener('keydown',event=>{
-      if(event.key==='Escape'&&header.classList.contains('av-tools-open')){
-        header.classList.remove('av-tools-open');
-        homeToggle?.setAttribute('aria-expanded','false');
-        homeToggle.textContent='☰';
-        homeToggle.focus();
-      }
+      if(event.key==='Escape'&&header.classList.contains('av-tools-open'))closeHomeMenu(true);
     });
-    document.addEventListener('click',()=>{
-      if(homeToggle&&!header.classList.contains('av-tools-open')&&homeToggle.textContent!=='☰')homeToggle.textContent='☰';
-    });
+    addEventListener('hashchange',()=>closeHomeMenu());
+    addEventListener('pageshow',syncHomeMenu);
+    syncHomeMenu();
   }
   function updateLanguage(){
     for(const {node,ru,en} of translations)node.textContent=tr(ru,en);
-    if(menuButton)setProfileOpen(header.classList.contains('av51-profile-menu-open'));
+    if(menuButton){profileNav?.setAttribute('aria-label',tr('Навигация по сайту','Site navigation'));setProfileOpen(header.classList.contains('av51-profile-menu-open'));}
+    syncHomeMenu();
     const quick=header.querySelector('.av51-home-shortcuts');
     if(quick)quick.setAttribute('aria-label',tr('Быстрые разделы','Quick sections'));
   }

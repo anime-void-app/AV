@@ -310,3 +310,10 @@ body.av-profile-page .av52-quick-grid{
     transition:none!important;
   }
 }
+/* V62 — profile tabs, studio and achievement controls fit small screens. */
+body.av-profile-page .av54-theme-chip,body.av-profile-page .av54-achievement-buttons button{box-sizing:border-box;touch-action:manipulation;text-align:center}
+@media(max-width:600px){
+ body.av-profile-page .av52-quick-item,body.av-profile-page .av52-gallery-launch,body.av-profile-page .av52-gallery-tabs button,body.av-profile-page .av52-gallery-more{box-sizing:border-box;min-height:44px;max-width:100%;white-space:normal;overflow-wrap:anywhere;touch-action:manipulation}
+ body.av-profile-page .av52-gallery-search input{font-size:16px;max-width:100%;min-width:0}
+ body.av-profile-page .av54-achievement-tools,body.av-profile-page .av52-gallery-controls,body.av-profile-page .av52-quick-grid{box-sizing:border-box;min-width:0;max-width:100%}
+}

@@ -458,3 +458,14 @@ body.av-home.av53-large-cards #favorites #favoritesGrid{
     transition:none!important;transform:none!important;
   }
 }
+/* V62 — menu and card controls remain usable at narrow widths. */
+body.av-home .av53-view-controls button,body.av-home .av53-links-tools :is(button,a){box-sizing:border-box;min-width:0;min-height:44px;line-height:1.35;text-align:center;white-space:normal;overflow-wrap:anywhere;touch-action:manipulation}
+@media(max-width:760px){
+ body.av-home>header .av-header-panel{width:100%;min-width:0;padding-inline:8px;padding-bottom:max(12px,env(safe-area-inset-bottom))}
+ body.av-home>header .av-header-panel nav{box-sizing:border-box;width:100%;min-width:0}
+ body.av-home>header .av-header-panel nav a{min-height:44px;min-width:0;display:inline-flex;align-items:center;justify-content:center;overflow-wrap:anywhere;touch-action:manipulation}
+}
+@media(max-width:360px){
+ body.av-home .av53-home-links{grid-template-columns:minmax(0,1fr)}
+ body.av-home .av53-home-links > .av-46-home-link{min-height:80px}
+}

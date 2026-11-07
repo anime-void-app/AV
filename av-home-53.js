@@ -1,4 +1,4 @@
-/* ANIME VOID 53.0 — usable home layout and catalog controls.
+/* ANIME VOID 62.0 — usable home layout and catalog controls.
    Keeps all existing player, catalog, favorites, account and cloud handlers.
    Only the new animeVoidHomeCardsV53 preference is written. */
 (() => {
@@ -120,6 +120,12 @@
     heading.append(controls);
   }
   setView(preference(),false);
+  addEventListener('storage',event=>{
+    if(event.key===prefKey&&event.storageArea===localStorage)setView(preference(),false);
+  });
+  addEventListener('pageshow',event=>{
+    if(event.persisted)setView(preference(),false);
+  });
 
   const searchSuggestions=$('searchSuggestions');
   document.addEventListener('keydown',event=>{
