@@ -75,7 +75,7 @@
       button.hidden=i<first||i>=first+pageSize;
       if(!button.hidden)button.setAttribute('aria-current',button.classList.contains('active')?'true':'false');
     });
-    pager.hidden=count<=pageSize;
+    pager.hidden=false;
     previous.disabled=page===0;
     next.disabled=page>=Math.ceil(count/pageSize)-1;
     search.max=String(count);
@@ -144,7 +144,11 @@
     searchCaption.textContent=T('Перейти к серии','Jump to an episode');
     search.setAttribute('aria-label',T('Номер серии','Episode number'));
     pager.setAttribute('aria-label',T('Страницы эпизодов','Episode pages'));
-    if(summary)summary.textContent=T('Список серий и мои отметки','Episodes & my marks');
+    if(summary){
+      summary.dataset.ru='Список серий и мои отметки';
+      summary.dataset.en='Episodes & my marks';
+      summary.textContent=T('Список серий и мои отметки','Episodes & my marks');
+    }
     sourcesNote.textContent=T('Видео доступно только для аниме с подключённым источником. Отметка серии выполняется вручную.',
       'Video is available only where a source is connected. Episode marks are manual.');
     applyPage();
