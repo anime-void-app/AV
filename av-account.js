@@ -105,7 +105,12 @@ async function choose(mode){if(busy)throw Error('Busy');busy=true;active=false;c
  AVSafe.exportBackup();if(!same(uid,e)||await hash(validated(raw()))!==digest)throw Error('Data changed; retry');localStorage.setItem(OWNER,uid);await push(uid,e,cloud.revision,current);active=true;
  });}catch(err){status(err?.code==='40001'?'conflict':'error',explain(err));throw err;}finally{busy=false;dispatchEvent(new CustomEvent('av:account-state',{detail:state()}));}}
 async function exportRecovery(kind){if(!identity||!['pending','safety'].includes(kind))throw Error(t('Сначала войдите в аккаунт.','Sign in first.'));const uid=identity.id,copy=await disk('get',kind+':'+uid);if(identity?.id!==uid)throw Error('Account changed');if(!copy?.data)throw Error(t('На этом устройстве нет такой копии.','This device has no such copy.'));const data=validated(copy.data),url=URL.createObjectURL(new Blob([JSON.stringify({app:'ANIME VOID',version:1,savedAt:copy.at,data},null,2)],{type:'application/json'})),a=document.createElement('a');a.href=url;a.download='anime-void-recovery-'+kind+'.json';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),10000);}
-function callbackURL(){return new URL('account.html',location.href).href.split('?')[0].split('#')[0];}
+function requireGoogleOrigin(){
+   const host=location.hostname.toLowerCase();
+   if(host==='animevoid.ru'||host==='localhost'||host==='127.0.0.1')return;
+   throw Error(t('Для Google-входа откройте https://animevoid.ru/account.html. На другом домене браузер не передаёт код подтверждения входа.','Open https://animevoid.ru/account.html to sign in with Google. A different domain cannot share the login verification code.'));
+ }
+ function callbackURL(){return new URL('account.html',location.href).href.split('?')[0].split('#')[0];}
 async function login(email,password){
    needSecure();
    authFlowPending=true;
@@ -125,7 +130,7 @@ async function register(email,password){
    if(result.error)throw result.error;
    return !!result.data.session;
  }
-async function google(){needSecure();const controller=new AbortController(),timeout=setTimeout(()=>controller.abort(),10000);let disabled=false;try{const settings=await fetch(BASE+'/auth/v1/settings',{headers:{apikey:KEY},credentials:'omit',cache:'no-store',signal:controller.signal});if(settings.ok)disabled=(await settings.json()).external?.google===false;}catch{}finally{clearTimeout(timeout);}if(disabled)throw Error(t('Вход через Google пока выключен владельцем сайта. Нужно настроить Google OAuth и включить Google в Supabase → Authentication → Providers. Пока можно войти по почте.','Google sign-in is disabled by the site owner. Configure Google OAuth and enable Google in Supabase Authentication Providers. Email sign-in is available.'));const r=await getClient().auth.signInWithOAuth({provider:'google',options:{redirectTo:callbackURL(),scopes:'openid email profile'}});if(r.error)throw r.error;}
+async function google(){needSecure();requireGoogleOrigin();const controller=new AbortController(),timeout=setTimeout(()=>controller.abort(),10000);let disabled=false;try{const settings=await fetch(BASE+'/auth/v1/settings',{headers:{apikey:KEY},credentials:'omit',cache:'no-store',signal:controller.signal});if(settings.ok)disabled=(await settings.json()).external?.google===false;}catch{}finally{clearTimeout(timeout);}if(disabled)throw Error(t('Вход через Google пока выключен владельцем сайта. Нужно настроить Google OAuth и включить Google в Supabase → Authentication → Providers. Пока можно войти по почте.','Google sign-in is disabled by the site owner. Configure Google OAuth and enable Google in Supabase Authentication Providers. Email sign-in is available.'));const r=await getClient().auth.signInWithOAuth({provider:'google',options:{redirectTo:callbackURL(),scopes:'openid email profile'}});if(r.error)throw r.error;}
 async function recover(email){needSecure();const r=await getClient().auth.resetPasswordForEmail(email,{redirectTo:callbackURL()});if(r.error)throw r.error;}
 async function password(value){needSecure();if(sessionStorage.getItem('avAccountRecovery')!=='1')throw Error(t('Сначала откройте ссылку восстановления из письма.','Open the recovery link from your email first.'));if(value.length<12)throw Error(t('Пароль — минимум 12 символов.','Use at least 12 characters.'));const r=await getClient().auth.updateUser({password:value});if(r.error)throw r.error;sessionStorage.removeItem('avAccountRecovery');}
 async function logout(){if(busy||restoring||['saving','checking','reloading'].includes(phase))throw Error(t('Синхронизация ещё выполняется. Повторите выход после завершения.','Sync is still in progress. Retry sign-out when it finishes.'));await save();if(busy||restoring||['saving','checking','reloading'].includes(phase))throw Error(t('Синхронизация ещё выполняется. Повторите выход после завершения.','Sync is still in progress. Retry sign-out when it finishes.'));if(['offline','error','conflict'].includes(phase)){AVSafe.exportBackup();if(!confirm(t('Последние изменения не подтверждены облаком. Страховочная копия скачана. Выйти, оставив данные на устройстве?','Latest changes are not confirmed in cloud. A safety copy was downloaded. Sign out and keep local data?')))return false;}const r=await getClient().auth.signOut({scope:'local'});if(r.error)throw r.error;active=false;identity=null;++epoch;status('guest',t('Вы вышли. Данные остаются на этом устройстве; на общем компьютере очистите данные сайта после сохранения копии.','Signed out. Data remains on this device; clear site data on shared computers after saving a copy.'));return true;}
@@ -136,26 +141,31 @@ async function init(){
      if(url.pathname.endsWith('/account.html')){
        const failure=url.searchParams.get('error'),errorText=url.searchParams.get('error_description')||failure;
        const code=url.searchParams.get('code');
-       if(failure)throw Error(errorText||'OAuth failed');
-       if(code){
-         // A callback is an explicit auth flow. Do not compete with the SIGNED_IN
-         // event by starting a second restore() before PKCE exchange completes.
+       let callbackError=null;
+       if(code&&!failure){
+         // The PKCE verifier stays in browser storage on the domain that started the flow.
+         // Keep auth listeners from restoring a half-exchanged session.
          authFlowPending=true;
          try{
            const result=await getClient().auth.exchangeCodeForSession(code);
            if(result.error)throw result.error;
-         }finally{authFlowPending=false;}
+         }catch(error){callbackError=error;}
+         finally{authFlowPending=false;}
        }
+       // OAuth codes are single-use: remove on both success and failure to prevent replay.
        if(failure||code){
          for(const key of ['error','error_description','error_code','code','state','sb_flow_id'])url.searchParams.delete(key);
          history.replaceState(history.state,'',url.pathname+url.search+url.hash);
        }
+       if(failure)throw Error(t('Google не завершил вход: ','Sign-in was not completed: ')+String(errorText||failure).slice(0,180));
+       if(callbackError)throw Error(t('Не получилось подтвердить вход. Повторите вход с основного адреса animevoid.ru в том же браузере. ','Could not verify sign-in. Start again from animevoid.ru in the same browser. ')+String(callbackError.message||callbackError).slice(0,180));
      }
      await restore();
    }catch(err){status('error',explain(err));}
    timer=setInterval(tick,3000);
  }
 window.AVAccount=Object.freeze({client:getClient,state,restore,choose,save,exportRecovery,login,register,google,recover,password,logout,t,open:()=>location.assign(new URL('account.html',location.href))});
+addEventListener('storage',ev=>{if(ev.storageArea===localStorage&&ev.key==='avSupabaseAuthV1'&&!authFlowPending)scheduleAuthRecheck();});
 addEventListener('storage',ev=>{if(ev.key===OWNER&&identity&&ev.newValue!==identity.id){active=false;++epoch;status('checking',t('Аккаунт изменён в другой вкладке.','Account changed in another tab.'));setTimeout(()=>restore(),0);}});
 let editTimer;
 function queueAutosave(){if(!active||restoring)return;clearTimeout(editTimer);editTimer=setTimeout(save,200);}

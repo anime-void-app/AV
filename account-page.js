@@ -6,6 +6,16 @@ $('openInterfaceSettings').onclick=()=>window.AVInterface.open();
 $('settingsLanguage').onclick=()=>{window.AVSiteI18n24.set(document.documentElement.lang==='en'?'ru':'en');location.reload();};
 $('startPasswordRecovery').onclick=()=>{showPanel('overview');location.hash='overview';tab('recover');$('authSection').hidden=false;$('accountMail').value=A.state().user?.email||'';$('accountMail').focus();};
 function feedback(text){$('accountFeedback').textContent=text;}
+if(!['animevoid.ru','localhost','127.0.0.1'].includes(location.hostname.toLowerCase())){
+ const note=document.createElement('p');
+ note.className='muted';
+ const label=document.createElement('span');
+ label.textContent=t('Google-вход работает на основном домене. Локальные данные с этого адреса не переносятся автоматически. ','Google sign-in uses the primary domain. Local data on this address will not transfer automatically. ');
+ const link=document.createElement('a');link.href='https://animevoid.ru/account.html';
+ link.textContent='animevoid.ru/account.html';
+ note.append(label,link);
+ $('googleLogin').insertAdjacentElement('afterend',note);
+}
 async function run(fn){if(pending)return;pending=true;document.querySelectorAll('button').forEach(b=>b.disabled=true);feedback('');try{await fn();}catch(e){feedback(String(e.message||e));}finally{pending=false;document.querySelectorAll('button').forEach(b=>b.disabled=false);render();}}
 function tab(value){mode=value;for(const m of ['login','register','recover'])$(m+'Tab').setAttribute('aria-selected',String(m===mode));$('passwordLabel').hidden=mode==='recover';$('accountPassword').required=mode!=='recover';$('accountPassword').autocomplete=mode==='register'?'new-password':'current-password';$('accountPassword').minLength=mode==='register'?12:1;$('consentLabel').hidden=mode!=='register';$('accountConsent').required=mode==='register';$('emailSubmit').textContent=mode==='register'?t('Создать аккаунт','Create account'):mode==='recover'?t('Отправить письмо','Send recovery email'):t('Войти','Sign in');}
 function render(){const s=A.state();$('accountStatus').dataset.phase=s.phase;$('accountStatus').textContent=s.message||({checking:t('Проверяем аккаунт…','Checking account…'),guest:t('Войдите — данные будут сохраняться автоматически.','Sign in — your data will save automatically.'),choose:t('Выберите данные для подключения.','Choose which data to connect.'),conflict:t('Есть конфликт версий. Выберите нужную копию.','Version conflict. Choose a copy.')}[s.phase]||s.phase);$('authSection').hidden=!!s.user;$('signedSection').hidden=!s.user;$('accountEmail').textContent=s.user?.email||'';$('loadCloud').disabled=pending||!s.remoteRevision;$('saveDevice').disabled=pending||s.phase==='checking';$('recoveryForm').hidden=sessionStorage.getItem('avAccountRecovery')!=='1';$('logoutAccount').hidden=!s.user;if(sessionStorage.getItem('avAccountRecovery')==='1')showPanel('security');}
