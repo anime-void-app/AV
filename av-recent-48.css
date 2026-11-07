@@ -36,3 +36,41 @@ body:is(.av-home,.av-profile-page) .av-48-recent-meter-fill{
 @media(prefers-reduced-motion:reduce){
   body:is(.av-home,.av-profile-page) .av-48-recent-switch button{transition:none}
 }
+/* ANIME VOID 63.0 — readable recent-history cards on desktop and phones. */
+body:is(.av-home,.av-profile-page) .av-47-recent-head{
+  min-width:0;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:8px 14px;
+}
+body:is(.av-home,.av-profile-page) .av-47-recent-head :is(h2,a){
+  min-width:0;
+  overflow-wrap:anywhere;
+}
+body:is(.av-home,.av-profile-page) .av-47-recent-item{
+  box-sizing:border-box;
+  min-width:0;
+  max-width:100%;
+  overflow-wrap:anywhere;
+  touch-action:manipulation;
+}
+body:is(.av-home,.av-profile-page) .av-47-recent-info{
+  min-width:0;
+  max-width:100%;
+  overflow-wrap:anywhere;
+}
+body:is(.av-home,.av-profile-page) .av-47-recent-item:focus-visible{
+  outline:3px solid #edc5ff;
+  outline-offset:2px;
+}
+@media(max-width:540px){
+  body:is(.av-home,.av-profile-page) .av-48-recent-switch button{
+    white-space:normal;
+    text-align:center;
+  }
+  body:is(.av-home,.av-profile-page) .av-47-recent-item{
+    min-height:70px;
+  }
+}

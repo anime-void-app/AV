@@ -1,4 +1,4 @@
-/* ANIME VOID 48.0 — read-only recent viewing preview.
+/* ANIME VOID 63.0 — read-only recent viewing preview.
    Player-confirmed episodes and manually marked episodes have separate views.
    This UI never writes or infers viewing history, rewards or account state. */
 (() => {
@@ -53,7 +53,7 @@
           const label=record.kind==='movie'?tr('Фильм','Movie')
             :tr('Сезон ','Season ')+record.season+' · '+tr('серия ','episode ')+record.episode;
           measured.push({
-            name:record.title||title(match,id),
+            name:match?title(match,id):(record.title||title(null,id)),
             label:label+' · '+percent.toFixed(1)+'% '+tr('подтверждено','verified'),
             percent,poster:safePoster(match?.image),
             href:id?'watch.html?id='+encodeURIComponent(id)+'&episode='+encodeURIComponent(record.episode):'history.html'
@@ -74,7 +74,7 @@
         const item=meta.get(id)||entry.item;
         manual.push({
           name:title(item,id),
-          label:tr('Отмечено вручную: ','Manually marked: ')+entry.episodes.length+tr(' сер.',' ep.'),
+          label:tr('Отмечено вручную: ','Manually marked: ')+entry.episodes.length+tr(' сер. · открыть серию 1',' ep. · open episode 1'),
           poster:safePoster(item?.image),href:'watch.html?id='+encodeURIComponent(id)+'&episode=1'
         });
         if(manual.length===3)break;
@@ -106,6 +106,7 @@
   function itemCard(item,type){
     const card=el('a','av-47-recent-item');
     card.href=item.href;
+    card.setAttribute('aria-label',item.name+' · '+item.label);
     const img=el('img');
     img.src=item.poster;img.alt='';img.loading='lazy';
     img.addEventListener('error',()=>{

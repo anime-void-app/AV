@@ -1,4 +1,4 @@
-/* ANIME VOID 46.0 — compact home/profile navigation.
+/* ANIME VOID 63.0 — compact home/profile navigation.
    Data is read-only; values are never written, awarded or used as entitlements. */
 (()=>{'use strict';
   const home=document.getElementById('av46HomeLinks');
@@ -15,7 +15,13 @@
     const measurementIds=new Set();
     try {
       const data=window.AVSafe?.read?.('animeVoidMeasuredV1',null);
-      for(const entry of Object.values(data?.entries||{})){
+      // Use the exact same read-only, de-duplicated presentation used by
+      // history.html and the recent player preview. Multiple durations of
+      // one episode must not inflate the compact profile counter.
+      const episodeRecords=data
+        ?(window.AVWatchLedger?.presentation?.(data)?.entries||Object.values(data.entries||{}))
+        :[];
+      for(const entry of episodeRecords){
         if(typeof entry?.coverage!=='string'||!/[1-9a-f]/i.test(entry.coverage))continue;
         const episodeKey=[entry.titleId,entry.season,entry.episode].join(':');
         measurementIds.add(episodeKey);
@@ -47,7 +53,7 @@
     const enTitles=count=>enPlural(count,'title','titles');
     setText('av46HomeHistoryCount',titles?tr(ruTitles(titles)+' в истории',enTitles(titles)+' in history'):tr('Просмотры и отметки','Views and marks'));
     setText('av46HomeFavoritesCount',n.favorites?tr(ruPlural(n.favorites,'любимый тайтл','любимых тайтла','любимых тайтлов'),enPlural(n.favorites,'favorite','favorites')):tr('Избранное и статусы','Favorites and statuses'));
-    setText('av46ProfileHistoryCount',titles?tr(ruTitles(titles)+' · '+ruPlural(n.measured,'замер','замера','замеров'),enTitles(titles)+' · '+enPlural(n.measured,'measurement','measurements')):tr('Фактический просмотр и отметки','Player records and marks'));
+    setText('av46ProfileHistoryCount',titles?tr(ruTitles(titles)+' · '+ruPlural(n.measured,'запись плеера','записи плеера','записей плеера'),enTitles(titles)+' · '+enPlural(n.measured,'player entry','player entries')):tr('Фактический просмотр и отметки','Player records and marks'));
     setText('av46ProfileWatchingCount',n.watching?tr(ruTitles(n.watching)+' со статусом «Смотрю»',enTitles(n.watching)+' marked watching'):tr('Тайтлы со статусом «Смотрю»','Titles marked as watching'));
     setText('av46ProfileFavoriteCount',n.favorites?tr(ruPlural(n.favorites,'любимый тайтл','любимых тайтла','любимых тайтлов'),enPlural(n.favorites,'favorite title','favorite titles')):tr('Любимые тайтлы','Favorite titles'));
   }
