@@ -3,10 +3,49 @@
 (()=>{'use strict';
 const BASE='https://bszukonnqdujllmblwcw.supabase.co',KEY='sb_publishable_2vQbIxS-UHMuSwRJGKIBGA_TqxEiYsj',OWNER='avCloudDeviceOwnerV1',META='avCloudMetaV1:',UUID=/^[a-f0-9-]{36}$/i;
 let client,identity=null,epoch=0,active=false,busy=false,restoring=false,timer,phase='checking',message='',remote=null,retryAt=0,retryDelay=3000;
+let authFlowPending=false,authRecheckScheduled=false;
 const t=(ru,en)=>document.documentElement.lang==='en'?en:ru;
 const safe=()=>isSecureContext&&['https:','http:'].includes(location.protocol);
 function needSecure(){if(!safe())throw Error(t('Сначала включите HTTPS для сайта. По HTTP вход и синхронизация заблокированы.','Enable HTTPS first. Sign-in and cloud sync are blocked over HTTP.'));}
-function getClient(){if(!client){needSecure();if(!window.supabase?.createClient)throw Error(t('Модуль входа не загрузился.','Auth library is unavailable.'));client=window.AVSharedSupabaseClient||window.supabase.createClient(BASE,KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:false,flowType:'pkce',storageKey:'avSupabaseAuthV1'}});window.AVSharedSupabaseClient=client;client.auth.onAuthStateChange((event,session)=>{if(event==='PASSWORD_RECOVERY')sessionStorage.setItem('avAccountRecovery','1');if(['SIGNED_IN','SIGNED_OUT','USER_UPDATED'].includes(event)||(event==='TOKEN_REFRESHED'&&identity&&session?.user?.id!==identity.id)){active=false;identity=null;++epoch;setTimeout(()=>restore(),0);}});}return client;}
+// Auth callbacks may fire on tab refocus and after a PKCE/password exchange.
+ // Never invalidate a *verified, unchanged* identity on a repeated SIGNED_IN event.
+ function scheduleAuthRecheck(){
+   if(authFlowPending||authRecheckScheduled)return;
+   authRecheckScheduled=true;
+   setTimeout(()=>{authRecheckScheduled=false;if(!authFlowPending)void restore();},0);
+ }
+ function getClient(){
+   if(!client){
+     needSecure();
+     if(!window.supabase?.createClient)throw Error(t('Модуль входа не загрузился.','Auth library is unavailable.'));
+     client=window.AVSharedSupabaseClient||window.supabase.createClient(BASE,KEY,{
+       auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:false,flowType:'pkce',storageKey:'avSupabaseAuthV1'}
+     });
+     window.AVSharedSupabaseClient=client;
+     client.auth.onAuthStateChange((event,session)=>{
+       if(event==='PASSWORD_RECOVERY'){
+         try{sessionStorage.setItem('avAccountRecovery','1');}catch{}
+       }
+       const incoming=session?.user?.id||null;
+       if(event==='SIGNED_OUT'){
+         // A real sign-out, not a routine token refresh.
+         active=false;identity=null;remote=null;++epoch;status('guest');
+         return;
+       }
+       if(event==='USER_UPDATED'&&incoming&&incoming===identity?.id){
+         identity={...identity,email:session.user.email||identity.email};
+         dispatchEvent(new CustomEvent('av:account-state',{detail:state()}));
+         return;
+       }
+       if(event==='TOKEN_REFRESHED'&&incoming===identity?.id)return;
+       if(event==='SIGNED_IN'&&incoming===identity?.id)return;
+       if(incoming&&['SIGNED_IN','USER_UPDATED','TOKEN_REFRESHED'].includes(event)){
+         scheduleAuthRecheck();
+       }
+     });
+   }
+   return client;
+ }
 function status(p,text=''){phase=p;message=text;paintSync();dispatchEvent(new CustomEvent('av:account-state',{detail:state()}));}
 function paintSync(){const text=phase==='saved'?t('Сохранено','Saved'):phase==='saving'||phase==='checking'?t('Сохраняется…','Syncing…'):phase==='offline'?t('Нет связи · данные на устройстве','Offline · kept on device'):phase==='conflict'?t('Конфликт копий','Version conflict'):phase==='guest'?t('Войти','Sign in'):t('Проверить сохранение','Check sync');const profile=document.getElementById('profileAccountButton');if(profile){let n=document.getElementById('profileAccountSyncStatus');if(!n){n=document.createElement('span');n.id='profileAccountSyncStatus';n.setAttribute('role','status');n.style.cssText='display:inline-block;margin-left:10px;font-size:12px;opacity:.8';profile.after(n);}n.textContent=text;}const link=document.querySelector('.vi-sidebar a[href="account.html"]');if(link){link.title=text;let dot=link.querySelector('.av-account-sync-dot');if(!dot){dot=document.createElement('span');dot.className='av-account-sync-dot';dot.setAttribute('aria-hidden','true');dot.style.cssText='margin-left:auto;font-size:10px';link.append(dot);}dot.textContent='●';dot.style.color=phase==='saved'?'#87c7a0':phase==='offline'||phase==='conflict'||phase==='error'?'#ef9b89':'#a694a7';}}
 function state(){return {phase,message,user:identity?{...identity}:null,active,busy,remoteRevision:remote?.revision||0};}
@@ -67,13 +106,55 @@ async function choose(mode){if(busy)throw Error('Busy');busy=true;active=false;c
  });}catch(err){status(err?.code==='40001'?'conflict':'error',explain(err));throw err;}finally{busy=false;dispatchEvent(new CustomEvent('av:account-state',{detail:state()}));}}
 async function exportRecovery(kind){if(!identity||!['pending','safety'].includes(kind))throw Error(t('Сначала войдите в аккаунт.','Sign in first.'));const uid=identity.id,copy=await disk('get',kind+':'+uid);if(identity?.id!==uid)throw Error('Account changed');if(!copy?.data)throw Error(t('На этом устройстве нет такой копии.','This device has no such copy.'));const data=validated(copy.data),url=URL.createObjectURL(new Blob([JSON.stringify({app:'ANIME VOID',version:1,savedAt:copy.at,data},null,2)],{type:'application/json'})),a=document.createElement('a');a.href=url;a.download='anime-void-recovery-'+kind+'.json';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),10000);}
 function callbackURL(){return new URL('account.html',location.href).href.split('?')[0].split('#')[0];}
-async function login(email,password){needSecure();const r=await getClient().auth.signInWithPassword({email,password});if(r.error)throw r.error;await restore();}
-async function register(email,password){needSecure();if(password.length<12)throw Error(t('Пароль — минимум 12 символов.','Use at least 12 characters.'));const r=await getClient().auth.signUp({email,password,options:{emailRedirectTo:callbackURL()}});if(r.error)throw r.error;return !!r.data.session;}
+async function login(email,password){
+   needSecure();
+   authFlowPending=true;
+   let result;
+   try{result=await getClient().auth.signInWithPassword({email,password});}
+   finally{authFlowPending=false;}
+   if(result.error)throw result.error;
+   await restore();
+ }
+async function register(email,password){
+   needSecure();
+   if(password.length<12)throw Error(t('Пароль — минимум 12 символов.','Use at least 12 characters.'));
+   authFlowPending=true;
+   let result;
+   try{result=await getClient().auth.signUp({email,password,options:{emailRedirectTo:callbackURL()}});}
+   finally{authFlowPending=false;}
+   if(result.error)throw result.error;
+   return !!result.data.session;
+ }
 async function google(){needSecure();const controller=new AbortController(),timeout=setTimeout(()=>controller.abort(),10000);let disabled=false;try{const settings=await fetch(BASE+'/auth/v1/settings',{headers:{apikey:KEY},credentials:'omit',cache:'no-store',signal:controller.signal});if(settings.ok)disabled=(await settings.json()).external?.google===false;}catch{}finally{clearTimeout(timeout);}if(disabled)throw Error(t('Вход через Google пока выключен владельцем сайта. Нужно настроить Google OAuth и включить Google в Supabase → Authentication → Providers. Пока можно войти по почте.','Google sign-in is disabled by the site owner. Configure Google OAuth and enable Google in Supabase Authentication Providers. Email sign-in is available.'));const r=await getClient().auth.signInWithOAuth({provider:'google',options:{redirectTo:callbackURL(),scopes:'openid email profile'}});if(r.error)throw r.error;}
 async function recover(email){needSecure();const r=await getClient().auth.resetPasswordForEmail(email,{redirectTo:callbackURL()});if(r.error)throw r.error;}
 async function password(value){needSecure();if(sessionStorage.getItem('avAccountRecovery')!=='1')throw Error(t('Сначала откройте ссылку восстановления из письма.','Open the recovery link from your email first.'));if(value.length<12)throw Error(t('Пароль — минимум 12 символов.','Use at least 12 characters.'));const r=await getClient().auth.updateUser({password:value});if(r.error)throw r.error;sessionStorage.removeItem('avAccountRecovery');}
 async function logout(){if(busy||restoring||['saving','checking','reloading'].includes(phase))throw Error(t('Синхронизация ещё выполняется. Повторите выход после завершения.','Sync is still in progress. Retry sign-out when it finishes.'));await save();if(busy||restoring||['saving','checking','reloading'].includes(phase))throw Error(t('Синхронизация ещё выполняется. Повторите выход после завершения.','Sync is still in progress. Retry sign-out when it finishes.'));if(['offline','error','conflict'].includes(phase)){AVSafe.exportBackup();if(!confirm(t('Последние изменения не подтверждены облаком. Страховочная копия скачана. Выйти, оставив данные на устройстве?','Latest changes are not confirmed in cloud. A safety copy was downloaded. Sign out and keep local data?')))return false;}const r=await getClient().auth.signOut({scope:'local'});if(r.error)throw r.error;active=false;identity=null;++epoch;status('guest',t('Вы вышли. Данные остаются на этом устройстве; на общем компьютере очистите данные сайта после сохранения копии.','Signed out. Data remains on this device; clear site data on shared computers after saving a copy.'));return true;}
-async function init(){try{needSecure();const url=new URL(location.href);if(url.pathname.endsWith('/account.html')){const failure=url.searchParams.get('error'),errorText=url.searchParams.get('error_description')||failure,code=url.searchParams.get('code');if(failure||code){for(const key of ['error','error_description','error_code','code','state'])url.searchParams.delete(key);history.replaceState(history.state,'',url.pathname+url.search+url.hash);}if(failure)throw Error(errorText||'OAuth failed');if(code){const result=await getClient().auth.exchangeCodeForSession(code);if(result.error)throw result.error;}}await restore();}catch(err){status('error',explain(err));}timer=setInterval(tick,3000);}
+async function init(){
+   try{
+     needSecure();
+     const url=new URL(location.href);
+     if(url.pathname.endsWith('/account.html')){
+       const failure=url.searchParams.get('error'),errorText=url.searchParams.get('error_description')||failure;
+       const code=url.searchParams.get('code');
+       if(failure)throw Error(errorText||'OAuth failed');
+       if(code){
+         // A callback is an explicit auth flow. Do not compete with the SIGNED_IN
+         // event by starting a second restore() before PKCE exchange completes.
+         authFlowPending=true;
+         try{
+           const result=await getClient().auth.exchangeCodeForSession(code);
+           if(result.error)throw result.error;
+         }finally{authFlowPending=false;}
+       }
+       if(failure||code){
+         for(const key of ['error','error_description','error_code','code','state','sb_flow_id'])url.searchParams.delete(key);
+         history.replaceState(history.state,'',url.pathname+url.search+url.hash);
+       }
+     }
+     await restore();
+   }catch(err){status('error',explain(err));}
+   timer=setInterval(tick,3000);
+ }
 window.AVAccount=Object.freeze({client:getClient,state,restore,choose,save,exportRecovery,login,register,google,recover,password,logout,t,open:()=>location.assign(new URL('account.html',location.href))});
 addEventListener('storage',ev=>{if(ev.key===OWNER&&identity&&ev.newValue!==identity.id){active=false;++epoch;status('checking',t('Аккаунт изменён в другой вкладке.','Account changed in another tab.'));setTimeout(()=>restore(),0);}});
 let editTimer;
