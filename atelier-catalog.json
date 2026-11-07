@@ -18,7 +18,7 @@
       "license": "Original vector artwork",
       "itemId": "v54-banner-lunar-wanderer",
       "thumb": "studio/v54/lunar-wanderer.svg",
-      "homeId": "moon-sanctuary",
+      "homeId": "sakura",
       "focalY": 42
     },
     {
@@ -58,7 +58,7 @@
       "license": "Original vector artwork",
       "itemId": "v54-banner-neon-sentinel",
       "thumb": "studio/v54/neon-sentinel.svg",
-      "homeId": "neon-rain",
+      "homeId": "station",
       "focalY": 42
     },
     {
@@ -98,7 +98,7 @@
       "license": "Original vector artwork",
       "itemId": "v54-banner-spirit-fox",
       "thumb": "studio/v54/spirit-fox.svg",
-      "homeId": "bamboo",
+      "homeId": "torii",
       "focalY": 42
     },
     {
@@ -118,7 +118,7 @@
       "license": "Original vector artwork",
       "itemId": "v54-banner-sky-academy",
       "thumb": "studio/v54/sky-academy.svg",
-      "homeId": "clouds",
+      "homeId": "rooftop",
       "focalY": 42
     },
     {
@@ -178,7 +178,7 @@
       "license": "Original vector artwork",
       "itemId": "v54-banner-astral-alchemist",
       "thumb": "studio/v54/astral-alchemist.svg",
-      "homeId": "void-orbit",
+      "homeId": "rooftop",
       "focalY": 42
     },
     {
@@ -198,7 +198,7 @@
       "license": "Original vector artwork",
       "itemId": "v54-banner-winter-empress",
       "thumb": "studio/v54/winter-empress.svg",
-      "homeId": "snowlamp",
+      "homeId": "rooftop",
       "focalY": 42
     },
     {
@@ -832,7 +832,7 @@
       "license": "Original vector artwork",
       "itemId": "v54-banner-lunar-wanderer",
       "thumb": "studio/v54/lunar-wanderer.svg",
-      "homeId": "moon-sanctuary",
+      "homeId": "sakura",
       "focalY": 42
     },
     {
@@ -872,7 +872,7 @@
       "license": "Original vector artwork",
       "itemId": "v54-banner-neon-sentinel",
       "thumb": "studio/v54/neon-sentinel.svg",
-      "homeId": "neon-rain",
+      "homeId": "station",
       "focalY": 42
     },
     {
@@ -912,7 +912,7 @@
       "license": "Original vector artwork",
       "itemId": "v54-banner-spirit-fox",
       "thumb": "studio/v54/spirit-fox.svg",
-      "homeId": "bamboo",
+      "homeId": "torii",
       "focalY": 42
     },
     {
@@ -932,7 +932,7 @@
       "license": "Original vector artwork",
       "itemId": "v54-banner-sky-academy",
       "thumb": "studio/v54/sky-academy.svg",
-      "homeId": "clouds",
+      "homeId": "rooftop",
       "focalY": 42
     },
     {
@@ -992,7 +992,7 @@
       "license": "Original vector artwork",
       "itemId": "v54-banner-astral-alchemist",
       "thumb": "studio/v54/astral-alchemist.svg",
-      "homeId": "void-orbit",
+      "homeId": "rooftop",
       "focalY": 42
     },
     {
@@ -1012,7 +1012,7 @@
       "license": "Original vector artwork",
       "itemId": "v54-banner-winter-empress",
       "thumb": "studio/v54/winter-empress.svg",
-      "homeId": "snowlamp",
+      "homeId": "rooftop",
       "focalY": 42
     },
     {
