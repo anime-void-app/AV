@@ -1,0 +1,494 @@
+/* ANIME VOID 57.0 — focused watch-page UX.
+   Appearance only. Built-in/native and provider players keep ownership of media. */
+body.av-watch-page{
+  --av57-line:rgba(197,158,236,.24);
+  --av57-surface:rgba(24,17,38,.92);
+  --av57-panel:rgba(38,26,56,.83);
+  --av57-muted:#c7bad7;
+  --av57-text:#f6edff;
+  overflow-x:clip;
+}
+body.av-watch-page *{scroll-margin-top:85px}
+body.av-watch-page > main{
+  box-sizing:border-box;
+  width:min(100%,1440px);
+  max-width:1440px;
+  padding:clamp(18px,2.6vw,36px) clamp(12px,3.2vw,46px) 100px;
+  margin-inline:auto;
+  min-width:0;
+}
+body.av-watch-page > main > .watch-top{
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:10px 20px;
+  flex-wrap:wrap;
+  min-width:0;
+  margin-bottom:19px;
+}
+body.av-watch-page #animeTitle{
+  font-size:clamp(23px,2.8vw,38px);
+  line-height:1.18;
+  letter-spacing:-.035em;
+  margin:0 0 7px;
+  overflow-wrap:anywhere;
+}
+body.av-watch-page #episodeTitle{
+  color:var(--av57-muted);
+  font-size:clamp(13px,1.4vw,16px);
+  font-weight:650;
+}
+body.av-watch-page #avPlayer{
+  box-sizing:border-box;
+  display:block;
+  width:100%;
+  max-width:100%;
+  min-width:0;
+  margin:0 0 20px;
+  overflow:hidden;
+  border:1px solid var(--av57-line);
+  border-radius:20px;
+  background:
+    radial-gradient(ellipse at 85% 0%,rgba(139,82,209,.13),transparent 55%),
+    var(--av57-surface);
+  box-shadow:0 16px 58px rgba(6,3,16,.24);
+}
+body.av-watch-page #avPlayer[style*="display: none"],
+body.av-watch-page #avPlayer[hidden]{
+  margin:0!important;
+}
+body.av-watch-page #avPlayer.avp2{
+  padding:clamp(13px,2.6vw,25px);
+}
+body.av-watch-page #avPlayer .avp2-view,
+body.av-watch-page #avPlayer .avk-view,
+body.av-watch-page #avKodikInlineView{
+  width:100%;
+  max-width:100%;
+  min-height:0;
+  overflow:hidden;
+  border-radius:14px;
+  aspect-ratio:16/9;
+  background:#030306;
+}
+body.av-watch-page #avPlayer :is(video,iframe),
+body.av-watch-page #avKodikInlineView iframe{
+  max-width:100%;
+}
+body.av-watch-page #avPlayer .avp2-head,
+body.av-watch-page #avPlayer .avk-head{
+  display:flex;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:10px 16px;
+  min-width:0;
+  margin-bottom:13px;
+}
+body.av-watch-page #avPlayer .avp2-head h2,
+body.av-watch-page #avPlayer .avk-head h2{
+  overflow-wrap:anywhere;
+}
+body.av-watch-page #avPlayer :is(button,select,input),
+body.av-watch-page .av-watch57-toolbar button,
+body.av-watch-page .av-watch57-pager button{
+  min-height:44px;
+  touch-action:manipulation;
+}
+body.av-watch-page :is(
+  #avPlayer,.av-watch57-toolbar,.av-watch57-pager,.avp2-tracker
+) :is(a,button,input,select,summary):focus-visible{
+  outline:3px solid #dfb3ff;
+  outline-offset:3px;
+}
+body.av-watch-page .av-watch57-source-note{
+  max-width:100%;
+  margin:0 0 17px;
+  color:var(--av57-muted);
+  font-size:12px;
+  line-height:1.6;
+}
+body.av-watch-page .av-watch57-toolbar{
+  box-sizing:border-box;
+  display:grid;
+  grid-template-columns:minmax(165px,.8fr) minmax(390px,1.5fr) auto;
+  align-items:center;
+  gap:18px;
+  width:100%;
+  max-width:100%;
+  margin:0 0 17px;
+  padding:18px;
+  background:linear-gradient(135deg,rgba(40,27,60,.96),rgba(19,14,31,.97));
+  border:1px solid var(--av57-line);
+  border-radius:17px;
+  color:var(--av57-text);
+}
+body.av-watch-page .av-watch57-toolbar-title{
+  min-width:0;
+}
+body.av-watch-page .av-watch57-kicker{
+  color:#d9b4f8;
+  font:850 11px/1.3 system-ui,sans-serif;
+  letter-spacing:.15em;
+}
+body.av-watch-page .av-watch57-hint{
+  color:var(--av57-muted);
+  font-size:11px;
+  line-height:1.5;
+  margin:6px 0 0;
+  max-width:38ch;
+}
+body.av-watch-page .av-watch57-controls.controls{
+  display:flex;
+  align-items:stretch;
+  justify-content:center;
+  gap:8px;
+  margin:0;
+  min-width:0;
+  width:100%;
+}
+body.av-watch-page .av-watch57-controls .control-btn{
+  box-sizing:border-box;
+  flex:1 1 0;
+  min-width:0;
+  min-height:50px;
+  padding:11px 9px;
+  border-radius:11px;
+  font-size:12px;
+  line-height:1.35;
+  white-space:normal;
+  text-align:center;
+}
+body.av-watch-page .av-watch57-controls #markWatchedBtn{
+  background:linear-gradient(125deg,#5a318c,#803eaa);
+  border-color:#b78be0;
+  color:#fff;
+}
+body.av-watch-page .av-watch57-controls #markWatchedBtn:disabled{
+  background:rgba(100,73,127,.28);
+}
+body.av-watch-page .av-watch57-toolbar-links{
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  gap:7px;
+  flex-wrap:wrap;
+  min-width:0;
+}
+body.av-watch-page .av-watch57-link{
+  box-sizing:border-box;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:44px;
+  padding:10px 12px;
+  color:var(--av57-text);
+  text-align:center;
+  text-decoration:none;
+  font:750 12px/1.35 system-ui,sans-serif;
+  background:rgba(151,104,203,.1);
+  border:1px solid var(--av57-line);
+  border-radius:11px;
+}
+body.av-watch-page .av-watch57-link:hover{
+  background:rgba(145,96,192,.25);
+  border-color:rgba(217,170,251,.65);
+}
+body.av-watch-page .avp2-tracker{
+  box-sizing:border-box;
+  width:100%;
+  max-width:100%;
+  margin:0;
+  padding:0;
+  background:var(--av57-surface);
+  border:1px solid var(--av57-line);
+  border-radius:17px;
+  overflow:clip;
+}
+body.av-watch-page .avp2-tracker > summary{
+  box-sizing:border-box;
+  display:list-item;
+  width:100%;
+  max-width:100%;
+  min-height:60px;
+  padding:19px 24px;
+  color:var(--av57-text);
+  font-size:15px;
+  font-weight:800;
+  line-height:1.35;
+  cursor:pointer;
+  background:linear-gradient(120deg,#291c3b,#171125);
+}
+body.av-watch-page .avp2-tracker[open] > summary{
+  border-bottom:1px solid var(--av57-line);
+}
+body.av-watch-page .avp2-tracker .episodes{
+  margin:0;
+  padding:clamp(14px,2.4vw,25px);
+  min-width:0;
+}
+body.av-watch-page .avp2-tracker .episodes h2{
+  font-size:clamp(18px,2.1vw,24px);
+  margin:0 0 16px;
+  color:var(--av57-text);
+}
+body.av-watch-page #episodeGrid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(min(100%,116px),1fr));
+  gap:10px;
+  min-width:0;
+  width:100%;
+  max-width:100%;
+}
+body.av-watch-page #episodeGrid .episode{
+  box-sizing:border-box;
+  min-width:0;
+  min-height:48px;
+  padding:10px;
+  font:750 12px/1.4 system-ui,sans-serif;
+  border-radius:10px;
+  white-space:normal;
+  overflow-wrap:anywhere;
+}
+body.av-watch-page #episodeGrid .episode[hidden]{
+  display:none!important;
+}
+body.av-watch-page #episodeGrid .episode.active{
+  outline:2px solid #e5c0ff;
+  outline-offset:0;
+}
+body.av-watch-page .av-watch57-pager{
+  display:grid;
+  grid-template-columns:auto minmax(110px,1fr) auto minmax(125px,175px) auto;
+  align-items:center;
+  gap:9px;
+  margin:0 0 17px;
+  padding:10px;
+  background:rgba(28,21,44,.88);
+  border:1px solid var(--av57-line);
+  border-radius:13px;
+}
+body.av-watch-page .av-watch57-pager[hidden]{
+  display:none!important;
+}
+body.av-watch-page .av-watch57-pager-status{
+  font-size:12px;
+  line-height:1.3;
+  text-align:center;
+  font-weight:750;
+  color:var(--av57-text);
+}
+body.av-watch-page .av-watch57-page-btn{
+  box-sizing:border-box;
+  min-height:44px;
+  min-width:0;
+  padding:10px 13px;
+  border:1px solid var(--av57-line);
+  border-radius:10px;
+  background:rgba(106,62,160,.2);
+  color:var(--av57-text);
+  font:750 12px/1.3 system-ui,sans-serif;
+  cursor:pointer;
+}
+body.av-watch-page .av-watch57-page-btn:hover:not(:disabled){
+  background:rgba(135,75,186,.5);
+}
+body.av-watch-page .av-watch57-page-btn:disabled{
+  opacity:.42;
+  cursor:not-allowed;
+}
+body.av-watch-page .av-watch57-jump{
+  display:block;
+  min-width:0;
+}
+body.av-watch-page .av-watch57-input{
+  display:block;
+  box-sizing:border-box;
+  width:100%;
+  min-width:0;
+  min-height:44px;
+  border-radius:10px;
+  padding:10px 12px;
+  border:1px solid rgba(177,133,220,.4);
+  background:#21172d;
+  color:#f6ecff;
+  font:650 13px/1.3 system-ui,sans-serif;
+}
+body.av-watch-page .av-watch57-input::placeholder{color:#c2accf}
+body.av-watch-page .av-watch57-sr-only{
+  position:absolute;
+  width:1px;
+  height:1px;
+  padding:0;
+  margin:-1px;
+  overflow:hidden;
+  clip:rect(0,0,0,0);
+  white-space:nowrap;
+  border:0;
+}
+body.theme-light.av-watch-page{
+  --av57-line:rgba(109,60,156,.24);
+  --av57-surface:#faf6ff;
+  --av57-panel:#f5eeff;
+  --av57-muted:#655474;
+  --av57-text:#2e2042;
+}
+body.theme-light.av-watch-page .av-watch57-toolbar,
+body.theme-light.av-watch-page .avp2-tracker{
+  background:linear-gradient(135deg,#f9f4ff,#eee1fa);
+}
+body.theme-light.av-watch-page .av-watch57-kicker{color:#6f369e}
+body.theme-light.av-watch-page .avp2-tracker > summary{
+  background:#f4e8fc;
+}
+body.theme-light.av-watch-page .av-watch57-pager{
+  background:#f5eeff;
+}
+body.theme-light.av-watch-page .av-watch57-input{
+  background:white;color:#2e2042;
+}
+body.theme-light.av-watch-page .av-watch57-page-btn,
+body.theme-light.av-watch-page .av-watch57-link{
+  background:#eee1fa;
+}
+@media(max-width:1280px){
+  body.av-watch-page .av-watch57-toolbar{
+    grid-template-columns:minmax(160px,1fr) minmax(340px,2fr);
+  }
+  body.av-watch-page .av-watch57-toolbar-links{
+    grid-column:1/-1;
+    justify-content:flex-start;
+  }
+}
+@media(max-width:830px){
+  body.av-watch-page .av-watch57-toolbar{
+    grid-template-columns:minmax(0,1fr);
+    gap:13px;
+  }
+  body.av-watch-page .av-watch57-toolbar-links{grid-column:auto}
+  body.av-watch-page .av-watch57-controls.controls{
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:7px;
+  }
+  body.av-watch-page .av-watch57-pager{
+    grid-template-columns:auto minmax(0,1fr) auto;
+    gap:8px;
+  }
+  body.av-watch-page .av-watch57-jump{
+    grid-column:1/3;
+  }
+  body.av-watch-page .av-watch57-go{
+    grid-column:3;
+  }
+}
+@media(max-width:600px){
+  body.av-watch-page > header{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    gap:8px 12px;
+    padding:11px 12px;
+  }
+  body.av-watch-page > header .logo{
+    margin-right:auto;
+  }
+  body.av-watch-page > header .header-actions{
+    min-width:0;
+    flex:1 1 100%;
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:flex-start;
+    align-items:center;
+    gap:7px;
+  }
+  body.av-watch-page > header .header-actions :is(button,a){
+    min-height:44px;
+  }
+  body.av-watch-page > main{
+    padding:15px 10px calc(92px + env(safe-area-inset-bottom));
+  }
+  body.av-watch-page #avPlayer{
+    border-radius:13px;
+    margin-bottom:13px;
+  }
+  body.av-watch-page #avPlayer.avp2{
+    padding:11px;
+  }
+  body.av-watch-page #avPlayer .avp2-view,
+  body.av-watch-page #avPlayer .avk-view{
+    border-radius:9px;
+  }
+  body.av-watch-page .av-watch57-toolbar{
+    padding:12px;
+    border-radius:13px;
+    margin-bottom:12px;
+  }
+  body.av-watch-page .av-watch57-controls.controls{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:8px;
+  }
+  body.av-watch-page .av-watch57-controls #markWatchedBtn{
+    grid-column:1/-1;
+    grid-row:1;
+  }
+  body.av-watch-page .av-watch57-controls .control-btn{
+    width:100%;
+    min-height:48px;
+    font-size:12px;
+  }
+  body.av-watch-page .av-watch57-toolbar-links{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+  body.av-watch-page .av-watch57-link{
+    min-width:0;
+    padding:10px 7px;
+    font-size:11px;
+  }
+  body.av-watch-page .avp2-tracker{
+    border-radius:13px;
+  }
+  body.av-watch-page .avp2-tracker > summary{
+    min-height:54px;
+    padding:16px;
+    font-size:13px;
+  }
+  body.av-watch-page .avp2-tracker .episodes{
+    padding:14px 12px;
+  }
+  body.av-watch-page #episodeGrid{
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:8px;
+  }
+  body.av-watch-page #episodeGrid .episode{
+    min-height:46px;
+    padding:9px 4px;
+    font-size:11px;
+  }
+  body.av-watch-page .av-watch57-pager{
+    padding:7px;
+    gap:7px;
+  }
+  body.av-watch-page .av-watch57-page-btn{
+    padding:9px 6px;
+    font-size:11px;
+  }
+  body.av-watch-page .av-watch57-pager-status{
+    font-size:11px;
+  }
+}
+@media(max-width:365px){
+  body.av-watch-page #episodeGrid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+  body.av-watch-page .av-watch57-toolbar-links{
+    grid-template-columns:minmax(0,1fr);
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  body.av-watch-page .episode,
+  body.av-watch-page .control-btn{
+    transition:none!important;
+    transform:none!important;
+  }
+}
