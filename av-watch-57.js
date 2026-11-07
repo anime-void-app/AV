@@ -149,8 +149,8 @@
       summary.dataset.en='Episodes & my marks';
       summary.textContent=T('Список серий и мои отметки','Episodes & my marks');
     }
-    sourcesNote.textContent=T('Видео доступно только для аниме с подключённым источником. Отметка серии выполняется вручную.',
-      'Video is available only where a source is connected. Episode marks are manual.');
+    sourcesNote.textContent=T('Видео доступно только при подключённом источнике. Кнопка отметки меняет список серий; подтверждённый просмотр учитывается отдельно, если плеер его поддерживает.',
+      'Video requires a connected source. Episode marks update your list; verified playback is tracked separately when supported.');
     applyPage();
   };
   // Intro must not be mistaken for verified playback.
