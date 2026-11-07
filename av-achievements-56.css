@@ -1,0 +1,222 @@
+/* ANIME VOID 56.0 — desktop achievement atlas layout repair.
+   #achievementsGrid receives .a22-panel from AVAchievements22.render().
+   Old profile CSS still turns it into a three-column grid: the HERO,
+   filters, awards and actions become separate GRID ITEMS, leaving large
+   unused columns. Only the upgraded atlas is reset to normal flow below.
+   The legacy fallback achievement cards remain a grid. */
+body.av-profile-page #profileAchievements{
+  width:100%;
+  max-width:100%;
+  min-width:0;
+  margin-inline:auto;
+  padding:clamp(18px,2.5vw,32px);
+}
+body.av-profile-page #profileAchievements #achievementsGrid.a22-panel{
+  box-sizing:border-box;
+  display:block!important;
+  grid-template-columns:none!important;
+  grid-auto-flow:initial!important;
+  grid-auto-columns:auto!important;
+  width:100%;
+  max-width:100%;
+  min-width:0;
+  margin:0!important;
+  padding:0;
+  overflow:visible;
+}
+body.av-profile-page #profileAchievements #achievementsGrid.a22-panel > :is(
+  .a22-hero,.a22-controls,.a22-actions,.a22-results,.a22-grid,.a22-more,.a22-muted
+){
+  box-sizing:border-box;
+  width:100%;
+  max-width:100%;
+  min-width:0;
+  grid-column:1/-1;
+}
+body.av-profile-page #profileAchievements .av54-achievement-tools{
+  box-sizing:border-box;
+  width:100%;
+  max-width:100%;
+  margin:16px 0 20px;
+  padding:clamp(14px,1.8vw,21px);
+}
+body.av-profile-page #profileAchievements .av54-achievement-intro{
+  align-items:center;
+  gap:10px 16px;
+}
+body.av-profile-page #profileAchievements .av54-achievement-bar{
+  margin:13px 0 17px;
+}
+body.av-profile-page #profileAchievements .av54-achievement-buttons{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:10px;
+}
+body.av-profile-page #profileAchievements .av54-achievement-buttons button{
+  width:100%;
+  min-width:0;
+  min-height:46px;
+}
+body.av-profile-page #profileAchievements #achievementsGrid.a22-panel > .a22-hero{
+  border-radius:19px;
+  margin:0 0 20px;
+  padding:clamp(19px,2.6vw,31px);
+}
+body.av-profile-page #profileAchievements #achievementsGrid.a22-panel .a22-hero h3{
+  max-width:850px;
+  font-size:clamp(26px,3vw,39px);
+  line-height:1.13;
+  margin:10px 0 15px;
+}
+body.av-profile-page #profileAchievements #achievementsGrid.a22-panel .a22-summary{
+  max-width:none;
+  margin:8px 0;
+  font-size:14px;
+}
+body.av-profile-page #profileAchievements #achievementsGrid.a22-panel > .a22-controls{
+  display:grid;
+  grid-template-columns:1.5fr repeat(4,minmax(0,1fr))!important;
+  gap:12px;
+  margin:12px 0 16px;
+}
+body.av-profile-page #profileAchievements #achievementsGrid.a22-panel .a22-controls > label{
+  min-width:0;
+  width:100%;
+  max-width:none;
+}
+body.av-profile-page #profileAchievements #achievementsGrid.a22-panel .a22-controls :is(input,select){
+  box-sizing:border-box;
+  width:100%;
+  max-width:none;
+  min-width:0;
+  min-height:46px;
+  font-size:14px;
+  border-radius:11px;
+}
+body.av-profile-page #profileAchievements #achievementsGrid.a22-panel > .a22-actions{
+  display:flex;
+  justify-content:flex-start;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:10px;
+  margin:0 0 14px;
+}
+body.av-profile-page #profileAchievements #achievementsGrid.a22-panel .a22-actions button{
+  min-height:44px;
+  white-space:normal;
+  text-align:center;
+}
+body.av-profile-page #profileAchievements #achievementsGrid.a22-panel > .a22-results{
+  margin:16px 0 14px;
+  min-height:24px;
+  font-size:13px;
+}
+body.av-profile-page #profileAchievements #achievementsGrid.a22-panel > .a22-grid{
+  display:grid!important;
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  grid-auto-flow:row;
+  gap:clamp(12px,1.4vw,20px)!important;
+  align-items:stretch;
+  justify-content:stretch;
+  width:100%;
+  max-width:100%;
+}
+body.av-profile-page #profileAchievements #achievementsGrid.a22-panel .a22-grid > .a22-card{
+  box-sizing:border-box;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-start;
+  min-width:0;
+  width:100%;
+  max-width:none;
+  min-height:286px;
+  padding:clamp(14px,1.8vw,21px);
+  border-radius:17px;
+  gap:11px;
+}
+body.av-profile-page #profileAchievements #achievementsGrid.a22-panel .a22-grid > .a22-card .a22-title{
+  font-size:clamp(14px,1.4vw,17px);
+  font-weight:800;
+  line-height:1.35;
+  text-wrap:balance;
+  overflow-wrap:anywhere;
+}
+body.av-profile-page #profileAchievements #achievementsGrid.a22-panel .a22-grid > .a22-card .a22-condition{
+  font-size:12px;
+  line-height:1.55;
+}
+body.av-profile-page #profileAchievements #achievementsGrid.a22-panel .a22-grid > .a22-card .a22-card-top{
+  flex-wrap:wrap;
+  align-items:baseline;
+  justify-content:space-between;
+}
+body.av-profile-page #profileAchievements #achievementsGrid.a22-panel > .a22-more{
+  display:block;
+  width:max-content;
+  max-width:100%;
+  min-height:44px;
+  margin:22px auto 0;
+  padding:10px 20px;
+}
+@media(max-width:1080px){
+  body.av-profile-page #profileAchievements #achievementsGrid.a22-panel > .a22-controls{
+    grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  }
+  body.av-profile-page #profileAchievements #achievementsGrid.a22-panel > .a22-controls > label:first-child{
+    grid-column:span 2;
+  }
+}
+@media(max-width:820px){
+  body.av-profile-page #profileAchievements #achievementsGrid.a22-panel > .a22-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  }
+  body.av-profile-page #profileAchievements #achievementsGrid.a22-panel > .a22-controls{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  }
+  body.av-profile-page #profileAchievements #achievementsGrid.a22-panel > .a22-controls > label:first-child{
+    grid-column:1/-1;
+  }
+}
+@media(max-width:620px){
+  body.av-profile-page #profileAchievements{
+    padding:14px 12px;
+  }
+  body.av-profile-page #profileAchievements .av54-achievement-buttons{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:8px;
+  }
+  body.av-profile-page #profileAchievements #achievementsGrid.a22-panel > .a22-hero{
+    margin-bottom:14px;
+    padding:20px 16px;
+    border-radius:15px;
+  }
+  body.av-profile-page #profileAchievements #achievementsGrid.a22-panel .a22-grid > .a22-card{
+    min-height:260px;
+    padding:13px 10px;
+    gap:8px;
+  }
+  body.av-profile-page #profileAchievements #achievementsGrid.a22-panel .a22-grid > .a22-card .a22-condition{
+    font-size:11px;
+  }
+}
+@media(max-width:430px){
+  body.av-profile-page #profileAchievements #achievementsGrid.a22-panel > .a22-grid{
+    grid-template-columns:minmax(0,1fr)!important;
+    gap:12px!important;
+  }
+  body.av-profile-page #profileAchievements #achievementsGrid.a22-panel > .a22-controls{
+    grid-template-columns:minmax(0,1fr)!important;
+  }
+  body.av-profile-page #profileAchievements #achievementsGrid.a22-panel > .a22-controls > label:first-child{
+    grid-column:auto;
+  }
+  body.av-profile-page #profileAchievements #achievementsGrid.a22-panel .a22-grid > .a22-card{
+    min-height:230px;
+    padding:17px 14px;
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  body.av-profile-page #profileAchievements .a22-card{
+    transition:none!important;
+  }
+}
