@@ -73,7 +73,7 @@
         getComputedStyle(continueSection).display!=='none' &&
         Boolean(card?.querySelector('h3'));
       continueAction.hidden=!visible;
-      tools.classList.toggle('av53-no-continue',!visible);
+      continueAction.parentElement?.classList.toggle('av53-no-continue',!visible);
     };
     syncContinue();
     const observer=new MutationObserver(syncContinue);
