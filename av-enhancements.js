@@ -2,7 +2,7 @@
 var I24=window.AVSiteI18n24;
 "use strict";
 (() => {
- const base = "https://anime-void-app.github.io/AV/";
+ const base = "https://animevoid.ru/";
  const routes = {"anilist-1535": "anime-death-note.html", "anilist-5081": "anime-bakemonogatari.html", "anilist-16498": "anime-attack-on-titan.html", "anilist-101922": "anime-demon-slayer.html", "anilist-113415": "anime-jujutsu-kaisen.html", "anilist-21": "anime-one-piece.html", "anilist-11061": "anime-hunter-x-hunter.html", "anilist-21087": "anime-one-punch-man.html", "anilist-20954": "anime-a-silent-voice.html", "anilist-21459": "anime-my-hero-academia.html"};
  window.avAnimeUrl = id => routes[String(id)] || "anime.html?id=" + encodeURIComponent(id);
  document.addEventListener("click", event => {
