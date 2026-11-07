@@ -915,8 +915,8 @@ const russianTitleOverrides = {
     section.hidden = false;
     document.getElementById("similarRow").innerHTML = currentSimilar.map(entry => `
       <article class="similar-card" role="link" tabindex="0"
-        onclick="window.location.href='anime.html?id=${AVSafe.escape(encodeURIComponent(entry.id))}'"
-        onkeydown="if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); window.location.href='anime.html?id=${AVSafe.escape(encodeURIComponent(entry.id))}'; }">
+        onclick="window.location.href='watch.html?id=${AVSafe.escape(encodeURIComponent(entry.id))}&episode=1'"
+        onkeydown="if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); window.location.href='watch.html?id=${AVSafe.escape(encodeURIComponent(entry.id))}&episode=1'; }">
         <div class="similar-poster">
           <img src="${AVSafe.escape(entry.image)}" alt="" loading="lazy"
             onerror="this.onerror=null;this.src='poster-unavailable.svg';">
