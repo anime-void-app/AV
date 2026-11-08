@@ -1,6 +1,6 @@
 /* ANIME VOID — service worker: установка как приложение + офлайн-режим */
 
-const CORE_CACHE = "av-AV-core-v72.0";
+const CORE_CACHE = "av-AV-core-v74.0";
 const IMAGE_CACHE = "av-AV-images-v3";
 const IMAGE_CACHE_LIMIT = 80;
 const AUDIO_CACHE = "av-AV-audio-v1";
@@ -8,6 +8,8 @@ const LICENSED_AUDIO = {"audio/japan-rain-v18.mp3": "e8adbedb517c7c30837ac4046dd
 
 
 const NEW_CORE = [
+ "av-account.js?v=73.0", "account-page.js?v=73.0", "av-auth-73.css?v=73.0",
+ "av-party-74.js?v=74.0", "av-party-74.css?v=74.0",
  "av-account.js?v=72.0", "account-page.js?v=72.0",
  "av-party-72.js?v=72.0",
  "av-party-71.js?v=71.0", "av-party-71.css?v=71.0",
@@ -265,8 +267,10 @@ async function networkFirstAsset(request) {
     }
     return response;
   } catch (error) {
-    const playbackAsset = /\/(?:av-(?:kodik-test|kodik-player|rutube-player|source-loader|player|player-home)|player-sources)\.js$/.test(new URL(request.url).pathname);
-    const cached = await caches.match(request, { ignoreSearch: !playbackAsset });
+    // Versioned scripts must never fall back to older, incompatible code on mobile.
+    const assetPath=new URL(request.url).pathname;
+    const requireExactVersion=/\.(?:js|css|json|wasm)$/i.test(assetPath);
+    const cached = await caches.match(request, { ignoreSearch: !requireExactVersion });
     if (cached) return cached;
     return Response.error();
   }

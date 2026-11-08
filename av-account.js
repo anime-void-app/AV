@@ -1,9 +1,10 @@
-/* ANIME VOID 72.0 accounts: stable PKCE and persistent sessions; verified identity; CAS-versioned PRIVATE copies.
+/* ANIME VOID 73.0 accounts: independent verified identity and cloud sync; verified identity; CAS-versioned PRIVATE copies.
    A browser snapshot is not proof of a purchase or of any privileged server role. */
 (()=>{'use strict';
 const BASE='https://bszukonnqdujllmblwcw.supabase.co',KEY='sb_publishable_2vQbIxS-UHMuSwRJGKIBGA_TqxEiYsj',AUTH_KEY='avSupabaseAuthV1',OWNER='avCloudDeviceOwnerV1',META='avCloudMetaV1:',UUID=/^[a-f0-9-]{36}$/i;
 let client,identity=null,epoch=0,active=false,busy=false,restoring=false,timer,phase='checking',message='',remote=null,retryAt=0,retryDelay=3000;
 let authFlowPending=false,authRecheckScheduled=false,authInitializing=true,restoreFlight=null;
+let lastVerifiedAt=0,localLockTail=Promise.resolve();
 const t=(ru,en)=>document.documentElement.lang==='en'?en:ru;
 const safe=()=>isSecureContext&&['https:','http:'].includes(location.protocol);
 function needSecure(){if(!safe())throw Error(t('Сначала включите HTTPS для сайта. По HTTP вход и синхронизация заблокированы.','Enable HTTPS first. Sign-in and cloud sync are blocked over HTTP.'));}
@@ -58,10 +59,10 @@ function assertSessionSaved(){
        }
        const incoming=session?.user?.id||null;
        if(event==='SIGNED_OUT'){
-         // Startup and OAuth callback are already checked by init(); do not
-         // let an outdated initialization event erase a newer verified login.
+         // Auth state notifications from stale tabs or refresh must never
+         // erase a verified user before SDK persistence has been checked.
          if(authInitializing||authFlowPending)return;
-         active=false;identity=null;remote=null;++epoch;status('guest');
+         scheduleAuthRecheck();
          return;
        }
        if(event==='USER_UPDATED'&&incoming&&incoming===identity?.id){
@@ -80,7 +81,7 @@ function assertSessionSaved(){
  }
 function status(p,text=''){phase=p;message=text;paintSync();dispatchEvent(new CustomEvent('av:account-state',{detail:state()}));}
 function paintSync(){const text=phase==='saved'?t('Сохранено','Saved'):phase==='saving'||phase==='checking'?t('Сохраняется…','Syncing…'):phase==='offline'?t('Нет связи · данные на устройстве','Offline · kept on device'):phase==='conflict'?t('Конфликт копий','Version conflict'):phase==='guest'?t('Войти','Sign in'):t('Проверить сохранение','Check sync');const profile=document.getElementById('profileAccountButton');if(profile){let n=document.getElementById('profileAccountSyncStatus');if(!n){n=document.createElement('span');n.id='profileAccountSyncStatus';n.setAttribute('role','status');n.style.cssText='display:inline-block;margin-left:10px;font-size:12px;opacity:.8';profile.after(n);}n.textContent=text;}const link=document.querySelector('.vi-sidebar a[href="account.html"]');if(link){link.title=text;let dot=link.querySelector('.av-account-sync-dot');if(!dot){dot=document.createElement('span');dot.className='av-account-sync-dot';dot.setAttribute('aria-hidden','true');dot.style.cssText='margin-left:auto;font-size:10px';link.append(dot);}dot.textContent='●';dot.style.color=phase==='saved'?'#87c7a0':phase==='offline'||phase==='conflict'||phase==='error'?'#ef9b89':'#a694a7';}}
-function state(){return {phase,message,user:identity?{...identity}:null,active,busy,remoteRevision:remote?.revision||0};}
+function state(){return {phase,message,user:identity?{...identity}:null,authenticated:!!identity,verifiedAt:lastVerifiedAt,active,busy,remoteRevision:remote?.revision||0};}
 function meta(uid){try{return JSON.parse(localStorage.getItem(META+uid)||'null');}catch{return null;}}
 function raw(){return window.AVSafe.snapshot();}
 function validated(data){if(!Object.keys(data).length)return {};return {...AVSafe.validateBackup({app:'ANIME VOID',version:1,data:{...data}})};}
@@ -90,7 +91,18 @@ function setMeta(uid,rev,digest){localStorage.setItem(META+uid,JSON.stringify({r
 function same(uid,e){return epoch===e&&identity?.id===uid;}
 async function readRemote(uid){const r=await getClient().from('av_account_documents').select('revision,document,updated_at').eq('user_id',uid).maybeSingle();if(r.error)throw Object.assign(r.error,{status:r.status});return r.data||{revision:0,document:{},updated_at:null};}
 function explain(e){if(['42P01','PGRST205','42883','PGRST202'].includes(e?.code))return t('Облачная база ещё не настроена. Выполните ACCOUNT-CLOUD-SETUP.sql в Supabase.','Cloud database is not configured. Run ACCOUNT-CLOUD-SETUP.sql in Supabase.');if(e?.code==='40001')return t('Есть другая версия данных. Автосохранение приостановлено: выберите нужную копию в аккаунте.','A different cloud revision exists. Autosave paused: choose a copy in Account.');return String(e?.message||e);}
-async function withLock(fn){if(!navigator.locks?.request)throw Error(t('Для безопасного сохранения нужен актуальный браузер и HTTPS.','Safe sync requires a modern browser and HTTPS.'));return navigator.locks.request('av-account-cloud-sync-v1',fn);}
+async function withLock(fn){
+ if(navigator.locks?.request)return navigator.locks.request('av-account-cloud-sync-v1',fn);
+ // Safari / mobile embedded browsers may not implement Web Locks.
+ // This serializes this tab. The server's expected-revision CAS operation
+ // remains authoritative across devices and tabs; do not bypass it.
+ const previous=localLockTail;
+ let release;
+ localLockTail=new Promise(resolve=>{release=resolve;});
+ await previous;
+ try{return await fn();}
+ finally{release();}
+}
 async function push(uid,e,expected,data){if(!same(uid,e)||localStorage.getItem(OWNER)!==uid)throw Error('Account changed; save cancelled');await keep('pending',uid,data);if(!same(uid,e)||localStorage.getItem(OWNER)!==uid)throw Error('Account changed; save cancelled');const r=await getClient().rpc('av_account_save',{p_expected_revision:expected,p_document:data,p_expected_user:uid});if(r.error)throw Object.assign(r.error,{status:r.status});if(!same(uid,e)||localStorage.getItem(OWNER)!==uid)return;const row=r.data?.[0];if(!Number.isSafeInteger(row?.revision)||row.revision!==expected+1)throw Error('Unverified save response');const digest=await hash(data);await baseline(uid,row.revision,data);if(!same(uid,e)||localStorage.getItem(OWNER)!==uid)return;setMeta(uid,row.revision,digest);remote={revision:row.revision,document:data,updated_at:row.updated_at};status('saved',t('Сохранено','Saved'));}
 // Recovery copies are private browser storage, not a new source of server privileges.
 function recoveryStore(){return new Promise((resolve,reject)=>{const q=indexedDB.open('anime-void-account-recovery-v1',1);q.onupgradeneeded=()=>q.result.createObjectStore('copies');q.onerror=()=>reject(q.error);q.onsuccess=()=>resolve(q.result);});}
@@ -124,48 +136,67 @@ async function automatic(uid,e){await withLock(async()=>{if(!same(uid,e))return;
  status('conflict',t('Одни и те же данные изменены на двух устройствах. Обе копии сохранены.','The same data changed on two devices. Both copies are retained.'));
  });}
 async function restore(){
- // Only one verification/merge may run at a time. Re-entrant getSession,
- // auth events, tab focus and the UI retry button share the same promise.
  if(restoreFlight)return restoreFlight;
  const work=Promise.resolve().then(async()=>{
-   const e=++epoch,previous=identity;
-   active=false;remote=null;
-   status('checking',t('Проверяем сохранённый вход…','Checking saved sign-in…'));
-   try{
-     needSecure();ensureAuthStorage();
-     const c=getClient();
-     const session=await c.auth.getSession();
-     if(session.error)throw session.error;
-     if(e!==epoch)return;
-     if(!session.data?.session){
-       identity=null;status('guest');
-       return;
-     }
-     const checked=await c.auth.getUser();
-     if(checked.error)throw checked.error;
-     const u=checked.data?.user;
-     if(!UUID.test(u?.id||''))throw Error('Unverified identity');
-     if(e!==epoch)return;
-     identity={id:u.id,email:u.email||''};
-     await automatic(u.id,e);
-     retryDelay=3000;
-   }catch(err){
-     if(e!==epoch)return;
-     if(networkError(err)&&!identity)identity=previous;
-     failed(err);
+  const e=++epoch,previous=identity;
+  active=false;
+  if(!previous)status('checking',t('Проверяем сохранённый вход…','Checking saved sign-in…'));
+  try{
+   needSecure();ensureAuthStorage();
+   const c=getClient();
+   let result=await c.auth.getSession();
+   if(result.error)throw result.error;
+   if(e!==epoch)return;
+   // iOS WebKit can sometimes report a transient null after foregrounding.
+   // Retry only when Supabase has an actual local persisted session candidate.
+   if(!result.data?.session&&localStorage.getItem(AUTH_KEY)){
+    await Promise.resolve();
+    result=await c.auth.getSession();
+    if(result.error)throw result.error;
+    if(e!==epoch)return;
    }
+   if(!result.data?.session){
+    identity=null;lastVerifiedAt=0;remote=null;
+    status('guest',t('Войдите в аккаунт.','Sign in to your account.'));
+    return;
+   }
+   const verified=await c.auth.getUser();
+   if(verified.error)throw verified.error;
+   const u=verified.data?.user;
+   if(!UUID.test(u?.id||''))throw Error('Unverified identity');
+   if(e!==epoch)return;
+   const changed=identity?.id!==u.id;
+   identity={id:u.id,email:u.email||''};
+   lastVerifiedAt=Date.now();
+   if(changed)remote=null;
+   // Authentication is complete here. Cloud save and IndexedDB errors are
+   // separate; never present them as a forced sign-out.
+   status('authenticated',t('Вход подтверждён. Проверяем сохранения…',
+                            'Signed in. Checking cloud saves…'));
+   retryDelay=3000;
+   try{await automatic(u.id,e);}
+   catch(cloudError){if(e===epoch)failed(cloudError);}
+  }catch(err){
+   if(e!==epoch)return;
+   if(networkError(err)&&!identity)identity=previous;
+   // An invalid or expired auth token is not a successful login.
+   if(!networkError(err)&&[401,403].includes(Number(err?.status))){
+    identity=null;lastVerifiedAt=0;active=false;remote=null;
+   }
+   failed(err);
+  }
  });
  restoreFlight=work;
  try{return await work;}
  finally{if(restoreFlight===work)restoreFlight=null;}
 }
-async function applyCloud(uid,e,cloud,expectedHash,auto=false){const data=validated(cloud.document),base=cloud.pendingBase?validated(cloud.pendingBase):data,digest=await hash(base);if(!same(uid,e)||await hash(validated(raw()))!==expectedHash)throw Error(t('Данные изменились во время загрузки. Повторяем синхронизацию.','Local data changed during download. Sync will retry.'));await keep('safety',localStorage.getItem(OWNER)||uid,validated(raw()));await baseline(uid,cloud.revision,base);if(!same(uid,e)||await hash(validated(raw()))!==expectedHash)throw Error('Local data changed; retrying');restoring=true;try{AVSafe.commitBackup(data,'replace');localStorage.setItem(OWNER,uid);setMeta(uid,cloud.revision,digest);}finally{restoring=false;}const autoReload=auto&&!location.pathname.endsWith('/account.html');
- active=!autoReload;
- status(autoReload?'reloading':'saved',autoReload?t('Загружаем данные аккаунта…','Loading account data…'):t('Сохранено','Saved'));
+
+async function applyCloud(uid,e,cloud,expectedHash,auto=false){const data=validated(cloud.document),base=cloud.pendingBase?validated(cloud.pendingBase):data,digest=await hash(base);if(!same(uid,e)||await hash(validated(raw()))!==expectedHash)throw Error(t('Данные изменились во время загрузки. Повторяем синхронизацию.','Local data changed during download. Sync will retry.'));await keep('safety',localStorage.getItem(OWNER)||uid,validated(raw()));await baseline(uid,cloud.revision,base);if(!same(uid,e)||await hash(validated(raw()))!==expectedHash)throw Error('Local data changed; retrying');restoring=true;try{AVSafe.commitBackup(data,'replace');localStorage.setItem(OWNER,uid);setMeta(uid,cloud.revision,digest);}finally{restoring=false;}// Cloud data was applied safely. Do not reload mobile pages automatically:
+ // it can interrupt OAuth session initialization and create a login loop.
+ active=cloud.revision>0;
+ status(active?'saved':'choose',active?t('Сохранено','Saved'):
+   t('Аккаунт подключён. Облачная копия ещё не создана.','Signed in. Cloud copy not created yet.'));
  dispatchEvent(new CustomEvent('av:cloud-restored',{detail:{automatic:auto}}));
- // The account page has no catalog UI to rehydrate; a forced reload during
- // initial OAuth login risks presenting a guest while storage is still settling.
- if(autoReload){assertSessionSaved();location.reload();}
 }
 async function save(){if(!active||busy||restoring||!identity||!safe())return;busy=true;const uid=identity.id,e=epoch;try{await withLock(async()=>{if(!same(uid,e)||localStorage.getItem(OWNER)!==uid){active=false;return;}const m=meta(uid);if(!m){active=false;return;}const data=validated(raw());if(await hash(data)===m.hash)return;await keep('pending',uid,data);status('saving',t('Сохраняется…','Saving…'));await push(uid,e,m.revision,data);});}catch(err){if(same(uid,e)){if(err?.code==='40001'){active=false;setTimeout(()=>restore(),0);}else failed(err);}}finally{busy=false;}}
 async function tick(){if(busy||restoring||(phase==='checking'||phase==='reloading'))return;if(phase==='offline'&&Date.now()>=retryAt){await restore();return;}if(phase==='error'&&/Local data changed|Данные изменились/.test(message)){await restore();return;}await save();}

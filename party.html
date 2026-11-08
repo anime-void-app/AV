@@ -8,9 +8,10 @@
 <link rel="icon" href="icon-192.png">
 <link rel="stylesheet" href="av-party-68.css?v=68.0">
 <link rel="stylesheet" href="av-party-71.css?v=71.0">
+<link rel="stylesheet" href="av-party-74.css?v=74.0">
 <script defer src="supabase-client.js?v=2.69.1"></script>
-<script defer src="av-account.js?v=72.0"></script>
-<script defer src="av-party-72.js?v=72.0"></script>
+<script defer src="av-account.js?v=73.0"></script>
+<script defer src="av-party-74.js?v=74.0"></script>
 </head>
 <body class="av-party-page">
 <header class="party-header">
@@ -28,13 +29,23 @@
      <input id="partyAnimeId" type="text" inputmode="numeric" maxlength="20" placeholder="4224" autocomplete="off">
      <button id="partyCreate" class="party-primary" type="button">+ Создать комнату</button>
     </div>
-    <p class="party-hint">Комната доступна по ссылке-приглашению. Чтобы войти, нужен аккаунт ANIME VOID.</p>
+    <p class="party-hint">Создай комнату для своего аниме — появятся ссылка и уникальный код.</p>
+  </div>
+  <div class="party-code-join">
+   <div class="party-code-heading"><span class="party-code-symbol" aria-hidden="true">⌘</span><div><strong>Войти по коду друга</strong><small>Без ссылки · код из восьми символов</small></div></div>
+   <div class="party-code-line">
+    <label for="partyJoinCode" class="party-sr-only">Код комнаты</label>
+    <input id="partyJoinCode" type="text" placeholder="Например, 8A2F3B9C" maxlength="8" autocomplete="off" spellcheck="false" autocapitalize="characters" inputmode="text">
+    <button id="partyJoinByCode" class="party-primary" type="button">Войти в комнату</button>
+   </div>
+   <p class="party-hint">Для входа требуется аккаунт. Неверные коды ограничены по числу попыток.</p>
   </div>
   <div id="partyStatus" class="party-status" role="status" aria-live="polite"></div>
  </section>
  <section class="party-session" id="partySession" hidden>
   <div class="party-session-bar">
    <div class="party-session-info"><span class="party-kicker">ПРИВАТНАЯ КОМНАТА</span><h2 id="partyRoomName">Совместный просмотр</h2><span id="partyMemberCount">1 участник</span></div>
+   <div class="party-access-code"><span>КОД КОМНАТЫ</span><strong id="partyRoomCode">—</strong><button id="partyCopyCode" class="party-ghost" type="button">Копировать код</button></div>
    <div class="party-session-actions"><button id="partyCopy" type="button" class="party-ghost">Скопировать приглашение</button><button id="partyReconnect" type="button" class="party-ghost" aria-label="Переподключиться к комнате">↻ Переподключиться</button><button id="partyLeave" type="button" class="party-danger">Покинуть</button></div>
   </div>
   <div class="party-grid">
@@ -50,6 +61,11 @@
       <button id="partyNext" type="button" aria-label="Следующая серия">→</button>
       <button id="partySync" type="button" class="party-ghost">Сверить просмотр</button>
      </div>
+    </div>
+    <div id="partyPlaybackHelp" class="party-play-help">
+     <button id="partyStartPlayback" type="button" class="party-primary">▶ Запустить видео</button>
+     <a id="partyOpenPlayback" class="party-ghost" href="watch.html" target="_blank" rel="noopener noreferrer">Открыть плеер отдельно</a>
+     <span>Если видео не воспроизводится внутри комнаты, открой его отдельно и нажми ▶. Для Kodik синхронизация паузы ограничена.</span>
     </div>
     <p id="partyPlayerStatus" class="party-player-status" role="status" aria-live="polite">Проверяем подключение видеоплеера…</p>
     <p class="party-limit">Для встроенного HTML5-плеера запуск, пауза и перемотка ведущего передаются примерно раз в секунду; задержка зависит от сети и браузера. Во внешнем Kodik-плеере синхронизируется выбранная серия, но не перемотка. У каждого участника видео воспроизводится отдельно.</p>

@@ -1,0 +1,75 @@
+/* ANIME VOID V74 — invite-code rooms, discoverable playback controls and compact mobile panels */
+body.av-party-page .party-hero{position:relative}
+body.av-party-page .party-lobby,
+body.av-party-page .party-code-join{
+ border:1px solid rgba(196,158,244,.29);
+ background:linear-gradient(128deg,rgba(57,38,82,.92),rgba(24,17,41,.94));
+ box-shadow:0 14px 45px rgba(8,4,17,.25);
+ padding:19px 20px;border-radius:17px;margin-bottom:13px;
+ max-width:660px;box-sizing:border-box;
+}
+body.av-party-page .party-code-heading{display:flex;gap:12px;align-items:center;margin-bottom:13px}
+body.av-party-page .party-code-heading strong{display:block;font-size:15px;color:#f6e9ff}
+body.av-party-page .party-code-heading small{display:block;font-size:12px;color:#bdaaCF;margin-top:2px}
+body.av-party-page .party-code-symbol{
+ display:grid;place-items:center;width:42px;height:42px;flex:0 0 42px;
+ background:linear-gradient(135deg,#693cac,#ca76ba);font-size:22px;
+ color:white;border-radius:13px;box-shadow:0 5px 22px rgba(167,106,244,.26);
+}
+body.av-party-page .party-code-line{display:flex;gap:10px}
+body.av-party-page #partyJoinCode{
+ flex:1;min-width:0;min-height:49px;box-sizing:border-box;
+ background:#100c1b;border:1px solid #735493;
+ border-radius:12px;color:#fff;font:750 19px/1.2 ui-monospace,SFMono-Regular,Consolas,monospace;
+ letter-spacing:.19em;padding:11px 14px;text-transform:uppercase;
+}
+body.av-party-page #partyJoinCode::placeholder{font-size:13px;letter-spacing:.06em;color:#9a88b2;font-weight:500}
+body.av-party-page #partyJoinByCode{min-height:49px}
+body.av-party-page .party-access-code{
+ display:flex;align-items:center;flex-wrap:wrap;gap:7px 11px;
+ border:1px solid rgba(189,141,242,.27);
+ background:rgba(132,79,176,.12);border-radius:13px;padding:10px 12px
+}
+body.av-party-page .party-access-code>span{font-size:10px;letter-spacing:.14em;color:#bb9ed7;font-weight:800}
+body.av-party-page .party-access-code strong{
+ font:850 20px/1.15 ui-monospace,Consolas,monospace;
+ letter-spacing:.15em;color:#efdcff;user-select:all;
+}
+body.av-party-page #partyCopyCode{padding:9px 12px;min-height:40px;font-size:12px}
+body.av-party-page .party-session-bar{gap:12px}
+body.av-party-page .party-play-help{
+ display:flex;align-items:center;gap:9px 13px;flex-wrap:wrap;
+ margin:14px 18px;padding:13px 15px;
+ border-radius:14px;background:rgba(119,82,174,.14);
+ border:1px solid rgba(192,153,238,.25)
+}
+body.av-party-page .party-play-help[hidden]{display:none!important}
+body.av-party-page .party-play-help button,
+body.av-party-page .party-play-help a{display:inline-flex;align-items:center;justify-content:center;min-height:46px;box-sizing:border-box;text-decoration:none}
+body.av-party-page .party-play-help>span{
+ display:block;flex:1 1 100%;font-size:12px;line-height:1.55;color:#c7bbd3
+}
+body.av-party-page .party-player-status{overflow-wrap:anywhere}
+body.av-party-page #partyJoinCode:focus-visible,
+body.av-party-page .party-play-help :is(a,button):focus-visible{
+ outline:3px solid #e2b5ff;outline-offset:3px;
+}
+@media(min-width:1051px){
+ body.av-party-page .party-session-bar{display:grid;grid-template-columns:minmax(180px,1fr) auto auto}
+}
+@media(max-width:650px){
+ body.av-party-page .party-lobby,body.av-party-page .party-code-join{padding:15px;margin-bottom:11px}
+ body.av-party-page .party-code-line{flex-direction:column}
+ body.av-party-page #partyJoinByCode{width:100%;min-height:48px}
+ body.av-party-page .party-session-bar{padding:14px}
+ body.av-party-page .party-access-code{width:100%;justify-content:space-between}
+ body.av-party-page #partyCopyCode{flex:1;min-width:145px}
+ body.av-party-page .party-play-help{margin:12px 13px;padding:12px}
+ body.av-party-page .party-play-help :is(a,button){width:100%;min-height:46px}
+ body.av-party-page .party-play-help>span{font-size:11px}
+}
+@media(max-width:380px){
+ body.av-party-page .party-access-code strong{font-size:18px}
+ body.av-party-page .party-code-heading strong{font-size:14px}
+ body.av-party-page #partyJoinCode{letter-spacing:.13em}
+}

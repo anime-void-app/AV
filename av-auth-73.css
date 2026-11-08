@@ -1,0 +1,35 @@
+/* V73 — verified auth separate from cloud-sync warnings; mobile touch targets */
+.av-account-page .av73-cloud-warning{
+ border:1px solid rgba(245,178,95,.5);
+ background:linear-gradient(120deg,rgba(160,97,53,.15),rgba(56,35,60,.25));
+ border-radius:13px;padding:14px 16px;margin-top:12px;
+ color:#f4dfbe
+}
+.av-account-page .av73-cloud-warning[hidden]{display:none!important}
+.av-account-page .av73-cloud-warning p{margin:0 0 12px;line-height:1.6;font-size:13px}
+.av-account-page .av73-cloud-warning button{
+ display:block;min-height:46px;width:100%;
+ background:#59432f;border:1px solid #ba9469;color:#fff2d6;
+ font-weight:750;text-align:center
+}
+.av-account-page #accountStatus[data-phase="authenticated"],
+.av-account-page #accountStatus[data-phase="saved"]{
+ background:rgba(50,134,93,.14);color:#c5f3d7;
+ border:1px solid rgba(97,199,150,.35);border-radius:12px;padding:12px 14px
+}
+.av-account-page #accountStatus[data-phase="conflict"],
+.av-account-page #accountStatus[data-phase="offline"],
+.av-account-page #accountStatus[data-phase="error"],
+.av-account-page #accountStatus[data-phase="choose"]{
+ background:rgba(171,99,54,.12);color:#ffe2bf;
+ border:1px solid rgba(245,171,103,.36);border-radius:12px;padding:12px 14px
+}
+.av-account-page .av73-browser-tip{font-size:12px;line-height:1.55;overflow-wrap:anywhere}
+.av-account-page #sessionPersistence{color:#a3e3c1;font-size:13px}
+.av-account-page #signedSection{gap:12px}
+@media(max-width:760px){
+.av-account-page .av73-cloud-warning{padding:12px}
+.av-account-page #googleLogin{min-height:50px}
+.av-account-page #accountStatus{overflow-wrap:anywhere}
+.av-account-page #accountEmail{font-size:16px;overflow-wrap:anywhere}
+}
