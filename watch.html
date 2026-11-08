@@ -249,9 +249,21 @@
 <script defer="" src="av-atmosphere.js?v=25.3"></script>
 <link href="void-interface.css?v=24.29" rel="stylesheet"/><script src="void-interface.js?v=24.29"></script>
 <script src="void-journal.js?v=18.1"></script>
-<link href="void-tv.css?v=18.1" rel="stylesheet"/><script defer="" src="void-tv.js?v=18.1"></script><link href="void-watch-layout.css?v=18.1" rel="stylesheet"/><link href="void-profile-next.css?v=19" rel="stylesheet"/><script defer="" src="av-shell.js?v=21"></script><script defer="" src="void-profile-next.js?v=24"></script><script src="void-vip-23.js?v=24.29"></script><link href="void-vip-23.css?v=23" rel="stylesheet"/><link href="void-refresh-24.css?v=24.29" rel="stylesheet"/><script src="player-sources.js?v=24.36"></script><link href="av-player.css?v=24.36" rel="stylesheet"/><link href="av-kodik-player.css?v=24.36" rel="stylesheet"/><script defer="" src="vendor/hls.light-1.6.15.min.js?v=24.31"></script><script defer src="av-watch-ledger.js?v=47.0"></script><script defer src="av-watch-tracker.js?v=24.40"></script><script defer src="av-kodik-test.js?v=67.0"></script><link rel="stylesheet" href="site-polish.css?v=34.0"><link rel="stylesheet" href="av-watch-57.css?v=66.0"><script defer src="av-watch-57.js?v=66.0"></script>
-<link rel="stylesheet" href="av-global-67.css?v=67.0"></head>
-<body class="av-shell av-watch-page">
+<link href="void-tv.css?v=18.1" rel="stylesheet"/><script defer="" src="void-tv.js?v=18.1"></script><link href="void-watch-layout.css?v=18.1" rel="stylesheet"/><link href="void-profile-next.css?v=19" rel="stylesheet"/><script defer="" src="av-shell.js?v=21"></script><script defer="" src="void-profile-next.js?v=24"></script><script src="void-vip-23.js?v=24.29"></script><link href="void-vip-23.css?v=23" rel="stylesheet"/><link href="void-refresh-24.css?v=24.29" rel="stylesheet"/><script src="player-sources.js?v=24.36"></script><link href="av-player.css?v=24.36" rel="stylesheet"/><link href="av-kodik-player.css?v=24.36" rel="stylesheet"/><script defer="" src="vendor/hls.light-1.6.15.min.js?v=24.31"></script><script defer src="av-watch-ledger.js?v=47.0"></script><script defer src="av-watch-tracker.js?v=24.40"></script><script defer src="av-kodik-test.js?v=67.0"></script><link rel="stylesheet" href="site-polish.css?v=34.0"><link rel="stylesheet" href="av-watch-57.css?v=66.0"><script defer src="av-watch-57.js?v=68.0"></script>
+<link rel="stylesheet" href="av-global-67.css?v=67.0"><style>
+body.av-watch-page.av-party-embed>header,
+body.av-watch-page.av-party-embed .watch-top,
+body.av-watch-page.av-party-embed .av-watch57-toolbar,
+body.av-watch-page.av-party-embed .av-watch57-source-note,
+body.av-watch-page.av-party-embed .avp2-tracker{display:none!important}
+body.av-watch-page.av-party-embed{background:#080611;min-height:0;overflow-x:hidden}
+body.av-watch-page.av-party-embed>main{box-sizing:border-box;width:100%;max-width:100%;padding:8px;margin:0}
+body.av-watch-page.av-party-embed #avPlayer{width:100%;margin:0;border-radius:10px;overflow:hidden}
+body.av-watch-page.av-party-embed #avPlayer .avp2-view{min-height:240px}
+</style></head>
+<body class="av-shell av-watch-page"><script>
+if(new URLSearchParams(location.search).get('party')==='1')document.body.classList.add('av-party-embed');
+</script>
 <header>
 <a class="logo" href="index.html">ANIME<span>VOID</span></a>
 <div class="header-actions">

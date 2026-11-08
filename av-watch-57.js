@@ -38,11 +38,13 @@
   back.href='index.html#catalog';
   const journal=make('a','av-watch57-link');
   journal.href='history.html';
+  const together=make('a','av-watch57-link');
   const information=make('a','av-watch57-link');
   const id=new URLSearchParams(location.search).get('id');
   const validId=/^(?:anilist-)?[1-9]\d*$/.test(String(id||''));
   information.href=validId?'anime.html?id='+encodeURIComponent(id):'index.html';
-  links.append(back,journal,information);
+  together.href=validId?'party.html?anime='+encodeURIComponent(id):'party.html';
+  links.append(back,journal,together,information);
   toolbar.append(heading,controls,links);
   player.insertAdjacentElement('afterend',toolbar);
   controls.classList.add('av-watch57-controls');
@@ -153,6 +155,7 @@
       'Switch episodes without opening settings. Episode marks are not measured watch time.');
     back.textContent=T('← В каталог','← Catalog');
     journal.textContent=T('История просмотра','Watch history');
+    together.textContent=T('🎬 Смотреть вместе','🎬 Watch together');
     information.textContent=T('Описание и обсуждение','Details & discussion');
     previous.textContent=T('← Раньше','← Earlier');
     next.textContent=T('Позже →','Later →');
