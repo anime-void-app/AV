@@ -7,9 +7,10 @@
 <title>Совместный просмотр — ANIME VOID</title>
 <link rel="icon" href="icon-192.png">
 <link rel="stylesheet" href="av-party-68.css?v=68.0">
+<link rel="stylesheet" href="av-party-71.css?v=71.0">
 <script defer src="supabase-client.js?v=2.69.1"></script>
 <script defer src="av-account.js?v=60.0"></script>
-<script defer src="av-party-68.js?v=68.0"></script>
+<script defer src="av-party-71.js?v=71.0"></script>
 </head>
 <body class="av-party-page">
 <header class="party-header">
@@ -34,7 +35,7 @@
  <section class="party-session" id="partySession" hidden>
   <div class="party-session-bar">
    <div class="party-session-info"><span class="party-kicker">ПРИВАТНАЯ КОМНАТА</span><h2 id="partyRoomName">Совместный просмотр</h2><span id="partyMemberCount">1 участник</span></div>
-   <div class="party-session-actions"><button id="partyCopy" type="button" class="party-ghost">Скопировать приглашение</button><button id="partyLeave" type="button" class="party-danger">Покинуть</button></div>
+   <div class="party-session-actions"><button id="partyCopy" type="button" class="party-ghost">Скопировать приглашение</button><button id="partyReconnect" type="button" class="party-ghost" aria-label="Переподключиться к комнате">↻ Переподключиться</button><button id="partyLeave" type="button" class="party-danger">Покинуть</button></div>
   </div>
   <div class="party-grid">
    <section class="party-main" aria-label="Совместный плеер">
@@ -50,6 +51,7 @@
       <button id="partySync" type="button" class="party-ghost">Сверить просмотр</button>
      </div>
     </div>
+    <p id="partyPlayerStatus" class="party-player-status" role="status" aria-live="polite">Проверяем подключение видеоплеера…</p>
     <p class="party-limit">Для встроенного HTML5-плеера синхронизируются пауза, запуск и позиция. Во внешнем Kodik-плеере синхронизируется выбранная серия, но не перемотка. У каждого участника видео воспроизводится отдельно.</p>
    </section>
    <aside class="party-sidebar">
@@ -70,10 +72,12 @@
      <div class="party-voice-art" aria-hidden="true">🎙</div>
      <h3>Голосовая комната</h3>
      <p>Включи микрофон, чтобы говорить с друзьями. Браузер спросит разрешение.</p>
-     <button id="partyMic" type="button" class="party-primary">Включить микрофон</button>
-     <button id="partyMute" type="button" class="party-ghost" disabled>Выключить звук микрофона</button>
+     <button id="partyMic" type="button" class="party-primary" aria-pressed="false">Включить микрофон</button>
+     <button id="partyMute" type="button" class="party-ghost" aria-pressed="false" disabled>Выключить звук микрофона</button>
+     <button id="partySound" type="button" class="party-ghost">♫ Включить звук друзей</button>
+     <button id="partyVoiceRetry" type="button" class="party-ghost">↻ Переподключить голос</button>
      <div id="partyVoiceState" role="status">Микрофон выключен</div>
-     <p class="party-tip">Голос работает через WebRTC, без записи. Некоторые сети требуют TURN-сервер; при таком подключении голос может быть недоступен. Максимум 4 собеседника в MVP.</p>
+     <p class="party-tip">Голос работает через WebRTC, без записи. Некоторые сети требуют TURN-сервер; при таком подключении голос может быть недоступен. До 4 собеседников одновременно.</p>
      <div id="partyRemoteAudio" hidden></div>
     </section>
     <div class="party-members"><div class="party-members-title"><strong>Сейчас здесь</strong><span id="partyOnline">0 онлайн</span></div><div id="partyPeople" class="party-people"></div></div>
