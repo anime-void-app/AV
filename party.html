@@ -9,9 +9,10 @@
 <link rel="stylesheet" href="av-party-68.css?v=68.0">
 <link rel="stylesheet" href="av-party-71.css?v=71.0">
 <link rel="stylesheet" href="av-party-74.css?v=74.0">
+<link rel="stylesheet" href="av-party-75.css?v=75.0">
 <script defer src="supabase-client.js?v=2.69.1"></script>
 <script defer src="av-account.js?v=73.0"></script>
-<script defer src="av-party-74.js?v=74.0"></script>
+<script defer src="av-party-75.js?v=75.0"></script>
 </head>
 <body class="av-party-page">
 <header class="party-header">
@@ -44,7 +45,7 @@
  </section>
  <section class="party-session" id="partySession" hidden>
   <div class="party-session-bar">
-   <div class="party-session-info"><span class="party-kicker">ПРИВАТНАЯ КОМНАТА</span><h2 id="partyRoomName">Совместный просмотр</h2><span id="partyMemberCount">1 участник</span></div>
+   <div class="party-session-info"><span class="party-kicker">ПРИВАТНАЯ КОМНАТА</span><h2 id="partyRoomName">Совместный просмотр</h2><span id="partyMemberCount">1 участник</span><span id="partyConnection" class="party-connection" role="status" aria-live="polite" data-state="idle">Вне комнаты</span></div>
    <div class="party-access-code"><span>КОД КОМНАТЫ</span><strong id="partyRoomCode">—</strong><button id="partyCopyCode" class="party-ghost" type="button">Копировать код</button></div>
    <div class="party-session-actions"><button id="partyCopy" type="button" class="party-ghost">Скопировать приглашение</button><button id="partyReconnect" type="button" class="party-ghost" aria-label="Переподключиться к комнате">↻ Переподключиться</button><button id="partyLeave" type="button" class="party-danger">Покинуть</button></div>
   </div>
@@ -72,8 +73,8 @@
    </section>
    <aside class="party-sidebar">
     <div class="party-tabs" role="tablist" aria-label="Общение">
-     <button id="partyChatTab" type="button" role="tab" aria-selected="true" aria-controls="partyChatPane">Чат</button>
-     <button id="partyVoiceTab" type="button" role="tab" aria-selected="false" aria-controls="partyVoicePane">Голос</button>
+     <button id="partyChatTab" type="button" role="tab" aria-selected="true" aria-controls="partyChatPane" tabindex="0">Чат <span id="partyUnread" class="party-unread" aria-hidden="true" hidden></span></button>
+     <button id="partyVoiceTab" type="button" role="tab" aria-selected="false" aria-controls="partyVoicePane" tabindex="-1">Голос</button>
     </div>
     <section id="partyChatPane" class="party-pane" role="tabpanel" aria-labelledby="partyChatTab">
      <div id="partyMessages" class="party-messages" role="log" aria-label="Сообщения комнаты" aria-live="polite"><p class="party-empty">Начни разговор — сообщения видны тем, кто сейчас в комнате.</p></div>

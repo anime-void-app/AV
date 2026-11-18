@@ -1,0 +1,14 @@
+/* ANIME VOID V75 — room status and chat usability */
+body.av-party-page .party-connection{display:inline-flex;align-items:center;gap:8px;width:max-content;max-width:100%;padding:7px 11px;margin-top:9px;border-radius:99px;border:1px solid rgba(191,160,236,.28);background:rgba(117,94,158,.15);color:#cdbedc;font-size:12px;font-weight:750;line-height:1.3}
+body.av-party-page .party-connection:before{content:"";display:block;width:8px;height:8px;flex:0 0 8px;background:#a79ab8;border-radius:50%}
+body.av-party-page .party-connection[data-state="connected"]{color:#9ff1d7;border-color:rgba(93,221,176,.35);background:rgba(36,135,102,.13)}
+body.av-party-page .party-connection[data-state="connected"]:before{background:#67e0b9}
+body.av-party-page .party-connection[data-state="connecting"]{color:#ffdeb0;border-color:rgba(238,184,114,.29)}
+body.av-party-page .party-connection[data-state="connecting"]:before{background:#f4c07c}
+body.av-party-page .party-connection[data-state="offline"]{color:#ffb4ca;border-color:rgba(238,101,142,.42);background:rgba(164,60,94,.17)}
+body.av-party-page .party-connection[data-state="offline"]:before{background:#f98fb4}
+body.av-party-page .party-tabs button{display:flex;align-items:center;justify-content:center;gap:9px;min-width:0}
+body.av-party-page .party-unread{min-width:21px;height:21px;box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;padding:0 5px;background:#ae70ed;color:#140c1e;border-radius:20px;font-size:11px;font-weight:900;line-height:1}
+body.av-party-page .party-unread[hidden]{display:none!important}
+body.av-party-page :is(#partyChatTab,#partyVoiceTab):focus-visible{outline:3px solid #e4baff;outline-offset:-4px}
+@media(max-width:650px){body.party-in-room .party-hero .party-eyebrow{display:none}body.party-in-room .party-hero h1{margin:0 0 4px}body.party-in-room .party-hero>p{display:none}body.av-party-page .party-session-info{display:flex;flex-direction:column;align-items:flex-start;gap:2px}body.av-party-page .party-connection{margin-top:6px}body.av-party-page .party-tabs button{min-height:51px}}
