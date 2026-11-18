@@ -10,9 +10,11 @@
 <link rel="stylesheet" href="av-party-71.css?v=71.0">
 <link rel="stylesheet" href="av-party-74.css?v=74.0">
 <link rel="stylesheet" href="av-party-75.css?v=75.0">
+<link rel="stylesheet" href="av-party-76.css?v=76.0">
 <script defer src="supabase-client.js?v=2.69.1"></script>
 <script defer src="av-account.js?v=73.0"></script>
-<script defer src="av-party-75.js?v=75.0"></script>
+<script defer src="av-party-sync-76.js?v=76.0"></script>
+<script defer src="av-party-76.js?v=76.0"></script>
 </head>
 <body class="av-party-page">
 <header class="party-header">
@@ -66,10 +68,11 @@
     <div id="partyPlaybackHelp" class="party-play-help">
      <button id="partyStartPlayback" type="button" class="party-primary">▶ Запустить видео</button>
      <a id="partyOpenPlayback" class="party-ghost" href="watch.html" target="_blank" rel="noopener noreferrer">Открыть плеер отдельно</a>
-     <span>Если видео не воспроизводится внутри комнаты, открой его отдельно и нажми ▶. Для Kodik синхронизация паузы ограничена.</span>
+     <span>Для первого запуска нажми ▶ внутри плеера у каждого участника. После получения времени от Kodik комната попробует автоматически выровнять воспроизведение. Если провайдер не отвечает на команды, используйте отдельный плеер.</span>
     </div>
+    <p id="partySyncMode" class="party-sync-mode" role="status" aria-live="polite" data-mode="pending">Ожидаем запуска синхронизации…</p>
     <p id="partyPlayerStatus" class="party-player-status" role="status" aria-live="polite">Проверяем подключение видеоплеера…</p>
-    <p class="party-limit">Для встроенного HTML5-плеера запуск, пауза и перемотка ведущего передаются примерно раз в секунду; задержка зависит от сети и браузера. Во внешнем Kodik-плеере синхронизируется выбранная серия, но не перемотка. У каждого участника видео воспроизводится отдельно.</p>
+    <p class="party-limit">Для HTML5 и Kodik (при поддержке его команд API) комната сверяет позицию, запуск, паузу и перемотку. Первый запуск Kodik может требовать нажатия ▶ у каждого зрителя. Точность зависит от сети и событий провайдера; посекундное совпадение не гарантировано. Видео каждому зрителю отдаёт его собственный источник.</p>
    </section>
    <aside class="party-sidebar">
     <div class="party-tabs" role="tablist" aria-label="Общение">

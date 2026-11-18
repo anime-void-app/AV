@@ -1,0 +1,18 @@
+/* ANIME VOID V76 — in-room sync confidence and playback-readiness surface */
+body.av-party-page .party-sync-mode{
+ margin:14px 18px 10px;padding:12px 15px;border:1px solid rgba(176,145,226,.32);
+ border-radius:12px;background:linear-gradient(110deg,rgba(96,67,142,.22),rgba(25,18,42,.76));
+ color:#dfd1f1;font-weight:750;font-size:13px;line-height:1.45;
+ display:flex;gap:9px;align-items:center;
+}
+body.av-party-page .party-sync-mode:before{
+ content:"";width:9px;height:9px;flex:0 0 9px;background:#d8b3fa;
+ border-radius:50%;box-shadow:0 0 13px rgba(183,148,230,.45);
+}
+body.av-party-page .party-sync-mode[data-mode="active"]{
+ border-color:rgba(107,213,170,.35);color:#b4f3de;
+}
+body.av-party-page .party-sync-mode[data-mode="active"]:before{background:#59d7aa;box-shadow:0 0 14px rgba(77,221,168,.5)}
+body.av-party-page .party-person{max-width:100%;white-space:normal;line-height:1.4}
+@media(max-width:650px){body.av-party-page .party-sync-mode{margin:12px 13px;padding:12px;font-size:12px}}
+@media(prefers-reduced-motion:reduce){body.av-party-page .party-sync-mode{transition:none}}
