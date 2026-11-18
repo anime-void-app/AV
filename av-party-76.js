@@ -72,7 +72,10 @@ function setHostUI(){
  ui.syncInfo.textContent=host?
   'Ты ведущий · '+clockPosition+' · действия передаются всем':
   'Синхронизация с ведущим · '+clockPosition+' · примерно каждую секунду';
- ui.count.textContent=host?'Ты создатель комнаты':'Ты участник комнаты';
+ const members=connected?present():[];
+ ui.count.textContent=members.length?
+  members.length+' онлайн · '+members.filter(person=>person.ready).length+' видео готово':
+  (host?'Ты создатель комнаты':'Ты участник комнаты');
 }
 function player(){
  try{return ui.frame.contentWindow?.AVPlayer?.getPlayer?.()||null;}catch{return null;}

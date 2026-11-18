@@ -43,6 +43,15 @@ test('Kodik trusted signals and party-only commands are wired',()=>{
  assert.match(p,/sampleProvider\(provider\.state\(\),room\.episode\)/);
  assert.match(html,/id="partySyncMode"/);
 });
+test('room membership and previous features remain wired',()=>{
+ const s=load('av-party-76.js');
+ assert.match(s,/members\.filter\(person=>person\.ready\)/);
+ assert.match(s,/\.rpc\('av_party_join_by_code'/);
+ assert.match(s,/async function submitChat\(\)/);
+ assert.match(s,/async function reconcilePeers\(users\)/);
+ assert.match(s,/channel\.send\(\{type:'broadcast',event,payload\}\)/);
+ assert.match(s,/\.eq\('host_id',user\.id\)\.eq\('episode',expectedEpisode\)/);
+});
 test('no data migrations and versioned resources',()=>{
  assert.match(load('party.html'),/av-party-sync-76\.js\?v=76\.0/);
  assert.match(load('party.html'),/av-party-76\.js\?v=76\.0/);
