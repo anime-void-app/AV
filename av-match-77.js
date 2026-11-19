@@ -110,7 +110,7 @@
    grid.append(empty);return;
   }
   const available=new Set((window.AVVideoSources?.sources||[]).map(x=>x.animeId));
- const localIds=new Set(cachedCatalog().map(entry=>Number(String(entry?.id||'').replace(/^anilist-/,''))).filter(Number.isSafeInteger));
+ const localIds=new Map(cachedCatalog().filter(entry=>entry&&entry.id).map(entry=>[Number(String(entry.id).replace(/^anilist-/,'')),String(entry.id)]).filter(([id])=>Number.isSafeInteger(id)&&id>0));
   for(const item of items){
    const article=create('article','av77-card');
    const poster=create('div','av77-poster');
@@ -129,7 +129,7 @@
    contents.append(create('div','av77-card-genres',item.genres.filter(x=>core.GENRES.includes(x)).slice(0,3).map(g=>labels[g]?.[lang()==='ru'?0:1]||g).join(' · ')));
    const links=create('div','av77-card-links'),details=create('a','',t('Подробнее ↗','Details ↗'));
    const inSite=localIds.has(item.id);
-   details.href=inSite?'anime.html?id='+encodeURIComponent(item.id):'https://anilist.co/anime/'+encodeURIComponent(item.id);
+   details.href=inSite?'anime.html?id='+encodeURIComponent(localIds.get(item.id)):'https://anilist.co/anime/'+encodeURIComponent(item.id);
    if(!inSite){details.target='_blank';details.rel='noopener noreferrer';details.textContent=t('AniList ↗','AniList ↗');}
    links.append(details);
    if(available.has('anilist-'+item.id)){
