@@ -1,0 +1,47 @@
+/* ANIME VOID V78 — mobile-first app navigation, quick hub and focus states */
+:root{--av78-accent:#d6a4ff;--av78-ink:#f5ebff}
+.av78-dock{display:none}
+.av78-top{position:fixed;z-index:58;right:18px;bottom:18px;width:43px;height:43px;border-radius:50%;border:1px solid rgba(216,177,253,.4);background:#241735;color:#f4e6ff;font:700 22px system-ui;box-shadow:0 9px 35px rgba(0,0,0,.3);cursor:pointer}
+.av78-top[hidden],.av78-hub-link[hidden]{display:none!important}
+.av78-top:focus-visible,.av78-dock-link:focus-visible,.av78-hub-link:focus-visible,.av78-install-help summary:focus-visible{outline:3px solid #e6bfff;outline-offset:3px}
+.av78-hub{position:relative;isolation:isolate;margin:24px auto 32px;padding:24px 26px;max-width:1320px;border:1px solid rgba(209,162,250,.23);border-radius:22px;background:linear-gradient(115deg,rgba(34,22,54,.95),rgba(16,12,32,.96));color:var(--av78-ink);box-shadow:0 20px 55px rgba(0,0,0,.15)}
+.av78-hub-heading{margin-bottom:18px}.av78-hub-eyebrow{font:800 10px system-ui;letter-spacing:.17em;color:#cda3f5}
+.av78-hub h2{font-size:clamp(22px,2.5vw,31px);line-height:1.2;letter-spacing:-.035em;margin:7px 0}
+.av78-hub-heading p{font-size:13px;color:#c2b4d0;margin:0}
+.av78-hub-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px}
+.av78-hub-link{display:flex;gap:11px;align-items:center;min-width:0;min-height:66px;padding:12px 14px;border:1px solid rgba(207,173,246,.2);border-radius:14px;background:rgba(255,255,255,.035);color:#f4e8ff;text-decoration:none;transition:background .16s,transform .16s}
+.av78-hub-link:hover{background:rgba(169,107,230,.18);transform:translateY(-2px)}
+.av78-hub-link strong{font:750 13px/1.3 system-ui;min-width:0}
+.av78-hub-symbol{display:grid;place-items:center;flex:0 0 35px;height:35px;border-radius:10px;background:rgba(188,129,244,.16);color:#ebc8ff;font:700 20px system-ui}
+.av78-hub-arrow{margin-left:auto;color:#bca2d0;font-size:15px}
+.av78-install-foot{margin-top:16px;padding-top:12px;border-top:1px solid rgba(208,174,245,.13);display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
+.av78-install-foot>p{margin:0;font:12px/1.5 system-ui;color:#bbadd1}
+.av78-install-help{font:12px/1.6 system-ui;color:#d9c7ee;max-width:450px}
+.av78-install-help summary{cursor:pointer;color:#ebc9ff;font-weight:750}
+.av78-install-help p{margin:8px 0 0}
+@media(max-width:800px){
+ .av78-hub{margin:16px 12px 24px;padding:20px;border-radius:18px}
+ .av78-hub-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:700px){
+ body:not(.av-party-embed){padding-bottom:calc(82px + env(safe-area-inset-bottom,0px))!important}
+ .av78-dock{position:fixed;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));align-items:stretch;left:0;right:0;bottom:0;z-index:9000;padding:6px max(7px,env(safe-area-inset-left,0px)) calc(7px + env(safe-area-inset-bottom,0px)) max(7px,env(safe-area-inset-right,0px));border-top:1px solid rgba(213,174,255,.24);background:rgba(16,10,29,.96);backdrop-filter:blur(22px);box-shadow:0 -12px 45px rgba(0,0,0,.33)}
+ .av78-dock-link{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;min-width:0;min-height:52px;border-radius:12px;text-decoration:none;color:#bcaacb;font:650 10px/1.3 system-ui;white-space:nowrap}
+ .av78-dock-icon{font:700 25px/1 system-ui;color:inherit}
+ .av78-dock-link[aria-current="page"]{background:rgba(177,110,238,.2);color:#f2d8ff}
+ .av78-dock-link:active{background:rgba(177,110,238,.25)}
+ .av78-top{bottom:calc(87px + env(safe-area-inset-bottom,0px));right:12px;width:40px;height:40px}
+ .av78-hub-link{min-height:60px;padding:10px}
+ .av78-hub-link strong{font-size:12px}
+}
+@media(max-width:370px){
+ .av78-hub{padding:14px;margin-inline:8px}
+ .av78-hub-grid{gap:7px}
+ .av78-hub-link{gap:7px;padding:9px}
+ .av78-hub-symbol{flex-basis:28px;height:30px;font-size:17px}
+ .av78-dock-link{font-size:9px}
+ .av78-dock-icon{font-size:23px}
+}
+@media(min-width:701px){.av78-top{bottom:20px}}
+@media(prefers-reduced-motion:reduce){.av78-hub-link{transition:none}.av78-hub-link:hover{transform:none}}
+@media print{.av78-dock,.av78-top,.av78-hub{display:none!important}}
