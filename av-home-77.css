@@ -1,0 +1,76 @@
+/* ANIME VOID V77 — content-first homepage polish. Existing theme variants, catalog and navigation remain intact. */
+body.av-home{--av77-border:rgba(208,167,252,.25);--av77-card:#191126}
+body.av-home .av77-skip{position:fixed;left:14px;top:-120px;z-index:2000;padding:12px 16px;background:#f0daff;color:#1c0a30;border-radius:10px;font:700 13px system-ui,sans-serif}
+body.av-home .av77-skip:focus{top:13px}
+body.av-home main>.hero{
+ min-height:clamp(390px,34vw,490px);
+ background:
+ linear-gradient(90deg,rgba(9,7,22,.97) 0%,rgba(13,8,30,.9) 40%,rgba(15,8,33,.46) 70%,rgba(13,8,30,.67) 100%),
+ url("studio/v49/sakura-moon.svg") center 45%/cover no-repeat!important;
+ box-shadow:0 20px 80px rgba(7,2,15,.27);
+}
+body.av-home main>.hero .hero-content{max-width:min(57%,640px);padding:clamp(24px,3vw,42px) 0;min-width:0}
+body.av-home main>.hero #heroTitle{font-size:clamp(36px,4.3vw,67px)!important;line-height:1.05!important;letter-spacing:-.05em}
+body.av-home main>.hero #heroText{max-width:520px;line-height:1.6}
+body.av-home .av77-hero-match{
+ box-sizing:border-box;position:absolute;right:clamp(22px,3.5vw,56px);bottom:clamp(18px,4vw,55px);
+ z-index:2;width:clamp(250px,31%,350px);min-width:0;padding:clamp(19px,2.2vw,27px);
+ border-radius:22px;border:1px solid rgba(224,177,255,.37);
+ background:linear-gradient(145deg,rgba(36,23,61,.92),rgba(17,12,35,.94));
+ box-shadow:0 20px 55px rgba(7,3,22,.48),inset 0 1px rgba(255,255,255,.05);
+ backdrop-filter:blur(20px);color:#fff;
+}
+body.av-home .av77-hero-kicker{color:#dbb4ff;font:800 10px/1.4 system-ui,sans-serif;letter-spacing:.14em}
+body.av-home .av77-hero-orbit{margin:8px 0 7px;font-size:28px;color:#f1d9ff;letter-spacing:.25em;text-shadow:0 0 28px rgba(190,118,247,.8)}
+body.av-home .av77-hero-orbit span{font-size:15px;opacity:.6}
+body.av-home .av77-hero-match h2{font-size:clamp(21px,2.1vw,29px);letter-spacing:-.055em;line-height:1.12;margin:10px 0 12px;color:#fff}
+body.av-home .av77-hero-match p{font-size:13px;line-height:1.55;margin:0 0 17px;color:#d3c3e4}
+body.av-home .av77-hero-match-actions{display:flex;gap:10px;flex-wrap:wrap}
+body.av-home .av77-hero-match-actions :is(a,button){
+ display:inline-flex;align-items:center;justify-content:center;box-sizing:border-box;
+ border-radius:11px;padding:10px 14px;min-height:44px;font:750 12px/1.4 system-ui,sans-serif;
+ text-decoration:none;white-space:normal;transition:transform .18s,background .18s;
+}
+body.av-home .av77-match-link{background:#dab0ff;color:#1c0b30;border:1px solid #efceff}
+body.av-home .av77-install{background:rgba(221,180,255,.12);color:#f0d9ff;border:1px solid rgba(221,180,255,.38)}
+body.av-home .av77-hero-match-actions :is(a,button):hover{transform:translateY(-2px)}
+body.av-home .av77-hero-match-actions [hidden]{display:none!important}
+body.av-home .av-46-home-subnav{flex-wrap:wrap}
+body.av-home .av-46-home-subnav a[href="match.html"]{font-weight:800;color:var(--av-accent,#d8afff)}
+body.av-home .av53-home-links{box-shadow:0 18px 45px rgba(9,4,24,.12);border-color:var(--av77-border)}
+body.av-home #catalog>.section-heading{gap:10px}
+body.av-home :is(#animeGrid,#favoritesGrid) .card{min-width:0;contain:layout style}
+body.av-home :is(#animeGrid,#favoritesGrid,.airing-row,.top-grid) img{aspect-ratio:2/3;object-fit:cover}
+body.av-home :is(#animeGrid,#favoritesGrid) :is(button,a){touch-action:manipulation}
+body.av-home :is(.av77-hero-match a,.av77-hero-match button,#catalog button):focus-visible{outline:3px solid #efd1ff;outline-offset:3px}
+@media(min-width:761px) and (max-width:1090px){
+ body.av-home main>.hero .hero-content{max-width:56%}
+ body.av-home .av77-hero-match{width:33%;padding:17px;right:20px}
+ body.av-home .av77-hero-match h2{font-size:21px}
+}
+@media(max-width:760px){
+ body.av-home main>.hero{display:flex;flex-direction:column;gap:16px;padding:clamp(16px,4vw,26px)!important;min-height:0!important}
+ body.av-home main>.hero .hero-content{max-width:100%;padding:12px 0 2px!important}
+ body.av-home main>.hero #heroTitle{font-size:clamp(30px,7.6vw,46px)!important}
+ body.av-home main>.hero .av77-hero-match{
+  width:100%;position:relative;right:auto;bottom:auto;top:auto;
+  padding:17px 18px;border-radius:17px;backdrop-filter:none;
+  background:linear-gradient(100deg,rgba(36,21,60,.94),rgba(18,13,36,.96))
+ }
+ body.av-home main>.hero .av77-hero-orbit{display:none}
+ body.av-home main>.hero .av77-hero-match h2{font-size:22px;margin:7px 0}
+ body.av-home main>.hero .av77-hero-match p{font-size:12px;margin-bottom:12px}
+ body.av-home .av77-hero-match-actions :is(a,button){min-height:44px}
+ body.av-home .av-46-home-subnav{gap:9px}
+ body.av-home .av-46-home-subnav a{min-height:42px;display:inline-flex;align-items:center}
+ body.av-home #catalog .filters{scroll-padding-inline:14px}
+}
+@media(max-width:370px){
+ body.av-home main>.hero{padding:14px!important}
+ body.av-home .av77-hero-match-actions :is(a,button){width:100%}
+ body.av-home .av-46-home-subnav a{font-size:11px}
+}
+@media(prefers-reduced-motion:reduce){
+ body.av-home .av77-hero-match-actions :is(a,button){transition:none}
+ body.av-home .av77-hero-match-actions :is(a,button):hover{transform:none}
+}
