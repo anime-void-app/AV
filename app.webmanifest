@@ -1,0 +1,76 @@
+{
+  "name": "ANIME VOID — аниме, друзья и истории",
+  "short_name": "ANIME VOID",
+  "description": "Аниме-каталог, история просмотра, персональные списки и совместный просмотр с друзьями.",
+  "id": "/index.html",
+  "start_url": "/index.html",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#090810",
+  "theme_color": "#140b26",
+  "lang": "ru",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Найти аниме",
+      "short_name": "Каталог",
+      "url": "/index.html#catalog",
+      "icons": [
+        {
+          "src": "/icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Подбор для двоих",
+      "short_name": "Anime Match",
+      "url": "/match.html",
+      "icons": [
+        {
+          "src": "/icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Смотреть вместе",
+      "short_name": "Комната",
+      "url": "/party.html",
+      "icons": [
+        {
+          "src": "/icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "История",
+      "short_name": "История",
+      "url": "/history.html",
+      "icons": [
+        {
+          "src": "/icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    }
+  ]
+}

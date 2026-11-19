@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#140b26">
+<meta name="description" content="Anime Match от ANIME VOID: выберите любимые жанры вдвоём и найдите аниме, которые понравятся обоим. Без регистрации.">
+<meta property="og:title" content="Anime Match — что посмотреть вдвоём? · ANIME VOID">
+<meta property="og:description" content="Выбирайте жанры, сравнивайте вкусы и находите общие истории вместе.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://animevoid.ru/match.html">
+<meta property="og:image" content="https://animevoid.ru/icon-512.png">
+<title>Anime Match — ANIME VOID</title>
+<link rel="icon" type="image/png" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="manifest" href="app.webmanifest?v=77.0">
+<link rel="stylesheet" href="av-match-77.css?v=77.0">
+<script defer src="av-match-core-77.js?v=77.0"></script>
+<script defer src="player-sources.js?v=24.36"></script>
+<script defer src="av-match-77.js?v=77.0"></script>
+</head>
+<body class="av77-match">
+<a class="av77-skip" href="#matchMain">К подбору</a>
+<header class="av77-top">
+ <a class="av77-brand" href="index.html" aria-label="ANIME VOID — главная">ANIME<span>VOID</span><small> / MATCH</small></a>
+ <nav aria-label="Навигация">
+  <a href="index.html#catalog" class="av77-copy" data-ru="Каталог" data-en="Catalog">Каталог</a>
+  <a href="party.html" class="av77-copy" data-ru="Смотреть вместе" data-en="Watch together">Смотреть вместе</a>
+  <a href="profile.html" class="av77-copy av77-desktop" data-ru="Профиль" data-en="Profile">Профиль</a>
+ </nav>
+ <button id="matchLanguage" class="av77-lang" type="button" aria-label="Switch language">EN</button>
+</header>
+<main id="matchMain">
+ <section class="av77-intro">
+  <div class="av77-stars" aria-hidden="true">✳</div>
+  <p class="av77-kicker">ANIME VOID ORIGINAL / 01</p>
+  <h1 class="av77-copy" data-ru="Два вкуса. <em>Одна история.</em>" data-en="Two tastes. <em>One story.</em>">Два вкуса. <em>Одна история.</em></h1>
+  <p class="av77-copy av77-intro-lead" data-ru="Выберите по 1–3 любимых жанра. Anime Match найдёт тайтлы, в которых пересекаются ваши интересы — без входа в аккаунт и доступа к личным спискам." data-en="Pick 1–3 favorite genres each. Anime Match finds shows combining both tastes, without sign-in or access to private lists.">Выберите по 1–3 любимых жанра. Anime Match найдёт тайтлы, в которых пересекаются ваши интересы — без входа в аккаунт и доступа к личным спискам.</p>
+  <div class="av77-intro-marks" aria-label="Особенности">
+   <span class="av77-copy" data-ru="✦ Для двоих" data-en="✦ Made for two">✦ Для двоих</span>
+   <span class="av77-copy" data-ru="◉ Аниме из AniList" data-en="◉ AniList titles">◉ Аниме из AniList</span>
+   <span class="av77-copy" data-ru="⌁ Без спойлеров" data-en="⌁ Spoiler-free">⌁ Без спойлеров</span>
+  </div>
+ </section>
+ <section class="av77-choices" aria-label="Выбор жанров">
+  <div class="av77-person av77-person-a">
+   <div class="av77-person-head"><span class="av77-person-icon" aria-hidden="true">☾</span><div><span class="av77-copy av77-mini" data-ru="ПЕРВЫЙ ЗРИТЕЛЬ" data-en="VIEWER ONE">ПЕРВЫЙ ЗРИТЕЛЬ</span><h2 class="av77-copy" data-ru="Твои жанры" data-en="Your genres">Твои жанры</h2></div></div>
+   <p class="av77-copy" data-ru="Выбери, что хочется посмотреть тебе." data-en="Choose what you enjoy watching.">Выбери, что хочется посмотреть тебе.</p>
+   <div id="matchGenresA" class="av77-chip-group" role="group" aria-label="Жанры первого зрителя"></div>
+  </div>
+  <div class="av77-bridge" aria-hidden="true"><span>×</span></div>
+  <div class="av77-person av77-person-b">
+   <div class="av77-person-head"><span class="av77-person-icon" aria-hidden="true">✧</span><div><span class="av77-copy av77-mini" data-ru="ВТОРОЙ ЗРИТЕЛЬ" data-en="VIEWER TWO">ВТОРОЙ ЗРИТЕЛЬ</span><h2 class="av77-copy" data-ru="Жанры друга" data-en="Friend's genres">Жанры друга</h2></div></div>
+   <p class="av77-copy" data-ru="Теперь выбери интересы второго человека." data-en="Now choose what the second person likes.">Теперь выбери интересы второго человека.</p>
+   <div id="matchGenresB" class="av77-chip-group" role="group" aria-label="Жанры второго зрителя"></div>
+  </div>
+ </section>
+ <section class="av77-actions" aria-label="Результат">
+  <div><strong id="matchCount" aria-live="polite"></strong><p class="av77-copy" data-ru="Можно поделиться выбранными жанрами по ссылке. Личные данные не передаются." data-en="Share only the selected genres using a link. No personal data is transferred.">Можно поделиться выбранными жанрами по ссылке. Личные данные не передаются.</p></div>
+  <div class="av77-action-buttons">
+   <button id="matchShare" class="av77-quiet" type="button"><span class="av77-copy" data-ru="↗ Поделиться" data-en="↗ Share picks">↗ Поделиться</span></button>
+   <button id="matchFind" class="av77-primary" type="button"><span class="av77-copy" data-ru="Найти наше аниме ✦" data-en="Find our anime ✦">Найти наше аниме ✦</span></button>
+  </div>
+ </section>
+ <p id="matchStatus" class="av77-status" role="status" aria-live="polite" hidden></p>
+ <section id="matchResults" class="av77-results" aria-labelledby="matchResultsTitle" hidden>
+  <div class="av77-results-head"><div><span class="av77-mini">SELECTED FOR TWO</span><h2 id="matchResultsTitle" class="av77-copy" data-ru="Ваши общие истории" data-en="Stories for both of you">Ваши общие истории</h2></div><span id="matchSource"></span></div>
+  <div id="matchGrid" class="av77-grid"></div>
+ </section>
+ <aside class="av77-footnote">
+  <span aria-hidden="true">♡</span><p class="av77-copy" data-ru="Это подбор по жанрам, не предсказание сюжета и не обещание счастливого финала. Совместный видеопросмотр работает только для аниме с подключённым источником; у каждого зрителя видео запускается отдельно." data-en="This is a genre match, not a plot prediction or a promise of a happy ending. Watch-party playback requires an available source for each viewer.">Это подбор по жанрам, не предсказание сюжета и не обещание счастливого финала. Совместный видеопросмотр работает только для аниме с подключённым источником; у каждого зрителя видео запускается отдельно.</p>
+ </aside>
+</main>
+<footer class="av77-footer"><span>ANIME VOID · 2026</span><a href="index.html">Главная</a><a href="updates.html">Что нового</a><a href="party.html">Комната</a></footer>
+</body>
+</html>
