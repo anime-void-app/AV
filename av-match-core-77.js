@@ -46,12 +46,12 @@
   for(const raw of items){
    const item=normalized(raw);
    if(!item||seen.has(item.id))continue;
-   seen.add(item.id);
    const genres=item.genres.map(x=>x.toLowerCase());
    const countA=a.filter(g=>genres.includes(g.toLowerCase())).length;
    const countB=b.filter(g=>genres.includes(g.toLowerCase())).length;
    // Both people must have at least one requested genre represented.
    if(!countA||!countB)continue;
+   seen.add(item.id);
    const score=100+countA*25+countB*25+item.score*.4;
    result.push({...item,matchScore:score,countA,countB});
   }

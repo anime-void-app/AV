@@ -9,12 +9,14 @@
   Adventure:['Приключения','Adventure'],'Slice of Life':['Повседневность','Slice of life'],
   'Sci-Fi':['Фантастика','Sci-Fi']
  };
- function lang(){try{return localStorage.getItem('animeVoidLanguage')==='en'?'en':'ru';}catch{return 'ru';}}
+ let activeLang='ru';
+ try{activeLang=localStorage.getItem('animeVoidLanguage')==='en'?'en':'ru';}catch{}
+ function lang(){return activeLang;}
  const t=(ru,en)=>lang()==='ru'?ru:en;
  let prefs={a:[],b:[]},busy=false,lastResult=[],source='';
  const params=core.parsePrefs(location.search);prefs={a:params.a,b:params.b};
  if(!prefs.a.length&&!prefs.b.length){prefs.a=['Romance'];prefs.b=['Comedy'];}
- const {a,b}=prefs;
+ // Selections are mutable; always read prefs.a / prefs.b at the moment of action.
  const genres={a:$('matchGenresA'),b:$('matchGenresB')};
  function create(tag,className,text){
   const el=document.createElement(tag);
@@ -37,9 +39,9 @@
   if(lastResult.length)renderResults(lastResult,source);
  }
  function updateCount(){
-  $('matchCount').textContent=t('Выбрано: '+a.length+' + '+b.length+' жанров','Selected: '+a.length+' + '+b.length+' genres');
-  $('matchFind').disabled=!a.length||!b.length||busy;
-  $('matchShare').disabled=!a.length||!b.length;
+  $('matchCount').textContent=t('Выбрано: '+prefs.a.length+' + '+prefs.b.length+' жанров','Selected: '+prefs.a.length+' + '+prefs.b.length+' genres');
+  $('matchFind').disabled=!prefs.a.length||!prefs.b.length||busy;
+  $('matchShare').disabled=!prefs.a.length||!prefs.b.length;
  }
  function renderChoices(){
   for(const side of ['a','b']){
@@ -79,8 +81,8 @@
   if(typeof link!=='string')return null;
   try{
    const url=new URL(link,location.href);
-   if(url.protocol==='https:'&&(url.hostname==='s4.anilist.co'||url.hostname==='s3.anilist.co'||url.hostname==='animevoid.ru'))return url.href;
-   if(url.origin===location.origin&&url.pathname.endsWith('.webp')||url.origin===location.origin&&url.pathname.endsWith('.jpg'))return url.href;
+   if(url.protocol==='https:'&&['s4.anilist.co','s3.anilist.co','animevoid.ru'].includes(url.hostname))return url.href;
+   if(url.origin===location.origin&&/\.(?:webp|jpg|jpeg|png)$/i.test(url.pathname))return url.href;
   }catch{}
   return null;
  }
@@ -108,6 +110,7 @@
    grid.append(empty);return;
   }
   const available=new Set((window.AVVideoSources?.sources||[]).map(x=>x.animeId));
+ const localIds=new Set(cachedCatalog().map(entry=>Number(String(entry?.id||'').replace(/^anilist-/,''))).filter(Number.isSafeInteger));
   for(const item of items){
    const article=create('article','av77-card');
    const poster=create('div','av77-poster');
@@ -125,7 +128,9 @@
    contents.append(meta);
    contents.append(create('div','av77-card-genres',item.genres.filter(x=>core.GENRES.includes(x)).slice(0,3).map(g=>labels[g]?.[lang()==='ru'?0:1]||g).join(' · ')));
    const links=create('div','av77-card-links'),details=create('a','',t('Подробнее ↗','Details ↗'));
-   details.href='anime.html?id='+encodeURIComponent(item.id);
+   const inSite=localIds.has(item.id);
+   details.href=inSite?'anime.html?id='+encodeURIComponent(item.id):'https://anilist.co/anime/'+encodeURIComponent(item.id);
+   if(!inSite){details.target='_blank';details.rel='noopener noreferrer';details.textContent=t('AniList ↗','AniList ↗');}
    links.append(details);
    if(available.has('anilist-'+item.id)){
     const room=create('a','',t('▶ Смотреть вдвоём','▶ Watch together'));
@@ -135,14 +140,14 @@
   }
  }
  async function find(){
-  if(busy||!a.length||!b.length)return;
+  if(busy||!prefs.a.length||!prefs.b.length)return;
   busy=true;updateCount();lastResult=[];$('matchResults').hidden=true;
   status(t('Ищем истории по вашим общим интересам…','Finding stories that fit both tastes…'));
   try{
    let data=[],from='online';
-   try{data=await onlineCatalog([...new Set([...a,...b])]);}
+   try{data=await onlineCatalog([...new Set([...prefs.a,...prefs.b])]);}
    catch(e){from='offline';data=cachedCatalog();}
-   const results=core.rank(data,a,b,12);
+   const results=core.rank(data,prefs.a,prefs.b,12);
    lastResult=results;source=from;
    if(!results.length&&from==='offline')status(t('Нет связи с AniList, а в локальном каталоге не хватает подходящих тайтлов. Открой каталог сайта и повтори.','AniList is unavailable and the saved catalog has no suitable titles. Visit the main catalog and retry.'),true);
    else status(from==='offline'?t('Показаны совпадения из сохранённого каталога.','Showing saved catalog matches.'):t('Готово — подбор основан на пересечении жанров.','Done — ranked by shared genres.'));
@@ -151,7 +156,7 @@
   finally{busy=false;updateCount();}
  }
  async function share(){
-  const url=new URL(location.href);url.search=core.buildParams(a,b);url.hash='';
+  const url=new URL(location.href);url.search=core.buildParams(prefs.a,prefs.b);url.hash='';
   const link=url.toString();
   try{
    if(navigator.share){await navigator.share({title:'Anime Match · ANIME VOID',url:link});return;}
@@ -168,10 +173,10 @@
  $('matchFind').addEventListener('click',find);
  $('matchShare').addEventListener('click',()=>void share());
  $('matchLanguage').addEventListener('click',()=>{
-  try{localStorage.setItem('animeVoidLanguage',lang()==='ru'?'en':'ru');}catch{}
-  // Language remains functional even if storage is blocked.
+  activeLang=lang()==='ru'?'en':'ru';
+  try{localStorage.setItem('animeVoidLanguage',activeLang);}catch{}
   updateCopy();
  });
- addEventListener('storage',event=>{if(event.key==='animeVoidLanguage')updateCopy();});
+ addEventListener('storage',event=>{if(event.key==='animeVoidLanguage'){activeLang=event.newValue==='en'?'en':'ru';updateCopy();}});
  updateCopy();
 })();
