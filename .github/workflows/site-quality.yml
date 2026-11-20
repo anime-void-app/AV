@@ -15,4 +15,4 @@ jobs:
         with:
           node-version: '22'
       - name: Validate site
-        run: node --test tests/v79-site-quality.cjs
+        run: node --test tests/v80-offline-pwa.cjs
