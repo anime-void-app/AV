@@ -1,6 +1,6 @@
 /* ANIME VOID — service worker: установка как приложение + офлайн-режим */
 
-const CORE_CACHE = "av-AV-core-v83.0";
+const CORE_CACHE = "av-AV-core-v84.0";
 const STUDIO_CACHE = "av-AV-studio-v79.0";
 const STUDIO_CACHE_LIMIT = 96;
 const IMAGE_CACHE = "av-AV-images-v3";
@@ -10,6 +10,7 @@ const LICENSED_AUDIO = {"audio/japan-rain-v18.mp3": "e8adbedb517c7c30837ac4046dd
 
 
 const NEW_CORE = [
+ "av-visual-84.css?v=84.0",
  "av-mobile-82.css?v=82.0",
   "index.html",
   "offline.html",

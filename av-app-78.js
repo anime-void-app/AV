@@ -1,7 +1,7 @@
 /* ANIME VOID V78 — accessible navigation for PWA, phones and desktop.
    Pure client-side navigation; never mutates accounts, catalog, history or playback. */
 (()=>{'use strict';
- if(new URLSearchParams(location.search).get('party')==='1'||window.self!==window.top)return;
+ if(window.self!==window.top)return;
  const path=(location.pathname.split('/').pop()||'index.html').toLowerCase();
  const home=path==='index.html',ru=()=>document.documentElement.lang!=='en';
  const labels={

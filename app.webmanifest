@@ -1,13 +1,13 @@
 {
   "name": "ANIME VOID — аниме, друзья и истории",
   "short_name": "ANIME VOID",
-  "description": "Аниме-каталог, история просмотра, персональные списки и совместный просмотр с друзьями.",
+  "description": "Аниме-каталог, история просмотра, персональные списки, коллекции и рекомендации.",
   "id": "/index.html",
   "start_url": "/index.html",
   "scope": "/",
   "display": "standalone",
-  "background_color": "#090810",
-  "theme_color": "#140b26",
+  "background_color": "#080913",
+  "theme_color": "#151426",
   "lang": "ru",
   "icons": [
     {
@@ -40,18 +40,6 @@
       "name": "Подбор для двоих",
       "short_name": "Anime Match",
       "url": "/match.html",
-      "icons": [
-        {
-          "src": "/icon-192.png",
-          "sizes": "192x192",
-          "type": "image/png"
-        }
-      ]
-    },
-    {
-      "name": "Смотреть вместе",
-      "short_name": "Комната",
-      "url": "/party.html",
       "icons": [
         {
           "src": "/icon-192.png",
