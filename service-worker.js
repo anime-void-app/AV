@@ -1,6 +1,6 @@
 /* ANIME VOID — service worker: установка как приложение + офлайн-режим */
 
-const CORE_CACHE = "av-AV-core-v80.0";
+const CORE_CACHE = "av-AV-core-v81.0";
 const STUDIO_CACHE = "av-AV-studio-v79.0";
 const STUDIO_CACHE_LIMIT = 96;
 const IMAGE_CACHE = "av-AV-images-v3";
@@ -12,6 +12,9 @@ const LICENSED_AUDIO = {"audio/japan-rain-v18.mp3": "e8adbedb517c7c30837ac4046dd
 const NEW_CORE = [
   "index.html",
   "offline.html",
+  "watch.html",
+  "kodik-bridge.js?v=81.0",
+  "kodik-data-client.js?v=24.13",
   "app.webmanifest?v=77.0",
   "icon-192.png",
   "icon-512.png",
