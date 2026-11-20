@@ -133,8 +133,10 @@ test('Kodik bridge ignores forged iframe events and only enables verified playba
  send('https://kodikplayer.com',inner,'kodik_player_time_update',25);
  assert.equal(api.state().ready,false,'must confirm exact episode from trusted source');
  send('https://kodikplayer.com',inner,'kodik_player_current_episode',{episode:2,season:1});
+ assert.equal(api.state().ready,false,'live time must follow identity verification');
+ send('https://kodikplayer.com',inner,'kodik_player_time_update',26);
  assert.equal(api.state().ready,true);
- assert.equal(api.state().position,25);
+ assert.equal(api.state().position,26);
  assert.equal(api.partyControl('seek',27),true);
  assert.equal(commands.length,1);
  assert.equal(commands[0].origin,'https://kodikplayer.com');
