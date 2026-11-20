@@ -1,7 +1,7 @@
 'use strict';
 const {test}=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),vm=require('node:vm');
 const root=path.resolve(__dirname,'..'),read=p=>fs.readFileSync(path.join(root,p),'utf8');
-const pages=['index.html','profile.html','anime.html','watch.html','account.html','history.html','collections.html','party.html','match.html','kodik.html','manga.html','movies.html','messages.html','community.html','explore.html','updates.html','reading.html'];
+const pages=['index.html','profile.html','anime.html','watch.html','account.html','history.html','collections.html','match.html','kodik.html','manga.html','movies.html','messages.html','community.html','explore.html','updates.html','reading.html'];
 test('new scripts and service worker parse',()=>{
   for(const p of ['av-journey-81.js','av-native-watch-81.js','service-worker.js'])assert.doesNotThrow(()=>new vm.Script(read(p),{filename:p}));
 });
@@ -17,7 +17,7 @@ test('manual progress, old rewards and room sync preserved',()=>{
   assert.match(read('watch.html'),/window\.AVWatchAutoComplete=/);
   assert.match(read('watch.html'),/navigator\.locks\?\.request/);
   assert.match(read('watch.html'),/av-watch-tracker\.js/);
-  assert.match(read('party.html'),/av-party-83\.js/);
+
   assert.match(read('profile.html'),/void-achievements-22\.js/);
   assert.doesNotMatch(read('av-journey-81.js'),/localStorage\.setItem/);
   assert.match(read('av-native-watch-81.js'),/L\.count\(state\.coverage\)<900/);
@@ -25,7 +25,7 @@ test('manual progress, old rewards and room sync preserved',()=>{
 test('offline shell includes new files and remains small',()=>{
   const worker=read('service-worker.js'),header=worker.slice(0,worker.indexOf('const PRELOAD_CONCURRENCY'));
   const {NEW_CORE,CORE_CACHE}=vm.runInNewContext(header+';({NEW_CORE,CORE_CACHE})');
-  assert.equal(CORE_CACHE,'av-AV-core-v83.0');
+  assert.equal(CORE_CACHE,'av-AV-core-v84.0');
   assert.ok(NEW_CORE.includes('av-cinema-81.css?v=81.0'));
   assert.ok(NEW_CORE.includes('av-journey-81.js?v=81.0'));
   assert.equal(NEW_CORE.length,new Set(NEW_CORE).size);

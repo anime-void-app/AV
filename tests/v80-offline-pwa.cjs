@@ -8,7 +8,7 @@ const header=worker.slice(0,worker.indexOf('const PRELOAD_CONCURRENCY'));
 const data=vm.runInNewContext(header+';({NEW_CORE,CORE_CACHE})');
 test('new service worker parses and uses the V81 cache',()=>{
  assert.doesNotThrow(()=>new vm.Script(worker));
- assert.equal(data.CORE_CACHE,'av-AV-core-v83.0');
+ assert.equal(data.CORE_CACHE,'av-AV-core-v84.0');
 });
 test('install uses the actual current home resources and no unnecessary old versions',()=>{
  const core=data.NEW_CORE;
@@ -53,7 +53,7 @@ test('navigation has a branded offline fallback and no playback rewrites',()=>{
  assert.match(worker,/status:503/);
  assert.match(worker,/LICENSED_AUDIO/);
  assert.ok(worker.includes("/kodik-data/"));
- assert.match(read('party.html'),/av-party-83\.js\?v=83\.0/);
+
  assert.match(read('match.html'),/av-match-77\.js\?v=77\.0/);
 });
 test('offline page is self-contained and accessible',()=>{

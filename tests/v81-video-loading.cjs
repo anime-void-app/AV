@@ -41,7 +41,7 @@ test('watch page loads local identity, no fabricated episode controls, and versi
  assert.match(html,/av-kodik-test\.js\?v=67\.0/);
 });
 test('release and cache are bumped, other player intact',()=>{
- assert.match(read('service-worker.js'),/av-AV-core-v83\.0/);
+ assert.match(read('service-worker.js'),/av-AV-core-v84\.0/);
  assert.match(read('updates.html'),/<strong>81\.0<\/strong>/);
  assert.match(read('av-kodik-player.js'),/function partyControl/);
 });

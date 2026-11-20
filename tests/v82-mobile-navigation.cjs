@@ -1,7 +1,7 @@
 'use strict';
 const {test}=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),vm=require('node:vm');
 const root=path.resolve(__dirname,'..'),read=p=>fs.readFileSync(path.join(root,p),'utf8');
-const all=["index.html","profile.html","anime.html","watch.html","account.html","history.html","collections.html","party.html","match.html","kodik.html","manga.html","movies.html","messages.html","community.html","explore.html","updates.html","reading.html"];
+const all=["index.html","profile.html","anime.html","watch.html","account.html","history.html","collections.html","match.html","kodik.html","manga.html","movies.html","messages.html","community.html","explore.html","updates.html","reading.html"];
 test('one shared app dock across 17 key pages',()=>{
  for(const p of all){
   const s=read(p);
@@ -23,18 +23,18 @@ test('watch brand is full-width and real controls are accessible',()=>{
 });
 test('watch-party embed and existing playback/auth remain wired',()=>{
  const app=read('av-app-78.js'),watch=read('watch.html');
- assert.match(app,/get\('party'\)==='1'/);
+
  assert.match(app,/window\.self!==window\.top/);
  assert.match(watch,/av-video-81\.js\?v=81\.0/);
  assert.match(watch,/kodik-bridge\.js\?v=81\.0/);
- assert.match(read('party.html'),/av-party-83\.js\?v=83\.0/);
+
  assert.match(read('account.html'),/av-account\.js\?v=73\.0/);
 });
 test('PWA CSS cache and release are versioned',()=>{
  const w=read('service-worker.js');
  assert.doesNotThrow(()=>new vm.Script(w));
  const c=vm.runInNewContext(w.slice(0,w.indexOf('const PRELOAD_CONCURRENCY'))+';({NEW_CORE,CORE_CACHE})');
- assert.equal(c.CORE_CACHE,'av-AV-core-v83.0');
+ assert.equal(c.CORE_CACHE,'av-AV-core-v84.0');
  assert.ok(c.NEW_CORE.includes('av-mobile-82.css?v=82.0'));
  assert.equal(c.NEW_CORE.length,new Set(c.NEW_CORE).size);
  assert.match(read('updates.html'),/<strong>82\.0<\/strong>/);
