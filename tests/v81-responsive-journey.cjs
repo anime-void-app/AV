@@ -6,11 +6,11 @@ test('new scripts and service worker parse',()=>{
   for(const p of ['av-journey-81.js','av-native-watch-81.js','service-worker.js'])assert.doesNotThrow(()=>new vm.Script(read(p),{filename:p}));
 });
 test('responsive stylesheet on every primary page',()=>{
-  for(const p of pages)assert.equal(read(p).split('av-cinema-81.css?v=81.1').length-1,1,p);
+  for(const p of pages)assert.equal(read(p).split('av-cinema-81.css?v=81.0').length-1,1,p);
 });
 test('journey and native tracker only on intended pages',()=>{
-  for(const p of ['index.html','profile.html','anime.html','watch.html'])assert.equal(read(p).split('av-journey-81.js?v=81.1').length-1,1,p);
-  assert.equal(read('watch.html').split('av-native-watch-81.js?v=81.1').length-1,1);
+  for(const p of ['index.html','profile.html','anime.html','watch.html'])assert.equal(read(p).split('av-journey-81.js?v=81.0').length-1,1,p);
+  assert.equal(read('watch.html').split('av-native-watch-81.js?v=81.0').length-1,1);
   for(const p of ['index.html','profile.html','anime.html'])assert.doesNotMatch(read(p),/src="av-native-watch-81\.js/);
 });
 test('manual progress, old rewards and room sync preserved',()=>{
