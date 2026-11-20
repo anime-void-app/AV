@@ -17,6 +17,8 @@ import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.WindowInsets;
+import android.graphics.Insets;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -69,6 +71,13 @@ public final class MainActivity extends Activity {
         getWindow().setStatusBarColor(Color.rgb(10,10,22));
         getWindow().setNavigationBarColor(Color.rgb(12,11,27));
         renderShell();
+        if(Build.VERSION.SDK_INT>=35){
+            getWindow().getDecorView().setOnApplyWindowInsetsListener((v,insets)->{
+                Insets bars=insets.getInsets(WindowInsets.Type.systemBars());
+                root.setPadding(bars.left,bars.top,bars.right,bars.bottom);
+                return insets;
+            });
+        }
         showTab("catalog");
         Uri deep=getIntent()==null?null:getIntent().getData();
         if(deep!=null)openTrusted(deep.toString());
@@ -162,7 +171,7 @@ public final class MainActivity extends Activity {
             settings.setJavaScriptEnabled(true);
             settings.setDomStorageEnabled(true);
             settings.setAllowFileAccess(false);
-            settings.setAllowContentAccess(false);
+            settings.setAllowContentAccess(true);
             settings.setMediaPlaybackRequiresUserGesture(true);
             settings.setMixedContentMode(WebSettings.MIXED_CONTENT_NEVER_ALLOW);
             settings.setUserAgentString(settings.getUserAgentString()+" AnimeVoidAndroid/1.0");
