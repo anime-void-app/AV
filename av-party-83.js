@@ -35,7 +35,7 @@ let latestPublished=0,busy=false,lastChatAt=0,heartbeat=null,peers=new Map();
 let videoProbeTimer=null,publishInFlight=false,chatSending=false;
 let publishPending=false,roomReceivedAt=0,lastSyncRequest=0,lastRoomPollAt=0,pollBusy=false,unreadChats=0;
 let lastRemoteSeekAt=0,lastRemoteTransportAt=0,lastPresenceReady=null,lastPresenceAt=0;
-let reconnectTimer=null,reconnectFailures=0;
+let reconnectTimer=null,reconnectFailures=0,reconnecting=false;
 const clock=()=>new Date().toLocaleTimeString('ru-RU',{hour:'2-digit',minute:'2-digit'});
 function status(message,error=false){ui.status.textContent=message;ui.status.dataset.error=String(error);}
 function setConnection(state){
@@ -183,7 +183,7 @@ function attachVideo(){
 }
 
 async function applyPlayback(){
- if(!room||room.host_id===user?.id||applying)return;
+ if(!room||room.host_id===user?.id||applying||!connected)return;
  const provider=providerAPI();
  if(provider){
   let sample=null,decision=null;
@@ -712,6 +712,7 @@ async function subscribe(){
     connected=true;setConnection('connected');reconnectFailures=0;
     if(reconnectTimer){clearTimeout(reconnectTimer);reconnectTimer=null;}
     ui.reconnect.disabled=false;
+    setHostUI();
     status('Комната подключена. Пригласи друзей по ссылке.');
     void track();drawPeers();
    }else if(state==='CHANNEL_ERROR'||state==='TIMED_OUT'||state==='CLOSED'){
@@ -742,6 +743,7 @@ async function subscribe(){
 async function closeLocal(message,failed=false){
  if(!active&&!roomId)return;
  active=false;connected=false;setConnection('idle');
+ reconnecting=false;
  if(reconnectTimer){clearTimeout(reconnectTimer);reconnectTimer=null;}
  reconnectFailures=0;
  cleanupVoice();clearInterval(heartbeat);heartbeat=null;
@@ -774,17 +776,24 @@ async function handleRoomError(error){
  }
 }
 ui.reconnect.onclick=async()=>{
- if(!active||!roomId)return;
+ if(!active||!roomId||reconnecting)return;
+ reconnecting=true;
+ const requestRoom=roomId;
  ui.reconnect.disabled=true;setConnection('connecting');
  try{
   const old=channel;channel=null;connected=false;
   if(old)try{await sb.removeChannel(old);}catch{}
   for(const id of [...peers.keys()])cleanupPeer(id);
   await fetchRoom(true);
+  if(!active||roomId!==requestRoom)return;
   await subscribe();
-  status('Восстанавливаем соединение с комнатой…');
+  if(active&&roomId===requestRoom)status('Восстанавливаем соединение с комнатой…');
  }catch(e){await handleRoomError(e);}
- finally{ui.reconnect.disabled=false;if(active&&!connected)scheduleReconnect();}
+ finally{
+  reconnecting=false;
+  ui.reconnect.disabled=false;
+  if(active&&!connected)scheduleReconnect();
+ }
 };
 
 async function join(id,created=false){

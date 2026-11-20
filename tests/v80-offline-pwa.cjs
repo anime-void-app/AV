@@ -53,7 +53,7 @@ test('navigation has a branded offline fallback and no playback rewrites',()=>{
  assert.match(worker,/status:503/);
  assert.match(worker,/LICENSED_AUDIO/);
  assert.ok(worker.includes("/kodik-data/"));
- assert.match(read('party.html'),/av-party-76\.js\?v=76\.0/);
+ assert.match(read('party.html'),/av-party-83\.js\?v=83\.0/);
  assert.match(read('match.html'),/av-match-77\.js\?v=77\.0/);
 });
 test('offline page is self-contained and accessible',()=>{

@@ -17,7 +17,7 @@ test('manual progress, old rewards and room sync preserved',()=>{
   assert.match(read('watch.html'),/window\.AVWatchAutoComplete=/);
   assert.match(read('watch.html'),/navigator\.locks\?\.request/);
   assert.match(read('watch.html'),/av-watch-tracker\.js/);
-  assert.match(read('party.html'),/av-party-76\.js/);
+  assert.match(read('party.html'),/av-party-83\.js/);
   assert.match(read('profile.html'),/void-achievements-22\.js/);
   assert.doesNotMatch(read('av-journey-81.js'),/localStorage\.setItem/);
   assert.match(read('av-native-watch-81.js'),/L\.count\(state\.coverage\)<900/);

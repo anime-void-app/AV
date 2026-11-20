@@ -27,7 +27,7 @@ test('watch-party embed and existing playback/auth remain wired',()=>{
  assert.match(app,/window\.self!==window\.top/);
  assert.match(watch,/av-video-81\.js\?v=81\.0/);
  assert.match(watch,/kodik-bridge\.js\?v=81\.0/);
- assert.match(read('party.html'),/av-party-76\.js\?v=76\.0/);
+ assert.match(read('party.html'),/av-party-83\.js\?v=83\.0/);
  assert.match(read('account.html'),/av-account\.js\?v=73\.0/);
 });
 test('PWA CSS cache and release are versioned',()=>{
