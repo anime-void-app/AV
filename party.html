@@ -11,10 +11,11 @@
 <link rel="stylesheet" href="av-party-74.css?v=74.0">
 <link rel="stylesheet" href="av-party-75.css?v=75.0">
 <link rel="stylesheet" href="av-party-76.css?v=76.0">
+<link rel="stylesheet" href="av-party-83.css?v=83.0">
 <script defer src="supabase-client.js?v=2.69.1"></script>
 <script defer src="av-account.js?v=73.0"></script>
-<script defer src="av-party-sync-76.js?v=76.0"></script>
-<script defer src="av-party-76.js?v=76.0"></script>
+<script defer src="av-party-sync-83.js?v=83.0"></script>
+<script defer src="av-party-83.js?v=83.0"></script>
 <link rel="manifest" href="app.webmanifest?v=77.0">
 <link rel="stylesheet" href="av-app-78.css?v=78.0"><script defer src="av-app-78.js?v=78.0"></script><link rel="stylesheet" href="av-update-79.css?v=79.0"><script defer src="av-update-79.js?v=79.0"></script><link rel="stylesheet" href="av-cinema-81.css?v=81.0"></head>
 <body class="av-party-page">
@@ -50,7 +51,7 @@
   <div class="party-session-bar">
    <div class="party-session-info"><span class="party-kicker">ПРИВАТНАЯ КОМНАТА</span><h2 id="partyRoomName">Совместный просмотр</h2><span id="partyMemberCount">1 участник</span><span id="partyConnection" class="party-connection" role="status" aria-live="polite" data-state="idle">Вне комнаты</span></div>
    <div class="party-access-code"><span>КОД КОМНАТЫ</span><strong id="partyRoomCode">—</strong><button id="partyCopyCode" class="party-ghost" type="button">Копировать код</button></div>
-   <div class="party-session-actions"><button id="partyCopy" type="button" class="party-ghost">Скопировать приглашение</button><button id="partyReconnect" type="button" class="party-ghost" aria-label="Переподключиться к комнате">↻ Переподключиться</button><button id="partyLeave" type="button" class="party-danger">Покинуть</button></div>
+   <div class="party-session-actions"><button id="partyCopy" type="button" class="party-ghost">Скопировать приглашение</button><button id="partyShare" type="button" class="party-ghost">Поделиться ↗</button><button id="partyReconnect" type="button" class="party-ghost" aria-label="Переподключиться к комнате">↻ Переподключиться</button><button id="partyLeave" type="button" class="party-danger">Покинуть</button></div>
   </div>
   <div class="party-grid">
    <section class="party-main" aria-label="Совместный плеер">
@@ -66,14 +67,23 @@
       <button id="partySync" type="button" class="party-ghost">Сверить просмотр</button>
      </div>
     </div>
+    <section id="partyHostPanel" class="party-host-panel" aria-label="Управление ведущего" hidden>
+     <span class="party-host-label">УПРАВЛЕНИЕ ВЕДУЩЕГО · ВИДЕО НА ТВОЁМ УСТРОЙСТВЕ</span>
+     <button id="partyHostPlay" type="button" class="party-host-primary">▶ Продолжить</button>
+     <button id="partyHostPause" type="button">Ⅱ Пауза</button>
+     <button id="partyHostBack" type="button">−10 с</button>
+     <button id="partyHostForward" type="button">+10 с</button>
+     <div class="party-episode-jump"><label for="partyJumpEpisode">Серия</label><input id="partyJumpEpisode" type="number" min="1" max="10000" step="1" inputmode="numeric" placeholder="1"><button id="partyGoEpisode" type="button">Перейти</button></div>
+    </section>
+    <div id="partyRoomQuality" class="party-room-quality" data-mode="pending" role="status" aria-live="polite"><span class="party-quality-dot" aria-hidden="true"></span><span id="partyRoomQualityText">Связь с комнатой: проверяем...</span></div>
     <div id="partyPlaybackHelp" class="party-play-help">
      <button id="partyStartPlayback" type="button" class="party-primary">▶ Запустить видео</button>
      <a id="partyOpenPlayback" class="party-ghost" href="watch.html" target="_blank" rel="noopener noreferrer">Открыть плеер отдельно</a>
-     <span>Для первого запуска нажми ▶ внутри плеера у каждого участника. После получения времени от Kodik комната попробует автоматически выровнять воспроизведение. Если провайдер не отвечает на команды, используйте отдельный плеер.</span>
+     <span>Для синхронизации включите видео на обоих устройствах. HTML5 следует за ведущим автоматически. Kodik может требовать ручной запуск и не всегда поддерживает команды. Если он не отвечает, воспользуйтесь ручной сверкой.</span>
     </div>
     <p id="partySyncMode" class="party-sync-mode" role="status" aria-live="polite" data-mode="pending">Ожидаем запуска синхронизации…</p>
     <p id="partyPlayerStatus" class="party-player-status" role="status" aria-live="polite">Проверяем подключение видеоплеера…</p>
-    <p class="party-limit">Для HTML5 и Kodik (при поддержке его команд API) комната сверяет позицию, запуск, паузу и перемотку. Первый запуск Kodik может требовать нажатия ▶ у каждого зрителя. Точность зависит от сети и событий провайдера; посекундное совпадение не гарантировано. Видео каждому зрителю отдаёт его собственный источник.</p>
+    <p class="party-limit">Видео воспроизводится на каждом устройстве отдельно. Для HTML5 доступна автоматическая синхронизация запуска, паузы и перемотки. Для Kodik поддержка ограничена его API и не гарантируется. Если у одного пользователя нет доступа к источнику, комната и чат остаются доступны.</p>
    </section>
    <aside class="party-sidebar">
     <div class="party-tabs" role="tablist" aria-label="Общение">
