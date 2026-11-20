@@ -10,6 +10,9 @@
 - External Kodik V81 iframe is correctly detected. Since its embedded instance does not expose reliable controls, show **manual mode** instead of false automatic sync.
 - Existing chat, WebRTC voice, room codes and subscriptions preserved, no SQL migration, no video distribution.
 
+## Quick entry
+On an anime detail page, tap **Смотреть вместе**. Party lobby must prefill that title ID; create the room, then share the room link to a second authenticated account.
+
 ## QA: two real browsers/two real accounts (required; not simulated by automated tests)
 1. Open `https://animevoid.ru/party.html` in two separate authenticated browsers; create room, share link, join with friend.
 2. Verify presence count and readiness, chat send/receive, microphone opt-in, mute. On cellular NAT, WebRTC may require TURN.

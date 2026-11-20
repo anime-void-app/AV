@@ -87,3 +87,14 @@ test('V83 does not relax RLS or invent direct video sources',()=>{
  assert.match(read('service-worker.js'),/av-AV-core-v83\.0/);
  assert.match(read('updates.html'),/<strong>83\.0<\/strong>/);
 });
+
+test('anime title opens its own private party with one tap',()=>{
+ const html=read('anime.html'),js=read('av-party-launch-83.js');
+ assert.match(html,/av-party-launch-83\.js\?v=83\.0/);
+ assert.match(html,/av-party-launch-83\.css\?v=83\.0/);
+ assert.doesNotThrow(()=>new vm.Script(js));
+ assert.match(js,/party\.html\?anime=/);
+ assert.match(js,/anilist-/);
+ assert.match(read('party.html'),/каталоге/);
+ assert.doesNotMatch(js,/fetch\(|localStorage\.setItem|supabase/i);
+});
