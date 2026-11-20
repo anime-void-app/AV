@@ -4,7 +4,8 @@ const assert=require('node:assert/strict');
 const fs=require('node:fs'),vm=require('node:vm'),path=require('node:path');
 const root=path.join(__dirname,'..'),read=p=>fs.readFileSync(path.join(root,p),'utf8');
 const worker=read('service-worker.js');
-const data=vm.runInNewContext(worker.slice(0,worker.indexOf('self.addEventListener("activate"'))).split('const PRELOAD_CONCURRENCY')[0]+';({NEW_CORE,CORE_CACHE})');
+const header=worker.slice(0,worker.indexOf('const PRELOAD_CONCURRENCY'));
+const data=vm.runInNewContext(header+';({NEW_CORE,CORE_CACHE})');
 test('new service worker parses and uses the V80 cache',()=>{
  assert.doesNotThrow(()=>new vm.Script(worker));
  assert.equal(data.CORE_CACHE,'av-AV-core-v80.0');
@@ -51,7 +52,7 @@ test('navigation has a branded offline fallback and no playback rewrites',()=>{
  assert.match(worker,/cache\.match\("offline\.html"\)/);
  assert.match(worker,/status:503/);
  assert.match(worker,/LICENSED_AUDIO/);
- assert.match(worker,//kodik-data\//);
+ assert.ok(worker.includes("/kodik-data/"));
  assert.match(read('party.html'),/av-party-76\.js\?v=76\.0/);
  assert.match(read('match.html'),/av-match-77\.js\?v=77\.0/);
 });
