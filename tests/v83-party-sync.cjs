@@ -111,3 +111,36 @@ test('external Kodik bridge accepts only exact-origin time and refuses unverifie
  assert.match(party,/context\?\.AVPartyBridge83/);
  assert.match(party,/providerAPI\(\)\|\|ui\.frame\.contentWindow\?\.AVPlayer/);
 });
+
+test('Kodik bridge ignores forged iframe events and only enables verified playback',()=>{
+ const listeners={},commands=[];
+ const inner={postMessage(msg,origin){commands.push({msg,origin});}};
+ const frame={src:'https://kodikplayer.com/serial/123/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/720p',contentWindow:inner};
+ const ctx={
+  location:{search:'?party=1&id=16498&episode=2'},document:{querySelector:()=>frame},
+  window:{},URLSearchParams,URL,Date,
+  addEventListener:(name,fn)=>{listeners[name]=fn},
+  removeEventListener:()=>{}
+ };
+ vm.runInNewContext(read('av-party-bridge-83.js'),ctx);
+ const api=ctx.window.AVPartyBridge83;assert.ok(api);
+ const send=(origin,source,key,value)=>listeners.message({origin,source,data:{key,value}});
+ assert.equal(api.state().ready,false);
+ send('https://evil.example',inner,'kodik_player_current_episode',{episode:2,season:1});
+ send('https://kodikplayer.com',{},'kodik_player_current_episode',{episode:2,season:1});
+ send('https://kodikplayer.com',inner,'kodik_player_duration_update',1200);
+ send('https://kodikplayer.com',inner,'kodik_player_video_started');
+ send('https://kodikplayer.com',inner,'kodik_player_time_update',25);
+ assert.equal(api.state().ready,false,'must confirm exact episode from trusted source');
+ send('https://kodikplayer.com',inner,'kodik_player_current_episode',{episode:2,season:1});
+ assert.equal(api.state().ready,true);
+ assert.equal(api.state().position,25);
+ assert.equal(api.partyControl('seek',27),true);
+ assert.equal(commands.length,1);
+ assert.equal(commands[0].origin,'https://kodikplayer.com');
+ assert.equal(commands[0].msg.value.method,'seek');
+ assert.equal(api.partyControl('seek',-20),false);
+ send('https://kodikplayer.com',inner,'kodik_player_current_episode',{episode:3,season:1});
+ assert.equal(api.state().ready,false);
+ assert.equal(api.partyControl('pause'),false);
+});

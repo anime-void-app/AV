@@ -58,8 +58,9 @@
     }
     break;
    case 'kodik_player_video_started':
-    if(confirmedEpisode===requested){started=true;playing=true;}
-    break;
+    // The provider may announce playback before its episode identity event.
+    // Readiness remains gated on a later confirmed matching episode and live time.
+    started=true;playing=true;break;
    case 'kodik_player_play':
     if(started)playing=true;
     break;
