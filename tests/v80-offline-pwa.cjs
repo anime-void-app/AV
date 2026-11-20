@@ -8,7 +8,7 @@ const header=worker.slice(0,worker.indexOf('const PRELOAD_CONCURRENCY'));
 const data=vm.runInNewContext(header+';({NEW_CORE,CORE_CACHE})');
 test('new service worker parses and uses the V81 cache',()=>{
  assert.doesNotThrow(()=>new vm.Script(worker));
- assert.equal(data.CORE_CACHE,'av-AV-core-v81.0');
+ assert.equal(data.CORE_CACHE,'av-AV-core-v81.1');
 });
 test('install uses the actual current home resources and no unnecessary old versions',()=>{
  const core=data.NEW_CORE;

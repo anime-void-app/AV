@@ -1,0 +1,275 @@
+/* ANIME VOID V81 — responsive cinema layer; design only, no hidden existing features. */
+:root{
+  --av81-glass:rgba(22,20,40,.78);
+  --av81-edge:rgba(202,175,255,.21);
+  --av81-fg:#f8f4ff;
+  --av81-soft:#c8bfdc;
+  --av81-accent:#d4b5ff;
+  --av81-accent-2:#7edccf;
+}
+body.av-shell{overflow-x:clip}
+body.av-shell :is(a,button,input,select,summary):focus-visible{
+  outline:3px solid #cba8ff!important;outline-offset:3px!important
+}
+body.av-shell :is(button,a){-webkit-tap-highlight-color:transparent}
+body.av-home .hero{
+  box-sizing:border-box;position:relative;
+  display:grid!important;grid-template-columns:minmax(0,1.15fr) minmax(290px,.85fr);
+  gap:clamp(24px,4.3vw,68px);align-items:center;
+  min-height:440px;padding:clamp(32px,5vw,72px)!important;
+  border-radius:28px;isolation:isolate;overflow:hidden;
+  background-color:#111022;
+  background-image:radial-gradient(circle at 80% 25%,rgba(156,103,235,.29),transparent 43%),
+     radial-gradient(circle at 10% 100%,rgba(44,153,166,.16),transparent 48%),
+     linear-gradient(128deg,#181226,#0d1122 80%)!important;
+  box-shadow:0 28px 90px rgba(5,4,18,.28);
+}
+body.av-home .hero::before{
+  content:"";pointer-events:none;position:absolute;inset:0;border:1px solid rgba(209,179,255,.2);
+  border-radius:inherit;z-index:-1
+}
+body.av-home .hero::after{
+  content:"✧";position:absolute;right:6%;top:-24%;font-size:clamp(220px,30vw,470px);
+  font-weight:200;line-height:1;color:rgba(192,158,248,.05);pointer-events:none;z-index:-1
+}
+body.av-home .hero>.hero-content{position:relative;z-index:1;min-width:0;max-width:700px}
+body.av-home .hero #heroTitle{
+  font-size:clamp(36px,5.3vw,76px)!important;line-height:1.08!important;
+  letter-spacing:-.06em!important;max-width:15ch;text-wrap:balance;
+}
+body.av-home .hero #heroText{max-width:54ch;font-size:clamp(15px,1.35vw,18px);line-height:1.7}
+body.av-home .hero .tag{letter-spacing:.15em;font-weight:750}
+.av81-hero-panel{
+  box-sizing:border-box;min-width:0;position:relative;z-index:2;
+  padding:clamp(20px,2.7vw,32px);border-radius:24px;
+  color:var(--av81-fg);border:1px solid var(--av81-edge);
+  background:linear-gradient(140deg,rgba(36,28,60,.9),rgba(16,19,37,.9));
+  box-shadow:0 20px 66px rgba(0,0,0,.2),inset 0 1px 0 rgba(255,255,255,.07);
+  backdrop-filter:blur(18px);
+}
+.av81-hero-top,.av81-passport-heading,.av81-explore-head,.av81-medals-heading{
+  display:flex;align-items:center;justify-content:space-between;gap:16px
+}
+.av81-eyebrow{font-size:11px;font-weight:800;letter-spacing:.18em;color:var(--av81-accent-2)}
+.av81-live-dot{width:34px;height:34px;display:grid;place-items:center;border-radius:50%;
+  background:rgba(173,137,232,.13);color:var(--av81-accent);font-size:20px}
+.av81-hero-rank{font-size:clamp(23px,2.6vw,36px)!important;letter-spacing:-.035em!important;
+  line-height:1.18!important;margin:24px 0 14px!important;color:inherit!important}
+.av81-hero-copy{margin:0 0 24px;color:var(--av81-soft);font-size:14px;line-height:1.65}
+.av81-hero-numbers{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0 0 22px}
+.av81-number{border-radius:15px;padding:17px 14px;background:rgba(255,255,255,.045);min-width:0}
+.av81-number strong{display:block;color:#fff;font-size:clamp(18px,2.2vw,27px);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-variant-numeric:tabular-nums}
+.av81-number span{font-size:12px;color:var(--av81-soft)}
+a.av81-primary{
+  box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;
+  width:100%;min-height:47px;padding:12px 17px;border-radius:13px;
+  background:linear-gradient(115deg,#b992ef,#d5a8fb);color:#1c1232!important;
+  text-decoration:none;font-size:14px;font-weight:850;transition:transform .2s,filter .2s
+}
+a.av81-primary:hover{filter:brightness(1.1);transform:translateY(-2px)}
+.av81-explore{box-sizing:border-box;width:100%;max-width:100%;margin:26px auto 35px;padding:0 2px}
+.av81-explore-head{margin:0 0 17px;align-items:end}
+.av81-explore-head h2{margin:0;color:var(--vi-text,#f5efff);font-size:clamp(22px,2.5vw,32px);letter-spacing:-.04em}
+.av81-explore-head p{margin:0;color:var(--vi-muted,#aa9db7);font-size:13px}
+.av81-tile-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+a.av81-tile{
+  display:flex;box-sizing:border-box;min-width:0;min-height:108px;gap:15px;align-items:center;
+  padding:18px;border-radius:19px;color:var(--vi-text,#f9f6ff)!important;
+  background:linear-gradient(145deg,rgba(139,106,197,.13),rgba(73,99,127,.07));
+  border:1px solid var(--vi-line,rgba(174,142,215,.2));text-decoration:none!important;
+  transition:transform .2s,border-color .2s,background .2s
+}
+a.av81-tile:hover{transform:translateY(-3px);border-color:var(--vi-accent,#b58adb)}
+.av81-tile-icon{flex:0 0 49px;display:grid;place-items:center;width:49px;height:49px;
+  border-radius:15px;background:rgba(166,130,226,.16);color:var(--vi-accent,#c8a4f7);
+  font-size:25px;font-weight:750}
+.av81-tile-copy{display:block;flex:1;min-width:0}
+.av81-tile-copy strong{display:block;font-size:15px;margin-bottom:4px;line-height:1.2}
+.av81-tile-copy small{display:block;color:var(--vi-muted,#b6a8c9);font-size:12px;line-height:1.45}
+.av81-tile-arrow{color:var(--vi-accent,#c8a4f7);font-size:21px}
+body.av-home :is(#catalog,#continueSection,#topSection,#recommendedSection,#favorites,.airing-section){
+  scroll-margin-top:95px
+}
+body.av-home :is(.anime-card,.top-card,.movie-card,.card,.continue-card){
+  transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease
+}
+@media(hover:hover){
+ body.av-home :is(.anime-card,.top-card,.movie-card,.card,.continue-card):hover{
+  transform:translateY(-4px)
+ }
+}
+body.av-profile-page #profileOverview{border-radius:25px}
+.av81-passport{box-sizing:border-box;min-width:0;margin:22px 0 35px;padding:clamp(18px,3vw,30px);
+  border:1px solid var(--vi-line,rgba(171,147,214,.28));border-radius:24px;
+  background:radial-gradient(circle at 100% 0,rgba(157,110,226,.16),transparent 47%),
+  linear-gradient(130deg,rgba(40,30,64,.54),rgba(18,21,36,.68));
+  color:var(--vi-text,#faf6ff)}
+.av81-passport-heading{align-items:center;margin-bottom:20px}
+.av81-passport h2{font-size:clamp(23px,2.8vw,34px)!important;letter-spacing:-.04em;margin:7px 0 0!important;color:inherit}
+.av81-passport-badge{padding:8px 11px;border-radius:99px;border:1px solid rgba(141,214,190,.32);
+ color:var(--av81-accent-2);font-size:12px;line-height:1.3}
+.av81-rank-layout{display:flex;align-items:center;gap:23px;border:1px solid rgba(204,174,247,.13);
+ background:rgba(255,255,255,.035);padding:19px;border-radius:20px}
+.av81-rank-symbol{flex:none;width:96px;height:96px;display:grid;place-items:center;
+ font-size:43px;border:1px solid rgba(202,173,242,.35);border-radius:25px;
+ background:radial-gradient(circle,rgba(184,137,241,.22),rgba(105,75,159,.07));
+ box-shadow:0 12px 32px rgba(8,5,25,.2)}
+.av81-rank-info{flex:1;min-width:0}
+.av81-rank-info h3{margin:0 0 5px;font-size:clamp(18px,2.6vw,28px);letter-spacing:-.035em}
+.av81-rank-info p{margin:0 0 13px;font-size:14px;color:var(--vi-muted,#c5b7d3)}
+.av81-rank-progress{display:block;width:100%;height:11px;accent-color:#c3a0f6}
+.av81-rank-info small{display:block;color:var(--vi-muted,#c5b7d3);font-size:12px;margin-top:8px}
+.av81-medals-heading{margin:26px 0 14px}
+.av81-medals-heading h3{margin:0;font-size:18px}
+.av81-medals-heading span{font-size:13px;color:var(--vi-muted,#c5b7d3)}
+.av81-medal-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.av81-medal{box-sizing:border-box;display:flex;align-items:center;min-width:0;min-height:84px;
+  gap:12px;padding:13px;border:1px solid var(--vi-line,rgba(189,154,236,.2));border-radius:16px;
+  background:rgba(255,255,255,.04);transition:border-color .2s,opacity .2s}
+.av81-medal.is-locked{opacity:.55;filter:saturate(.45)}
+.av81-medal.is-earned{border-color:rgba(125,217,199,.48);background:rgba(93,181,172,.08)}
+.av81-medal-icon{font-size:25px;flex:none;width:42px;height:42px;display:grid;place-items:center;
+  border-radius:12px;background:rgba(180,137,243,.15)}
+.av81-medal strong{display:block;font-size:13px;line-height:1.3}
+.av81-medal small{display:block;font-size:11px;color:var(--vi-muted,#c6b7d5);margin-top:3px;line-height:1.35}
+.av81-passport-note{margin:20px 0 0;font-size:12px;line-height:1.6;color:var(--vi-muted,#c5b7d3)}
+.av81-watch-hint{box-sizing:border-box;padding:12px 15px!important;margin-top:12px;
+  border-radius:13px;border:1px solid rgba(106,200,169,.33);
+  background:rgba(55,135,106,.09);color:#a4e6cb!important;font-size:13px;line-height:1.6}
+body.theme-light .av81-passport,body.theme-light .av81-tile{
+  background:linear-gradient(130deg,#f8f4ff,#f1edf8);color:#2b213c!important
+}
+body.theme-light .av81-passport h2,body.theme-light .av81-passport h3{color:#30243d}
+body.theme-light .av81-rank-layout,body.theme-light .av81-medal{background:rgba(124,89,165,.055)}
+body.theme-light .av81-watch-hint{color:#276f58!important;background:#eff9f3}
+@media(max-width:1060px){
+ body.av-home .hero{grid-template-columns:minmax(0,1fr) minmax(260px,.78fr);padding:38px!important}
+ .av81-medal-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:760px){
+ body.av-home .hero{display:block!important;min-height:auto;padding:26px!important;border-radius:22px}
+ body.av-home .hero>.hero-content{max-width:none}
+ body.av-home .hero #heroTitle{font-size:clamp(34px,8.2vw,55px)!important;max-width:16ch}
+ .av81-hero-panel{margin-top:25px;padding:19px;border-radius:20px}
+ .av81-hero-rank{margin:17px 0 9px!important}
+ .av81-hero-numbers{margin-bottom:16px}
+ .av81-explore{margin:19px auto 25px}
+ .av81-explore-head{display:block}
+ .av81-explore-head p{margin-top:5px}
+ .av81-tile-grid{grid-template-columns:1fr;gap:9px}
+ a.av81-tile{min-height:75px;padding:12px 14px;border-radius:15px}
+ .av81-tile-icon{width:43px;height:43px;flex-basis:43px;font-size:23px}
+ .av81-passport{border-radius:19px;margin:16px 0 25px}
+ .av81-passport-heading{align-items:start}
+ .av81-passport-badge{max-width:126px}
+ .av81-rank-layout{gap:13px;padding:13px}
+ .av81-rank-symbol{width:63px;height:63px;border-radius:16px;font-size:31px}
+ .av81-medal-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+ .av81-medal{min-height:78px;padding:9px;gap:7px}
+ .av81-medal-icon{font-size:20px;width:33px;height:38px}
+ body.av-shell .av81-passport :is(a,button){min-height:44px}
+ body.av-home .hero,body.av-profile-page #profileOverview{scroll-margin-top:86px}
+}
+@media(max-width:390px){
+ .av81-passport-badge{display:none}
+ .av81-medal-grid{grid-template-columns:1fr}
+ .av81-medal{min-height:66px}
+ .av81-hero-numbers{grid-template-columns:1fr 1fr}
+ .av81-number{padding:12px 8px}
+ .av81-number strong{font-size:17px}
+}
+@media(prefers-reduced-motion:reduce){
+ body.av-shell .av81-tile,body.av-shell .av81-primary,body.av-shell .av81-medal{
+  transition:none!important
+ }
+}
+/* V81 shared polish: account, history, title, catalog, watch room and controls. */
+body:is(.av-home,.av-profile-page,.av-title-page,.av-watch-page) > header{
+  border-bottom:1px solid rgba(190,157,234,.15);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)
+}
+body:is(.av-home,.av-profile-page,.av-title-page,.av-watch-page) > header :is(a,button){
+  text-underline-offset:4px
+}
+body.av-title-page :is(.anime-page,.similar-section,.characters-section,.episodes),
+body.av-watch-page :is(.avp2,.avp2-tracker){
+  min-width:0
+}
+body.av-title-page .anime-page h1{letter-spacing:-.045em;line-height:1.13;text-wrap:balance}
+body.av-title-page :is(.season-choice,.favorite-page-btn,.status-btn,.episode),
+body.av-watch-page :is(.control-btn,.episode,.avk-toolbar button){
+  border-radius:12px;transition:border-color .2s,filter .2s,transform .2s
+}
+body.av-title-page :is(.season-choice,.favorite-page-btn,.status-btn,.episode):hover,
+body.av-watch-page :is(.control-btn,.episode):hover{filter:brightness(1.1)}
+body.av-watch-page #avPlayer{
+  min-width:0;border:1px solid rgba(178,145,224,.24);border-radius:20px;
+  box-shadow:0 22px 65px rgba(3,3,10,.24)
+}
+body.av-watch-page .watch-top h1{letter-spacing:-.035em;text-wrap:balance}
+body.av-watch-page .avp2-view{background:#080812;border-radius:14px;overflow:hidden}
+body.av-watch-page .avp2-tracker{border-radius:18px}
+body.av-account-page .layout{max-width:1180px;margin-inline:auto}
+body.av-account-page :is(.card,.consent,.av73-cloud-warning){
+  border-radius:20px;box-shadow:0 18px 50px rgba(0,0,0,.13)
+}
+body.av-account-page :is(input,button){border-radius:12px}
+body.av-account-page :is(.account-nav a,.tabs button){
+  min-height:44px;display:inline-flex;align-items:center;justify-content:center
+}
+body.av-history-page #historyMain{
+  box-sizing:border-box;width:min(100%,1320px);
+  margin-inline:auto;padding-inline:clamp(14px,2.8vw,38px)
+}
+body.av-history-page .av-46-intro h1{letter-spacing:-.05em;text-wrap:balance}
+body.av-history-page .av-46-metrics article{
+  border-radius:19px;
+  background:linear-gradient(145deg,rgba(174,126,227,.13),rgba(51,84,99,.09));
+  border:1px solid rgba(187,150,239,.2);
+  box-shadow:0 14px 37px rgba(0,0,0,.12)
+}
+body.av-history-page :is(.av-46-journal,.av-46-record-section,.av-46-continue){
+  border-radius:19px
+}
+body.av-history-page .av-46-search-label input{min-height:46px;border-radius:13px}
+body.av-party-page .party-hero{border-radius:25px;
+  background-image:radial-gradient(circle at 86% 10%,rgba(167,111,236,.13),transparent 55%)
+}
+body.av-party-page :is(.party-lobby,.party-code-join,.party-session,.party-pane){
+  border-radius:20px;border-color:rgba(177,143,226,.27)
+}
+body.av-party-page :is(.party-primary,.party-ghost,.party-danger){
+  border-radius:12px;min-height:44px
+}
+body.av77-match :is(.av77-person,.av77-actions,.av77-intro){
+  border-radius:23px
+}
+body.av77-match :is(.av77-primary,.av77-quiet){
+  min-height:46px;border-radius:13px
+}
+body.av-collections :is(.ma-collection-grid>*,.ma-collection-card){
+  border-radius:18px
+}
+body.av-shell :is(.av-mobile-nav,.av78-bottom-nav) a{touch-action:manipulation}
+@media(max-width:760px){
+  body:is(.av-title-page,.av-watch-page) > header{
+    box-sizing:border-box;gap:9px;padding-inline:12px
+  }
+  body.av-title-page #content{min-width:0;max-width:100%;overflow-wrap:anywhere}
+  body.av-watch-page #avPlayer{border-radius:13px}
+  body.av-watch-page .watch-top h1{font-size:clamp(23px,6vw,34px)}
+  body.av-history-page .av-46-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}
+  body.av-history-page .av-46-metrics article{min-width:0;padding:14px}
+  body.av-party-page :is(.party-lobby-line,.party-code-line){
+    flex-wrap:wrap
+  }
+  body.av-party-page :is(#partyAnimeId,#partyJoinCode){
+    box-sizing:border-box;min-width:0;flex:1 1 180px
+  }
+  body.av-account-page .layout{padding-inline:12px}
+}
+@media(max-width:360px){
+  body.av-history-page .av-46-metrics{grid-template-columns:1fr}
+  body.av-party-page :is(.party-primary,.party-ghost){max-width:100%}
+}

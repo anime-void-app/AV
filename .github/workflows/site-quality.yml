@@ -15,4 +15,4 @@ jobs:
         with:
           node-version: '22'
       - name: Validate site
-        run: node --test tests/v80-offline-pwa.cjs tests/v81-video-loading.cjs
+        run: node --test tests/v80-offline-pwa.cjs tests/v81-video-loading.cjs tests/v81-responsive-journey.cjs
