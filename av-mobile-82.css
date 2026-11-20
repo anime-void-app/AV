@@ -1,0 +1,109 @@
+/* ANIME VOID V82 — compact responsive headers; no playback or account modifications. */
+@media(max-width:760px){
+body:is(.av-home,.av-watch-page,.av-title-page,.av-profile-page)>header{
+ box-sizing:border-box!important;width:100%!important;max-width:100%!important;min-width:0!important;
+ min-height:0!important;height:auto!important;padding:10px 12px!important;gap:8px!important;
+ position:relative!important;top:auto!important;border-radius:0!important
+}
+body:is(.av-home,.av-watch-page,.av-title-page,.av-profile-page)>header>.logo{
+ display:inline-flex!important;align-items:center;min-width:0!important;
+ flex-shrink:0!important;width:max-content!important;max-width:100%!important;
+ white-space:nowrap!important;word-break:normal!important;overflow-wrap:normal!important;
+ writing-mode:horizontal-tb!important;overflow:visible!important;
+ font-size:clamp(18px,5.4vw,23px)!important;line-height:1.25!important;
+ letter-spacing:-.035em!important;padding:0!important;margin:0!important
+}
+/* Homepage stays searchable; secondary menu scrolls rather than collapsing the logo. */
+body.av-home>header{
+ display:grid!important;grid-template-columns:minmax(0,1fr) auto auto;
+ grid-template-areas:"brand lang theme" "search search decor" "links links links";
+ align-items:center!important;column-gap:8px!important
+}
+body.av-home>header>.logo{grid-area:brand}
+body.av-home>header>.language-switch{grid-area:lang;display:flex!important;align-items:center;gap:3px;margin:0!important}
+body.av-home>header>.language-switch button{min-width:30px!important;min-height:36px!important;padding:6px!important}
+body.av-home>header>#themeToggle{grid-area:theme}
+body.av-home>header>#decorToggle{grid-area:decor}
+body.av-home>header>.search-wrap{grid-area:search;display:block;min-width:0;width:100%!important;margin:0!important}
+body.av-home>header>.search-wrap .search{
+ box-sizing:border-box;width:100%!important;max-width:100%;min-width:0;height:42px;font-size:16px
+}
+body.av-home>header>nav{
+ grid-area:links;min-width:0;max-width:100%;width:100%;
+ display:flex!important;flex-wrap:nowrap!important;align-items:center;gap:8px!important;
+ overflow-x:auto;overflow-y:hidden;overscroll-behavior-inline:contain;
+ -webkit-overflow-scrolling:touch;scrollbar-width:thin;white-space:nowrap;padding:0 0 3px!important
+}
+body.av-home>header>nav a{flex:0 0 auto;display:inline-flex;align-items:center;min-height:38px;white-space:nowrap;font-size:12px}
+body.av-home>header>:is(#themeToggle,#decorToggle){min-width:38px!important;width:38px!important;min-height:38px!important;padding:6px!important}
+/* Watch: never squeeze ANIME VOID vertically; all original controls remain accessible. */
+body.av-watch-page>header{
+ display:grid!important;grid-template-columns:minmax(0,1fr);
+ align-content:start;justify-content:stretch!important
+}
+body.av-watch-page>header>.logo{grid-row:1;grid-column:1}
+body.av-watch-page>header>.header-actions{
+ display:flex!important;grid-row:2;grid-column:1;min-width:0!important;width:100%!important;
+ align-items:center!important;justify-content:flex-start!important;
+ flex-wrap:wrap!important;gap:8px!important
+}
+body.av-watch-page>header>.header-actions :is(a,button){
+ display:inline-flex;box-sizing:border-box;align-items:center;justify-content:center;
+ flex:0 0 auto;min-height:40px!important;min-width:0;max-width:100%;
+ padding:8px 10px!important;font-size:12px!important;line-height:1.25;
+ white-space:normal;overflow-wrap:break-word;text-align:center
+}
+body.av-watch-page>header>.header-actions #backAnime{max-width:min(100%,200px)}
+/* Title page: brand on its own line, remaining real controls wrap naturally. */
+body.av-title-page>header{
+ display:flex!important;align-items:center!important;align-content:start;
+ justify-content:flex-start!important;flex-wrap:wrap!important;gap:8px!important
+}
+body.av-title-page>header>.logo{flex-basis:100%!important}
+body.av-title-page>header>:is(a:not(.logo),button){
+ display:inline-flex;align-items:center;justify-content:center;min-height:40px!important;
+ padding:8px 10px!important;font-size:12px!important;line-height:1.25;
+ flex:0 1 auto;max-width:100%;white-space:normal
+}
+/* Profile: compact language/theme + horizontally scrollable section tabs. */
+body.av-profile-page>header{
+ display:grid!important;grid-template-columns:minmax(0,1fr) auto;
+ grid-template-areas:"brand actions" "nav nav";align-items:center!important
+}
+body.av-profile-page>header>.logo{grid-area:brand}
+body.av-profile-page>header>.header-actions{
+ grid-area:actions;display:flex!important;align-items:center;justify-content:flex-end;
+ flex-wrap:nowrap!important;gap:5px!important;min-width:0!important;margin:0!important
+}
+body.av-profile-page>header>.header-actions :is(a,button){
+ min-height:36px!important;padding:5px 7px!important;box-sizing:border-box;font-size:12px!important
+}
+body.av-profile-page>header>nav{
+ grid-area:nav;display:flex!important;gap:10px;flex-wrap:nowrap!important;
+ overflow-x:auto;overflow-y:hidden;scrollbar-width:thin;-webkit-overflow-scrolling:touch;
+ width:100%;max-width:100%;min-width:0;white-space:nowrap
+}
+body.av-profile-page>header>nav a{
+ display:inline-flex;align-items:center;flex:0 0 auto;min-height:36px;font-size:12px
+}
+body:is(.av-watch-page,.av-title-page)>main{
+ box-sizing:border-box;max-width:100%;min-width:0;
+ padding-inline:clamp(12px,3.5vw,22px)!important
+}
+body.av-watch-page #animeTitle{overflow-wrap:break-word;word-break:normal}
+body.av-watch-page :is(#avPlayer,#avKodikBridge,.av-watch57-toolbar,.avp2-tracker){
+ box-sizing:border-box;min-width:0;max-width:100%
+}
+.av78-dock-link{min-width:0;overflow:hidden;white-space:normal!important;text-align:center;line-height:1.15!important}
+.av78-dock-label{display:block;width:100%;max-width:100%;overflow-wrap:anywhere;font-size:clamp(9px,2.5vw,11px)}
+}
+@media(max-width:365px){
+ body.av-home>header{column-gap:5px!important;padding-inline:9px!important}
+ body.av-home>header>.logo{font-size:17px!important}
+ body.av-home>header>.language-switch button{min-width:27px!important;padding:4px!important;font-size:11px!important}
+ body.av-profile-page>header>.header-actions{gap:2px!important}
+ body.av-profile-page>header>.header-actions :is(a,button){padding:5px!important}
+ body.av-watch-page>header>.header-actions{gap:6px!important}
+}
+@media(prefers-reduced-motion:reduce){body.av-home>header>nav{scroll-behavior:auto}}
+@media print{.av78-dock,.av78-top{display:none!important}}
