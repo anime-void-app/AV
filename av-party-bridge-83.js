@@ -81,7 +81,7 @@
  function state(){
   const current=locate(),age=lastSignalAt?Math.max(0,Date.now()-lastSignalAt):Infinity;
   return {
-   providerManaged:true,externalBridge:true,episode:confirmedEpisode,
+   providerManaged:!!current,externalBridge:true,episode:confirmedEpisode,
    ready:!!current&&started&&confirmedEpisode===requested&&duration>0&&lastSignalAt>0,
    playing:started&&playing,position,duration,signalAgeMs:age
   };

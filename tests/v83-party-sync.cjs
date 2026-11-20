@@ -126,6 +126,7 @@ test('Kodik bridge ignores forged iframe events and only enables verified playba
  const api=ctx.window.AVPartyBridge83;assert.ok(api);
  const send=(origin,source,key,value)=>listeners.message({origin,source,data:{key,value}});
  assert.equal(api.state().ready,false);
+ assert.equal(api.state().providerManaged,true);
  send('https://evil.example',inner,'kodik_player_current_episode',{episode:2,season:1});
  send('https://kodikplayer.com',{},'kodik_player_current_episode',{episode:2,season:1});
  send('https://kodikplayer.com',inner,'kodik_player_duration_update',1200);
@@ -145,4 +146,18 @@ test('Kodik bridge ignores forged iframe events and only enables verified playba
  send('https://kodikplayer.com',inner,'kodik_player_current_episode',{episode:3,season:1});
  assert.equal(api.state().ready,false);
  assert.equal(api.partyControl('pause'),false);
+});
+
+test('external iframe must actually exist before provider mode can be advertised',()=>{
+ const handlers={};
+ const ctx={
+  window:{},location:{search:'?party=1&id=16498&episode=1'},
+  document:{querySelector:()=>null},URL,URLSearchParams,Date,
+  addEventListener:(type,fn)=>{handlers[type]=fn},removeEventListener:()=>{}
+ };
+ vm.runInNewContext(read('av-party-bridge-83.js'),ctx);
+ assert.ok(ctx.window.AVPartyBridge83);
+ assert.equal(ctx.window.AVPartyBridge83.state().providerManaged,false);
+ assert.equal(ctx.window.AVPartyBridge83.state().ready,false);
+ assert.equal(ctx.window.AVPartyBridge83.partyControl('play'),false);
 });
