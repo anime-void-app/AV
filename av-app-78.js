@@ -2,7 +2,7 @@
    Pure client-side navigation; never mutates accounts, catalog, history or playback. */
 (()=>{'use strict';
  if(window.self!==window.top)return;
- if(/AnimeVoidAndroid\\/\.test(navigator.userAgent)){document.body.classList.add('av-native-client');return;}
+ if(navigator.userAgent.includes('AnimeVoidAndroid/')){document.body.classList.add('av-native-client');return;}
  const path=(location.pathname.split('/').pop()||'index.html').toLowerCase();
  const home=path==='index.html',ru=()=>document.documentElement.lang!=='en';
  const labels={
