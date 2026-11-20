@@ -91,7 +91,10 @@ function player(){
 }
 function providerAPI(){
  try{
-  const api=ui.frame.contentWindow?.AVPlayer;
+  const context=ui.frame.contentWindow;
+  const officialBridge=context?.AVPartyBridge83;
+  if(officialBridge?.state?.()?.providerManaged===true)return officialBridge;
+  const api=context?.AVPlayer;
   return api?.state?.()?.providerManaged===true?api:null;
  }catch{return null;}
 }
@@ -266,7 +269,7 @@ ui.frame.addEventListener('load',()=>{
   let providerManaged=false,noSource=false,embeddedBridge=false,bridgeLoading=false;
   try{
    const child=ui.frame.contentWindow;
-   providerManaged=child?.AVPlayer?.state?.()?.providerManaged===true;
+   providerManaged=!!providerAPI();
    const knownSources=child?.AVVideoSources?.sources;
    // V81 Kodik mounts a second iframe outside AVPlayer. This cannot be controlled.
    const bridge=child?.document?.getElementById('avKodikBridge');
@@ -275,7 +278,7 @@ ui.frame.addEventListener('load',()=>{
    noSource=!bridge&&Array.isArray(knownSources)&&
      !knownSources.some(source=>source?.animeId===room.anime_id);
   }catch{}
-  if(embeddedBridge){
+  if(embeddedBridge&&!providerManaged){
    ui.playbackHelp.hidden=false;
    ui.startPlayback.textContent='↻ Перезапустить внешний плеер';
    ui.playerStatus.textContent='Внешний Kodik найден. Его iframe не предоставляет ANIME VOID подтверждённого управления воспроизведением. Комната и чат работают, но автоматическая синхронизация этого источника недоступна.';
@@ -298,7 +301,7 @@ ui.frame.addEventListener('load',()=>{
   if(providerManaged){
    ui.playbackHelp.hidden=false;
    ui.startPlayback.textContent='▶ Подготовить совместный просмотр';
-   ui.playerStatus.textContent='Kodik · открой видео, нажми ▶ внутри плеера. После появления времени будут передаваться пауза и перемотка — если провайдер выполняет команды.';
+   ui.playerStatus.textContent='Kodik · запусти видео внутри плеера. Если источник передаст подтверждённые время и серию, попробуем сверять паузу и перемотку. Выполнение команд не гарантируется.';
    syncLabel('Kodik · ожидаем запуска и времени просмотра','pending');
    if(videoProbeTimer){clearInterval(videoProbeTimer);videoProbeTimer=null;}
    return;
@@ -317,7 +320,7 @@ ui.frame.addEventListener('load',()=>{
 
 ui.startPlayback.onclick=async()=>{
  if(!room)return;
- const api=ui.frame.contentWindow?.AVPlayer;
+ const api=providerAPI()||ui.frame.contentWindow?.AVPlayer;
  const video=player();
  const managed=api?.state?.()?.providerManaged===true;
  if(managed){

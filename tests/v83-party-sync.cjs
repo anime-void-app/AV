@@ -98,3 +98,16 @@ test('anime title opens its own private party with one tap',()=>{
  assert.match(read('party.html'),/каталоге/);
  assert.doesNotMatch(js,/fetch\(|localStorage\.setItem|supabase/i);
 });
+
+test('external Kodik bridge accepts only exact-origin time and refuses unverified controls',()=>{
+ const bridge=read('av-party-bridge-83.js'),watch=read('watch.html'),party=read('av-party-83.js');
+ assert.doesNotThrow(()=>new vm.Script(bridge));
+ assert.match(watch,/av-party-bridge-83\.js\?v=83\.0/);
+ assert.match(bridge,/event\.origin!==ORIGIN\|\|event\.source!==current\.contentWindow/);
+ assert.match(bridge,/confirmedEpisode===requested/);
+ assert.match(bridge,/params\.get\('party'\)!=='1'/);
+ assert.match(bridge,/postMessage\(\{key:'kodik_player_api'/);
+ assert.match(bridge,/!info\.ready/);
+ assert.match(party,/context\?\.AVPartyBridge83/);
+ assert.match(party,/providerAPI\(\)\|\|ui\.frame\.contentWindow\?\.AVPlayer/);
+});
