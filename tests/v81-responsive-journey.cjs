@@ -40,3 +40,22 @@ test('release information present',()=>{
   assert.match(read('updates.html'),/<strong>81\.0<\/strong>/);
   assert.match(read('V81_QA.md'),/RuStore/);
 });
+test('unique observed playback counts; seeking and replay do not inflate hours',()=>{
+  const L=require('../av-watch-ledger.js');
+  const session=L.session({titleId:'anilist-4224',title:'Sample',kind:'series',season:1,episode:1});
+  session.event({key:'kodik_player_duration_update',value:1200},0,true);
+  session.event({key:'kodik_player_video_started'},0,true);
+  session.event({key:'kodik_player_time_update',value:0},0,true);
+  session.event({key:'kodik_player_seek'},1000,true);
+  session.event({key:'kodik_player_time_update',value:1140},1000,true);
+  assert.equal(L.count(session.state().coverage),0,'seeking cannot earn viewed coverage');
+  session.event({key:'kodik_player_play'},2000,true);
+  session.event({key:'kodik_player_time_update',value:0},2000,true);
+  for(let i=1;i<=230;i++){
+    session.event({key:'kodik_player_time_update',value:i*5},2000+i*5000,true);
+  }
+  assert.ok(L.count(session.state().coverage)>=900,'continuous viewing reaches completion threshold');
+  const first=L.merge({version:1,entries:{}},session.snapshot());
+  const repeated=L.merge(first,session.snapshot());
+  assert.equal(L.presentation(first).seconds,L.presentation(repeated).seconds,'replay cannot double count unique content');
+});
