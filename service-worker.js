@@ -1,6 +1,6 @@
 /* ANIME VOID — service worker: установка как приложение + офлайн-режим */
 
-const CORE_CACHE = "av-AV-core-v80.0";
+const CORE_CACHE = "av-AV-core-v81.0";
 const STUDIO_CACHE = "av-AV-studio-v79.0";
 const STUDIO_CACHE_LIMIT = 96;
 const IMAGE_CACHE = "av-AV-images-v3";
