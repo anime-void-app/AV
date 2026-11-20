@@ -54,7 +54,6 @@
       else header.prepend(menuButton);
       const routes=[
         ['history.html','История','History'],
-        ['party.html','Смотреть вместе','Watch together'],
         ['collections.html','Коллекции','Collections'],
         ['account.html','Аккаунт','Account']
       ];
@@ -104,7 +103,6 @@
       const shortcuts=make('div','av51-home-shortcuts');
       shortcuts.setAttribute('role','group');
       shortcuts.append(
-        makeLink('party.html','🎬 Смотреть вместе','🎬 Watch together'),
         makeLink('history.html','◷ История','◷ History'),
         makeLink('account.html','⚙ Аккаунт','⚙ Account'),
         makeLink('collections.html','♡ Коллекции','♡ Collections')
