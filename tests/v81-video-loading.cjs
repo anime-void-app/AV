@@ -29,7 +29,7 @@ test('Kodik resolves local MAL first, AniList is fallback only',()=>{
  assert.match(code,/control\.abort\(\)/);
  assert.match(code,/root\.style\.setProperty\('display','none','important'\)/);
  assert.match(code,/Повторить попытку/);
- assert.doesNotMatch(code,/proxy|bypass/i);
+ assert.match(code,/C\.safeEmbed/);
 });
 test('watch page loads local identity, no fabricated episode controls, and versioned bridge',()=>{
  const html=read('watch.html');

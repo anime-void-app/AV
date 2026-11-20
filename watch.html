@@ -350,7 +350,7 @@ if(new URLSearchParams(location.search).get('party')==='1')document.body.classLi
 
     let metadataState='loading';
     async function loadAnimeMetadata(){
-      const m=/^(?:anilist-)?([1-9]\\d*)$/.exec(animeId||'');
+      const m=/^(?:anilist-)?([1-9]\d*)$/.exec(animeId||'');
       if(!m){metadataState='error';applyLanguage();return;}
       // Opening a title with verified cached episodes must not depend on AniList availability.
       if(window.AVVideoIdentity81?.hasEpisodeCount(item)){
