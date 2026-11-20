@@ -1,0 +1,91 @@
+/* ANIME VOID V84 — NOCTURNE: dark-jade and amethyst visual language.
+   Presentation only: never changes player sources, user data, authentication, or playback accounting. */
+:root{--av84-bg:#080913;--av84-panel:#151426;--av84-panel-soft:#1b1a32;
+ --av84-border:rgba(189,166,240,.18);--av84-text:#f3f1ff;
+ --av84-sub:#b8b0ca;--av84-purple:#be98ff;--av84-turquoise:#77dacd}
+html{scroll-behavior:smooth;scroll-padding-top:88px}
+body{background-color:var(--av84-bg);
+ background-image:radial-gradient(ellipse 70vw 38vw at 85% -5%,rgba(116,78,195,.13),transparent 82%),
+ radial-gradient(ellipse 65vw 45vw at 0 35%,rgba(62,145,169,.07),transparent 77%);
+ background-attachment:fixed}
+body,button,input,select,textarea{font-family:Inter,Manrope,system-ui,-apple-system,Segoe UI,sans-serif}
+body>header,body>header.party-header,body>header.dna-header,body>header.q23-header{
+ background:rgba(12,13,26,.92)!important;border-bottom:1px solid var(--av84-border)!important;
+ box-shadow:0 8px 28px rgba(2,3,13,.16);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
+body>header .logo,body>header .dna-brand,body>header .brand{letter-spacing:-.045em!important;font-weight:900!important}
+body a{text-underline-offset:3px}
+body :is(button,input,select,textarea){accent-color:var(--av84-purple)}
+body :is(a,button,input,textarea,select,summary,[role="button"]):focus-visible{
+ outline:3px solid #bca4f9!important;outline-offset:3px!important}
+body :is(button,a){-webkit-tap-highlight-color:transparent}
+body :is(button,[role="button"]){touch-action:manipulation}
+body :is(.anime-card,.top-card,.movie-card,.card,.continue-card,.ma-collection-card,
+.av77-person,.av77-actions,.av-46-journal,.av-46-record-section,.av81-passport){
+ border-radius:19px;outline-color:var(--av84-border)}
+body :is(.anime-card,.movie-card,.top-card){overflow:hidden;box-shadow:0 12px 38px rgba(3,4,16,.2);
+ border:1px solid rgba(186,157,224,.13)}
+@media(hover:hover){body :is(.anime-card,.movie-card,.top-card,.ma-collection-card):hover{
+ border-color:rgba(186,146,250,.57)!important;
+ box-shadow:0 20px 45px rgba(0,0,0,.24),0 0 30px rgba(165,108,226,.1)!important;
+ transform:translateY(-4px)}}
+body.av-home .hero{
+ background-image:radial-gradient(ellipse at 80% 20%,rgba(164,111,238,.21),transparent 55%),
+ radial-gradient(ellipse at 7% 92%,rgba(78,197,172,.13),transparent 45%),
+ linear-gradient(125deg,#1a1731 5%,#0d1121 78%)!important;
+ border:1px solid rgba(201,161,241,.20);box-shadow:0 22px 75px rgba(3,3,18,.28)}
+body.av-home .hero #heroTitle{font-size:clamp(36px,5.5vw,78px)!important;line-height:1.04!important;
+ letter-spacing:-.065em!important;text-wrap:balance}
+body.av-home .hero #heroText{line-height:1.7;max-width:49ch}
+body.av-home :is(.av81-hero-panel,.av78-hub){
+ border:1px solid rgba(200,172,248,.26);
+ background:linear-gradient(150deg,rgba(30,29,54,.95),rgba(13,16,31,.94));
+ box-shadow:0 15px 45px rgba(0,0,0,.17)}
+body.av-home :is(.av81-explore-head h2,.av78-hub-heading h2){letter-spacing:-.055em!important;text-wrap:balance}
+body.av-home a.av81-tile,body.av-home a.av78-hub-link{
+ border:1px solid rgba(190,165,234,.20)!important;
+ background:linear-gradient(130deg,rgba(170,121,220,.11),rgba(81,102,160,.035))!important;
+ border-radius:17px!important}
+body.av-home a.av81-tile:hover,body.av-home a.av78-hub-link:hover{
+ border-color:rgba(194,155,246,.58)!important;
+ background:linear-gradient(130deg,rgba(170,121,220,.20),rgba(81,102,160,.10))!important}
+body.av-home #search{border:1px solid rgba(194,167,238,.33)!important;
+ background-color:rgba(21,18,38,.9)!important;color:#f6edff!important;
+ border-radius:14px!important;box-shadow:0 8px 25px rgba(0,0,0,.12)}
+body.av-home #search::placeholder{color:#bdb1cc}
+body.av-home .search-suggestions{border-radius:15px!important;
+ border:1px solid rgba(198,164,240,.35)!important;box-shadow:0 25px 55px #0008!important}
+body :is(.av81-passport,.avp2-tracker,.av-46-metrics article){border-color:var(--av84-border)!important}
+body:is(.av-watch-page,.av-title-page) #avPlayer{
+ border-radius:19px!important;overflow:hidden;box-shadow:0 20px 64px rgba(3,3,15,.3)}
+body.av-watch-page .watch-top h1,body.av-title-page .anime-page h1{
+ letter-spacing:-.045em!important;line-height:1.13!important;text-wrap:balance}
+body.av-profile-page .av81-rank-layout{
+ background:linear-gradient(110deg,rgba(167,111,211,.09),rgba(55,126,142,.06))}
+body .av78-dock{border-top:1px solid rgba(204,173,244,.29)!important;
+ background:rgba(12,11,27,.96)!important;box-shadow:0 -8px 30px rgba(2,2,12,.3)}
+body .av78-dock-link[aria-current="page"]{
+ background:linear-gradient(145deg,rgba(179,120,242,.23),rgba(115,102,235,.13))!important;
+ color:#f5ddff!important}
+body :is(.av77-intro,.av77-person,.av77-actions,.av-46-journal,.av-46-record-section){
+ border-color:rgba(194,159,243,.2)}
+body :is(.av77-primary,.av81-primary){
+ background:linear-gradient(120deg,#b78bee,#dfbaff)!important;
+ color:#1d122d!important;border-radius:13px!important;font-weight:800!important}
+body.theme-light{background-image:radial-gradient(ellipse at 80% 0%,#e7e0f7,transparent 50%);
+ background-color:#f8f7fd;color:#27223a}
+body.theme-light>header{background:rgba(248,245,255,.96)!important}
+body.theme-light #search{background-color:#fff!important;color:#2b1d3b!important}
+@media(max-width:800px){
+ body.av-home .hero{border-radius:20px!important;margin-inline:0}
+ body.av-home .av78-hub{margin-inline:0;border-radius:17px}
+ body.av-home .av81-explore{margin-bottom:22px}
+ body .av78-dock-link{min-height:48px}
+ body :is(.anime-card,.movie-card,.top-card){border-radius:14px}}
+@media(max-width:390px){
+ body.av-home #heroTitle{font-size:clamp(32px,9.4vw,45px)!important}
+ body .av78-dock-icon{font-size:23px}}
+@media(prefers-reduced-motion:reduce){
+ html{scroll-behavior:auto}
+ body *,body *::before,body *::after{scroll-behavior:auto!important;
+ animation-duration:.01ms!important;transition-duration:.01ms!important}}
+@media print{body{background:#fff!important}.av78-dock,.av78-top{display:none!important}}
