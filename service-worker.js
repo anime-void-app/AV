@@ -1,6 +1,6 @@
 /* ANIME VOID — service worker: установка как приложение + офлайн-режим */
 
-const CORE_CACHE = "av-AV-core-v79.0";
+const CORE_CACHE = "av-AV-core-v80.0";
 const STUDIO_CACHE = "av-AV-studio-v79.0";
 const STUDIO_CACHE_LIMIT = 96;
 const IMAGE_CACHE = "av-AV-images-v3";
@@ -10,50 +10,105 @@ const LICENSED_AUDIO = {"audio/japan-rain-v18.mp3": "e8adbedb517c7c30837ac4046dd
 
 
 const NEW_CORE = [
- "av-update-79.js?v=79.0", "av-update-79.css?v=79.0",
- "av-app-78.css?v=78.0", "av-app-78.js?v=78.0",
- "app.webmanifest?v=77.0", "match.html", "av-match-core-77.js?v=77.0", "av-match-77.js?v=77.0", "av-match-77.css?v=77.0",
- "av-home-77.js?v=77.0", "av-home-77.css?v=77.0",
- "av-account.js?v=73.0", "account-page.js?v=73.0", "av-auth-73.css?v=73.0",
- "av-party-sync-76.js?v=76.0", "av-party-76.js?v=76.0", "av-party-76.css?v=76.0",
- "av-party-75.js?v=75.0", "av-party-75.css?v=75.0",
- "av-kodik-player.js?v=76.0",
- "av-party-74.js?v=74.0", "av-party-74.css?v=74.0",
- "av-account.js?v=72.0", "account-page.js?v=72.0",
- "av-party-72.js?v=72.0",
- "av-party-71.js?v=71.0", "av-party-71.css?v=71.0",
- "av-download-policy-70.js?v=70.0", "av-download-70.js?v=70.0", "av-download-70.css?v=70.0",
- "av-download-policy-69.js?v=69.0", "av-download-69.js?v=69.0", "av-download-69.css?v=69.0",
- "./party.html", "party.html", "av-party-68.css?v=68.0", "av-party-68.js?v=68.0",
- "av-watch-57.js?v=68.0", "av-layout-51.js?v=68.0",
- "av-global-67.css?v=67.0",
- "av-kodik-test.js?v=67.0", "av-player.js?v=67.0",
- "av-recent-48.js?v=67.0", "av-dashboard-46.js?v=67.0", "av-history-46.js?v=67.0",
- "av-watch-57.js?v=66.0", "av-watch-57.css?v=66.0",
- "av-dashboard-46.js?v=63.0", "av-recent-48.js?v=63.0", "av-recent-48.css?v=63.0",
- "av-layout-51.js?v=62.0", "av-layout-51.css?v=62.0", "av-home-53.js?v=62.0", "av-home-53.css?v=62.0", "av-profile-54.css?v=62.0",
- "av-history-46.js?v=61.0", "av-history-46.css?v=61.0",
- "account-page.js?v=65.0",
- "av-recent-48.js?v=59.0",
- "av-profile-charts-58.css?v=58.0", "void-display-charts.js?v=58.0",
- "av-watch-57.css?v=57.0", "av-watch-57.js?v=57.0",
- "movies.html", "movies-data.json", "av-watch-ledger.js?v=24.40", "av-watch-tracker.js?v=24.40", "site-polish.css?v=24.40",
- "anime-comments.js?v=24.15", "anime-comments.css?v=24.15",
- "kodik.html", "kodik-catalog.css?v=24.13", "kodik-data-client.js?v=24.13", "kodik-catalog.js?v=24.40", "kodik-home.js?v=24.40", "kodik-bridge.js?v=24.40",
- 'av-kodik-player.css?v=24.36',
- 'av-kodik-test.js?v=24.40',
- 'av-kodik-player.js?v=24.40',
- 'av-source-loader.js?v=24.36',
- 'vendor/hls.light-1.6.15.min.js?v=24.31',
- 'player-sources.js?v=24.36','av-player.js?v=24.36','av-player-home.js?v=24.36','av-player.css?v=24.36',
-  'account.html','av-account.js?v=60.0','account-page.js?v=24.29',"./404.html", "./anime-a-silent-voice.html", "./anime-attack-on-titan.html", "./anime-bakemonogatari.html", "./anime-death-note.html", "./anime-demon-slayer.html", "./anime-hunter-x-hunter.html", "./anime-jujutsu-kaisen.html", "./anime-my-hero-academia.html", "./anime-one-piece.html", "./anime-one-punch-man.html", "./anime.html", "./art-credits.html", "./art-sources.json?v=24.29", "./atelier-catalog.json?v=24.29", "./audio-sources.html", "./av-atmosphere.css?v=24.29", "./av-atmosphere.js?v=25.3", "./av-design.css?v=24.29", "./av-design.js?v=24.29", "./av-enhancements.css?v=24.29", "./av-enhancements.js?v=55.0", "./av-progress.css?v=24.29", "./av-progress.js?v=24.29", "./av-rewards.js?v=24.29", "./av-safety.js?v=24.40", "./av-shell.js?v=24.29", "./av-state.js?v=24.40", "./av-titles.js?v=24.29", "./banner-atelier.css?v=24.29", "./banner-atelier.js?v=24.29", "./character-quotes-23.json?v=24.29", "./collections.html", "./community-rules.html", "./community.html", "./eras.html", "./explore.html", "./festivals.html", "./field-recordings-v18.json?v=24.29", "./google2c8f216ee8b4f66e.html", "./index.html", "./journal.html", "./manga-catalog-23.json?v=24.29", "./manga.html", "./manifest.json?v=24.29", "./messages.html", "./monogatari-order.html", "./music.html", "./profile-catalog.json?v=24.29", "./profile-studio.css?v=24.29", "./profile-studio.js?v=24.29", "./profile.html", "./quotes.html", "./reading.css?v=24.29", "./reading.html", "./reading.js?v=24.29", "./secrets.html", "./story-dna.html", "./studio-config.js?v=24.29", "./studios.html", "./supabase-client.js?v=24.29", "./taste.html", "./universe-data.json?v=24.29", "./universe.css?v=24.29", "./universe.html", "./universe.js?v=24.29", "./updates.html", "./visual-avatars.json?v=24.29", "./visual-gallery.json?v=24.29", "./visual-studio.css?v=24.29", "./visual-studio.js?v=24.40", "./void-achievements-22.css?v=24.29", "./void-achievements-22.js?v=24.29", "./void-catalog-view.js?v=24.29", "./void-collections.css?v=24.29", "./void-collections.js?v=24.29", "./void-community-layout.css?v=24.29", "./void-custom.js?v=24.29", "./void-daily-card.css?v=24.29", "./void-daily-card.js?v=24.29", "./void-dashboard.css?v=24.29", "./void-dashboard.js?v=24.29", "./void-display-charts.css?v=24.29", "./void-display-charts.js?v=24.29", "./void-eras.css?v=24.29", "./void-eras.js?v=24.29", "./void-evolution.css?v=24.29", "./void-evolution.js?v=24.29", "./void-explore.css?v=24.29", "./void-explore.js?v=24.29", "./void-festivals.css?v=24.29", "./void-festivals.js?v=24.29", "./void-i18n-24.js?v=24.29", "./void-interface.css?v=24.29", "./void-interface.js?v=24.29", "./void-journal.css?v=24.29", "./void-journal.js?v=24.29", "./void-legacy-layout.css?v=24.29", "./void-lexicon.js?v=24.29", "./void-library-23.css?v=24.29", "./void-manga-23.js?v=24.29", "./void-messages.css?v=24.29", "./void-messages.js?v=24.29", "./void-messenger-21.css?v=24.29", "./void-music.css?v=24.29", "./void-music.js?v=24.29", "./void-people-21.js?v=24.29", "./void-profile-20.css?v=24.29", "./void-profile-20.js?v=24.29", "./void-profile-layout.css?v=24.29", "./void-profile-next.css?v=24.29", "./void-profile-next.js?v=24.29", "./void-quotes-23.js?v=24.29", "./void-quotes.css?v=24.29", "./void-quotes.js?v=24.29", "./void-reader-23.js?v=24.29", "./void-reader-bookmarks.js?v=24.29", "./void-reading-stats.css?v=24.29", "./void-reading-stats.js?v=24.29", "./void-refresh-24.css?v=24.29", "./void-secrets.css?v=24.29", "./void-secrets.js?v=24.29", "./void-social.css?v=24.29", "./void-social.js?v=24.29", "./void-story-dna.css?v=24.29", "./void-story-dna.js?v=24.29", "./void-studios-data.js?v=24.29", "./void-studios.css?v=24.29", "./void-studios.js?v=24.29", "./void-taste.css?v=24.29", "./void-taste.js?v=24.29", "./void-title-accent.css?v=24.29", "./void-title-accent.js?v=24.29", "./void-title-layout.css?v=24.29", "./void-title-scene.css?v=24.29", "./void-title-scene.js?v=24.29", "./void-tv.css?v=24.29", "./void-tv.js?v=24.29", "./void-vip-23.css?v=24.29", "./void-vip-23.js?v=24.29", "./void-watch-layout.css?v=24.29", "./watch.html", "./vendor/fflate.js"];
-// Optional studio art is cached on demand, not prefetched on install.
+  "index.html",
+  "offline.html",
+  "app.webmanifest?v=77.0",
+  "icon-192.png",
+  "icon-512.png",
+  "void-i18n-24.js?v=24.29",
+  "av-enhancements.css?v=1",
+  "av-enhancements.js?v=55.0",
+  "av-safety.js?v=24.45",
+  "av-state.js?v=24.40",
+  "void-display-charts.js?v=58.0",
+  "void-display-charts.css?v=18.1",
+  "av-progress.js?v=18.1",
+  "av-progress.css?v=18.1",
+  "void-achievements-22.js?v=22",
+  "av-rewards.js?v=22",
+  "av-titles.js?v=20261030-2",
+  "av-design.css?v=17.0",
+  "av-design.js?v=17.0",
+  "av-atmosphere.css?v=24.29",
+  "av-atmosphere.js?v=25.3",
+  "visual-studio.css?v=17.4",
+  "visual-studio.js?v=24.40",
+  "banner-atelier.css?v=17.3",
+  "banner-atelier.js?v=54.0",
+  "void-social.css?v=18.1",
+  "supabase-client.js?v=2.69.1",
+  "av-account.js?v=73.0",
+  "void-custom.js?v=17.4.1",
+  "void-social.js?v=24.29",
+  "void-interface.css?v=24.29",
+  "void-interface.js?v=24.29",
+  "void-journal.js?v=18.1",
+  "void-dashboard.css?v=18.1",
+  "void-dashboard.js?v=18.1",
+  "void-tv.css?v=18.1",
+  "void-tv.js?v=18.1",
+  "void-title-accent.css?v=18.1",
+  "void-title-accent.js?v=18.1",
+  "void-title-scene.css?v=18.1",
+  "void-title-scene.js?v=18.1",
+  "void-daily-card.css?v=18.1",
+  "void-daily-card.js?v=18.1",
+  "void-catalog-view.js?v=18.1",
+  "void-festivals.css?v=18.1",
+  "void-festivals.js?v=18.1",
+  "void-profile-next.css?v=19",
+  "av-shell.js?v=21",
+  "void-profile-next.js?v=24",
+  "void-vip-23.js?v=24.29",
+  "void-vip-23.css?v=23",
+  "void-refresh-24.css?v=24.29",
+  "av-player.css?v=24.36",
+  "av-player-home.js?v=24.36",
+  "player-sources.js?v=24.36",
+  "site-polish.css?v=47.0",
+  "av-dashboard-46.js?v=67.0",
+  "av-watch-ledger.js?v=47.0",
+  "av-recent-48.css?v=63.0",
+  "av-recent-48.js?v=67.0",
+  "av-layout-51.css?v=62.0",
+  "av-layout-51.js?v=68.0",
+  "av-home-53.css?v=62.0",
+  "av-home-53.js?v=68.0",
+  "av-home-77.js?v=77.0",
+  "av-global-67.css?v=67.0",
+  "av-home-77.css?v=77.0",
+  "av-app-78.css?v=78.0",
+  "av-app-78.js?v=78.0",
+  "av-update-79.css?v=79.0",
+  "av-update-79.js?v=79.0",
+  "void-profile-20.css?v=20",
+  "void-profile-20.js?v=24.29",
+  "void-messenger-21.css?v=21",
+  "void-people-21.js?v=24.29",
+  "kodik-home.js?v=24.40"
+];
+
+// V80: only the actual homepage shell is precached; other routes and assets cache on first visit.
+const PRELOAD_CONCURRENCY = 6;
+async function precacheShell() {
+  const cache = await caches.open(CORE_CACHE);
+  let next = 0;
+  await Promise.all(Array.from({length:Math.min(PRELOAD_CONCURRENCY,NEW_CORE.length)},async()=>{
+    while(next < NEW_CORE.length){
+      const asset = NEW_CORE[next++];
+      try {
+        // Individual failures cannot abort a release. A later visit can cache it normally.
+        const response = await fetch(asset,{cache:"reload"});
+        if(response && response.ok) await cache.put(asset,response);
+      }catch(error){ /* Optional resource failed; continue with the others. */ }
+    }
+  }));
+  // Never replace a working offline-capable version with an incomplete shell.
+  if(!await cache.match("index.html") || !await cache.match("offline.html"))
+    throw new Error("Required offline pages are unavailable");
+}
 self.addEventListener("install", (event) => {
-  event.waitUntil(
-    caches.open(CORE_CACHE)
-      .then((cache) => cache.addAll(NEW_CORE))
-      .then(() => self.skipWaiting())
-  );
+  event.waitUntil(precacheShell().then(()=>self.skipWaiting()));
 });
 
 self.addEventListener("activate", (event) => {
@@ -139,6 +194,12 @@ async function networkFirstPage(request) {
     const cache = await caches.open(CORE_CACHE);
     const cached = await cache.match(canonicalPageKey(request));
     if (cached) return cached;
+    // A real offline screen beats a partially initialized page for an uncached route.
+    const fallback = await cache.match("offline.html");
+    if(fallback) return new Response(await fallback.text(), {
+      status:503,
+      headers:{"Content-Type":"text/html; charset=utf-8","Cache-Control":"no-store"}
+    });
     return new Response(
       '<!DOCTYPE html><html lang="ru"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>ANIME VOID</title></head>' +
       '<body style="margin:0;background:#090810;color:#f5f3ff;font-family:Arial,sans-serif;text-align:center;padding-top:40vh">' +

@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#130c24">
+<meta name="robots" content="noindex,nofollow">
+<title>Нет соединения — ANIME VOID</title>
+<style>
+:root{color-scheme:dark;font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif}
+*{box-sizing:border-box}
+body{min-height:100svh;margin:0;display:grid;place-items:center;padding:24px 18px calc(24px + env(safe-area-inset-bottom,0px));background:radial-gradient(circle at 15% 10%,#2b1745 0%,transparent 50%),radial-gradient(circle at 90% 85%,#261339 0%,transparent 52%),#0c0915;color:#f6f0ff}
+main{width:min(100%,480px);border:1px solid #49315f;border-radius:28px;padding:clamp(24px,6vw,42px);background:linear-gradient(155deg,rgba(33,20,54,.94),rgba(15,11,28,.96));box-shadow:0 24px 100px #06040f80}
+.logo{font-weight:900;letter-spacing:-.06em;font-size:20px}.logo span{color:#d8a8ff}
+.symbol{display:grid;place-items:center;width:76px;height:76px;margin:34px 0 24px;border-radius:22px;background:#2a1a43;border:1px solid #61407f;font-size:42px;color:#e4beff}
+.eyebrow{letter-spacing:.15em;color:#c6a0eb;text-transform:uppercase;font-weight:750;font-size:11px}
+h1{font-size:clamp(29px,7vw,39px);letter-spacing:-.05em;line-height:1.12;margin:10px 0 16px}
+p{color:#c8bbd7;line-height:1.65;margin:0 0 22px;font-size:15px}
+.actions{display:flex;gap:10px;flex-wrap:wrap}
+button,a{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:12px 20px;border-radius:12px;font:750 14px system-ui;text-decoration:none;cursor:pointer}
+button{border:1px solid #d7a5ff;background:#dab0ff;color:#21102e}a{border:1px solid #65447e;color:#f2dcff;background:#241934}
+button:focus-visible,a:focus-visible{outline:3px solid #fff;outline-offset:3px}
+small{display:block;margin-top:24px;color:#9c8aaa;line-height:1.5}
+@media(max-width:360px){main{padding:22px}.actions>*{flex:1 1 100%}}
+</style>
+</head>
+<body>
+<main>
+<div class="logo" aria-label="ANIME VOID">ANIME<span>VOID</span></div>
+<div class="symbol" aria-hidden="true">⌁</div>
+<div class="eyebrow" id="eyebrow">Режим без сети</div>
+<h1 id="title">Связь прервалась.</h1>
+<p id="message">Эта страница ещё не сохранена на устройстве. Проверь интернет и попробуй ещё раз. Уже посещённые страницы могут открываться без сети.</p>
+<div class="actions">
+<button type="button" id="retry">↻ Повторить</button>
+<a href="index.html" id="home">На главную</a>
+</div>
+<small id="hint">Твой аккаунт и история не удалены. Это только ошибка подключения.</small>
+</main>
+<script>
+(function(){
+var en=(navigator.language||'').toLowerCase().startsWith('en');
+if(en){
+document.documentElement.lang='en';
+document.getElementById('eyebrow').textContent='Offline mode';
+document.getElementById('title').textContent='Connection lost.';
+document.getElementById('message').textContent='This page is not saved on your device yet. Check your connection and try again. Previously visited pages may still work offline.';
+document.getElementById('retry').textContent='↻ Retry';
+document.getElementById('home').textContent='Go home';
+document.getElementById('hint').textContent='Your account and watch history were not deleted. This is only a connection error.';
+}
+document.getElementById('retry').addEventListener('click',function(){location.reload();});
+})();
+</script>
+</body>
+</html>
