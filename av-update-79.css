@@ -1,0 +1,9 @@
+/* ANIME VOID V79 — visible only when a PWA upgrade has been installed */
+.av79-update{position:fixed;z-index:9101;bottom:20px;left:50%;transform:translateX(-50%);box-sizing:border-box;display:flex;align-items:center;gap:12px;width:min(540px,calc(100% - 30px));padding:13px 15px;border:1px solid rgba(204,148,255,.5);border-radius:16px;background:rgba(26,17,45,.98);box-shadow:0 14px 45px rgba(0,0,0,.48);color:#f7efff;font:13px/1.5 system-ui,sans-serif;backdrop-filter:blur(18px)}
+.av79-update[hidden]{display:none!important}.av79-text{flex:1;min-width:0}
+.av79-update button{cursor:pointer;min-height:40px}.av79-apply{flex-shrink:0;padding:8px 12px;border:0;border-radius:10px;background:#ddafff;color:#1d0c31;font:800 12px system-ui}
+.av79-close{flex-shrink:0;min-width:30px;background:transparent;border:0;color:#ded0e9;font:23px system-ui}
+.av79-update button:focus-visible{outline:3px solid #f4dcff;outline-offset:2px}
+@media(max-width:700px){.av79-update{bottom:calc(144px + env(safe-area-inset-bottom,0px));gap:9px;padding:10px;font-size:12px}}
+@media(max-width:370px){.av79-update{flex-wrap:wrap}.av79-text{flex-basis:100%}.av79-close{margin-left:auto}}
+@media(prefers-reduced-transparency:reduce){.av79-update{backdrop-filter:none}}
