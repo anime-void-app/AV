@@ -132,10 +132,6 @@
    details.href=inSite?'anime.html?id='+encodeURIComponent(localIds.get(item.id)):'https://anilist.co/anime/'+encodeURIComponent(item.id);
    if(!inSite){details.target='_blank';details.rel='noopener noreferrer';details.textContent=t('AniList ↗','AniList ↗');}
    links.append(details);
-   if(available.has('anilist-'+item.id)){
-    const room=create('a','',t('▶ Смотреть вдвоём','▶ Watch together'));
-    room.href='party.html?anime='+encodeURIComponent(item.id);links.append(room);
-   }
    contents.append(links);article.append(poster,contents);grid.append(article);
   }
  }

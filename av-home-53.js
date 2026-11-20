@@ -56,9 +56,6 @@
       });
       tools.append(searchAction);
     }
-    const partyAction=copy('a','av53-party-action','🎬 Смотреть вместе','🎬 Watch together');
-    partyAction.href='party.html';
-    tools.append(partyAction);
     if(continueSection){
       continueAction=copy('a','av53-continue-action','▶ Продолжить','▶ Continue');
       continueAction.href='#continueSection';

@@ -84,7 +84,7 @@
     tiles.append(
       link('index.html#catalog','⌕','Выбрать аниме','Explore anime','Каталог и поиск по жанрам','Catalog and genre search'),
       link('history.html','▶','Продолжить просмотр','Continue watching','Вернуться к последней серии','Pick up where you left off'),
-      link('party.html','♡','Смотреть вместе','Watch together','Общая комната с другом','Share a room with a friend')
+      link('collections.html','♡','Мои коллекции','My collections','Сохраняй любимые истории','Save your favorite stories')
     );
     menu.append(tiles);hero.after(menu);
   }

@@ -6,9 +6,9 @@
  const home=path==='index.html',ru=()=>document.documentElement.lang!=='en';
  const labels={
   home:['Главная','Home'],search:['Поиск','Search'],match:['Для двоих','Match'],
-  party:['Комната','Party'],profile:['Профиль','Profile'],top:['Наверх','Back to top'],
+  profile:['Профиль','Profile'],top:['Наверх','Back to top'],
   recent:['Продолжить','Continue'],calendar:['Расписание','Schedule'],history:['История','History'],
-  library:['Мои списки','My lists'],install:['Установить приложение','Install app'],
+  library:['Мои списки','My lists'],explore:['Открытия','Explore'],install:['Установить приложение','Install app'],
   help:['На iPhone: «Поделиться» → «На экран Домой». На Android: меню браузера → «Установить приложение».',
         'On iPhone: Share → Add to Home Screen. On Android: browser menu → Install app.']
  };
@@ -19,7 +19,7 @@
   ['home','⌂','index.html'],
   ['search','⌕','index.html#catalog'],
   ['match','♡','match.html'],
-  ['party','▷','party.html'],
+  ['history','↺','history.html'],
   ['profile','♙','profile.html']
  ];
  const links=new Map();
@@ -28,7 +28,7 @@
   const symbol=create('span','av78-dock-icon');symbol.textContent=icon;symbol.setAttribute('aria-hidden','true');
   const name=create('span','av78-dock-label');name.textContent=t(key);a.append(symbol,name);
   if(key==='home'&&home||key==='match'&&path==='match.html'||
-   key==='party'&&path==='party.html'||key==='profile'&&path==='profile.html'||
+   key==='history'&&path==='history.html'||key==='profile'&&path==='profile.html'||
    key==='search'&&['kodik.html','anime.html'].includes(path)){
    a.setAttribute('aria-current','page');
   }
@@ -57,7 +57,7 @@
    for(const [key,icon,href] of [
     ['recent','▶','#continueSection'],['library','☆','#favorites'],
     ['calendar','◷','#calendarSection'],['history','↺','history.html'],
-    ['match','♡','match.html'],['party','▷','party.html']
+    ['match','♡','match.html'],['explore','✧','explore.html']
    ]){
     const a=create('a','av78-hub-link');a.href=href;a.dataset.hub=key;
     const mark=create('span','av78-hub-symbol');mark.textContent=icon;mark.setAttribute('aria-hidden','true');
