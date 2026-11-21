@@ -31,10 +31,10 @@ test('V94 native colors exactly match ANIME VOID website default CSS theme',()=>
  const design=read('android-app/app/src/main/java/ru/animevoid/app/AuroraDesign.java');
  const main=read('android-app/app/src/main/java/ru/animevoid/app/MainActivity.java');
  const styles=read('android-app/app/src/main/res/values/styles.xml');
- const css=read('av-design.css'),polish=read('site-polish.css');
+ const css=read('av-design.css');
  for(const color of ['11,7,19','23,16,32','36,22,50','48,27,72','244,242,250','182,177,197','193,162,255','124,58,237','73,48,95'])assert.ok(theme.includes(color),color);
  for(const color of ['--av-bg:#0b0b12','--av-surface:#15151f','--av-accent:#c1a2ff','--av-solid:#7140bf'])assert.ok(css.includes(color),color);
- for(const color of ['--av-bg:#0b0713','--av-surface:#171020','--av-raised:#241632','--av-tint:#301b48','--av-line:#49305f','--av-solid:#7c3aed'])assert.ok(polish.includes(color),color);
+ for(const color of ['--av-bg:#0b0713','--av-surface:#171020','--av-raised:#241632','--av-tint:#301b48','--av-line:#49305f','--av-solid:#7c3aed'])assert.ok(css.includes(color),color);
  assert.match(main,/Точная основная тема ANIME VOID/);
  assert.match(styles,/#C1A2FF/);
  assert.doesNotMatch(main,/Color\.rgb\(140,241,212\)|AuroraTheme\.JADE/);
