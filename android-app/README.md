@@ -33,7 +33,7 @@ The exact applicationId is `ru.animevoid.app`; confirm package availability befo
 ## Monetization roadmap — OFF by default
 - Cosmetic profile themes, banner packs, frames and optional supporter subscription (no exclusive anime content or copyrighted assets sold).
 - Entitlements must be server-verified: RuStore Pay SDK + server-to-server purchase validation + trusted per-user entitlement records/RLS; never unlock paid features by trusting frontend flags.
-- RuStore reports monetization requires an eligible developer aged **18+**. No payments, pricing, fake checkout or unlock logic are present in this app.
+- As of 2026, RuStore's own developer documentation states **only registered legal entities and individual entrepreneurs (ИП)** may activate RuStore in-app payments; a personal / self-employed account alone is not sufficient. Check current RuStore conditions and legal eligibility before enabling payments. No payments, pricing, fake checkout or unlock logic are present in this app.
 - Avoid disruptive ads in the video player. Respect paid-user rights and provide clear purchase/refund terms.
 
 ## Do not delete Supabase tables from earlier party versions without an explicit data-deletion decision
@@ -44,3 +44,12 @@ The UI and scripts for rooms were retired on the website; tables remain unused s
 - Test all three accents, tab switching, video full screen and back navigation on a real phone.
 - Check the public app page at https://animevoid.ru/app.html and verify it does not advertise an APK or purchase that is not live.
 - Selling cosmetic digital entitlements requires eligibility, RuStore Pay SDK, signed backend purchase verification, refunds and a privacy policy. Do not enable in the client before those systems are verified.
+
+## V86 — native navigation (Android 1.2.0 / versionCode 3)
+- Five-tab native interface: Главная, Каталог, Поиск, Моё, Профиль.
+- Native landing dashboard, search entry and discovery shortcuts; catalog, accounts and playback still operate through the **existing first-party website** inside the restricted WebView.
+- Native search enters a query only on a verified animevoid.ru page and dispatches the site's existing input event; this is NOT a new server-side search implementation.
+- A local "last opened anime/watch page" URL is saved in app preferences. It does not claim to sync watch position between devices.
+- Local diary and reminders remain functional via Моё and Профиль.
+- This is a staged foundation, NOT feature parity with Anixart. Next milestones: native feed backed by documented catalog data, optimized anime detail screens, source/license-aware player, remote push for followed titles, cloud lists with account sign-in, performance/accessibility QA.
+- Store distribution remains blocked by rights verification, device QA, final app listing, release signing, and approved developer eligibility.
