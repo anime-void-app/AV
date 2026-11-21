@@ -1,0 +1,54 @@
+name: ANIME VOID V87 — direct Android test download
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/android-v87-share.yml'
+  workflow_dispatch:
+permissions:
+  actions: read
+  contents: write
+jobs:
+  publish-test-apk:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Download successfully built V87 Android APK
+        uses: actions/download-artifact@v4
+        with:
+          name: animevoid-android-debug-apk
+          run-id: 44894420742
+          github-token: ${{ github.token }}
+          path: ./download
+      - name: Validate actual Android APK before publishing
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -s download/app-debug.apk
+          python3 - <<'PY'
+          from zipfile import ZipFile
+          with ZipFile("download/app-debug.apk") as apk:
+              assert apk.testzip() is None
+              names=set(apk.namelist())
+              assert "AndroidManifest.xml" in names
+              assert "classes.dex" in names
+              print("Verified Android APK:", len(names), "entries")
+          PY
+          cp download/app-debug.apk animevoid-v87-debug.apk
+          sha256sum animevoid-v87-debug.apk
+      - name: Create public pre-release with direct APK link
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          tag="v1.3.0-beta1"
+          if gh release view "$tag" >/dev/null 2>&1; then
+            gh release upload "$tag" animevoid-v87-debug.apk --clobber
+          else
+            gh release create "$tag" animevoid-v87-debug.apk \
+              --target "$GITHUB_SHA" \
+              --title "ANIME VOID V87 — Android 1.3.0 (test APK)" \
+              --notes "Android test APK with native catalogue, native search, genre filters, sorting and local favourites. This is a DEBUG build for personal testing, not signed for RuStore release. Requires Android 8.0+. Content and playback availability may vary." \
+              --prerelease
+          fi
