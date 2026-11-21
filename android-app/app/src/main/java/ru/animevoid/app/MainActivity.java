@@ -64,6 +64,10 @@ public final class MainActivity extends Activity {
     private String pendingWebUrl;
     private FrameLayout content;
     private WebView browser;
+    private LinearLayout appHeader;
+    private LinearLayout webContainer;
+    private TextView webTitle;
+    private FrameLayout webErrorHost;
     private NativeCatalog nativeCatalog;
     private LibraryBackup libraryBackup;
     private String pendingCatalogQuery;
@@ -143,6 +147,7 @@ public final class MainActivity extends Activity {
             new LinearLayout.LayoutParams(dp(42),dp(42)));
         LinearLayout.LayoutParams share=new LinearLayout.LayoutParams(dp(42),dp(42));
         share.leftMargin=dp(8);header.addView(toolbarAction("search","Поиск",()->showTab("discover")),share);
+        appHeader=header;
         root.addView(header,new LinearLayout.LayoutParams(-1,dp(67)));
         View separator=new View(this);separator.setBackgroundColor(AuroraTheme.LINE);
         root.addView(separator,new LinearLayout.LayoutParams(-1,dp(1)));
@@ -161,6 +166,7 @@ public final class MainActivity extends Activity {
 
         private void showTab(String tab){
         activeTab=tab;content.removeAllViews();nav.removeAllViews();
+        if(appHeader!=null)appHeader.setVisibility("web".equals(tab)?View.GONE:View.VISIBLE);
         if(pageLoad!=null)pageLoad.setVisibility("web".equals(tab)?View.VISIBLE:View.GONE);
         if("web".equals(tab))showCatalog();
         else if("catalog".equals(tab)||"favorites".equals(tab)){
@@ -213,6 +219,13 @@ public final class MainActivity extends Activity {
         metrics.addView(AuroraDesign.stat(this,String.valueOf(saved),"Сохранено локально",ACCENT),statLeft);
         metrics.addView(AuroraDesign.stat(this,String.valueOf(stored(DIARY).length()),
             "Записей в дневнике",AuroraTheme.LILAC),new LinearLayout.LayoutParams(0,-2,1));
+        AuroraDesign.section(this,host,"ОТКРОЙ НОВОЕ","Постеры и свежие истории",ACCENT);
+        LinearLayout showcaseSlot=new LinearLayout(this);
+        showcaseSlot.setOrientation(LinearLayout.VERTICAL);
+        LinearLayout.LayoutParams showcaseLp=new LinearLayout.LayoutParams(-1,-2);
+        showcaseLp.bottomMargin=dp(18);
+        host.addView(showcaseSlot,showcaseLp);
+        nativeCatalog.showHomeShowcase(showcaseSlot);
         AuroraDesign.section(this,host,"ПРОДОЛЖИТЬ","Твои недавние истории",ACCENT);
         String recent=getSharedPreferences(PREF,MODE_PRIVATE).getString("lastAnimeUrl",null);
         if(recent!=null&&trusted(Uri.parse(recent))){
@@ -246,6 +259,17 @@ public final class MainActivity extends Activity {
             "Сохранённые тайтлы и личный дневник",AuroraTheme.GOLD,()->showTab("library"));
         AuroraDesign.addTile(this,host,"bookmark","Подборки ANIME VOID",
             "Коллекции на сайте",ACCENT,()->openTrusted("https://animevoid.ru/collections.html"));
+        View socialGap=new View(this);host.addView(socialGap,new LinearLayout.LayoutParams(-1,dp(10)));
+        AuroraDesign.section(this,host,"СООБЩЕСТВО","Больше возможностей",ACCENT);
+        AuroraDesign.addTile(this,host,"profile","Сообщество",
+            "Общение и публикации",AuroraTheme.LILAC,
+            ()->openTrusted("https://animevoid.ru/community.html"));
+        AuroraDesign.addTile(this,host,"share","Личные сообщения",
+            "Твои диалоги на ANIME VOID",AuroraTheme.GOLD,
+            ()->openTrusted("https://animevoid.ru/messages.html"));
+        AuroraDesign.addTile(this,host,"sparkle","Anime Match",
+            "Открой подбор историй по настроению",ACCENT,
+            ()->openTrusted("https://animevoid.ru/match.html"));
         TextView foot=AuroraDesign.text(this,"ANIME VOID  ·  AURORA CINEMA  ·  V92",10,MUTED,true);
         foot.setGravity(Gravity.CENTER);foot.setLetterSpacing(.12f);
         foot.setPadding(0,dp(23),0,dp(5));host.addView(foot);
@@ -284,6 +308,12 @@ public final class MainActivity extends Activity {
         AuroraDesign.addTile(this,host,"sparkle","Рекомендации сайта",
             "Редакторские подборки ANIME VOID",AuroraTheme.GOLD,
             ()->openTrusted(HOME+"#recommendedSection"));
+        AuroraDesign.addTile(this,host,"bookmark","Манга и истории",
+            "Раздел чтения ANIME VOID",ACCENT,
+            ()->openTrusted("https://animevoid.ru/manga.html"));
+        AuroraDesign.addTile(this,host,"play","Фильмы",
+            "Отдельный кинораздел сайта",AuroraTheme.LILAC,
+            ()->openTrusted("https://animevoid.ru/movies.html"));
     }
 
         private void openCatalogSearch(String entered){
@@ -338,6 +368,12 @@ public final class MainActivity extends Activity {
         AuroraDesign.addTile(this,host,"bookmark","Достижения и ранги",
             "Открой реальные достижения своего аккаунта",AuroraTheme.GOLD,
             ()->openTrusted("https://animevoid.ru/profile.html"));
+        AuroraDesign.addTile(this,host,"share","Мои сообщения",
+            "Чаты и переписки на сайте",ACCENT,
+            ()->openTrusted("https://animevoid.ru/messages.html"));
+        AuroraDesign.addTile(this,host,"profile","Аккаунт и вход",
+            "Настройки учётной записи",AuroraTheme.LILAC,
+            ()->openTrusted("https://animevoid.ru/account.html"));
         View space=new View(this);host.addView(space,new LinearLayout.LayoutParams(-1,dp(14)));
         AuroraDesign.section(this,host,"ИНСТРУМЕНТЫ","Приложение",ACCENT);
         AuroraDesign.addTile(this,host,"clock","Напоминания",
@@ -354,7 +390,8 @@ public final class MainActivity extends Activity {
         private boolean trusted(Uri u){
         if(u==null||!"https".equalsIgnoreCase(u.getScheme()))return false;
         String host=u.getHost();
-        return "animevoid.ru".equalsIgnoreCase(host)||"www.animevoid.ru".equalsIgnoreCase(host);
+        return ("animevoid.ru".equalsIgnoreCase(host)||"www.animevoid.ru".equalsIgnoreCase(host))
+            &&(u.getPort()==-1||u.getPort()==443)&&u.getUserInfo()==null;
     }
     private void openTrusted(String url){
         Uri u=Uri.parse(url);
@@ -386,12 +423,20 @@ public final class MainActivity extends Activity {
             settings.setAllowContentAccess(true);
             settings.setMediaPlaybackRequiresUserGesture(true);
             settings.setMixedContentMode(WebSettings.MIXED_CONTENT_NEVER_ALLOW);
+            settings.setSafeBrowsingEnabled(true);
             settings.setUserAgentString(settings.getUserAgentString()+" AnimeVoidAndroid/1.0");
             CookieManager.getInstance().setAcceptCookie(true);
             CookieManager.getInstance().setAcceptThirdPartyCookies(browser,true);
             browser.setWebViewClient(new WebViewClient(){
                 @Override public void onPageFinished(WebView view,String url){
                     super.onPageFinished(view,url);
+                    if(webTitle!=null){
+                        String pageTitle=view.getTitle();
+                        if(pageTitle==null||pageTitle.trim().isEmpty())pageTitle="ANIME VOID";
+                        if(pageTitle.length()>55)pageTitle=pageTitle.substring(0,55)+"…";
+                        webTitle.setText(pageTitle);
+                    }
+                    if(webErrorHost!=null)webErrorHost.setVisibility(View.GONE);
                     Uri current=Uri.parse(url);
                     if(!trusted(current))return;
                     if(url.contains("/anime.html")||url.contains("/watch.html")
@@ -416,7 +461,8 @@ public final class MainActivity extends Activity {
                 @Override public void onReceivedError(WebView view,WebResourceRequest request,WebResourceError error){
                     if(request.isForMainFrame()){
                         if(pageLoad!=null)pageLoad.setVisibility(View.GONE);
-                        toast("Сайт недоступен. Каталог и дневник доступны в приложении.");
+                        showWebError("Страница недоступна",
+                            "Проверь интернет или открой каталог — сохранённые данные останутся доступными.");
                     }
                 }
                 @Override public boolean onRenderProcessGone(WebView view,android.webkit.RenderProcessGoneDetail detail){
@@ -431,6 +477,11 @@ public final class MainActivity extends Activity {
                 }
             });
             browser.setWebChromeClient(new WebChromeClient(){
+                @Override public void onReceivedTitle(WebView view,String title){
+                    if(webTitle!=null&&title!=null&&!title.trim().isEmpty()){
+                        webTitle.setText(title.length()>55?title.substring(0,55)+"…":title);
+                    }
+                }
                 @Override public void onProgressChanged(WebView view,int progress){
                     if(pageLoad!=null){pageLoad.setProgress(progress);pageLoad.setVisibility("web".equals(activeTab)&&progress<100?View.VISIBLE:View.GONE);}
                 }
@@ -454,11 +505,70 @@ public final class MainActivity extends Activity {
                 if(url!=null)openExternal(url);
             });
         }
-        if(pendingWebUrl!=null){browser.loadUrl(pendingWebUrl);pendingWebUrl=null;}
-        else if(browser.getUrl()==null){browser.loadUrl(HOME);}
+        String requested=pendingWebUrl;
+        pendingWebUrl=null;
+        if(requested!=null)browser.loadUrl(requested);
+        else if(browser.getUrl()==null)browser.loadUrl(HOME);
         if(browser.getParent() instanceof ViewGroup)((ViewGroup)browser.getParent()).removeView(browser);
-        content.addView(browser,new FrameLayout.LayoutParams(-1,-1));
+        webContainer=new LinearLayout(this);webContainer.setOrientation(LinearLayout.VERTICAL);
+        webContainer.setBackgroundColor(AuroraTheme.BG);
+        LinearLayout toolbar=new LinearLayout(this);toolbar.setGravity(Gravity.CENTER_VERTICAL);
+        toolbar.setPadding(dp(10),dp(4),dp(10),dp(4));
+        toolbar.setBackgroundColor(Color.rgb(11,19,31));
+        View back=toolbarAction("back","Назад по истории",()->{
+            if(browser!=null&&browser.canGoBack())browser.goBack();
+            else showTab("catalog");
+        });
+        toolbar.addView(back,new LinearLayout.LayoutParams(dp(39),dp(39)));
+        webTitle=AuroraDesign.text(this,"ANIME VOID / ПРОСМОТР",12,AuroraTheme.FG,true);
+        webTitle.setSingleLine(true);
+        webTitle.setEllipsize(android.text.TextUtils.TruncateAt.END);
+        LinearLayout.LayoutParams titleLp=new LinearLayout.LayoutParams(0,-2,1f);
+        titleLp.leftMargin=dp(9);toolbar.addView(webTitle,titleLp);
+        LinearLayout.LayoutParams smallLp=new LinearLayout.LayoutParams(dp(39),dp(39));
+        smallLp.leftMargin=dp(5);
+        toolbar.addView(toolbarAction("refresh","Обновить страницу",()->{
+            if(browser!=null)browser.reload();
+        }),smallLp);
+        LinearLayout.LayoutParams browserLp=new LinearLayout.LayoutParams(dp(39),dp(39));
+        browserLp.leftMargin=dp(5);
+        toolbar.addView(toolbarAction("external","Открыть в браузере",()->{
+            if(browser!=null&&browser.getUrl()!=null)openExternal(browser.getUrl());
+            else openExternal(HOME);
+        }),browserLp);
+        webContainer.addView(toolbar,new LinearLayout.LayoutParams(-1,dp(49)));
+        FrameLayout webSurface=new FrameLayout(this);
+        webContainer.addView(webSurface,new LinearLayout.LayoutParams(-1,0,1f));
+        webSurface.addView(browser,new FrameLayout.LayoutParams(-1,-1));
+        webErrorHost=new FrameLayout(this);webErrorHost.setVisibility(View.GONE);
+        webSurface.addView(webErrorHost,new FrameLayout.LayoutParams(-1,-1));
+        content.addView(webContainer,new FrameLayout.LayoutParams(-1,-1));
     }
+    private void showWebError(String title,String message){
+        if(webErrorHost==null||!"web".equals(activeTab))return;
+        webErrorHost.removeAllViews();
+        webErrorHost.setBackgroundColor(AuroraTheme.BG);
+        ScrollView scroll=new ScrollView(this);scroll.setFillViewport(true);
+        LinearLayout column=new LinearLayout(this);column.setOrientation(LinearLayout.VERTICAL);
+        column.setGravity(Gravity.CENTER_VERTICAL);
+        column.setPadding(dp(24),dp(24),dp(24),dp(24));
+        scroll.addView(column);
+        AuroraDesign.hero(this,column,ACCENT,"ANIME VOID  /  ВОССТАНОВЛЕНИЕ",
+            title,message,"Повторить загрузку",()->{
+                if(webErrorHost!=null)webErrorHost.setVisibility(View.GONE);
+                if(browser!=null)browser.reload();
+            });
+        AuroraDesign.addTile(this,column,"catalog","Перейти к каталогу",
+            "Нативные постеры, фильтры и сохранённые тайтлы",ACCENT,()->showTab("catalog"));
+        AuroraDesign.addTile(this,column,"external","Открыть страницу в Chrome",
+            "Поможет, если вход или плеер не работают в приложении",AuroraTheme.LILAC,()->{
+                if(browser!=null&&browser.getUrl()!=null)openExternal(browser.getUrl());
+                else openExternal(HOME);
+            });
+        webErrorHost.addView(scroll,new FrameLayout.LayoutParams(-1,-1));
+        webErrorHost.setVisibility(View.VISIBLE);
+    }
+    
     private void leaveFullScreen(){
         if(fullView==null)return;
         if(fullView.getParent() instanceof ViewGroup)((ViewGroup)fullView.getParent()).removeView(fullView);
