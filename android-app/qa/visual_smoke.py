@@ -169,6 +169,8 @@ def main():
     tap("Профиль")
     capture("07-profile")
     tap("Настройки и оформление", exact=False, scroll=True)
+    expect("Единая фиолетовая палитра")
+    expect("#C1A2FF")
     capture("08-settings")
     print("Emulator navigation, poster catalogue, title sheet and backup UI passed.", flush=True)
 
