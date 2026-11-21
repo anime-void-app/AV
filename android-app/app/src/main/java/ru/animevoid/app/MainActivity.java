@@ -232,7 +232,7 @@ public final class MainActivity extends Activity {
         LinearLayout.LayoutParams showcaseLp=new LinearLayout.LayoutParams(-1,-2);
         showcaseLp.bottomMargin=dp(18);
         host.addView(showcaseSlot,showcaseLp);
-        nativeCatalog.showHomeShowcase(showcaseSlot);
+        nativeCatalog.showHomeShowcase(showcaseSlot,()->showTab("catalog"));
         AuroraDesign.section(this,host,"ПРОДОЛЖИТЬ","Твои недавние истории",ACCENT);
         String recent=getSharedPreferences(PREF,MODE_PRIVATE).getString("lastAnimeUrl",null);
         if(recent!=null&&trusted(Uri.parse(recent))){
