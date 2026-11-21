@@ -1,0 +1,90 @@
+name: ANIME VOID V93 — emulator-verified mobile APK
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'android-app/**'
+      - 'tests/v93-visual-smoke.cjs'
+      - '.github/workflows/android-v93-qa.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+  actions: read
+concurrency:
+  group: animevoid-v93-device-qa
+  cancel-in-progress: true
+jobs:
+  emulator-qa-and-release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: android-actions/setup-android@v4
+      - name: Android SDK 35
+        run: sdkmanager --install "platforms;android-35" "build-tools;35.0.0"
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.11.1'
+      - uses: actions/cache@v4
+        with:
+          path: ~/.android/debug.keystore
+          key: av-v90-preview-debug-keystore-1
+      - name: Validate V93 design and security regression tests
+        run: node --test tests/v93-visual-smoke.cjs tests/v92-native-design-smoke.cjs
+      - name: Build V93 preview APK
+        run: gradle -p android-app :app:assembleDebug --no-daemon --stacktrace
+      - name: Enable emulator hardware acceleration
+        run: if test -e /dev/kvm; then sudo chmod 666 /dev/kvm; fi
+      - name: Launch emulator, navigate and capture all eight screens
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 35
+          target: google_apis
+          arch: x86_64
+          profile: pixel_4
+          emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim
+          disable-animations: true
+          script: python3 android-app/qa/visual_smoke.py
+      - name: Attach UI screenshots and hierarchy audits
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: animevoid-v93-ui-screenshots
+          path: android-app/qa/screenshots/*
+          if-no-files-found: warn
+      - name: Verify final debug APK
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -s android-app/app/build/outputs/apk/debug/app-debug.apk
+          python3 - <<'PY'
+          from zipfile import ZipFile
+          with ZipFile('android-app/app/build/outputs/apk/debug/app-debug.apk') as apk:
+              assert apk.testzip() is None
+              assert 'AndroidManifest.xml' in apk.namelist()
+              assert 'classes.dex' in apk.namelist()
+          PY
+          cp android-app/app/build/outputs/apk/debug/app-debug.apk animevoid-v93-preview.apk
+          sha256sum animevoid-v93-preview.apk
+      - name: Publish V93 direct test APK for phones
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          grep -q "versionCode 8" android-app/app/build.gradle
+          grep -q "versionName '2.3.0'" android-app/app/build.gradle
+          tag="v2.3.0-beta1"
+          if gh release view "$tag" >/dev/null 2>&1; then
+            gh release upload "$tag" animevoid-v93-preview.apk --clobber
+          else
+            gh release create "$tag" animevoid-v93-preview.apk \
+              --target "$GITHUB_SHA" \
+              --title "ANIME VOID V93 — Aurora Cinema, native showcase + device QA" \
+              --notes "Android 2.3 preview: catalog-powered native banners and poster carousel, Aurora Cinema five-tab interface, native anime detail sheet, feature shortcuts for messages/community/account/manga, WebView navigation and error recovery, editable diary and backups. Android emulator smoke-tested. Still a temporary CI debug-signed APK, not RuStore-ready. Third-party streaming and user sign-in require real Android device verification and permission to distribute content." \
+              --prerelease
+          fi

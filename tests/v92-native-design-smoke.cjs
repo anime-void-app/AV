@@ -19,8 +19,8 @@ test('V92 catalogue cards, save action, dark spinners and title sheet exist',()=
 });
 test('V92 versionCode and preview package still protect user local data',()=>{
  const gradle=load('android-app/app/build.gradle');
- assert.match(gradle,/versionCode 7/);assert.match(gradle,/versionName '2\.2\.0'/);
- assert.match(gradle,/appLabel:'ANIME VOID V92'/);
+ assert.match(gradle,/versionCode (?:7|8)/);assert.match(gradle,/versionName '2\.(?:2|3)\.0'/);
+ assert.match(gradle,/appLabel:'ANIME VOID V9(?:2|3)'/);
  assert.match(gradle,/applicationIdSuffix '\.preview'/);
  assert.match(load('android-app/README.md'),/V92/);
 });

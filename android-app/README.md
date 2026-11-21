@@ -94,3 +94,14 @@ The UI and scripts for rooms were retired on the website; tables remain unused s
 - Decorative nebula rendering uses static Canvas painting; no continuous animation or added analytics or JS bridge. Existing catalogue cache, export/import, notes, reminders and first-party WebView are preserved.
 - Same ru.animevoid.app.preview application ID and cached testing key as V90/V91. Version increments to 2.2.0/7, supports installation over V91 preview (same signing key).
 - UI redesign is implemented and automated build tests run. Real-device screenshots, hands-on playback testing, permanent store signing and media distribution rights verification still needed before RuStore submission. Not yet full Anixart feature parity.
+
+
+## V93 — catalogue-powered mobile showcase, feature hub and device QA (Android 2.3.0 / code 8)
+- Home gains a true metadata-driven anime poster banner plus a horizontal, scrollable carousel, fetched from the same static catalog dataset as the website. Posters are HTTPS allowlisted, cached on disk and fall back to native art offline.
+- First-party profile, watch history, account, messages, community, manga, movies, match and collections are reachable through dedicated native routes. Existing user data remains on the site; no simulated cloud activity or fake levels.
+- Native playback wrapper gains a contextual mini toolbar (Back, Refresh, Open in browser), a responsive network-error recovery screen, main-frame HTTP error handling, fullscreen support and first-party domain restrictions (HTTPS, port 443, no userinfo).
+- Secondary views have unified typography and card surfaces. Diary entries are editable without losing their URL; reminders properly show an empty state when all past reminders expire.
+- Performance: bounded 24-card browsing, 9 MB catalogue cap, 3 poster download workers, bounded memory/disk image caches; individual card favorites no longer parse saved JSON repeatedly. Nebula art is static, not CPU-looping animation.
+- CI now includes Android emulator screenshot smoke tests for home, catalogue, anime title, discovery, library, diary, profile and settings. Test metadata is drawn from the repository catalog chunks, injected into emulator app cache and never bundled inside the APK.
+- Preview package ru.animevoid.app.preview, versionCode 8 / versionName 2.3.0, retains V90/V91/V92 cached debug signing key and local data where certificate matches. V87 uses a separate app ID.
+- V93 UI coverage does not establish real-device playback reliability or full native parity with the website. For RuStore release verify legal media licences, sign with an owner-held permanent keystore, run real-phone QA and publish a privacy policy.
