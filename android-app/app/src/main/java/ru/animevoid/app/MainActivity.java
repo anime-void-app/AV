@@ -908,7 +908,7 @@ public final class MainActivity extends Activity {
         LinearLayout details=card(root);
         details.addView(AuroraDesign.kicker(this,"ANIME VOID  /  О ПРИЛОЖЕНИИ",ACCENT));
         TextView note=AuroraDesign.text(this,
-            "Версия 2.3.0 · Android 8.0+. Дневник, избранное приложения и резервные копии хранятся на устройстве. Вход, уровни, история просмотра и плеер работают через сайт. Видеоконтент может предоставляться сторонними сервисами.",
+            "Версия 2.3.0 · Android 8.0+. Дневник, избранное приложения и резервные копии хранятся на устройстве. Вход, уровни, история просмотра и плеер работают через сайт. Видеоконтент может предоставляться сторонними сервисами. Сейчас оплата и подписки не подключены.",
             12,MUTED,false);
         note.setLineSpacing(dp(4),1f);note.setPadding(0,dp(10),0,0);
         details.addView(note);
