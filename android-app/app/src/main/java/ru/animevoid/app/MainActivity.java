@@ -67,6 +67,7 @@ public final class MainActivity extends Activity {
     private LinearLayout appHeader;
     private LinearLayout webContainer;
     private TextView webTitle;
+    private boolean webMainFrameFailed=false;
     private FrameLayout webErrorHost;
     private NativeCatalog nativeCatalog;
     private LibraryBackup libraryBackup;
@@ -108,9 +109,12 @@ public final class MainActivity extends Activity {
     }
     private Button button(String label,Runnable action,boolean primary){
         Button b=new Button(this);b.setText(label);b.setAllCaps(false);
-        b.setTextColor(primary?AuroraTheme.DARK_TEXT:AuroraTheme.FG);b.setTextSize(13);b.setMinHeight(dp(44));
-        GradientDrawable bg=AuroraTheme.solid(primary?ACCENT:AuroraTheme.SOFT,13,
-            primary?ACCENT:AuroraTheme.LINE,1,getResources().getDisplayMetrics().density);
+        b.setTextColor(primary?AuroraTheme.DARK_TEXT:AuroraTheme.FG);
+        b.setTextSize(13);b.setTypeface(android.graphics.Typeface.create("sans-serif-medium",1));
+        b.setMinHeight(dp(44));b.setPadding(dp(12),0,dp(12),0);
+        b.setStateListAnimator(null);
+        GradientDrawable bg=primary?AuroraTheme.solid(ACCENT,13,ACCENT,1,getResources().getDisplayMetrics().density)
+            :AuroraDesign.panel(this,13);
         b.setBackground(AuroraTheme.touch(bg,0x35ffffff));
         b.setOnClickListener(v->action.run());return b;
     }
@@ -138,8 +142,11 @@ public final class MainActivity extends Activity {
         LinearLayout identity=new LinearLayout(this);identity.setOrientation(LinearLayout.VERTICAL);
         identity.setPadding(dp(10),0,dp(2),0);
         TextView brand=AuroraDesign.text(this,"ANIME VOID",20,AuroraTheme.FG,true);
-        brand.setLetterSpacing(-.04f);identity.addView(brand);
+        brand.setLetterSpacing(-.04f);brand.setSingleLine(true);
+        brand.setEllipsize(android.text.TextUtils.TruncateAt.END);identity.addView(brand);
         TextView byline=AuroraDesign.kicker(this,"AURORA CINEMA  /  MOBILE",ACCENT);
+        byline.setSingleLine(true);
+        byline.setEllipsize(android.text.TextUtils.TruncateAt.END);
         LinearLayout.LayoutParams byp=new LinearLayout.LayoutParams(-1,-2);byp.topMargin=dp(4);
         identity.addView(byline,byp);
         header.addView(identity,new LinearLayout.LayoutParams(0,-2,1f));
@@ -428,6 +435,11 @@ public final class MainActivity extends Activity {
             CookieManager.getInstance().setAcceptCookie(true);
             CookieManager.getInstance().setAcceptThirdPartyCookies(browser,true);
             browser.setWebViewClient(new WebViewClient(){
+                @Override public void onPageStarted(WebView view,String url,android.graphics.Bitmap favicon){
+                    webMainFrameFailed=false;
+                    if(webErrorHost!=null)webErrorHost.setVisibility(View.GONE);
+                    if(webTitle!=null)webTitle.setText("ANIME VOID · ЗАГРУЗКА");
+                }
                 @Override public void onPageFinished(WebView view,String url){
                     super.onPageFinished(view,url);
                     if(webTitle!=null){
@@ -436,7 +448,7 @@ public final class MainActivity extends Activity {
                         if(pageTitle.length()>55)pageTitle=pageTitle.substring(0,55)+"…";
                         webTitle.setText(pageTitle);
                     }
-                    if(webErrorHost!=null)webErrorHost.setVisibility(View.GONE);
+                    if(webErrorHost!=null&&!webMainFrameFailed)webErrorHost.setVisibility(View.GONE);
                     Uri current=Uri.parse(url);
                     if(!trusted(current))return;
                     if(url.contains("/anime.html")||url.contains("/watch.html")
@@ -460,9 +472,18 @@ public final class MainActivity extends Activity {
                 }
                 @Override public void onReceivedError(WebView view,WebResourceRequest request,WebResourceError error){
                     if(request.isForMainFrame()){
+                        webMainFrameFailed=true;
                         if(pageLoad!=null)pageLoad.setVisibility(View.GONE);
                         showWebError("Страница недоступна",
                             "Проверь интернет или открой каталог — сохранённые данные останутся доступными.");
+                    }
+                }
+                @Override public void onReceivedHttpError(WebView view,WebResourceRequest request,
+                    android.webkit.WebResourceResponse error){
+                    if(request.isForMainFrame()&&error.getStatusCode()>=500){
+                        webMainFrameFailed=true;
+                        showWebError("Сервис временно недоступен",
+                            "Сервер ответил с ошибкой "+error.getStatusCode()+". Каталог приложения остаётся доступен.");
                     }
                 }
                 @Override public boolean onRenderProcessGone(WebView view,android.webkit.RenderProcessGoneDetail detail){
@@ -612,12 +633,16 @@ public final class MainActivity extends Activity {
         getSharedPreferences(PREF,MODE_PRIVATE).edit().putString(key,value.toString()).apply();
     }
     private void heading(LinearLayout host,String title,String subtitle){
-        TextView a=text(title,29,AuroraTheme.FG,true);host.addView(a);
-        TextView b=text(subtitle,13,MUTED,false);b.setPadding(0,dp(7),0,dp(20));host.addView(b);
+        TextView eyebrow=AuroraDesign.kicker(this,"ANIME VOID  /  ЛИЧНОЕ ПРОСТРАНСТВО",ACCENT);
+        LinearLayout.LayoutParams ep=new LinearLayout.LayoutParams(-1,-2);ep.bottomMargin=dp(10);
+        host.addView(eyebrow,ep);
+        TextView a=AuroraDesign.text(this,title,28,AuroraTheme.FG,true);a.setLetterSpacing(-.03f);host.addView(a);
+        TextView b=AuroraDesign.text(this,subtitle,13,MUTED,false);
+        b.setLineSpacing(dp(3),1f);b.setPadding(0,dp(10),0,dp(20));host.addView(b);
     }
     private LinearLayout card(LinearLayout host){
         LinearLayout c=new LinearLayout(this);c.setOrientation(LinearLayout.VERTICAL);
-        c.setPadding(dp(17),dp(17),dp(17),dp(17));c.setBackground(surface(PANEL,21));
+        c.setPadding(dp(17),dp(17),dp(17),dp(17));c.setBackground(AuroraDesign.panel(this,21));
         LinearLayout.LayoutParams p=new LinearLayout.LayoutParams(-1,-2);p.bottomMargin=dp(12);
         host.addView(c,p);return c;
     }
@@ -641,7 +666,8 @@ public final class MainActivity extends Activity {
             TextView n=text(entry.optString("note",""),13,MUTED,false);
             n.setPadding(0,dp(6),0,0);item.addView(n);
             String url=entry.optString("url",HOME);
-            addButton(item,"Открыть на ANIME VOID",()->openTrusted(url),true);
+            addButton(item,"▶  Открыть на ANIME VOID",()->openTrusted(url),true);
+            addButton(item,"✎  Изменить заметку",()->editExistingEntry(id),false);
             addButton(item,"Удалить запись",()->new AlertDialog.Builder(this)
                 .setTitle("Удалить запись?").setMessage(title).setNegativeButton("Отмена",null)
                 .setPositiveButton("Удалить",(d,w)->{removeById(DIARY,id);showTab("diary");}).show(),false);
@@ -678,6 +704,42 @@ public final class MainActivity extends Activity {
                 }catch(Exception e){toast("Не удалось сохранить запись");}
             }).show();
     }
+    private void editExistingEntry(String id){
+        JSONArray list=stored(DIARY);
+        JSONObject existing=null;
+        for(int i=0;i<list.length();i++){
+            JSONObject row=list.optJSONObject(i);
+            if(row!=null&&id.equals(row.optString("id"))){existing=row;break;}
+        }
+        if(existing==null){toast("Запись не найдена");return;}
+        final JSONObject selected=existing;
+        LinearLayout form=new LinearLayout(this);form.setOrientation(LinearLayout.VERTICAL);
+        form.setPadding(dp(18),dp(12),dp(18),dp(8));
+        TextView noteLabel=AuroraDesign.kicker(this,"МОЯ БИБЛИОТЕКА  /  РЕДАКТИРОВАНИЕ",ACCENT);
+        form.addView(noteLabel);
+        EditText title=new EditText(this);title.setSingleLine(true);title.setHint("Название");
+        title.setText(existing.optString("title",""));title.setTextColor(AuroraTheme.FG);
+        form.addView(title);
+        EditText note=new EditText(this);note.setMinLines(3);note.setHint("Твоя заметка");
+        note.setText(existing.optString("note",""));note.setTextColor(AuroraTheme.FG);
+        form.addView(note);
+        AlertDialog dialog=new AlertDialog.Builder(this).setTitle("Изменить запись")
+            .setView(form).setNegativeButton("Отмена",null)
+            .setPositiveButton("Сохранить",null).create();
+        dialog.setOnShowListener(ignored->dialog.getButton(AlertDialog.BUTTON_POSITIVE)
+            .setOnClickListener(v->{
+                String name=title.getText().toString().trim();
+                if(name.isEmpty()){title.setError("Введи название");return;}
+                try{
+                    selected.put("title",name.substring(0,Math.min(160,name.length())));
+                    String notes=note.getText().toString();
+                    selected.put("note",notes.substring(0,Math.min(500,notes.length())));
+                    store(DIARY,list);dialog.dismiss();showTab("diary");
+                }catch(Exception ex){toast("Не удалось сохранить изменения");}
+            }));
+        dialog.show();
+    }
+    
     private void removeById(String key,String id){
         JSONArray old=stored(key),now=new JSONArray();
         for(int i=0;i<old.length();i++){
@@ -707,7 +769,11 @@ public final class MainActivity extends Activity {
                 removeById(REMINDERS,id);showTab("reminders");
             },false);
         }
-        if(reminders.length()==0)card(root).addView(text("Напоминаний ещё нет.",14,MUTED,false));
+        boolean future=false;
+        for(int i=0;i<reminders.length();i++)
+            if(reminders.optJSONObject(i)!=null&&reminders.optJSONObject(i).optLong("when",0)>=System.currentTimeMillis())
+                future=true;
+        if(!future)card(root).addView(text("Активных напоминаний пока нет.",14,MUTED,false));
         card(root).addView(text("Уведомления требуют разрешения Android. Время не гарантируется с точностью до секунды.",12,MUTED,false));
     }
     private void newReminder(){
@@ -766,12 +832,13 @@ public final class MainActivity extends Activity {
             }).setNegativeButton("Отмена",null).show();
     }
     private void showSettings(LinearLayout root){
-        heading(root,"Настройки","Aurora Cinema · Android 2.2.0 / V92");
+        heading(root,"Настройки","Aurora Cinema · Android 2.3.0 / V93");
         LinearLayout about=card(root);
         about.addView(text("Быстрые действия",17,Color.WHITE,true));
         addButton(about,"Мой профиль на сайте",()->openTrusted("https://animevoid.ru/profile.html"),true);
         addButton(about,"Каталог Anime Match",()->openTrusted("https://animevoid.ru/match.html"),false);
-        addButton(about,"Обновить главную сайта",()->openTrusted(HOME+"?fromAndroid=v91"),false);
+        addButton(about,"Главная сайта",()->openTrusted(HOME+"?fromAndroid=v93"),false);
+        addButton(about,"Открыть аккаунт в браузере",()->openExternal("https://animevoid.ru/account.html"),false);
         LinearLayout design=card(root);
         design.addView(text("Оформление · бесплатно",17,Color.WHITE,true));
         addButton(design,"Выбрать цвет: нефрит / аметист / янтарь",this::chooseAccent,false);
