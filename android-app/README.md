@@ -6,7 +6,7 @@
 - local scheduled viewing reminders (notification permission requested only when needed, restored after reboot);
 - native share sheet, page shortcuts, Android back navigation, file-picker for avatar uploads, fullscreen HTML video;
 - HTTPS only, no JavaScript bridge, no hidden proxy or video redistribution;
-- branded icon, navigation, dark theme, Android 8.0+ (API 26), target SDK 35.
+- branded icon, navigation, dark theme with three free local accent options, Android 8.0+ (API 26), target SDK 35.
 
 The Android diary is local **and is not cloud-synced with the site's favorites**. Third-party embedded media and Google OAuth may be restricted in Android WebView; test carefully and offer email sign-in / browser fallback. APK does not grant rights to anime videos.
 
@@ -38,3 +38,9 @@ The exact applicationId is `ru.animevoid.app`; confirm package availability befo
 
 ## Do not delete Supabase tables from earlier party versions without an explicit data-deletion decision
 The UI and scripts for rooms were retired on the website; tables remain unused so users' legacy records are not destroyed by a frontend deploy.
+
+## V85 Android UI checklist
+- Version 1.1.0 / versionCode 2 includes free native jade, amethyst and amber accents; selection is stored locally and does not affect the web player's state.
+- Test all three accents, tab switching, video full screen and back navigation on a real phone.
+- Check the public app page at https://animevoid.ru/app.html and verify it does not advertise an APK or purchase that is not live.
+- Selling cosmetic digital entitlements requires eligibility, RuStore Pay SDK, signed backend purchase verification, refunds and a privacy policy. Do not enable in the client before those systems are verified.

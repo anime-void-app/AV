@@ -54,10 +54,10 @@ public final class MainActivity extends Activity {
     private static final String REMINDERS="reminders";
     private static final int PICK_FILE=421;
     private static final int NOTIFICATIONS=422;
-    private static final int BACKGROUND=Color.rgb(8,9,19);
-    private static final int PANEL=Color.rgb(20,21,39);
-    private static final int ACCENT=Color.rgb(194,154,255);
-    private static final int MUTED=Color.rgb(182,171,207);
+    private static final int BACKGROUND=Color.rgb(8,14,25);
+    private static final int PANEL=Color.rgb(18,31,45);
+    private int ACCENT=Color.rgb(140,241,212);
+    private static final int MUTED=Color.rgb(174,192,207);
     private LinearLayout root, nav;
     private FrameLayout content;
     private WebView browser;
@@ -68,8 +68,9 @@ public final class MainActivity extends Activity {
 
     @Override public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getWindow().setStatusBarColor(Color.rgb(10,10,22));
-        getWindow().setNavigationBarColor(Color.rgb(12,11,27));
+        getWindow().setStatusBarColor(Color.rgb(9,17,28));
+        getWindow().setNavigationBarColor(Color.rgb(9,17,28));
+        ACCENT=accentFor(getSharedPreferences(PREF,MODE_PRIVATE).getString("accent","jade"));
         renderShell();
         if(Build.VERSION.SDK_INT>=35){
             getWindow().getDecorView().setOnApplyWindowInsetsListener((v,insets)->{
@@ -93,9 +94,9 @@ public final class MainActivity extends Activity {
     }
     private Button button(String label,Runnable action,boolean primary){
         Button b=new Button(this);b.setText(label);b.setAllCaps(false);
-        b.setTextColor(primary?Color.rgb(29,18,43):Color.rgb(240,230,255));
+        b.setTextColor(primary?Color.rgb(8,31,36):Color.rgb(240,250,255));
         b.setTextSize(13);b.setMinHeight(dp(43));
-        b.setBackground(surface(primary?ACCENT:Color.rgb(46,39,67),12));
+        b.setBackground(surface(primary?ACCENT:Color.rgb(31,47,65),12));
         b.setOnClickListener(v->action.run());return b;
     }
     private void renderShell(){
@@ -103,7 +104,7 @@ public final class MainActivity extends Activity {
         root.setBackgroundColor(BACKGROUND);setContentView(root);
         LinearLayout top=new LinearLayout(this);top.setPadding(dp(15),dp(9),dp(13),dp(9));
         top.setGravity(Gravity.CENTER_VERTICAL);
-        top.setBackgroundColor(Color.rgb(15,14,31));
+        top.setBackgroundColor(Color.rgb(12,23,35));
         TextView brand=text("ANIME VOID",21,Color.WHITE,true);brand.setLetterSpacing(-0.045f);
         top.addView(brand,new LinearLayout.LayoutParams(0,dp(48),1f));
         Button save=button("☆",this::saveFromBrowser,false);
@@ -111,12 +112,12 @@ public final class MainActivity extends Activity {
         Button share=button("↗",this::sharePage,false);
         LinearLayout.LayoutParams sp=new LinearLayout.LayoutParams(dp(44),dp(44));sp.leftMargin=dp(8);top.addView(share,sp);
         root.addView(top);
-        View line=new View(this);line.setBackgroundColor(Color.rgb(49,39,70));
+        View line=new View(this);line.setBackgroundColor(Color.rgb(55,79,90));
         root.addView(line,new LinearLayout.LayoutParams(-1,dp(1)));
         content=new FrameLayout(this);content.setBackgroundColor(BACKGROUND);
         root.addView(content,new LinearLayout.LayoutParams(-1,0,1f));
         nav=new LinearLayout(this);nav.setOrientation(LinearLayout.HORIZONTAL);
-        nav.setPadding(dp(6),dp(7),dp(6),dp(7));nav.setBackgroundColor(Color.rgb(15,14,31));
+        nav.setPadding(dp(6),dp(7),dp(6),dp(7));nav.setBackgroundColor(Color.rgb(12,23,35));
         root.addView(nav,new LinearLayout.LayoutParams(-1,dp(72)));
     }
     private void showTab(String tab){
@@ -386,16 +387,35 @@ public final class MainActivity extends Activity {
             toast("Напоминание назначено");showTab("reminders");
         }catch(Exception e){toast("Не удалось создать напоминание");}
     }
+    private int accentFor(String theme){
+        if("amethyst".equals(theme))return Color.rgb(194,154,255);
+        if("amber".equals(theme))return Color.rgb(245,211,154);
+        return Color.rgb(140,241,212);
+    }
+    private void chooseAccent(){
+        final String[] labels={"Нефрит · jade","Аметист · violet","Янтарь · amber"};
+        final String[] values={"jade","amethyst","amber"};
+        new AlertDialog.Builder(this).setTitle("Цвет ANIME VOID")
+            .setItems(labels,(dialog,which)->{
+                getSharedPreferences(PREF,MODE_PRIVATE).edit().putString("accent",values[which]).apply();
+                ACCENT=accentFor(values[which]);
+                renderShell();
+                showTab("settings");
+            }).setNegativeButton("Отмена",null).show();
+    }
     private void showSettings(LinearLayout root){
-        heading(root,"Настройки","ANIME VOID для Android · версия 1.0.0");
+        heading(root,"Настройки","ANIME VOID для Android · версия 1.1.0");
         LinearLayout about=card(root);
         about.addView(text("Быстрые действия",17,Color.WHITE,true));
         addButton(about,"Мой профиль на сайте",()->openTrusted("https://animevoid.ru/profile.html"),true);
         addButton(about,"Каталог Anime Match",()->openTrusted("https://animevoid.ru/match.html"),false);
         addButton(about,"Обновить сайт",()->{showTab("catalog");browser.reload();},false);
+        LinearLayout design=card(root);
+        design.addView(text("Оформление · бесплатно",17,Color.WHITE,true));
+        addButton(design,"Выбрать цвет: нефрит / аметист / янтарь",this::chooseAccent,false);
         LinearLayout premium=card(root);
         premium.addView(text("VOID+ · план развития",18,ACCENT,true));
-        TextView info=text("В будущем: особые темы профиля, рамки, фоны и поддержка разработки. Сейчас всё без покупок: оплата и подписки не подключены.",13,MUTED,false);
+        TextView info=text("Три цвета интерфейса уже доступны бесплатно. В будущем: особые темы профиля, рамки, фоны и поддержка разработки. Сейчас всё без покупок: оплата и подписки не подключены.",13,MUTED,false);
         info.setPadding(0,dp(10),0,0);premium.addView(info);
         LinearLayout privacy=card(root);
         privacy.addView(text("Приватность",17,Color.WHITE,true));

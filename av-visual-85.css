@@ -214,3 +214,11 @@ body.theme-light .av85-hero-side{background:#182d3c}
  .av85-journey-card:hover{transform:none!important}
 }
 @media print{.av85-journey{display:none!important}}
+
+/* Progressive enhancement: preserve usable home promo when JS is unavailable. */
+body.av-home:not(.av85-ready) .av77-hero-match{display:flex!important}
+body.av-home .av85-hero-side .av85-install:not([hidden]){
+ display:inline-flex!important;margin-top:12px;padding:11px 15px;min-height:43px;
+ border-radius:12px;border:1px solid rgba(140,241,212,.5);
+ color:#bcfff0!important;background:rgba(140,241,212,.13)!important;font-weight:800
+}
