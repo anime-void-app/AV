@@ -214,6 +214,60 @@ public final class AuroraDesign {
             canvas.restoreToCount(save);
         }
     }
+    /** Original fallback cover art when a catalog provider does not serve its poster. */
+    public static final class PosterArt extends android.graphics.drawable.Drawable{
+        private final int accent;
+        private final Paint paint=new Paint(Paint.ANTI_ALIAS_FLAG);
+        public PosterArt(int accent){this.accent=accent;}
+        @Override public void draw(Canvas canvas){
+            android.graphics.Rect bounds=getBounds();
+            float w=bounds.width(),h=bounds.height();
+            if(w<=0||h<=0)return;
+            canvas.save();canvas.translate(bounds.left,bounds.top);
+            paint.setStyle(Paint.Style.FILL);
+            paint.setShader(new LinearGradient(0,0,w,h,new int[]{
+                Color.rgb(14,48,60),Color.rgb(18,31,58),Color.rgb(39,23,59)},null,Shader.TileMode.CLAMP));
+            canvas.drawRect(0,0,w,h,paint);paint.setShader(null);
+            float moonX=w*.71f,moonY=h*.29f,radius=Math.min(w*.20f,h*.17f);
+            paint.setShader(new RadialGradient(moonX,moonY,radius*2.8f,
+                new int[]{0x68d5e7ff,0x2384b6bd,0x00071b26},null,Shader.TileMode.CLAMP));
+            canvas.drawCircle(moonX,moonY,radius*2.8f,paint);paint.setShader(null);
+            paint.setColor(0xffe2edf9);canvas.drawCircle(moonX,moonY,radius,paint);
+            paint.setColor(0x885f94ab);canvas.drawCircle(moonX+radius*.19f,moonY-radius*.08f,radius*.76f,paint);
+            Path far=new Path();far.moveTo(0,h*.71f);
+            far.lineTo(w*.19f,h*.48f);far.lineTo(w*.39f,h*.69f);
+            far.lineTo(w*.64f,h*.40f);far.lineTo(w*.92f,h*.74f);far.lineTo(w,h*.64f);
+            far.lineTo(w,h);far.lineTo(0,h);far.close();
+            paint.setColor(0xff193949);canvas.drawPath(far,paint);
+            Path close=new Path();close.moveTo(0,h*.83f);
+            close.lineTo(w*.26f,h*.62f);close.lineTo(w*.48f,h*.81f);
+            close.lineTo(w*.77f,h*.58f);close.lineTo(w,h*.74f);
+            close.lineTo(w,h);close.lineTo(0,h);close.close();
+            paint.setColor(0xff0b2032);canvas.drawPath(close,paint);
+            paint.setStrokeWidth(Math.max(1f,w*.006f));
+            paint.setStyle(Paint.Style.STROKE);
+            paint.setColor(Color.argb(110,Color.red(accent),Color.green(accent),Color.blue(accent)));
+            canvas.drawLine(0,h*.86f,w,h*.74f,paint);
+            canvas.drawLine(0,h*.91f,w,h*.79f,paint);
+            paint.setStyle(Paint.Style.FILL);
+            for(int i=0;i<22;i++){
+                float x=((i*67+13)%101)/101f*w;
+                float y=((i*53+23)%101)/101f*h*.58f;
+                paint.setColor(i%4==0?0xbaf7fbff:0x75b2dee4);
+                canvas.drawCircle(x,y,Math.max(.8f,w*(i%6==0?.009f:.004f)),paint);
+            }
+            paint.setShader(new LinearGradient(0,h*.76f,0,h,
+                new int[]{0x00071221,0xf2081527},null,Shader.TileMode.CLAMP));
+            canvas.drawRect(0,h*.76f,w,h,paint);paint.setShader(null);
+            paint.setColor(0xbde1fff5);paint.setTypeface(Typeface.create("sans-serif-medium",Typeface.BOLD));
+            paint.setTextSize(Math.max(8f,w*.080f));
+            canvas.drawText("ANIME VOID",w*.085f,h*.944f,paint);
+            canvas.restore();
+        }
+        @Override public void setAlpha(int alpha){}
+        @Override public void setColorFilter(android.graphics.ColorFilter filter){}
+        @Override public int getOpacity(){return android.graphics.PixelFormat.OPAQUE;}
+    }
     /** Procedural decorative paint, static on purpose to avoid CPU/battery animation loops. */
     public static final class Nebula extends View{
         private final int accent;
