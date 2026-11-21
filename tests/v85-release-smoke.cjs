@@ -20,11 +20,13 @@ test('V85 home navigation and PWA install survives hero replacement',()=>{
  assert.match(js,/side\.append\(install\)/);
  assert.match(read('index.html'),/id="search"/);
 });
-test('V85 Android landing does not claim live purchase or store release',()=>{
+test('V93 Android landing links only to verified GitHub preview, not RuStore checkout',()=>{
  const html=read('app.html');
- assert.match(html,/пока не опубликована в RuStore/);
+ assert.match(html,/не релиз RuStore/);
  assert.match(html,/оплата, подписки и платные функции не подключены/);
+ assert.match(html,/releases\/download\/v2\.3\.0-beta1\/animevoid-v93-preview\.apk/);
  assert.match(html,/av-visual-85.css\?v=85\.0/);
+ assert.doesNotMatch(html,/rustore\.ru\/catalog\/app\/ru\.animevoid\.app/);
 });
 test('V85 offline assets are precached with fresh version',()=>{
  const sw=read('service-worker.js');
