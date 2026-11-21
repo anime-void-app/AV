@@ -1,4 +1,4 @@
-name: ANIME VOID V93 — emulator-verified mobile APK
+name: ANIME VOID V94 — emulator-verified mobile APK
 on:
   push:
     branches: [main]
@@ -53,7 +53,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: animevoid-v93-ui-screenshots
+          name: animevoid-v94-ui-screenshots
           path: android-app/qa/screenshots/*
           if-no-files-found: warn
       - name: Verify final debug APK
@@ -68,23 +68,23 @@ jobs:
               assert 'AndroidManifest.xml' in apk.namelist()
               assert 'classes.dex' in apk.namelist()
           PY
-          cp android-app/app/build/outputs/apk/debug/app-debug.apk animevoid-v93-preview.apk
-          sha256sum animevoid-v93-preview.apk
+          cp android-app/app/build/outputs/apk/debug/app-debug.apk animevoid-v94-preview.apk
+          sha256sum animevoid-v94-preview.apk
       - name: Publish V93 direct test APK for phones
         env:
           GH_TOKEN: ${{ github.token }}
           GH_REPO: ${{ github.repository }}
         run: |
           set -euo pipefail
-          grep -q "versionCode 8" android-app/app/build.gradle
-          grep -q "versionName '2.3.0'" android-app/app/build.gradle
-          tag="v2.3.0-beta1"
+          grep -q "versionCode 9" android-app/app/build.gradle
+          grep -q "versionName '2.4.0'" android-app/app/build.gradle
+          tag="v2.4.0-beta1"
           if gh release view "$tag" >/dev/null 2>&1; then
-            gh release upload "$tag" animevoid-v93-preview.apk --clobber
+            gh release upload "$tag" animevoid-v94-preview.apk --clobber
           else
-            gh release create "$tag" animevoid-v93-preview.apk \
+            gh release create "$tag" animevoid-v94-preview.apk \
               --target "$GITHUB_SHA" \
-              --title "ANIME VOID V93 — Aurora Cinema, native showcase + device QA" \
-              --notes "Android 2.3 preview: catalog-powered native banners and poster carousel, Aurora Cinema five-tab interface, native anime detail sheet, feature shortcuts for messages/community/account/manga, WebView navigation and error recovery, editable diary and backups. Android emulator smoke-tested. Still a temporary CI debug-signed APK, not RuStore-ready. Third-party streaming and user sign-in require real Android device verification and permission to distribute content." \
+              --title "ANIME VOID V94 — site-matched violet palette, native catalogue + device QA" \
+              --notes "Android 2.4 preview: catalog-powered native banners and poster carousel, exact ANIME VOID website violet/lavender palette, five-tab interface, native anime detail sheet, feature shortcuts for messages/community/account/manga, WebView navigation and error recovery, editable diary and backups. Android emulator smoke-tested. Still a temporary CI debug-signed APK, not RuStore-ready. Third-party streaming and user sign-in require real Android device verification and permission to distribute content." \
               --prerelease
           fi
