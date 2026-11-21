@@ -40,6 +40,11 @@ jobs:
             echo "AV_KEY_PASSWORD=$KEY_PASSWORD" >> "$GITHUB_ENV"
             echo "AV_KEY_ALIAS=$KEY_ALIAS" >> "$GITHUB_ENV"
           fi
+      - name: Preserve V90 preview signing across CI runs
+        uses: actions/cache@v4
+        with:
+          path: ~/.android/debug.keystore
+          key: av-v90-preview-debug-keystore-1
       - name: Build Android APK
         run: gradle -p android-app :app:assembleDebug :app:assembleRelease --no-daemon --stacktrace
       - uses: actions/upload-artifact@v4

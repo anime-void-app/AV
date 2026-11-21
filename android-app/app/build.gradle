@@ -25,8 +25,13 @@ android {
         }
     }
     buildTypes {
-        debug { applicationIdSuffix '.debug'; versionNameSuffix '-debug' }
+        debug {
+            applicationIdSuffix '.preview'
+            versionNameSuffix '-preview'
+            manifestPlaceholders = [appLabel:'ANIME VOID V90']
+        }
         release {
+            manifestPlaceholders = [appLabel:'ANIME VOID']
             minifyEnabled false
             if (System.getenv('AV_KEYSTORE_FILE') && System.getenv('AV_KEY_ALIAS') &&
                 System.getenv('AV_KEY_PASSWORD') && System.getenv('AV_STORE_PASSWORD'))

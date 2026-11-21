@@ -29,3 +29,11 @@ test('V90 Android 2.0 has incremented version; store release remains gated',()=>
  assert.match(gradle,/versionCode 5/);assert.match(gradle,/versionName '2\.0\.0'/);
  const docs=p('android-app/README.md');assert.match(docs,/V90/);assert.match(docs,/DEBUG/);
 });
+
+test('V90 preview has a side-by-side package and persistent CI test signing',()=>{
+ const gradle=p('android-app/app/build.gradle');
+ assert.match(gradle,/applicationIdSuffix '\.preview'/);
+ assert.match(gradle,/manifestPlaceholders = \[appLabel:'ANIME VOID V90'\]/);
+ assert.match(p('android-app/app/src/main/AndroidManifest.xml'),/android:label="\$\{appLabel\}"/);
+ assert.match(p('.github/workflows/android-rustore.yml'),/av-v90-preview-debug-keystore-1/);
+});

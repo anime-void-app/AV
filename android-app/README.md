@@ -72,3 +72,7 @@ The UI and scripts for rooms were retired on the website; tables remain unused s
 - Performance: first-party WebView no longer preloads the home page before a deep link, in-app page load indicator, normalized search index, 24-card pages, bounded disk poster caching (80-100 files) and 24-hour catalogue cache with an offline fallback to older cached index.
 - Native recent-opened titles are stored locally; opening a catalog title updates recent metadata.
 - Device QA is still required for memory usage, battery, third-party streaming, sign-in and poster delivery. Copyright licences and store signing are not implied by this test build. No live monetization.
+
+### V90 preview installation and signing
+- The test APK uses applicationId `ru.animevoid.app.preview` and is labeled `ANIME VOID V90`. This is deliberate: V87 debug builds were signed with per-run keys, so a direct upgrade could fail and require deletion of private local data. V90 installs **alongside** V87; V87 and V90 do not share app-local data.
+- GitHub Actions caches only a **temporary preview signing keystore** between V90 test builds. This is not appropriate for an official RuStore upload. Release APK still requires developer-supplied, securely managed signing secrets.
