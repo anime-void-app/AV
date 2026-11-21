@@ -203,6 +203,20 @@ public final class MainActivity extends Activity {
             recent.addView(text("Откроем страницу последнего выбранного аниме. Прогресс просмотра учитывает сайт.",12,MUTED,false));
             addButton(recent,"Продолжить",()->openTrusted(last),true);
         }
+        JSONArray opened=stored("native_catalog_recent_v90");
+        if(opened.length()>0){
+            LinearLayout timeline=card(host);
+            timeline.addView(text("◷  Недавно открыто в каталоге",18,AuroraTheme.FG,true));
+            for(int i=0;i<opened.length()&&i<3;i++){
+                JSONObject entry=opened.optJSONObject(i);if(entry==null)continue;
+                String id=entry.optString("id","");
+                String name=entry.optString("name","Аниме");
+                if(!id.matches("(?:shikimori|kinopoisk)-[1-9][0-9]*|kodik-(?:movie|serial)-[1-9][0-9]*"))continue;
+                if(name.length()>60)name=name.substring(0,60)+"…";
+                addButton(timeline,"▶  "+name,
+                    ()->openTrusted("https://animevoid.ru/kodik.html?title="+Uri.encode(id)),false);
+            }
+        }
         LinearLayout journey=card(host);
         journey.addView(text("Выбирай свой маршрут",19,AuroraTheme.FG,true));
         TextView hint=text("Открой нужный раздел в одно касание",12,MUTED,false);
