@@ -198,6 +198,15 @@ public final class AuroraDesign {
                 case "share":
                     canvas.drawLine(12,17,12,3,p);canvas.drawLine(7,8,12,3,p);canvas.drawLine(17,8,12,3,p);
                     canvas.drawRoundRect(new RectF(4,11,20,21),3,3,p);break;
+                case "back":
+                    canvas.drawLine(16,5,9,12,p);canvas.drawLine(9,12,16,19,p);break;
+                case "refresh":
+                    canvas.drawArc(new RectF(4,4,20,20),-45,295,false,p);
+                    canvas.drawLine(19,4,20,10,p);canvas.drawLine(20,10,14,9,p);break;
+                case "external":
+                    canvas.drawRoundRect(new RectF(3,8,16,21),2,2,p);
+                    canvas.drawLine(12,4,21,4,p);canvas.drawLine(21,4,21,13,p);
+                    canvas.drawLine(21,4,10,15,p);break;
                 case "chevron":
                     canvas.drawLine(8,5,15,12,p);canvas.drawLine(15,12,8,19,p);break;
                 default:canvas.drawCircle(12,12,5,p);
