@@ -105,3 +105,11 @@ The UI and scripts for rooms were retired on the website; tables remain unused s
 - CI now includes Android emulator screenshot smoke tests for home, catalogue, anime title, discovery, library, diary, profile and settings. Test metadata is drawn from the repository catalog chunks, injected into emulator app cache and never bundled inside the APK.
 - Preview package ru.animevoid.app.preview, versionCode 8 / versionName 2.3.0, retains V90/V91/V92 cached debug signing key and local data where certificate matches. V87 uses a separate app ID.
 - V93 UI coverage does not establish real-device playback reliability or full native parity with the website. For RuStore release verify legal media licences, sign with an owner-held permanent keystore, run real-phone QA and publish a privacy policy.
+
+
+## V94 — exact ANIME VOID website palette (Android 2.4.0 / code 9)
+- Removed the unrelated jade/teal default from the native Android app.
+- Main palette now matches the website's active default theme from \`av-design.css\` and \`site-polish.css\`: background \`#0B0713\`, surface \`#171020\`, raised surface \`#241632\`, tint \`#301B48\`, border \`#49305F\`, text \`#F4F2FA\`, muted text \`#B6B1C5\`, accent \`#C1A2FF\`, primary purple \`#7C3AED\`.
+- Updated Android status/navigation bars, cards, navigation, catalogue chips, fallback posters, hero art, buttons and settings palette preview to use the website's violet/lavender look.
+- The settings screen displays the real site palette instead of offering unrelated jade and amber themes.
+- No green or turquoise is used as the default app accent.
