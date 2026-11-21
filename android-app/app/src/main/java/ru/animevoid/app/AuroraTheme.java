@@ -6,19 +6,24 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.RippleDrawable;
 
-/** Aurora Cinema: shared palette and touch-friendly Android surfaces. Mirrors av-visual-85.css. */
+/** Exact default ANIME VOID website palette from av-design.css + site-polish.css. */
 public final class AuroraTheme {
     private AuroraTheme(){}
-    public static final int BG=Color.rgb(7,11,20);
-    public static final int PANEL=Color.rgb(17,26,41);
-    public static final int SOFT=Color.rgb(26,37,56);
-    public static final int FG=Color.rgb(246,248,255);
-    public static final int MUTED=Color.rgb(172,185,204);
-    public static final int JADE=Color.rgb(140,241,212);
-    public static final int LILAC=Color.rgb(196,165,255);
-    public static final int GOLD=Color.rgb(245,211,154);
-    public static final int LINE=Color.rgb(53,73,89);
-    public static final int DARK_TEXT=Color.rgb(8,23,31);
+    public static final int BG=Color.rgb(11,7,19);             // #0b0713
+    public static final int PANEL=Color.rgb(23,16,32);         // #171020
+    public static final int SOFT=Color.rgb(36,22,50);          // #241632
+    public static final int TINT=Color.rgb(48,27,72);          // #301b48
+    public static final int FG=Color.rgb(244,242,250);         // #f4f2fa
+    public static final int MUTED=Color.rgb(182,177,197);      // #b6b1c5
+    public static final int ACCENT=Color.rgb(193,162,255);     // #c1a2ff
+    public static final int LILAC=Color.rgb(216,180,254);      // #d8b4fe
+    public static final int PURPLE=Color.rgb(168,85,247);      // #a855f7
+    public static final int SOLID=Color.rgb(124,58,237);       // #7c3aed
+    public static final int LINE=Color.rgb(73,48,95);          // #49305f
+    public static final int DARK_TEXT=Color.WHITE;
+    // Compatibility aliases: old callers now resolve to the site's violet palette.
+    public static final int JADE=ACCENT;
+    public static final int GOLD=PURPLE;
 
     public static GradientDrawable solid(int fill,int radius,int strokeColor,int strokeSize,float density){
         GradientDrawable d=new GradientDrawable();d.setColor(fill);
@@ -27,8 +32,8 @@ public final class AuroraTheme {
     }
     public static GradientDrawable hero(float density){
         GradientDrawable d=new GradientDrawable(GradientDrawable.Orientation.TL_BR,
-            new int[]{Color.rgb(11,35,48),Color.rgb(19,25,43),Color.rgb(29,21,51)});
-        d.setCornerRadius(25*density);d.setStroke(Math.max(1,(int)density),Color.rgb(61,111,109));
+            new int[]{PANEL,SOFT,TINT});
+        d.setCornerRadius(25*density);d.setStroke(Math.max(1,(int)density),0x66c1a2ff);
         return d;
     }
     public static Drawable touch(GradientDrawable surface,int highlight){
