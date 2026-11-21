@@ -23,8 +23,8 @@ test('native last-page shortcut uses local preferences only',()=>{
  assert.match(java,/Открыть последнюю страницу на ANIME VOID/);
 });
 test('V86 version increment and staged store claims',()=>{
- assert.match(read('android-app/app/build.gradle'),/versionCode (?:3|4|5|6|7|8)/);
- assert.match(read('android-app/app/build.gradle'),/versionName '(?:1\.(?:2|3)|2\.(?:0|1|2|3))\.0'/);
+ assert.match(read('android-app/app/build.gradle'),/versionCode (?:3|4|5|6|7|8|9)/);
+ assert.match(read('android-app/app/build.gradle'),/versionName '(?:1\.(?:2|3)|2\.(?:0|1|2|3|4))\.0'/);
  assert.match(read('android-app/README.md'),/NOT feature parity with Anixart/);
  assert.match(read('android-app/README.md'),/individual entrepreneurs/);
 });
