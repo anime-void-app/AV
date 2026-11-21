@@ -85,3 +85,12 @@ The UI and scripts for rooms were retired on the website; tables remain unused s
 - The WebView handles renderer termination without crashing the app and offers a return to the native home. Immersive fullscreen controls are enabled while the player requests fullscreen.
 - No claims of automatic episode completion or cross-device sync: these require trustworthy provider playback events and account backend support.
 - This is a debug-signed preview APK, not a store-signed release. RuStore requires a permanent release keystore, legal rights and physical-device QA.
+
+
+## V92 — completed native visual redesign (Android 2.2.0, versionCode 7)
+- Five main sections now share the website-inspired Aurora Cinema palette, backgrounds, vector icon navigation, fonts, cards and responsive native layout.
+- Rebuilt home, search, library and profile with real on-device bookmark and diary counts. Profile, ranks, achievements, watch history and collections continue to use real website data; nothing fake is stored.
+- Native catalogue displays responsive two-column poster cards, inline favourite buttons, format badges, dark selection menus and a branded bottom-sheet title detail with descriptions and watch entry point.
+- Decorative nebula rendering uses static Canvas painting; no continuous animation or added analytics or JS bridge. Existing catalogue cache, export/import, notes, reminders and first-party WebView are preserved.
+- Same ru.animevoid.app.preview application ID and cached testing key as V90/V91. Version increments to 2.2.0/7, supports installation over V91 preview (same signing key).
+- UI redesign is implemented and automated build tests run. Real-device screenshots, hands-on playback testing, permanent store signing and media distribution rights verification still needed before RuStore submission. Not yet full Anixart feature parity.

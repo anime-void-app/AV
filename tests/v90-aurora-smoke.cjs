@@ -9,7 +9,7 @@ test('V90 native theme matches website Aurora Cinema palette',()=>{
 });
 test('V90 native redesign and real account data remain distinct',()=>{
  const app=p('android-app/app/src/main/java/ru/animevoid/app/MainActivity.java');
- for(const str of ['AURORA CINEMA','AuroraTheme.hero','Моя коллекция','Сохранённые тайтлы','История просмотра','showNativeProfile','getSharedPreferences'])assert.ok(app.includes(str),str);
+ for(const str of ['AURORA CINEMA','AuroraDesign.hero','Моя коллекция','Сохранённые тайтлы','История просмотра','showNativeProfile','getSharedPreferences'])assert.ok(app.includes(str),str);
  assert.match(app,/Настоящий уровень, XP, ранги и достижения/);
  assert.doesNotMatch(app,/addJavascriptInterface|purchaseProduct\(/);
 });
@@ -26,14 +26,14 @@ test('V90 catalog has offline fallback, detail loading, image disk cache, bounde
 });
 test('V90 Android 2.0 has incremented version; store release remains gated',()=>{
  const gradle=p('android-app/app/build.gradle');
- assert.match(gradle,/versionCode (?:5|6)/);assert.match(gradle,/versionName '2\.(?:0|1)\.0'/);
+ assert.match(gradle,/versionCode (?:5|6|7)/);assert.match(gradle,/versionName '2\.(?:0|1|2)\.0'/);
  const docs=p('android-app/README.md');assert.match(docs,/V90/);assert.match(docs,/(?:debug|DEBUG)/);
 });
 
 test('V90 preview has a side-by-side package and persistent CI test signing',()=>{
  const gradle=p('android-app/app/build.gradle');
  assert.match(gradle,/applicationIdSuffix '\.preview'/);
- assert.match(gradle,/manifestPlaceholders = \[appLabel:'ANIME VOID V9(?:0|1)'\]/);
+ assert.match(gradle,/manifestPlaceholders = \[appLabel:'ANIME VOID V9(?:0|1|2)'\]/);
  assert.match(p('android-app/app/src/main/AndroidManifest.xml'),/android:label="\$\{appLabel\}"/);
  assert.match(p('.github/workflows/android-rustore.yml'),/av-v90-preview-debug-keystore-1/);
 });

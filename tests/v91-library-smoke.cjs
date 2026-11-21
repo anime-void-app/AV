@@ -11,13 +11,13 @@ test('V91 UI supports backup and fullscreen recovery without losing native catal
  const app=read('android-app/app/src/main/java/ru/animevoid/app/MainActivity.java');
  for(const marker of ['LibraryBackup','libraryBackup.exportToFile()','libraryBackup.importFromFile()','onRenderProcessGone','IMMERSIVE_STICKY','showTab("catalog")','showTab("favorites")','nativeCatalog.show(content'])assert.ok(app.includes(marker),marker);
  assert.match(app,/LibraryBackup\.EXPORT_REQUEST\|\|requestCode==LibraryBackup\.IMPORT_REQUEST/);
- assert.match(app,/Настройки","Aurora Cinema · Android 2\.1\.0 \/ V91/);
+ assert.match(app,/Настройки","Aurora Cinema · Android 2\.(?:1|2)\.0 \/ V9(?:1|2)/);
 });
 test('V91 retains same preview package for upgrading V90 and version is bumped',()=>{
  const g=read('android-app/app/build.gradle');
- assert.match(g,/versionCode 6/);assert.match(g,/versionName '2\.1\.0'/);
+ assert.match(g,/versionCode (?:6|7)/);assert.match(g,/versionName '2\.(?:1|2)\.0'/);
  assert.match(g,/applicationIdSuffix '\.preview'/);
- assert.match(g,/appLabel:'ANIME VOID V91'/);
+ assert.match(g,/appLabel:'ANIME VOID V9(?:1|2)'/);
  const docs=read('android-app/README.md');
  assert.match(docs,/No passwords, cookies, cloud account data or media files/);
 });

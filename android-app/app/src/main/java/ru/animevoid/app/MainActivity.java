@@ -656,7 +656,7 @@ public final class MainActivity extends Activity {
             }).setNegativeButton("Отмена",null).show();
     }
     private void showSettings(LinearLayout root){
-        heading(root,"Настройки","Aurora Cinema · Android 2.1.0 / V91");
+        heading(root,"Настройки","Aurora Cinema · Android 2.2.0 / V92");
         LinearLayout about=card(root);
         about.addView(text("Быстрые действия",17,Color.WHITE,true));
         addButton(about,"Мой профиль на сайте",()->openTrusted("https://animevoid.ru/profile.html"),true);

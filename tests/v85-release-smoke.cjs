@@ -36,7 +36,7 @@ test('V85 offline assets are precached with fresh version',()=>{
 test('native version has genuine free theme selector and no fake paid unlock',()=>{
  const build=read('android-app/app/build.gradle');
  const java=read('android-app/app/src/main/java/ru/animevoid/app/MainActivity.java');
- assert.match(build,/versionCode (?:2|3|4|5|6)/);assert.match(build,/versionName '(?:1\.(?:1|2|3)|2\.(?:0|1))\.0'/);
+ assert.match(build,/versionCode (?:2|3|4|5|6|7)/);assert.match(build,/versionName '(?:1\.(?:1|2|3)|2\.(?:0|1|2))\.0'/);
  for(const item of ['chooseAccent','accentFor','getSharedPreferences','оплата и подписки не подключены'])assert.ok(java.includes(item),item);
  assert.doesNotMatch(java,/addJavascriptInterface|purchaseProduct\(/);
 });
