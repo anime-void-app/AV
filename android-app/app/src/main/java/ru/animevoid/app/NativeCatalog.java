@@ -2,6 +2,9 @@ package ru.animevoid.app;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
+import android.view.Window;
+import android.view.WindowManager;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -111,32 +114,26 @@ public final class NativeCatalog {
         this.page=0;this.selectedType="all";
         ScrollView scroll=new ScrollView(activity);scroll.setFillViewport(true);listScroll=scroll;
         LinearLayout container=new LinearLayout(activity);container.setOrientation(LinearLayout.VERTICAL);
-        container.setPadding(dp(14),dp(22),dp(14),dp(24));
+        container.setPadding(dp(16),dp(21),dp(16),dp(26));
+        scroll.setVerticalScrollBarEnabled(false);
         scroll.addView(container);destination.addView(scroll,new FrameLayout.LayoutParams(-1,-1));
-        TextView eyebrow=label("ANIME VOID   /   DISCOVERY",11,accent,true);
-        eyebrow.setLetterSpacing(.12f);container.addView(eyebrow);
-        LinearLayout hero=new LinearLayout(activity);hero.setOrientation(LinearLayout.VERTICAL);
-        hero.setPadding(dp(19),dp(20),dp(19),dp(18));
-        hero.setBackground(AuroraTheme.hero(activity.getResources().getDisplayMetrics().density));
-        LinearLayout.LayoutParams heroP=new LinearLayout.LayoutParams(-1,-2);heroP.topMargin=dp(9);heroP.bottomMargin=dp(15);
-        container.addView(hero,heroP);
-        TextView overline=label(favorites?"МОЯ ПОДБОРКА · 01":"AURORA CINEMA · DISCOVERY",10,accent,true);
-        overline.setLetterSpacing(.15f);hero.addView(overline);
-        TextView heading=label(favorites?"Моя коллекция":"Открой свою\nследующую историю",27,AuroraTheme.FG,true);
-        heading.setPadding(0,dp(11),0,dp(6));hero.addView(heading);
-        TextView subtitle=label(favorites?"То, что ты сохранил на этом устройстве":"Тысячи аниме · жанры · переводы · находки",13,AuroraTheme.MUTED,false);
-        hero.addView(subtitle);
-        if(!favorites)addButton(hero,"✧  Случайная история",()->{
-            if(titles.isEmpty())return;
-            java.util.Random random=new java.util.Random();
-            detail(titles.get(random.nextInt(titles.size())));
-        },true);
-
+        AuroraDesign.hero(activity,container,accent,
+            favorites?"♡  МОЯ БИБЛИОТЕКА  /  ANIME VOID":"✦  AURORA CINEMA  /  DISCOVERY",
+            favorites?"Мои любимые\nистории.":"Твоя следующая\nлюбимая история.",
+            favorites?"Сохранено на этом устройстве. Открой историю в одно касание."
+                :"Исследуй мир аниме и дунхуа. Жанры, новые открытия и твоя коллекция.",
+            favorites?"К общему каталогу":"Случайная история",()->{
+                if(favorites){onlyFavorites=false;render();return;}
+                if(titles.isEmpty())return;
+                detail(titles.get(new java.util.Random().nextInt(titles.size())));
+            });
+        AuroraDesign.section(activity,container,"ПОИСК  /  ФИЛЬТРЫ",
+            favorites?"Найти в сохранённом":"Исследовать каталог",accent);
         search=new EditText(activity);
-        search.setSingleLine(true);search.setHint("Название аниме на русском или английском");
+        search.setSingleLine(true);search.setHint("Название аниме или дунхуа…");
         search.setTextColor(Color.WHITE);search.setHintTextColor(Color.rgb(162,181,196));
         search.setTextSize(15);search.setPadding(dp(14),0,dp(14),0);
-        search.setBackground(background(AuroraTheme.SOFT,15));
+        search.setBackground(AuroraDesign.panel(activity,15));
         search.setText(query);
         container.addView(search,new LinearLayout.LayoutParams(-1,dp(54)));
         search.addTextChangedListener(new TextWatcher(){
@@ -173,7 +170,7 @@ public final class NativeCatalog {
         genreChoice.setOnItemSelectedListener(choiceHandler());
         sortChoice.setOnItemSelectedListener(choiceHandler());
 
-        status=label("Загружаем каталог…",13,Color.rgb(160,193,204),false);
+        status=label("Загружаем каталог…",12,accent,true);
         status.setPadding(0,dp(15),0,dp(12));container.addView(status);
         results=new LinearLayout(activity);results.setOrientation(LinearLayout.VERTICAL);
         container.addView(results);
@@ -182,9 +179,24 @@ public final class NativeCatalog {
     }
     private Spinner spinner(String[] labels){
         Spinner result=new Spinner(activity);
-        ArrayAdapter<String> adapter=new ArrayAdapter<>(activity,android.R.layout.simple_spinner_dropdown_item,labels);
-        result.setAdapter(adapter);result.setBackground(background(AuroraTheme.SOFT,12));
+        result.setAdapter(genreAdapter(Arrays.asList(labels)));
+        result.setPadding(dp(9),0,dp(7),0);
+        result.setBackground(AuroraDesign.panel(activity,13));
         return result;
+    }
+    private ArrayAdapter<String> genreAdapter(List<String> labels){
+        return new ArrayAdapter<String>(activity,android.R.layout.simple_spinner_item,labels){
+            @Override public View getView(int position,View convert,ViewGroup parent){
+                TextView t=label(getItem(position),12,AuroraTheme.FG,true);
+                t.setPadding(dp(8),dp(6),dp(7),dp(6));t.setSingleLine(true);
+                t.setEllipsize(android.text.TextUtils.TruncateAt.END);return t;
+            }
+            @Override public View getDropDownView(int position,View convert,ViewGroup parent){
+                TextView t=label(getItem(position),13,AuroraTheme.FG,false);
+                t.setPadding(dp(16),dp(12),dp(16),dp(12));
+                t.setBackgroundColor(AuroraTheme.PANEL);return t;
+            }
+        };
     }
     private AdapterView.OnItemSelectedListener choiceHandler(){
         return new AdapterView.OnItemSelectedListener(){
@@ -207,7 +219,7 @@ public final class NativeCatalog {
         Set<String> all=new LinkedHashSet<>();for(Item t:titles)for(String g:t.genres)all.add(g);
         List<String> ordered=new ArrayList<>(all);Collections.sort(ordered);
         ordered.add(0,"Все жанры");
-        ArrayAdapter<String> adapter=new ArrayAdapter<>(activity,android.R.layout.simple_spinner_dropdown_item,ordered);
+        ArrayAdapter<String> adapter=genreAdapter(ordered);
         genreChoice.setAdapter(adapter);
         int at=ordered.indexOf(selected);genreChoice.setSelection(at<0?0:at);
     }
@@ -333,30 +345,55 @@ public final class NativeCatalog {
         int pages=Math.max(1,(all.size()+PAGE-1)/PAGE);page=Math.min(page,pages-1);
         status.setText("✦  "+all.size()+" тайтлов    ·    "+(page+1)+" / "+pages);
         if(all.isEmpty()){results.addView(label("Ничего не найдено. Попробуй другое название или жанр.",14,Color.rgb(180,192,202),false));return;}
-        GridLayout grid=new GridLayout(activity);grid.setColumnCount(2);grid.setUseDefaultMargins(false);
-        results.addView(grid,new LinearLayout.LayoutParams(-1,-2));
-        int width=activity.getResources().getDisplayMetrics().widthPixels-dp(38);
-        int cardWidth=Math.max(dp(125),width/2-dp(6));
+        LinearLayout row=null;
         int start=page*PAGE;
         for(int i=start;i<Math.min(all.size(),start+PAGE);i++){
             Item t=all.get(i);
+            if((i-start)%2==0){
+                row=new LinearLayout(activity);row.setOrientation(LinearLayout.HORIZONTAL);
+                LinearLayout.LayoutParams rowParams=new LinearLayout.LayoutParams(-1,-2);
+                rowParams.bottomMargin=dp(10);results.addView(row,rowParams);
+            }
             LinearLayout card=new LinearLayout(activity);card.setOrientation(LinearLayout.VERTICAL);
-            card.setBackground(background(AuroraTheme.PANEL,18));card.setPadding(dp(7),dp(7),dp(7),dp(10));
-            GridLayout.LayoutParams cp=new GridLayout.LayoutParams();cp.width=cardWidth;cp.height=-2;cp.setMargins(dp(2),dp(3),dp(5),dp(8));grid.addView(card,cp);
+            card.setBackground(AuroraDesign.panel(activity,19));
+            card.setPadding(dp(7),dp(7),dp(7),dp(12));
+            LinearLayout.LayoutParams cp=new LinearLayout.LayoutParams(0,-2,1);
+            if((i-start)%2==0)cp.rightMargin=dp(5);else cp.leftMargin=dp(5);
+            row.addView(card,cp);
             FrameLayout cover=new FrameLayout(activity);
-            cover.setBackground(AuroraTheme.hero(activity.getResources().getDisplayMetrics().density));card.addView(cover,new LinearLayout.LayoutParams(-1,dp(204)));
-            TextView fallback=label("◈",41,accent,true);fallback.setGravity(Gravity.CENTER);
+            cover.setBackground(AuroraTheme.hero(activity.getResources().getDisplayMetrics().density));
+            cover.setClipToOutline(true);
+            card.addView(cover,new LinearLayout.LayoutParams(-1,dp(209)));
+            TextView fallback=label("✦",42,accent,true);fallback.setGravity(Gravity.CENTER);
             cover.addView(fallback,new FrameLayout.LayoutParams(-1,-1));
             if(!t.poster.isEmpty()){
                 ImageView poster=new ImageView(activity);poster.setScaleType(ImageView.ScaleType.CENTER_CROP);
                 cover.addView(poster,new FrameLayout.LayoutParams(-1,-1));loadImage(t.poster,poster);
             }
-            TextView name=label(t.name,14,AuroraTheme.FG,true);name.setMaxLines(2);name.setEllipsize(android.text.TextUtils.TruncateAt.END);
-            name.setPadding(dp(4),dp(10),dp(2),dp(3));card.addView(name,new LinearLayout.LayoutParams(-1,dp(56)));
-            TextView meta=label((t.year>0?t.year+"":"Год —")+"  ·  "+(t.type.equals("anime-serial")?"Сериал":"Фильм / OVA"),11,AuroraTheme.MUTED,false);
-            meta.setPadding(dp(4),0,dp(2),dp(5));card.addView(meta);
-            TextView badge=label("✧ "+t.variants+" переводов",10,accent,true);
-            badge.setPadding(dp(4),0,0,0);card.addView(badge);
+            TextView type=label(t.type.equals("anime-serial")?"  СЕРИАЛ  ":"  ФИЛЬМ / OVA  ",10,AuroraTheme.FG,true);
+            type.setBackground(AuroraTheme.solid(0xd70d1b2b,9,Color.TRANSPARENT,0,
+                activity.getResources().getDisplayMetrics().density));
+            FrameLayout.LayoutParams typeP=new FrameLayout.LayoutParams(-2,dp(25),Gravity.TOP|Gravity.LEFT);
+            typeP.leftMargin=dp(8);typeP.topMargin=dp(8);cover.addView(type,typeP);
+            TextView fav=label(favoriteIds().contains(t.id)?"♥":"♡",22,accent,true);
+            fav.setGravity(Gravity.CENTER);fav.setContentDescription("В избранное: "+t.name);
+            fav.setBackground(AuroraTheme.touch(AuroraTheme.solid(0xe10d1b2b,11,Color.TRANSPARENT,0,
+                activity.getResources().getDisplayMetrics().density),0x20ffffff));
+            FrameLayout.LayoutParams favP=new FrameLayout.LayoutParams(dp(34),dp(34),Gravity.RIGHT|Gravity.TOP);
+            favP.rightMargin=dp(7);favP.topMargin=dp(7);cover.addView(fav,favP);
+            fav.setOnClickListener(v->{
+                toggleFavorite(t);fav.setText(favoriteIds().contains(t.id)?"♥":"♡");
+                if(onlyFavorites)render();
+            });
+            TextView name=label(t.name,14,AuroraTheme.FG,true);
+            name.setMaxLines(2);name.setEllipsize(android.text.TextUtils.TruncateAt.END);
+            name.setPadding(dp(5),dp(11),dp(5),dp(4));
+            card.addView(name,new LinearLayout.LayoutParams(-1,dp(57)));
+            TextView meta=label((t.year>0?t.year+"":"—")+"  ·  "+
+                (t.type.equals("anime-serial")?"Сериал":"Фильм / OVA"),11,AuroraTheme.MUTED,false);
+            meta.setPadding(dp(5),0,dp(2),dp(6));card.addView(meta);
+            TextView badge=label("✧  "+t.variants+" переводов",10,accent,true);
+            badge.setPadding(dp(5),0,0,0);card.addView(badge);
             card.setOnClickListener(v->detail(t));
             card.setContentDescription(t.name+", "+t.year+", открыть описание");
         }
@@ -381,37 +418,78 @@ public final class NativeCatalog {
         p.edit().putString("native_catalog_recent_v90",fresh.toString()).apply();
     }
     private void detail(Item t){
-        ScrollView scroller=new ScrollView(activity);
-        LinearLayout details=new LinearLayout(activity);details.setPadding(dp(19),dp(9),dp(19),dp(12));
-        details.setOrientation(LinearLayout.VERTICAL);scroller.addView(details);
-        LinearLayout cover=new LinearLayout(activity);cover.setGravity(Gravity.CENTER_VERTICAL);
-        cover.setOrientation(LinearLayout.HORIZONTAL);
-        details.addView(cover);
+        Dialog dialog=new Dialog(activity);
+        LinearLayout sheet=new LinearLayout(activity);sheet.setOrientation(LinearLayout.VERTICAL);
+        sheet.setPadding(dp(18),dp(12),dp(18),dp(18));
+        sheet.setBackground(AuroraDesign.raised(activity,25,accent));
+        ScrollView scroller=new ScrollView(activity);scroller.setFillViewport(false);
+        scroller.setVerticalScrollBarEnabled(false);
+        LinearLayout details=new LinearLayout(activity);details.setOrientation(LinearLayout.VERTICAL);
+        details.setPadding(dp(4),dp(6),dp(4),dp(8));
+        scroller.addView(details);
+        TextView handle=label("━",21,AuroraTheme.MUTED,true);
+        handle.setGravity(Gravity.CENTER);sheet.addView(handle,new LinearLayout.LayoutParams(-1,dp(26)));
+        TextView over=AuroraDesign.kicker(activity,"✦  ANIME VOID   /   ИСТОРИЯ",accent);
+        details.addView(over);
+        TextView heading=label(t.name,23,AuroraTheme.FG,true);
+        heading.setLetterSpacing(-.02f);heading.setPadding(0,dp(12),0,dp(14));
+        details.addView(heading);
+        LinearLayout cover=new LinearLayout(activity);cover.setGravity(Gravity.TOP);
+        cover.setOrientation(LinearLayout.HORIZONTAL);details.addView(cover);
         ImageView poster=new ImageView(activity);poster.setScaleType(ImageView.ScaleType.CENTER_CROP);
         poster.setBackground(AuroraTheme.hero(activity.getResources().getDisplayMetrics().density));
-        cover.addView(poster,new LinearLayout.LayoutParams(dp(100),dp(144)));loadImage(t.poster,poster);
+        cover.addView(poster,new LinearLayout.LayoutParams(dp(109),dp(157)));loadImage(t.poster,poster);
         LinearLayout metadata=new LinearLayout(activity);metadata.setOrientation(LinearLayout.VERTICAL);
-        metadata.setPadding(dp(15),0,0,0);cover.addView(metadata,new LinearLayout.LayoutParams(0,-2,1f));
-        metadata.addView(label("✦  "+(t.year>0?t.year:"Год неизвестен"),13,accent,true));
-        TextView format=label(t.type.equals("anime-serial")?"Сериал":"Фильм / OVA",13,AuroraTheme.FG,false);
-        format.setPadding(0,dp(6),0,0);metadata.addView(format);
-        metadata.addView(label("◈  "+t.variants+" переводов",12,AuroraTheme.MUTED,false));
-        TextView genres=label(String.join(" · ",t.genres),13,AuroraTheme.MUTED,false);
-        genres.setPadding(0,dp(16),0,dp(10));details.addView(genres);
-        TextView summaryTitle=label("ОБ ЭТОЙ ИСТОРИИ",11,accent,true);details.addView(summaryTitle);
+        metadata.setPadding(dp(15),dp(5),0,0);cover.addView(metadata,new LinearLayout.LayoutParams(0,-2,1f));
+        metadata.addView(label("✦  "+(t.year>0?t.year:"Год неизвестен"),14,accent,true));
+        TextView format=label(t.type.equals("anime-serial")?"Аниме-сериал":"Фильм / OVA",
+            14,AuroraTheme.FG,true);format.setPadding(0,dp(12),0,0);metadata.addView(format);
+        TextView language=label("◈  "+t.variants+" переводов",12,AuroraTheme.MUTED,false);
+        language.setPadding(0,dp(10),0,0);metadata.addView(language);
+        TextView genres=label(String.join("  ·  ",t.genres),12,AuroraTheme.MUTED,false);
+        genres.setPadding(0,dp(16),0,dp(14));details.addView(genres);
+        View rule=new View(activity);rule.setBackgroundColor(AuroraTheme.LINE);
+        details.addView(rule,new LinearLayout.LayoutParams(-1,dp(1)));
+        TextView summaryTitle=AuroraDesign.kicker(activity,"ОБ ЭТОЙ ИСТОРИИ",accent);
+        summaryTitle.setPadding(0,dp(16),0,0);details.addView(summaryTitle);
         TextView description=label("Загружаем описание...",13,AuroraTheme.FG,false);
-        description.setPadding(0,dp(10),0,dp(5));details.addView(description);
+        description.setLineSpacing(dp(4),1f);
+        description.setPadding(0,dp(12),0,dp(8));details.addView(description);
+        sheet.addView(scroller,new LinearLayout.LayoutParams(-1,0,1f));
+        Button watch=button("▶   Смотреть аниме",()->{
+            rememberOpened(t);dialog.dismiss();
+            navigator.open(ORIGIN+"kodik.html?title="+android.net.Uri.encode(t.id));
+        },true);
+        LinearLayout.LayoutParams wp=new LinearLayout.LayoutParams(-1,dp(49));wp.topMargin=dp(7);
+        sheet.addView(watch,wp);
         boolean favored=favoriteIds().contains(t.id);
-        AlertDialog dialog=new AlertDialog.Builder(activity).setTitle(t.name).setView(scroller)
-            .setPositiveButton("▶ Смотреть",(d,which)->{
-                rememberOpened(t);
-                navigator.open(ORIGIN+"kodik.html?title="+android.net.Uri.encode(t.id));
-            })
-            .setNeutralButton(favored?"Убрать ♡":"Сохранить ♡",(d,which)->{
-                toggleFavorite(t);if(onlyFavorites)render();
-            })
-            .setNegativeButton("Закрыть",null).create();
+        Button saved=button(favored?"♥   Удалить из избранного":"♡   В мою коллекцию",()->{
+            toggleFavorite(t);
+            boolean isSaved=favoriteIds().contains(t.id);
+            if(onlyFavorites&&!isSaved){dialog.dismiss();render();}
+            else {
+                if(screen!=null&&!onlyFavorites)render();
+                dialog.dismiss();
+            }
+        },false);
+        LinearLayout.LayoutParams favp=new LinearLayout.LayoutParams(-1,dp(45));favp.topMargin=dp(9);
+        sheet.addView(saved,favp);
+        dialog.setContentView(sheet);
+        Window window=dialog.getWindow();
+        if(window!=null){
+            window.setBackgroundDrawableResource(android.R.color.transparent);
+            window.addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+            WindowManager.LayoutParams attrs=window.getAttributes();
+            attrs.gravity=Gravity.BOTTOM;attrs.dimAmount=.72f;
+            attrs.width=activity.getResources().getDisplayMetrics().widthPixels-dp(10);
+            attrs.height=Math.min(dp(720),(int)(activity.getResources().getDisplayMetrics().heightPixels*.88f));
+            window.setAttributes(attrs);
+        }
         dialog.show();
+        if(dialog.getWindow()!=null){
+            dialog.getWindow().setLayout(activity.getResources().getDisplayMetrics().widthPixels-dp(10),
+                Math.min(dp(720),(int)(activity.getResources().getDisplayMetrics().heightPixels*.88f)));
+        }
         if(t.chunk.matches("titles-[0-9]{4}\\.json")){
             background.execute(()->{
                 String info="Описание не предоставлено каталогом.";
