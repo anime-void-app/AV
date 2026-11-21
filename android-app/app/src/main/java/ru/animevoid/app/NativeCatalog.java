@@ -122,7 +122,7 @@ public final class NativeCatalog {
         container.addView(hero,heroP);
         TextView overline=label(favorites?"МОЯ ПОДБОРКА · 01":"AURORA CINEMA · DISCOVERY",10,accent,true);
         overline.setLetterSpacing(.15f);hero.addView(overline);
-        TextView heading=label(favorites?"Моя коллекция":"Открой свою\\nследующую историю",27,AuroraTheme.FG,true);
+        TextView heading=label(favorites?"Моя коллекция":"Открой свою\nследующую историю",27,AuroraTheme.FG,true);
         heading.setPadding(0,dp(11),0,dp(6));hero.addView(heading);
         TextView subtitle=label(favorites?"То, что ты сохранил на этом устройстве":"Тысячи аниме · жанры · переводы · находки",13,AuroraTheme.MUTED,false);
         hero.addView(subtitle);
