@@ -22,6 +22,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.HorizontalScrollView;
 import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -47,6 +48,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.lang.ref.WeakReference;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
@@ -87,9 +89,99 @@ public final class NativeCatalog {
     private int page=0;
     private Runnable pendingSearch;
     private int accent=AuroraTheme.JADE;
+    private WeakReference<LinearLayout> showcaseHost=new WeakReference<>(null);
+    private TextView showcaseHint;
 
     public NativeCatalog(Activity activity, Navigator navigator){this.activity=activity;this.navigator=navigator;}
     public void setAccent(int color){accent=color;}
+    /** Public on-device catalogue artwork shared by the native home screen; no fake ratings. */
+    public void showHomeShowcase(LinearLayout host){
+        showcaseHost=new WeakReference<>(host);
+        showcaseHint=label("Подбираем постеры из каталога…",12,AuroraTheme.MUTED,false);
+        host.addView(showcaseHint);
+        if(loaded)renderHomeShowcase();
+        else if(!loading)load();
+    }
+    private void renderHomeShowcase(){
+        LinearLayout target=showcaseHost.get();
+        if(target==null||target.getWindowToken()==null)return;
+        if(showcaseHint!=null&&showcaseHint.getParent()==target)target.removeView(showcaseHint);
+        target.removeAllViews();
+        ArrayList<Item> recent=new ArrayList<>();
+        for(Item item:titles){
+            if(item.year>=2000&&!item.poster.isEmpty()&&!item.name.isEmpty()&&item.variants>0)recent.add(item);
+        }
+        recent.sort(Comparator.comparingInt((Item t)->t.year).reversed().thenComparing(t->t.name));
+        if(recent.isEmpty()){
+            AuroraDesign.addTile(activity,target,"catalog","Открыть каталог",
+                "Каталог доступен в отдельной вкладке",accent,
+                ()->navigator.open(ORIGIN+"kodik.html"));
+            return;
+        }
+        Item lead=recent.get(0);
+        LinearLayout feature=new LinearLayout(activity);feature.setGravity(Gravity.CENTER_VERTICAL);
+        feature.setBackground(AuroraDesign.raised(activity,20,accent));
+        feature.setPadding(dp(11),dp(11),dp(13),dp(11));
+        LinearLayout.LayoutParams fp=new LinearLayout.LayoutParams(-1,-2);
+        fp.bottomMargin=dp(14);target.addView(feature,fp);
+        ImageView image=new ImageView(activity);
+        image.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        image.setBackground(AuroraTheme.hero(activity.getResources().getDisplayMetrics().density));
+        image.setClipToOutline(true);
+        feature.addView(image,new LinearLayout.LayoutParams(dp(112),dp(155)));
+        loadImage(lead.poster,image);
+        LinearLayout copy=new LinearLayout(activity);copy.setOrientation(LinearLayout.VERTICAL);
+        copy.setPadding(dp(14),dp(4),0,dp(4));
+        feature.addView(copy,new LinearLayout.LayoutParams(0,-2,1f));
+        copy.addView(AuroraDesign.kicker(activity,"✦  В КАТАЛОГЕ  /  "+lead.year,accent));
+        TextView title=label(lead.name,16,AuroraTheme.FG,true);
+        title.setMaxLines(3);title.setEllipsize(TextUtils.TruncateAt.END);
+        LinearLayout.LayoutParams tp=new LinearLayout.LayoutParams(-1,-2);
+        tp.topMargin=dp(11);copy.addView(title,tp);
+        TextView info=label((lead.type.equals("anime-serial")?"Сериал":"Фильм")+"  ·  "+lead.variants+" переводов",
+            11,AuroraTheme.MUTED,false);
+        info.setPadding(0,dp(8),0,dp(9));copy.addView(info);
+        TextView cta=label("Подробнее  ›",12,accent,true);copy.addView(cta);
+        feature.setOnClickListener(v->detail(lead));
+        feature.setContentDescription("Открыть аниме "+lead.name);
+        HorizontalScrollView track=new HorizontalScrollView(activity);
+        track.setHorizontalScrollBarEnabled(false);
+        track.setClipToPadding(false);track.setFillViewport(false);
+        LinearLayout shelf=new LinearLayout(activity);shelf.setOrientation(LinearLayout.HORIZONTAL);
+        shelf.setPadding(0,dp(1),dp(2),dp(6));
+        track.addView(shelf);target.addView(track,new LinearLayout.LayoutParams(-1,-2));
+        int count=0;
+        for(Item t:recent){
+            if(t.id.equals(lead.id))continue;
+            if(count++>=9)break;
+            LinearLayout card=new LinearLayout(activity);card.setOrientation(LinearLayout.VERTICAL);
+            card.setBackground(AuroraDesign.panel(activity,15));
+            card.setPadding(dp(6),dp(6),dp(6),dp(8));
+            LinearLayout.LayoutParams cp=new LinearLayout.LayoutParams(dp(141),-2);
+            cp.rightMargin=dp(11);shelf.addView(card,cp);
+            FrameLayout wrap=new FrameLayout(activity);
+            wrap.setBackground(AuroraTheme.hero(activity.getResources().getDisplayMetrics().density));
+            wrap.setClipToOutline(true);
+            card.addView(wrap,new LinearLayout.LayoutParams(-1,dp(174)));
+            ImageView poster=new ImageView(activity);poster.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            wrap.addView(poster,new FrameLayout.LayoutParams(-1,-1));loadImage(t.poster,poster);
+            TextView year=label(" "+t.year+" ",10,AuroraTheme.FG,true);
+            year.setBackground(AuroraTheme.solid(0xe21a2436,8,Color.TRANSPARENT,0,
+                activity.getResources().getDisplayMetrics().density));
+            FrameLayout.LayoutParams yp=new FrameLayout.LayoutParams(-2,dp(22),Gravity.TOP|Gravity.LEFT);
+            yp.leftMargin=dp(7);yp.topMargin=dp(7);wrap.addView(year,yp);
+            TextView name=label(t.name,12,AuroraTheme.FG,true);
+            name.setPadding(dp(3),dp(10),dp(2),0);
+            name.setMaxLines(2);name.setEllipsize(TextUtils.TruncateAt.END);
+            card.addView(name,new LinearLayout.LayoutParams(-1,dp(52)));
+            card.setOnClickListener(v->detail(t));
+            card.setContentDescription(t.name+" — открыть описание");
+        }
+        AuroraDesign.addTile(activity,target,"catalog","Весь каталог",
+            "Поиск по жанрам, годам и названиям",accent,
+            ()->navigator.open(ORIGIN+"kodik.html"));
+    }
+
     private int dp(int n){return (int)(n*activity.getResources().getDisplayMetrics().density+.5f);}
     private GradientDrawable background(int color,int radius){
         return AuroraTheme.solid(color,radius,AuroraTheme.LINE,1,activity.getResources().getDisplayMetrics().density);
@@ -247,11 +339,15 @@ public final class NativeCatalog {
                 main.post(()->{
                     titles.clear();titles.addAll(valid);loaded=true;loading=false;
                     if(screen!=null&&screen.getParent()!=null){populateGenres();render();}
+                    renderHomeShowcase();
                 });
             }catch(Exception ex){
                 main.post(()->{
                     loading=false;
                     if(status!=null&&screen!=null)status.setText("Не удалось загрузить каталог. Проверь интернет и повтори попытку.");
+                    if(showcaseHint!=null&&showcaseHost.get()!=null){
+                        showcaseHint.setText("Постеры недоступны без интернета. Попробуй открыть каталог позже.");
+                    }
                     if(results!=null){results.removeAllViews();addButton(results,"Повторить загрузку",this::load,true);
                         addButton(results,"Открыть веб-каталог",()->navigator.open(ORIGIN+"kodik.html"),false);}
                 });
