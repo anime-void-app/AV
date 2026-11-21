@@ -91,15 +91,17 @@ public final class NativeCatalog {
     private int accent=AuroraTheme.JADE;
     private WeakReference<LinearLayout> showcaseHost=new WeakReference<>(null);
     private TextView showcaseHint;
+    private Runnable goToCatalog=()->{};
 
     public NativeCatalog(Activity activity, Navigator navigator){this.activity=activity;this.navigator=navigator;}
     public void setAccent(int color){accent=color;}
     /** Public on-device catalogue artwork shared by the native home screen; no fake ratings. */
-    public void showHomeShowcase(LinearLayout host){
+    public void showHomeShowcase(LinearLayout host,Runnable openCatalog){
         showcaseHost=new WeakReference<>(host);
+        goToCatalog=openCatalog;
         showcaseHint=label("Подбираем постеры из каталога…",12,AuroraTheme.MUTED,false);
         host.addView(showcaseHint);
-        if(loaded)renderHomeShowcase();
+        if(loaded)host.post(this::renderHomeShowcase);
         else if(!loading)load();
     }
     private void renderHomeShowcase(){
@@ -115,7 +117,7 @@ public final class NativeCatalog {
         if(recent.isEmpty()){
             AuroraDesign.addTile(activity,target,"catalog","Открыть каталог",
                 "Каталог доступен в отдельной вкладке",accent,
-                ()->navigator.open(ORIGIN+"kodik.html"));
+                goToCatalog);
             return;
         }
         Item lead=recent.get(0);
@@ -179,7 +181,7 @@ public final class NativeCatalog {
         }
         AuroraDesign.addTile(activity,target,"catalog","Весь каталог",
             "Поиск по жанрам, годам и названиям",accent,
-            ()->navigator.open(ORIGIN+"kodik.html"));
+            goToCatalog);
     }
 
     private int dp(int n){return (int)(n*activity.getResources().getDisplayMetrics().density+.5f);}
@@ -442,6 +444,7 @@ public final class NativeCatalog {
         status.setText("✦  "+all.size()+" тайтлов    ·    "+(page+1)+" / "+pages);
         if(all.isEmpty()){results.addView(label("Ничего не найдено. Попробуй другое название или жанр.",14,Color.rgb(180,192,202),false));return;}
         LinearLayout row=null;
+        Set<String> selectedFavorites=favoriteIds();
         int start=page*PAGE;
         for(int i=start;i<Math.min(all.size(),start+PAGE);i++){
             Item t=all.get(i);
@@ -471,7 +474,7 @@ public final class NativeCatalog {
                 activity.getResources().getDisplayMetrics().density));
             FrameLayout.LayoutParams typeP=new FrameLayout.LayoutParams(-2,dp(25),Gravity.TOP|Gravity.LEFT);
             typeP.leftMargin=dp(8);typeP.topMargin=dp(8);cover.addView(type,typeP);
-            TextView fav=label(favoriteIds().contains(t.id)?"♥":"♡",22,accent,true);
+            TextView fav=label(selectedFavorites.contains(t.id)?"♥":"♡",22,accent,true);
             fav.setGravity(Gravity.CENTER);fav.setContentDescription("В избранное: "+t.name);
             fav.setBackground(AuroraTheme.touch(AuroraTheme.solid(0xe10d1b2b,11,Color.TRANSPARENT,0,
                 activity.getResources().getDisplayMetrics().density),0x20ffffff));
@@ -689,5 +692,8 @@ public final class NativeCatalog {
             }
         }
     }
-    public void dispose(){background.shutdownNow();posters.shutdownNow();}
+    public void dispose(){
+        if(pendingSearch!=null)main.removeCallbacks(pendingSearch);
+        showcaseHost.clear();background.shutdownNow();posters.shutdownNow();
+    }
 }
