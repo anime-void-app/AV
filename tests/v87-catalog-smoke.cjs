@@ -25,7 +25,7 @@ test('native catalog opens existing first-party title page; saved shelf stays lo
 });
 test('Android version and release readme V87 are explicit',()=>{
  const g=read('android-app/app/build.gradle');
- assert.match(g,/versionCode (?:4|5)/);assert.match(g,/versionName '(?:1\.3|2\.0)\.0'/);
+ assert.match(g,/versionCode (?:4|5|6)/);assert.match(g,/versionName '(?:1\.3|2\.(?:0|1))\.0'/);
  assert.match(read('android-app/README.md'),/native catalogue/);
  assert.match(read('android-app/README.md'),/does NOT yet have native video playback/);
 });

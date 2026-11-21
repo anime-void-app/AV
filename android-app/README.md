@@ -76,3 +76,12 @@ The UI and scripts for rooms were retired on the website; tables remain unused s
 ### V90 preview installation and signing
 - The test APK uses applicationId `ru.animevoid.app.preview` and is labeled `ANIME VOID V90`. This is deliberate: V87 debug builds were signed with per-run keys, so a direct upgrade could fail and require deletion of private local data. V90 installs **alongside** V87; V87 and V90 do not share app-local data.
 - GitHub Actions caches only a **temporary preview signing keystore** between V90 test builds. This is not appropriate for an official RuStore upload. Release APK still requires developer-supplied, securely managed signing secrets.
+
+## V91 — Aurora Cinema library safety and playback recovery (Android 2.1.0)
+- Android 2.1.0 / versionCode 6, preview package stays `ru.animevoid.app.preview` to allow upgrades from V90 without changing the application ID.
+- The native app and site share the Aurora Cinema palette; the existing native catalogue, poster cache and browsing stay in place.
+- User-initiated export/import of local bookmarks, recently opened titles and offline diary as a bounded JSON document through Android's document picker. Import validates IDs and lengths and asks for confirmation before replacing local records. **No passwords, cookies, cloud account data or media files are exported.**
+- The offline library can be backed up before reinstalling or switching devices. Reminders are intentionally excluded because they require rescheduling and notification permission.
+- The WebView handles renderer termination without crashing the app and offers a return to the native home. Immersive fullscreen controls are enabled while the player requests fullscreen.
+- No claims of automatic episode completion or cross-device sync: these require trustworthy provider playback events and account backend support.
+- This is a debug-signed preview APK, not a store-signed release. RuStore requires a permanent release keystore, legal rights and physical-device QA.
