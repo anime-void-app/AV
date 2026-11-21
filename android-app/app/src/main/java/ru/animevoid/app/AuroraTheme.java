@@ -21,9 +21,6 @@ public final class AuroraTheme {
     public static final int SOLID=Color.rgb(124,58,237);       // #7c3aed
     public static final int LINE=Color.rgb(73,48,95);          // #49305f
     public static final int DARK_TEXT=Color.WHITE;
-    // Compatibility aliases: old callers now resolve to the site's violet palette.
-    public static final int JADE=ACCENT;
-    public static final int GOLD=PURPLE;
 
     public static GradientDrawable solid(int fill,int radius,int strokeColor,int strokeSize,float density){
         GradientDrawable d=new GradientDrawable();d.setColor(fill);
