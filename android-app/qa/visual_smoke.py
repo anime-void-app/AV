@@ -142,6 +142,13 @@ def main():
     fixture()
     adb("shell", "am", "start", "-n", PKG + "/ru.animevoid.app.MainActivity")
     time.sleep(7)
+    capture("00-startup")
+    for _ in range(5):
+        try:
+            expect("ANIME VOID")
+            break
+        except AssertionError:
+            time.sleep(2)
     expect("ANIME VOID")
     capture("01-home")
     tap("Каталог")
@@ -172,4 +179,14 @@ if __name__ == "__main__":
     except Exception:
         import traceback
         traceback.print_exc()
+        try:
+            (OUT / "qa-logcat.txt").write_bytes(
+                adb("shell", "logcat", "-d", "-v", "time", "-t", "1200", check=False).stdout)
+            (OUT / "qa-activity.txt").write_bytes(
+                adb("shell", "dumpsys", "activity", "activities", check=False).stdout)
+            result = adb("exec-out", "screencap", "-p", check=False)
+            if result.returncode == 0:
+                (OUT / "qa-failure.png").write_bytes(result.stdout)
+        except Exception as diagnostics:
+            print("Could not collect emulator diagnostics:", diagnostics, flush=True)
         raise
