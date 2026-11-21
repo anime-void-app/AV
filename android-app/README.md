@@ -64,3 +64,11 @@ The UI and scripts for rooms were retired on the website; tables remain unused s
 - Opening a title takes the user to `kodik.html?title=<validated id>` within the existing first-party WebView; no video extraction or region bypass.
 - Dataset availability is not proof of rights or successful playback; licensed media verification remains mandatory before RuStore submission.
 - The app does NOT yet have native video playback, push syncing or complete account integration; device QA is required.
+
+## V90 — Aurora Cinema / Android 2.0.0 (versionCode 5)
+- Main UI rebuilt around the same Aurora Cinema colours and card language as the responsive website. Premium **look**, but existing free colours and all other functions stay free.
+- Native visual refresh for home, search, five-tab navigation, library, profile and title explorer. Website-linked profile, comments, ranks, achievements and player retain their real backend state rather than fake local clones.
+- Native catalogue: tappable title preview with type, genres, translation count and optional detailed description fetched from the original static title chunk; filter chips, random discovery, and preserved bookmarks.
+- Performance: first-party WebView no longer preloads the home page before a deep link, in-app page load indicator, normalized search index, 24-card pages, bounded disk poster caching (80-100 files) and 24-hour catalogue cache with an offline fallback to older cached index.
+- Native recent-opened titles are stored locally; opening a catalog title updates recent metadata.
+- Device QA is still required for memory usage, battery, third-party streaming, sign-in and poster delivery. Copyright licences and store signing are not implied by this test build. No live monetization.

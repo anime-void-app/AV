@@ -20,11 +20,11 @@ test('native last-page shortcut uses local preferences only',()=>{
  const java=read('android-app/app/src/main/java/ru/animevoid/app/MainActivity.java');
  assert.match(java,/putString\("lastAnimeUrl",url\)/);
  assert.match(java,/getString\("lastAnimeUrl",null\)/);
- assert.match(java,/Позиция видео хранится отдельно на сайте/);
+ assert.match(java,/Прогресс просмотра учитывает сайт/);
 });
 test('V86 version increment and staged store claims',()=>{
- assert.match(read('android-app/app/build.gradle'),/versionCode (?:3|4)/);
- assert.match(read('android-app/app/build.gradle'),/versionName '1\.(?:2|3)\.0'/);
+ assert.match(read('android-app/app/build.gradle'),/versionCode (?:3|4|5)/);
+ assert.match(read('android-app/app/build.gradle'),/versionName '(?:1\.(?:2|3)|2\.0)\.0'/);
  assert.match(read('android-app/README.md'),/NOT feature parity with Anixart/);
  assert.match(read('android-app/README.md'),/individual entrepreneurs/);
 });
