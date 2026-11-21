@@ -65,6 +65,7 @@ public final class MainActivity extends Activity {
     private FrameLayout content;
     private WebView browser;
     private NativeCatalog nativeCatalog;
+    private LibraryBackup libraryBackup;
     private String pendingCatalogQuery;
     private String activeTab="home";
     private String pendingSearch=null;
@@ -78,6 +79,7 @@ public final class MainActivity extends Activity {
         getWindow().setNavigationBarColor(AuroraTheme.BG);
         ACCENT=accentFor(getSharedPreferences(PREF,MODE_PRIVATE).getString("accent","jade"));
         nativeCatalog=new NativeCatalog(this,this::openTrusted);
+        libraryBackup=new LibraryBackup(this,()->showTab("library"));
         renderShell();
         if(Build.VERSION.SDK_INT>=35){
             getWindow().getDecorView().setOnApplyWindowInsetsListener((v,insets)->{
@@ -286,6 +288,8 @@ public final class MainActivity extends Activity {
         local.addView(text("Личный дневник",18,AuroraTheme.FG,true));
         local.addView(text(stored(DIARY).length()+" записей · доступны офлайн · не синхронизируются",12,MUTED,false));
         addButton(local,"✎  Открыть дневник",()->showTab("diary"),false);
+        addButton(local,"⇩  Экспортировать мою библиотеку",()->libraryBackup.exportToFile(),false);
+        addButton(local,"⇧  Восстановить библиотеку из файла",()->libraryBackup.importFromFile(),false);
         addButton(local,"☆  Сохранить открытую страницу",this::saveFromBrowser,false);
     }
 
@@ -338,6 +342,10 @@ public final class MainActivity extends Activity {
             WebSettings settings=browser.getSettings();
             settings.setJavaScriptEnabled(true);
             settings.setDomStorageEnabled(true);
+            settings.setCacheMode(WebSettings.LOAD_DEFAULT);
+            settings.setBuiltInZoomControls(false);
+            settings.setDisplayZoomControls(false);
+            settings.setSupportZoom(false);
             settings.setAllowFileAccess(false);
             settings.setAllowContentAccess(true);
             settings.setMediaPlaybackRequiresUserGesture(true);
@@ -370,7 +378,20 @@ public final class MainActivity extends Activity {
                     openExternal(u.toString());return true;
                 }
                 @Override public void onReceivedError(WebView view,WebResourceRequest request,WebResourceError error){
-                    if(request.isForMainFrame())toast("Сайт недоступен. Дневник и напоминания работают офлайн.");
+                    if(request.isForMainFrame()){
+                        if(pageLoad!=null)pageLoad.setVisibility(View.GONE);
+                        toast("Сайт недоступен. Каталог и дневник доступны в приложении.");
+                    }
+                }
+                @Override public boolean onRenderProcessGone(WebView view,android.webkit.RenderProcessGoneDetail detail){
+                    if(view.getParent() instanceof ViewGroup)((ViewGroup)view.getParent()).removeView(view);
+                    view.destroy();browser=null;
+                    if(pageLoad!=null)pageLoad.setVisibility(View.GONE);
+                    if("web".equals(activeTab)){
+                        toast("Плеер перезапущен после ошибки. Открой страницу ещё раз.");
+                        showTab("home");
+                    }
+                    return true;
                 }
             });
             browser.setWebChromeClient(new WebChromeClient(){
@@ -380,6 +401,8 @@ public final class MainActivity extends Activity {
                 @Override public void onShowCustomView(View view,CustomViewCallback callback){
                     if(fullView!=null){callback.onCustomViewHidden();return;}
                     fullView=view;fullCallback=callback;root.setVisibility(View.GONE);
+                    getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN
+                        |View.SYSTEM_UI_FLAG_HIDE_NAVIGATION|View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
                     ViewGroup decor=(ViewGroup)getWindow().getDecorView();
                     decor.addView(view,new ViewGroup.LayoutParams(-1,-1));
                 }
@@ -404,10 +427,14 @@ public final class MainActivity extends Activity {
         if(fullView==null)return;
         if(fullView.getParent() instanceof ViewGroup)((ViewGroup)fullView.getParent()).removeView(fullView);
         fullView=null;root.setVisibility(View.VISIBLE);
+        getWindow().getDecorView().setSystemUiVisibility(0);
         if(fullCallback!=null){fullCallback.onCustomViewHidden();fullCallback=null;}
     }
     @Override protected void onActivityResult(int requestCode,int resultCode,Intent data){
         super.onActivityResult(requestCode,resultCode,data);
+        if(requestCode==LibraryBackup.EXPORT_REQUEST||requestCode==LibraryBackup.IMPORT_REQUEST){
+            libraryBackup.onResult(requestCode,resultCode,data);return;
+        }
         if(requestCode==PICK_FILE&&uploadCallback!=null){
             uploadCallback.onReceiveValue(WebChromeClient.FileChooserParams.parseResult(resultCode,data));
             uploadCallback=null;
@@ -593,15 +620,17 @@ public final class MainActivity extends Activity {
             }).setNegativeButton("Отмена",null).show();
     }
     private void showSettings(LinearLayout root){
-        heading(root,"Настройки","Aurora Cinema · Android 2.0.0 / V90");
+        heading(root,"Настройки","Aurora Cinema · Android 2.1.0 / V91");
         LinearLayout about=card(root);
         about.addView(text("Быстрые действия",17,Color.WHITE,true));
         addButton(about,"Мой профиль на сайте",()->openTrusted("https://animevoid.ru/profile.html"),true);
         addButton(about,"Каталог Anime Match",()->openTrusted("https://animevoid.ru/match.html"),false);
-        addButton(about,"Обновить главную сайта",()->openTrusted(HOME+"?fromAndroid=v90"),false);
+        addButton(about,"Обновить главную сайта",()->openTrusted(HOME+"?fromAndroid=v91"),false);
         LinearLayout design=card(root);
         design.addView(text("Оформление · бесплатно",17,Color.WHITE,true));
         addButton(design,"Выбрать цвет: нефрит / аметист / янтарь",this::chooseAccent,false);
+        addButton(design,"⇩  Сохранить копию библиотеки",()->libraryBackup.exportToFile(),false);
+        addButton(design,"⇧  Импортировать библиотеку",()->libraryBackup.importFromFile(),false);
         LinearLayout premium=card(root);
         premium.addView(text("VOID+ · план развития",18,ACCENT,true));
         TextView info=text("Три цвета интерфейса уже доступны бесплатно. В будущем: особые темы профиля, рамки, фоны и поддержка разработки. Сейчас всё без покупок: оплата и подписки не подключены.",13,MUTED,false);
