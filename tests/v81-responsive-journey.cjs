@@ -25,7 +25,7 @@ test('manual progress, old rewards and room sync preserved',()=>{
 test('offline shell includes new files and remains small',()=>{
   const worker=read('service-worker.js'),header=worker.slice(0,worker.indexOf('const PRELOAD_CONCURRENCY'));
   const {NEW_CORE,CORE_CACHE}=vm.runInNewContext(header+';({NEW_CORE,CORE_CACHE})');
-  assert.equal(CORE_CACHE,'av-AV-core-v84.0');
+  assert.equal(CORE_CACHE,'av-AV-core-v85.0');
   assert.ok(NEW_CORE.includes('av-cinema-81.css?v=81.0'));
   assert.ok(NEW_CORE.includes('av-journey-81.js?v=81.0'));
   assert.equal(NEW_CORE.length,new Set(NEW_CORE).size);

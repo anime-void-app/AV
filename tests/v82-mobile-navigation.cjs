@@ -34,7 +34,7 @@ test('PWA CSS cache and release are versioned',()=>{
  const w=read('service-worker.js');
  assert.doesNotThrow(()=>new vm.Script(w));
  const c=vm.runInNewContext(w.slice(0,w.indexOf('const PRELOAD_CONCURRENCY'))+';({NEW_CORE,CORE_CACHE})');
- assert.equal(c.CORE_CACHE,'av-AV-core-v84.0');
+ assert.equal(c.CORE_CACHE,'av-AV-core-v85.0');
  assert.ok(c.NEW_CORE.includes('av-mobile-82.css?v=82.0'));
  assert.equal(c.NEW_CORE.length,new Set(c.NEW_CORE).size);
  assert.match(read('updates.html'),/<strong>82\.0<\/strong>/);

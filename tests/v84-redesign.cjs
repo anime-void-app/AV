@@ -19,7 +19,7 @@ test('existing shared scripts still parse',()=>{
   assert.doesNotThrow(()=>new vm.Script(read(p),{filename:p}));
 });
 test('cache revision and main search are intact',()=>{
- assert.match(read('service-worker.js'),/av-AV-core-v84\.0/);
+ assert.match(read('service-worker.js'),/av-AV-core-v85\.0/);
  assert.match(read('service-worker.js'),/av-visual-84\.css\?v=84\.0/);
  assert.match(read('index.html'),/id="search"/);
 });
