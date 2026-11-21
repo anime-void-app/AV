@@ -35,20 +35,20 @@ public final class AuroraDesign {
     }
     public static GradientDrawable panel(Context c,int radius){
         GradientDrawable d=new GradientDrawable(GradientDrawable.Orientation.TL_BR,
-            new int[]{Color.rgb(21,32,48),Color.rgb(12,20,33)});
-        d.setCornerRadius(dp(c,radius));d.setStroke(dp(c,1),Color.rgb(49,67,87));
+            new int[]{AuroraTheme.PANEL,AuroraTheme.BG});
+        d.setCornerRadius(dp(c,radius));d.setStroke(dp(c,1),AuroraTheme.LINE);
         return d;
     }
     public static GradientDrawable raised(Context c,int radius,int accent){
         GradientDrawable d=new GradientDrawable(GradientDrawable.Orientation.TL_BR,
-            new int[]{Color.rgb(23,47,60),Color.rgb(17,25,44),Color.rgb(29,23,48)});
-        d.setCornerRadius(dp(c,radius));d.setStroke(dp(c,1),tone(accent,.23f));
+            new int[]{AuroraTheme.SOFT,AuroraTheme.PANEL,AuroraTheme.TINT});
+        d.setCornerRadius(dp(c,radius));d.setStroke(dp(c,1),tone(accent,.32f));
         return d;
     }
     public static int tone(int color,float t){
-        int r=(int)(Color.red(color)*t+38*(1-t));
-        int g=(int)(Color.green(color)*t+58*(1-t));
-        int b=(int)(Color.blue(color)*t+73*(1-t));
+        int r=(int)(Color.red(color)*t+36*(1-t));
+        int g=(int)(Color.green(color)*t+22*(1-t));
+        int b=(int)(Color.blue(color)*t+50*(1-t));
         return Color.rgb(r,g,b);
     }
     public static TextView kicker(Context c,String s,int accent){
@@ -80,7 +80,7 @@ public final class AuroraDesign {
         btn.setGravity(Gravity.CENTER);
         btn.setPadding(dp(c,16),0,dp(c,16),0);
         GradientDrawable fill=new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT,
-            new int[]{accent,Color.rgb(179,232,231)});
+            new int[]{AuroraTheme.SOLID,accent});
         fill.setCornerRadius(dp(c,13));
         btn.setBackground(AuroraTheme.touch(fill,0x22ffffff));
         btn.setMinWidth(dp(c,194));btn.setContentDescription(action);
@@ -102,7 +102,7 @@ public final class AuroraDesign {
         row.setPadding(dp(c,15),dp(c,14),dp(c,14),dp(c,14));
         row.setBackground(AuroraTheme.touch(panel(c,17),0x18ffffff));
         SymbolView icon=new SymbolView(c,symbol,accent);
-        icon.setBackground(AuroraTheme.solid(tone(accent,.12f),12,Color.rgb(59,87,105),1,density(c)));
+        icon.setBackground(AuroraTheme.solid(tone(accent,.12f),12,AuroraTheme.LINE,1,density(c)));
         row.addView(icon,new LinearLayout.LayoutParams(dp(c,44),dp(c,44)));
         LinearLayout middle=new LinearLayout(c);middle.setOrientation(LinearLayout.VERTICAL);
         middle.setPadding(dp(c,13),0,dp(c,7),0);
@@ -139,7 +139,7 @@ public final class AuroraDesign {
         holder.setContentDescription(text);
         holder.setFocusable(true);
         holder.setBackground(AuroraTheme.touch(
-            AuroraTheme.solid(active?Color.rgb(22,52,62):Color.rgb(10,16,27),15,
+            AuroraTheme.solid(active?AuroraTheme.TINT:AuroraTheme.BG,15,
                 active?tone(accent,.28f):Color.TRANSPARENT,active?1:0,density(c)),0x22ffffff));
         SymbolView art=new SymbolView(c,name,active?accent:AuroraTheme.MUTED);
         holder.addView(art,new LinearLayout.LayoutParams(dp(c,27),dp(c,27)));
@@ -226,24 +226,24 @@ public final class AuroraDesign {
             canvas.save();canvas.translate(bounds.left,bounds.top);
             paint.setStyle(Paint.Style.FILL);
             paint.setShader(new LinearGradient(0,0,w,h,new int[]{
-                Color.rgb(14,48,60),Color.rgb(18,31,58),Color.rgb(39,23,59)},null,Shader.TileMode.CLAMP));
+                Color.rgb(11,7,19),Color.rgb(36,22,50),Color.rgb(48,27,72)},null,Shader.TileMode.CLAMP));
             canvas.drawRect(0,0,w,h,paint);paint.setShader(null);
             float moonX=w*.71f,moonY=h*.29f,radius=Math.min(w*.20f,h*.17f);
             paint.setShader(new RadialGradient(moonX,moonY,radius*2.8f,
-                new int[]{0x68d5e7ff,0x2384b6bd,0x00071b26},null,Shader.TileMode.CLAMP));
+                new int[]{0x68d8b4fe,0x238c55d9,0x000b0713},null,Shader.TileMode.CLAMP));
             canvas.drawCircle(moonX,moonY,radius*2.8f,paint);paint.setShader(null);
-            paint.setColor(0xffe2edf9);canvas.drawCircle(moonX,moonY,radius,paint);
-            paint.setColor(0x885f94ab);canvas.drawCircle(moonX+radius*.19f,moonY-radius*.08f,radius*.76f,paint);
+            paint.setColor(0xfff4eaff);canvas.drawCircle(moonX,moonY,radius,paint);
+            paint.setColor(0x887c3aed);canvas.drawCircle(moonX+radius*.19f,moonY-radius*.08f,radius*.76f,paint);
             Path far=new Path();far.moveTo(0,h*.71f);
             far.lineTo(w*.19f,h*.48f);far.lineTo(w*.39f,h*.69f);
             far.lineTo(w*.64f,h*.40f);far.lineTo(w*.92f,h*.74f);far.lineTo(w,h*.64f);
             far.lineTo(w,h);far.lineTo(0,h);far.close();
-            paint.setColor(0xff193949);canvas.drawPath(far,paint);
+            paint.setColor(0xff241632);canvas.drawPath(far,paint);
             Path close=new Path();close.moveTo(0,h*.83f);
             close.lineTo(w*.26f,h*.62f);close.lineTo(w*.48f,h*.81f);
             close.lineTo(w*.77f,h*.58f);close.lineTo(w,h*.74f);
             close.lineTo(w,h);close.lineTo(0,h);close.close();
-            paint.setColor(0xff0b2032);canvas.drawPath(close,paint);
+            paint.setColor(0xff0b0713);canvas.drawPath(close,paint);
             paint.setStrokeWidth(Math.max(1f,w*.006f));
             paint.setStyle(Paint.Style.STROKE);
             paint.setColor(Color.argb(110,Color.red(accent),Color.green(accent),Color.blue(accent)));
@@ -253,13 +253,13 @@ public final class AuroraDesign {
             for(int i=0;i<22;i++){
                 float x=((i*67+13)%101)/101f*w;
                 float y=((i*53+23)%101)/101f*h*.58f;
-                paint.setColor(i%4==0?0xbaf7fbff:0x75b2dee4);
+                paint.setColor(i%4==0?0xbaf4eaff:0x75c1a2ff);
                 canvas.drawCircle(x,y,Math.max(.8f,w*(i%6==0?.009f:.004f)),paint);
             }
             paint.setShader(new LinearGradient(0,h*.76f,0,h,
-                new int[]{0x00071221,0xf2081527},null,Shader.TileMode.CLAMP));
+                new int[]{0x000b0713,0xf2080713},null,Shader.TileMode.CLAMP));
             canvas.drawRect(0,h*.76f,w,h,paint);paint.setShader(null);
-            paint.setColor(0xbde1fff5);paint.setTypeface(Typeface.create("sans-serif-medium",Typeface.BOLD));
+            paint.setColor(0xbdf4eaff);paint.setTypeface(Typeface.create("sans-serif-medium",Typeface.BOLD));
             paint.setTextSize(Math.max(8f,w*.080f));
             canvas.drawText("ANIME VOID",w*.085f,h*.944f,paint);
             canvas.restore();
@@ -277,29 +277,29 @@ public final class AuroraDesign {
             super.onDraw(canvas);
             float w=getWidth(),h=getHeight();if(w<1||h<1)return;
             p.setShader(new LinearGradient(0,0,w,h,
-                new int[]{Color.rgb(9,33,45),Color.rgb(15,25,47),Color.rgb(34,21,55)},null,Shader.TileMode.CLAMP));
+                new int[]{Color.rgb(11,7,19),Color.rgb(23,16,32),Color.rgb(48,27,72)},null,Shader.TileMode.CLAMP));
             canvas.drawRect(0,0,w,h,p);p.setShader(null);
             p.setShader(new RadialGradient(w*.86f,h*.30f,w*.74f,new int[]{
                 Color.argb(110,Color.red(accent),Color.green(accent),Color.blue(accent)),
-                0x1533a8ce,0x00101828},null,Shader.TileMode.CLAMP));
+                0x158c55d9,0x000b0713},null,Shader.TileMode.CLAMP));
             canvas.drawRect(0,0,w,h,p);p.setShader(null);
             p.setStyle(Paint.Style.STROKE);p.setStrokeWidth(dp(getContext(),1.1f));
             for(int i=0;i<4;i++){
-                p.setColor(Color.argb(58-i*10,155,220,224));
+                p.setColor(Color.argb(58-i*10,193,162,255));
                 float r=dp(getContext(),52+i*34);
                 canvas.drawOval(new RectF(w*.94f-r,h*.43f-r,w*.94f+r,h*.43f+r),p);
             }
             p.setStyle(Paint.Style.FILL);
-            p.setColor(0x65d4ecff);canvas.drawCircle(w*.88f,h*.34f,dp(getContext(),17),p);
-            p.setColor(0x99f8feff);canvas.drawCircle(w*.88f,h*.34f,dp(getContext(),9),p);
+            p.setColor(0x65c1a2ff);canvas.drawCircle(w*.88f,h*.34f,dp(getContext(),17),p);
+            p.setColor(0x99f4eaff);canvas.drawCircle(w*.88f,h*.34f,dp(getContext(),9),p);
             for(int i=0;i<23;i++){
                 float x=((i*73+19)%101)/101f*w;
                 float y=((i*43+71)%97)/97f*h;
-                p.setColor(i%3==0?0x8ae2ffff:0x5fc9b9ee);
+                p.setColor(i%3==0?0x8af4eaff:0x5fc1a2ff);
                 canvas.drawCircle(x,y,dp(getContext(),i%6==0?1.45f:.7f),p);
             }
             p.setShader(new LinearGradient(0,0,w*.92f,0,new int[]{
-                0xe90b1b29,0xb00d2034,0x0010192b},null,Shader.TileMode.CLAMP));
+                0xe90b0713,0xb0171020,0x00301b48},null,Shader.TileMode.CLAMP));
             canvas.drawRect(0,0,w,h,p);p.setShader(null);
         }
     }
