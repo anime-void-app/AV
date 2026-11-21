@@ -57,7 +57,7 @@ public final class MainActivity extends Activity {
     private static final int NOTIFICATIONS=422;
     private static final int BACKGROUND=AuroraTheme.BG;
     private static final int PANEL=AuroraTheme.PANEL;
-    private int ACCENT=Color.rgb(140,241,212);
+    private int ACCENT=AuroraTheme.ACCENT;
     private static final int MUTED=AuroraTheme.MUTED;
     private LinearLayout root, nav;
     private ProgressBar pageLoad;
@@ -82,7 +82,7 @@ public final class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         getWindow().setStatusBarColor(AuroraTheme.BG);
         getWindow().setNavigationBarColor(AuroraTheme.BG);
-        ACCENT=accentFor(getSharedPreferences(PREF,MODE_PRIVATE).getString("accent","jade"));
+        ACCENT=AuroraTheme.ACCENT;
         nativeCatalog=new NativeCatalog(this,this::openTrusted);
         libraryBackup=new LibraryBackup(this,()->showTab("library"));
         renderShell();
@@ -167,7 +167,7 @@ public final class MainActivity extends Activity {
         View footerLine=new View(this);footerLine.setBackgroundColor(AuroraTheme.LINE);
         root.addView(footerLine,new LinearLayout.LayoutParams(-1,dp(1)));
         nav=new LinearLayout(this);nav.setOrientation(LinearLayout.HORIZONTAL);
-        nav.setPadding(dp(7),dp(5),dp(7),dp(5));nav.setBackgroundColor(Color.rgb(9,16,27));
+        nav.setPadding(dp(7),dp(5),dp(7),dp(5));nav.setBackgroundColor(AuroraTheme.BG);
         root.addView(nav,new LinearLayout.LayoutParams(-1,dp(71)));
     }
 
@@ -273,7 +273,7 @@ public final class MainActivity extends Activity {
             "Общение и публикации",AuroraTheme.LILAC,
             ()->openTrusted("https://animevoid.ru/community.html"));
         AuroraDesign.addTile(this,host,"share","Личные сообщения",
-            "Твои диалоги на ANIME VOID",AuroraTheme.GOLD,
+            "Твои диалоги на ANIME VOID",AuroraTheme.PURPLE,
             ()->openTrusted("https://animevoid.ru/messages.html"));
         AuroraDesign.addTile(this,host,"sparkle","Anime Match",
             "Открой подбор историй по настроению",ACCENT,
@@ -314,7 +314,7 @@ public final class MainActivity extends Activity {
         AuroraDesign.addTile(this,host,"heart","Мои сохранённые",
             "Продолжи свою коллекцию",AuroraTheme.LILAC,()->showTab("favorites"));
         AuroraDesign.addTile(this,host,"sparkle","Рекомендации сайта",
-            "Редакторские подборки ANIME VOID",AuroraTheme.GOLD,
+            "Редакторские подборки ANIME VOID",AuroraTheme.PURPLE,
             ()->openTrusted(HOME+"#recommendedSection"));
         AuroraDesign.addTile(this,host,"bookmark","Манга и истории",
             "Раздел чтения ANIME VOID",ACCENT,
@@ -343,7 +343,7 @@ public final class MainActivity extends Activity {
             "Настоящая история в твоём аккаунте на сайте",AuroraTheme.LILAC,
             ()->openTrusted("https://animevoid.ru/history.html"));
         AuroraDesign.addTile(this,host,"bookmark","Мои коллекции на сайте",
-            "Списки и подборки, связанные с аккаунтом",AuroraTheme.GOLD,
+            "Списки и подборки, связанные с аккаунтом",AuroraTheme.PURPLE,
             ()->openTrusted("https://animevoid.ru/collections.html"));
         AuroraDesign.addTile(this,host,"sparkle","Личный дневник",
             stored(DIARY).length()+" заметок · доступны без интернета",ACCENT,
@@ -374,7 +374,7 @@ public final class MainActivity extends Activity {
             "Баннеры, темы и персонализация",ACCENT,
             ()->openTrusted("https://animevoid.ru/profile.html#profileWorkshop"));
         AuroraDesign.addTile(this,host,"bookmark","Достижения и ранги",
-            "Открой реальные достижения своего аккаунта",AuroraTheme.GOLD,
+            "Открой реальные достижения своего аккаунта",AuroraTheme.PURPLE,
             ()->openTrusted("https://animevoid.ru/profile.html"));
         AuroraDesign.addTile(this,host,"share","Мои сообщения",
             "Чаты и переписки на сайте",ACCENT,
@@ -389,7 +389,7 @@ public final class MainActivity extends Activity {
         AuroraDesign.addTile(this,host,"settings","Настройки и оформление",
             "Цветовые акценты и приватность",AuroraTheme.LILAC,()->showTab("settings"));
         AuroraDesign.addTile(this,host,"share","Поделиться ANIME VOID",
-            "Пригласи друзей в свою вселенную",AuroraTheme.GOLD,this::sharePage);
+            "Пригласи друзей в свою вселенную",AuroraTheme.PURPLE,this::sharePage);
         TextView disclaimer=AuroraDesign.text(this,
             "Настоящий уровень, XP, ранги и достижения берутся из аккаунта на сайте. Здесь они не подменяются тестовыми цифрами.",11,MUTED,false);
         disclaimer.setPadding(0,dp(10),0,dp(4));host.addView(disclaimer);
@@ -536,7 +536,7 @@ public final class MainActivity extends Activity {
         webContainer.setBackgroundColor(AuroraTheme.BG);
         LinearLayout toolbar=new LinearLayout(this);toolbar.setGravity(Gravity.CENTER_VERTICAL);
         toolbar.setPadding(dp(10),dp(4),dp(10),dp(4));
-        toolbar.setBackgroundColor(Color.rgb(11,19,31));
+        toolbar.setBackgroundColor(AuroraTheme.BG);
         View back=toolbarAction("back","Назад по истории",()->{
             if(browser!=null&&browser.canGoBack())browser.goBack();
             else showTab("catalog");
@@ -864,7 +864,7 @@ public final class MainActivity extends Activity {
             "Восстановить данные с другого телефона",AuroraTheme.LILAC,
             ()->libraryBackup.importFromFile());
         AuroraDesign.addTile(this,root,"refresh","Очистить кеш обложек",
-            "Освободить память, не удаляя избранное",AuroraTheme.GOLD,this::confirmClearPosters);
+            "Освободить память, не удаляя избранное",AuroraTheme.PURPLE,this::confirmClearPosters);
         View divider=new View(this);root.addView(divider,new LinearLayout.LayoutParams(-1,dp(17)));
         AuroraDesign.section(this,root,"АККАУНТ И ПРИВАТНОСТЬ","Твои данные",ACCENT);
         AuroraDesign.addTile(this,root,"profile","Профиль и аккаунт",
@@ -874,7 +874,7 @@ public final class MainActivity extends Activity {
             "Если Google-вход ограничен в WebView",AuroraTheme.LILAC,
             ()->openExternal("https://animevoid.ru/account.html"));
         AuroraDesign.addTile(this,root,"bookmark","Правила сообщества",
-            "Политика общения и контента",AuroraTheme.GOLD,
+            "Политика общения и контента",AuroraTheme.PURPLE,
             ()->openTrusted("https://animevoid.ru/community-rules.html"));
         LinearLayout details=card(root);
         details.addView(AuroraDesign.kicker(this,"ANIME VOID  /  О ПРИЛОЖЕНИИ",ACCENT));
