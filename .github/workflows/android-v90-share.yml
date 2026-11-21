@@ -1,0 +1,58 @@
+name: ANIME VOID V90 — direct preview APK
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/android-v90-share.yml'
+  workflow_dispatch:
+permissions:
+  actions: read
+  contents: write
+jobs:
+  publish-android-v90:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Download V90 Android APK from green compile
+        uses: actions/download-artifact@v4
+        with:
+          name: animevoid-android-debug-apk
+          run-id: 44897928091
+          github-token: ${{ github.token }}
+          path: ./download
+      - name: Validate test installer
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -s download/app-debug.apk
+          python3 - <<'PY'
+          from zipfile import ZipFile
+          from os.path import getsize
+          path='download/app-debug.apk'
+          assert getsize(path)>40000, 'Unexpected APK size'
+          with ZipFile(path) as apk:
+              assert apk.testzip() is None
+              names=set(apk.namelist())
+              assert 'AndroidManifest.xml' in names
+              assert 'classes.dex' in names
+              print('Valid ANIME VOID V90 Preview APK:',getsize(path),'bytes')
+          PY
+          cp download/app-debug.apk animevoid-v90-preview.apk
+          sha256sum animevoid-v90-preview.apk
+      - name: Publish GitHub V90 preview APK for phone download
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          tag="v2.0.0-beta1"
+          if gh release view "$tag" >/dev/null 2>&1; then
+            gh release upload "$tag" animevoid-v90-preview.apk --clobber
+          else
+            gh release create "$tag" animevoid-v90-preview.apk \
+              --target "98b41dca346199033c567a2894ae176ea6423fdb" \
+              --title "ANIME VOID V90 — Aurora Cinema Android 2.0 Preview" \
+              --notes "V90 preview Android APK: Aurora Cinema native redesign, catalogue title details, search and filters, poster disk caching, recent titles, local bookmarks and more robust WebView playback navigation. Installs NEXT TO V87, does not delete V87 or migrate its local data. This is a test debug-signed preview APK (ru.animevoid.app.preview), NOT a RuStore-ready production release. Video playback depends on site and third-party availability." \
+              --prerelease
+          fi
