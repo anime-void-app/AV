@@ -816,9 +816,9 @@ public final class MainActivity extends Activity {
         }catch(Exception e){toast("Не удалось создать напоминание");}
     }
     private int accentFor(String theme){
-        if("amethyst".equals(theme))return Color.rgb(194,154,255);
-        if("amber".equals(theme))return Color.rgb(245,211,154);
-        return Color.rgb(140,241,212);
+        if("amethyst".equals(theme))return AuroraTheme.LILAC;
+        if("amber".equals(theme))return AuroraTheme.GOLD;
+        return AuroraTheme.JADE;
     }
     private void chooseAccent(){
         final String[] labels={"Нефрит · jade","Аметист · violet","Янтарь · amber"};
@@ -831,28 +831,90 @@ public final class MainActivity extends Activity {
                 showTab("settings");
             }).setNegativeButton("Отмена",null).show();
     }
+    private View themeChip(String code,String title,int tint){
+        String chosen=getSharedPreferences(PREF,MODE_PRIVATE).getString("accent","jade");
+        boolean selected=code.equals(chosen);
+        LinearLayout tile=new LinearLayout(this);tile.setOrientation(LinearLayout.VERTICAL);
+        tile.setGravity(Gravity.CENTER_HORIZONTAL);
+        tile.setPadding(dp(7),dp(15),dp(7),dp(13));
+        tile.setBackground(AuroraTheme.touch(selected?AuroraDesign.raised(this,16,tint)
+            :AuroraDesign.panel(this,16),0x22ffffff));
+        FrameLayout ring=new FrameLayout(this);
+        ring.setBackground(AuroraTheme.solid(tint,12,tint,1,getResources().getDisplayMetrics().density));
+        TextView shape=AuroraDesign.text(this,selected?"✓":"✦",22,AuroraTheme.DARK_TEXT,true);
+        shape.setGravity(Gravity.CENTER);
+        ring.addView(shape,new FrameLayout.LayoutParams(-1,-1));
+        tile.addView(ring,new LinearLayout.LayoutParams(dp(44),dp(44)));
+        TextView label=AuroraDesign.text(this,title,11,AuroraTheme.FG,selected);
+        label.setGravity(Gravity.CENTER);
+        LinearLayout.LayoutParams p=new LinearLayout.LayoutParams(-1,dp(28));p.topMargin=dp(8);
+        tile.addView(label,p);
+        tile.setContentDescription("Тема "+title+(selected?", выбрана":", выбрать"));
+        tile.setOnClickListener(v->{
+            if(code.equals(getSharedPreferences(PREF,MODE_PRIVATE).getString("accent","jade")))return;
+            getSharedPreferences(PREF,MODE_PRIVATE).edit().putString("accent",code).apply();
+            ACCENT=accentFor(code);
+            renderShell();showTab("settings");
+        });
+        return tile;
+    }
+    private void confirmClearPosters(){
+        new AlertDialog.Builder(this).setTitle("Очистить кеш обложек?")
+            .setMessage("Удалятся только загруженные изображения. Сохранённые аниме, дневник, аккаунт и история сайта останутся без изменений.")
+            .setNegativeButton("Отмена",null)
+            .setPositiveButton("Очистить",(dialog,which)->{
+                int amount=nativeCatalog.clearPosterCache();
+                toast("Удалено файлов обложек: "+amount);
+            }).show();
+    }
     private void showSettings(LinearLayout root){
         heading(root,"Настройки","Aurora Cinema · Android 2.3.0 / V93");
-        LinearLayout about=card(root);
-        about.addView(text("Быстрые действия",17,Color.WHITE,true));
-        addButton(about,"Мой профиль на сайте",()->openTrusted("https://animevoid.ru/profile.html"),true);
-        addButton(about,"Каталог Anime Match",()->openTrusted("https://animevoid.ru/match.html"),false);
-        addButton(about,"Главная сайта",()->openTrusted(HOME+"?fromAndroid=v93"),false);
-        addButton(about,"Открыть аккаунт в браузере",()->openExternal("https://animevoid.ru/account.html"),false);
-        LinearLayout design=card(root);
-        design.addView(text("Оформление · бесплатно",17,Color.WHITE,true));
-        addButton(design,"Выбрать цвет: нефрит / аметист / янтарь",this::chooseAccent,false);
-        addButton(design,"⇩  Сохранить копию библиотеки",()->libraryBackup.exportToFile(),false);
-        addButton(design,"⇧  Импортировать библиотеку",()->libraryBackup.importFromFile(),false);
-        LinearLayout premium=card(root);
-        premium.addView(text("VOID+ · план развития",18,ACCENT,true));
-        TextView info=text("Три цвета интерфейса уже доступны бесплатно. В будущем: особые темы профиля, рамки, фоны и поддержка разработки. Сейчас всё без покупок: оплата и подписки не подключены.",13,MUTED,false);
-        info.setPadding(0,dp(10),0,0);premium.addView(info);
-        LinearLayout privacy=card(root);
-        privacy.addView(text("Приватность",17,Color.WHITE,true));
-        TextView note=text("Дневник хранится в памяти этого приложения. Сайт может обрабатывать данные аккаунта и сторонних видеопровайдеров отдельно. Для удаления локальных записей используй кнопки в дневнике.",13,MUTED,false);
-        note.setPadding(0,dp(8),0,0);privacy.addView(note);
+        AuroraDesign.section(this,root,"ТВОЙ СТИЛЬ","Цветовая палитра",ACCENT);
+        LinearLayout palette=new LinearLayout(this);palette.setOrientation(LinearLayout.HORIZONTAL);
+        LinearLayout.LayoutParams row=new LinearLayout.LayoutParams(-1,-2);
+        row.bottomMargin=dp(14);root.addView(palette,row);
+        String[][] schemes={{"jade","Нефрит"},{"amethyst","Аметист"},{"amber","Янтарь"}};
+        int[] colors={AuroraTheme.JADE,AuroraTheme.LILAC,AuroraTheme.GOLD};
+        for(int i=0;i<schemes.length;i++){
+            LinearLayout.LayoutParams cell=new LinearLayout.LayoutParams(0,-2,1f);
+            if(i>0)cell.leftMargin=dp(8);
+            palette.addView(themeChip(schemes[i][0],schemes[i][1],colors[i]),cell);
+        }
+        LinearLayout colorsBox=card(root);
+        colorsBox.addView(AuroraDesign.text(this,
+            "Все три оформления бесплатны. Выбранный цвет меняет нативные баннеры, кнопки, карточки и навигацию.",
+            12,MUTED,false));
+        AuroraDesign.section(this,root,"БИБЛИОТЕКА","Храни свои истории",ACCENT);
+        AuroraDesign.addTile(this,root,"share","Экспортировать библиотеку",
+            "Локальные сохранения и заметки в файле JSON",ACCENT,
+            ()->libraryBackup.exportToFile());
+        AuroraDesign.addTile(this,root,"bookmark","Импортировать библиотеку",
+            "Восстановить данные с другого телефона",AuroraTheme.LILAC,
+            ()->libraryBackup.importFromFile());
+        AuroraDesign.addTile(this,root,"refresh","Очистить кеш обложек",
+            "Освободить память, не удаляя избранное",AuroraTheme.GOLD,this::confirmClearPosters);
+        View divider=new View(this);root.addView(divider,new LinearLayout.LayoutParams(-1,dp(17)));
+        AuroraDesign.section(this,root,"АККАУНТ И ПРИВАТНОСТЬ","Твои данные",ACCENT);
+        AuroraDesign.addTile(this,root,"profile","Профиль и аккаунт",
+            "Настройки и достижения на сайте",ACCENT,
+            ()->openTrusted("https://animevoid.ru/profile.html"));
+        AuroraDesign.addTile(this,root,"external","Открыть вход в браузере",
+            "Если Google-вход ограничен в WebView",AuroraTheme.LILAC,
+            ()->openExternal("https://animevoid.ru/account.html"));
+        AuroraDesign.addTile(this,root,"bookmark","Правила сообщества",
+            "Политика общения и контента",AuroraTheme.GOLD,
+            ()->openTrusted("https://animevoid.ru/community-rules.html"));
+        LinearLayout details=card(root);
+        details.addView(AuroraDesign.kicker(this,"ANIME VOID  /  О ПРИЛОЖЕНИИ",ACCENT));
+        TextView note=AuroraDesign.text(this,
+            "Версия 2.3.0 · Android 8.0+. Дневник, избранное приложения и резервные копии хранятся на устройстве. Вход, уровни, история просмотра и плеер работают через сайт. Видеоконтент может предоставляться сторонними сервисами.",
+            12,MUTED,false);
+        note.setLineSpacing(dp(4),1f);note.setPadding(0,dp(10),0,0);
+        details.addView(note);
+        TextView footer=AuroraDesign.kicker(this,"MADE FOR ANIME · AURORA CINEMA",ACCENT);
+        footer.setGravity(Gravity.CENTER);footer.setPadding(0,dp(6),0,dp(10));root.addView(footer);
     }
+    
     private void sharePage(){
         String url=browser!=null&&browser.getUrl()!=null?browser.getUrl():HOME;
         if(!trusted(Uri.parse(url)))url=HOME;
