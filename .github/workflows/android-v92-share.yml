@@ -1,0 +1,64 @@
+name: ANIME VOID V92 — direct mobile APK
+on:
+  workflow_run:
+    workflows: ["ANIME VOID Android APK"]
+    types: [completed]
+    branches: [main]
+permissions:
+  actions: read
+  contents: write
+jobs:
+  publish:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.workflow_run.head_sha }}
+      - name: Confirm V92 version from the tested commit
+        shell: bash
+        run: |
+          set -euo pipefail
+          grep -q "versionCode 7" android-app/app/build.gradle
+          grep -q "versionName '2.2.0'" android-app/app/build.gradle
+          grep -q "appLabel:'ANIME VOID V92'" android-app/app/build.gradle
+      - name: Fetch successful Android APK
+        uses: actions/download-artifact@v4
+        with:
+          name: animevoid-android-debug-apk
+          run-id: ${{ github.event.workflow_run.id }}
+          github-token: ${{ github.token }}
+          path: ./download
+      - name: Validate APK container
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -s download/app-debug.apk
+          python3 - <<'PY'
+          from zipfile import ZipFile
+          with ZipFile('download/app-debug.apk') as f:
+              assert f.testzip() is None
+              assert 'AndroidManifest.xml' in f.namelist()
+              assert 'classes.dex' in f.namelist()
+          PY
+          cp download/app-debug.apk animevoid-v92-preview.apk
+          sha256sum animevoid-v92-preview.apk
+      - name: Publish verified V92 test APK
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          BUILD_SHA: ${{ github.event.workflow_run.head_sha }}
+        run: |
+          set -euo pipefail
+          tag="v2.2.0-beta1"
+          if gh release view "$tag" >/dev/null 2>&1; then
+            gh release upload "$tag" animevoid-v92-preview.apk --clobber
+          else
+            gh release create "$tag" animevoid-v92-preview.apk \
+              --target "$BUILD_SHA" \
+              --title "ANIME VOID V92 — Aurora Cinema UI Redesign" \
+              --notes "Android 2.2 V92 preview: five-tab website-inspired visual system, custom vector navigation, static nebula artwork, native catalogue poster cards with favourites, new title details and preserved V91 local diary, backups, reminders and playback shell. Android 8+. Test version only, not a signed RuStore release. Account, episode tracking, playback and licensed media must be verified on real devices." \
+              --prerelease
+          fi
