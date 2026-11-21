@@ -18,8 +18,13 @@ OUT.mkdir(parents=True, exist_ok=True)
 
 
 def adb(*args, check=True, timeout=50):
-    return subprocess.run(["adb", *args], capture_output=True, check=check,
-                          timeout=timeout)
+    result = subprocess.run(["adb", *args], capture_output=True, timeout=timeout)
+    if check and result.returncode:
+        raise RuntimeError("adb " + " ".join(args) + " failed (" +
+                           str(result.returncode) + "): stdout=" +
+                           result.stdout.decode(errors="replace")[-2000:] +
+                           "; stderr=" + result.stderr.decode(errors="replace")[-2000:])
+    return result
 
 
 def fixture():
@@ -57,7 +62,8 @@ def fixture():
     source.write_text(json.dumps({"titles": titles}, ensure_ascii=False), "utf-8")
     adb("push", str(source), "/data/local/tmp/av-qa-index.json")
     adb("shell", "chmod", "644", "/data/local/tmp/av-qa-index.json")
-    command = "cat /data/local/tmp/av-qa-index.json > cache/av-kodik-index-v87.json"
+    # Android may not have created the app cache directory before first launch.
+    command = "mkdir -p cache && cat /data/local/tmp/av-qa-index.json > cache/av-kodik-index-v87.json"
     adb("shell", "run-as", PKG, "sh", "-c", command)
     print("CI metadata fixture:", len(titles), "real catalogue items", flush=True)
 
