@@ -47,6 +47,9 @@
   const copy=make('p');
   const action=make('a');action.href='history.html';
   side.append(orbit,kicker,title,copy,action);
+  // Keep the existing PWA install button and its event listeners intact.
+  const install=old?.querySelector('#av77Install');
+  if(install){install.classList.add('av85-install');side.append(install)}
   if(old)old.replaceWith(side);else hero.append(side);
 
   const journey=make('section','av85-journey');journey.id='av85Journey';
