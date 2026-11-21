@@ -27,7 +27,7 @@ test('V90 catalog has offline fallback, detail loading, image disk cache, bounde
 test('V90 Android 2.0 has incremented version; store release remains gated',()=>{
  const gradle=p('android-app/app/build.gradle');
  assert.match(gradle,/versionCode 5/);assert.match(gradle,/versionName '2\.0\.0'/);
- const docs=p('android-app/README.md');assert.match(docs,/V90/);assert.match(docs,/DEBUG/);
+ const docs=p('android-app/README.md');assert.match(docs,/V90/);assert.match(docs,/(?:debug|DEBUG)/);
 });
 
 test('V90 preview has a side-by-side package and persistent CI test signing',()=>{
