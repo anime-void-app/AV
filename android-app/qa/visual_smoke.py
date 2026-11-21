@@ -64,7 +64,21 @@ def fixture():
     adb("shell", "chmod", "644", "/data/local/tmp/av-qa-index.json")
     # Android may not have created the app cache directory before first launch.
     command = "mkdir -p cache && cat /data/local/tmp/av-qa-index.json > cache/av-kodik-index-v87.json"
-    adb("shell", "run-as", PKG, "sh", "-c", command)
+    attempt = adb("shell", "run-as", PKG, "sh", "-c", command, check=False)
+    if attempt.returncode:
+        print("run-as fixture injection failed:", attempt.stdout.decode(errors="replace"),
+              attempt.stderr.decode(errors="replace"), flush=True)
+        # Google APIs emulator images permit adb root; never attempt this on user phones.
+        rooting = adb("root", check=False)
+        if rooting.returncode:
+            raise RuntimeError("Cannot prepare QA fixture: " +
+                               attempt.stderr.decode(errors="replace")[-1200:])
+        adb("wait-for-device")
+        folder = "/data/user/0/" + PKG + "/cache"
+        adb("shell", "mkdir", "-p", folder)
+        adb("shell", "cp", "/data/local/tmp/av-qa-index.json",
+            folder + "/av-kodik-index-v87.json")
+        adb("shell", "chmod", "644", folder + "/av-kodik-index-v87.json")
     print("CI metadata fixture:", len(titles), "real catalogue items", flush=True)
 
 
