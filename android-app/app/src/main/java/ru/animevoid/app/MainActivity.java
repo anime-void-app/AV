@@ -212,10 +212,11 @@ public final class MainActivity extends Activity {
     }
 
         private void showNativeHome(LinearLayout host){
-        AuroraDesign.hero(this,host,ACCENT,"✦  ANIME VOID   /   ТВОЯ ИСТОРИЯ",
+        LinearLayout homeHero=AuroraDesign.hero(this,host,ACCENT,"✦  ANIME VOID   /   ТВОЯ ИСТОРИЯ",
             "Миры, в которые\nхочется вернуться.",
             "Собери свою вселенную из любимых историй. Найди что-то новое сегодня.",
             "Исследовать каталог",()->showTab("catalog"));
+        nativeCatalog.showHomeHeroPoster(homeHero);
         int saved=0;
         try{saved=new JSONArray(getSharedPreferences(PREF,MODE_PRIVATE)
             .getString("native_catalog_favorites_v87","[]")).length();}catch(Exception ignored){}
