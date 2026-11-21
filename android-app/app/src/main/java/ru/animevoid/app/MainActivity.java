@@ -36,6 +36,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -54,11 +55,13 @@ public final class MainActivity extends Activity {
     private static final String REMINDERS="reminders";
     private static final int PICK_FILE=421;
     private static final int NOTIFICATIONS=422;
-    private static final int BACKGROUND=Color.rgb(8,14,25);
-    private static final int PANEL=Color.rgb(18,31,45);
+    private static final int BACKGROUND=AuroraTheme.BG;
+    private static final int PANEL=AuroraTheme.PANEL;
     private int ACCENT=Color.rgb(140,241,212);
-    private static final int MUTED=Color.rgb(174,192,207);
+    private static final int MUTED=AuroraTheme.MUTED;
     private LinearLayout root, nav;
+    private ProgressBar pageLoad;
+    private String pendingWebUrl;
     private FrameLayout content;
     private WebView browser;
     private NativeCatalog nativeCatalog;
@@ -71,8 +74,8 @@ public final class MainActivity extends Activity {
 
     @Override public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getWindow().setStatusBarColor(Color.rgb(9,17,28));
-        getWindow().setNavigationBarColor(Color.rgb(9,17,28));
+        getWindow().setStatusBarColor(AuroraTheme.BG);
+        getWindow().setNavigationBarColor(AuroraTheme.BG);
         ACCENT=accentFor(getSharedPreferences(PREF,MODE_PRIVATE).getString("accent","jade"));
         nativeCatalog=new NativeCatalog(this,this::openTrusted);
         renderShell();
@@ -90,43 +93,53 @@ public final class MainActivity extends Activity {
 
     private int dp(float dp){return (int)(getResources().getDisplayMetrics().density*dp+0.5f);}
     private GradientDrawable surface(int color,int radius){
-        GradientDrawable d=new GradientDrawable();d.setColor(color);d.setCornerRadius(dp(radius));return d;
+        return AuroraTheme.solid(color,radius,AuroraTheme.LINE,1,getResources().getDisplayMetrics().density);
     }
+
     private TextView text(String text,int size,int color,boolean bold){
         TextView t=new TextView(this);t.setText(text);t.setTextColor(color);t.setTextSize(size);
         t.setGravity(Gravity.CENTER_VERTICAL);if(bold)t.setTypeface(null,1);return t;
     }
     private Button button(String label,Runnable action,boolean primary){
         Button b=new Button(this);b.setText(label);b.setAllCaps(false);
-        b.setTextColor(primary?Color.rgb(8,31,36):Color.rgb(240,250,255));
-        b.setTextSize(13);b.setMinHeight(dp(43));
-        b.setBackground(surface(primary?ACCENT:Color.rgb(31,47,65),12));
+        b.setTextColor(primary?AuroraTheme.DARK_TEXT:AuroraTheme.FG);b.setTextSize(13);b.setMinHeight(dp(44));
+        GradientDrawable bg=AuroraTheme.solid(primary?ACCENT:AuroraTheme.SOFT,13,
+            primary?ACCENT:AuroraTheme.LINE,1,getResources().getDisplayMetrics().density);
+        b.setBackground(AuroraTheme.touch(bg,0x35ffffff));
         b.setOnClickListener(v->action.run());return b;
     }
+
     private void renderShell(){
-        root=new LinearLayout(this);root.setOrientation(LinearLayout.VERTICAL);
-        root.setBackgroundColor(BACKGROUND);setContentView(root);
-        LinearLayout top=new LinearLayout(this);top.setPadding(dp(15),dp(9),dp(13),dp(9));
-        top.setGravity(Gravity.CENTER_VERTICAL);
-        top.setBackgroundColor(Color.rgb(12,23,35));
-        TextView brand=text("ANIME VOID",21,Color.WHITE,true);brand.setLetterSpacing(-0.045f);
-        top.addView(brand,new LinearLayout.LayoutParams(0,dp(48),1f));
-        Button save=button("☆",this::saveFromBrowser,false);
+        root=new LinearLayout(this);root.setOrientation(LinearLayout.VERTICAL);root.setBackgroundColor(BACKGROUND);setContentView(root);
+        LinearLayout top=new LinearLayout(this);top.setPadding(dp(17),dp(10),dp(13),dp(8));
+        top.setGravity(Gravity.CENTER_VERTICAL);top.setBackgroundColor(AuroraTheme.BG);
+        LinearLayout identity=new LinearLayout(this);identity.setOrientation(LinearLayout.VERTICAL);
+        TextView brand=text("ANIME VOID",23,AuroraTheme.FG,true);brand.setLetterSpacing(-0.045f);
+        identity.addView(brand);
+        TextView tagline=text("AURORA CINEMA  ·  ТВОЯ ИСТОРИЯ",9,ACCENT,true);tagline.setLetterSpacing(.15f);
+        identity.addView(tagline);
+        top.addView(identity,new LinearLayout.LayoutParams(0,dp(52),1f));
+        Button save=button("♡",()->showTab("favorites"),false);save.setTextSize(20);
         top.addView(save,new LinearLayout.LayoutParams(dp(44),dp(44)));
-        Button share=button("↗",this::sharePage,false);
+        Button share=button("↗",this::sharePage,false);share.setTextSize(20);
         LinearLayout.LayoutParams sp=new LinearLayout.LayoutParams(dp(44),dp(44));sp.leftMargin=dp(8);top.addView(share,sp);
         root.addView(top);
-        View line=new View(this);line.setBackgroundColor(Color.rgb(55,79,90));
+        View line=new View(this);line.setBackgroundColor(AuroraTheme.LINE);
         root.addView(line,new LinearLayout.LayoutParams(-1,dp(1)));
+        pageLoad=new ProgressBar(this,null,android.R.attr.progressBarStyleHorizontal);
+        pageLoad.setMax(100);pageLoad.setIndeterminate(false);pageLoad.setVisibility(View.GONE);
+        pageLoad.setProgressTintList(android.content.res.ColorStateList.valueOf(ACCENT));
+        root.addView(pageLoad,new LinearLayout.LayoutParams(-1,dp(2)));
         content=new FrameLayout(this);content.setBackgroundColor(BACKGROUND);
         root.addView(content,new LinearLayout.LayoutParams(-1,0,1f));
         nav=new LinearLayout(this);nav.setOrientation(LinearLayout.HORIZONTAL);
-        nav.setPadding(dp(6),dp(7),dp(6),dp(7));nav.setBackgroundColor(Color.rgb(12,23,35));
-        root.addView(nav,new LinearLayout.LayoutParams(-1,dp(72)));
+        nav.setPadding(dp(5),dp(7),dp(5),dp(7));nav.setBackgroundColor(Color.rgb(12,19,31));
+        root.addView(nav,new LinearLayout.LayoutParams(-1,dp(73)));
     }
 
     private void showTab(String tab){
         activeTab=tab;content.removeAllViews();nav.removeAllViews();
+        if(pageLoad!=null)pageLoad.setVisibility("web".equals(tab)?View.VISIBLE:View.GONE);
         if("web".equals(tab))showCatalog();
         else if("catalog".equals(tab)||"favorites".equals(tab)){
             nativeCatalog.setAccent(ACCENT);
@@ -158,66 +171,82 @@ public final class MainActivity extends Activity {
                 ||("settings".equals(tab)&&"profile".equals(next));
             Button b=button(item[1],()->showTab(next),selected);
             b.setTextSize(11);b.setGravity(Gravity.CENTER);
+            b.setBackground(AuroraTheme.touch(AuroraTheme.solid(selected?Color.rgb(26,63,66):Color.rgb(12,19,31),14,
+                selected?ACCENT:Color.rgb(12,19,31),selected?1:0,getResources().getDisplayMetrics().density),0x20ffffff));
+            b.setTextColor(selected?ACCENT:MUTED);
             LinearLayout.LayoutParams pos=new LinearLayout.LayoutParams(0,dp(55),1f);
             pos.leftMargin=dp(2);pos.rightMargin=dp(2);nav.addView(b,pos);
         }
     }
 
     private void showNativeHome(LinearLayout host){
-        TextView kicker=text("ANIME VOID  ·  ТВОЙ МИР",12,ACCENT,true);
-        kicker.setLetterSpacing(0.12f);host.addView(kicker);
-        TextView title=text("С чего начнём сегодня?",30,Color.WHITE,true);
-        title.setPadding(0,dp(9),0,dp(8));host.addView(title);
-        TextView caption=text("Аниме, дунхуа, любимые истории и твой личный прогресс.",14,MUTED,false);
-        caption.setPadding(0,0,0,dp(20));host.addView(caption);
+        TextView kicker=text("✦  ТВОЯ ИСТОРИЯ · 01",11,ACCENT,true);
+        kicker.setLetterSpacing(.13f);host.addView(kicker);
+        TextView title=text("Всегда есть что открыть.",32,AuroraTheme.FG,true);
+        title.setPadding(0,dp(12),0,dp(7));host.addView(title);
+        TextView caption=text("Аниме, дунхуа и твои истории. Всё важное — рядом.",14,MUTED,false);
+        caption.setPadding(0,0,0,dp(18));host.addView(caption);
         LinearLayout featured=card(host);
-        featured.setBackground(surface(Color.rgb(20,49,57),22));
-        featured.addView(text("✦  Открой новую историю",23,Color.WHITE,true));
-        TextView sub=text("Каталог, жанры и рекомендации доступны прямо в приложении.",14,MUTED,false);
-        sub.setPadding(0,dp(7),0,dp(8));featured.addView(sub);
-        addButton(featured,"Перейти в каталог",()->showTab("catalog"),true);
+        featured.setBackground(AuroraTheme.hero(getResources().getDisplayMetrics().density));
+        featured.setPadding(dp(22),dp(25),dp(20),dp(24));
+        TextView featureTag=text("ANIME VOID ORIGINAL  ✧",10,ACCENT,true);featureTag.setLetterSpacing(.15f);
+        featured.addView(featureTag);
+        TextView featuredTitle=text("Твой следующий\nлюбимый мир",27,AuroraTheme.FG,true);
+        featuredTitle.setPadding(0,dp(13),0,dp(8));featured.addView(featuredTitle);
+        TextView sub=text("Тысячи историй и десятки жанров. Выбирай то, что захочется посмотреть сегодня.",14,MUTED,false);
+        sub.setPadding(0,0,0,dp(12));featured.addView(sub);
+        addButton(featured,"✦  Исследовать каталог",()->showTab("catalog"),true);
         String last=getSharedPreferences(PREF,MODE_PRIVATE).getString("lastAnimeUrl",null);
         if(last!=null&&trusted(Uri.parse(last))){
             LinearLayout recent=card(host);
-            recent.addView(text("◷  Недавно открывал",18,Color.WHITE,true));
-            TextView explanation=text("Вернись на последнюю страницу тайтла. Позиция видео хранится отдельно на сайте.",12,MUTED,false);
-            explanation.setPadding(0,dp(6),0,0);recent.addView(explanation);
-            addButton(recent,"Продолжить с этой страницы",()->openTrusted(last),true);
+            recent.addView(text("◷  Вернуться к истории",18,AuroraTheme.FG,true));
+            recent.addView(text("Откроем страницу последнего выбранного аниме. Прогресс просмотра учитывает сайт.",12,MUTED,false));
+            addButton(recent,"Продолжить",()->openTrusted(last),true);
         }
-        LinearLayout shortcuts=card(host);
-        shortcuts.addView(text("Быстрые разделы",18,Color.WHITE,true));
-        addButton(shortcuts,"⌕  Найти аниме",()->showTab("discover"),false);
-        addButton(shortcuts,"♡  Мои списки и коллекции",()->showTab("library"),false);
-        addButton(shortcuts,"✧  Подборки и новое",()->openTrusted(HOME+"#recommendedSection"),false);
-        addButton(shortcuts,"◷  Напоминания",()->showTab("reminders"),false);
-        LinearLayout status=card(host);
-        status.addView(text("Личный прогресс",17,Color.WHITE,true));
-        status.addView(text("Записей в офлайн-дневнике: "+stored(DIARY).length(),14,MUTED,false));
-        addButton(status,"Открыть статистику профиля",
-            ()->openTrusted("https://animevoid.ru/profile.html"),false);
+        LinearLayout journey=card(host);
+        journey.addView(text("Выбирай свой маршрут",19,AuroraTheme.FG,true));
+        TextView hint=text("Открой нужный раздел в одно касание",12,MUTED,false);
+        hint.setPadding(0,dp(6),0,dp(5));journey.addView(hint);
+        addButton(journey,"⌕  Найти историю",()->showTab("discover"),false);
+        addButton(journey,"♡  Моя коллекция",()->showTab("library"),false);
+        addButton(journey,"◷  История просмотра",()->openTrusted("https://animevoid.ru/history.html"),false);
+        addButton(journey,"✧  Подборки на сайте",()->openTrusted(HOME+"#recommendedSection"),false);
+        int localSaved=0;
+        try{localSaved=new JSONArray(getSharedPreferences(PREF,MODE_PRIVATE)
+                .getString("native_catalog_favorites_v87","[]")).length();}catch(Exception ignored){}
+        LinearLayout overview=card(host);
+        overview.addView(text("Мой уголок",19,AuroraTheme.FG,true));
+        overview.addView(text("♡  "+localSaved+" сохранённых на телефоне",14,MUTED,false));
+        overview.addView(text("✎  "+stored(DIARY).length()+" заметок в дневнике",14,MUTED,false));
+        overview.addView(text("Избранное приложения хранится отдельно от избранного на сайте.",11,MUTED,false));
+        addButton(overview,"Открыть профиль",()->showTab("profile"),false);
     }
 
     private void showDiscover(LinearLayout host){
-        heading(host,"Поиск и открытия","Найди аниме по названию или перейди к любимым разделам.");
-        LinearLayout search=card(host);
+        heading(host,"Найди свой мир","Поиск, жанры и личные рекомендации ANIME VOID");
+        LinearLayout searchBox=card(host);
+        searchBox.setBackground(AuroraTheme.hero(getResources().getDisplayMetrics().density));
+        searchBox.addView(text("⌕  Начнём с названия?",19,AuroraTheme.FG,true));
         EditText query=new EditText(this);
-        query.setSingleLine(true);query.setHint("Название аниме или дунхуа");
-        query.setTextColor(Color.WHITE);query.setHintTextColor(MUTED);
+        query.setSingleLine(true);query.setHint("Например, Ван Линь или Solo Leveling");
+        query.setTextColor(AuroraTheme.FG);query.setHintTextColor(MUTED);query.setTextSize(15);
         query.setInputType(android.text.InputType.TYPE_CLASS_TEXT);
         query.setImeOptions(android.view.inputmethod.EditorInfo.IME_ACTION_SEARCH);
-        search.addView(query,new LinearLayout.LayoutParams(-1,dp(53)));
+        query.setPadding(dp(12),dp(10),dp(12),dp(10));
+        query.setBackground(surface(AuroraTheme.SOFT,12));
+        LinearLayout.LayoutParams qp=new LinearLayout.LayoutParams(-1,dp(51));qp.topMargin=dp(10);searchBox.addView(query,qp);
         query.setOnEditorActionListener((v,action,event)->{
             if(action==android.view.inputmethod.EditorInfo.IME_ACTION_SEARCH){openCatalogSearch(query.getText().toString());return true;}
             return false;
         });
-        addButton(search,"⌕  Найти в каталоге",()->openCatalogSearch(query.getText().toString()),true);
-        LinearLayout discover=card(host);
-        discover.addView(text("Исследовать ANIME VOID",18,Color.WHITE,true));
-        addButton(discover,"✦  Аниме и фильтры",()->openTrusted(HOME+"#catalog"),false);
-        addButton(discover,"☯  Китайские дунхуа",()->openTrusted(HOME+"#catalog"),false);
-        addButton(discover,"★  Популярное и рейтинги",()->openTrusted(HOME+"#topSection"),false);
-        addButton(discover,"✧  Рекомендации",()->openTrusted(HOME+"#recommendedSection"),false);
-        addButton(discover,"◇  Коллекции",()->openTrusted("https://animevoid.ru/collections.html"),false);
+        addButton(searchBox,"Найти в нативном каталоге",()->openCatalogSearch(query.getText().toString()),true);
+        LinearLayout picks=card(host);
+        picks.addView(text("Исследовать",18,AuroraTheme.FG,true));
+        addButton(picks,"✦  Все аниме и жанры",()->showTab("catalog"),false);
+        addButton(picks,"♡  Моё сохранённое",()->showTab("favorites"),false);
+        addButton(picks,"✧  Рекомендации ANIME VOID",()->openTrusted(HOME+"#recommendedSection"),false);
+        addButton(picks,"★  Топ и рейтинги",()->openTrusted(HOME+"#topSection"),false);
+        addButton(picks,"◇  Аниме-коллекции",()->openTrusted("https://animevoid.ru/collections.html"),false);
     }
 
     private void openCatalogSearch(String entered){
@@ -228,34 +257,44 @@ public final class MainActivity extends Activity {
     }
 
     private void showLibrary(LinearLayout host){
-        heading(host,"Моё аниме","Избранное, просмотренные серии и личные коллекции.");
+        heading(host,"Моя вселенная","Любимые сюжеты, история, списки и личный прогресс");
+        LinearLayout favorites=card(host);
+        favorites.setBackground(AuroraTheme.hero(getResources().getDisplayMetrics().density));
+        favorites.addView(text("♡  Моя полка",20,AuroraTheme.FG,true));
+        favorites.addView(text("Сохранённые тайтлы в приложении доступны отдельно от сайта.",13,MUTED,false));
+        addButton(favorites,"Открыть избранное приложения",()->showTab("favorites"),true);
         LinearLayout cloud=card(host);
-        cloud.addView(text("Списки на ANIME VOID",18,Color.WHITE,true));
-        addButton(cloud,"♡  Избранное и запланированное",()->openTrusted(HOME+"#favorites"),true);
+        cloud.addView(text("Мой аккаунт на ANIME VOID",18,AuroraTheme.FG,true));
+        addButton(cloud,"♡  Избранное и запланированное",()->openTrusted(HOME+"#favorites"),false);
         addButton(cloud,"◷  История просмотра",()->openTrusted("https://animevoid.ru/history.html"),false);
-        addButton(cloud,"◇  Коллекции",()->openTrusted("https://animevoid.ru/collections.html"),false);
-        addButton(cloud,"★  Сохранено в приложении",()->showTab("favorites"),false);
+        addButton(cloud,"◇  Мои коллекции",()->openTrusted("https://animevoid.ru/collections.html"),false);
         LinearLayout local=card(host);
-        local.addView(text("Локальный дневник",18,Color.WHITE,true));
-        local.addView(text(stored(DIARY).length()+" записей · доступны без интернета · не синхронизируются",12,MUTED,false));
-        addButton(local,"Открыть мой дневник",()->showTab("diary"),false);
-        addButton(local,"☆  Сохранить текущую страницу",this::saveFromBrowser,false);
+        local.addView(text("Личный дневник",18,AuroraTheme.FG,true));
+        local.addView(text(stored(DIARY).length()+" записей · доступны офлайн · не синхронизируются",12,MUTED,false));
+        addButton(local,"✎  Открыть дневник",()->showTab("diary"),false);
+        addButton(local,"☆  Сохранить открытую страницу",this::saveFromBrowser,false);
     }
 
     private void showNativeProfile(LinearLayout host){
-        heading(host,"Мой профиль","Оформление, достижения, статистика и настройки.");
-        LinearLayout panel=card(host);
-        panel.setBackground(surface(Color.rgb(29,33,60),20));
-        panel.addView(text("✦  Мой ANIME VOID",20,Color.WHITE,true));
-        panel.addView(text("Профиль и достижения сайта доступны после входа в аккаунт.",13,MUTED,false));
-        addButton(panel,"Открыть профиль",()->openTrusted("https://animevoid.ru/profile.html"),true);
-        addButton(panel,"Мастерская оформления",
-            ()->openTrusted("https://animevoid.ru/profile.html#profileWorkshop"),false);
+        heading(host,"Твоя история","Профиль, уровни, достижения и мастерская");
+        LinearLayout identity=card(host);
+        identity.setBackground(AuroraTheme.hero(getResources().getDisplayMetrics().density));
+        identity.addView(text("✦  ANIME VOID / ПАСПОРТ",11,ACCENT,true));
+        TextView avatar=text("◈",48,AuroraTheme.FG,true);avatar.setPadding(0,dp(8),0,dp(4));identity.addView(avatar);
+        identity.addView(text("Создай свой собственный мир",20,AuroraTheme.FG,true));
+        TextView summary=text("Настоящий уровень, XP, ранги и достижения берутся из твоего аккаунта на сайте. Здесь они не подменяются тестовыми цифрами.",13,MUTED,false);
+        summary.setPadding(0,dp(8),0,dp(12));identity.addView(summary);
+        addButton(identity,"Открыть мой профиль",()->openTrusted("https://animevoid.ru/profile.html"),true);
+        LinearLayout workshop=card(host);
+        workshop.addView(text("Мастерская и социальные функции",18,AuroraTheme.FG,true));
+        addButton(workshop,"✧  Оформление профиля",()->openTrusted("https://animevoid.ru/profile.html#profileWorkshop"),false);
+        addButton(workshop,"★  Достижения и ранги",()->openTrusted("https://animevoid.ru/profile.html"),false);
+        addButton(workshop,"◇  Коллекции",()->openTrusted("https://animevoid.ru/collections.html"),false);
         LinearLayout tools=card(host);
-        tools.addView(text("Мои инструменты",17,Color.WHITE,true));
-        addButton(tools,"◷  Напоминания о просмотре",()->showTab("reminders"),false);
-        addButton(tools,"⚙  Настройки приложения",()->showTab("settings"),false);
-        addButton(tools,"↗  Поделиться ANIME VOID",this::sharePage,false);
+        tools.addView(text("Приложение",18,AuroraTheme.FG,true));
+        addButton(tools,"◷  Напоминания",()->showTab("reminders"),false);
+        addButton(tools,"⚙  Настройки и оформление",()->showTab("settings"),false);
+        addButton(tools,"↗  Поделиться",this::sharePage,false);
     }
 
     private boolean trusted(Uri u){
@@ -266,8 +305,8 @@ public final class MainActivity extends Activity {
     private void openTrusted(String url){
         Uri u=Uri.parse(url);
         if(!trusted(u)){openExternal(url);return;}
+        pendingWebUrl=u.toString();
         showTab("web");
-        browser.loadUrl(u.toString());
     }
     private void openExternal(String url){
         try{
@@ -297,7 +336,8 @@ public final class MainActivity extends Activity {
                     super.onPageFinished(view,url);
                     Uri current=Uri.parse(url);
                     if(!trusted(current))return;
-                    if(url.contains("/anime.html")||url.contains("/watch.html")){
+                    if(url.contains("/anime.html")||url.contains("/watch.html")
+                        ||url.contains("/kodik.html")&&current.getQueryParameter("title")!=null){
                         getSharedPreferences(PREF,MODE_PRIVATE).edit().putString("lastAnimeUrl",url).apply();
                     }
                     if(pendingSearch!=null&&url.contains("/index.html")&&url.contains("appSearch=")){
@@ -320,6 +360,9 @@ public final class MainActivity extends Activity {
                 }
             });
             browser.setWebChromeClient(new WebChromeClient(){
+                @Override public void onProgressChanged(WebView view,int progress){
+                    if(pageLoad!=null){pageLoad.setProgress(progress);pageLoad.setVisibility("web".equals(activeTab)&&progress<100?View.VISIBLE:View.GONE);}
+                }
                 @Override public void onShowCustomView(View view,CustomViewCallback callback){
                     if(fullView!=null){callback.onCustomViewHidden();return;}
                     fullView=view;fullCallback=callback;root.setVisibility(View.GONE);
@@ -337,8 +380,9 @@ public final class MainActivity extends Activity {
             browser.setDownloadListener((url,userAgent,contentDisposition,mimeType,length)->{
                 if(url!=null)openExternal(url);
             });
-            browser.loadUrl(HOME);
         }
+        if(pendingWebUrl!=null){browser.loadUrl(pendingWebUrl);pendingWebUrl=null;}
+        else if(browser.getUrl()==null){browser.loadUrl(HOME);}
         if(browser.getParent() instanceof ViewGroup)((ViewGroup)browser.getParent()).removeView(browser);
         content.addView(browser,new FrameLayout.LayoutParams(-1,-1));
     }
@@ -381,18 +425,18 @@ public final class MainActivity extends Activity {
         getSharedPreferences(PREF,MODE_PRIVATE).edit().putString(key,value.toString()).apply();
     }
     private void heading(LinearLayout host,String title,String subtitle){
-        TextView a=text(title,26,Color.WHITE,true);host.addView(a);
+        TextView a=text(title,29,AuroraTheme.FG,true);host.addView(a);
         TextView b=text(subtitle,13,MUTED,false);b.setPadding(0,dp(7),0,dp(20));host.addView(b);
     }
     private LinearLayout card(LinearLayout host){
         LinearLayout c=new LinearLayout(this);c.setOrientation(LinearLayout.VERTICAL);
-        c.setPadding(dp(16),dp(15),dp(16),dp(15));c.setBackground(surface(PANEL,17));
+        c.setPadding(dp(17),dp(17),dp(17),dp(17));c.setBackground(surface(PANEL,21));
         LinearLayout.LayoutParams p=new LinearLayout.LayoutParams(-1,-2);p.bottomMargin=dp(12);
         host.addView(c,p);return c;
     }
     private void addButton(LinearLayout box,String label,Runnable action,boolean main){
         Button b=button(label,action,main);
-        LinearLayout.LayoutParams p=new LinearLayout.LayoutParams(-1,dp(46));p.topMargin=dp(9);
+        LinearLayout.LayoutParams p=new LinearLayout.LayoutParams(-1,dp(48));p.topMargin=dp(9);
         box.addView(b,p);
     }
     private void toast(String s){Toast.makeText(this,s,Toast.LENGTH_LONG).show();}
@@ -535,12 +579,12 @@ public final class MainActivity extends Activity {
             }).setNegativeButton("Отмена",null).show();
     }
     private void showSettings(LinearLayout root){
-        heading(root,"Настройки","ANIME VOID для Android · версия 1.3.0");
+        heading(root,"Настройки","Aurora Cinema · Android 2.0.0 / V90");
         LinearLayout about=card(root);
         about.addView(text("Быстрые действия",17,Color.WHITE,true));
         addButton(about,"Мой профиль на сайте",()->openTrusted("https://animevoid.ru/profile.html"),true);
         addButton(about,"Каталог Anime Match",()->openTrusted("https://animevoid.ru/match.html"),false);
-        addButton(about,"Обновить сайт",()->{showTab("catalog");browser.reload();},false);
+        addButton(about,"Обновить главную сайта",()->openTrusted(HOME+"?fromAndroid=v90"),false);
         LinearLayout design=card(root);
         design.addView(text("Оформление · бесплатно",17,Color.WHITE,true));
         addButton(design,"Выбрать цвет: нефрит / аметист / янтарь",this::chooseAccent,false);
