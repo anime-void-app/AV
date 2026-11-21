@@ -120,7 +120,7 @@ public final class NativeCatalog {
         hero.addView(art,1,imageParams);
         View fade=new View(activity);
         fade.setBackground(new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT,new int[]{
-            0xef0c2130,0xd90f2636,0xb3091929},null));
+            0xef0c2130,0xd90f2636,0xb3091929}));
         hero.addView(fade,2,new FrameLayout.LayoutParams(-1,-1));
         loadImage(lead.poster,art);
     }
