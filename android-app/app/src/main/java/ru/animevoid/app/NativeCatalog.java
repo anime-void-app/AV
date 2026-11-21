@@ -88,7 +88,7 @@ public final class NativeCatalog {
     private String query="";
     private int page=0;
     private Runnable pendingSearch;
-    private int accent=AuroraTheme.JADE;
+    private int accent=AuroraTheme.ACCENT;
     private WeakReference<LinearLayout> showcaseHost=new WeakReference<>(null);
     private WeakReference<FrameLayout> brandHero=new WeakReference<>(null);
     private Item featuredItem;
@@ -199,7 +199,7 @@ public final class NativeCatalog {
             ImageView poster=new ImageView(activity);poster.setScaleType(ImageView.ScaleType.CENTER_CROP);
             wrap.addView(poster,new FrameLayout.LayoutParams(-1,-1));loadImage(t.poster,poster);
             TextView year=label(" "+t.year+" ",10,AuroraTheme.FG,true);
-            year.setBackground(AuroraTheme.solid(0xe21a2436,8,Color.TRANSPARENT,0,
+            year.setBackground(AuroraTheme.solid(0xe2171020,8,Color.TRANSPARENT,0,
                 activity.getResources().getDisplayMetrics().density));
             FrameLayout.LayoutParams yp=new FrameLayout.LayoutParams(-2,dp(22),Gravity.TOP|Gravity.LEFT);
             yp.leftMargin=dp(7);yp.topMargin=dp(7);wrap.addView(year,yp);
@@ -256,7 +256,7 @@ public final class NativeCatalog {
             favorites?"Найти в сохранённом":"Исследовать каталог",accent);
         search=new EditText(activity);
         search.setSingleLine(true);search.setHint("Название аниме или дунхуа…");
-        search.setTextColor(Color.WHITE);search.setHintTextColor(Color.rgb(162,181,196));
+        search.setTextColor(AuroraTheme.FG);search.setHintTextColor(AuroraTheme.MUTED);
         search.setTextSize(15);search.setPadding(dp(14),0,dp(14),0);
         search.setBackground(AuroraDesign.panel(activity,15));
         search.setText(query);
@@ -474,7 +474,7 @@ public final class NativeCatalog {
         List<Item> all=filtered();
         int pages=Math.max(1,(all.size()+PAGE-1)/PAGE);page=Math.min(page,pages-1);
         status.setText("✦  "+all.size()+" тайтлов    ·    "+(page+1)+" / "+pages);
-        if(all.isEmpty()){results.addView(label("Ничего не найдено. Попробуй другое название или жанр.",14,Color.rgb(180,192,202),false));return;}
+        if(all.isEmpty()){results.addView(label("Ничего не найдено. Попробуй другое название или жанр.",14,AuroraTheme.MUTED,false));return;}
         LinearLayout row=null;
         Set<String> selectedFavorites=favoriteIds();
         int start=page*PAGE;
@@ -502,13 +502,13 @@ public final class NativeCatalog {
                 cover.addView(poster,new FrameLayout.LayoutParams(-1,-1));loadImage(t.poster,poster);
             }
             TextView type=label(t.type.equals("anime-serial")?"  СЕРИАЛ  ":"  ФИЛЬМ / OVA  ",10,AuroraTheme.FG,true);
-            type.setBackground(AuroraTheme.solid(0xd70d1b2b,9,Color.TRANSPARENT,0,
+            type.setBackground(AuroraTheme.solid(0xd7241632,9,Color.TRANSPARENT,0,
                 activity.getResources().getDisplayMetrics().density));
             FrameLayout.LayoutParams typeP=new FrameLayout.LayoutParams(-2,dp(25),Gravity.TOP|Gravity.LEFT);
             typeP.leftMargin=dp(8);typeP.topMargin=dp(8);cover.addView(type,typeP);
             TextView fav=label(selectedFavorites.contains(t.id)?"♥":"♡",22,accent,true);
             fav.setGravity(Gravity.CENTER);fav.setContentDescription("В избранное: "+t.name);
-            fav.setBackground(AuroraTheme.touch(AuroraTheme.solid(0xe10d1b2b,11,Color.TRANSPARENT,0,
+            fav.setBackground(AuroraTheme.touch(AuroraTheme.solid(0xe2171020,11,Color.TRANSPARENT,0,
                 activity.getResources().getDisplayMetrics().density),0x20ffffff));
             FrameLayout.LayoutParams favP=new FrameLayout.LayoutParams(dp(34),dp(34),Gravity.RIGHT|Gravity.TOP);
             favP.rightMargin=dp(7);favP.topMargin=dp(7);cover.addView(fav,favP);
