@@ -24,7 +24,7 @@ test('V93 Android landing links only to verified GitHub preview, not RuStore che
  const html=read('app.html');
  assert.match(html,/не релиз RuStore/);
  assert.match(html,/оплата, подписки и платные функции не подключены/);
- assert.match(html,/releases\/download\/v2\.3\.0-beta1\/animevoid-v93-preview\.apk/);
+ assert.match(html,/releases\/download\/v2\.4\.0-beta1\/animevoid-v94-preview\.apk/);
  assert.match(html,/av-visual-85.css\?v=85\.0/);
  assert.doesNotMatch(html,/rustore\.ru\/catalog\/app\/ru\.animevoid\.app/);
 });
@@ -38,7 +38,7 @@ test('V85 offline assets are precached with fresh version',()=>{
 test('native version has genuine free theme selector and no fake paid unlock',()=>{
  const build=read('android-app/app/build.gradle');
  const java=read('android-app/app/src/main/java/ru/animevoid/app/MainActivity.java');
- assert.match(build,/versionCode (?:2|3|4|5|6|7|8)/);assert.match(build,/versionName '(?:1\.(?:1|2|3)|2\.(?:0|1|2|3))\.0'/);
+ assert.match(build,/versionCode (?:2|3|4|5|6|7|8|9)/);assert.match(build,/versionName '(?:1\.(?:1|2|3)|2\.(?:0|1|2|3|4))\.0'/);
  for(const item of ['chooseAccent','accentFor','getSharedPreferences','оплата и подписки не подключены'])assert.ok(java.includes(item),item);
  assert.doesNotMatch(java,/addJavascriptInterface|purchaseProduct\(/);
 });
