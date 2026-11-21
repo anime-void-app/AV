@@ -61,6 +61,8 @@ public final class MainActivity extends Activity {
     private LinearLayout root, nav;
     private FrameLayout content;
     private WebView browser;
+    private NativeCatalog nativeCatalog;
+    private String pendingCatalogQuery;
     private String activeTab="home";
     private String pendingSearch=null;
     private ValueCallback<Uri[]> uploadCallback;
@@ -72,6 +74,7 @@ public final class MainActivity extends Activity {
         getWindow().setStatusBarColor(Color.rgb(9,17,28));
         getWindow().setNavigationBarColor(Color.rgb(9,17,28));
         ACCENT=accentFor(getSharedPreferences(PREF,MODE_PRIVATE).getString("accent","jade"));
+        nativeCatalog=new NativeCatalog(this,this::openTrusted);
         renderShell();
         if(Build.VERSION.SDK_INT>=35){
             getWindow().getDecorView().setOnApplyWindowInsetsListener((v,insets)->{
@@ -124,8 +127,12 @@ public final class MainActivity extends Activity {
 
     private void showTab(String tab){
         activeTab=tab;content.removeAllViews();nav.removeAllViews();
-        if("catalog".equals(tab))showCatalog();
-        else{
+        if("web".equals(tab))showCatalog();
+        else if("catalog".equals(tab)||"favorites".equals(tab)){
+            nativeCatalog.setAccent(ACCENT);
+            nativeCatalog.show(content,pendingCatalogQuery,"favorites".equals(tab));
+            pendingCatalogQuery=null;
+        }else{
             ScrollView scroll=new ScrollView(this);scroll.setFillViewport(true);
             LinearLayout vertical=new LinearLayout(this);vertical.setOrientation(LinearLayout.VERTICAL);
             vertical.setPadding(dp(18),dp(22),dp(18),dp(28));
@@ -144,7 +151,9 @@ public final class MainActivity extends Activity {
             {"home","⌂\nГлавная"},{"catalog","▦\nКаталог"},
             {"discover","⌕\nПоиск"},{"library","♡\nМоё"},{"profile","☻\nПрофиль"}}){
             final String next=item[0];
-            boolean selected=tab.equals(next)||("diary".equals(tab)&&"library".equals(next))
+            boolean selected=tab.equals(next)||("web".equals(tab)&&"catalog".equals(next))
+                ||("favorites".equals(tab)&&"library".equals(next))
+                ||("diary".equals(tab)&&"library".equals(next))
                 ||("reminders".equals(tab)&&"profile".equals(next))
                 ||("settings".equals(tab)&&"profile".equals(next));
             Button b=button(item[1],()->showTab(next),selected);
@@ -213,9 +222,9 @@ public final class MainActivity extends Activity {
 
     private void openCatalogSearch(String entered){
         String q=entered==null?"":entered.trim();
-        if(q.isEmpty()){openTrusted(HOME+"#catalog");return;}
-        pendingSearch=q.substring(0,Math.min(120,q.length()));
-        openTrusted(HOME+"?appSearch="+System.currentTimeMillis()+"#catalog");
+        if(q.isEmpty()){showTab("catalog");return;}
+        pendingCatalogQuery=q.substring(0,Math.min(120,q.length()));
+        showTab("catalog");
     }
 
     private void showLibrary(LinearLayout host){
@@ -225,6 +234,7 @@ public final class MainActivity extends Activity {
         addButton(cloud,"♡  Избранное и запланированное",()->openTrusted(HOME+"#favorites"),true);
         addButton(cloud,"◷  История просмотра",()->openTrusted("https://animevoid.ru/history.html"),false);
         addButton(cloud,"◇  Коллекции",()->openTrusted("https://animevoid.ru/collections.html"),false);
+        addButton(cloud,"★  Сохранено в приложении",()->showTab("favorites"),false);
         LinearLayout local=card(host);
         local.addView(text("Локальный дневник",18,Color.WHITE,true));
         local.addView(text(stored(DIARY).length()+" записей · доступны без интернета · не синхронизируются",12,MUTED,false));
@@ -256,7 +266,7 @@ public final class MainActivity extends Activity {
     private void openTrusted(String url){
         Uri u=Uri.parse(url);
         if(!trusted(u)){openExternal(url);return;}
-        showTab("catalog");
+        showTab("web");
         browser.loadUrl(u.toString());
     }
     private void openExternal(String url){
@@ -347,7 +357,7 @@ public final class MainActivity extends Activity {
     }
     @Override public void onBackPressed(){
         if(fullView!=null){leaveFullScreen();return;}
-        if("catalog".equals(activeTab)&&browser!=null&&browser.canGoBack()){browser.goBack();return;}
+        if("web".equals(activeTab)&&browser!=null&&browser.canGoBack()){browser.goBack();return;}
         if(!"home".equals(activeTab)){showTab("home");return;}
         super.onBackPressed();
     }
@@ -359,6 +369,7 @@ public final class MainActivity extends Activity {
         leaveFullScreen();
         if(uploadCallback!=null){uploadCallback.onReceiveValue(null);uploadCallback=null;}
         if(browser!=null){if(browser.getParent() instanceof ViewGroup)((ViewGroup)browser.getParent()).removeView(browser);browser.destroy();browser=null;}
+        if(nativeCatalog!=null)nativeCatalog.dispose();
         super.onDestroy();
     }
 
@@ -524,7 +535,7 @@ public final class MainActivity extends Activity {
             }).setNegativeButton("Отмена",null).show();
     }
     private void showSettings(LinearLayout root){
-        heading(root,"Настройки","ANIME VOID для Android · версия 1.2.0");
+        heading(root,"Настройки","ANIME VOID для Android · версия 1.3.0");
         LinearLayout about=card(root);
         about.addView(text("Быстрые действия",17,Color.WHITE,true));
         addButton(about,"Мой профиль на сайте",()->openTrusted("https://animevoid.ru/profile.html"),true);
