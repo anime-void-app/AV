@@ -53,3 +53,14 @@ The UI and scripts for rooms were retired on the website; tables remain unused s
 - Local diary and reminders remain functional via Моё and Профиль.
 - This is a staged foundation, NOT feature parity with Anixart. Next milestones: native feed backed by documented catalog data, optimized anime detail screens, source/license-aware player, remote push for followed titles, cloud lists with account sign-in, performance/accessibility QA.
 - Store distribution remains blocked by rights verification, device QA, final app listing, release signing, and approved developer eligibility.
+
+## V87 — native catalogue (1.3.0, versionCode 4)
+- A native Android catalogue replaces the web homepage as the catalogue tab.
+- Metadata comes from the **same published static Kodik index** as the site (manifest + generation + index, currently 9,067 entries). No API token or video URL is bundled in the app.
+- HTTPS-only network requests, no cross-domain redirects for catalogue JSON, 9 MB read cap, verified title IDs and generation count.
+- Background refresh, 24-hour on-device metadata cache, bounded poster cache, safe poster host allowlist and 24-card pagination.
+- Native search in both title fields, genre filter, series/standalone filter and sort by year or title.
+- Local-only metadata bookmarks (max 300, separate from cloud favorites) under Моё → Сохранено в приложении.
+- Opening a title takes the user to `kodik.html?title=<validated id>` within the existing first-party WebView; no video extraction or region bypass.
+- Dataset availability is not proof of rights or successful playback; licensed media verification remains mandatory before RuStore submission.
+- The app does NOT yet have native video playback, push syncing or complete account integration; device QA is required.
