@@ -1,0 +1,55 @@
+name: ANIME VOID V91 — mobile APK direct release
+on:
+  workflow_run:
+    workflows: ["ANIME VOID Android APK"]
+    types: [completed]
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  actions: read
+  contents: write
+jobs:
+  publish:
+    if: ${{ github.event_name == 'workflow_dispatch' || (github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_sha == '27c2f12684103ed32ba5ef2468a100a3a97be2e1') }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Get V91 build artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: animevoid-android-debug-apk
+          run-id: 44899004083
+          github-token: ${{ github.token }}
+          path: ./download
+      - name: Verify and rename APK
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -s download/app-debug.apk
+          python3 - <<'PY'
+          from zipfile import ZipFile
+          p='download/app-debug.apk'
+          with ZipFile(p) as f:
+              assert f.testzip() is None
+              assert 'AndroidManifest.xml' in f.namelist()
+              assert 'classes.dex' in f.namelist()
+          PY
+          cp download/app-debug.apk animevoid-v91-preview.apk
+          sha256sum animevoid-v91-preview.apk
+      - name: Publish V91 Android preview
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          tag="v2.1.0-beta1"
+          if gh release view "$tag" >/dev/null 2>&1; then
+            gh release upload "$tag" animevoid-v91-preview.apk --clobber
+          else
+            gh release create "$tag" animevoid-v91-preview.apk \
+              --target "27c2f12684103ed32ba5ef2468a100a3a97be2e1" \
+              --title "ANIME VOID V91 — Aurora Cinema Android 2.1 Preview" \
+              --notes "V91 preview: site-matched Aurora Cinema styling, native catalogue, posters, filters, local bookmarks, offline diary, portable library export/import, immersive fullscreen and WebView renderer recovery. Same preview package ID and signing key as V90. Android 8+. This is a debug preview, NOT a signed RuStore release. Playback and site sign-in require testing on actual devices and rights verification." \
+              --prerelease
+          fi
