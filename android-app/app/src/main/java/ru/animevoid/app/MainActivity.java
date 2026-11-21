@@ -46,7 +46,7 @@ import org.json.JSONObject;
 import java.util.Calendar;
 import java.util.UUID;
 
-/** Native Android companion: catalog + offline diary + local reminders. No JavaScript bridge. */
+/** ANIME VOID native navigation, discovery and offline tools. Trusted-domain WebView for playback. */
 public final class MainActivity extends Activity {
     private static final String HOME="https://animevoid.ru/index.html";
     private static final String PREF="av_native_v1";
@@ -61,7 +61,8 @@ public final class MainActivity extends Activity {
     private LinearLayout root, nav;
     private FrameLayout content;
     private WebView browser;
-    private String activeTab="catalog";
+    private String activeTab="home";
+    private String pendingSearch=null;
     private ValueCallback<Uri[]> uploadCallback;
     private View fullView;
     private WebChromeClient.CustomViewCallback fullCallback;
@@ -79,7 +80,7 @@ public final class MainActivity extends Activity {
                 return insets;
             });
         }
-        showTab("catalog");
+        showTab("home");
         Uri deep=getIntent()==null?null:getIntent().getData();
         if(deep!=null)openTrusted(deep.toString());
     }
@@ -120,6 +121,7 @@ public final class MainActivity extends Activity {
         nav.setPadding(dp(6),dp(7),dp(6),dp(7));nav.setBackgroundColor(Color.rgb(12,23,35));
         root.addView(nav,new LinearLayout.LayoutParams(-1,dp(72)));
     }
+
     private void showTab(String tab){
         activeTab=tab;content.removeAllViews();nav.removeAllViews();
         if("catalog".equals(tab))showCatalog();
@@ -129,19 +131,121 @@ public final class MainActivity extends Activity {
             vertical.setPadding(dp(18),dp(22),dp(18),dp(28));
             scroll.addView(vertical);content.addView(scroll);
             switch(tab){
+                case "home":showNativeHome(vertical);break;
+                case "discover":showDiscover(vertical);break;
+                case "library":showLibrary(vertical);break;
                 case "diary":showDiary(vertical);break;
                 case "reminders":showReminders(vertical);break;
+                case "profile":showNativeProfile(vertical);break;
                 default:showSettings(vertical);break;
             }
         }
         for(String[] item:new String[][]{
-            {"catalog","⌂\nКаталог"},{"diary","☆\nДневник"},
-            {"reminders","◷\nНапомнить"},{"settings","⚙\nЕщё"}}){
-            final String next=item[0];Button b=button(item[1],()->showTab(next),tab.equals(next));
+            {"home","⌂\nГлавная"},{"catalog","▦\nКаталог"},
+            {"discover","⌕\nПоиск"},{"library","♡\nМоё"},{"profile","☻\nПрофиль"}}){
+            final String next=item[0];
+            boolean selected=tab.equals(next)||("diary".equals(tab)&&"library".equals(next))
+                ||("reminders".equals(tab)&&"profile".equals(next))
+                ||("settings".equals(tab)&&"profile".equals(next));
+            Button b=button(item[1],()->showTab(next),selected);
             b.setTextSize(11);b.setGravity(Gravity.CENTER);
-            LinearLayout.LayoutParams p=new LinearLayout.LayoutParams(0,dp(55),1f);
-            p.leftMargin=dp(3);p.rightMargin=dp(3);nav.addView(b,p);
+            LinearLayout.LayoutParams pos=new LinearLayout.LayoutParams(0,dp(55),1f);
+            pos.leftMargin=dp(2);pos.rightMargin=dp(2);nav.addView(b,pos);
         }
+    }
+
+    private void showNativeHome(LinearLayout host){
+        TextView kicker=text("ANIME VOID  ·  ТВОЙ МИР",12,ACCENT,true);
+        kicker.setLetterSpacing(0.12f);host.addView(kicker);
+        TextView title=text("С чего начнём сегодня?",30,Color.WHITE,true);
+        title.setPadding(0,dp(9),0,dp(8));host.addView(title);
+        TextView caption=text("Аниме, дунхуа, любимые истории и твой личный прогресс.",14,MUTED,false);
+        caption.setPadding(0,0,0,dp(20));host.addView(caption);
+        LinearLayout featured=card(host);
+        featured.setBackground(surface(Color.rgb(20,49,57),22));
+        featured.addView(text("✦  Открой новую историю",23,Color.WHITE,true));
+        TextView sub=text("Каталог, жанры и рекомендации доступны прямо в приложении.",14,MUTED,false);
+        sub.setPadding(0,dp(7),0,dp(8));featured.addView(sub);
+        addButton(featured,"Перейти в каталог",()->showTab("catalog"),true);
+        String last=getSharedPreferences(PREF,MODE_PRIVATE).getString("lastAnimeUrl",null);
+        if(last!=null&&trusted(Uri.parse(last))){
+            LinearLayout recent=card(host);
+            recent.addView(text("◷  Недавно открывал",18,Color.WHITE,true));
+            TextView explanation=text("Вернись на последнюю страницу тайтла. Позиция видео хранится отдельно на сайте.",12,MUTED,false);
+            explanation.setPadding(0,dp(6),0,0);recent.addView(explanation);
+            addButton(recent,"Продолжить с этой страницы",()->openTrusted(last),true);
+        }
+        LinearLayout shortcuts=card(host);
+        shortcuts.addView(text("Быстрые разделы",18,Color.WHITE,true));
+        addButton(shortcuts,"⌕  Найти аниме",()->showTab("discover"),false);
+        addButton(shortcuts,"♡  Мои списки и коллекции",()->showTab("library"),false);
+        addButton(shortcuts,"✧  Подборки и новое",()->openTrusted(HOME+"#recommendedSection"),false);
+        addButton(shortcuts,"◷  Напоминания",()->showTab("reminders"),false);
+        LinearLayout status=card(host);
+        status.addView(text("Личный прогресс",17,Color.WHITE,true));
+        status.addView(text("Записей в офлайн-дневнике: "+stored(DIARY).length(),14,MUTED,false));
+        addButton(status,"Открыть статистику профиля",
+            ()->openTrusted("https://animevoid.ru/profile.html"),false);
+    }
+
+    private void showDiscover(LinearLayout host){
+        heading(host,"Поиск и открытия","Найди аниме по названию или перейди к любимым разделам.");
+        LinearLayout search=card(host);
+        EditText query=new EditText(this);
+        query.setSingleLine(true);query.setHint("Название аниме или дунхуа");
+        query.setTextColor(Color.WHITE);query.setHintTextColor(MUTED);
+        query.setInputType(android.text.InputType.TYPE_CLASS_TEXT);
+        query.setImeOptions(android.view.inputmethod.EditorInfo.IME_ACTION_SEARCH);
+        search.addView(query,new LinearLayout.LayoutParams(-1,dp(53)));
+        query.setOnEditorActionListener((v,action,event)->{
+            if(action==android.view.inputmethod.EditorInfo.IME_ACTION_SEARCH){openCatalogSearch(query.getText().toString());return true;}
+            return false;
+        });
+        addButton(search,"⌕  Найти в каталоге",()->openCatalogSearch(query.getText().toString()),true);
+        LinearLayout discover=card(host);
+        discover.addView(text("Исследовать ANIME VOID",18,Color.WHITE,true));
+        addButton(discover,"✦  Аниме и фильтры",()->openTrusted(HOME+"#catalog"),false);
+        addButton(discover,"☯  Китайские дунхуа",()->openTrusted(HOME+"#catalog"),false);
+        addButton(discover,"★  Популярное и рейтинги",()->openTrusted(HOME+"#topSection"),false);
+        addButton(discover,"✧  Рекомендации",()->openTrusted(HOME+"#recommendedSection"),false);
+        addButton(discover,"◇  Коллекции",()->openTrusted("https://animevoid.ru/collections.html"),false);
+    }
+
+    private void openCatalogSearch(String entered){
+        String q=entered==null?"":entered.trim();
+        if(q.isEmpty()){openTrusted(HOME+"#catalog");return;}
+        pendingSearch=q.substring(0,Math.min(120,q.length()));
+        openTrusted(HOME+"?appSearch="+System.currentTimeMillis()+"#catalog");
+    }
+
+    private void showLibrary(LinearLayout host){
+        heading(host,"Моё аниме","Избранное, просмотренные серии и личные коллекции.");
+        LinearLayout cloud=card(host);
+        cloud.addView(text("Списки на ANIME VOID",18,Color.WHITE,true));
+        addButton(cloud,"♡  Избранное и запланированное",()->openTrusted(HOME+"#favorites"),true);
+        addButton(cloud,"◷  История просмотра",()->openTrusted("https://animevoid.ru/history.html"),false);
+        addButton(cloud,"◇  Коллекции",()->openTrusted("https://animevoid.ru/collections.html"),false);
+        LinearLayout local=card(host);
+        local.addView(text("Локальный дневник",18,Color.WHITE,true));
+        local.addView(text(stored(DIARY).length()+" записей · доступны без интернета · не синхронизируются",12,MUTED,false));
+        addButton(local,"Открыть мой дневник",()->showTab("diary"),false);
+        addButton(local,"☆  Сохранить текущую страницу",this::saveFromBrowser,false);
+    }
+
+    private void showNativeProfile(LinearLayout host){
+        heading(host,"Мой профиль","Оформление, достижения, статистика и настройки.");
+        LinearLayout panel=card(host);
+        panel.setBackground(surface(Color.rgb(29,33,60),20));
+        panel.addView(text("✦  Мой ANIME VOID",20,Color.WHITE,true));
+        panel.addView(text("Профиль и достижения сайта доступны после входа в аккаунт.",13,MUTED,false));
+        addButton(panel,"Открыть профиль",()->openTrusted("https://animevoid.ru/profile.html"),true);
+        addButton(panel,"Мастерская оформления",
+            ()->openTrusted("https://animevoid.ru/profile.html#profileWorkshop"),false);
+        LinearLayout tools=card(host);
+        tools.addView(text("Мои инструменты",17,Color.WHITE,true));
+        addButton(tools,"◷  Напоминания о просмотре",()->showTab("reminders"),false);
+        addButton(tools,"⚙  Настройки приложения",()->showTab("settings"),false);
+        addButton(tools,"↗  Поделиться ANIME VOID",this::sharePage,false);
     }
 
     private boolean trusted(Uri u){
@@ -179,6 +283,22 @@ public final class MainActivity extends Activity {
             CookieManager.getInstance().setAcceptCookie(true);
             CookieManager.getInstance().setAcceptThirdPartyCookies(browser,true);
             browser.setWebViewClient(new WebViewClient(){
+                @Override public void onPageFinished(WebView view,String url){
+                    super.onPageFinished(view,url);
+                    Uri current=Uri.parse(url);
+                    if(!trusted(current))return;
+                    if(url.contains("/anime.html")||url.contains("/watch.html")){
+                        getSharedPreferences(PREF,MODE_PRIVATE).edit().putString("lastAnimeUrl",url).apply();
+                    }
+                    if(pendingSearch!=null&&url.contains("/index.html")&&url.contains("appSearch=")){
+                        String q=pendingSearch;pendingSearch=null;
+                        String quoted=JSONObject.quote(q);
+                        String script="(function(){var field=document.getElementById('search');"
+                          +"if(field){field.value="+quoted+";field.dispatchEvent(new Event('input',{bubbles:true}));field.focus();}})();";
+                        view.evaluateJavascript(script,null);
+                    }
+                }
+
                 @Override public boolean shouldOverrideUrlLoading(WebView view,WebResourceRequest request){
                     if(!request.isForMainFrame())return false;
                     Uri u=request.getUrl();
@@ -228,7 +348,7 @@ public final class MainActivity extends Activity {
     @Override public void onBackPressed(){
         if(fullView!=null){leaveFullScreen();return;}
         if("catalog".equals(activeTab)&&browser!=null&&browser.canGoBack()){browser.goBack();return;}
-        if(!"catalog".equals(activeTab)){showTab("catalog");return;}
+        if(!"home".equals(activeTab)){showTab("home");return;}
         super.onBackPressed();
     }
     @Override protected void onNewIntent(Intent intent){
@@ -404,7 +524,7 @@ public final class MainActivity extends Activity {
             }).setNegativeButton("Отмена",null).show();
     }
     private void showSettings(LinearLayout root){
-        heading(root,"Настройки","ANIME VOID для Android · версия 1.1.0");
+        heading(root,"Настройки","ANIME VOID для Android · версия 1.2.0");
         LinearLayout about=card(root);
         about.addView(text("Быстрые действия",17,Color.WHITE,true));
         addButton(about,"Мой профиль на сайте",()->openTrusted("https://animevoid.ru/profile.html"),true);
