@@ -412,11 +412,18 @@ public final class NativeCatalog {
             })
             .setNegativeButton("Закрыть",null).create();
         dialog.show();
-        if(t.chunk.matches("titles-[0-9]{4}\\.json")&&!generation.isEmpty()){
+        if(t.chunk.matches("titles-[0-9]{4}\\.json")){
             background.execute(()->{
                 String info="Описание не предоставлено каталогом.";
                 try{
-                    String content=fetch(ORIGIN+"kodik-data/"+generation+"/"+t.chunk,2_000_000);
+                    String activeGen=generation;
+                    if(activeGen.isEmpty()){
+                        JSONObject manifest=new JSONObject(fetch(ORIGIN+"kodik-data/manifest.json",25000));
+                        activeGen=manifest.optString("generation","");
+                        if(!activeGen.matches("g-[A-Za-z0-9-]{1,75}"))throw new IllegalStateException("Invalid generation");
+                        generation=activeGen;
+                    }
+                    String content=fetch(ORIGIN+"kodik-data/"+activeGen+"/"+t.chunk,2_000_000);
                     JSONArray all=new JSONObject(content).getJSONArray("titles");
                     for(int i=0;i<all.length();i++){
                         JSONObject o=all.optJSONObject(i);
