@@ -692,6 +692,18 @@ public final class NativeCatalog {
             }
         }
     }
+    /** User-controlled image-cache cleanup; preserves bookmarks, notes and catalog metadata. */
+    public int clearPosterCache(){
+        images.evictAll();
+        File folder=new File(activity.getCacheDir(),"poster_v90");
+        File[] files=folder.listFiles();
+        int deleted=0;
+        if(files!=null)for(File file:files){
+            if(file.isFile()&&file.getName().matches("[0-9a-f]{36}\\.(?:img|tmp)")&&file.delete())deleted++;
+        }
+        return deleted;
+    }
+    
     public void dispose(){
         if(pendingSearch!=null)main.removeCallbacks(pendingSearch);
         showcaseHost.clear();background.shutdownNow();posters.shutdownNow();
