@@ -264,7 +264,7 @@ public final class MainActivity extends Activity {
         AuroraDesign.addTile(this,host,"search","Найти свою историю",
             "Поиск по названиям и фильтрам",AuroraTheme.LILAC,()->showTab("discover"));
         AuroraDesign.addTile(this,host,"heart","Моя коллекция",
-            "Сохранённые тайтлы и личный дневник",AuroraTheme.GOLD,()->showTab("library"));
+            "Сохранённые тайтлы и личный дневник",AuroraTheme.PURPLE,()->showTab("library"));
         AuroraDesign.addTile(this,host,"bookmark","Подборки ANIME VOID",
             "Коллекции на сайте",ACCENT,()->openTrusted("https://animevoid.ru/collections.html"));
         View socialGap=new View(this);host.addView(socialGap,new LinearLayout.LayoutParams(-1,dp(10)));
@@ -816,47 +816,17 @@ public final class MainActivity extends Activity {
             toast("Напоминание назначено");showTab("reminders");
         }catch(Exception e){toast("Не удалось создать напоминание");}
     }
-    private int accentFor(String theme){
-        if("amethyst".equals(theme))return AuroraTheme.LILAC;
-        if("amber".equals(theme))return AuroraTheme.GOLD;
-        return AuroraTheme.JADE;
-    }
-    private void chooseAccent(){
-        final String[] labels={"Нефрит · jade","Аметист · violet","Янтарь · amber"};
-        final String[] values={"jade","amethyst","amber"};
-        new AlertDialog.Builder(this).setTitle("Цвет ANIME VOID")
-            .setItems(labels,(dialog,which)->{
-                getSharedPreferences(PREF,MODE_PRIVATE).edit().putString("accent",values[which]).apply();
-                ACCENT=accentFor(values[which]);
-                renderShell();
-                showTab("settings");
-            }).setNegativeButton("Отмена",null).show();
-    }
-    private View themeChip(String code,String title,int tint){
-        String chosen=getSharedPreferences(PREF,MODE_PRIVATE).getString("accent","jade");
-        boolean selected=code.equals(chosen);
+    private View paletteSwatch(String title,int color){
         LinearLayout tile=new LinearLayout(this);tile.setOrientation(LinearLayout.VERTICAL);
-        tile.setGravity(Gravity.CENTER_HORIZONTAL);
-        tile.setPadding(dp(7),dp(15),dp(7),dp(13));
-        tile.setBackground(AuroraTheme.touch(selected?AuroraDesign.raised(this,16,tint)
-            :AuroraDesign.panel(this,16),0x22ffffff));
-        FrameLayout ring=new FrameLayout(this);
-        ring.setBackground(AuroraTheme.solid(tint,12,tint,1,getResources().getDisplayMetrics().density));
-        TextView shape=AuroraDesign.text(this,selected?"✓":"✦",22,AuroraTheme.DARK_TEXT,true);
-        shape.setGravity(Gravity.CENTER);
-        ring.addView(shape,new FrameLayout.LayoutParams(-1,-1));
-        tile.addView(ring,new LinearLayout.LayoutParams(dp(44),dp(44)));
-        TextView label=AuroraDesign.text(this,title,11,AuroraTheme.FG,selected);
+        tile.setGravity(Gravity.CENTER_HORIZONTAL);tile.setPadding(dp(7),dp(10),dp(7),dp(10));
+        tile.setBackground(AuroraDesign.panel(this,13));
+        View sample=new View(this);
+        sample.setBackground(AuroraTheme.solid(color,9,color,1,getResources().getDisplayMetrics().density));
+        tile.addView(sample,new LinearLayout.LayoutParams(-1,dp(34)));
+        TextView label=AuroraDesign.text(this,title,10,AuroraTheme.MUTED,true);
         label.setGravity(Gravity.CENTER);
-        LinearLayout.LayoutParams p=new LinearLayout.LayoutParams(-1,dp(28));p.topMargin=dp(8);
-        tile.addView(label,p);
-        tile.setContentDescription("Тема "+title+(selected?", выбрана":", выбрать"));
-        tile.setOnClickListener(v->{
-            if(code.equals(getSharedPreferences(PREF,MODE_PRIVATE).getString("accent","jade")))return;
-            getSharedPreferences(PREF,MODE_PRIVATE).edit().putString("accent",code).apply();
-            ACCENT=accentFor(code);
-            renderShell();showTab("settings");
-        });
+        LinearLayout.LayoutParams lp=new LinearLayout.LayoutParams(-1,dp(26));
+        lp.topMargin=dp(7);tile.addView(label,lp);
         return tile;
     }
     private void confirmClearPosters(){
@@ -869,22 +839,23 @@ public final class MainActivity extends Activity {
             }).show();
     }
     private void showSettings(LinearLayout root){
-        heading(root,"Настройки","Aurora Cinema · Android 2.3.0 / V93");
-        AuroraDesign.section(this,root,"ТВОЙ СТИЛЬ","Цветовая палитра",ACCENT);
+        heading(root,"Настройки","ANIME VOID · Android 2.4.0 / V94");
+        AuroraDesign.section(this,root,"ОРИГИНАЛЬНЫЙ СТИЛЬ САЙТА","Единая фиолетовая палитра",ACCENT);
         LinearLayout palette=new LinearLayout(this);palette.setOrientation(LinearLayout.HORIZONTAL);
         LinearLayout.LayoutParams row=new LinearLayout.LayoutParams(-1,-2);
-        row.bottomMargin=dp(14);root.addView(palette,row);
-        String[][] schemes={{"jade","Нефрит"},{"amethyst","Аметист"},{"amber","Янтарь"}};
-        int[] colors={AuroraTheme.JADE,AuroraTheme.LILAC,AuroraTheme.GOLD};
-        for(int i=0;i<schemes.length;i++){
+        row.bottomMargin=dp(12);root.addView(palette,row);
+        String[] labels={"Фон","Карточки","Акцент","Кнопки"};
+        int[] colors={AuroraTheme.BG,AuroraTheme.PANEL,AuroraTheme.ACCENT,AuroraTheme.SOLID};
+        for(int i=0;i<labels.length;i++){
             LinearLayout.LayoutParams cell=new LinearLayout.LayoutParams(0,-2,1f);
-            if(i>0)cell.leftMargin=dp(8);
-            palette.addView(themeChip(schemes[i][0],schemes[i][1],colors[i]),cell);
+            if(i>0)cell.leftMargin=dp(7);
+            palette.addView(paletteSwatch(labels[i],colors[i]),cell);
         }
         LinearLayout colorsBox=card(root);
-        colorsBox.addView(AuroraDesign.text(this,
-            "Все три оформления бесплатны. Выбранный цвет меняет нативные баннеры, кнопки, карточки и навигацию.",
-            12,MUTED,false));
+        TextView paletteInfo=AuroraDesign.text(this,
+            "Точная основная тема ANIME VOID: фон #0B0713, сливовые карточки #171020, лавандовый акцент #C1A2FF и фиолетовые кнопки #7C3AED. Без отдельной зелёной или бирюзовой палитры.",
+            12,MUTED,false);
+        paletteInfo.setLineSpacing(dp(3),1f);colorsBox.addView(paletteInfo);
         AuroraDesign.section(this,root,"БИБЛИОТЕКА","Храни свои истории",ACCENT);
         AuroraDesign.addTile(this,root,"share","Экспортировать библиотеку",
             "Локальные сохранения и заметки в файле JSON",ACCENT,
@@ -908,11 +879,11 @@ public final class MainActivity extends Activity {
         LinearLayout details=card(root);
         details.addView(AuroraDesign.kicker(this,"ANIME VOID  /  О ПРИЛОЖЕНИИ",ACCENT));
         TextView note=AuroraDesign.text(this,
-            "Версия 2.3.0 · Android 8.0+. Дневник, избранное приложения и резервные копии хранятся на устройстве. Вход, уровни, история просмотра и плеер работают через сайт. Видеоконтент может предоставляться сторонними сервисами. Сейчас оплата и подписки не подключены.",
+            "Версия 2.4.0 · Android 8.0+. Дневник, избранное приложения и резервные копии хранятся на устройстве. Вход, уровни, история просмотра и плеер работают через сайт. Видеоконтент может предоставляться сторонними сервисами. Сейчас оплата и подписки не подключены.",
             12,MUTED,false);
         note.setLineSpacing(dp(4),1f);note.setPadding(0,dp(10),0,0);
         details.addView(note);
-        TextView footer=AuroraDesign.kicker(this,"MADE FOR ANIME · AURORA CINEMA",ACCENT);
+        TextView footer=AuroraDesign.kicker(this,"ANIME VOID · ORIGINAL WEBSITE DESIGN",ACCENT);
         footer.setGravity(Gravity.CENTER);footer.setPadding(0,dp(6),0,dp(10));root.addView(footer);
     }
     
