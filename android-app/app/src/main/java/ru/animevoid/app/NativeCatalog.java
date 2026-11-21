@@ -128,7 +128,7 @@ public final class NativeCatalog {
         fp.bottomMargin=dp(14);target.addView(feature,fp);
         ImageView image=new ImageView(activity);
         image.setScaleType(ImageView.ScaleType.CENTER_CROP);
-        image.setBackground(AuroraTheme.hero(activity.getResources().getDisplayMetrics().density));
+        image.setBackground(new AuroraDesign.PosterArt(accent));
         image.setClipToOutline(true);
         feature.addView(image,new LinearLayout.LayoutParams(dp(112),dp(155)));
         loadImage(lead.poster,image);
@@ -162,7 +162,7 @@ public final class NativeCatalog {
             LinearLayout.LayoutParams cp=new LinearLayout.LayoutParams(dp(141),-2);
             cp.rightMargin=dp(11);shelf.addView(card,cp);
             FrameLayout wrap=new FrameLayout(activity);
-            wrap.setBackground(AuroraTheme.hero(activity.getResources().getDisplayMetrics().density));
+            wrap.setBackground(new AuroraDesign.PosterArt(accent));
             wrap.setClipToOutline(true);
             card.addView(wrap,new LinearLayout.LayoutParams(-1,dp(174)));
             ImageView poster=new ImageView(activity);poster.setScaleType(ImageView.ScaleType.CENTER_CROP);
@@ -460,7 +460,7 @@ public final class NativeCatalog {
             if((i-start)%2==0)cp.rightMargin=dp(5);else cp.leftMargin=dp(5);
             row.addView(card,cp);
             FrameLayout cover=new FrameLayout(activity);
-            cover.setBackground(AuroraTheme.hero(activity.getResources().getDisplayMetrics().density));
+            cover.setBackground(new AuroraDesign.PosterArt(accent));
             cover.setClipToOutline(true);
             card.addView(cover,new LinearLayout.LayoutParams(-1,dp(209)));
             TextView fallback=label("✦",42,accent,true);fallback.setGravity(Gravity.CENTER);
@@ -536,7 +536,7 @@ public final class NativeCatalog {
         LinearLayout cover=new LinearLayout(activity);cover.setGravity(Gravity.TOP);
         cover.setOrientation(LinearLayout.HORIZONTAL);details.addView(cover);
         ImageView poster=new ImageView(activity);poster.setScaleType(ImageView.ScaleType.CENTER_CROP);
-        poster.setBackground(AuroraTheme.hero(activity.getResources().getDisplayMetrics().density));
+        poster.setBackground(new AuroraDesign.PosterArt(accent));
         cover.addView(poster,new LinearLayout.LayoutParams(dp(109),dp(157)));loadImage(t.poster,poster);
         LinearLayout metadata=new LinearLayout(activity);metadata.setOrientation(LinearLayout.VERTICAL);
         metadata.setPadding(dp(15),dp(5),0,0);cover.addView(metadata,new LinearLayout.LayoutParams(0,-2,1f));
