@@ -90,11 +90,40 @@ public final class NativeCatalog {
     private Runnable pendingSearch;
     private int accent=AuroraTheme.JADE;
     private WeakReference<LinearLayout> showcaseHost=new WeakReference<>(null);
+    private WeakReference<FrameLayout> brandHero=new WeakReference<>(null);
+    private Item featuredItem;
     private TextView showcaseHint;
     private Runnable goToCatalog=()->{};
 
     public NativeCatalog(Activity activity, Navigator navigator){this.activity=activity;this.navigator=navigator;}
     public void setAccent(int color){accent=color;}
+    /** Safely layers a real catalog poster behind the Aurora Cinema home headline. */
+    public void showHomeHeroPoster(LinearLayout textBody){
+        if(!(textBody.getParent() instanceof FrameLayout))return;
+        brandHero=new WeakReference<>((FrameLayout)textBody.getParent());
+        if(loaded)textBody.post(this::renderHomeHeroPoster);
+    }
+    private void renderHomeHeroPoster(){
+        FrameLayout hero=brandHero.get();
+        if(hero==null||hero.getWindowToken()==null||hero.findViewWithTag("av-home-hero-poster")!=null)return;
+        Item lead=featuredItem;
+        if(lead==null){
+            for(Item t:titles)if(!t.poster.isEmpty()&&t.variants>0&&(lead==null
+                ||t.year>lead.year||(t.year==lead.year&&t.name.compareTo(lead.name)<0)))lead=t;
+        }
+        if(lead==null)return;
+        ImageView art=new ImageView(activity);
+        art.setTag("av-home-hero-poster");
+        art.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        art.setBackground(new AuroraDesign.PosterArt(accent));
+        FrameLayout.LayoutParams imageParams=new FrameLayout.LayoutParams(dp(185),-1,Gravity.RIGHT);
+        hero.addView(art,1,imageParams);
+        View fade=new View(activity);
+        fade.setBackground(new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT,new int[]{
+            0xef0c2130,0xd90f2636,0xb3091929},null));
+        hero.addView(fade,2,new FrameLayout.LayoutParams(-1,-1));
+        loadImage(lead.poster,art);
+    }
     /** Public on-device catalogue artwork shared by the native home screen; no fake ratings. */
     public void showHomeShowcase(LinearLayout host,Runnable openCatalog){
         showcaseHost=new WeakReference<>(host);
@@ -121,6 +150,8 @@ public final class NativeCatalog {
             return;
         }
         Item lead=recent.get(0);
+        featuredItem=lead;
+        renderHomeHeroPoster();
         LinearLayout feature=new LinearLayout(activity);feature.setGravity(Gravity.CENTER_VERTICAL);
         feature.setBackground(AuroraDesign.raised(activity,20,accent));
         feature.setPadding(dp(11),dp(11),dp(13),dp(11));
@@ -342,6 +373,7 @@ public final class NativeCatalog {
                     titles.clear();titles.addAll(valid);loaded=true;loading=false;
                     if(screen!=null&&screen.getParent()!=null){populateGenres();render();}
                     renderHomeShowcase();
+                    renderHomeHeroPoster();
                 });
             }catch(Exception ex){
                 main.post(()->{
@@ -706,6 +738,6 @@ public final class NativeCatalog {
     
     public void dispose(){
         if(pendingSearch!=null)main.removeCallbacks(pendingSearch);
-        showcaseHost.clear();background.shutdownNow();posters.shutdownNow();
+        showcaseHost.clear();brandHero.clear();background.shutdownNow();posters.shutdownNow();
     }
 }
